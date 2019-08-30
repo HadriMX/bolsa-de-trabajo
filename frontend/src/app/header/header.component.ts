@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { LoginService } from '../login.service';
+import { LoginInfo } from 'src/api/models/login_info';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  @Input() loginInfo: LoginInfo = {
+      email: '',
+      pwd: ''
+    }
+    
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+  }
+
+  login() {
+    this.loginService.login(this.loginInfo.email, this.loginInfo.pwd).subscribe((result) => alert(result));
   }
 
 }

@@ -6,13 +6,13 @@
            </h5> 
           <a style="color:beige; margin-left: 590px;">Iniciar sesión</a>
           <div id="block">
-              <input  class="form-control" type="text"  id="usuario" placeholder="Correo electronico"  autofocus required/>
+              <input [(ngModel)]="loginInfo.email" name="email" class="form-control" type="text" id="usuario" placeholder="Correo electronico"  autofocus required/>
             </div>
             <div>
-              <input  class="form-control" type="password" id="contrasena" placeholder="Contraseña" required />
+              <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control" type="password" id="contrasena" placeholder="Contraseña" required />
             </div>
           <div>
-              <button class="btn btn-primary" pButton  >Ingresar</button>
+              <button class="btn btn-primary" (click)="login()" pButton>Ingresar</button>
           </div>  
         </nav>  
        </form>

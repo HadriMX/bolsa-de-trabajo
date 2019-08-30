@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +12,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   crear() {
-    swal('Felicidades', 'Aun no puedes hacer nada!', 'success');
 
   }
+
 }
