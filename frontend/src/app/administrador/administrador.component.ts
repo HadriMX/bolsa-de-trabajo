@@ -14,9 +14,9 @@ export class AdministradorComponent implements OnInit {
 
   }
   agregar() {
-    const nombre = $('#categoria').val();
-    this.numero.push(nombre);
-    $('#categoria').val('');
+    // const nombre = $('#categoria').val();
+    // this.numero.push(nombre);
+    // $('#categoria').val('');
 
   }
   eliminar(i) {
