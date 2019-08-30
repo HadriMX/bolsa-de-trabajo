@@ -1,0 +1,26 @@
+<app-headertittle></app-headertittle>
+<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%;"> 
+  <div class="row" style="margin-left: 28%; margin-top: 5%; ; " >
+            <input class="form-control" id="categoria" type="text" style="width: 50%" placeholder="Agregar una categoria"> 
+            <button class="btn btn-primary" style="margin-left: 2%;" (click)="agregar()">Agregar</button>
+    </div>
+    <div style="margin-left: 26%; margin-top: 3%; ; ">
+        <h4>Categorias para las empresas</h4>
+        <div class="border border-dark" style="width: 70%; height:300px; background-color:white; overflow-y:scroll" >
+                <table class="table table-striped" >
+                        <thead>
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Estado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor='let val of numero; index as i'>
+                            <td>{{numero[i]}}</td>
+                            <img (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
+                          </tr>
+                        </tbody>
+                      </table>
+        </div>
+    </div>
+</body>
