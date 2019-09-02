@@ -1,14 +1,14 @@
 <?php
 
 class ErrorResult {
+    public $message;
     public $code;
-    public $error_message;
     public $success;
 
-    public function __construct($success, $code, $error_message)
+    public function __construct(string $error_message, int $code)
     {
+        $this->message = $error_message;
         $this->code = $code;
-        $this->error_message = $error_message;
-        $this->success = $success;
+        $this->success = false;
     }
 }

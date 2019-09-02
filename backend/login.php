@@ -1,7 +1,10 @@
 <?php
-// error_reporting(E_ERROR | E_PARSE);
+
+error_reporting(E_ERROR | E_PARSE);
+
 include "db_conn.php";
 require_once "error.php";
+require_once "success.php";
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
@@ -12,27 +15,31 @@ $post = json_decode(file_get_contents("php://input"));
 $username = $post->email;
 $pwd = $post->pwd;
 
-echo json_encode(login($username,$pwd));
+echo json_encode(login($username, $pwd));
 
-    function login($username, $pwd)
-    {
-        echo "procesando";
-        $db = new Db();
-        $conn = $db->getConn();
 
-        $r = $conn->query("SELECT * FROM usuarios WHERE email = Binary '".$username."' AND pw = Binary '".$pwd."'");
+function login(string $username, string $pwd)
+{
+    $db = new Db();
+    $conn = $db->getConn();
 
-        $output;
+    // prepare and bind
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = Binary ? AND pw = Binary ?");
+    $stmt->bind_param("ss", $username, $pwd);
+    
+    $stmt->execute();
 
-        if (empty($r)) {
-            $e = new ErrorResult(false, 190293, "puytuti");
-            $output= json_encode($e);
-        }
-        else {
-            $output = $db->readResult($r);
-            $output= json_encode($output);
-        }
+    $r = $db->readResult($stmt->get_result());
 
-        return $output;
+    if (empty($r)) {
+        $err = new ErrorResult("Usuario y/o contrasenia incorrecto.", 401);
+        $output = $err;
+    } else {
+        $output = new SuccessResult("Login correcto", true);
+        $output = $output;
     }
+
+    return $output;
+}
+
 ?>
