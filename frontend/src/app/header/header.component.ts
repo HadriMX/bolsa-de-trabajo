@@ -20,7 +20,16 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
-    this.loginService.login(this.loginInfo.email, this.loginInfo.pwd).subscribe((result) => alert(result));
+    this.loginService.login(this.loginInfo.email, this.loginInfo.pwd)
+      .subscribe((result) => {
+        if (result.success)
+        {
+          // login bien
+        }
+        else {
+          alert(result.message);
+        }
+      });
   }
 
 }
