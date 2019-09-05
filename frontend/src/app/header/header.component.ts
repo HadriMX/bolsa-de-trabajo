@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../login.service';
-import { LoginInfo } from 'src/api/models/login_info';
+import { LoginInfo } from '../../api/models/login_info';
+import { CurrentUserService } from '../current-user.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
       pwd: ''
     }
     
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private currentUserService: CurrentUserService) { }
 
   ngOnInit() {
   }
@@ -24,10 +25,9 @@ export class HeaderComponent implements OnInit {
       .subscribe((response) => {
         if (response.success)
         {
-          var usuario = response.data;
-          alert(usuario.id_tipo_usuario);
-          
           // login bien
+          this.currentUserService.usuario = response.data;
+          alert(this.currentUserService.usuario.id_tipo_usuario);
         }
         else {
           alert(response.message);
