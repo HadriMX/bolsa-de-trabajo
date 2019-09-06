@@ -32,7 +32,7 @@ function login(string $username, string $pwd)
     $r = $db->readResult($stmt->get_result());
 
     if (empty($r)) {
-        $err = new ErrorResult("Usuario y/o contrasenia incorrecto.", 401);
+        $err = new ErrorResult("Usuario y/o contrasenia incorrectoooo.", 401); //le moví
         $output = $err;
     } else {
         $output = new SuccessResult("Login correcto", true);
