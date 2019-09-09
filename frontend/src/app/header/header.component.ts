@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit {
       email: '',
       pwd: ''
     }
+
+  btnIngresarClicked = false;
     
   constructor(private loginService: LoginService, private currentUserService: CurrentUserService) { }
 
@@ -21,6 +23,8 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
+    this.btnIngresarClicked = true;
+
     this.loginService.login(this.loginInfo)
       .subscribe((response) => {
         if (response.success)
@@ -32,6 +36,8 @@ export class HeaderComponent implements OnInit {
         else {
           alert(response.message);
         }
+
+        this.btnIngresarClicked = false;
       });
   }
 

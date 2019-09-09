@@ -8,7 +8,7 @@ require_once "success.php";
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Methods: POST');
 header('content-type: application/json; charset=utf-8');
 
 $post = json_decode(file_get_contents("php://input"));
@@ -24,22 +24,31 @@ function login(string $username, string $pwd)
     $conn = $db->getConn();
 
     // prepare and bind
-    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = Binary ? AND pw = Binary ?");
-    $stmt->bind_param("ss", $username, $pwd);
+    $stmt = $conn->prepare("SELECT * FROM usuarios_activos WHERE email = Binary ?");
+    $stmt->bind_param("s", $username);
     
     $stmt->execute();
 
     $r = $db->readResult($stmt->get_result());
 
     if (empty($r)) {
-        $err = new ErrorResult("Usuario y/o contrasenia incorrecto.", 401);
-        $output = $err;
-    } else {
-        $output = new SuccessResult("Login correcto", true);
-        $output = $output;
+        return new ErrorResult("El usuario no existe.", 404);
     }
 
-    return $output;
+    $usuario = $r[0];
+    $hashedPwd = $usuario['pw'];
+
+    if (!password_verify($pwd, $hashedPwd)) {
+        return new ErrorResult("Contraseña incorrecta. Intente de nuevo, por favor.", 401);
+    }
+
+    $isEmailVerificado = boolval($usuario['email_verificado']);
+    if (!$isEmailVerificado) {
+        return new ErrorResult("No se puede iniciar sesión porque no se ha verificado la dirección email.", 4001);
+    }
+
+    $usuario['pw'] = null;  // limpiar contraseña antes de retornar
+    return new SuccessResult("Login correcto", $usuario);
 }
 
 ?>
