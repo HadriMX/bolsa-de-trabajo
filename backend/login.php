@@ -22,8 +22,7 @@ function login(string $username, string $pwd)
 {
     $db = new Db();
     $conn = $db->getConn();
-
-    // prepare and bind
+    
     $stmt = $conn->prepare("SELECT * FROM usuarios_activos WHERE email = Binary ?");
     $stmt->bind_param("s", $username);
     
@@ -36,8 +35,12 @@ function login(string $username, string $pwd)
     }
 
     $usuario = $r[0];
-    $hashedPwd = $usuario['pw'];
 
+    if ($usuario['estatus'] == 'N') {
+        return new ErrorResult("El usuario no está autorizado aún. Debes esperar a que un administrador autorice tu solicitud de registro.", 4002);
+    }
+    
+    $hashedPwd = $usuario['pw'];
     if (!password_verify($pwd, $hashedPwd)) {
         return new ErrorResult("Contraseña incorrecta. Intente de nuevo, por favor.", 401);
     }
