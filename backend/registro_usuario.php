@@ -28,7 +28,7 @@ else{
 //Crear el codigo de confirmacion
 $codigo = com_create_guid();
 
-$pwd = hash($pwd);
+$pwd = password_hash($pwd,PASSWORD_BCRYPT);
 
 echo json_encode(registro($username, $pwd, $codigo, $tipoUsuario, $estatus));
 
@@ -42,19 +42,27 @@ function registro(string $username1, string $pwd1, string $codigo_conf1, int $ti
     if ($resultado_email==1){
         $insertar = $conn->prepare("INSERT INTO usuarios (email, pw, codigo_confirmacion, id_tipo_usuario, estatus) VALUES  ( ?, ?, ?, ?, ?)");
         $insertar->bind_param("sssis", $username1, $pwd1, $codigo_conf1, $tipoUsuario1, $estatus1);
-        $insertar->execute();
+        $resultado = $insertar->execute();
 
-        //Agregar condicion de que se haga la insersion
-        if (empty($r)) {
+        if ($resultado==true) { //Si se hizo la insersión
+            //mandar correo
+            $to      = $username;
+            $subject = "Correo de Confirmacion";
+            $message = 'Hola '.$username1."\r\n"." Sigue este vinculo para activar tu cuenta"."\r\n\r\n"." https://paginadetareaschin.000webhostapp.com/practica9/activar_cuenta.php?codigo=".$codigo_conf1."&email=".$username1."\r\n";
+            $headers = 'De: (jonsonh45@gmail.com)' . "\r\n" .
+                'Dudas y/o sugerencias: (volar@gmail.com)' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+            mail($to, $subject, $message, $headers);
+
+            $output = new SuccessResult("Registro correcto", true);
+            
+        } else { //No se hizo la insersión
             $err = new ErrorResult("Error de registro", 401);
             $output = $err;
-        } else {
-            $output = new SuccessResult("Registro correcto", true);
-            $output = $output;
         }
     }
     else{
-        $err = new ErrorResult("Error de registro", 401);
+        $err = new ErrorResult("Email invalido", 401);
         $output = $err;
     }
 
