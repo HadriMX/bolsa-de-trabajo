@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from '../current-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -7,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   cursor: boolean = false;
-  constructor() { }
+  constructor(private currentUserService: CurrentUserService,
+    private router: Router) { }
 
   ngOnInit() {
     this.cursor = true;
+
+    if (this.currentUserService.getUserLoggedIn() == null) {
+      this.router.navigateByUrl("/");
+    }
   }
 
 }

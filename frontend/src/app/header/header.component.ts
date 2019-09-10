@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../login.service';
 import { LoginInfo } from '../../api/models/login_info';
 import { CurrentUserService } from '../current-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,9 +18,14 @@ export class HeaderComponent implements OnInit {
 
   btnIngresarClicked = false;
     
-  constructor(private loginService: LoginService, private currentUserService: CurrentUserService) { }
+  constructor(private loginService: LoginService,
+      private currentUserService: CurrentUserService,
+      private router: Router) { }
 
   ngOnInit() {
+    if (this.currentUserService.getUserLoggedIn() != null) {
+      this.router.navigateByUrl("/menu");
+    }
   }
 
   login() {
@@ -29,9 +35,9 @@ export class HeaderComponent implements OnInit {
       .subscribe((response) => {
         if (response.success)
         {
-          // login bien
-          this.currentUserService.usuario = response.data;
-          alert(this.currentUserService.usuario.id_tipo_usuario);
+          // this.currentUserService.usuario = response.data;
+          this.currentUserService.setUserLoggedIn(response.data);
+          this.router.navigateByUrl("/menu");
         }
         else {
           alert(response.message);
