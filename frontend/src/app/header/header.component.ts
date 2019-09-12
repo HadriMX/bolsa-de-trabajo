@@ -23,9 +23,11 @@ export class HeaderComponent implements OnInit {
       private router: Router) { }
 
   ngOnInit() {
-    if (this.currentUserService.getUserLoggedIn() != null) {
-      this.router.navigateByUrl("/menu");
-    }
+    this.currentUserService.getUserLoggedIn().subscribe((response) => {
+      if (response.data != null){
+        this.router.navigateByUrl("/menu");
+      }
+    });
   }
 
   login() {
@@ -35,8 +37,7 @@ export class HeaderComponent implements OnInit {
       .subscribe((response) => {
         if (response.success)
         {
-          // this.currentUserService.usuario = response.data;
-          this.currentUserService.setUserLoggedIn(response.data);
+          this.currentUserService.setCurrentUser(response.data);
           this.router.navigateByUrl("/menu");
         }
         else {

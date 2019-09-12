@@ -12,6 +12,7 @@ import { VacantesComponent } from './vacantes/vacantes.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { EditarusuarioComponent } from './editarusuario/editarusuario.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 
 const routes: Routes = [
@@ -44,7 +45,9 @@ const routes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
