@@ -1,10 +1,12 @@
 <?php
 
-error_reporting(E_ERROR | E_PARSE);
+require_once('db_conn.php');
+require_once('error.php');
+require_once('success.php');
+require_once('sess_handler.php');
 
-include "db_conn.php";
-require_once "error.php";
-require_once "success.php";
+error_reporting(E_ERROR | E_PARSE);
+session_start();
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
@@ -50,7 +52,12 @@ function login(string $username, string $pwd)
         return new ErrorResult("No se puede iniciar sesión porque no se ha verificado la dirección email.", 4001);
     }
 
-    $usuario['pw'] = null;  // limpiar contraseña antes de retornar
+    // limpiar antes de retornar
+    $usuario['pw'] = null;
+    $usuario['phpsessid'] = session_id();
+
+    $_SESSION['currentUser'] = $usuario;
+
     return new SuccessResult("Login correcto", $usuario);
 }
 

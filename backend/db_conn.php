@@ -1,6 +1,6 @@
 <?php
 
-include "error.php";
+require_once('error.php');
 
 class Db {
     private $server_name = 'localhost';
