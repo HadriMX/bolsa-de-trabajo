@@ -1,139 +1,147 @@
 <app-headertittle></app-headertittle>
 <body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%;">
     
-        <div style="margin-left:40px;">
-                <h6>Mi informacion</h6>
+        <div class="contenedor" >
                 <div class="row">
-                        <div class="border border-dark" style="width: 730px; height: 370px; margin-top: 5px; background-color: rgb(229, 226, 226);"> 
-                                <h6 style="margin-left: 5px;">Datos personales</h6>
-                                <div class="row" style="margin-left: 15px;">
-                                      <div class="col-lg-1" id="titulo">
-                                          <h6>Nombre:</h6>
-                                      </div>
-                                      <div class="col-lg-4 " style="margin-left: 12px;"> 
-                                          <input  id="input100" class="input100" type="text">
-                                      </div>
-                                      <div class="col-lg-1" id="titulo">
-                                          <h6>Telefono:</h6>
-                                      </div>
-                                      <div class="col-lg-4" style="margin-left: 12px;"> 
-                                          <input  id="input100" class="input100" type="number">
+                    <div class="col-md-3 col-xs-12 border border-dark" style=" height: 100%; background-color: blueviolet">
+                        <div style="margin-left:20%; ">
+                                <img style="margin-block-start: 5%;"  class="modal-title" src="../../assets/user.png" height="200px" width="200px" alt="Generic placeholder image">
+                            <div>
+                                <button style="margin-block-start: 10px; width:200px; " class="btn btn-info">Editar Informacion</button>
+                            </div>
+                            <div style="margin-block-start: 120%;">
+                                    <button style="width:200px; margin-block-end: 35%;" class="btn btn-success">Confirmar Cambio</button>
+                            </div>
+                        </div>            
+                    </div>
+                    <div class="col-md-9 border border-dark" >
+                            <h6 style="margin-block-start: 1%;" >Mi informacion</h6>
+
+                        <div>
+                                <div  style="width:98%; height: 30%; margin-top: 5px; background-color: rgb(229, 226, 226);"> 
+                                        <h6 style="margin-left: 5px;">Datos personales</h6>
+                                    <div class="row" style="margin-left: 15px;">
+                                              <div class="col-lg-1" >
+                                                  <h6>Nombre:</h6>
+                                              </div>
+                                              <div class="col-lg-2 "> 
+                                                  <input  id="input100" class="input100" type="text">
+                                              </div>
+                                              <div class="col-lg-1" id="titulo">
+                                                  <h6>Telefono:</h6>
+                                              </div>
+                                              <div class="col-lg-2"> 
+                                                  <input  id="input100" class="input100" type="number">
+                                              </div>
+                                              <div class="col-lg-1" id="titulo">
+                                                <h6>Primer apellido:</h6>
+                                            </div>
+                                            <div class="col-lg-2"> 
+                                                <input  id="input100" class="input100" type="text">
+                                            </div>
+                                    </div>
+                                    <div class="row" style="margin-left: 15px; margin-block-start: 25px;">
+                                        <div class="col-lg-1" >
+                                            <h6>Correo electronico:</h6>
+                                        </div>
+                                        <div class="col-lg-2" id="titulo" > 
+                                            <input  id="input100" class="input100" type="email">
+                                        </div>
+                                          <div class="col-lg-1" id="titulo">
+                                              <h6>Segundo apellido:</h6>
+                                          </div>
+                                          <div class="col-lg-2" > 
+                                              <input  id="input100" class="input100" type="email">
+                                          </div>
+                                          <div class="col-lg-1" style="margin-block-start: 7px;" id="titulo">
+                                            <h6>Genero:</h6>
+                                        </div>
+                                        <div class="col-lg-2" style="margin-block-start: 5px;" > 
+                                            <select name="select" style=" width:180px;">
+                                                <option value="value1" selected>Hombre</option> 
+                                                <option value="value2">Mujer</option>
+                                            </select>             
+                                         </div>
+                                    </div>
+                                       <h6 style="margin-left: 30px; margin-top: 20px; margin-block-start: 25px;">Direccion</h6>
+                                    <div class="row" style="margin-left: 15px;">
+                                          <div class="col-lg-1">
+                                              <h6>Estado:</h6>
+                                          </div>
+                                          <div class="col-lg-2" > 
+                                              <select name="select" style="width:180px;">
+                                                  <option value="value1" selected>Ejemplo 1</option> 
+                                                  <option value="value2">Ejemplo 2</option>
+                                              </select>             
+                                           </div>
+                                           <div class="col-lg-1" id="titulo">
+                                              <h6>Ciudad:</h6>
+                                          </div>
+                                          <div class="col-lg-2"> 
+                                              <input  id="input100" class="input100" type="text">
+                                          </div>
+                                          <div class="col-lg-1" id="titulo">
+                                            <h6>Colonia:</h6>
+                                        </div>
+                                        <div class="col-lg-4"> 
+                                            <input  id="input100" class="input100" type="text">     
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-left: 35px; margin-block-start: 25px;">
+                                           <div class="col-lg-1" >
+                                              <h6>Calle:</h6>
+                                          </div>
+                                          <div class="col-lg-2"  > 
+                                              <input  id="input100" class="input100" type="text">
+                                          </div>
+                                          <div class="col-lg-1" id="titulo" >
+                                            <h6>CP:</h6>
+                                        </div>
+                                        <div class="col-lg-2" > 
+                                            <input  id="input100" class="input100" type="number">     
+                                         </div>
+                                    </div>
+                                </div> 
+                              
+                                         <!--Aqui empieza la segunda tabla de llenado de datos-->
+                        <div  style="width:98%; height: 30%; margin-top: 2%; background-color: rgb(229, 226, 226);"> 
+                                <h6 style="margin-left: 5px;">Datos Laborales</h6>
+                                <div class="row" style="margin-left: 35px; margin-block-start: 10px;">
+                                    <div class="col-lg-4" id="titulo">
+                                        <h6>Grado de estudios:</h6>
+                                    </div>
+                                    <div class="col-lg-4" style="margin-left: 10px;" > 
+                                        <select name="select" style="width:200px;">
+                                            <option value="value1" selected>Ejemplo 1</option> 
+                                            <option value="value2">Ejemplo 2</option>
+                                        </select>  
                                       </div>
                                 </div>
-                                <div class="row" style="margin-left: 15px; margin-block-start: 10px; ">
-                                    <div class="col-lg-1" id="titulo">
-                                        <h6>Primer apellido:</h6>
+                                <div class="row" style="margin-left: 35px; margin-block-start: 1%;">
+                                    <div class="col-lg-4" id="titulo">
+                                        <h6>Area de estudios:</h6>
                                     </div>
-                                    <div class="col-lg-4" style="margin-left: 10px; margin-block-start: 10px;"> 
-                                        <input  id="input100" class="input100" type="text">
+                                    <div class="col-lg-4" style="margin-left: 10px;" > 
+                                        <select name="select" style="width:200px;">
+                                            <option value="value1" selected>Ejemplo 1</option> 
+                                            <option value="value2">Ejemplo 2</option>
+                                        </select>  
+                                      </div>
+                                </div>
+                                <div class="row" style="margin-left: 35px; margin-block-start: 1%;">
+                                    <div class="col-lg-4" id="titulo">
+                                        <h6>Subarea de estudios:</h6>
                                     </div>
-                                    <div class="col-lg-1" id="titulo">
-                                        <h6>Correo electronico:</h6>
-                                    </div>
-                                    <div class="col-lg-4" style="margin-left: 30px; margin-block-start: 10px" > 
-                                        <input  id="input100" class="input100" type="email">
-                                    </div>
-                              </div>
-                              <div class="row" style="margin-left: 15px; margin-block-start: 10px;">
-                                  <div class="col-lg-1" id="titulo">
-                                      <h6>Segundo apellido:</h6>
-                                  </div>
-                                  <div class="col-lg-4" style="margin-left: 10px; margin-block-start: 10px" > 
-                                      <input  id="input100" class="input100" type="email">
-                                  </div>
-                              </div>
-                              <div class="row" style="margin-left: 15px; margin-block-start: 10px;">
-                                  <div class="col-lg-1" id="titulo">
-                                      <h6>Genero:</h6>
-                                  </div>
-                                  <div class="col-lg-4" style="margin-left: 10px;" > 
-                                      <select name="select" style="margin-top: 10px; width:200px;">
-                                          <option value="value1" selected>Hombre</option> 
-                                          <option value="value2">Mujer</option>
-                                      </select>             
-                                   </div>
-                              </div>
-                              <h6 style="margin-left: 30px; margin-top: 20px; margin-block-start: 10px;">Direccion</h6>
-                              <div class="row" style="margin-left: 35px;">
-                                  <div class="col-lg-1" id="titulo">
-                                      <h6>Estado:</h6>
-                                  </div>
-                                  <div class="col-lg-4" style="margin-left: 10px;" > 
-                                      <select name="select" style="margin-top: 10px; width:200px;">
-                                          <option value="value1" selected>Ejemplo 1</option> 
-                                          <option value="value2">Ejemplo 2</option>
-                                      </select>             
-                                   </div>
-                                   <div class="col-lg-1" id="titulo" style="margin-block-start: 10px;">
-                                      <h6>Ciudad:</h6>
-                                  </div>
-                                  <div class="col-lg-4" style="margin-left: 30px;" > 
-                                      <input  id="input100" class="input100" type="text">
-                                  </div>
-                              </div>
-                              <div class="row" style="margin-left: 35px; margin-block-start: 10px;">
-                                  <div class="col-lg-1" id="titulo">
-                                      <h6>Colonia:</h6>
-                                  </div>
-                                  <div class="col-lg-4" style="margin-left: 10px;" > 
-                                      <input  id="input100" class="input100" type="text">     
-                                   </div>
-                                   <div class="col-lg-1" id="titulo">
-                                      <h6>Calle:</h6>
-                                  </div>
-                                  <div class="col-lg-4" style="margin-left: 30px;" > 
-                                      <input  id="input100" class="input100" type="text">
-                                  </div>
-                              </div>
-                              <div class="row" style="margin-left: 35px; margin-block-start: 10px;">
-                                  <div class="col-lg-1" id="titulo">
-                                      <h6>CP:</h6>
-                                  </div>
-                                  <div class="col-lg-4" style="margin-left: 10px;" > 
-                                      <input  id="input100" class="input100" type="number">     
-                                   </div>
-                              </div>
-                               </div> 
-                                 <!--Aqui empieza la segunda tabla de llenado de datos-->
-                <div class="border border-dark" style="width:600px; height: 200px; margin-left: 10px; margin-top: 5px; background-color: rgb(229, 226, 226);"> 
-                        <h6 style="margin-left: 5px;">Datos Laborales</h6>
-                        <div class="row" style="margin-left: 35px; margin-block-start: 10px;">
-                            <div class="col-lg-3" id="titulo">
-                                <h6>Grado de estudios:</h6>
-                            </div>
-                            <div class="col-lg-4" style="margin-left: 10px;" > 
-                                <select name="select" style="margin-top: 10px; width:200px;">
-                                    <option value="value1" selected>Ejemplo 1</option> 
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>  
-                              </div>
+                                    <div class="col-lg-4" style="margin-left: 10px;" > 
+                                        <select name="select" style="width:200px;">
+                                            <option value="value1" selected>Ejemplo 1</option> 
+                                            <option value="value2">Ejemplo 2</option>
+                                        </select>  
+                                      </div>
+                                </div>
+                              </div> 
                         </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-3" id="titulo">
-                                <h6>Area de estudios:</h6>
-                            </div>
-                            <div class="col-lg-4" style="margin-left: 10px;" > 
-                                <select name="select" style="margin-top: 10px; width:200px;">
-                                    <option value="value1" selected>Ejemplo 1</option> 
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>  
-                              </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-3" id="titulo">
-                                <h6>Subarea de estudios:</h6>
-                            </div>
-                            <div class="col-lg-4" style="margin-left: 10px;" > 
-                                <select name="select" style="margin-top: 10px; width:200px;">
-                                    <option value="value1" selected>Ejemplo 1</option> 
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>  
-                              </div>
-                        </div>
-                      </div> 
+                    </div>
                 </div>
-                <button style="margin-top: 10px; width:200px; " class="btn btn-success">Guardar configuarion</button>
-                <button style="margin-top: 10px; width:200px; margin-left: 1%;" class="btn btn-info">Editar Informacion</button>
-                
-             </div>
+               </div>
 </body>
