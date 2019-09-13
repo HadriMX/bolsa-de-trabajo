@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentUserService } from '../current-user.service';
-import { Usuario } from '../../api/models/usuario'
 
 @Component({
   selector: 'app-headertittle',
@@ -8,13 +6,9 @@ import { Usuario } from '../../api/models/usuario'
   styleUrls: ['./headertittle.component.css']
 })
 export class HeadertittleComponent implements OnInit {
-
-  public currentUser : Usuario;
-
-  constructor(private currentUserService: CurrentUserService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.currentUser = this.currentUserService.getUserLoggedIn();
   }
 
 }
