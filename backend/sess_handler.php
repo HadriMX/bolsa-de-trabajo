@@ -3,7 +3,6 @@
 require_once('db_conn.php');
 
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 class MySessionHandler implements SessionHandlerInterface
 {
@@ -43,31 +42,19 @@ class MySessionHandler implements SessionHandlerInterface
         $DateTime = date('Y-m-d H:i:s');
         $NewDateTime = date('Y-m-d H:i:s', strtotime($DateTime . ' + 1 hour'));
         $result = mysqli_query($this->link, "REPLACE INTO Session SET Session_Id = '" . $id . "', Session_Expires = '" . $NewDateTime . "', Session_Data = '" . $data . "'");
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return $result;
     }
 
     public function destroy($id)
     {
         $result = mysqli_query($this->link, "DELETE FROM Session WHERE Session_Id ='" . $id . "'");
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return $result;
     }
 
     public function gc($maxlifetime)
     {
         $result = mysqli_query($this->link, "DELETE FROM Session WHERE ((UNIX_TIMESTAMP(Session_Expires) + " . $maxlifetime . ") < " . $maxlifetime . ")");
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return $result;
     }
 }
 

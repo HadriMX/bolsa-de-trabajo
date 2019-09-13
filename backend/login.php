@@ -1,15 +1,15 @@
 <?php
 
+require_once('sess_handler.php');
 require_once('db_conn.php');
 require_once('error.php');
 require_once('success.php');
-require_once('sess_handler.php');
 
 error_reporting(E_ERROR | E_PARSE);
 session_start();
 
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Php-Session-Id");
 header('Access-Control-Allow-Methods: POST');
 header('content-type: application/json; charset=utf-8');
 
@@ -37,14 +37,14 @@ function login(string $username, string $pwd)
     }
 
     $usuario = $r[0];
-
-    if ($usuario['estatus'] == 'N') {
-        return new ErrorResult("El usuario no está autorizado aún. Debes esperar a que un administrador autorice tu solicitud de registro.", 4002);
-    }
     
     $hashedPwd = $usuario['pw'];
     if (!password_verify($pwd, $hashedPwd)) {
         return new ErrorResult("Contraseña incorrecta. Intente de nuevo, por favor.", 401);
+    }
+
+    if ($usuario['estatus'] == 'N') {
+        return new ErrorResult("El usuario no está autorizado aún. Debes esperar a que un administrador autorice tu solicitud de registro.", 4002);
     }
 
     $isEmailVerificado = boolval($usuario['email_verificado']);
