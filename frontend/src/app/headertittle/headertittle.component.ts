@@ -15,11 +15,13 @@ export class HeadertittleComponent implements OnInit {
   constructor(private currentUserService: CurrentUserService) { }
 
   ngOnInit() {
-    this.currentUserService.getUserLoggedIn()
-      .subscribe((response) => {
-        this.currentUser = response.data;
-        this.emailUsuario = this.currentUser.email;
-      });
+    // this.currentUserService.getUsuarioActual()
+    //   .subscribe((response) => {
+    //     this.currentUser = response.data;
+    //     this.emailUsuario = this.currentUser.email;
+    //   });
+
+    this.emailUsuario = this.currentUserService.getEmailUsuarioActual();
   }
 
 }

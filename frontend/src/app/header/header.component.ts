@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
       .subscribe((response) => {
         if (response.success)
         {
-          this.currentUserService.setCurrentUser(response.data);
+          this.currentUserService.setUsuarioActual(response.data);
           this.router.navigateByUrl("/menu");
         }
         else {

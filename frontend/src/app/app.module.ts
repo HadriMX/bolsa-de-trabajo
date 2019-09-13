@@ -14,6 +14,7 @@ import { EditarusuarioComponent } from './editarusuario/editarusuario.component'
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuard }  from './auth/auth.guard';
+import * as $ from 'jquery';
 
 
 const routes: Routes = [
