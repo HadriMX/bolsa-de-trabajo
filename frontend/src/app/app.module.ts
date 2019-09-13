@@ -12,15 +12,14 @@ import { VacantesComponent } from './vacantes/vacantes.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { EditarusuarioComponent } from './editarusuario/editarusuario.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard }  from './auth/auth.guard';
 
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent },
-  {path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
-  {path: 'postulaciones', component: PostulacionesComponent,canActivate: [AuthGuard]},
-  {path: 'editarusuario', component: EditarusuarioComponent,canActivate: [AuthGuard]},
-  {path: 'administracion', component: AdministradorComponent,canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'menu', component: MenuComponent},
+  {path: 'postulaciones', component: PostulacionesComponent},
+  {path: 'editarusuario', component: EditarusuarioComponent},
+  {path: 'administracion', component: AdministradorComponent},
   {path: '**', component: LoginComponent}
 ];
 
@@ -45,9 +44,7 @@ const routes: Routes = [
   exports: [
     RouterModule
   ],
-  providers: [
-    AuthGuard,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import swal from 'sweetalert';
+import { CurrentUserService } from '../current-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -8,22 +9,15 @@ import swal from 'sweetalert';
 })
 export class MenuComponent implements OnInit {
   cursor: boolean = false;
-  constructor() { }
+  constructor(private currentUserService: CurrentUserService,
+    private router: Router) { }
 
   ngOnInit() {
-    $("#datoscompletos").modal("show");
+    this.cursor = true;
 
-  }
-  busquedaavanzada() {
-    if ($('#busquedaavanzada').is(':visible')) {
-      $('#texto').text('Busqueda Avanzada');
-    } else {
-      $('#texto').text('Cancelar Busqueda');
+    if (this.currentUserService.getUserLoggedIn() == null) {
+      this.router.navigateByUrl("/");
     }
+  }
 
-    $('#busquedaavanzada').toggle(); //muestro mediante id
-  }
-  buscar() {
-    swal("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
-  }
 }

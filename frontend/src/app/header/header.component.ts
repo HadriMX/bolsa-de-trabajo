@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../login.service';
-import { LoginInfo } from 'src/api/models/login_info';
+import { LoginInfo } from '../../api/models/login_info';
+import { CurrentUserService } from '../current-user.service';
 import { Router } from '@angular/router';
-import swal from 'sweetalert';
 
 @Component({
   selector: 'app-header',
@@ -11,25 +11,40 @@ import swal from 'sweetalert';
 })
 export class HeaderComponent implements OnInit {
 
-
   @Input() loginInfo: LoginInfo = {
       email: '',
       pwd: ''
     }
-    
-  constructor(private loginService: LoginService, private router: Router) {
 
-   }
+  btnIngresarClicked = false;
+    
+  constructor(private loginService: LoginService,
+      private currentUserService: CurrentUserService,
+      private router: Router) { }
 
   ngOnInit() {
+    if (this.currentUserService.getUserLoggedIn() != null) {
+      this.router.navigateByUrl("/menu");
+    }
   }
 
   login() {
-    if (this.loginInfo.email === '123' && this.loginInfo.pwd === '123') {
-      this.router.navigateByUrl('/menu');
-    }  else 
-    swal("Datos incorrectos");
-    this.loginService.login(this.loginInfo.email, this.loginInfo.pwd).subscribe((result) => alert(result));
+    this.btnIngresarClicked = true;
+
+    this.loginService.login(this.loginInfo)
+      .subscribe((response) => {
+        if (response.success)
+        {
+          // this.currentUserService.usuario = response.data;
+          this.currentUserService.setUserLoggedIn(response.data);
+          this.router.navigateByUrl("/menu");
+        }
+        else {
+          alert(response.message);
+        }
+
+        this.btnIngresarClicked = false;
+      });
   }
 
 }
