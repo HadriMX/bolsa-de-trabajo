@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from '../current-user.service';
 import { Usuario } from '../../api/models/usuario'
-import { ApiResponse } from 'src/api/models/api_response';
 
 @Component({
   selector: 'app-headertittle',

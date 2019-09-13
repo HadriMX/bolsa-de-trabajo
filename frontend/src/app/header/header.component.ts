@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../login.service';
-import { LoginInfo } from '../../api/models/login_info';
-import { CurrentUserService } from '../current-user.service';
+import { LoginInfo } from 'src/api/models/login_info';
 import { Router } from '@angular/router';
+import { CurrentUserService } from '../current-user.service';
 
 @Component({
   selector: 'app-header',
@@ -11,23 +11,26 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() loginInfo: LoginInfo = {
+
+  @Input()
+  loginInfo: LoginInfo = {
       email: '',
       pwd: ''
-    }
+  }
 
-  btnIngresarClicked = false;
+  btnIngresarClicked: boolean;
     
-  constructor(private loginService: LoginService,
-      private currentUserService: CurrentUserService,
-      private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router,
+    private currentUserService: CurrentUserService) {
+
+   }
 
   ngOnInit() {
-    this.currentUserService.getUserLoggedIn().subscribe((response) => {
-      if (response.data != null){
-        this.router.navigateByUrl("/menu");
-      }
-    });
+    // this.currentUserService.getUserLoggedIn().subscribe((response) => {
+    //   if (response.data != null){
+    //     this.router.navigateByUrl("/menu");
+    //   }
+    // });
   }
 
   login() {
