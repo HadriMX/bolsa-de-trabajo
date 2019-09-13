@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
     "jquery": "^3.4.1",
+    "ngx-cookie-service": "^2.2.0",
     "rxjs": "~6.4.0",
     "sweetalert": "^2.1.2",
     "tslib": "^1.10.0",
