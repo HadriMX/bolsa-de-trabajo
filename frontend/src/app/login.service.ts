@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginInfo } from '../api/models/login_info';
 import { Observable } from 'rxjs';
+import { LoginInfo } from '../api/models/login_info';
+import { ApiResponse } from '../api/models/api_response';
+import { Usuario } from '../api/models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +16,10 @@ export class LoginService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private	http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  login(email: string, pwd: string): Observable<boolean> {
-    var loginInfo: LoginInfo = {
-      email: email,
-      pwd: pwd
-    };
-
-    return this.http.post<boolean>(this.endpointUrl, loginInfo, this.httpOptions);
+  login(loginInfo: LoginInfo): Observable<ApiResponse<Usuario>> {
+    return this.http.post<ApiResponse<Usuario>>(this.endpointUrl, loginInfo, this.httpOptions);
   }
 
 }
