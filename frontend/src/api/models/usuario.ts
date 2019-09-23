@@ -4,4 +4,5 @@ export class Usuario {
     password: string;
     id_tipo_usuario: number;
     estatus: string;
+    phpsessid: string;
 }
