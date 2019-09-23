@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
     email: '',
     password: '',
     id_tipo_usuario: 1,
-    estatus: ''
+    estatus: '',
+    phpsessid: ''
   }
   constructor() { }
 

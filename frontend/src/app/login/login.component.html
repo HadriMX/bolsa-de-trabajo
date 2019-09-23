@@ -64,22 +64,22 @@
  
                <div id="electronico" class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                  <span  style="color:black;" class="label-input100">Correo electronico</span>
-                 <input id="input100" class="input100" type="email" name="email" placeholder="Correo electronico..." required>
+                 <input [(ngModel)]="nuevoUsuario.email" name="email" id="input100" class="input100" type="email" name="email" placeholder="Correo electronico..." required>
                  <span class="focus-input100"></span>
                </div>
        
                <div id="contrasenaa" class="wrap-input100 validate-input" data-validate = "Password is required">
                  <span style="color:black;" class="label-input100">Contraseña</span>
-                 <input   class="input100" type="password" name="pass" placeholder="*************"required>
+                 <input  [(ngModel)]="nuevoUsuario.password" name="password" class="input100" type="password" name="pass" placeholder="*************"required>
                  <span class="focus-input100"></span>
                </div>
 
                    <div class="row">
                          <div id="preferencialaboral" style="margin-left: 10px;" >
                            <h6>Seleccione el tipo de usuario:</h6>
-                             <select name="select" style="margin-top: 10px; width:200px;">
-                                 <option value="value1" selected>Empleado</option> 
-                                 <option value="value2">Empresa</option>
+                             <select [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select" style="margin-top: 10px; width:200px;">
+                                 <option value="1" selected>Empleado</option> 
+                                 <option value="2">Empresa</option>
                              </select>  
                            </div>  
                    </div>
