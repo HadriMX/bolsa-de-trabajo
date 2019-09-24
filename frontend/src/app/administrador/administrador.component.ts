@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-administrador',
@@ -17,7 +17,7 @@ export class AdministradorComponent implements OnInit {
   agregar() {
     const nombre = $('#categoria').val();
     if (nombre === '') {
-      swal("No ingreso ningun valor");
+      Swal.fire("No ingreso ningun valor");
       } else {
       this.numero.push(nombre);
       $('#categoria').val('');
