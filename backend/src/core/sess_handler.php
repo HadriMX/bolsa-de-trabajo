@@ -1,8 +1,6 @@
 <?php
 
-require_once('db_conn.php');
-
-header('Access-Control-Allow-Origin: *');
+require_once 'db_conn.php';
 
 class MySessionHandler implements SessionHandlerInterface
 {

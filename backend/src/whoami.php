@@ -1,8 +1,8 @@
 <?php
 
-require_once('sess_handler.php');
-require_once('success.php');
-require_once('error.php');
+require_once './core/sess_handler.php'; // esta línea es necesaria para sobreescribir la implementación de sesiones
+require_once 'autoload.inc.php';
+
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
