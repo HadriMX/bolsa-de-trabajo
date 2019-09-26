@@ -10,7 +10,7 @@ import { Usuario } from '../api/models/usuario';
 })
 export class LoginService {
 
-  private endpointUrl = 'http://localhost/bdt/php/login.php';
+  private endpointUrl = 'http://localhost/bdt/php/src/login.php';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

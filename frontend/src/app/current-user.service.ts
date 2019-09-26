@@ -13,7 +13,7 @@ export class CurrentUserService {
 
   public usuario : Usuario;
 
-  private endpointUrl = 'http://localhost/bdt/php/recuerdame.php';
+  private endpointUrl = 'http://localhost/bdt/php/src/recuerdame.php';
 
   constructor(private http: HttpClient, private cookies: CookieService,
     private httpOptionsService: HttpOptionsService) {
