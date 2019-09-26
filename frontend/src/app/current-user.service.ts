@@ -12,9 +12,7 @@ import { HttpOptionsService } from './http-options.service';
 export class CurrentUserService {
 
   public usuario : Usuario;
-
-  private endpointUrl = 'http://localhost/bdt/php/src/recuerdame.php';
-
+  
   constructor(private http: HttpClient, private cookies: CookieService,
     private httpOptionsService: HttpOptionsService) {
   }
@@ -25,8 +23,13 @@ export class CurrentUserService {
     this.cookies.set('email_current_user', usuario.email);
   }
 
+  deleteUsuarioActual(): Observable<ApiResponse<boolean>> {
+    var url = "http://localhost/bdt/php/src/logout.php?phpsessid=" + this.cookies.get('PHPSESSID');
+    return this.http.post<ApiResponse<boolean>>(url, this.httpOptionsService);
+  }
+
   getUsuarioActual() : Observable<ApiResponse<Usuario>> {
-    var url = this.endpointUrl + "?phpsessid=" + this.cookies.get('PHPSESSID');
+    var url = "http://localhost/bdt/php/src/whoami.php?phpsessid=" + this.cookies.get('PHPSESSID');
     return this.http.get<ApiResponse<Usuario>>(url, this.httpOptionsService);
   }
 
