@@ -23,6 +23,7 @@ const routes: Routes = [
   {path: 'postulaciones', component: PostulacionesComponent, canActivate: [AuthGuard]},
   {path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard]},
   {path: 'administracion', component: AdministradorComponent, canActivate: [AuthGuard]},
+  {path: 'vacantes', component: VacantesComponent,canActivate: [AuthGuard]},
   {path: '**', component: LoginComponent}
 ];
 
