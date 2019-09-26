@@ -1,14 +1,16 @@
 <?php
 
-error_reporting(E_ERROR | E_PARSE);
+require_once('sess_handler.php');
+require_once('db_conn.php');
+require_once('error.php');
+require_once('success.php');
 
-include "db_conn.php";
-require_once "error.php";
-require_once "success.php";
+error_reporting(E_ERROR | E_PARSE);
+session_start();
 
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Php-Session-Id");
+header('Access-Control-Allow-Methods: POST');
 header('content-type: application/json; charset=utf-8');
 
 $post = json_decode(file_get_contents("php://input"));
@@ -22,24 +24,41 @@ function login(string $username, string $pwd)
 {
     $db = new Db();
     $conn = $db->getConn();
-
-    // prepare and bind
-    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = Binary ? AND pw = Binary ?");
-    $stmt->bind_param("ss", $username, $pwd);
+    
+    $stmt = $conn->prepare("SELECT * FROM usuarios_activos WHERE email = Binary ?");
+    $stmt->bind_param("s", $username);
     
     $stmt->execute();
 
     $r = $db->readResult($stmt->get_result());
 
     if (empty($r)) {
-        $err = new ErrorResult("Usuario y/o contrasenia incorrectoooo.", 401); //le moví
-        $output = $err;
-    } else {
-        $output = new SuccessResult("Login correcto", true);
-        $output = $output;
+        return new ErrorResult("El usuario no existe.", 404);
+    }
+    
+    $usuario = $r[0];
+    
+    $hashedPwd = $usuario['pw'];
+    if (!password_verify($pwd, $hashedPwd)) {
+        return new ErrorResult("Contraseña incorrecta. Intente de nuevo, por favor.", 401);
     }
 
-    return $output;
+    if ($usuario['estatus'] == 'N') {
+        return new ErrorResult("El usuario no está autorizado aún. Debes esperar a que un administrador autorice tu solicitud de registro.", 4002);
+    }
+
+    $isEmailVerificado = boolval($usuario['email_verificado']);
+    if (!$isEmailVerificado) {
+        return new ErrorResult("No se puede iniciar sesión porque no se ha verificado la dirección email.", 4001);
+    }
+
+    // limpiar antes de retornar
+    $usuario['pw'] = null;
+    $usuario['phpsessid'] = session_id();
+
+    $_SESSION['currentUser'] = $usuario;
+
+    return new SuccessResult("Login correcto", $usuario);
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-include "error.php";
+require_once('error.php');
 
 class Db {
     private $server_name = '192.168.1.200';
@@ -18,14 +18,14 @@ class Db {
     public function getConn()
     {
         if ($this->conn->connect_error) {
-            $error = new ErrorResult(false, 0, "No se pudo conectar a la BD");
+            $error = new ErrorResult("No se pudo conectar a la BD", 0);
             return $error;
         }
 
         return $this->conn;
     }
 
-    public function readResult($result)
+    public function readResult(mysqli_result $result)
     {
         try {
             $output = array();
@@ -36,7 +36,7 @@ class Db {
         
             return $output;
         } catch (\Throwable $th) {
-            $error = new ErrorResult(false, 5, "Error al leer el resultado");
+            $error = new ErrorResult($th->getMessage(), 500);
             return $error;
         }
     }

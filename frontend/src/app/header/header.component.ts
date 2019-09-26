@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from '../login.service';
-import { LoginInfo } from '../../api/models/login_info';
+import { LoginInfo } from 'src/api/models/login_info';
+import { Router } from '@angular/router';
 import { CurrentUserService } from '../current-user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -9,29 +11,39 @@ import { CurrentUserService } from '../current-user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  @Input() loginInfo: LoginInfo = {
+  
+  @Input()
+  loginInfo: LoginInfo = {
       email: '',
       pwd: ''
-    }
+  }
+
+  btnIngresarClicked: boolean;
     
-  constructor(private loginService: LoginService, private currentUserService: CurrentUserService) { }
+  constructor(private loginService: LoginService, private router: Router,
+    private currentUserService: CurrentUserService) {
+   }
 
   ngOnInit() {
   }
 
   login() {
+    
+    
+    this.btnIngresarClicked = true;
+
     this.loginService.login(this.loginInfo)
       .subscribe((response) => {
         if (response.success)
         {
-          // login bien
-          this.currentUserService.usuario = response.data;
-          alert(this.currentUserService.usuario.id_tipo_usuario);
+          this.currentUserService.setUsuarioActual(response.data);
+          this.router.navigateByUrl("/menu");
         }
         else {
-          alert(response.message);
+          Swal.fire("Error", response.message, 'error');
         }
+
+        this.btnIngresarClicked = false;
       });
   }
 
