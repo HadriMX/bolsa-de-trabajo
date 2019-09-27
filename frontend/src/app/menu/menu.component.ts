@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import Swal from 'sweetalert2';
+import { Vacante } from 'src/api/models/vacantes';
+import { VacantesService } from '../vacantes.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,20 +9,25 @@ import Swal from 'sweetalert2';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+
   cursor: boolean = false;
-  constructor() { }
+
+  vacantes: Vacante[];
+
+  constructor(private vacantesService : VacantesService) { }
 
   ngOnInit() {
-  }
+    this.vacantesService.getVacantes()
+      .subscribe((response) => {
+        if (response.success)
+        {
+          this.vacantes = response.data;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
 
-  busquedaavanzada() {
-    if ($('#busquedaavanzada').is(':visible')) {
-      $('#texto').text('Busqueda Avanzada');
-    } else {
-      $('#texto').text('Cancelar Busqueda');
-    }
-
-    $('#busquedaavanzada').toggle(); //muestro mediante id
+      });
   }
 
   buscar() {
