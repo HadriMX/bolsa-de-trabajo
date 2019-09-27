@@ -70,7 +70,7 @@
        
                <div id="contrasenaa" class="wrap-input100 validate-input" data-validate = "Password is required">
                  <span style="color:black;" class="label-input100">Contraseña</span>
-                 <input  [(ngModel)]="nuevoUsuario.password" name="password" class="input100" type="password" name="pass" placeholder="*************"required>
+                 <input  [(ngModel)]="nuevoUsuario.password" name="password" id="input101" class="input100" type="password" name="pass" placeholder="*************"required>
                  <span class="focus-input100"></span>
                </div>
 
@@ -90,12 +90,6 @@
                      <div class="login100-form-bgbtn"></div>
                      <button (click)="crear()" class="login100-form-btn">
                        Crear cuenta
-                     </button>
-                   </div>
-                   <div class="wrap-login100-form-btn" style="width:250px; margin-left: 15px;" >
-                     <div class="login100-form-bgbtn"></div>
-                     <button routerLink="/menu" class="login100-form-btn"  >
-                       Ingresar como visitante
                      </button>
                    </div>
                  </div>

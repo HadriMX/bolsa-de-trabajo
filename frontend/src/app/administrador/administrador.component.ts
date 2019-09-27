@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import Swal from 'sweetalert2';
-import { timingSafeEqual } from 'crypto';
+//import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-administrador',
