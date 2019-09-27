@@ -3,6 +3,7 @@ import { LoginService } from '../login.service';
 import { LoginInfo } from 'src/api/models/login_info';
 import { Router } from '@angular/router';
 import { CurrentUserService } from '../current-user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,7 @@ import { CurrentUserService } from '../current-user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-
+  
   @Input()
   loginInfo: LoginInfo = {
       email: '',
@@ -22,18 +22,14 @@ export class HeaderComponent implements OnInit {
     
   constructor(private loginService: LoginService, private router: Router,
     private currentUserService: CurrentUserService) {
-
    }
 
   ngOnInit() {
-    // this.currentUserService.getUserLoggedIn().subscribe((response) => {
-    //   if (response.data != null){
-    //     this.router.navigateByUrl("/menu");
-    //   }
-    // });
   }
 
   login() {
+    
+    
     this.btnIngresarClicked = true;
 
     this.loginService.login(this.loginInfo)
@@ -44,7 +40,7 @@ export class HeaderComponent implements OnInit {
           this.router.navigateByUrl("/menu");
         }
         else {
-          alert(response.message);
+          Swal.fire("Error", response.message, 'error');
         }
 
         this.btnIngresarClicked = false;

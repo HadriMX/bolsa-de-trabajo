@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu',
@@ -11,9 +11,8 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    $("#datoscompletos").modal("show");
-
   }
+
   busquedaavanzada() {
     if ($('#busquedaavanzada').is(':visible')) {
       $('#texto').text('Busqueda Avanzada');
@@ -23,7 +22,8 @@ export class MenuComponent implements OnInit {
 
     $('#busquedaavanzada').toggle(); //muestro mediante id
   }
+
   buscar() {
-    swal("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
+    Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
   }
 }
