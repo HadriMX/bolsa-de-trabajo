@@ -24,12 +24,12 @@
            <h4>Apartado de configuracion</h4>  
           <img style="margin-block-start: 5%;" src="../../assets/settings.png" height="55%" width="55%" alt="Generic placeholder image">
         </div>
-    <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
+    <!-- En esta parte comienza la configuracion de de las categorias de la empresa --> 
         <div class="conteiner" >
             <div *ngIf="estado">
                 <div class="row" style="margin-left: 5%; margin-top: 3%; ; " >
                     <input class="form-control" id="categoria" type="text" style="width: 50%" placeholder="Agregar una categoria"> 
-                    <button class="btn btn-primary" style="margin-left: 2%;" (click)="agregar()">Agregar</button>
+                    <button class="btn btn-primary" style="margin-left: 2%;" (click)="agregar1()">Agregar</button>
                 </div>
                 <div style="margin-left: 5%; margin-top: 1%; ; ">
                     <h5>Categorias para las empresas</h5>
@@ -56,7 +56,7 @@
         <div class="conteiner">
           <div *ngIf="estado2">
             <div class="row" style="margin-left: 5%; margin-top: 3%; ; " >
-                <input class="form-control" id="categoria" type="text" style="width: 50%" placeholder="Nombre de area de estudio"> 
+                <input [(ngModel)]="nuevaArea.nombre_area" class="form-control" id="categoria" type="text" style="width: 50%" placeholder="Nombre de area de estudio"> 
                 <button class="btn btn-primary" style="margin-left: 2%;" (click)="agregar()">Registrar</button>
             </div>
             <div style="margin-left: 5%; margin-top: 1%; ; ">

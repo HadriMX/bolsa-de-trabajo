@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { Area} from 'src/api/models/areas';
 import Swal from 'sweetalert2';
-import { timingSafeEqual } from 'crypto';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-administrador',
@@ -9,6 +9,9 @@ import { timingSafeEqual } from 'crypto';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
+  @Input() nuevaArea : Area={
+    nombre_area:''
+  }
   datoscategoria = [];
   datosarea = [];
   datossubarea = [];
@@ -16,23 +19,51 @@ export class AdministradorComponent implements OnInit {
   estado2 = false;
   estado3 = false; 
   estadoimagen = true;
-  constructor() { }
-  ngOnInit() {}
+
+  
+
+  
+  
   // Esto es para agregar algo a la lista y se puede usar para agregar cosas a la base de datos
-  agregar() {
+  agregar3() {
     const nombre = $('#categoria').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
       } else {
       this.datoscategoria.push(nombre);
+      
       $('#categoria').val('');
 
     }
+    
+    
   }
+  
+  btnagregarCliked: boolean;
+  constructor(private adminservice:AdminService) { }
+  ngOnInit() {}
+  
   // Se usar para eliminar cosas de la lista, se puede usar para eliminar cosas de la base de datos
   eliminar(i) {
     this.datoscategoria.splice(i, 1);
   }
+  agregar(){
+    this.btnagregarCliked=true;
+    this.adminservice.add(this.nuevaArea)
+    .subscribe((response) => {
+      if (response.success)
+      {
+        Swal.fire("correcto", response.message, 'success');
+        $("#categoria").val('');
+      }
+      else {
+        Swal.fire("Error", response.message, 'error');
+      }
+
+      this.btnagregarCliked = false;
+    });
+   }
+
 
   categorias(numero) {
         // Este es para el primer boton 
