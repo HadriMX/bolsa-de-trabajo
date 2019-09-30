@@ -8,6 +8,7 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'auth' => '/../src/core/Auth.php',
+                'candidato' => '/../src/core/Candidato.php',
                 'db' => '/../src/core/db_conn.php',
                 'errorresult' => '/../src/core/error.php',
                 'mysessionhandler' => '/../src/core/sess_handler.php',

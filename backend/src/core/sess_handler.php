@@ -38,7 +38,7 @@ class MySessionHandler implements SessionHandlerInterface
     public function write($id, $data)
     {
         $DateTime = date('Y-m-d H:i:s');
-        $NewDateTime = date('Y-m-d H:i:s', strtotime($DateTime . ' + 1 hour'));
+        $NewDateTime = date('Y-m-d H:i:s', strtotime($DateTime . ' + 24 hour'));
         $result = mysqli_query($this->link, "REPLACE INTO Session SET Session_Id = '" . $id . "', Session_Expires = '" . $NewDateTime . "', Session_Data = '" . $data . "'");
         return $result;
     }
