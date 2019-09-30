@@ -1,69 +1,74 @@
 <app-headertittle></app-headertittle>
-<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: scroll;">
-    
-        <div class="conteiner">
-                <div class="row" id="contenedor">
-                    <div  class="col-md-3 col-xs-12 border border-dark" style=" background-color: blueviolet">
-                        <div   style="margin-left:20%; ">
-                                <img style="margin-block-start: 5%;"  class="modal-title" src="../../assets/user.png" height="200px" width="200px" alt="Generic placeholder image">
-                            <div>
-                                <button style="margin-block-start: 10px; width:200px; " class="btn btn-info">Editar Informacion</button>
-                            </div>
-                            <div >
-                                    <button style="width:200px; margin-block-end: 35%;" class="btn btn-success">Confirmar Cambio</button>
-                            </div>
-                        </div>            
-                    </div>
-                    <div class="col-md-9 border border-dark" >
-                            <h6 style="margin-block-start: 1%;" >Mi informacion</h6>
+<!-- En esta parte comienza el cuerpo de la pagina -->
+<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: auto;">
+    <!-- Comienza la division de la pagina en dos contenedores -->
+       <div id="contenedor" style="margin-left: 2%; " >                
+            <div> 
+                <div class="row">
+                        <h4 style="margin-block-start: 1%; color:rgb(3, 21, 58); margin-left: 1%;">Cuenta</h4>
+                        <button id="boton" class="btn btn-primary">Editar informacion</button>
+                        <button id="boton2" class="btn btn-success">Guardar cambios</button>
 
-                        <div>
-                                <div  style="width:98%; height: 30%; margin-top: 5px; background-color: rgb(229, 226, 226);"> 
-                                        <h6 style="margin-left: 5px;">Datos personales</h6>
-                                    <div class="row" style="margin-left: 15px;">
-                                              <div class="col-lg-1" >
-                                                  <h6>Nombre:</h6>
-                                              </div>
-                                              <div class="col-lg-2 "> 
-                                                  <input  id="input100" class="input100" type="text">
-                                              </div>
-                                              <div class="col-lg-1" id="titulo">
-                                                  <h6>Telefono:</h6>
-                                              </div>
-                                              <div class="col-lg-2"> 
-                                                  <input  id="input100" class="input100" type="number">
-                                              </div>
-                                              <div class="col-lg-1" id="titulo">
-                                                <h6>Primer apellido:</h6>
+                </div>
+                <div style="margin-block-start: 1%;">
+                    <!-- Comienza el apartado de la cuenta del usuario -->
+                    <div style="width:93%; height: 30%; margin-block-start: 1%; margin-top: 5px; background-color: rgb(229, 226, 226);"> 
+                                            <h6 id="titulo-css">Datos personales</h6>
+                            <!-- Comienza la division de la pantalla en dos partes -->
+                             <div class="row" style="margin-left: 5%;">
+                                <!-- Primera parte -->
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                            <div class="col-lg-4">
+                                                    <h6 style="margin-block-start: 4%;">Nombre:</h6>
+                                                    <h6 style="margin-block-start: 14%;">Primer apellido:</h6>
+                                                    <h6 style="margin-block-start: 14%;">Segundo apellido:</h6>
+                                                    <h6  style="margin-block-start: 14%;">Fechad de nacimiento:</h6>
+
                                             </div>
-                                            <div class="col-lg-2"> 
+                                            <div class="col-lg-8">
+                                                    <div>
+                                                        <input  id="input100" class="input100" type="text">
+                                                    </div>
+                                                    <div style="margin-block-start: 4%;">
+                                                        <input   id="input100" class="input100" type="text">
+                                                    </div>      
+                                                    <div style="margin-block-start: 4%;">
+                                                        <input  id="input100" class="input100" type="email">
+                                                    </div>  
+                                                    <div style="margin-block-start: 4%;">
+                                                            <input style="background-color: thistle; width: 80%;"  id="date" type="date">          
+                                                    </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <!-- Segunda parte -->
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                                <h6 style="margin-block-start: 4%;" >Telefono:</h6>
+                                                <h6 style="margin-block-start: 14%;">Correo electronico:</h6>
+                                                <h6 style="margin-block-start: 14%;">Genero:</h6>
+                                        </div>
+                                        <div class="col-lg-8">
+                                             <div>
                                                 <input  id="input100" class="input100" type="text">
-                                            </div>
-                                    </div>
-                                    <div class="row" style="margin-left: 15px; margin-block-start: 25px;">
-                                        <div class="col-lg-1" >
-                                            <h6>Correo electronico:</h6>
+                                             </div>
+                                             <div style="margin-block-start: 4%;">
+                                                <input  id="input100" class="input100" type="email">
+                                             </div>
+                                             <div style="margin-block-start: 4%;">
+                                                <select name="select" style=" width:180px;">
+                                                    <option value="value1" selected>Hombre</option> 
+                                                    <option value="value2">Mujer</option>
+                                                </select>  
+                                             </div>
                                         </div>
-                                        <div class="col-lg-2" id="titulo" > 
-                                            <input  id="input100" class="input100" type="email">
-                                        </div>
-                                          <div class="col-lg-1" id="titulo">
-                                              <h6>Segundo apellido:</h6>
-                                          </div>
-                                          <div class="col-lg-2" > 
-                                              <input  id="input100" class="input100" type="email">
-                                          </div>
-                                          <div class="col-lg-1" style="margin-block-start: 7px;" id="titulo">
-                                            <h6>Genero:</h6>
-                                        </div>
-                                        <div class="col-lg-2" style="margin-block-start: 5px;" > 
-                                            <select name="select" style=" width:180px;">
-                                                <option value="value1" selected>Hombre</option> 
-                                                <option value="value2">Mujer</option>
-                                            </select>             
-                                         </div>
-                                    </div>
-                                       <h6 style="margin-left: 30px; margin-top: 20px; margin-block-start: 25px;">Direccion</h6>
+                                    </div>    
+                                </div>
+                             </div>
+                             <div class="" style="width: 98%; margin-left: 4%; margin-block-start: 1%; ">
+                                    <h6 style="margin-left: 30px; ">Direccion</h6>
                                     <div class="row" style="margin-left: 15px;">
                                           <div class="col-lg-1">
                                               <h6>Estado:</h6>
@@ -87,7 +92,7 @@
                                             <input  id="input100" class="input100" type="text">     
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-left: 35px; margin-block-start: 25px;">
+                                    <div class="row" style="margin-left: 1%; margin-block-start: 1%;">
                                            <div class="col-lg-1" >
                                               <h6>Calle:</h6>
                                           </div>
@@ -101,16 +106,18 @@
                                             <input  id="input100" class="input100" type="number">     
                                          </div>
                                     </div>
-                                </div> 
+                                 </div>                   
+                                       
+                            </div> 
                               
                                          <!--Aqui empieza la segunda tabla de llenado de datos-->
-                        <div  style="width:98%; height: 30%; margin-top: 2%; background-color: rgb(229, 226, 226);"> 
-                                <h6 style="margin-left: 5px;">Datos Laborales</h6>
+                        <div  style="width:93%; height: 30%; margin-top: 2%; background-color: rgb(229, 226, 226);"> 
+                                <h6 id="titulo-css">Datos Laborales</h6>
                                 <div class="row" style="margin-left: 35px; margin-block-start: 10px;">
-                                    <div class="col-lg-4" id="titulo">
+                                    <div class="col-lg-3" id="titulo">
                                         <h6>Grado de estudios:</h6>
                                     </div>
-                                    <div class="col-lg-4" style="margin-left: 10px;" > 
+                                    <div class="col-lg-3" style="margin-left: 10px;" > 
                                         <select name="select" style="width:200px;">
                                             <option value="value1" selected>Ejemplo 1</option> 
                                             <option value="value2">Ejemplo 2</option>
@@ -118,10 +125,10 @@
                                       </div>
                                 </div>
                                 <div class="row" style="margin-left: 35px; margin-block-start: 1%;">
-                                    <div class="col-lg-4" id="titulo">
+                                    <div class="col-lg-3" id="titulo">
                                         <h6>Area de estudios:</h6>
                                     </div>
-                                    <div class="col-lg-4" style="margin-left: 10px;" > 
+                                    <div class="col-lg-3" style="margin-left: 10px;" > 
                                         <select name="select" style="width:200px;">
                                             <option value="value1" selected>Ejemplo 1</option> 
                                             <option value="value2">Ejemplo 2</option>
@@ -129,19 +136,18 @@
                                       </div>
                                 </div>
                                 <div class="row" style="margin-left: 35px; margin-block-start: 1%;">
-                                    <div class="col-lg-4" id="titulo">
+                                    <div class="col-lg-3" id="titulo">
                                         <h6>Subarea de estudios:</h6>
                                     </div>
-                                    <div class="col-lg-4" style="margin-left: 10px;" > 
+                                    <div class="col-lg-3" style="margin-left: 10px;" > 
                                         <select name="select" style="width:200px;">
                                             <option value="value1" selected>Ejemplo 1</option> 
                                             <option value="value2">Ejemplo 2</option>
                                         </select>  
-                                      </div>
-                                </div>
-                              </div> 
-                        </div>
-                    </div>
+                                    </div>
+                       </div>
+                    </div> 
                 </div>
-               </div>
+            </div>
+        </div>
 </body>
