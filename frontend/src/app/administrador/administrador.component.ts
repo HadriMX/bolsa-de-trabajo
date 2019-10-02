@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Area} from 'src/api/models/areas';
+import { Area} from 'src/api/models/area';
 import Swal from 'sweetalert2';
 import { AdminService } from '../admin.service';
 
@@ -10,7 +10,9 @@ import { AdminService } from '../admin.service';
 })
 export class AdministradorComponent implements OnInit {
   @Input() nuevaArea : Area={
-    nombre_area:''
+    id:0,
+    nombre_area:'',
+    estatus:''
   }
   datoscategoria = [];
   datosarea = [];
@@ -49,7 +51,7 @@ export class AdministradorComponent implements OnInit {
   }
   agregar(){
     this.btnagregarCliked=true;
-    this.adminservice.add(this.nuevaArea)
+    this.adminservice.add_area(this.nuevaArea)
     .subscribe((response) => {
       if (response.success)
       {

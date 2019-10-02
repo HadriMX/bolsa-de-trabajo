@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Area} from 'src/api/models/areas';
+import { Area } from 'src/api/models/area';
 import { ApiResponse } from 'src/api/models/api_response';
 import { Observable } from 'rxjs';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
 
-  add(area: Area): Observable<ApiResponse<Area>> {
+  add_area(area: Area): Observable<ApiResponse<Area>> {
     return this.http.post<ApiResponse<Area>>(this.endpointUrl, area, this.httpOptions);
   }
  
