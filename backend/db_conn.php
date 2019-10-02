@@ -5,7 +5,7 @@ require_once('error.php');
 class Db {
     private $server_name = '192.168.1.200';
     private $username = 'root';
-    private $pwd = '';
+    private $pwd = 'some_pass';
     private $db_name = 'bdt_bd';
 
     private $conn;

@@ -14,7 +14,9 @@ export class MenuComponent implements OnInit {
 
   vacantes: Vacante[];
 
-  constructor(private vacantesService : VacantesService) { }
+  constructor(private vacantesService : VacantesService) {
+    
+   }
 
   ngOnInit() {
     this.vacantesService.getVacantes()

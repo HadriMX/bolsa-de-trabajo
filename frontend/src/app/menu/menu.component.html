@@ -87,10 +87,10 @@
                  </div>
              </div>
              
-             <div class="" style="background: rgba(18, 11, 119, 0.502); width: 70%; height: 25%; margin-left: 10%">
+             <div *ngFor="let prueba of pruebas" class="" style="background: rgba(18, 11, 119, 0.502); width: 70%; height: 25%; margin-left: 10%">
                     <div data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 60px;" class="row">
                             <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                                <h6 style="color:yellow;">NOMBRE DE LA VACANTE</h6>
+                                <h6 style="color:yellow;">{prueba}</h6>
                             </div>
                             <div class="col-lg-3">
                                     <h6 style="color:white;">FECHA</h6>
@@ -108,9 +108,7 @@
                     <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 30px; margin-left: 75px; color:white;">DESCRIPCION</h6>
                     <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 75px; color:white;">SE SOLICITA EMPLEADO PARA APOYO EN DESARROLLO DE PROYECTOS DE SOFTWARE EN IMCA</h6>
                 </div>        
-                            <div class="main" style="margin-top: 10%; vertical-align: bottom;">
-                                   Copyrigth
-                                </div>              
+                                         
     </div>
 
     
