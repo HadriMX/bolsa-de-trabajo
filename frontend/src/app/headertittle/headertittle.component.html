@@ -18,10 +18,10 @@
                   <li class="dropdown">
                     <a style="color:white" class="dropbtn">Opciones</a>
                     <div class="dropdown-content">
-                      <a style="color:rgb(150, 149, 149)" routerLink="/menu">Menu principal</a>
-                      <a  style="color:rgb(150, 149, 149)" routerLink="/editarusuario">Informacion de la cuenta</a>
+                      <a style="color:rgb(150, 149, 149)" routerLink="/menu">Menú principal</a>
+                      <a style="color:rgb(150, 149, 149)" routerLink="/editarusuario">Información de la cuenta</a>
                       <a style="color:rgb(150, 149, 149)" routerLink="/postulaciones">Mis postulaciones</a>
-                      <a style="color:rgb(150, 149, 149)"  routerLink="/moduloregistro">Cerrar sesion</a>
+                      <a style="color:rgb(150, 149, 149)" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
                     </div>
                   </li>
                 </form>
@@ -30,7 +30,7 @@
                     <a style="color:white" class="dropbtn">Opciones</a>
                     <div class="dropdown-content">
                       <a style="color:rgb(150, 149, 149)" routerLink="/menu">Menu principal</a>
-                      <a  style="color:rgb(150, 149, 149)" routerLink="/moduloconfiguracion">Informacion de la cuenta</a>
+                      <a style="color:rgb(150, 149, 149)" routerLink="/moduloconfiguracion">Informacion de la cuenta</a>
                       <a style="color:rgb(150, 149, 149)" routerLink="/postulaciones">Registrar tipo de empresa</a>
                       <a style="color:rgb(150, 149, 149)" routerLink="/postulaciones">Registrar areas de estudio</a>
                       <a style="color:rgb(150, 149, 149)"  routerLink="/moduloregistro">Cerrar sesion</a>
@@ -39,7 +39,7 @@
                 </form>
                 <img style="margin-left: 10px; background-color: rgb(228, 213, 8);"  class="modal-title" src="../../assets/envelope.png" height="25px" width="25px" alt="Generic placeholder image">
                 <img  style="margin-left: 5px;"  src="../../assets/bell.png" height="25px" width="25px" alt="Generic placeholder image">
-          <h6 style="color:white; margin-left: 10px;">Usuario</h6>
+          <h6 style="color:white; margin-left: 10px;">{{ emailUsuario }}</h6>
         </div>
        
     </nav>  

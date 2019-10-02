@@ -13,18 +13,19 @@ import { AdministradorComponent } from './administrador/administrador.component'
 import { EditarusuarioComponent } from './editarusuario/editarusuario.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthGuard }  from './auth/auth.guard';
+import { AuthGuardService as AuthGuard }  from './auth/auth.guard';
+import { LoginGuardService as LoginGuard } from './auth/login.guard';
 import * as $ from 'jquery';
 
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent },
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   {path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
   {path: 'postulaciones', component: PostulacionesComponent, canActivate: [AuthGuard]},
   {path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard]},
   {path: 'administracion', component: AdministradorComponent, canActivate: [AuthGuard]},
-  {path: 'vacantes', component: VacantesComponent,canActivate: [AuthGuard]},
-  {path: '**', component: LoginComponent}
+  {path: 'vacantes', component: VacantesComponent, canActivate: [AuthGuard]},
+  { path: '**', component: LoginComponent, canActivate: [LoginGuard]}
 ];
 
 @NgModule({
