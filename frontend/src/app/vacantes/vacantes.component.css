@@ -2,11 +2,6 @@ li.dropdown {
     display: inline-block;
   }
   
-  .form-control {
-  
-    
-  
-  }
   #buscador {
     margin-left: 100px;
   }
@@ -195,3 +190,27 @@ li.dropdown {
     color: white;
     text-align: center;
   }
+  /* Sticky Footer Classes */
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+.main {
+  width: 100%;
+  height: 15%;
+  background-color: rgb(91, 6, 112);
+}
+#tamaño {
+  font-size: 14px;
+}
+.modal-body{
+  height: 500px;
+  width: 100%;
+  overflow-y: auto;
+}

@@ -17,9 +17,11 @@ export class AdministradorComponent implements OnInit {
   datoscategoria = [];
   datosarea = [];
   datossubarea = [];
+  datos = [1,2,3,4,5,6];
   estado = false;
   estado2 = false;
   estado3 = false; 
+  estado4 = false; 
   estadoimagen = true;
 
   
@@ -35,7 +37,6 @@ export class AdministradorComponent implements OnInit {
       this.datoscategoria.push(nombre);
       
       $('#categoria').val('');
-
     }
     
     
@@ -80,6 +81,7 @@ export class AdministradorComponent implements OnInit {
               this.estado = true;
               this.estado2 = false;
               this.estado3 = false;
+              this.estado4 = false;
               this.funcioncolores1();
             }
       // Este es para el segundo boton 
@@ -93,11 +95,12 @@ export class AdministradorComponent implements OnInit {
               this.estado2 = true;
               this.estado = false;
               this.estado3 = false;
+              this.estado4 = false;
               this.estadoimagen = false;
               this.funcioncolores2();
             }
       // Este es para el tercer boton 
-        } else {
+        } else if(numero === 3) {
             if (this.estado3 === true) {
               this.estado3 = false;
               this.estadoimagen = true; 
@@ -108,9 +111,24 @@ export class AdministradorComponent implements OnInit {
               this.estadoimagen = false;
               this.estado = false;
               this.estado2 = false;
+              this.estado4 = false
               this.funcioncolores3(); 
             }
-        }    
+        } else {
+          if (this.estado4 === true) {
+            this.estado4 = false;
+            this.estadoimagen = true;
+            $('#usuarios').css('background', 'rgb(75, 60, 143)');
+
+          } else {
+            this.estado4 = true;
+            this.estadoimagen = false;
+            this.estado = false;
+            this.estado2 = false;
+            this.estado3 = false;
+            this.funcioncolores4();
+          }
+        }
   }
 
   // En esta parte se manejan los colores de los botones al momento de presionarlos
@@ -120,6 +138,8 @@ export class AdministradorComponent implements OnInit {
       $('#categoriaboton').css('background', 'red');
       $('#areas').css('background', 'rgb(60, 143, 60)');
       $('#subareas').css('background', 'rgb(60, 143, 60)');
+      $('#usuarios').css('background', 'rgb(75, 60, 143)');
+
     })
   }
   funcioncolores2() {
@@ -127,6 +147,8 @@ export class AdministradorComponent implements OnInit {
       $('#areas').css('background', 'red');
       $('#categoriaboton').css('background', 'rgb(60, 143, 60)');
       $('#subareas').css('background', 'rgb(60, 143, 60)');
+      $('#usuarios').css('background', 'rgb(75, 60, 143)');
+
     })
   }
   funcioncolores3() {
@@ -134,6 +156,17 @@ export class AdministradorComponent implements OnInit {
       $('#subareas').css('background', 'red');
       $('#areas').css('background', 'rgb(60, 143, 60)');
       $('#categoriaboton').css('background', 'rgb(60, 143, 60)');
+      $('#usuarios').css('background', 'rgb(75, 60, 143)');
+
+    })
+  }
+  funcioncolores4() {
+    $(function(){
+      $('#subareas').css('background', 'rgb(60, 143, 60)');
+      $('#areas').css('background', 'rgb(60, 143, 60)');
+      $('#categoriaboton').css('background', 'rgb(60, 143, 60)');
+      $('#usuarios').css('background', 'red');
+
     })
   }
   //------------------------------------------------------------------------------------
