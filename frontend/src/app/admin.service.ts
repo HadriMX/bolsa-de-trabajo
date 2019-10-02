@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Area } from 'src/api/models/area';
+import { Area, Cat_empresa } from 'src/api/models/admin';
 import { ApiResponse } from 'src/api/models/api_response';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -17,6 +17,10 @@ export class AdminService {
 
   add_area(area: Area): Observable<ApiResponse<Area>> {
     return this.http.post<ApiResponse<Area>>(this.endpointUrl, area, this.httpOptions);
+  }
+
+  add_categoria(categoria:Cat_empresa):Observable<ApiResponse<Cat_empresa>>{
+    return this.http.post<ApiResponse<Cat_empresa>>(this.endpointUrl, categoria ,this.httpOptions);
   }
  
 }

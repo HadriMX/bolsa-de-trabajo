@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Area} from 'src/api/models/area';
+import { Area, Cat_empresa } from 'src/api/models/admin';
 import Swal from 'sweetalert2';
 import { AdminService } from '../admin.service';
 
@@ -12,6 +12,11 @@ export class AdministradorComponent implements OnInit {
   @Input() nuevaArea : Area={
     id:0,
     nombre_area:'',
+    estatus:''
+  }
+  @Input() nuevaCategoria : Cat_empresa={
+    id:0,
+    nombre_categoria:'',
     estatus:''
   }
   datoscategoria = [];
@@ -29,43 +34,80 @@ export class AdministradorComponent implements OnInit {
   
   
   // Esto es para agregar algo a la lista y se puede usar para agregar cosas a la base de datos
-  agregar3() {
-    const nombre = $('#categoria').val();
-    if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
-      } else {
-      this.datoscategoria.push(nombre);
-      
-      $('#categoria').val('');
-    }
-    
-    
-  }
   
-  btnagregarCliked: boolean;
+  
+  btnAgregarArea  : boolean;
+  btnAgregarCategoria : boolean;
   constructor(private adminservice:AdminService) { }
   ngOnInit() {}
   
-  // Se usar para eliminar cosas de la lista, se puede usar para eliminar cosas de la base de datos
+  add_areaEstudio() {
+    const nombre = $('#area').val();
+    if (nombre ==='') {
+      Swal.fire("No ingreso ningun valor");
+      } else {
+        this.btnAgregarArea=true;
+        this.adminservice.add_area(this.nuevaArea)
+        .subscribe((response) => {
+          if (response.success)
+          {
+            Swal.fire("correcto", response.message, 'success');
+          }
+          else {
+            Swal.fire("Error", response.message, 'error');
+          }
+    
+          this.btnAgregarArea = false;
+          this.datosarea.push(nombre);
+         $('#area').val('');
+        });
+        
+    }
+
+  }
+  add_CategoriaEmpresa(){
+    const nombre=$('#categoria').val();
+    if (nombre===''){
+      Swal.fire("No ingreso ningun valor");
+    }else{
+      this.btnAgregarCategoria=true;
+      this.adminservice.add_categoria(this.nuevaCategoria)
+      .subscribe((response) =>{
+        if (response.success)
+        {
+          Swal.fire("Correcto", response.message, 'success')
+        }
+        else{
+          Swal.fire("Error", response.message, 'error');
+        }
+
+        this.btnAgregarCategoria=false;
+        this.datoscategoria.push(nombre);
+        $('#categoria').val('');
+      });
+    }
+    
+
+  }
   eliminar(i) {
     this.datoscategoria.splice(i, 1);
   }
-  agregar(){
-    this.btnagregarCliked=true;
-    this.adminservice.add_area(this.nuevaArea)
-    .subscribe((response) => {
-      if (response.success)
-      {
-        Swal.fire("correcto", response.message, 'success');
-        $("#categoria").val('');
-      }
-      else {
-        Swal.fire("Error", response.message, 'error');
-      }
+  // agregar(){
+  //   this.btnagregarCliked=true;
+  //   this.adminservice.add_area(this.nuevaArea)
+  //   .subscribe((response) => {
+  //     if (response.success)
+  //     {
+  //       Swal.fire("correcto", response.message, 'success');
+  //       $("#categoria").val('');
+  //     }
+  //     else {
+  //       Swal.fire("Error", response.message, 'error');
+  //     }
 
-      this.btnagregarCliked = false;
-    });
-   }
+  //     this.btnagregarCliked = false;
+  //   });
+  //  }
 
 
   categorias(numero) {

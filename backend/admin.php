@@ -12,29 +12,63 @@ header('content-type: application/json; charset=utf-8');
 
 $post = json_decode(file_get_contents("php://input"));
 
-$area_estudio1 = "$post->nombre_area";
-$id=3;
+$area_estudio = "$post->nombre_area";
+$categoria="$post->nombre_categoria";
 $estatus="A";
 
+if ($area_estudio<>''){
+    echo json_encode(add_area($area_estudio,$estatus));
+}
+else{
+    echo json_encode(add_categoria($categoria,$estatus));
+}
+//echo json_encode(add_area($area_estudio,$estatus), add_categoria($categoria,$estatus));
 
-echo json_encode(add_area($id,$area_estudio,$estatus));
-function add_area(int $id1,string $area_estudio1,string $estatus1)
+
+function add_area(string $area_estudio,string $estatus)
 {
-    $db = new Db();
-    $conn = $db->getConn();
-    
-    $insertar = $conn->prepare("INSERT INTO areas_estudio (id_area_estudio,nombre,estatus)VALUES (?,?,?)");
-    $insertar->bind_param("iss",$id1, $area_estudio1,$estatus1);
-    $resultado = $insertar->execute();
-    if ($resultado==true) {
-        $output = new SuccessResult("Registro correcto", true);
-    }
-    else {
-        $err = new ErrorResult("Error de registro", 404);
-        $output = $err;
-    }
    
+    if ($area_estudio<>''){
+        
+        
+        $db = new Db();
+        $conn = $db->getConn();
+        $insertar = $conn->prepare("INSERT INTO areas_estudio (nombre,estatus)VALUES (?,?)");
+        $insertar->bind_param("ss",$area_estudio,$estatus);
+        $resultado = $insertar->execute();
+        if ($resultado==true) {
+            $output = new SuccessResult("Registro correcto", true);
+        }
+        else {
+            $err = new ErrorResult("Error de registro", 401);
+            $output = $err;
+        }
+    
+    }
     return $output;
 
 }
+
+
+function add_categoria(string $categoria,string $estatus){
+    
+    if($categoria<>''){
+        
+        $db = new Db();
+        $conn = $db->getConn();
+        $insertar = $conn->prepare("INSERT INTO tipos_empresa (nombre_empresa,estatus)VALUES (?,?)");
+        $insertar->bind_param("ss",$categoria,$estatus);
+        $resultado = $insertar->execute();
+        if ($resultado==true) {
+            $output = new SuccessResult("Registro correcto", true);
+        }
+        else {
+            $err = new ErrorResult("Error de registro", 401);
+            $output = $err;
+        }
+    }
+    return $output;
+}
+    
+
 ?>
