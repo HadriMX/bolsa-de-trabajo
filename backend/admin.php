@@ -16,14 +16,14 @@ $area_estudio = "$post->nombre_area";
 $categoria="$post->nombre_categoria";
 $estatus="A";
 
-if ($area_estudio<>''){
-    echo json_encode(add_area($area_estudio,$estatus));
-}
-else{
-    echo json_encode(add_categoria($categoria,$estatus));
-}
-//echo json_encode(add_area($area_estudio,$estatus), add_categoria($categoria,$estatus));
-
+// if ($area_estudio<>''){
+//     echo json_encode(add_area($area_estudio,$estatus));
+// }
+// else{
+//     echo json_encode(add_categoria($categoria,$estatus));
+// }
+// echo json_encode(add_area($area_estudio,$estatus), add_categoria($categoria,$estatus));
+ echo json_encode(get_areas());
 
 function add_area(string $area_estudio,string $estatus)
 {
@@ -68,6 +68,20 @@ function add_categoria(string $categoria,string $estatus){
         }
     }
     return $output;
+}
+
+
+
+function get_areas(){
+    $db = new Db();
+    $conn = $db->getConn();
+    
+    $stmt = $conn->prepare("SELECT  * FROM areasactivas");
+    //$stmt->bind_param();
+    
+    $stmt->execute();
+    $r = $db->readResult($stmt->get_result());
+    return new SuccessResult("",$r);
 }
     
 

@@ -30,7 +30,7 @@ export class AdministradorComponent implements OnInit {
   estadoimagen = true;
 
   
-
+ 
   
   
   // Esto es para agregar algo a la lista y se puede usar para agregar cosas a la base de datos
@@ -39,7 +39,20 @@ export class AdministradorComponent implements OnInit {
   btnAgregarArea  : boolean;
   btnAgregarCategoria : boolean;
   constructor(private adminservice:AdminService) { }
-  ngOnInit() {}
+  ngOnInit() {
+    this.adminservice.get_areas()
+    .subscribe((response) => {
+      if (response.success)
+      {
+        this.datosarea = response.data;
+        // this .datosarea= this.areas;
+      }
+      else {
+        Swal.fire("Error", response.message, 'error');
+      }
+
+    });
+  }
   
   add_areaEstudio() {
     const nombre = $('#area').val();

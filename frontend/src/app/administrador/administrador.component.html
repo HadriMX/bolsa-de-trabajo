@@ -77,8 +77,8 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr *ngFor='let val of datosarea; index as i'>
-                                    <td>{{datosarea[i]}}</td>
+                                  <tr *ngFor='let val of datosarea'>
+                                    <td>{{val.nombre}}</td>
                                     <img (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
                                   </tr>
                                 </tbody>

@@ -22,5 +22,13 @@ export class AdminService {
   add_categoria(categoria:Cat_empresa):Observable<ApiResponse<Cat_empresa>>{
     return this.http.post<ApiResponse<Cat_empresa>>(this.endpointUrl, categoria ,this.httpOptions);
   }
+
+  get_areas(): Observable<ApiResponse<Area[]>> {
+    return this.http.get<ApiResponse<Area[]>>(this.endpointUrl, this.httpOptions);
+  }
+
+  add_subarea(){
+    
+  }
  
 }
