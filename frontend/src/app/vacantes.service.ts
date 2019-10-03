@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class VacantesService {
 
-  private endpointUrl = 'http://localhost/bdt/php/vacante.php';
+  private endpointUrl = 'http://localhost/bdt/php/src/vacante/vacante.php';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

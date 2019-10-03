@@ -49,7 +49,6 @@
                          </div>
                  </div>
                         
-                 
                  <div class="container">
                          <div class="row" id="busquedaavanzada">
                                  <div class="drop-down-options-style col-lg-2 col-5 col-sm-5 col-md-4" > 
@@ -87,26 +86,26 @@
                  </div>
              </div>
              
-             <div *ngFor="let prueba of pruebas" class="" style="background: rgba(18, 11, 119, 0.502); width: 70%; height: 25%; margin-left: 10%">
+             <div  *ngFor = "let vacante of vacantes" class="" style="background: rgba(18, 11, 119, 0.502); width: 70%; height: 25%; margin-left: 10%">
                     <div data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 60px;" class="row">
                             <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                                <h6 style="color:yellow;">{prueba}</h6>
+                                <h6 style="color:yellow;">{{vacante.titulo_vacante}}</h6>
                             </div>
                             <div class="col-lg-3">
-                                    <h6 style="color:white;">FECHA</h6>
+                                    <h6 style="color:white;">{{vacante.fecha_publicacion | date: 'mediumDate'}}</h6>
                             </div>
                         <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                            <h6 style="color: white;">UBICACION DE LA VACANTE</h6>
+                            <h6 style="color: white;">{{ vacante.entidades_federativa }}</h6>
                         </div>
                         <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                            <h6 style="color:white;">NOMBRE DE LA EMPRESA</h6>
+                            <h6 style="color:white;">{{vacante.usuario}}</h6>
                         </div>       
                         <div data-toggle="modal" data-target="#datosvacante" class="col-lg-3" >
                             
                         </div>
                     </div> 
-                    <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 30px; margin-left: 75px; color:white;">DESCRIPCION</h6>
-                    <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 75px; color:white;">SE SOLICITA EMPLEADO PARA APOYO EN DESARROLLO DE PROYECTOS DE SOFTWARE EN IMCA</h6>
+                    <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 30px; margin-left: 75px; color:white;">{{vacante.descripcion_puesto | slice:0:230}}..</h6>
+                    
                 </div>        
                                          
     </div>

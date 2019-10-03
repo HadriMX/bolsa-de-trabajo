@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
 
   constructor(private vacantesService : VacantesService) {
     
-   }
+  }
 
   ngOnInit() {
     this.vacantesService.getVacantes()

@@ -1,7 +1,7 @@
 export class Vacante {
     id_vacante: number;
     titulo_vacante: string;
-    fecha_publicacion: string;
+    fecha_publicacion: Date;
     id_usuario: number;
     usuario: string;
     puesto: string;
@@ -14,6 +14,6 @@ export class Vacante {
     genero: string;
     direccion: string;
     id_entidad_federativa: number;
-    entidad_federativa: string;
+    entidades_federativa: string;
     estatus: string;
 }

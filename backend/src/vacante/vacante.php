@@ -10,7 +10,7 @@ session_start();
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Php-Session-Id");
-header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Methods: GET');
 header('content-type: application/json; charset=utf-8');
 
 echo json_encode(getVacantes());
@@ -23,7 +23,6 @@ function getVacantes(){
     //$stmt->bind_param();
     
     $stmt->execute();
-
     $r = $db->readResult($stmt->get_result());
 
     return new SuccessResult("",$r);
