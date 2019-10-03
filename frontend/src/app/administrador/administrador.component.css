@@ -20,3 +20,9 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 100%;
     overflow: auto;
 }
+.btn {
+    border-radius: 15px;
+    color:white;
+    background-color:rgb(121, 24, 129);
+
+}

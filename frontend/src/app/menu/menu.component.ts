@@ -11,7 +11,7 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    $("#datoscompletos").modal("show");
+    //$("#datoscompletos").modal("show");
 
   }
   buscar() {

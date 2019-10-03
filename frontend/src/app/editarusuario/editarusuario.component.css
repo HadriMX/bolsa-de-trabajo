@@ -1,3 +1,6 @@
+.form-control {
+    width: 70%;
+}
 #titulo {
     margin-left: 3%;
 }
@@ -24,3 +27,22 @@
     margin-block-start: 1%;
     margin-left: 1%;
 }
+.laborals {
+    width:96%; 
+    height: 30%;
+    margin-top: 2%;
+    background-color: rgb(229, 226, 226);
+}
+  @media  (max-width: 575px) {
+    .laborals {
+        height: 330px;
+    }
+    .form-control {
+        width: 200%;
+    }
+  }
+  @media (min-width: 575px) and (max-width: 1000px) {
+      .form-control {
+          width: 250%;
+      }
+  }

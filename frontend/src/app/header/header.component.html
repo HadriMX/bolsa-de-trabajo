@@ -1,19 +1,25 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
 
-<form >
-        <nav class="navbar navbar-expand-sm bg-red navbar-dark">
-           <h5 style="color:white;" > 
-               Icono - Volar Iap
-           </h5> 
-          <a style="color:beige; margin-left: 480px;">Iniciar sesión</a>
-          <div id="block">
+<form>
+        <nav class="navbar navbar-expand-sm bg-red navbar-dark" role="navigation">
+                <h5 style="color:white;" >  
+                    Icono - Volar Iap
+                </h5> 
+       
+          <div id="inicio2">
+            <a  >Iniciar sesión</a>
+
+          </div>
+          <div class="titulologin" >
               <input [(ngModel)]="loginInfo.email" name="email" class="form-control" type="text" id="usuario" placeholder="Correo electronico"  autofocus required/>
             </div>
-            <div>
+            <div  class="titulologin2">
               <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control" type="password" id="contrasena" placeholder="Contraseña" required />
             </div>
-          <div>
-              <button class="btn btn-primary" (click)="login()" pButton>Ingresar</button>
+          <div class="form-control2">
+              <button class=" form-control btn btn-primary" (click)="login()" pButton>Ingresar</button>
           </div>  
         </nav>  
        </form>
-       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+       
+      

@@ -1,18 +1,7 @@
 <app-header></app-header>
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <script src="https://code.angularjs.org/1.6.9/angular.js"></script>
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!--===============================================================================================-->
-    <!--===============================================================================================-->
-
-  </head>
-    <body>
-     
-  <div class="container-fluid " ng-app="myApp" ng-controller="myCtrl">
+<div class="container-fluid " ng-app="myApp" ng-controller="myCtrl">
     <div class="row" style="height: 100%; ">
-       <div class="col-sm-7 login100-more d-none d-md-block" style="background-image: url('../../assets/trapiche.jpg');">
+       <div class="col-lg-7 col-sm-12 login100-more d-none d-sm-block" id="carrusellogin" >
          <div class="row align-items-center" style=" height: 100%;">
            <div class="row justify-content-center w-100" >
               <div id="carouselExampleIndicators"  class="carousel slide w-75" data-ride="carousel">
@@ -56,7 +45,7 @@
          </div>
        </div>
       <div class="col-sm-5" style="height:100%;"> 
-         <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+         <div  class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
              <form class="login100-form validate-form">
                <span class="login100-form-title p-b-59">
                  Registrar cuenta
@@ -64,46 +53,40 @@
  
                <div id="electronico" class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                  <span  style="color:black;" class="label-input100">Correo electronico</span>
-                 <input id="input100" class="input100" type="email" name="email" placeholder="Correo electronico..." required>
+                 <input id="input100" class="form-control input100" type="email" name="email" placeholder="Correo electronico..." required>
                  <span class="focus-input100"></span>
                </div>
        
                <div id="contrasenaa" class="wrap-input100 validate-input" data-validate = "Password is required">
                  <span style="color:black;" class="label-input100">Contraseña</span>
-                 <input   class="input100" type="password" name="pass" placeholder="*************"required>
+                 <input   class="form-control input100" type="password" name="pass" placeholder="*************"required>
                  <span class="focus-input100"></span>
                </div>
 
                    <div class="row">
                          <div id="preferencialaboral" style="margin-left: 10px;" >
                            <h6>Seleccione el tipo de usuario:</h6>
-                             <select name="select" style="margin-top: 10px; width:200px;">
-                                 <option value="value1" selected>Empleado</option> 
+                             <select class="form-control" name="select" style="margin-top: 10px; width:200px;">
+                                 <option value="value1" selected>Usuario normal</option> 
                                  <option value="value2">Empresa</option>
                              </select>  
                            </div>  
                    </div>
-                   <div class="row" style="margin-left: 10px;"  > 
-
-               <div class="container-login100-form-btn" style="margin-top: 20px;">
-                   <div class="wrap-login100-form-btn">
-                     <div class="login100-form-bgbtn"></div>
-                     <button (click)="crear()" class="login100-form-btn">
-                       Crear cuenta
-                     </button>
-                   </div>
-                   <div class="wrap-login100-form-btn" style="width:250px; margin-left: 15px;" >
-                     <div class="login100-form-bgbtn"></div>
-                     <button routerLink="/menu" class="login100-form-btn"  >
-                       Ingresar como visitante
-                     </button>
-                   </div>
-                 </div>
+                   <div class="row"  style="margin-block-start: 5%;" id="espaciobotones"> 
+                    <div class=" col-lg-6 col-sm-5 col-10"  >
+                      <button class="form-control" id="boton1" (click)="crear()" >
+                        Crear cuenta
+                      </button>  
+                    </div>
+                    <div class="col-lg-6 col-sm-5 col-10">
+                      <button class="form-control" id="boton2" routerLink="/menu"  >
+                        Ingresar como visitante
+                      </button>
+                    </div>
                </div>
              </form>
            </div>
        </div>
     </div>
   </div>
-    </body>
     
