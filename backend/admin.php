@@ -23,7 +23,7 @@ $estatus="A";
 //     echo json_encode(add_categoria($categoria,$estatus));
 // }
 // echo json_encode(add_area($area_estudio,$estatus), add_categoria($categoria,$estatus));
- echo json_encode(get_areas());
+//  echo json_encode(get_areas(),get_categorias());
 
 function add_area(string $area_estudio,string $estatus)
 {
@@ -77,6 +77,18 @@ function get_areas(){
     $conn = $db->getConn();
     
     $stmt = $conn->prepare("SELECT  * FROM areasactivas");
+    //$stmt->bind_param();
+    
+    $stmt->execute();
+    $r = $db->readResult($stmt->get_result());
+    return new SuccessResult("",$r);
+}
+
+function get_categorias(){
+    $db = new Db();
+    $conn = $db->getConn();
+    
+    $stmt = $conn->prepare("SELECT  * FROM categorias_activas");
     //$stmt->bind_param();
     
     $stmt->execute();

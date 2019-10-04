@@ -50,7 +50,7 @@
                                     </thead>
                                     <tbody>
                                       <tr *ngFor='let val of datoscategoria; index as i'>
-                                        <td>{{datoscategoria[i]}}</td>
+                                        <td>{{val.nombre_empresa}}</td>
                                         <img data-toggle="modal" data-target="#datocategoria"  style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
                                       </tr>
                                     </tbody>
@@ -77,7 +77,7 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr *ngFor='let val of datosarea'>
+                                  <tr *ngFor='let val of datosarea;index as i'>
                                     <td>{{val.nombre}}</td>
                                     <img (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
                                   </tr>

@@ -9,6 +9,8 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 export class AdminService {
   private endpointUrl = 'http://localhost/bdt/php/src/admin.php';
+  private endpointUrlAreas='http://localhost/bdt/php/src/get_areas.php';
+  private endpointUrlCategorias='http://localhost/bdt/php/src/get_categorias.php';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -24,7 +26,11 @@ export class AdminService {
   }
 
   get_areas(): Observable<ApiResponse<Area[]>> {
-    return this.http.get<ApiResponse<Area[]>>(this.endpointUrl, this.httpOptions);
+    return this.http.get<ApiResponse<Area[]>>(this.endpointUrlAreas, this.httpOptions);
+  }
+
+  get_categorias(): Observable<ApiResponse<Cat_empresa[]>> {
+    return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlCategorias, this.httpOptions);
   }
 
   add_subarea(){

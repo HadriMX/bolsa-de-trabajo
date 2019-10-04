@@ -39,7 +39,7 @@ export class AdministradorComponent implements OnInit {
   btnAgregarArea  : boolean;
   btnAgregarCategoria : boolean;
   constructor(private adminservice:AdminService) { }
-  ngOnInit() {
+  update(){
     this.adminservice.get_areas()
     .subscribe((response) => {
       if (response.success)
@@ -50,8 +50,22 @@ export class AdministradorComponent implements OnInit {
       else {
         Swal.fire("Error", response.message, 'error');
       }
-
     });
+
+    this.adminservice.get_categorias()
+    .subscribe((response) => {
+      if (response.success)
+      {
+        this.datoscategoria = response.data;
+        // this .datosarea= this.areas;
+      }
+      else {
+        Swal.fire("Error", response.message, 'error');
+      }
+    });
+  }
+  ngOnInit() {
+    this.update();
   }
   
   add_areaEstudio() {
@@ -65,17 +79,19 @@ export class AdministradorComponent implements OnInit {
           if (response.success)
           {
             Swal.fire("correcto", response.message, 'success');
+            this.datosarea.push(nombre);
+            this.update();
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
     
           this.btnAgregarArea = false;
-          this.datosarea.push(nombre);
+          
          $('#area').val('');
         });
         
-    }
+   }
 
   }
   add_CategoriaEmpresa(){
@@ -89,13 +105,15 @@ export class AdministradorComponent implements OnInit {
         if (response.success)
         {
           Swal.fire("Correcto", response.message, 'success')
+          this.datoscategoria.push(nombre);
+          this.update();
         }
         else{
           Swal.fire("Error", response.message, 'error');
         }
 
         this.btnAgregarCategoria=false;
-        this.datoscategoria.push(nombre);
+        
         $('#categoria').val('');
       });
     }
