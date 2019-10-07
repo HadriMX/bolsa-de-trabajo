@@ -39,6 +39,15 @@ export class HeaderComponent implements OnInit {
           this.currentUserService.setUsuarioActual(response.data);
           this.router.navigateByUrl("/menu");
         }
+        else if (response.code == 4011) {
+          Swal.fire({
+            title: 'No autorizado',
+            text: 'Termina tu registro para continuar.',
+            type: 'question',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar'
+          });
+        }
         else {
           Swal.fire("Error", response.message, 'error');
         }
