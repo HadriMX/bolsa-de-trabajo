@@ -1,9 +1,10 @@
 <?php
 error_reporting(E_ERROR | E_PARSE);
 
-include "db_conn.php";
-require_once "error.php";
-require_once "success.php";
+// include "db_conn.php";
+// require_once "error.php";
+// require_once "success.php";
+require_once '../autoload.inc.php';
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
