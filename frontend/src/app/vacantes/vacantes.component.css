@@ -215,3 +215,24 @@ body {
   width: 100%;
   overflow-y: auto;
 }
+body {
+  position: fixed; 
+  width:100%;
+  height:100%; 
+  overflow: auto;
+  background-image: url('../../assets/background.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+
+}
+.container-fluid {
+  width:50%; 
+   margin-block-start: 3%;
+}
+@media (min-width:246px) and (max-width:767px) {
+  .container-fluid {
+    width: 100%;
+  }
+}

@@ -2,6 +2,9 @@ nav {
     height: 300%;
    
 }
+.form {
+    height: 90%;
+}
 nav.navbar {
     background-color:rgb(121, 24, 129);
     

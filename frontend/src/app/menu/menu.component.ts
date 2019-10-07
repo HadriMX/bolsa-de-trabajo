@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 })
 export class MenuComponent implements OnInit {
   cursor: boolean = false;
+  datos = [1,2,3,4,5]
   constructor() { }
 
   ngOnInit() {

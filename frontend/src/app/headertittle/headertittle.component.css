@@ -61,12 +61,14 @@ li.dropdown {
   text-align: center;
   margin-left: 20%;
   width: 40%;
+  
 }
 @media (max-width: 985px) {
   #titulopag{
     color:white;
     width: 80%;
-    margin-left: 10%
+    margin-left: 10%;
+    margin-block-start: 2%;
 }
 #prueba {
   margin-block-start: 1%;
