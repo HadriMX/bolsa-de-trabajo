@@ -14,6 +14,7 @@ export class MenuComponent implements OnInit {
 
   vacantes: Vacante[];
 
+
   constructor(private vacantesService : VacantesService) {
     
   }
