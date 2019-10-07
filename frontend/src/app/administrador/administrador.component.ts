@@ -39,7 +39,7 @@ export class AdministradorComponent implements OnInit {
   btnAgregarArea  : boolean;
   btnAgregarCategoria : boolean;
   constructor(private adminservice:AdminService) { }
-  update(){
+  MostrarAreas(){
     this.adminservice.get_areas()
     .subscribe((response) => {
       if (response.success)
@@ -51,7 +51,8 @@ export class AdministradorComponent implements OnInit {
         Swal.fire("Error", response.message, 'error');
       }
     });
-
+  }
+  MostrarCategorias(){
     this.adminservice.get_categorias()
     .subscribe((response) => {
       if (response.success)
@@ -65,7 +66,8 @@ export class AdministradorComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.update();
+    this.MostrarAreas();
+    this.MostrarCategorias();
   }
   
   add_areaEstudio() {
@@ -80,7 +82,7 @@ export class AdministradorComponent implements OnInit {
           {
             Swal.fire("correcto", response.message, 'success');
             this.datosarea.push(nombre);
-            this.update();
+            this.MostrarAreas();
           }
           else {
             Swal.fire("Error", response.message, 'error');
@@ -106,7 +108,7 @@ export class AdministradorComponent implements OnInit {
         {
           Swal.fire("Correcto", response.message, 'success')
           this.datoscategoria.push(nombre);
-          this.update();
+          this.MostrarCategorias();
         }
         else{
           Swal.fire("Error", response.message, 'error');
