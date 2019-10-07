@@ -184,6 +184,7 @@ a{
   height:100%;
 }
 .main {
+  position: static;
   width: 100%;
   height: 21%;
   background-color: rgb(91, 6, 112);
@@ -203,4 +204,20 @@ a{
   background-color: rgb(8, 2, 90);
   color: white;
   text-align: center;
+}
+
+html {
+  min-height: 100vh !important;
+  height: 100vh;
+}
+#body { 
+  min-height: 700px;
+  background-image: url('../../assets/background.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+#sticky-footer {
+  width: 100%; 
 }
