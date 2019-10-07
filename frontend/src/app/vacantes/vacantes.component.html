@@ -1,6 +1,6 @@
 <app-headertittle></app-headertittle>
-<body  style="background-color: rgb(206, 211, 208);  width:100%; height:100%; overflow:auto; position: fixed;">
-        <div class="container-fluid" style="width:50%;  margin-block-start: 3%;" >
+<body>
+        <div class="container-fluid"  >
                                 <div class="row">
                                         <div class="col-lg-8 col-sm-8 col-md-8">
                                                 <h4 style="margin-left: 1%;" >Mis vacantes</h4>
@@ -24,8 +24,6 @@
                         </div>
                 </div>
            </div>
-           
-                           
                            <div>
                                <div style="height: 70px; background-color:transparent; margin-block-start: 8%;">
                               </div>
@@ -39,7 +37,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-                <h5 class="col-8 col-sm-8 col-md-8" id="exampleModalLabel" style="margin-left:230px; color:white;">INFORMACION DE LA VACANTE</h5>                  
+                <h5 class="col-8 col-sm-8 col-md-8" id="exampleModalLabel" style="font-size: 100%; margin-left: 35%;color:white;">INFORMACION DE LA VACANTE</h5>                  
         </div>
         <div class="modal-body">
                 <div style="margin-left: 60px;">
@@ -88,7 +86,7 @@
       <div class="modal-content">
         <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
         
-              <h5 id="exampleModalLabel" style="margin-left:210px;"> EDITAR VACANTE</h5>                  
+              <h5 id="exampleModalLabel" style="font-size: 100%; margin-left: 35%; color:white;"> EDITAR VACANTE</h5>                  
         </div>
         <div class="modal-body">
            <div style="margin-left: 40px;">
@@ -96,25 +94,25 @@
             <div style="margin-left: 20px;" >
                 <div class="row">
                         <h6 style="margin-block-start: 15px;">Titulo de la vacante</h6>
-                        <input style="width: 400px; margin-block-start: 10px; margin-left: 30px;" placeholder="titulo">
+                        <input class="form-control" style="width: 400px; margin-block-start: 10px; margin-left: 30px;" placeholder="titulo">
                 </div>
                 <div class="row">
                     <h6 style="margin-block-start: 15px;">Nombre del puesto</h6>
-                    <input style="width: 400px; margin-block-start: 10px; margin-left: 30px;" placeholder="titulo">
+                    <input class="form-control" style="width: 400px; margin-block-start: 10px; margin-left: 30px;" placeholder="titulo">
                 </div>
                 <div class="row">
                         <h6 style="margin-block-start: 15px;">Descripcion del puesto</h6>
-                        <textarea style="width: 400px; margin-block-start: 10px; margin-left: 10px;" ></textarea>
+                        <textarea class="form-control" style="width: 400px; margin-block-start: 10px; margin-left: 10px;" ></textarea>
                 </div>
                 <div class="row">
                         <h6 style="margin-block-start: 15px;">Area de estudio deseada</h6>
-                        <select name="select" style="margin-left: 10px; width:120px; margin-block-start: 10px;">
+                        <select  class="form-control" name="select" style="margin-left: 10px; width:120px; margin-block-start: 10px;">
                                 <option value="">Opciones</option>
                                 <option value="value1"> Ejemplo 1</option> 
                                 <option value="value2">Ejemplo 2</option>
                             </select>  
                         <h6 style="margin-left: 20px;margin-block-start: 15px;">Subarea de estudio deseada</h6>
-                        <select name="select" style="margin-left: 10px; width:170px; margin-block-start: 10px;">
+                        <select class="form-control" name="select" style="margin-left: 10px; width:170px; margin-block-start: 10px;">
                                 <option value="">Opciones</option>
                                 <option value="value1"> Ejemplo 1</option> 
                                 <option value="value2">Ejemplo 2</option>
@@ -122,7 +120,7 @@
                 </div>
                 <div class="row">
                         <h6 style="margin-block-start: 15px;">Genero</h6>
-                        <select name="select" style="margin-left: 26px; width:120px; margin-block-start: 10px;">
+                        <select  class="form-control" name="select" style="margin-left: 26px; width:120px; margin-block-start: 10px;">
                                 <option value="">Opciones</option>
                                 <option value="value1"> Ejemplo 1</option> 
                                 <option value="value2">Ejemplo 2</option>
@@ -130,12 +128,12 @@
                 </div>
                 <div class="row">
                         <h6 style="margin-block-start: 15px;">Direccion</h6>
-                        <textarea style="width: 400px; margin-block-start: 10px; margin-left: 10px;" ></textarea>
+                        <textarea  class="form-control" style="width: 400px; margin-block-start: 10px; margin-left: 10px;" ></textarea>
              
                 </div>
                 <div class="row">
                         <h6 style="margin-block-start: 15px;">Sueldo</h6>
-                        <input style="width: 200px; margin-block-start: 10px; margin-left: 29px;" placeholder="titulo">
+                        <input class="form-control" style="width: 200px; margin-block-start: 10px; margin-left: 29px;" placeholder="titulo">
                   
                 </div>
             </div>
@@ -155,33 +153,33 @@
   <div class="modal-content">
     <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
     
-          <h5 id="exampleModalLabel" style="margin-left:210px; color:white;">REGISTRO DE VACANTE</h5>                  
+          <h5 id="exampleModalLabel" style="color:white;font-size: 100%; margin-left: 35%;">REGISTRO DE VACANTE</h5>                  
     </div>
     <div class="modal-body">
-       <div style="margin-left: 40px;">
+       <div >
         <h5>Datos de la vacante</h5>
         <div style="margin-left: 20px;" >
             <div class="row">
-                    <h6 style="margin-block-start: 15px;">Titulo de la vacante</h6>
-                    <input style="width: 400px; margin-block-start: 10px; margin-left: 30px;" placeholder="titulo">
+                    <h6 style="margin-block-start: 15px;">Titulo de la vacante:</h6>
+                    <input class="form-control" style="width: 400px; margin-block-start: 10px; margin-left: 1%;" placeholder="titulo">
             </div>
             <div class="row">
-                <h6 style="margin-block-start: 15px;">Nombre del puesto</h6>
-                <input style="width: 400px; margin-block-start: 10px; margin-left: 30px;" placeholder="titulo">
+                <h6 style="margin-block-start: 15px;">Nombre del puesto:</h6>
+                <input class="form-control" style="width: 400px; margin-block-start: 10px;  margin-left: 1%;" placeholder="titulo">
             </div>
             <div class="row">
-                    <h6 style="margin-block-start: 15px;">Descripcion del puesto</h6>
-                    <textarea style="width: 400px; margin-block-start: 10px; margin-left: 10px;" ></textarea>
-            </div>
+                    <h6 style="margin-block-start: 15px;">Descripcion del puesto:</h6>
+                    <textarea class="form-control"style="width: 400px; margin-block-start: 10px; margin-left: 1%;" ></textarea>
+            </div> 
             <div class="row">
                     <h6 style="margin-block-start: 15px;">Area de estudio deseada</h6>
-                    <select name="select" style="margin-left: 10px; width:120px; margin-block-start: 10px;">
+                    <select  class="form-control" name="select" style="margin-left: 10px; width:120px; margin-block-start: 10px;">
                             <option value="">Opciones</option>
                             <option value="value1"> Ejemplo 1</option> 
                             <option value="value2">Ejemplo 2</option>
                         </select>  
                     <h6 style="margin-left: 20px;margin-block-start: 15px;">Subarea de estudio deseada</h6>
-                    <select name="select" style="margin-left: 10px; width:170px; margin-block-start: 10px;">
+                    <select class="form-control" name="select" style="margin-left: 10px; width:170px; margin-block-start: 10px;">
                             <option value="">Opciones</option>
                             <option value="value1"> Ejemplo 1</option> 
                             <option value="value2">Ejemplo 2</option>
@@ -189,7 +187,7 @@
             </div>
             <div class="row">
                     <h6 style="margin-block-start: 15px;">Genero</h6>
-                    <select name="select" style="margin-left: 26px; width:120px; margin-block-start: 10px;">
+                    <select class="form-control" name="select" style="margin-left: 26px; width:120px; margin-block-start: 10px;">
                             <option value="">Opciones</option>
                             <option value="value1"> Ejemplo 1</option> 
                             <option value="value2">Ejemplo 2</option>
@@ -197,12 +195,12 @@
             </div>
             <div class="row">
                     <h6 style="margin-block-start: 15px;">Direccion</h6>
-                    <textarea style="width: 400px; margin-block-start: 10px; margin-left: 10px;" ></textarea>
+                    <textarea class="form-control" style="width: 400px; margin-block-start: 10px; margin-left: 10px;" ></textarea>
          
             </div>
             <div class="row">
                     <h6 style="margin-block-start: 15px;">Sueldo</h6>
-                    <input style="width: 200px; margin-block-start: 10px; margin-left: 29px;" placeholder="titulo">
+                    <input class="form-control" style="width: 200px; margin-block-start: 10px; margin-left: 29px;" placeholder="titulo">
               
             </div>
         </div>
@@ -234,14 +232,14 @@
                               <h6  autofocus required id="tamaño">Nombre:</h6>
                           </div>
                           <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
-                              <input  id="input100" class="input100" type="text">
+                              <input   class="form-control input100" type="text">
                           </div>
                           <div class="col-lg-1 col-sm-2 col-3" id="titulo">
                               <h6 id="tamaño">Telefono:</h6>
                           </div>
                           <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
-                              <input  id="input100" class="input100" type="number">
-                          </div>
+                              <input   class="form-control input100" type="number">
+                          </div> 
                     </div>
            
                   <div class="row" style="margin-left: 15px;">
@@ -249,13 +247,13 @@
                           <h6 id="tamaño">RFC:</h6>
                       </div>
                       <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%; " > 
-                          <input  id="input100" class="input100" type="email">
+                          <input class="form-control input100" type="email">
                       </div>
                       <div class="col-lg-2 col-sm-2 col-3" id="titulo">
                             <h6 id="tamaño">Pagina web:</h6>
                         </div>
                         <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%; " > 
-                            <input  id="input100" class="input100" type="email">
+                            <input   class="form-control input100" type="email">
                         </div>
                         
                   </div>
@@ -263,7 +261,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" style="background-color: black; color:white;">Descripcion</span>
                     </div>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                    <textarea class="form-control" style="background-color: rgb(228, 231, 231);" aria-label="With textarea"></textarea>
                   </div>
                   <h6 style="margin-left: 30px; margin-top: 20px;">Direccion</h6>
                   <div class="row" style="margin-left: 35px;">
@@ -271,7 +269,7 @@
                           <h6 id="tamaño">Estado:</h6>
                       </div>
                       <div class="col-lg-4 col-sm-4 col-9" style="margin-left: 2%;" > 
-                          <select name="select" style="margin-top: 10px; width:70%;">
+                          <select class="form-control" name="select" style="margin-top: 10px; width:70%;">
                               <option value="value1" selected>Ejemplo 1</option> 
                               <option value="value2">Ejemplo 2</option>
                           </select>             
@@ -280,7 +278,7 @@
                           <h6 id="tamaño">Ciudad:</h6>
                       </div>
                       <div class="col-lg-4 col-sm-3 col-7" style="margin-left: 2%;" > 
-                          <input  id="input100" class="input100" type="text">
+                          <input   class="form-control input100" type="text">
                       </div>
                   </div>
                   <div class="row" style="margin-left: 35px;">
@@ -288,13 +286,13 @@
                           <h6 id="tamaño">Colonia:</h6>
                       </div>
                       <div class="col-lg-4 col-sm-3 col-8" style="margin-left: 10px;" > 
-                          <input  id="input100" class="input100" type="text">     
+                          <input   class="form-control input100" type="text">     
                        </div>
                        <div class="col-lg-1 col-sm-1 col-2" id="titulo"  >
                           <h6 id="tamaño">Calle:</h6>
                       </div>
                       <div class="col-lg-4 col-sm-4 col-7" style="margin-left: 2%;" > 
-                          <input  id="input100" class="input100" type="text">
+                          <input   class="form-control input100" type="text">
                       </div>
                   </div>
                   <div class="row" style="margin-left: 35px; margin-block-end: 2%;">
@@ -302,7 +300,7 @@
                           <h6 id="tamaño">CP:</h6>
                       </div>
                       <div class="col-lg-4 col-sm-3 col-7" style="margin-left: 10px;" > 
-                          <input  id="input100" class="input100" type="number">     
+                          <input   class="form-control input100" type="number">     
                        </div>
                   </div>
                    </div> 
@@ -314,13 +312,13 @@
                               <h6  autofocus required id="tamaño">Nombre:</h6>
                           </div>
                           <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
-                              <input  id="input100" class="input100" type="text">
+                              <input   class=" form-control input100" type="text">
                           </div>
                           <div class="col-lg-1 col-sm-2 col-3" id="titulo">
                               <h6 id="tamaño">Telefono:</h6>
                           </div>
                           <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
-                              <input  id="input100" class="input100" type="number">
+                              <input   class="form-control input100" type="number">
                           </div>
                     </div>
            
@@ -329,12 +327,12 @@
                           <h6 id="tamaño">Correo Electronico:</h6>
                       </div>
                       <div class="col-lg-3 col-sm-5 col-7" style="margin-left: 4%; margin-block-start: 1%; " > 
-                          <input  id="input100" class="input100" type="email">
+                          <input   class="form-control  input100" type="email">
                       </div>
                   </div>
                 </div> 
                 <div class="row" style="margin-block-start: 5%;">
-                        <div class="col-lg-4 col-sm-4 col-4" style="width: 100%;">
+                        <div class="col-lg-4 col-sm-4 col-4" >
                             <div >
                                  <button  class="form-control btn btn-primary">Seleccionar Logo</button> 
                             </div>

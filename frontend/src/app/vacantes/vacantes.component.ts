@@ -12,7 +12,4 @@ export class VacantesComponent implements OnInit {
   ngOnInit() {
    // $("#editarinfoempresa").modal("show");
   }
-
- 
-
 }

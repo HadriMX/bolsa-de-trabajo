@@ -1,7 +1,14 @@
 nav {
+    height: 300%;
+   
+}
+.form {
+    height: 90%;
 }
 nav.navbar {
-    background-color:rgb(55, 9, 94);
+    background-color:rgb(121, 24, 129);
+    
+    width:100%;
 }
 input {
     margin-inline-end: 10px;
@@ -16,4 +23,64 @@ a{
 }
 .btn{
     margin-left: 20px;
+}
+.form-control2 {
+    border-radius: 23px;
+
+}
+#inicio2 {
+    margin-left: 35%;
+    color:beige;
+}
+@media (max-width: 461px)  {
+ .titulologin2 {
+    margin-block-start: 5%;
+    margin-left: 9%;
+    width: 70%;
+ }
+ .titulologin {
+     margin-block-start: 5%;
+     margin-left: 12%;
+     width: 70%;
+ }
+ #inicio2 {
+    margin-left: 36%;
+ }
+ .form-control2 {
+     margin-block-start: 5%;
+     width: 60%;
+     margin-left: 6%;
+    }
+}
+ @media (min-width: 462px) and (max-width: 575px)  {
+    .titulologin2 {
+       margin-block-start: 5%;
+       width: 60%;
+       margin-left: 13%;
+    }
+    .titulologin {
+        margin-block-start: 5%;
+        margin-left: 15%;
+        width: 60%;
+    }
+   .form-control2 {
+       width: 60%;
+        margin-left: 10%;       
+      margin-block-start: 5%;
+   } 
+   }
+   
+
+@media (max-width: 360px) {
+    .form-control2 {
+        margin-block-start: 15%;
+    }
+    .titulologin {
+    margin-block-start: 2%;
+    }
+}
+@media (min-width: 739px) {
+   #inicio{
+    margin-left: 480px;
+   }
 }

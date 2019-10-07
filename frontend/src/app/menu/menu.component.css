@@ -14,7 +14,9 @@ li.dropdown {
   z-index: 1;
 }
 
-
+.drop-down-options-style {
+   margin-left: 2px;
+}
 .drop-down-options-style select{
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -29,10 +31,9 @@ li.dropdown {
   line-height: 1.75;
   color: white;
   
-  background-color: transparent;
-  background-image: none;
-
-  border: 1px solid white;
+  background-color: rgb(146, 34, 131);  background-image: none;
+  
+  border: 3px solid white;
   border-top-color: transparent;
   border-bottom-color: transparent;
   border-left-color: transparent;
@@ -109,7 +110,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 #titulo2 {
   margin-block-start: 20px;
-  margin-left: 0px;
   
 }
 
@@ -186,7 +186,7 @@ a{
 .main {
   position: static;
   width: 100%;
-  height: 21%;
+  height: 140px;
   background-color: rgb(91, 6, 112);
 }
 #texto {
@@ -219,5 +219,133 @@ html {
   background-size: cover;
 }
 #sticky-footer {
-  width: 100%; 
+  width: 100%;
+  position: fixed;
 }
+html {
+  min-height: 100vh !important;
+  height: 100vh;
+}
+#ubicacionspace {
+  margin-left: 2%;
+}
+#drop-down-options {
+  width:119%; 
+  margin-block-start: 3%; 
+  font-size: 15px;
+}
+#limpiar {
+  color: rgb(18, 129, 180); 
+  margin-block-start: 1%; 
+  margin-left: 10%;
+  cursor:pointer;
+}
+.Buscarspace {
+  width: 100%;
+  height: 50%;
+  margin-block-start: 18%; 
+  margin-left: 10%;
+  border-radius: 20px;
+}
+#vacantesmenu {
+  margin-block-start: 5px;
+  margin-left: 2%;
+  color:white;
+
+
+}
+#vacantecontenedor {
+  background: rgba(18, 11, 119, 0.502); 
+  width: 70%; height: 25%;
+  margin-left: 7%
+}
+/* Aqui comienzan los diseños responsivos en el apartado main*/
+@media (min-width:990px) and (max-width:1189px) {
+  #ubicacionspace {
+    margin-left: 8%;
+  }
+}
+@media (min-width:574px) and (max-width:990px) {
+  .form-control {
+    width: 100%;
+  }
+ #espaciobuscar{
+   margin-left: 19%;
+ }
+ .main {
+  height: 40%;;
+}
+#drop-down-options{
+  width:100%; 
+  margin-block-start: 5%; 
+  margin-top:1%;
+}
+.drop-down-options-style {
+  margin-block-start: 3%;
+}
+#limpiar {
+  margin-left: 80%;
+}
+}
+
+@media (min-width:992px) and (max-width:1193px) {
+  .Buscarspace {
+    margin-block-start: 23%;
+    margin-left: 32%;
+  }
+}
+
+@media (max-width:575px) {
+  .main {
+    height: 60%;;
+  }
+  .form-control {
+    width: 100%;
+    height: 45%;
+    
+  }
+   #vacantecontenedor {
+    margin-left: 2%;
+    width: 95%;
+    margin-block-start: 8%;  
+  }
+  #titulo2 {
+    font-size: 14px;
+  }
+  #ubicacionspace {
+    margin-left: 0;
+  }
+  .Buscarspace {
+    height: 80%;;
+    margin-block-start: 10%;
+    width: 100%;
+    margin-left: 20%;
+  }
+  #busquedaavanzada {
+    margin-block-start: 7%;
+  }
+  #drop-down-options{
+    width:100%; 
+    margin-block-start: 3%; 
+    margin-top:1%;
+  }
+  #limpiar {
+    margin-left: 30%;
+  }
+  .drop-down-options-style {
+    margin-block-start: 1%;
+  }
+}
+@media (max-width:320px) {
+  .main {
+    height: 65%;
+  }
+  #drop-down-options {
+    width:80%; 
+    margin-block-start: 3%; 
+    size: 5px;
+    
+  }
+ 
+}
+/* Aqui comienzan con los diseños responsivos en el apartado de las vacantes */
