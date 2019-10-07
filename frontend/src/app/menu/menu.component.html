@@ -1,116 +1,116 @@
+
 <app-headertittle></app-headertittle>
+
+
 <!--inicia del cuerpo de la pagina del menu -->
 
-<head>
-    <meta charset="UTF-8">
-    <TItle>Sitio web responsivo</TItle>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <meta name="viewport" content="width-device-width, user-scalable=no, initial-scale=1.0, maxium-scale=1.0, minium-scale=1.0">
-</head>
-    <div class="contenedor" style="overflow: scroll;">
-         <div style="margin-left:350px; margin-block-start: 40px; display: none;" >
-                 <div class="row">
-                     <h4 style="margin-left: 1%;" >Mis vacantes</h4>
-                     <button style="margin-left: 35%; width:160px;" class="btn btn-info" data-toggle="modal" data-target="#agregarvacante">Agregar Vacante</button>
-                 </div>
-                 <h6>_________________________________________________________________________________________________________-</h6>
-         
-             <div style="margin-left: 15px;">
-                     <h6>Desarollo de software</h6>
-                     <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
-                     <h6>DESARROLLO EMPRESARIAL</h6>
-                     <div class="row" style="margin-left: 1px;">
-                             <h6>Fecha</h6>
-                            <button style="margin-left: 480px;" class="btn btn-primary" data-toggle="modal" data-target="#vermas">Ver mas</button>
-                     </div>
-             </div>
-             <h6>_________________________________________________________________________________________________________-</h6>
-         </div>       
-         <div class="border border-dark main">
-                 <div class="container" >
-                         <div class="row" >
-                                 <div class="col-lg-3">
-                                     <h6 id="titulo2" style="color:white;">Titulo de la empresa</h6>
-                                     <input type="text" class="form-control input-lg" placeholder="Titulo o Empresa"> 
-                                 </div>
-                                 <div class="col-lg-3 col-md-5 col-sm-7" style="margin-left: 2%">
-                                     <h6 id="titulo2"  style="color:white;">Ubicación</h6>
-                                     <input type="text"  class="form-control" placeholder="Ciudad o Estado"> 
-                                 </div>
-                                 <div class="" >
-                                     <button (click)="buscar()"  style="width: 200%; height: 50%; margin-block-start: 65%; margin-left: 50%" class="btn btn-primary" > 
-                                         Buscar
-                                     </button>
-                                 </div>      
-                         </div>
-                 </div>
-                        
-                 
-                 <div class="container">
-                         <div class="row" id="busquedaavanzada">
-                                 <div class="col-lg-3 col-5 col-sm-5 col-md-4" > 
-                                         <select class="form-control" name="select" style=" width:80%; margin-block-start: 6%; font-size: 15px">
-                                                 <option value="">Salario</option>
-                                                 <option value="value1"> Ejemplo 1</option> 
-                                                 <option value="value2">Ejemplo 2</option>
-                                         </select>     
-                                 </div>
-                                 <div class="col-lg-3 col-5 col-sm-5 col-md-4"  >
-                                         <select  class="form-control" name="select" style=" width:80%; margin-block-start: 6%; font-size: 15px">
-                                                 <option value="">Categoria</option>
-                                                 <option value="value1"> Ejemplo 1</option> 
-                                                 <option value="value2">Ejemplo 2</option>
-                                         </select>  
-                                 </div>
-                                 <div class="col-lg-3 col-5 col-sm-5 col-md-4" >
-                                         <select  class="form-control" name="select" style=" width:100%; margin-block-start: 6%; font-size: 15px">
-                                                 <option value="">Subcategoria</option>
-                                                 <option value="value1"> Ejemplo 1</option> 
-                                                 <option value="value2">Ejemplo 2</option>
-                                         </select>  
-         
-                                 </div>
-                                 <h6 class="col-lg-3 col-5 col-sm-5 col-md-4" style="color:white; margin-block-start: 2%; margin-left: 0%; cursor:pointer;">Limpiar Filtros</h6>
-                             </div>
-                 </div>
-             </div> 
-             
-             <div style=" margin-block-start: 3%; margin-left: 10%;" class="row">
-                 <div class="col-lg-6">
-                     <h6 style="color:black; padding-left: 20px">999 Ofertas de empleo actualmente</h6>
-                 </div>       
-                 <div class="col-lg-3" >
-                 </div>
-             </div>
-             
-         
-             
-                 <div class="" style="background: rgba(18, 11, 119, 0.502); width: 70%; height: 25%; margin-left: 10%">
-                     <div data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 60px;" class="row">
-                             <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                                 <h6 style="color:yellow;">NOMBRE DE LA VACANTE</h6>
-                             </div>
-                             <div class="col-lg-3">
-                                     <h6 style="color:white;">FECHA</h6>
-                             </div>
-                         <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                             <h6 style="color: white;">UBICACION DE LA VACANTE</h6>
-                         </div>
-                         <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                             <h6 style="color:white;">NOMBRE DE LA EMPRESA</h6>
-                         </div>       
-                         <div data-toggle="modal" data-target="#datosvacante" class="col-lg-3" >
-                             
-                         </div>
-                     </div> 
-                     <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 30px; margin-left: 75px; color:white;">DESCRIPCION</h6>
-                     <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 75px; color:white;">SE SOLICITA EMPLEADO PARA APOYO EN DESARROLLO DE PROYECTOS DE SOFTWARE EN IMCA</h6>
-                 </div>
-             
-                  
-    </div>
-    
+<div class="contenedor" style="overflow: scroll;">
+        <div style="margin-left:350px; margin-block-start: 40px; display: none;" >
+                <div class="row">
+                    <h4 style="margin-left: 1%;" >Mis vacantes</h4>
+                    <button style="margin-left: 35%; width:160px;" class="btn btn-info" data-toggle="modal" data-target="#agregarvacante">Agregar Vacante</button>
+                </div>
+                <h6>_________________________________________________________________________________________________________-</h6>
+        
+            <div style="margin-left: 15px;">
+                    <h6>Desarollo de software</h6>
+                    <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
+                    <h6>DESARROLLO EMPRESARIAL</h6>
+                    <div class="row" style="margin-left: 1px;">
+                            <h6>Fecha</h6>
+                           <button style="margin-left: 480px;" class="btn btn-primary" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                    </div>
+            </div>
+            <h6>_________________________________________________________________________________________________________-</h6>
+        </div>       
+        <div class="border border-dark main">
+                <div class="container" >
+                        <div class="row" >
+                                <div class="col-lg-3">
+                                    <h6 id="titulo2" style="color:white;">Titulo de la empresa</h6>
+                                    <input type="text" class="form-control input-lg" placeholder="Titulo o Empresa"> 
+                                </div>
+                                <div class="col-lg-3 col-md-5 col-sm-7" style="margin-left: 2%">
+                                    <h6 id="titulo2"  style="color:white;">Ubicación</h6>
+                                    <input type="text"  class="form-control" placeholder="Ciudad o Estado"> 
+                                </div>
+                                <div class="" >
+                                    <button (click)="buscar()"  style="width: 200%; height: 40%; margin-block-start: 70%; margin-left: 60%" class="btn btn-primary" > 
+                                        Buscar
+                                    </button>
+                                </div>      
+                        </div>
+                </div>
+                       
+                
+                <div class="container">
+                        <div class="row" id="busquedaavanzada">
+                                <div class="drop-down-options-style col-lg-2 col-5 col-sm-5 col-md-4" > 
+                                        <select class="drop-down-options" name="select" style=" width:119%; margin-block-start: 3%; font-size: 15px;">
+                                                <option value="">Salario</option>
+                                                <option value="value1"> Ejemplo 1</option> 
+                                                <option value="value2">Ejemplo 2</option>
+                                        </select>     
+                                </div>
+                                <div class="drop-down-options-style col-lg-2 col-5 col-sm-5 col-md-4"  >
+                                        <select  class="drop-down-options" name="select" style=" width:119%; margin-block-start: 3%; font-size: 15px">
+                                                <option value="">Categoria</option>
+                                                <option value="value1"> Ejemplo 1</option> 
+                                                <option value="value2">Ejemplo 2</option>
+                                        </select>  
+                                </div>
+                                <div class="drop-down-options-style col-lg-2 col-5 col-sm-5 col-md-4" >
+                                        <select  class="select-drop-down-options" name="select" style=" width:150%; margin-block-start: 3%; font-size: 15px">
+                                                <option value="">Subcategoria</option>
+                                                <option value="value1"> Ejemplo 1</option> 
+                                                <option value="value2">Ejemplo 2</option>
+                                        </select>  
+        
+                                </div>
+                                <h6 class="col-lg-3 col-5 col-sm-5 col-md-4" style="color: rgb(18, 129, 180); margin-block-start: 1%; margin-left: 10%; cursor:pointer;">Limpiar Filtros</h6>
+                            </div>
+                </div>
+            </div> 
+            
+            <div style=" margin-block-start: 3%; margin-left: 10%;" class="row">
+                <div class="col-lg-6">
+                    <h6 style="color:black; padding-left: 20px">999 Ofertas de empleo actualmente</h6>
+                </div>       
+                <div class="col-lg-3" >
+                </div>
+            </div>
+            
+            <div class="" style="background: rgba(18, 11, 119, 0.502); width: 70%; height: 25%; margin-left: 10%">
+                   <div data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 60px;" class="row">
+                           <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
+                               <h6 style="color:yellow;">NOMBRE DE LA VACANTE</h6>
+                           </div>
+                           <div class="col-lg-3">
+                                   <h6 style="color:white;">FECHA</h6>
+                           </div>
+                       <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
+                           <h6 style="color: white;">UBICACION DE LA VACANTE</h6>
+                       </div>
+                       <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
+                           <h6 style="color:white;">NOMBRE DE LA EMPRESA</h6>
+                       </div>       
+                       <div data-toggle="modal" data-target="#datosvacante" class="col-lg-3" >
+                           
+                       </div>
+                   </div> 
+                   <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 30px; margin-left: 75px; color:white;">DESCRIPCION</h6>
+                   <h6   data-toggle="modal" data-target="#datosvacante" style="margin-block-start: 5px; margin-left: 75px; color:white;">SE SOLICITA EMPLEADO PARA APOYO EN DESARROLLO DE PROYECTOS DE SOFTWARE EN IMCA</h6>
+               </div>        
+                           <div class="main" style="margin-top: 10%; vertical-align: bottom;">
+                                  Copyrigth
+                               </div>              
+   </div>
+
+
+
+
+
 <!--===============================================================================================-->
 <!-- Modal de los datos de los usuarios -->
 <div   class="modal fade"  id="datoscompletos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -611,7 +611,7 @@
        </div>
      </div>
      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-       <button type="button" class="btn btn-primary" data-dismiss="modal">Gurdar Cambios</button>
+       <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar Cambios</button>
      </div>
    </div>
  </div>

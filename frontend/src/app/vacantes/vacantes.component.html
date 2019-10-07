@@ -1,24 +1,36 @@
 <app-headertittle></app-headertittle>
-<body>
-    <div style="margin-left:350px; margin-block-start: 40px;" >
-        <div class="row">
-            <h4 style="margin-left: 1%;" >Mis vacantes</h4>
-            <button style="margin-left: 35%; width:160px;" class="btn btn-info" data-toggle="modal" data-target="#agregarvacante">Agregar Vacante</button>
-        </div>
-        <h6>_________________________________________________________________________________________________________-</h6>
-
-    <div style="margin-left: 15px;">
-            <h6>Desarollo de software</h6>
-            <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
-            <h6>DESARROLLO EMPRESARIAL</h6>
-            <div class="row" style="margin-left: 1px;">
-                    <h6>Fecha</h6>
-                   <button style="margin-left: 480px;" class="btn btn-primary" data-toggle="modal" data-target="#datosvacante">Ver mas</button>
-            </div>
-    </div>
-    <h6>_________________________________________________________________________________________________________-</h6>
-</div> 
-       
+<body  style="background-color: rgb(206, 211, 208);  width:100%; height:100%; overflow:auto; position: fixed;">
+        <div class="container-fluid" style="width:50%;  margin-block-start: 3%;" >
+                                <div class="row">
+                                        <div class="col-lg-8 col-sm-8 col-md-8">
+                                                <h4 style="margin-left: 1%;" >Mis vacantes</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-sm-4 col-md-4" style="width: 100%;">
+                                                <button  class="btn btn-info" data-toggle="modal" data-target="#agregarvacante">Agregar Vacante</button>    
+                                        </div>
+                                </div>
+        <div style="margin-left: 1%; margin-block-start: 3%; height: 100%;" class=" border border-success border-left-0 border-right-0">
+                <div style="margin-block-start: 1%;">
+                        <h6>Desarollo de software</h6>
+                        <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
+                        <h6>DESARROLLO EMPRESARIAL</h6>
+                        <div class="row" style="margin-left: 1px;">
+                                <div class="col-lg-8 col-sm-8 col-md-8">
+                                <h6>Fecha</h6>
+                                </div>     
+                                <div class="col-lg-4 col-sm-4 col-md-4">
+                                <button class="btn btn-primary" style="margin-block-end: 4%;" data-toggle="modal" data-target="#datosvacante">Ver mas</button>
+                                </div>
+                        </div>
+                </div>
+           </div>
+           
+                           
+                           <div>
+                               <div style="height: 70px; background-color:transparent; margin-block-start: 8%;">
+                              </div>
+                </div>  
+      </div>    
 </body>
 
 <!--===============================================================================================-->
@@ -31,7 +43,16 @@
         </div>
         <div class="modal-body">
                 <div style="margin-left: 60px;">
-                        <h4  style="margin-block-start: 20px; color:blue;">--------</h4>
+                        <div class="row" style="margin-block-start: 5%;">
+                            <div class="col-lg-8 col-sm-6 col-4">
+                                    <h4  style="color:blue;">--------</h4>
+
+                            </div>
+                            <div>
+                                   <h6 data-dismiss="modal" data-toggle="modal" data-target="#editarvacante">Editar <img data-dismiss="modal" data-toggle="modal" data-target="#editarvacante" style="margin-left: 5px;"  src="../../assets/edit.png" height="25px" width="25px" alt="Generic placeholder image"></h6> 
+
+                            </div>
+                        </div>
                         <h6 style="margin-block-start: 30px;">----------</h6>
                         <h6 style="margin-block-start: 30px;">Contratacion:</h6>
                         <h6>----------------</h6>
@@ -45,17 +66,14 @@
                         <h6 style="margin-block-start: 30px;">Fecha de postulacion -------------- </h6> 
                             
                         <div class="row"> 
-                            <div class="col-md-3">
+                            <div class=" col-lg-4 col-sm-2 col-2">
 
                             </div>  
                             <div>
-                                    <button class="btn btn-primary"style="margin-block-start: 30px; height:50px; width:200px;" >Postularme</button>
-        
-                            </div>
-                                
+                                    <button class="btn btn-danger"style="margin-block-start: 10%;; height:70%; width:100%;" >Cancelar Vacante</button>
+                            </div>   
                             </div>                        
                        </div>
-       
       </div>
       <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>    
@@ -197,4 +215,143 @@
   </div>
 </div>
 </div>
-    
+    <!--===============================================================================================-->
+<!-- Modal para editar la informacion del usuario -->
+<div class="modal fade" id="editarinfoempresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
+                    <h5 id="exampleModalLabel" style="color:white; font-size: 100%; margin-left: 35%;">Editar informacion</h5>           
+                 </div>
+            <div class="modal-body" style="overflow: auto">
+              <div>
+          
+                <h6>Informacion de la Empresa</h6>
+                <div class="border border-dark" style="width: 99%; "> 
+                    <h6 style="margin-left: 1%;">Datos de la Empresa</h6>
+                    <div class="row" style="margin-left: 1%;">
+                          <div class="col-lg-1 col-sm-2 col-3"  id="titulo">
+                              <h6  autofocus required id="tamaño">Nombre:</h6>
+                          </div>
+                          <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
+                              <input  id="input100" class="input100" type="text">
+                          </div>
+                          <div class="col-lg-1 col-sm-2 col-3" id="titulo">
+                              <h6 id="tamaño">Telefono:</h6>
+                          </div>
+                          <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
+                              <input  id="input100" class="input100" type="number">
+                          </div>
+                    </div>
+           
+                  <div class="row" style="margin-left: 15px;">
+                      <div class="col-lg-1 col-sm-1 col-3" id="titulo">
+                          <h6 id="tamaño">RFC:</h6>
+                      </div>
+                      <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%; " > 
+                          <input  id="input100" class="input100" type="email">
+                      </div>
+                      <div class="col-lg-2 col-sm-2 col-3" id="titulo">
+                            <h6 id="tamaño">Pagina web:</h6>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%; " > 
+                            <input  id="input100" class="input100" type="email">
+                        </div>
+                        
+                  </div>
+                  <div class="input-group" style="margin-block-start: 2%; width: 90%; margin-left: 2%;">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" style="background-color: black; color:white;">Descripcion</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                  </div>
+                  <h6 style="margin-left: 30px; margin-top: 20px;">Direccion</h6>
+                  <div class="row" style="margin-left: 35px;">
+                      <div class="col-lg-1 col-sm-2 col-2" id="titulo">
+                          <h6 id="tamaño">Estado:</h6>
+                      </div>
+                      <div class="col-lg-4 col-sm-4 col-9" style="margin-left: 2%;" > 
+                          <select name="select" style="margin-top: 10px; width:70%;">
+                              <option value="value1" selected>Ejemplo 1</option> 
+                              <option value="value2">Ejemplo 2</option>
+                          </select>             
+                       </div>
+                       <div class="col-lg-1 col-sm-2 col-2" id="titulo">
+                          <h6 id="tamaño">Ciudad:</h6>
+                      </div>
+                      <div class="col-lg-4 col-sm-3 col-7" style="margin-left: 2%;" > 
+                          <input  id="input100" class="input100" type="text">
+                      </div>
+                  </div>
+                  <div class="row" style="margin-left: 35px;">
+                      <div class="col-lg-1 col-sm-2 col-2" id="titulo">
+                          <h6 id="tamaño">Colonia:</h6>
+                      </div>
+                      <div class="col-lg-4 col-sm-3 col-8" style="margin-left: 10px;" > 
+                          <input  id="input100" class="input100" type="text">     
+                       </div>
+                       <div class="col-lg-1 col-sm-1 col-2" id="titulo"  >
+                          <h6 id="tamaño">Calle:</h6>
+                      </div>
+                      <div class="col-lg-4 col-sm-4 col-7" style="margin-left: 2%;" > 
+                          <input  id="input100" class="input100" type="text">
+                      </div>
+                  </div>
+                  <div class="row" style="margin-left: 35px; margin-block-end: 2%;">
+                      <div class="col-lg-1 col-sm-2 col-2" id="titulo">
+                          <h6 id="tamaño">CP:</h6>
+                      </div>
+                      <div class="col-lg-4 col-sm-3 col-7" style="margin-left: 10px;" > 
+                          <input  id="input100" class="input100" type="number">     
+                       </div>
+                  </div>
+                   </div> 
+                   <!-- Aqui empieza el espacio para el contacto -->
+                   <div class="border border-dark" style="width: 99%; margin-block-start: 2%;"> 
+                    <h6 style="margin-left: 1%;">Datos del Contacto</h6>
+                    <div class="row" style="margin-left: 1%;">
+                          <div class="col-lg-1 col-sm-2 col-3"  id="titulo">
+                              <h6  autofocus required id="tamaño">Nombre:</h6>
+                          </div>
+                          <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
+                              <input  id="input100" class="input100" type="text">
+                          </div>
+                          <div class="col-lg-1 col-sm-2 col-3" id="titulo">
+                              <h6 id="tamaño">Telefono:</h6>
+                          </div>
+                          <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;"> 
+                              <input  id="input100" class="input100" type="number">
+                          </div>
+                    </div>
+           
+                  <div class="row" style="margin-left: 15px; margin-block-end: 5%;">
+                      <div class="col-lg-1 col-sm-1 col-3" id="titulo">
+                          <h6 id="tamaño">Correo Electronico:</h6>
+                      </div>
+                      <div class="col-lg-3 col-sm-5 col-7" style="margin-left: 4%; margin-block-start: 1%; " > 
+                          <input  id="input100" class="input100" type="email">
+                      </div>
+                  </div>
+                </div> 
+                <div class="row" style="margin-block-start: 5%;">
+                        <div class="col-lg-4 col-sm-4 col-4" style="width: 100%;">
+                            <div >
+                                 <button  class="form-control btn btn-primary">Seleccionar Logo</button> 
+                            </div>
+                        </div> 
+                        <div class="col-lg-6 col-sm-6 col-6">
+                            <div style="margin-left: 80%;">
+                                 <img  class="modal-title" src="../../assets/img.png" height="60px" width="60px" alt="Generic placeholder image">
+                            </div>
+                         </div>
+                   </div>
+            </div>
+      
+          </div>
+          <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Omitir</button>              
+            <button type="button" class="btn btn-success" data-dismiss="modal">Guardar Cambios</button>
+          </div>
+        </div>
+       </div> 
+    </div> 
