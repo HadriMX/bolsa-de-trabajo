@@ -8,9 +8,9 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AdminService {
-  private endpointUrl = 'http://localhost/bdt/php/src/admin.php';
-  private endpointUrlAreas='http://localhost/bdt/php/src/get_areas.php';
-  private endpointUrlCategorias='http://localhost/bdt/php/src/get_categorias.php';
+  private endpointUrl = 'http://localhost/bdt/php/src/admin/admin.php';
+  private endpointUrlAreas ='http://localhost/bdt/php/src/admin/get_areas.php';
+  private endpointUrlCategorias ='http://localhost/bdt/php/src/admin/get_categorias.php';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
