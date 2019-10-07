@@ -196,15 +196,16 @@ a{
   width: 200px;
 
 }
-.footer {
+/* .footer {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 200px;
   background-color: rgb(8, 2, 90);
   color: white;
   text-align: center;
-}
+} */
 
 html {
   min-height: 100vh !important;
@@ -220,4 +221,9 @@ html {
 }
 #sticky-footer {
   width: 100%; 
+  height: 20%;
+  font-size: 20px;
+  color: white;
+  padding-top: 10px;
+  background-color:  rgb(91, 6, 112);
 }
