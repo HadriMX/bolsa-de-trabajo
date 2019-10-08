@@ -51,7 +51,7 @@ function registro(string $username1, string $pwd1, string $codigo_conf1, int $ti
                 //mandar correo
                 $to      = $username;
                 $subject = "Correo de Confirmacion";
-                $message = 'Hola '.$username1."\r\n"." Sigue este vinculo para activar tu cuenta"."\r\n\r\n"." https://mipaginapersonalweb.000webhostapp.com/practica9/activacion.php?codigo=".$codigo_conf1."&email=".$username1."\r\n";
+                $message = 'Hola '.$username1."\r\n"." Sigue este vinculo para activar tu cuenta"."\r\n\r\n"." https://localhost/bolsatrabajo/activacion.php?codigo=".$codigo_conf1."\r\n";
                 $headers = 'De: (jonsonh45@gmail.com)' . "\r\n" .
                     'Dudas y/o sugerencias: (volar@gmail.com)' . "\r\n" .
                     'X-Mailer: PHP/' . phpversion();
