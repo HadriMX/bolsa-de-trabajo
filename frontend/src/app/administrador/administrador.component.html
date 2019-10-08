@@ -1,32 +1,29 @@
  
-      <app-headertittle></app-headertittle>
-
- 
-
+<app-headertittle></app-headertittle>
 <!-- En esta parte comienza el cuerpo de la pagina -->
 <body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: auto;"> 
       <!-- En esta parte se divide la pantalla en dos partes -->
         <div class="row" id="contenedor">
           <!-- Primera parte-->
-            <div class="col-lg-4 border border-dark" style="background-color: rgb(92, 13, 92);" >
+            <div class="col-lg-3 border border-dark" style="background-color: rgb(92, 13, 92);" >
               <div style="margin-left: 20%; margin-block-start: 2%; color:white">
-                  <h6 >Opciones de configuracion</h6>
+                  <h6 >Opciones de configuración</h6>
               </div>
-              <div style="margin-block-start: 5%; margin-left: 5%;">
-                <button (click)="categorias(4)" id="usuarios" style="background-color: rgb(75, 60, 143); color: white;" class="form-control">Ver Solicitudes de Usuarios</button>
+              <div style="margin-block-start: 5%; margin-left: 1%; width: 100%;">
+                <button  (click)="categorias(4)" id="usuarios" style="width: 100%; background-color: rgb(102, 5, 81); color: white; width: 100%" class="form-control">Ver Solicitudes de Usuarios</button>
             </div>
-              <div style="margin-block-start: 5%; margin-left: 5%;">
-                  <button id="categoriaboton" (click)="categorias(1)" style="background-color: rgb(60, 143, 60); color: white;" class="form-control">Configuracion de categorias de empresas</button>
+              <div style="margin-block-start: 5%; margin-left: 1%;">
+                  <button id="categoriaboton" (click)="categorias(1)" style="background-color: rgb(102, 5, 81); color: white;" class="form-control">Registro categorias de empresas</button>
               </div>
-              <div style="margin-block-start: 2%; margin-left: 5%;">
-                 <button  id="areas" (click)="categorias(2)" style="background-color: rgb(60, 143, 60); color: white;" class="form-control">Configuracion de registro de area de estudio</button>
+              <div style="margin-block-start: 2%; margin-left: 1%;">
+                 <button  id="areas" (click)="categorias(2)" style=" background-color: rgb(102, 5, 81); color: white;" class="form-control">Registro de area de estudio</button>
               </div>
-              <div style="margin-block-start: 2%; margin-left: 5%; margin-block-end: 2%;">
-                   <button id="subareas"  (click)="categorias(3)" style="background-color: rgb(60, 143, 60); color: white;" class="form-control">Configuracion de areas y subareas</button>
+              <div style="margin-block-start: 2%; margin-left: 1%; margin-block-end: 2%;">
+                   <button id="subareas"  (click)="categorias(3)" style="background-color: rgb(102, 5, 81); color: white;" class="form-control">Registro de areas y subareas</button>
               </div>
             </div>
     <!-- Segunda parte en que se divide -->
-      <div class="col-lg-8 " id="contenedor2"  >
+      <div class="col-lg-9 " id="contenedor2"  >
         <div *ngIf="estadoimagen" style="margin-left: 30%; margin-top: 3%; ">
            <h4>Apartado de configuracion</h4>  
           <img style="margin-block-start: 5%;" src="../../assets/settings.png" height="55%" width="55%" alt="Generic placeholder image">

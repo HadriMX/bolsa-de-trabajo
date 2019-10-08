@@ -14,18 +14,10 @@
        <div id="contenedor" style="margin-left: 2%; " >                
             <div> 
                 <div class="row" style="margin-block-start: 1%;">
-                    <div class="col-lg-7 col-sm-6" >
+                    <div class="col-lg-7 col-sm-6 col-2" >
                             <h4 style=" color:rgb(3, 21, 58); margin-left: 1%;">Cuenta</h4>
 
                     </div>
-                    <div class="col-lg-2 col-sm-3 col-5" >
-                            <button  class=" btn btn-primary">Editar informacion</button>
-
-                    </div>
-                    <div class="col-lg-2 col-sm-2 col-3">
-                            <button  class="btn btn-success">Guardar cambios</button>
-                    </div>
-
                 </div>
                 <div style="margin-block-start: 1%;">
                     <!-- Comienza el apartado de la cuenta del usuario -->
@@ -149,7 +141,7 @@
                                             <h6>CP:</h6>
                                         </div>
                                         <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; "> 
-                                            <input   placeholder="Ingrese el codigo postal"  style="width: 100%;" id="input100" class="form-control input100" type="number">     
+                                            <input   placeholder="Ingrese el codigo postal"  style="width: 100%;" id="input100" class="form-control input100" type="text">     
                                          </div>
                                     </div>
                                  </div>                   
@@ -193,12 +185,21 @@
                                     </div>
                        </div>                
                     </div>
-                  
-                    
+                    <div class="row" style="margin-block-start: 2%;">
+                            <div class="col-lg-5 col-sm-5 col-0" >
+
+                            </div>    
+                            <div class="col-lg-3 col-sm-3 col-4"  >
+                                <button id="boton3" class="form-control">Editar informacion</button>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-4">
+                                <button  id="boton3" class="form-control">Guardar cambios</button>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div style="height: 15%;">
+        <div id="espaciovacio" >
 
             </div>
 </body>
