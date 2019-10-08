@@ -208,7 +208,7 @@ a{
 
 #body {
   min-height:700px; 
-  background-image: url('../../assets/background.png');
+  background-image: url('/assets/background.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;

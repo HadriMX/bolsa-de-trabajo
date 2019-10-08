@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from '../api/models/usuario';
+import { Usuario } from '../models/usuario';
 import { Observable } from 'rxjs';
-import { ApiResponse } from 'src/api/models/api_response';
+import { ApiResponse } from 'src/app/models/api_response';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpOptionsService } from './http-options.service';

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/api/models/usuario';
-import { RegistroService } from '../registro.service';
+import { Usuario } from 'src/app/models/usuario';
+import { RegistroService } from '../../services/registro.service';
 import Swal from 'sweetalert2';
 
 @Component({

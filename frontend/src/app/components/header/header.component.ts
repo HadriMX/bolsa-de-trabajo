@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LoginService } from '../login.service';
-import { LoginInfo } from 'src/api/models/login_info';
+import { LoginService } from '../../services/login.service';
+import { LoginInfo } from 'src/app/models/login_info';
 import { Router } from '@angular/router';
-import { CurrentUserService } from '../current-user.service';
+import { CurrentUserService } from '../../services/current-user.service';
 import Swal from 'sweetalert2';
 
 @Component({

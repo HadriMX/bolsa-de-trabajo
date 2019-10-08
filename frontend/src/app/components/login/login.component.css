@@ -382,7 +382,7 @@ p{
 /*//////////////////////////////////////////////////////////////////
 [ Responsive ]*/
 #carrusellogin {
-  background-image: url('../../assets/trapiche.jpg');
+  background-image: url('/assets/trapiche.jpg');
    width: 100%;
 }
 @media (min-width: 587px) and (max-width:977px) {

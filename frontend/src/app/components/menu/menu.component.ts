@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Vacante } from 'src/api/models/vacantes';
-import { VacantesService } from '../vacantes.service';
+import { Vacante } from 'src/app/models/vacantes';
+import { VacantesService } from '../../services/vacantes.service';
 
 @Component({
   selector: 'app-menu',

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LoginInfo } from '../api/models/login_info';
-import { ApiResponse } from '../api/models/api_response';
-import { Usuario } from '../api/models/usuario';
+import { LoginInfo } from '../models/login_info';
+import { ApiResponse } from '../models/api_response';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'

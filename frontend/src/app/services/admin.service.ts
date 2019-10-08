@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Area, Cat_empresa } from 'src/api/models/admin';
-import { ApiResponse } from 'src/api/models/api_response';
+import { Area, Cat_empresa } from 'src/app/models/admin';
+import { ApiResponse } from 'src/app/models/api_response';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 

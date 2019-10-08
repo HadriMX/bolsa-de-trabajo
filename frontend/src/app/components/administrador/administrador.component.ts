@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Area, Cat_empresa } from 'src/api/models/admin';
+import { Area, Cat_empresa } from 'src/app/models/admin';
 import Swal from 'sweetalert2';
-import { AdminService } from '../admin.service';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-administrador',

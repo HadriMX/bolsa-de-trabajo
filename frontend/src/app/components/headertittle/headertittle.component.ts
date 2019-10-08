@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentUserService } from '../current-user.service';
-import { Usuario } from '../../api/models/usuario'
+import { CurrentUserService } from '../../services/current-user.service';
+import { Usuario } from '../../models/usuario'
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
