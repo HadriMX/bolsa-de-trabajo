@@ -14,7 +14,6 @@ export class MenuComponent implements OnInit {
 
   vacantes: Vacante[];
 
-
   constructor(private vacantesService : VacantesService) {
     
   }
@@ -29,11 +28,12 @@ export class MenuComponent implements OnInit {
         else {
           Swal.fire("Error", response.message, 'error');
         }
-
       });
   }
 
   buscar() {
+
     Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
+
   }
 }
