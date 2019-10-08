@@ -1,0 +1,408 @@
+
+
+input {
+    margin-inline-end: 10px;
+    margin-top: 10px;
+    
+}
+
+.espacio1{
+  margin-left: 5px;
+}
+legend {
+    padding: 2px;    
+}
+
+
+  
+ 
+
+  input{
+margin-top: 10px;
+  }
+
+  .imagenfondo{
+    margin-left: 0px;
+  } 
+input {
+	outline: none;
+	border: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+button {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+
+
+
+
+
+.wrap-login100 {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  border-radius: 2px;
+  position: relative;
+}
+
+/*------------------------------------------------------------------
+[ Login100 more ]*/
+.login100-more {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: calc(100% - 520px);
+  position: relative;
+  z-index: 1;
+}
+
+.login100-more::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+/*==================================================================
+[ Form ]*/
+
+.login100-form {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.login100-form-title {
+  display: block;
+  width: 100%;
+  font-size: 39px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: left;
+}
+
+
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+  width: 100%;
+  position: relative;
+  border-bottom: 2px solid #dbdbdb;
+  margin-bottom: 15px;
+}
+
+
+#electronico {
+  margin-top: 20px;
+}
+#titulo {
+  margin-block-start: 12px;
+}
+.input100 {
+  display: block;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  color:black;
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.2;
+  padding: 0 2px;
+  border: 2px solid rgb(190, 189, 189);
+}
+#input100 {
+  display: block;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  font-size: 15px;
+  color: #555555;
+  line-height: 1.2;
+  padding: 0 2px;
+  border: 1px solid rgb(190, 189, 189);
+
+}
+p{
+  padding: 30px;
+  font-size: 20px;
+}
+.focus-input100 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.focus-input100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  background: #d5007d;
+  background: -webkit-linear-gradient(45deg, #d5007d, #e53935);
+  background: -o-linear-gradient(45deg, #d5007d, #e53935);
+  background: -moz-linear-gradient(45deg, #d5007d, #e53935);
+  background: linear-gradient(45deg, #d5007d, #e53935);
+}
+
+
+
+/*==================================================================
+[ Restyle Checkbox ]*/
+
+
+
+
+.input-checkbox100:checked + .label-checkbox100::before {
+  color: #c87ef0;
+}
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login100-form-btn {
+  width: 100%;
+  margin-top: 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wrap-login100-form-btn {
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: 23px;
+  overflow: hidden;
+}
+#boton1:hover {
+  background:rgb(77, 16, 83);
+
+}
+#boton1 {
+  border-radius: 25px;
+  z-index: -1;
+  width: 155%;
+  height: 125%;
+  background:rgb(121, 24, 129);
+  color:white;
+}
+#boton2:hover{
+  background:rgb(77, 16, 83);
+
+}
+#boton2{
+  border-radius: 25px;
+  z-index: -1;
+  width: 155%;
+  height: 125%;
+  background:rgb(121, 24, 129);
+  color:white;
+}
+@media (min-width: 576px) {
+  #boton2 {
+    margin-left: 47%;
+  }
+} 
+
+@media (max-width: 991px) and (min-width:568px) {
+  #boton2 {
+    height: 90%;
+  }
+  #boton1 {
+    height: 90%;
+  }
+} 
+@media (max-width: 575px) {
+  #boton2 {
+    width: 100%;
+    height: 90%;
+    margin-block-start: 10%;
+  }
+  .login100-form-title {
+    font-size: 25px;
+  }
+  #boton1 {
+    width: 100%;
+    height: 130%;
+  }
+} 
+
+#login100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 244px;
+  height: 50px;
+
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+}
+.wrap-login100-form-btn:hover .login100-form-bgbtn {
+  bottom: 0;
+}
+
+
+/*------------------------------------------------------------------
+[ Alert validate ]*/
+
+.validate-input {
+  position: relative;
+}
+
+.alert-validate::before {
+  content: attr(data-validate);
+  position: absolute;
+  max-width: 70%;
+  background-color: #fff;
+  border: 1px solid #c80000;
+  border-radius: 2px;
+  padding: 4px 30px 4px 10px;
+  bottom: calc((100% - 25px) / 2);
+  -webkit-transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  -o-transform: translateY(50%);
+  transform: translateY(50%);
+  right: 2px;
+  pointer-events: none;
+
+  font-family: Poppins-Medium;
+  color: #c80000;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: left;
+
+  visibility: hidden;
+  opacity: 0;
+
+  -webkit-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.alert-validate::after {
+  content: "\f06a";
+  font-family: FontAwesome;
+  display: block;
+  position: absolute;
+  color: #c80000;
+  font-size: 18px;
+  bottom: calc((100% - 25px) / 2);
+  -webkit-transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  -o-transform: translateY(50%);
+  transform: translateY(50%);
+  right: 8px;
+}
+
+.alert-validate:hover:before {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 992px) {
+  .alert-validate::before {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.true-validate::after {
+  content: "\f26b";
+  font-family: Material-Design-Iconic-Font;
+  font-size: 22px;
+  color: #00ad5f;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: calc((100% - 25px) / 2);
+  -webkit-transform: translateY(50%);
+  -moz-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  -o-transform: translateY(50%);
+  transform: translateY(50%);
+  right: 5px;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ Responsive ]*/
+#carrusellogin {
+  background-image: url('/assets/trapiche.jpg');
+   width: 100%;
+}
+@media (min-width: 587px) and (max-width:977px) {
+  .login100-more {
+    height: 300%;
+  }
+  .align-items-center {
+    height: 300%;
+  }
+  .justify-content-center {
+    height: 300%;
+  }
+  
+}
+
+
+@media (max-width: 576px) {
+  .wrap-login100 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (min-width:)

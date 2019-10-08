@@ -26,7 +26,7 @@ class Auth
         }
 
         if ($usuario['estatus'] == 'N') {
-            return new ErrorResult("El usuario no está autorizado aún. Debes esperar a que un administrador autorice tu solicitud de registro.", 4002);
+            return new ErrorResult("El usuario no está autorizado aún. Debes esperar a que un administrador autorice tu solicitud de registro.", 4011);
         }
 
         $isEmailVerificado = boolval($usuario['email_verificado']);

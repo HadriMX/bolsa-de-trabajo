@@ -1,0 +1,28 @@
+/*---------------------------------------------*/
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+#contenedor {
+    width: 100%;
+    height: 100%;
+}
+#contenedor2 {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.btn {
+    border-radius: 15px;
+    color:white;
+    background-color:rgb(121, 24, 129);
+
+}

@@ -1,0 +1,95 @@
+<app-headertittle></app-headertittle>
+<!--inicia del cuerpo de la pagina del menu -->
+<html>
+        <head>
+                <meta charset="UTF-8">
+                <TItle>Sitio web responsivo</TItle>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+                <meta name="viewport" content="width-device-width, user-scalable=no, initial-scale=1.0, maxium-scale=1.0, minium-scale=1.0">
+            </head>
+            
+            <div id="body">
+
+          
+                <div class="border border-dark main">
+                       <div class="container" >
+                               <div class="row" >
+                                       <div class="col-lg-3 col-sm-5 col-10">
+                                           <h6 id="titulo2" style="color:white;">Titulo de la empresa</h6>
+                                           <input type="text" class="form-control " placeholder="Titulo o Empresa"> 
+                                       </div>
+                                       <div id="ubicacionspace" class="col-lg-3 col-sm-5 col-10" >
+                                           <h6 id="titulo2"  style="color:white;">Ubicación</h6>
+                                           <input type="text"  class="form-control" placeholder="Ciudad o Estado"> 
+                                       </div>
+                                       <div id="espaciobuscar" class=" col-lg-3 col-sm-5 col-7" >
+                                           <button  (click)="buscar()" class="Buscarspace btn btn-success" > 
+                                               Buscar
+                                           </button>
+                                       </div>      
+                               </div>
+                       </div>
+                       <div class="container">
+                               <div class="row" id="busquedaavanzada">
+                                       <div class="drop-down-options-style col-lg-2 col-5 col-sm-3" > 
+                                               <select id="drop-down-options" class="form-control" name="select" >
+                                                       <option value="">Salario</option>
+                                                       <option value="value1"> Ejemplo 1</option> 
+                                                       <option value="value2">Ejemplo 2</option>
+                                               </select>     
+                                       </div>
+                                       <div class="drop-down-options-style col-lg-2 col-5 col-sm-4"  >
+                                               <select id="drop-down-options"  class="form-control" name="select" >
+                                                       <option value="">Categoria</option>
+                                                       <option value="value1"> Ejemplo 1</option> 
+                                                       <option value="value2">Ejemplo 2</option>
+                                               </select>  
+                                       </div>
+                                       <div class="drop-down-options-style col-lg-2 col-8 col-sm-4" >
+                                               <select id="drop-down-options" class="form-control" name="select" >
+                                                       <option value="">Subcategoria</option>
+                                                       <option value="value1"> Ejemplo 1</option> 
+                                                       <option value="value2">Ejemplo 2</option>
+                                               </select>
+                                       </div>
+                                       <h6 id="limpiar" class=" col-lg-3 col-6 col-sm-5" >Limpiar Filtros</h6>
+                                   </div>
+                       </div>
+                   </div> 
+                                   <div style="margin-left: 10%; margin-block-start:4%;">
+                                       <h6 style="color:black;">999 Ofertas de empleo actualmente</h6>
+                                   </div> 
+                               <div  *ngFor="let dat of datos; index as i" id="vacantecontenedor"  >
+                                      <div data-toggle="modal" data-target="#datosvacante" id="vacantesmenu"   class="row">
+                                              <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9 col-sm-9 col-9 ">
+                                                  <h6 style="color:yellow;">NOMBRE DE LA VACANTE</h6>
+                                              </div>
+                                              <div class="col-lg-3 col-sm-3 col-3">
+                                                      <h6 style="color:white;">FECHA</h6>
+                                              </div>
+                                          <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
+                                              <h6 style="color: white;">UBICACION DE LA VACANTE</h6>
+                                          </div>
+                                          <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
+                                              <h6 style="color:white;">NOMBRE DE LA EMPRESA</h6>
+                                          </div>       
+                                          <div data-toggle="modal" data-target="#datosvacante" class="col-lg-3" >
+                                              
+                                          </div>
+                                      </div> 
+                                      <h6   data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">DESCRIPCION</h6>
+                                      <h6   data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">SE SOLICITA EMPLEADO PARA APOYO EN DESARROLLO DE PROYECTOS DE SOFTWARE EN IMCA</h6>
+                                  </div>       
+                                  <div style="height: 30px">
+                                    <!-- SEPARADOR ENTRE FOOTER Y ULTIMO ELEMENTO -->
+                                  </div>  
+                                </div>
+   <footer  id="sticky-footer" class="static-bottom">
+    <div class="container text-center">
+        <small>Copyright &copy;  VOLAR IAP ✔ 🐱‍👤</small>
+    </div>
+</footer>
+</html>
+
+
+

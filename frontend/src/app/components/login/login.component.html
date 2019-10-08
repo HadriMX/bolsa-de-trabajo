@@ -1,0 +1,91 @@
+<app-header></app-header>
+<div class="container-fluid " ng-app="myApp" ng-controller="myCtrl">
+    <div class="row" style="height: 100%; ">
+       <div class="col-lg-7 col-sm-12 login100-more d-none d-sm-block" id="carrusellogin" >
+         <div class="row align-items-center" style=" height: 100%;">
+           <div class="row justify-content-center w-100" >
+              <div id="carouselExampleIndicators"  class="carousel slide w-75" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="" style="background: rgba(53, 52, 52, 0.502); padding: 10px; border-radius: 10px;">
+                            <h5 style="color:rgb(199, 219, 12); text-align: center;">Usuario laboral</h5>
+                            <p style="color:white">Podras crearte una cuenta y observar vacantes disponibles</p>
+                          </div>
+                          
+                    </div>
+                    <div class="carousel-item"> 
+                        <div class="" style="background:  rgba(53, 52, 52, 0.502); padding: 10px; border-radius: 10px;">
+                           <h5 style="color:rgb(199, 219, 12);  text-align: center;">Empresa</h5>
+                           <p style="color:white">Podras crearte una cuenta para publicar vacantes y ver usuarios laborales </p>
+                          </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="" style="background:  rgba(53, 52, 52, 0.502); padding: 10px; border-radius: 10px;">
+                           <h5 style="color:rgb(199, 219, 12);  text-align: center;">Usuario visitante</h5>
+                           <p style="color:white">Podras entrar a la pagina central y ver informacion de las vacantes</p>
+                          </div>
+                    </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+              </div>
+           </div>
+         </div>
+       </div>
+      <div class="col-sm-5" style="height:100%;"> 
+         <div  class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+             <form class="login100-form validate-form">
+               <span class="login100-form-title p-b-59">
+                 Registrar cuenta
+               </span>         
+ 
+               <div id="electronico" class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                 <span  style="color:black;" class="label-input100">Correo electronico</span>
+                 <input [(ngModel)]="nuevoUsuario.email" name="email" id="input100" class="input100" type="email" name="email" placeholder="Correo electrónico..." required>
+                 <span class="focus-input100"></span>
+               </div>
+       
+               <div id="contrasenaa" class="wrap-input100 validate-input" data-validate = "Password is required">
+                 <span style="color:black;" class="label-input100">Contraseña</span>
+                 <input  [(ngModel)]="nuevoUsuario.password" name="password" id="input101" class="input100" type="password" name="pass" placeholder="*************"required>
+                 <span class="focus-input100"></span>
+               </div>
+
+                   <div class="row">
+                         <div id="preferencialaboral" style="margin-left: 40px;" >
+                           <h6>Seleccione el tipo de usuario:</h6>
+                             <select [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select" style="margin-top: 10px; width:200px;">
+                                 <option value="1" selected>Empleado</option> 
+                                 <option value="2">Empresa</option>
+                             </select>  
+                           </div>  
+                   </div>
+                   <div class="row" style="margin-left: 10px;"  > 
+
+               <div class="container-login100-form-btn" style="margin-top: 20px;">
+                   <div class="wrap-login100-form-btn">
+                     <div class="login100-form-bgbtn"></div>
+                     <button (click)="crear()" id="boton1" class="form-control">
+                       Crear cuenta
+                     </button>
+                   </div>
+                 </div>
+               </div>
+             </form>
+           </div>
+       </div>
+    </div>
+  </div>
+    

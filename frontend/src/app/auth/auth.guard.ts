@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { CurrentUserService } from '../current-user.service';
+import { CurrentUserService } from '../services/current-user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthGuardService implements CanActivate {
   
   canActivate(): boolean {
     if (!this.auth.haySesionActiva()) {
-      this.router.navigate(['login']);
+      this.router.navigateByUrl('login');
       return false;
     }
     return true;

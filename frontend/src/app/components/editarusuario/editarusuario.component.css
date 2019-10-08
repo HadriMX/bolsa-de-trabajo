@@ -1,0 +1,78 @@
+.form-control {
+    width: 70%;
+}
+#titulo {
+    margin-left: 3%;
+}
+#contenedor {
+    width: 100%;
+    height: 100%;
+
+}
+
+#titulo-css {
+    margin-left: 1%; 
+    font-size: 20px;
+    border:inset;
+    
+}
+#boton {
+    width: 15%;
+    height: 15%;
+    margin-block-start: 1%;
+    margin-left: 54%;
+}
+#boton2 {
+    width: 15%;
+    height: 15%;
+    margin-block-start: 1%;
+    margin-left: 1%;
+}
+#boton3:hover{
+    background:rgb(77, 16, 83);
+  
+  }
+  #boton3{
+    border-radius: 25px;
+    width: 100%;
+    height: 120%;
+    background:rgb(121, 24, 129);
+    color:white;
+  }
+.laborals {
+    width:96%; 
+    height: 30%;
+    margin-top: 2%;
+    background-color: transparent;;
+}
+  @media  (max-width: 575px) {
+    .laborals {
+        height: 250px;
+    }
+    .form-control {
+        width: 200%;
+    }
+  }
+  @media (min-width: 575px) and (max-width: 1000px) {
+      .form-control {
+          width: 250%;
+      }
+      #espaciovacio {
+          height: 300px;
+      }
+  }
+  body {
+    position: fixed; 
+    width:100%;
+    height:100%; 
+    overflow: auto;
+    background-image: url('/assets/background.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+
+  }
+  #espaciovacio {
+    height: 220px;
+  }
