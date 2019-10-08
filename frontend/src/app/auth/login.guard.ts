@@ -11,7 +11,7 @@ export class LoginGuardService implements CanActivate {
 
     canActivate(): boolean {
         if (this.auth.haySesionActiva()) {
-            this.router.navigate(['menu']);
+            this.router.navigateByUrl('menu');
             return false;
         }
         return true;
