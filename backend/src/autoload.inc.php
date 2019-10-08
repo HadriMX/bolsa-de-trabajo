@@ -9,6 +9,7 @@ spl_autoload_register(
             $classes = array(
                 'auth' => '/core/Auth.php',
                 'candidato' => '/core/Candidato.php',
+                'admin'=> '/core/Admin.php',
                 'db' => '/core/db_conn.php',
                 'errorresult' => '/core/error.php',
                 'mysessionhandler' => '/core/sess_handler.php',

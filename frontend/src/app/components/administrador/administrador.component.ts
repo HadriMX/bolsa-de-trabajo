@@ -22,7 +22,8 @@ export class AdministradorComponent implements OnInit {
   datoscategoria = [];
   datosarea = [];
   datossubarea = [];
-  datos = [1,2,3,4,5,6];
+  datos_solicitud=[];
+  datos = [1,2,3,4,5,6]; 
   estado = false;
   estado2 = false;
   estado3 = false; 
@@ -39,6 +40,19 @@ export class AdministradorComponent implements OnInit {
   btnAgregarArea  : boolean;
   btnAgregarCategoria : boolean;
   constructor(private adminservice:AdminService) { }
+  MostrarSolicitudes(){
+    this.adminservice.get_solicitudes()
+    .subscribe((response) => {
+      if (response.success)
+      {
+        this.datos_solicitud = response.data;
+        // this .datosarea= this.areas;
+      }
+      else {
+        Swal.fire("Error", response.message, 'error');
+      }
+    });
+  }
   MostrarAreas(){
     this.adminservice.get_areas()
     .subscribe((response) => {
@@ -68,6 +82,7 @@ export class AdministradorComponent implements OnInit {
   ngOnInit() {
     this.MostrarAreas();
     this.MostrarCategorias();
+    this.MostrarSolicitudes();
   }
   
   add_areaEstudio() {

@@ -69,14 +69,18 @@
                         <table class="table table-striped" >
                                 <thead>
                                   <tr>
+                                    <th scope="col">#</th>
                                     <th scope="col">Nombre del area de estudio</th>
                                     <th scope="col">Estado</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr *ngFor='let val of datosarea;index as i'>
+                                    <td>{{val.id_area_estudio}}</td>
                                     <td>{{val.nombre}}</td>
-                                    <img (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
+                                    <img *ngIf="val.estatus==='A'" (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
+                                
+                                    
                                   </tr>
                                 </tbody>
                               </table>
@@ -116,24 +120,24 @@
                 <div *ngIf="estado4"  >
                   <div style="margin-left: 1%; margin-top: 1%;">
                       <h5>Lista de Solicitudes  </h5>
-                      <div *ngFor="let dato of datos; index as i" class="border border-primary border-left-0 border-right-0" style="width: 99%; height:50%; margin-block-start: 3%;" >
-                          <h6 style="font-size: 20px;">Nombre del usuario</h6>
+                      <div *ngFor="let val of datos_solicitud; index as i" class="border border-primary border-left-0 border-right-0" style="width: 99%; height:50%; margin-block-start: 3%;" >
+                          <h6 style="font-size: 20px;">Nombre del usuario: {{val.nombre}}</h6>
                           <div class="row">
                             <div class="col-lg-8 col-sm-8 col-8">
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-6 col-9" >
-                                      <h6 style="margin-block-start: 2%;">Telefono: </h6>
+                                      <h6 style="margin-block-start: 2%;">Telefono: {{val.telefono}}</h6>
                                     </div>
                                     <div class="col-lg-5 col-sm-6 col-12">
-                                       <h6 style="margin-block-start: 2%;">Correo Electronico</h6> 
+                                       <h6 style="margin-block-start: 2%;">Correo Electronico: {{val.email}}</h6> 
                                     </div>
                                   </div>
                                   <div class="row" style="margin-block-start: 1%;">
                                     <div class="col-lg-6 col-sm-6 col-9">
-                                        <h6>Genero</h6>
+                                        <h6>Genero: {{val.genero}}</h6>
                                     </div>
                                     <div class="col-lg-5 col-sm-6 col-12">
-                                        <h6>Fecha de nacimiento</h6>
+                                        <h6>Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
                                         <button class="form*control btn" style="margin-block-end: 4%;" >Aceptar Solicitud</button>  
                                     </div>
 

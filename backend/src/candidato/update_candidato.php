@@ -16,3 +16,4 @@ $post = json_decode(file_get_contents("php://input"));
 $candidato = (array) $post;
 
 echo json_encode(Candidato::update($candidato));
+ 
