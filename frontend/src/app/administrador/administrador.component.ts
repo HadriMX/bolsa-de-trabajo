@@ -149,7 +149,7 @@ export class AdministradorComponent implements OnInit {
             if (this.estado === true) {
               this.estadoimagen = true;
               this.estado = false;
-              $('#categoriaboton').css('background', 'rgb(60, 143, 60)');
+              $('#categoriaboton').css('border-width', '1px');
 
             } else {
               this.estadoimagen = false;
@@ -164,7 +164,7 @@ export class AdministradorComponent implements OnInit {
             if (this.estado2 === true) {
               this.estado2 = false;
               this.estadoimagen = true;
-              $('#areas').css('background', 'rgb(60, 143, 60)');
+              $('#areas').css('border-width', '1px');
 
             } else {
               this.estado2 = true;
@@ -179,7 +179,7 @@ export class AdministradorComponent implements OnInit {
             if (this.estado3 === true) {
               this.estado3 = false;
               this.estadoimagen = true; 
-              $('#subareas').css('background', 'rgb(60, 143, 60)');
+              $('#subareas').css('border-width', '1px');
 
             } else {
               this.estado3 = true;
@@ -193,7 +193,7 @@ export class AdministradorComponent implements OnInit {
           if (this.estado4 === true) {
             this.estado4 = false;
             this.estadoimagen = true;
-            $('#usuarios').css('background', 'rgb(75, 60, 143)');
+            $('#usuarios').css('border-width', '1px');
 
           } else {
             this.estado4 = true;
@@ -210,37 +210,36 @@ export class AdministradorComponent implements OnInit {
   //------------------------------------------------------------------------------------
   funcioncolores1() {
     $(function(){
-      $('#categoriaboton').css('background', 'red');
-      $('#areas').css('background', 'rgb(60, 143, 60)');
-      $('#subareas').css('background', 'rgb(60, 143, 60)');
-      $('#usuarios').css('background', 'rgb(75, 60, 143)');
-
+      $('#subareas').css('border-width', '1px');
+      $('#areas').css('border-width', '1px');
+      $('#categoriaboton').css('border', 'inset');
+      $('#usuarios').css('border-width', '1px'); 
     })
   }
   funcioncolores2() {
     $(function(){
-      $('#areas').css('background', 'red');
-      $('#categoriaboton').css('background', 'rgb(60, 143, 60)');
-      $('#subareas').css('background', 'rgb(60, 143, 60)');
-      $('#usuarios').css('background', 'rgb(75, 60, 143)');
+      $('#subareas').css('border-width', '1px');
+      $('#areas').css('border', 'inset');
+      $('#categoriaboton').css('border-width', '1px');
+      $('#usuarios').css('border-width', '1px');
 
     })
   }
   funcioncolores3() {
     $(function(){
-      $('#subareas').css('background', 'red');
-      $('#areas').css('background', 'rgb(60, 143, 60)');
-      $('#categoriaboton').css('background', 'rgb(60, 143, 60)');
-      $('#usuarios').css('background', 'rgb(75, 60, 143)');
+      $('#subareas').css('border', 'inset');
+      $('#areas').css('border-width', '1px');
+      $('#categoriaboton').css('border-width', '1px');
+      $('#usuarios').css('border-width', '1px');
 
     })
   }
   funcioncolores4() {
     $(function(){
-      $('#subareas').css('background', 'rgb(60, 143, 60)');
-      $('#areas').css('background', 'rgb(60, 143, 60)');
-      $('#categoriaboton').css('background', 'rgb(60, 143, 60)');
-      $('#usuarios').css('background', 'red');
+       $('#subareas').css('border-width', '1px');
+      $('#areas').css('border-width', '1px');
+      $('#categoriaboton').css('border-width', '1px');
+      $('#usuarios').css('border', 'inset'); 
 
     })
   }
