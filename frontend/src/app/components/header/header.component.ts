@@ -12,13 +12,12 @@ import Swal from 'sweetalert2';
 })
 export class HeaderComponent implements OnInit {
   
-  @Input()
   loginInfo: LoginInfo = {
       email: '',
       pwd: ''
   }
 
-  btnIngresarClicked: boolean;
+  btnIngresarClicked = false;
     
   constructor(private loginService: LoginService, private router: Router,
     private currentUserService: CurrentUserService) {
@@ -26,10 +25,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
   login() {
-    
-    
     this.btnIngresarClicked = true;
 
     this.loginService.login(this.loginInfo)

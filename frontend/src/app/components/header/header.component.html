@@ -2,7 +2,7 @@
 
 <form class="form">
         <nav class="navbar navbar-expand-sm bg-red navbar-dark" role="navigation">
-            <img  class="modal-title" src="../../assets/logo-volar.png" style="margin-left: 1%;" height="40px" width="100px" alt="Generic placeholder image">        
+            <img  class="modal-title" src="/assets/logo-volar.png" style="margin-left: 1%;" height="40px" width="100px" alt="Generic placeholder image">        
 
 
        
@@ -17,7 +17,7 @@
               <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control" type="password" id="contrasena" placeholder="Contraseña" required />
             </div>
           <div class="form-control2">
-              <button class=" form-control btn btn-primary" (click)="login()" pButton>Ingresar</button>
+              <button class="form-control btn btn-primary" [disabled]="btnIngresarClicked" (click)="login()" pButton>Ingresar</button>
           </div>  
         </nav>  
        </form>
