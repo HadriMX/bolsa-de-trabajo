@@ -16,7 +16,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService as AuthGuard }  from './auth/auth.guard';
 import { LoginGuardService as LoginGuard } from './auth/login.guard';
 import * as $ from 'jquery';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
+
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+  MatSortModule, MatTableModule } from "@angular/material";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -45,6 +50,16 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MaterialModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     RouterModule

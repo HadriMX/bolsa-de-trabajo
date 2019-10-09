@@ -1,7 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Area, Cat_empresa } from 'src/app/models/admin';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../services/admin.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator'; 
+
 
 @Component({
   selector: 'app-administrador',
@@ -9,6 +13,7 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
+  
   @Input() nuevaArea : Area={
     id:0,
     nombre_area:'',
@@ -31,22 +36,38 @@ export class AdministradorComponent implements OnInit {
   estadoimagen = true;
 
   
+
+  displayedColumns: string[] = ['id_area_estudio', 'nombre', 'estatus'];
+  dataSource = new MatTableDataSource<any>();
+  
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
  
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   
   
   // Esto es para agregar algo a la lista y se puede usar para agregar cosas a la base de datos
-  
+ 
   
   btnAgregarArea  : boolean;
   btnAgregarCategoria : boolean;
+  
   constructor(private adminservice:AdminService) { }
+  
   MostrarSolicitudes(){
     this.adminservice.get_solicitudes()
     .subscribe((response) => {
       if (response.success)
       {
         this.datos_solicitud = response.data;
-        // this .datosarea= this.areas;
+  
       }
       else {
         Swal.fire("Error", response.message, 'error');
@@ -59,13 +80,19 @@ export class AdministradorComponent implements OnInit {
       if (response.success)
       {
         this.datosarea = response.data;
-        // this .datosarea= this.areas;
+        this.dataSource.data=this.datosarea;
+     
+
       }
       else {
         Swal.fire("Error", response.message, 'error');
       }
+      
     });
   }
+
+  
+  
   MostrarCategorias(){
     this.adminservice.get_categorias()
     .subscribe((response) => {
@@ -79,13 +106,20 @@ export class AdministradorComponent implements OnInit {
       }
     });
   }
+
+  
   ngOnInit() {
+    
     this.MostrarAreas();
     this.MostrarCategorias();
     this.MostrarSolicitudes();
+    
+    
   }
+
   
   add_areaEstudio() {
+    this.dataSource.paginator = this.paginator;
     const nombre = $('#area').val();
     if (nombre ==='') {
       Swal.fire("No ingreso ningun valor");
@@ -259,4 +293,5 @@ export class AdministradorComponent implements OnInit {
     })
   }
   //------------------------------------------------------------------------------------
+  
 }

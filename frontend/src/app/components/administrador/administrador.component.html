@@ -65,26 +65,44 @@
             </div>
             <div style="margin-left: 5%; margin-top: 1%; ; ">
                 <h5>Lista de areas de estudio</h5>
+                <mat-form-field>
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                </mat-form-field>
                 <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll" >
-                        <table class="table table-striped" >
-                                <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nombre del area de estudio</th>
-                                    <th scope="col">Estado</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor='let val of datosarea;index as i'>
-                                    <td>{{val.id_area_estudio}}</td>
-                                    <td>{{val.nombre}}</td>
-                                    <img *ngIf="val.estatus==='A'" (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
-                                
-                                    
-                                  </tr>
-                                </tbody>
-                              </table>
+                  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+                    <mat-spinner></mat-spinner>
+                   </div>
+                  
+                  <table  mat-table [dataSource]="dataSource"  matSort class="lessons-table mat-elevation-z8">
+                  
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="id_area_estudio">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                      <td mat-cell *matCellDef="let element"> {{element.id_area_estudio}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                    </ng-container>
+                  
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="estatus">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                      <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  
+                  
                 </div>
+                <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
                 <button class="form-control btn btn-primary" style="width: 45%; margin-block-start: 3%;">Agregar Subarea</button>
             </div> 
          </div>
