@@ -11,22 +11,21 @@ import { HttpOptionsService } from './http-options.service';
 })
 export class CurrentUserService {
 
+  readonly CURRENT_USER_COOKIE = 'current_user';
+
   constructor(private http: HttpClient, private cookies: CookieService,
-    private httpOptions: HttpOptionsService) {
-      console.log('current-user-service constructed.');
-  }
+    private httpOptions: HttpOptionsService) { }
 
   setUsuarioActual(usuario: Usuario) {
-    this.cookies.set('PHPSESSID', usuario.phpsessid, 1);
-    this.cookies.set('email_current_user', usuario.email);
+    this.cookies.set(this.CURRENT_USER_COOKIE, JSON.stringify(usuario), 1);
   }
 
-  deleteUsuarioActual(): Observable<ApiResponse<boolean>> {
-    var url = "http://localhost/bdt/php/src/logout.php?phpsessid=" + this.cookies.get('PHPSESSID');
-    return this.http.post<ApiResponse<boolean>>(url, null, this.httpOptions);
+  deleteUsuarioActual(): Promise<ApiResponse<boolean>> {
+    var url = "http://localhost/bdt/php/src/logout.php?phpsessid=" + this.getPhpsessid();
+    return this.http.post<ApiResponse<boolean>>(url, null, this.httpOptions).toPromise();
   }
 
-  getUsuarioActual() : Observable<ApiResponse<Usuario>> {
+  getUsuarioActualDesdeServidor(): Observable<ApiResponse<Usuario>> {
     if (!this.haySesionActiva()) {
       return of({
         code: 404,
@@ -36,16 +35,53 @@ export class CurrentUserService {
       });
     }
 
-    var url = "http://localhost/bdt/php/src/whoami.php?phpsessid=" + this.cookies.get('PHPSESSID');
+    var url = "http://localhost/bdt/php/src/whoami.php?phpsessid=" + this.getPhpsessid();
     return this.http.get<ApiResponse<Usuario>>(url, this.httpOptions);
   }
 
-  getEmailUsuarioActual() : string {
-    return this.cookies.get('email_current_user');
+  getUsuarioActual(): Usuario {
+    if (!this.haySesionActiva()) {
+      return null;
+    }
+
+    var currentUser = JSON.parse(this.cookies.get(this.CURRENT_USER_COOKIE));
+    return currentUser;
   }
 
-  haySesionActiva() : boolean {
-    return this.cookies.check('PHPSESSID');
+  getPhpsessid(): string {
+    var currentUser = this.getUsuarioActual();
+
+    if (currentUser == null) {
+      return null;
+    }
+
+    return currentUser.phpsessid;
   }
-  
+
+  agregarPhpsessidEnUrl(url: string): string {
+    return url + '?phpsessid=' + this.getPhpsessid();
+  }
+
+  haySesionActiva(): boolean {
+    return this.cookies.check(this.CURRENT_USER_COOKIE) && this.tryParseJSON(this.cookies.get(this.CURRENT_USER_COOKIE));
+  }
+
+  // fuente: https://stackoverflow.com/a/20392392
+  tryParseJSON(jsonString: string) {
+    try {
+      var o = JSON.parse(jsonString);
+
+      // Handle non-exception-throwing cases:
+      // Neither JSON.parse(false) or JSON.parse(1234) throw errors, hence the type-checking,
+      // but... JSON.parse(null) returns null, and typeof null === "object", 
+      // so we must check for that, too. Thankfully, null is falsey, so this suffices:
+      if (o && typeof o === "object") {
+        return o;
+      }
+    }
+    catch (e) { }
+
+    return false;
+  };
+
 }

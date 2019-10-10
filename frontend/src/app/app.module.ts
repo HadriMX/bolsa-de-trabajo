@@ -11,10 +11,11 @@ import { HeadertittleComponent } from './components/headertittle/headertittle.co
 import { VacantesComponent } from './components/vacantes/vacantes.component';
 import { AdministradorComponent } from './components/administrador/administrador.component';
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService as AuthGuard }  from './auth/auth.guard';
 import { LoginGuardService as LoginGuard } from './auth/login.guard';
+import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 
 
@@ -50,6 +51,11 @@ const routes: Routes = [
     RouterModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     CookieService,
     AuthGuard,
   ],

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrentUserService } from '../../services/current-user.service';
 import { Usuario } from '../../models/usuario'
-import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'app-headertittle',
@@ -12,34 +12,25 @@ import { Router } from '@angular/router';
 })
 export class HeadertittleComponent implements OnInit {
 
-  public currentUser : Usuario;
-  public emailUsuario : string;
+  public usuarioActual : Usuario;
 
   constructor(private currentUserService: CurrentUserService, private router: Router,
-    private cookies: CookieService) { }
+    private loginService: LoginService) { }
 
   ngOnInit() {
-    this.emailUsuario = this.currentUserService.getEmailUsuarioActual();
-
-    this.currentUserService.getUsuarioActual().subscribe((response) => {
-      if (response.success) {
-        this.currentUser = response.data;
-      } else {
-        Swal.fire('Error del servidor', response.message, 'error');
-      }
-    });
+    this.usuarioActual = this.currentUserService.getUsuarioActual();
   }
 
   logout() {
-    this.currentUserService.deleteUsuarioActual().subscribe((response) => {
-      if (response.success) {
-        this.cookies.delete('PHPSESSID');
-        this.cookies.delete('email_current_user');
-        this.router.navigateByUrl("/login");
-      } else {
-        Swal.fire('Error del servidor', response.message, 'error');
-      }
-    });
+    this.loginService.logout().then(
+      response => {
+        if (response.success) {
+          this.router.navigateByUrl("/login");
+        } else {
+          Swal.fire('Error en el servidor', response.message, 'error');
+        }
+      },
+      reason => console.log(reason));
   }
 
 }

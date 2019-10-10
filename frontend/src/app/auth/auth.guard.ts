@@ -8,7 +8,7 @@ import { CurrentUserService } from '../services/current-user.service';
 export class AuthGuardService implements CanActivate {
 
   constructor(public auth: CurrentUserService, public router: Router) { }
-  
+
   canActivate(): boolean {
     if (!this.auth.haySesionActiva()) {
       this.router.navigateByUrl('login');
