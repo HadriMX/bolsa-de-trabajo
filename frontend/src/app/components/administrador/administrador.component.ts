@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ViewChild,ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ViewChild,ViewChildren, QueryList,AfterViewInit } from '@angular/core';
 import { Area, Cat_empresa } from 'src/app/models/admin';
 import Swal from 'sweetalert2';
 import { AdminService } from '../../services/admin.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator'; 
+import { stat } from 'fs';
 
 
 @Component({
@@ -36,13 +37,17 @@ export class AdministradorComponent implements OnInit {
   estadoimagen = true;
   btnAgregarArea  : boolean;
   btnAgregarCategoria : boolean;
+  opc:any;
+  private paginator: MatPaginator;
+  private sort: MatSort;
+
 
   ColumnasCategorias: string[]=['id_tipo_empresa','nombre_empresa','estatus'];
   ColumnasAreas: string[] = ['id_area_estudio', 'nombre', 'estatus'];
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias= new MatTableDataSource<any>();
  
-
+  //Filtro para los catalagos de areas de estudio y categorias de empresas
   applyFilterAreas(filterValue: string) {
     this.dataSource_AreasEstudio.filter = filterValue.trim().toLowerCase();
   }
@@ -50,50 +55,26 @@ export class AdministradorComponent implements OnInit {
     this.dataSource_Categorias.filter = filterValue.trim().toLowerCase();
   }
 
-  private paginator: MatPaginator;
-  private sort: MatSort;
-  private paginator1: MatPaginator;
-  private sort1: MatSort;
-
-  
+  //Ordenamiento de los datos de las tablas
   @ViewChild(MatSort,{static:false}) set matSort(ms: MatSort) {
     this.sort = ms;
 
-    this.setDataSourceAreasAttributes();
+    this.dataSource_AreasEstudio.sort = this.sort;
+    this.dataSource_Categorias.sort=this.sort;
   }
 
+//Paginación de las tablas
   @ViewChild(MatPaginator,{static:false}) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
-
-    this.setDataSourceAreasAttributes();
-  }
-
-  setDataSourceAreasAttributes() {
-    
     this.dataSource_AreasEstudio.paginator = this.paginator;
-    this.dataSource_AreasEstudio.sort = this.sort;
-  }
-  @ViewChild(MatPaginator,{static:false}) set matPaginator2 (mp2:MatPaginator){
-    this.paginator1=mp2;
-    this.setDataSourceCategoriasAttributes();
-  }
-  @ViewChild(MatSort,{static:false}) set matSort2 (ms2:MatSort){
-    this.sort1=ms2;
-    this.setDataSourceCategoriasAttributes();
-  }
-  setDataSourceCategoriasAttributes(){
-    this.dataSource_Categorias.paginator=this.paginator1;
-    this.dataSource_Categorias.sort=this.sort1;
+    if (this.opc===1){
+      this.dataSource_Categorias.paginator=this.paginator
+    }
+    else{
+      this.dataSource_AreasEstudio.paginator=this.paginator;
+    } 
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource_AreasEstudio.paginator=this.paginator;
-    this.dataSource_AreasEstudio.sort=this.sort;
-    this.dataSource_Categorias.paginator=this.paginator1;
-    this.dataSource_Categorias.sort=this.sort1;
-  }
-
-  
   constructor(private adminservice:AdminService) { }
   MostrarSolicitudes(){
     this.adminservice.get_solicitudes()
@@ -115,7 +96,6 @@ export class AdministradorComponent implements OnInit {
       {
         this.datosarea = response.data;
         this.dataSource_AreasEstudio.data=this.datosarea;
-
       }
       else {
         Swal.fire("Error", response.message, 'error');
@@ -130,8 +110,6 @@ export class AdministradorComponent implements OnInit {
       {
         this.datoscategoria = response.data;
         this.dataSource_Categorias.data=this.datoscategoria;
-
-
       }
       else {
         Swal.fire("Error", response.message, 'error');
@@ -196,22 +174,23 @@ export class AdministradorComponent implements OnInit {
   }
   
   categorias(numero) {
-        // Este es para el primer boton 
+        // Se selecciona Categorias de las empresas 
         if (numero === 1) {
             if (this.estado === true) {
               this.estadoimagen = true;
               this.estado = false;
               $('#categoriaboton').css('border-width', '1px');
-
-
+             
             } else {
               this.estadoimagen = false;
               this.estado = true;
               this.estado2 = false;
               this.estado3 = false;
               this.estado4 = false;
+              this.funcioncolores1();
+              this.opc=numero;
             }
-      // Este es para el segundo boton 
+      // Se selecciona Aareas de estudio
         } else if (numero === 2) {
             if (this.estado2 === true) {
               this.estado2 = false;
@@ -224,27 +203,14 @@ export class AdministradorComponent implements OnInit {
               this.estado4 = false;
               this.estadoimagen = false;
               this.funcioncolores2();
+              this.opc=numero;
             }
-      // Este es para el tercer boton 
-        } else if(numero === 3) {
-            if (this.estado3 === true) {
-              this.estado3 = false;
-              this.estadoimagen = true; 
-              $('#subareas').css('border-width', '1px');
-            } else {
-              this.estado3 = true;
-              this.estadoimagen = false;
-              this.estado = false;
-              this.estado2 = false;
-              this.estado4 = false
-              this.funcioncolores3(); 
-            }
-        } else {
+        //Se selecciona las solicitudes de los usuarios    
+        } else if(numero==3){
           if (this.estado4 === true) {
             this.estado4 = false;
             this.estadoimagen = true;
             $('#usuarios').css('border-width', '1px');
-
           } else {
             this.estado4 = true;
             this.estadoimagen = false;
@@ -255,7 +221,6 @@ export class AdministradorComponent implements OnInit {
           }
         }
   }
-
   // En esta parte se manejan los colores de los botones al momento de presionarlos
   //------------------------------------------------------------------------------------
   funcioncolores1() {
@@ -272,7 +237,6 @@ export class AdministradorComponent implements OnInit {
       $('#areas').css('border', 'inset');
       $('#categoriaboton').css('border-width', '1px');
       $('#usuarios').css('border-width', '1px');
-
     })
   }
   funcioncolores3() {
@@ -281,7 +245,6 @@ export class AdministradorComponent implements OnInit {
       $('#areas').css('border-width', '1px');
       $('#categoriaboton').css('border-width', '1px');
       $('#usuarios').css('border-width', '1px');
-
     })
   }
   funcioncolores4() {
@@ -290,9 +253,7 @@ export class AdministradorComponent implements OnInit {
       $('#areas').css('border-width', '1px');
       $('#categoriaboton').css('border-width', '1px');
       $('#usuarios').css('border', 'inset'); 
-
     })
   }
   //------------------------------------------------------------------------------------
-  
 }

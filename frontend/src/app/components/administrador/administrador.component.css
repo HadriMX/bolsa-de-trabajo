@@ -37,3 +37,11 @@ table {
     background-color:rgb(121, 24, 129);
 
 }
+
+th{
+  color: #ffffff;
+  background-color: rgb(153, 103, 158);
+}
+::ng-deep .mat-sort-header-arrow {
+  color: white;
+}
