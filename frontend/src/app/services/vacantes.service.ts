@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Vacante } from 'src/app/models/vacantes';
 import { ApiResponse } from 'src/app/models/api_response';
 import { Observable } from 'rxjs';
+import { Busqueda } from '../models/busqueda';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,9 @@ export class VacantesService {
 
   constructor(private http: HttpClient) { }
 
-  getVacantes(): Observable<ApiResponse<Vacante[]>> {
-    return this.http.get<ApiResponse<Vacante[]>>(this.endpointUrl, this.httpOptions);
+  getVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
+    return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrl, busqueda, this.httpOptions);
   }
+
+
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,8 +15,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService as AuthGuard }  from './auth/auth.guard';
 import { LoginGuardService as LoginGuard } from './auth/login.guard';
+import localeEsAr from '@angular/common/locales/es-AR';
+import { registerLocaleData } from '@angular/common';
+
 import * as $ from 'jquery';
 
+registerLocaleData(localeEsAr);
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -51,7 +55,7 @@ const routes: Routes = [
   ],
   providers: [
     CookieService,
-    AuthGuard,
+    AuthGuard,{ provide: LOCALE_ID, useValue: 'es-Ar' } 
   ],
   bootstrap: [AppComponent]
 })

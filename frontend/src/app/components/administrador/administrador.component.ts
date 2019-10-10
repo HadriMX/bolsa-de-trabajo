@@ -10,8 +10,8 @@ import { AdminService } from '../../services/admin.service';
 })
 export class AdministradorComponent implements OnInit {
   @Input() nuevaArea : Area={
-    id:0,
-    nombre_area:'',
+    id_area_estudio:0,
+    nombre:'',
     estatus:''
   }
   @Input() nuevaCategoria : Cat_empresa={

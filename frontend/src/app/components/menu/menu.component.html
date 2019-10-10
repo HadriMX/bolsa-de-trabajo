@@ -15,12 +15,12 @@
                        <div class="container" >
                                <div class="row" >
                                        <div class="col-lg-3 col-sm-5 col-10">
-                                           <h6 id="titulo2" style="color:white;">Titulo de la empresa</h6>
-                                           <input type="text" class="form-control " placeholder="Titulo o Empresa"> 
+                                           <h6 id="titulo2" style="color:white;">Titulo de la vacante</h6>
+                                           <input type="text" class="form-control"  placeholder="Titulo o Empresa" [(ngModel)]="InputTitulo"> 
                                        </div>
                                        <div id="ubicacionspace" class="col-lg-3 col-sm-5 col-10" >
                                            <h6 id="titulo2"  style="color:white;">Ubicación</h6>
-                                           <input type="text"  class="form-control" placeholder="Ciudad o Estado"> 
+                                           <input type="text"  class="form-control"  placeholder="Estado" [(ngModel)]="InputUbicacion"> 
                                        </div>
                                        <div id="espaciobuscar" class=" col-lg-3 col-sm-5 col-7" >
                                            <button  (click)="buscar()" class="Buscarspace btn btn-success" > 
@@ -32,54 +32,65 @@
                        <div class="container">
                                <div class="row" id="busquedaavanzada">
                                        <div class="drop-down-options-style col-lg-2 col-5 col-sm-3" > 
-                                               <select id="drop-down-options" class="form-control" name="select" >
-                                                       <option value="">Salario</option>
-                                                       <option value="value1"> Ejemplo 1</option> 
-                                                       <option value="value2">Ejemplo 2</option>
-                                               </select>     
+                                            <select id="drop-down-options" class="form-control" name="select" [(ngModel)]="SelectedSalario">
+                                                    <option value = "0" >Sueldos</option>
+                                                    <option value="1">$0 - $5,000 MXN</option>
+                                                    <option value="2">$5,000 - $10,000 MXN</option>
+                                                    <option value="3">$10,000 - $15,000 MXN</option>
+                                                    <option value="4">$15,000 - $20,000 MXN</option>
+                                                    <option value="5">$20,000 - $30,000 MXN</option>
+                                                    <option value="6">$30,000 - $40,000 MXN</option>
+                                                    <option value="7">$40,000 - $60,000 MXN</option>
+                                                    <option value="8">$60,000 - $80,000 MXN</option>
+                                                    <option value="9">$80,000 - o más</option>
+                                                  </select>     
                                        </div>
                                        <div class="drop-down-options-style col-lg-2 col-5 col-sm-4"  >
-                                               <select id="drop-down-options"  class="form-control" name="select" >
-                                                       <option value="">Categoria</option>
-                                                       <option value="value1"> Ejemplo 1</option> 
-                                                       <option value="value2">Ejemplo 2</option>
-                                               </select>  
+                                            <select id="drop-down-options" class="form-control selectpicker" name="select" [(ngModel)]="SelectedFecha" >
+                                                <option value = "0" >Fecha</option>
+                                                <option value="1">Hace 1 semana</option>
+                                                <option value="2">Hace 2 semanas</option>
+                                                <option value="3">Hace 1 mes</option>
+                                                <option value="4">Hace 2 meses</option>
+                                                <option value="5">Hace 4 meses</option>
+                                                <option value="6">Hace 6 meses</option>
+                                              </select> 
                                        </div>
                                        <div class="drop-down-options-style col-lg-2 col-8 col-sm-4" >
-                                               <select id="drop-down-options" class="form-control" name="select" >
-                                                       <option value="">Subcategoria</option>
-                                                       <option value="value1"> Ejemplo 1</option> 
-                                                       <option value="value2">Ejemplo 2</option>
-                                               </select>
+                                                <select id="drop-down-options" class="form-control" name="select" [(ngModel)]="SelectedArea">
+                                                    <option value = "0" selected>Subareas</option>
+                                                    <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
+                                                  </select>
                                        </div>
-                                       <h6 id="limpiar" class=" col-lg-3 col-6 col-sm-5" >Limpiar Filtros</h6>
+                                       <h6 id="limpiar" class=" col-lg-3 col-6 col-sm-5" (click)= "limpiarFiltros()">Limpiar Filtros</h6>
                                    </div>
                        </div>
                    </div> 
                                    <div style="margin-left: 10%; margin-block-start:4%;">
-                                       <h6 style="color:black;">999 Ofertas de empleo actualmente</h6>
+                                       <h6 style="color:black;">{{vacantes.length}} Ofertas de empleo actualmente</h6>
                                    </div> 
-                               <div  *ngFor="let dat of datos; index as i" id="vacantecontenedor"  >
+                               <div  *ngFor = "let vacante of vacantes" id="vacantecontenedor"  >
                                       <div data-toggle="modal" data-target="#datosvacante" id="vacantesmenu"   class="row">
                                               <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9 col-sm-9 col-9 ">
-                                                  <h6 style="color:yellow;">NOMBRE DE LA VACANTE</h6>
+                                                  <h6 style="color:yellow;">{{vacante.titulo_vacante}}</h6>
                                               </div>
                                               <div class="col-lg-3 col-sm-3 col-3">
-                                                      <h6 style="color:white;">FECHA</h6>
+                                                      <h6 style="color:white;">{{vacante.fecha_publicacion | date: 'longDate'}}</h6>
                                               </div>
                                           <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                                              <h6 style="color: white;">UBICACION DE LA VACANTE</h6>
+                                              <h6 style="color: white;">{{vacante.nombre_empresa}}</h6>
                                           </div>
                                           <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9">
-                                              <h6 style="color:white;">NOMBRE DE LA EMPRESA</h6>
+                                              <h6 style="color:white;">{{vacante.entidad_federativa}}</h6>
                                           </div>       
                                           <div data-toggle="modal" data-target="#datosvacante" class="col-lg-3" >
                                               
                                           </div>
                                       </div> 
-                                      <h6   data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">DESCRIPCION</h6>
-                                      <h6   data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">SE SOLICITA EMPLEADO PARA APOYO EN DESARROLLO DE PROYECTOS DE SOFTWARE EN IMCA</h6>
-                                  </div>       
+                                      <h6   data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">{{vacante.descripcion_puesto | slice:0:190}}...</h6>
+                                      
+                                  </div> 
+                                       
                                   <div style="height: 30px">
                                     <!-- SEPARADOR ENTRE FOOTER Y ULTIMO ELEMENTO -->
                                   </div>  

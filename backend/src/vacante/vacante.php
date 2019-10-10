@@ -9,8 +9,15 @@ require_once '../autoload.inc.php';
 session_start();
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET');
+header('Access-Control-Allow-Methods: POST');
 header('content-type: application/json; charset=utf-8');
+
+$post = json_decode(file_get_contents("php://input"));
+$titulo = "$post->InputTitulo";
+$ubicacion = "$post->InputUbicacion";
+$sueldo ="$post->SelectedSalario";
+$fecha = "$post->SelectedFecha";
+$area = "$post->SelectedArea";
 
 $response = getVacantes();
 echo json_encode($response);
