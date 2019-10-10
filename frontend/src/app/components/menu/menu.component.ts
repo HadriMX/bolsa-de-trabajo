@@ -81,9 +81,9 @@ export class MenuComponent implements OnInit {
     }
 
     //llamar funcion de busqueda
-    // alert(this.InputTitulo + " " + this.InputUbicacion + " " + this.SelectedSalario + " " + this.SelectedFecha + " " + this.SelectedArea)
+    alert(this.InputTitulo + " " + this.InputUbicacion + " " + this.SelectedSalario + " " + this.SelectedFecha + " " + this.SelectedArea)
     
-    this.getVacantes();
+    // this.getVacantes();
     
     if (this.InputTitulo == "0") {
       this.InputTitulo = "";
