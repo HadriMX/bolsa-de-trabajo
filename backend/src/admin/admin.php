@@ -20,10 +20,10 @@ $estatus="A";
 
 
 if ($area_estudio<>''){
-    echo json_encode(add_area($area_estudio,$estatus));
+    echo json_encode(Admin::add_area($area_estudio, $estatus));
 }
 else{
-    echo json_encode(add_categoria($categoria,$estatus));
+    echo json_encode(Admin::add_categoria($categoria, $estatus));
 }
 
 ?>

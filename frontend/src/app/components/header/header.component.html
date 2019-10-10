@@ -1,25 +1,26 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <form class="form">
-        <nav class="navbar navbar-expand-sm bg-red navbar-dark" role="navigation">
-            <img  class="modal-title" src="../../assets/logo-volar.png" style="margin-left: 1%;" height="40px" width="100px" alt="Generic placeholder image">        
-
-
-       
-          <div id="inicio2">
-            <a  >Iniciar sesión</a>
-
-          </div>
-          <div class="titulologin" >
-              <input [(ngModel)]="loginInfo.email" name="email" class="form-control" type="email" id="usuario" placeholder="Correo electronico"  autofocus required/>
-            </div>
-            <div  class="titulologin2">
-              <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control" type="password" id="contrasena" placeholder="Contraseña" required />
-            </div>
-          <div class="form-control2">
-              <button class=" form-control btn btn-primary" (click)="login()" pButton>Ingresar</button>
-          </div>  
-        </nav>  
-       </form>
-       
+  <nav class="navbar navbar-expand-sm bg-red navbar-dark" role="navigation">
+    <img class="modal-title" src="/assets/logo-volar.png" style="margin-left: 1%;" height="40px" width="100px"
+      alt="Generic placeholder image">
       
+    <div id="inicio2">
+      <a>Iniciar sesión</a>
+    </div>
+
+    <div class="titulologin">
+      <input [(ngModel)]="loginInfo.email" name="email" class="form-control" type="email" id="usuario"
+        placeholder="Correo electronico" autofocus required />
+    </div>
+    <div class="titulologin2">
+      <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control" type="password" id="contrasena"
+        placeholder="Contraseña" required />
+    </div>
+    <div class="form-control2">
+      <button class="form-control btn btn-primary" [disabled]="btnIngresarClicked" (click)="login()"
+        pButton>Ingresar</button>
+    </div>
+  </nav>
+</form>

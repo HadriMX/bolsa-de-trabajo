@@ -11,25 +11,26 @@ import { HeadertittleComponent } from './components/headertittle/headertittle.co
 import { VacantesComponent } from './components/vacantes/vacantes.component';
 import { AdministradorComponent } from './components/administrador/administrador.component';
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthGuardService as AuthGuard }  from './auth/auth.guard';
+import { AuthGuardService as AuthGuard } from './auth/auth.guard';
 import { LoginGuardService as LoginGuard } from './auth/login.guard';
 import localeEsAr from '@angular/common/locales/es-AR';
 import { registerLocaleData } from '@angular/common';
 
+import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 
 registerLocaleData(localeEsAr);
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  {path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
-  {path: 'postulaciones', component: PostulacionesComponent, canActivate: [AuthGuard]},
-  {path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard]},
-  {path: 'administracion', component: AdministradorComponent, canActivate: [AuthGuard]},
-  {path: 'vacantes', component: VacantesComponent, canActivate: [AuthGuard]},
-  { path: '**', component: LoginComponent, canActivate: [LoginGuard]}
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
+  { path: 'postulaciones', component: PostulacionesComponent, canActivate: [AuthGuard] },
+  { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
+  { path: 'administracion', component: AdministradorComponent, canActivate: [AuthGuard] },
+  { path: 'vacantes', component: VacantesComponent, canActivate: [AuthGuard] },
+  { path: '**', component: LoginComponent, canActivate: [LoginGuard] }
 ];
 
 @NgModule({
@@ -54,6 +55,11 @@ const routes: Routes = [
     RouterModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     CookieService,
     AuthGuard,{ provide: LOCALE_ID, useValue: 'es-Ar' } 
   ],

@@ -7,6 +7,7 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
+                'admin' => '/core/Admin.php',
                 'auth' => '/core/Auth.php',
                 'candidato' => '/core/Candidato.php',
                 'db' => '/core/db_conn.php',
