@@ -1,0 +1,7 @@
+## ejecutar dentro de la carpeta /src
+## generar autoloader
+& "C:\xampp\php\php.exe" "C:\xampp\htdocs\bdt\php\tests\phpab.phar" -o autoload.inc.php ./
+
+## ejecutar dentro de la carpeta /tests
+## correr todo los tests
+& "C:\xampp\php\php.exe" "C:\xampp\htdocs\bdt\php\tests\phpunit.phar" --bootstrap ./autoload.inc.php --testdox ./
