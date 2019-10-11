@@ -23,6 +23,7 @@ import { MaterialModule } from './material/material.module';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
   MatSortModule, MatTableModule } from "@angular/material";
 
+
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   {path: 'menu', component: MenuComponent, canActivate: [AuthGuard]},
@@ -43,7 +44,8 @@ const routes: Routes = [
     HeadertittleComponent,
     VacantesComponent,
     AdministradorComponent,
-    EditarusuarioComponent
+    EditarusuarioComponent,
+
   ],
   imports: [
     FormsModule,
