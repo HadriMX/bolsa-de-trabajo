@@ -10,6 +10,7 @@ spl_autoload_register(
                 'admin' => '/core/Admin.php',
                 'auth' => '/core/Auth.php',
                 'candidato' => '/core/Candidato.php',
+                'admin'=> '/core/Admin.php',
                 'db' => '/core/db_conn.php',
                 'errorresult' => '/core/error.php',
                 'mysessionhandler' => '/core/sess_handler.php',

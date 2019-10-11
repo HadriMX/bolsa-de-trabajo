@@ -1,214 +1,315 @@
- 
 <app-headertittle></app-headertittle>
 <!-- En esta parte comienza el cuerpo de la pagina -->
-<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: auto;"> 
-      <!-- En esta parte se divide la pantalla en dos partes -->
-        <div class="row" id="contenedor">
-          <!-- Primera parte-->
-            <div class="col-lg-3 border border-dark" style="background-color: rgb(92, 13, 92);" >
-              <div style="margin-left: 20%; margin-block-start: 2%; color:white">
-                  <h6 >Opciones de configuración</h6>
-              </div>
-              <div style="margin-block-start: 5%; margin-left: 1%; width: 100%;">
-                <button  (click)="categorias(4)" id="usuarios" style="width: 100%; background-color: rgb(102, 5, 81); color: white; width: 100%" class="form-control">Ver Solicitudes de Usuarios</button>
-            </div>
-              <div style="margin-block-start: 5%; margin-left: 1%;">
-                  <button id="categoriaboton" (click)="categorias(1)" style="background-color: rgb(102, 5, 81); color: white;" class="form-control">Registro categorias de empresas</button>
-              </div>
-              <div style="margin-block-start: 2%; margin-left: 1%;">
-                 <button  id="areas" (click)="categorias(2)" style=" background-color: rgb(102, 5, 81); color: white;" class="form-control">Registro de area de estudio</button>
-              </div>
-              <div style="margin-block-start: 2%; margin-left: 1%; margin-block-end: 2%;">
-                   <button id="subareas"  (click)="categorias(3)" style="background-color: rgb(102, 5, 81); color: white;" class="form-control">Registro de areas y subareas</button>
-              </div>
-            </div>
-    <!-- Segunda parte en que se divide -->
-      <div class="col-lg-9 " id="contenedor2"  >
-        <div *ngIf="estadoimagen" style="margin-left: 30%; margin-top: 3%; ">
-           <h4>Apartado de configuracion</h4>  
-          <img style="margin-block-start: 5%;" src="../../assets/settings.png" height="55%" width="55%" alt="Generic placeholder image">
-        </div>
-    <!-- En esta parte comienza la configuracion de de las categorias de la empresa --> 
-        <div class="conteiner" >
-            <div *ngIf="estado">
-                <div class="row" style="margin-left: 5%; margin-top: 3%; ; " >
-                    <input [(ngModel)]="nuevaCategoria.nombre_categoria" class="form-control" id="categoria" type="text" style="width: 50%" placeholder="Agregar una categoria"> 
-                    <button class="btn btn-primary" style="margin-left: 2%;" (click)="add_CategoriaEmpresa()">Agregar</button>
-                </div>
-                <div style="margin-left: 5%; margin-top: 1%; ; ">
-                    <h5>Categorias para las empresas</h5>
-                    <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll" >
-                            <table class="table table-striped" >
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Estado</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr *ngFor='let val of datoscategoria; index as i'>
-                                        <td>{{val.nombre_empresa}}</td>
-                                        <img data-toggle="modal" data-target="#datocategoria"  style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                    </div>
-                </div> 
-            </div>  
-        </div>
-        <!-- En esta parte comienza la configuracion de areas de estudio -->
-        <div class="conteiner">
-          <div *ngIf="estado2">
-            <div class="row" style="margin-left: 5%; margin-top: 3%; ; " >
-                <input [(ngModel)]="nuevaArea.nombre_area" class="form-control" id="area" type="text" style="width: 50%" placeholder="Nombre de area de estudio"> 
-                <button class="btn btn-primary" style="margin-left: 2%;" (click)="add_areaEstudio()">Registrar</button>
-            </div>
-            <div style="margin-left: 5%; margin-top: 1%; ; ">
-                <h5>Lista de areas de estudio</h5>
-                <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll" >
-                        <table class="table table-striped" >
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Nombre del area de estudio</th>
-                                    <th scope="col">Estado</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor='let val of datosarea;index as i'>
-                                    <td>{{val.nombre}}</td>
-                                    <img (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
-                                  </tr>
-                                </tbody>
-                              </table>
-                </div>
-                <button class="form-control btn btn-primary" style="width: 45%; margin-block-start: 3%;">Agregar Subarea</button>
-            </div> 
-         </div>
-        </div>
-          <!-- En esta parte comienza la configuracion de areas de estudio y las subareas -->
-          <div class="container-fluid"   >
-            <div *ngIf="estado3"  >
-              <div style="margin-left: 5%; margin-top: 1%;">
-                  <h5>Seleccione el area de estudio</h5>
-                  <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll" >
-                          <table class="table table-striped" >
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">Nombre del area de estudio</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr *ngFor='let val of numero; index as i'>
-                                      <td>{{datosareas[i]}}</td>
-                                      <img (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
-                                    </tr>
-                                  </tbody>
-                                </table>
-                  </div>
-                         <div style="width: 25%; margin-block-start: 3%; margin-left: 60%;">
-                            <button  class="form-control btn btn-primary" data-toggle="modal" data-target="#agregarsubarea" >Agregar Subarea</button>
-                        </div>
-              </div>  
-        </div>
+
+<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: auto;">
+  <!-- En esta parte se divide la pantalla en dos partes -->
+  <div class="row" id="contenedor">
+    <!-- Primera parte-->
+    <div class="col-lg-3 border border-dark" style="background-color: rgb(92, 13, 92);">
+      <div style="margin-left: 20%; margin-block-start: 2%; color:white">
+        <h6>Opciones de configuración</h6>
       </div>
-              <!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
-              <div class="container-fluid" style="overflow: auto;">
-                <div *ngIf="estado4"  >
-                  <div style="margin-left: 1%; margin-top: 1%;">
-                      <h5>Lista de Solicitudes  </h5>
-                      <div *ngFor="let dato of datos; index as i" class="border border-primary border-left-0 border-right-0" style="width: 99%; height:50%; margin-block-start: 3%;" >
-                          <h6 style="font-size: 20px;">Nombre del usuario</h6>
-                          <div class="row">
-                            <div class="col-lg-8 col-sm-8 col-8">
-                                <div class="row">
-                                    <div class="col-lg-6 col-sm-6 col-9" >
-                                      <h6 style="margin-block-start: 2%;">Telefono: </h6>
-                                    </div>
-                                    <div class="col-lg-5 col-sm-6 col-12">
-                                       <h6 style="margin-block-start: 2%;">Correo Electronico</h6> 
-                                    </div>
-                                  </div>
-                                  <div class="row" style="margin-block-start: 1%;">
-                                    <div class="col-lg-6 col-sm-6 col-9">
-                                        <h6>Genero</h6>
-                                    </div>
-                                    <div class="col-lg-5 col-sm-6 col-12">
-                                        <h6>Fecha de nacimiento</h6>
-                                        <button class="form*control btn" style="margin-block-end: 4%;" >Aceptar Solicitud</button>  
-                                    </div>
+      <div style="margin-block-start: 5%; margin-left: 1%; width: 100%;">
+        <button (click)="categorias(3)" id="usuarios"
+          style="width: 100%; background-color: rgb(102, 5, 81); color: white; width: 100%" class="form-control">Ver
+          Solicitudes de Usuarios</button>
+      </div>
+      <div style="margin-block-start: 5%; margin-left: 1%;">
+        <button id="categoriaboton" (click)="categorias(1)" style="background-color: rgb(102, 5, 81); color: white;"
+          class="form-control">Registro categorias de empresas</button>
+      </div>
+      <div style="margin-block-start: 2%; margin-left: 1%;">
+        <button id="areas" (click)="categorias(2)" style=" background-color: rgb(102, 5, 81); color: white;"
+          class="form-control">Registro de area de estudio</button>
+      </div>
+    </div>
+    <!-- Segunda parte en que se divide -->
+    <div class="col-lg-9 " id="contenedor2">
+      <div *ngIf="estadoimagen" style="margin-left: 30%; margin-top: 3%; ">
+        <h4>Apartado de configuracion</h4>
+        <img style="margin-block-start: 5%;" src="../../assets/settings.png" height="55%" width="55%"
+          alt="Generic placeholder image">
+      </div>
+      <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
+      <div class="conteiner">
+        <div *ngIf="estado">
+          <div class="row" style="margin-left: 5%; margin-top: 3%; ; ">
+            <input [(ngModel)]="nuevaCategoria.nombre_categoria" class="form-control" id="categoria" type="text"
+              style="width: 50%" placeholder="Agregar una categoria">
+            <button class="btn btn-primary" style="margin-left: 2%;" (click)="add_CategoriaEmpresa()">Agregar</button>
+          </div>
+          <div style="margin-left: 5%; margin-top: 1%; ; ">
+            <h5>Categorias para las empresas</h5>
+            <div style="margin-right: 10%; margin-top: 1%; ; ">
+              <mat-form-field>
+                <input matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Filtrar">
+              </mat-form-field>
+            </div>
+            <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll">
 
-                            </div>
-                          </div>
-                            <div class="col-lg-4 col-sm-4 col-4 d-none d-sm-block">
-                                <img style="margin-left: 35%;"  src="../../assets/man-user.png" height="75%" width="40%" alt="Generic placeholder image">
-                            </div>                         
-                          </div>
-                      </div>
-          
-                      <div style="height:80px; background-color:transparent;">
+              <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
+                <!-- Columna para id -->
+                <ng-container matColumnDef="id_tipo_empresa">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.id_tipo_empresa}} </td>
+                </ng-container>
 
-                      </div>
-                  </div>  
+                <!-- Columna para nombre de la categoria -->
+                <ng-container matColumnDef="nombre_empresa">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre_empresa}} </td>
+                </ng-container>
+
+                <!-- Columna para estatus -->
+                <ng-container matColumnDef="estatus">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td mat-cell *matCellDef="let element" class="action-link">
+                    <button class="btn btn-primary" data-target="#vermas" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                      Editar
+                    </button>
+
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="ColumnasCategorias"></tr>
+                <tr mat-row *matRowDef="let row; columns: ColumnasCategorias;"></tr>
+              </table>
+
+
+            </div>
+            <div style="margin-right: 10%; margin-top: 1%; ; ">
+              <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
+        </div>
+      </div>
+      <!-- En esta parte comienza la configuracion de areas de estudio -->
+      <div class="conteiner">
+        <div *ngIf="estado2">
+          <div class="row" style="margin-left: 5%; margin-top: 3%; ; ">
+            <input [(ngModel)]="nuevaArea.nombre_area" class="form-control" id="area" type="text" style="width: 50%"
+              placeholder="Nombre de area de estudio">
+            <button class="btn btn-primary" style="margin-left: 2%;" (click)="add_areaEstudio()">Registrar</button>
+          </div>
+          <div style="margin-left: 5%; margin-top: 1%; ; ">
+            <h5>Lista de areas de estudio</h5>
+            <div style="margin-right: 10%; margin-top: 1%; ; ">
+              <mat-form-field>
+                <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
+              </mat-form-field>
+            </div>
+            <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll">
+
+              <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
+                <!-- Columna para id -->
+                <ng-container matColumnDef="id_area_estudio">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
+                  <td mat-cell *matCellDef="let element"> {{element.id_area_estudio}} </td>
+                </ng-container>
+
+                <!-- Columna para nombre del area de esutdio -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+
+                <!-- Columna para estatus -->
+                <ng-container matColumnDef="estatus">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element" class="action-link">
+                      <button class="btn btn-primary" data-target="#areas1" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                        Editar
+                      </button>
+  
+                    </td>
+                  </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="ColumnasAreas"></tr>
+                <tr mat-row *matRowDef="let row; columns: ColumnasAreas;"></tr>
+              </table>
+
+            </div>
+            <div style="margin-right: 10%; margin-top: 1%; ; ">
+              <mat-paginator #PaginatorAreas [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- En esta parte comienza la configuracion de areas de estudio y las subareas -->
+
+      <!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
+      <div class="container-fluid" style="overflow: auto;">
+        <div *ngIf="estado4">
+          <div style="margin-left: 1%; margin-top: 1%;">
+            <h5>Lista de Solicitudes </h5>
+            <div *ngFor="let val of datos_solicitud; index as i"
+              class="border border-primary border-left-0 border-right-0"
+              style="width: 99%; height:50%; margin-block-start: 3%;">
+              <h6 style="font-size: 20px;">Nombre del usuario: {{val.nombre}}</h6>
+              <div class="row">
+                <div class="col-lg-8 col-sm-8 col-8">
+                  <div class="row">
+                    <div class="col-lg-6 col-sm-6 col-9">
+                      <h6 style="margin-block-start: 2%;">Telefono: {{val.telefono}}</h6>
+                    </div>
+                    <div class="col-lg-5 col-sm-6 col-12">
+                      <h6 style="margin-block-start: 2%;">Correo Electronico: {{val.email}}</h6>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-block-start: 1%;">
+                    <div class="col-lg-6 col-sm-6 col-9">
+                      <h6>Genero: {{val.genero}}</h6>
+                    </div>
+                    <div class="col-lg-5 col-sm-6 col-12">
+                      <h6>Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
+                      <button class="form*control btn" style="margin-block-end: 4%;">Aceptar Solicitud</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-4 d-none d-sm-block">
+                  <img style="margin-left: 35%;" src="../../assets/man-user.png" height="75%" width="40%"
+                    alt="Generic placeholder image">
+                </div>
+              </div>
+            </div>
+
+            <div style="height:80px; background-color:transparent;">
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
 <!--===============================================================================================-->
-  <!-- Modal de los datos de los usuarios -->
-  <div class="modal fade" id="datocategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<!-- Modal de los datos de los usuarios -->
+<div class="modal fade" id="datocategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
+        <h5 id="exampleModalLabel" style="color:white;">Deseas Eliminar esta categoria</h5>
+      </div>
+      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
+        <button (click)="eliminar([i])" type="button" class="btn btn-primary" data-dismiss="modal">Si</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--===============================================================================================-->
+<!-- Modal para agregar una subarea del area que se selecciono -->
+
+<div class="modal fade" id="vermas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
+
+        <h5 id="exampleModalLabel" style="margin-left:28%; color:white;">Modificar Categoria</h5>
+      </div>
+      <div class="modal-body">
+        <div style="margin-left: 60px;">
+          <div class="row">
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 20px;">Id:</h6>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 20px;">----------</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">Nombre:</h6>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">-----</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">Estatus</h6>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">-------------------</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div>
+              <button class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal para Areas de estudio -->
+<div class="modal fade" id="areas1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-              <h5 id="exampleModalLabel" style="color:white;">Deseas Eliminar esta categoria</h5>                  
+  
+          <h5 id="exampleModalLabel" style="margin-left:28%; color:white;">Modificar Categoria</h5>
+        </div>
+        <div class="modal-body">
+          <div style="margin-left: 60px;">
+            <div class="row">
+              <div class="col-lg-6 col-sm-6 col-12">
+                <h6 style="margin-block-start: 20px;">Id:</h6>
+              </div>
+              <div class="col-lg-6 col-sm-6 col-12">
+                <h6 style="margin-block-start: 20px;">----------</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-sm-6 col-12">
+                <h6 style="margin-block-start: 30px;">Nombre:</h6>
+              </div>
+              <div class="col-lg-6 col-sm-6 col-12">
+                <h6 style="margin-block-start: 30px;">-----</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-sm-6 col-12">
+                <h6 style="margin-block-start: 30px;">Estatus</h6>
+              </div>
+              <div class="col-lg-6 col-sm-6 col-12">
+                <h6 style="margin-block-start: 30px;">-------------------</h6>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+  
+              </div>
+              <div>
+                <button class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-          <button (click)="eliminar([i])" type="button" class="btn btn-primary" data-dismiss="modal">Si</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>    
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
     </div>
   </div>
-<!--===============================================================================================-->
-  <!-- Modal para agregar una subarea del area que se selecciono -->
-  <div class="modal fade" id="agregarsubarea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-              <h5 id="exampleModalLabel" style="margin-left:40%; color:white;">Agregar Subarea</h5>                  
-        </div>
-        <div class="modal-body">
-           <div style="margin-left: 10%">
-                    <h6 style="margin-left: 26%;">REGISTRO DE SUBAREAS DE ESTUDIO</h6>
--                    <h6>Area: Ejemplo</h6>   
-                  <div class="row">
-                      <input  class="form-control" id="categoria" type="text" style="width: 50%" placeholder="Nombre de area de estudio"> 
-                      <button class="btn btn-primary" style="margin-left: 2%;">Agregar</button>
-                  </div>
-                  <div style="margin-top: 1%; ">
-                      <h5>Lista de areas de estudio</h5>
-                      <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll" >
-                              <table class="table table-striped" >
-                                      <thead>
-                                        <tr>
-                                          <th scope="col">Nombre del area de estudio</th>
-                                          <th scope="col">Estado</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr *ngFor='let val of numero; index as i'>
-                                          <td>{{datosareas[i]}}</td>
-                                          <img (click)="eliminar([i])" style="margin-left: 8%; margin-block-start: 3%;"  class="modal-title" src="../../assets/x-button.png" height="25px" width="25px" alt="Generic placeholder image">
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                      </div>
-                  </div> 
-            </div>  
-           </div>
-        </div>
-        <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>    
-        </div>
-      </div>
-      </div>

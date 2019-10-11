@@ -6,6 +6,7 @@ error_reporting(E_ERROR | E_PARSE);
 // require_once "success.php";
 require_once '../autoload.inc.php';
 
+
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');

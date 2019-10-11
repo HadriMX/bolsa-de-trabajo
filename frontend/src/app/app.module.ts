@@ -20,6 +20,12 @@ import { registerLocaleData } from '@angular/common';
 
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+
+
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+  MatSortModule, MatTableModule } from "@angular/material";
 
 registerLocaleData(localeEsAr);
 
@@ -43,13 +49,24 @@ const routes: Routes = [
     HeadertittleComponent,
     VacantesComponent,
     AdministradorComponent,
-    EditarusuarioComponent
+    EditarusuarioComponent,
+
   ],
   imports: [
     FormsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MaterialModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     RouterModule

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Area, Cat_empresa } from 'src/app/models/admin';
+import { Solicitudes } from 'src/app/models/solicitudes'
 import { ApiResponse } from 'src/app/models/api_response';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -12,6 +13,8 @@ export class AdminService {
   private endpointUrlAreas ='http://localhost/bdt/php/src/admin/get_areas.php';
   //private endpointUrlAreas ='http://localhost/bdt/php/src/admin/get_subareas.php';
   private endpointUrlCategorias ='http://localhost/bdt/php/src/admin/get_categorias.php';
+  private endpointUrlSolicitudes= 'http://localhost/bdt/php/src/admin/get_solicitudes.php';
+  private endpointUrlUpdateCat='http://localhost/bdt/php/src/admin/update_categoria.php';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -34,12 +37,13 @@ export class AdminService {
     return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlCategorias, this.httpOptions);
   }
 
-  // add_subarea(){
-    
-  // }
+  get_solicitudes(): Observable<ApiResponse<Solicitudes[]>> {
+    return this.http.get<ApiResponse<Solicitudes[]>>(this.endpointUrlSolicitudes, this.httpOptions);
+  }
+  
+  update_categorias(categoria:Cat_empresa):Observable<ApiResponse<Cat_empresa>>{
+    return this.http.post<ApiResponse<Cat_empresa>>(this.endpointUrlUpdateCat, categoria ,this.httpOptions);
+  }
 
-  // get_subareas(): Observable<ApiResponse<Area[]>> {
-  //   return this.http.get<ApiResponse<Area[]>>(this.endpointUrlAreas, this.httpOptions);
-  // }
  
 }

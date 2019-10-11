@@ -10,7 +10,18 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-
+/* Structure */
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
 #contenedor {
     width: 100%;
     height: 100%;
@@ -25,4 +36,12 @@ input[type="number"]::-webkit-inner-spin-button {
     color:white;
     background-color:rgb(121, 24, 129);
 
+}
+
+th{
+  color: #ffffff;
+  background-color: rgb(153, 103, 158);
+}
+::ng-deep .mat-sort-header-arrow {
+  color: white;
 }
