@@ -1,21 +1,51 @@
-body {
-    position: fixed; 
-    width:100%;
-    height:100%; 
-    overflow: auto;
+
+#body {
     background-image: url('../../assets/background.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
-  
   }
   .container {
     width:50%; 
-    margin-block-start: 3%;
   }
   @media (min-width:246px) and (max-width:767px) {
     .container {
       width: 100%;
     }
   }
+  .btn2 {
+    margin-block-end: 15%;
+    background-color: rgb(121, 24, 129);
+    border-radius: 20px;
+    color:white;
+    width: 100%;
+    height: 80%;
+  }
+  .btn3 {
+    background-color: rgb(138, 71, 145);
+    border-radius: 20px;
+    color:white;
+    width: 25%;
+  }
+.btn3:hover {
+  background-color: rgb(95, 17, 104);
+}
+.ir-arriba {
+  display: none;
+  padding:16px;
+  background-repeat: no-repeat;
+	background:rgb(121, 24, 129);
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:20px;
+  right:20px;
+  z-index: 1000;
+
+}
+.ir-arriba:hover{
+  background:rgb(67, 8, 71);
+
+}

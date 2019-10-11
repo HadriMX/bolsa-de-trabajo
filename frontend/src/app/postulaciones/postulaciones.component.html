@@ -1,33 +1,42 @@
 <app-headertittle></app-headertittle>
-<body >
-
-  <div class="container " >
-      <h4>Mis postulaciones</h4>
-    <div style="margin-block-start: 2%;" class=" border border-success border-left-0 border-right-0">
-        <div class="row">
-          
-            <div>
-                <div style="margin-block-start: 2%;" class="col-12 col-sm-12 col-md-12">
-                      <div >
-                        <h6>Desarollo de software</h6>
-                        <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
-                        <h6>DESARROLLO EMPRESARIAL</h6>
-                        <div class="row" style="margin-left: 1px;">
-                            <div class="col-md-11">
-                              <h6>Fecha</h6>
-                            </div>     
-                            <div class="col-md-1">
-                               <button style="margin-block-end: 10%;"  class="btn btn-primary" data-toggle="modal" data-target="#vermas">Ver mas</button>
-                           </div>
-                        </div>
-                    </div>
-                  </div>
-            </div>
+<html>
+      <div id="body">
+        <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="../../assets/arrowuo.png" height="15px" width="15px"  alt="Generic placeholder image">
+        </span>
+        <div style="height: 35px; background-color: transparent;">
           </div>
-    </div>
-      
-  </div>
-</body>
+        <div class="container " >
+            <h4>Mis postulaciones</h4>
+          <div *ngFor="let dat of varios; index as i" style="margin-block-start: 2%;" class=" border border-success border-left-0 border-right-0">
+              <div class="row">
+                  <div>
+                      <div style="margin-block-start: 2%;" class="col-12 col-sm-12 col-md-12">
+                            <div >
+                              <h6>Desarollo de software</h6>
+                              <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
+                              <h6>DESARROLLO EMPRESARIAL</h6>
+                              <div class="row" style="margin-left: 1px;">
+                                  <div class="col-lg-8 col-sm-8 col-5">
+                                    <h6 style="margin-block-start:3%;">Fecha</h6>
+                                  </div>     
+                                  <div class="col-lg-4 col-sm-4 col-5" >
+                                     <button  class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                                 </div>
+                              </div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+          </div>   
+           
+          <div style="height: 70px;">
+
+          </div>
+        </div>
+
+        </div>
+  </html>
+
 <!--===============================================================================================-->
   <!-- Modal de los datos de los usuarios -->
   <div class="modal fade" id="vermas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -102,8 +111,8 @@
                </div>
             </div>
             <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>    
-            </div>
+              <button type="button" class="btn3 form-control" data-dismiss="modal">Salir</button>    
+         </div>
           </div>
         </div>
       </div>

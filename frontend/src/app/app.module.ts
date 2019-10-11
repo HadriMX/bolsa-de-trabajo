@@ -16,6 +16,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService as AuthGuard }  from './auth/auth.guard';
 import { LoginGuardService as LoginGuard } from './auth/login.guard';
 import * as $ from 'jquery';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
   ],
   exports: [
     RouterModule

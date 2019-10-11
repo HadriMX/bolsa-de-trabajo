@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
+import * as $ from 'jquery';
 import { Area, Cat_empresa } from 'src/api/models/admin';
 import Swal from 'sweetalert2';
 import { AdminService } from '../admin.service';
@@ -244,4 +245,19 @@ export class AdministradorComponent implements OnInit {
     })
   }
   //------------------------------------------------------------------------------------
+/*   arriba() {
+    $('body, html').animate({
+      scrollTop:'0px'
+    }, 500);
+  }
+
+@HostListener('body:scroll', ['$event']) // for window scroll events
+  onScroll(event) {
+    alert('hola');
+    if ($(window).scrollTop() > 200) {
+      $('.ir-arriba').slideDown(300);
+    } else {
+      $('.ir-arriba').slideUp(300);
+    }
+  }   */
 }

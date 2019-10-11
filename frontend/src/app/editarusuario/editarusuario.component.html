@@ -1,16 +1,14 @@
-<app-headertittle></app-headertittle>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.angularjs.org/1.6.9/angular.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <!--===============================================================================================-->
-  <!--===============================================================================================-->
 
-</head>
 <!-- En esta parte comienza el cuerpo de la pagina -->
+<html>
+    <header>
+            <app-headertittle></app-headertittle>
+
+    </header>
+
 <body >
     <!-- Comienza la division de la pagina en dos contenedores -->
+    <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="../../assets/arrowuo.png" height="15px" width="15px"  alt="Generic placeholder image"></span>
        <div id="contenedor" style="margin-left: 2%; " >                
             <div> 
                 <div class="row" style="margin-block-start: 1%;">
@@ -29,7 +27,7 @@
                                 <div class="col-lg-6 col-sm-6 col-12">
                                     <div class="row" style="margin-block-start: 3%;">
                                             <div class="col-lg-4 col-sm-5 col-12">
-                                                    <h6 >Nombre:</h6>
+                                                    <h6 id="espacioabajo">Nombre:</h6>
                                             </div>
                                             <div class="col-lg-8 col-sm-3 col-6">
                                                     <div>
@@ -39,7 +37,7 @@
                                     </div>
                                     <div class="row" style="margin-block-start: 3%;">
                                             <div class="col-lg-4 col-sm-5 col-12">
-                                                    <h6 >Primer apellido:</h6>
+                                                    <h6 id="espacioabajo">Primer apellido:</h6>
                                             </div>
                                             <div class="col-lg-8 col-sm-3 col-6">
                                                     <div >
@@ -49,7 +47,7 @@
                                     </div>
                                     <div class="row" style="margin-block-start: 3%;">
                                             <div class="col-lg-4 col-sm-5 col-12">
-                                                    <h6 >Segundo apellido:</h6>
+                                                    <h6 id="espacioabajo" >Segundo apellido:</h6>
                                             </div>
                                             <div class="col-lg-8 col-sm-3 col-6">
                                                     <div >
@@ -59,7 +57,7 @@
                                     </div>
                                     <div class="row" style="margin-block-start: 3%;">
                                             <div class="col-lg-4 col-sm-7 col-12">
-                                                    <h6  >Fechad de nacimiento:</h6>
+                                                    <h6 id="espacioabajo" >Fechad de nacimiento:</h6>
                                             </div>
                                             <div class="col-lg-8 col-sm-10 col-12">
                                                     <div    >
@@ -72,7 +70,7 @@
                                 <div class="col-lg-6 col-sm-6 col-12 " >
                                         <div class="row" style="margin-block-start: 3%;">
                                                 <div class="col-lg-4 col-sm-5 col-12">
-                                                        <h6 >Telefono:</h6>
+                                                        <h6 id="espacioabajo">Telefono:</h6>
                                                     </div>
                                                 <div class="col-lg-8 col-sm-3 col-6">
                                                         <div>
@@ -82,7 +80,7 @@
                                         </div>
                                         <div class="row" style="margin-block-start: 3%;">
                                                 <div class="col-lg-4 col-sm-5 col-12">
-                                                        <h6 >Correo electronico:</h6>
+                                                        <h6 id="espacioabajo">Correo electronico:</h6>
                                                     </div>
                                                 <div class="col-lg-8 col-sm-3 col-6">
                                                         <div>
@@ -92,7 +90,7 @@
                                         </div>
                                     <div class="row" style="margin-block-start: 3%;">
                                         <div class="col-lg-4 col-sm-5 col-12">
-                                                <h6 >Genero:</h6>
+                                                <h6 id="espacioabajo">Genero:</h6>
                                         </div>
                                         <div class="col-lg-8 col-sm-4 col-12">
                                              <div >
@@ -109,7 +107,7 @@
                                     <h6 style="margin-block-start: 1%; ">Direccion</h6>
                                     <div class="row" >
                                           <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 1%; " >
-                                              <h6>Estado:</h6>
+                                              <h6 id="espacioabajo">Estado:</h6>
                                           </div>
                                           <div class="col-lg-2 col-sm-2 col-10" style="margin-block-start: 1%; "> 
                                               <select class="form-control" name="select" style="width: 100%;">
@@ -118,13 +116,13 @@
                                               </select>             
                                            </div>
                                            <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 1%; ">
-                                              <h6>Ciudad:</h6>
+                                              <h6 id="espacioabajo">Ciudad:</h6>
                                           </div>
                                           <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; "> 
                                               <input  placeholder="Ingrese la ciudad"  style="width: 100%;" id="input100" class="form-control input100" type="text">
                                           </div>
                                           <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 1%; " >
-                                            <h6>Colonia:</h6>
+                                            <h6 id="espacioabajo">Colonia:</h6>
                                         </div>
                                         <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; "> 
                                             <input  placeholder="Ingrese la colonia"  style="width: 100%;" id="input100" class=" form-control input100" type="text">     
@@ -132,13 +130,13 @@
                                     </div>
                                     <div class="row" style="margin-block-start: 1%;">
                                            <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 1%; ">
-                                              <h6>Calle:</h6>
+                                              <h6 id="espacioabajo">Calle:</h6>
                                           </div>
                                           <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; " > 
                                               <input  placeholder="Ingrese la calle"  style="width: 100%;" id="input100" class="form-control input100" type="text">
                                           </div>
                                           <div class="col-lg-1 col-sm-1 col-12"  style="margin-block-start: 1%; ">
-                                            <h6>CP:</h6>
+                                            <h6 id="espacioabajo">CP:</h6>
                                         </div>
                                         <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; "> 
                                             <input   placeholder="Ingrese el codigo postal"  style="width: 100%;" id="input100" class="form-control input100" type="text">     
@@ -153,7 +151,7 @@
                                 <h6 id="titulo-css">Datos Laborales</h6>
                                 <div class="row" style="margin-left: 35px; margin-block-start: 10px;">
                                     <div class="col-lg-3 col-sm-3 col-7" id="titulo">
-                                        <h6>Grado de estudios:</h6>
+                                        <h6 id="espacioabajo">Grado de estudios:</h6>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-5" style="margin-left: 10px;" > 
                                         <select class="form-control" name="select" style="width:200px;">
@@ -164,7 +162,7 @@
                                 </div>
                                 <div class="row" style="margin-left: 35px; margin-block-start: 1%;">
                                     <div class="col-lg-3 col-sm-3 col-7" id="titulo">
-                                        <h6>Area de estudios:</h6>
+                                        <h6 id="espacioabajo">Area de estudios:</h6>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-5" style="margin-left: 10px;" > 
                                         <select class="form-control" name="select" style="width:200px;">
@@ -175,7 +173,7 @@
                                 </div>
                                 <div class="row" style="margin-left: 35px; margin-block-start: 1%;">
                                     <div class="col-lg-3 col-sm-3 col-7" id="titulo">
-                                        <h6>Subarea de estudios:</h6>
+                                        <h6 id="espacioabajo">Subarea de estudios:</h6>
                                     </div>
                                     <div class="col-lg-3 col-sm-6 col-5" style="margin-left: 10px;" > 
                                         <select class="form-control" name="select" style="width:200px;">
@@ -185,21 +183,24 @@
                                     </div>
                        </div>                
                     </div>
-                    <div class="row" style="margin-block-start: 2%;">
-                            <div class="col-lg-5 col-sm-5 col-0" >
+                    <div class="row" id="reglon" >
+                            <div class="col-lg-5 col-sm-3 col-1" >
 
                             </div>    
-                            <div class="col-lg-3 col-sm-3 col-4"  >
+                            <div class="col-lg-3 col-sm-4 col-5"  >
                                 <button id="boton3" class="form-control">Editar informacion</button>
                             </div>
-                            <div class="col-lg-3 col-sm-3 col-4">
+                            <div class="col-lg-3 col-sm-4 col-5">
                                 <button  id="boton3" class="form-control">Guardar cambios</button>
                             </div>
                     </div>
+                   
                 </div>
+                <div id="espaciovacio" >
+
+                    </div>
             </div>
         </div>
-        <div id="espaciovacio" >
-
-            </div>
+        
 </body>
+</html>
