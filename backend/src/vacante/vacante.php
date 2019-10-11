@@ -2,8 +2,8 @@
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-header("Access-Control-Allow-Methods: GET, OPTIONS");
-header("Allow: GET, OPTIONS");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Allow: POST, OPTIONS");
 header("Content-Type: application/json; charset=utf-8");
 
 require_once '../core/cors.php';
@@ -13,11 +13,11 @@ require_once '../core/session_starter.php';
 
 $post = json_decode(file_get_contents("php://input"));
 
-$titulo = "$post->InputTitulo";
-$ubicacion = "$post->InputUbicacion";
-$idsueldo ="$post->SelectedSalario";
-$idfecha = "$post->SelectedFecha";
-$idarea = "$post->SelectedArea";
+$titulo = $post->InputTitulo;
+$ubicacion = $post->InputUbicacion;
+$idsueldo =$post->SelectedSalario;
+$idfecha = $post->SelectedFecha;
+$idarea = $post->SelectedArea;
 
 $response = getVacantes($titulo,$ubicacion,$idsueldo,$idfecha,$idarea);
 echo json_encode($response);
@@ -84,7 +84,11 @@ function getVacantes($titulo,$ubicacion,$idsueldo,$idfecha,$idarea)
 
     $stmt->execute();
     $nombreResult = $db->readResult($stmt->get_result()); //obtengo el nombre del area mediante el id
-    $nombreArea = $nombreResult[0]["nombre"];
+    if (empty($nombreResult)) {
+        $nombreArea = "";
+    } else {
+        $nombreArea = $nombreResult[0]["nombre"];
+    }
 
     $stmt = $conn->prepare("SELECT * FROM vacantes_activos WHERE ((titulo_vacante LIKE ?) or ?) AND ((entidad_federativa LIKE ?) or ?) AND ((sueldo >= ? AND sueldo <= ?) or ?) AND ((fecha_publicacion >= (NOW() - INTERVAL ? DAY)) or ? ) AND ((area_estudio LIKE ?) or ? )");
     $titulo = "%".$titulo."%";

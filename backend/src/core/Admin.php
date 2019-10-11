@@ -78,7 +78,7 @@ class Admin {
         return new SuccessResult("",$r);
     }
 
-    function get_areas(){
+    public static function get_areas(){
         $db = new Db();
         $conn = $db->getConn();
         
