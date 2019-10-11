@@ -21,18 +21,18 @@ export class MenuComponent implements OnInit {
   areas: Area[];
   
   //ngModels de la busqueda
-  SelectedSalario: string = "0";
-  SelectedFecha: string = "0";
-  SelectedArea: string = "0";
-  InputTitulo: string = "";
-  InputUbicacion: string = "";
+  // SelectedSalario: string = "0";
+  // SelectedFecha: string = "0";
+  // SelectedArea: string = "0";
+  // InputTitulo: string = "";
+  // InputUbicacion: string = "";
 
   @Input() busqueda: Busqueda = {
-    SelectedSalario: this.SelectedArea,
-    SelectedFecha: this.SelectedFecha,
-    SelectedArea: this.SelectedArea,
-    InputTitulo: this.InputTitulo,
-    InputUbicacion: this.InputUbicacion
+    SelectedSalario: "0",
+    SelectedFecha: "0",
+    SelectedArea: "0",
+    InputTitulo: "",
+    InputUbicacion: ""
   }
   
 
@@ -72,32 +72,16 @@ export class MenuComponent implements OnInit {
 
   buscar() {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
-  
-    if (this.InputTitulo.trim() == "") {
-      this.InputTitulo = "0";
-    }
-    if (this.InputUbicacion.trim() == "") {
-      this.InputUbicacion = "0";
-    }
 
-    //llamar funcion de busqueda
-    alert(this.InputTitulo + " " + this.InputUbicacion + " " + this.SelectedSalario + " " + this.SelectedFecha + " " + this.SelectedArea)
-    
-    // this.getVacantes();
-    
-    if (this.InputTitulo == "0") {
-      this.InputTitulo = "";
-    }
-    if (this.InputUbicacion == "0") {
-      this.InputUbicacion = "";
-    }
+    alert(this.busqueda.InputTitulo + " " + this.busqueda.InputUbicacion + " " + this.busqueda.SelectedSalario + " " + this.busqueda.SelectedFecha + " " + this.busqueda.SelectedArea)
+    this.getVacantes();
 
   }
 
   limpiarFiltros(){
-    this.SelectedSalario = "0";
-    this.SelectedFecha = "0";
-    this.SelectedArea = "0";
-    this.buscar();
+    this.busqueda.SelectedSalario = "0";
+    this.busqueda.SelectedFecha = "0";
+    this.busqueda.SelectedArea = "0";
+    
   }
 }
