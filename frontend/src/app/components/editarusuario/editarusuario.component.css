@@ -32,6 +32,9 @@
     background:rgb(77, 16, 83);
   
   }
+  #espacioabajo {
+      margin-block-start: 4%;
+  }
   #boton3{
     border-radius: 25px;
     width: 100%;
@@ -47,11 +50,15 @@
 }
   @media  (max-width: 575px) {
     .laborals {
-        height: 250px;
+        height: 290px;
     }
     .form-control {
         width: 200%;
     }
+    #reglon{
+        margin-block-start: 100%;
+    }
+   
   }
   @media (min-width: 575px) and (max-width: 1000px) {
       .form-control {
@@ -59,6 +66,11 @@
       }
       #espaciovacio {
           height: 300px;
+      }
+  }
+  @media (min-width:320px) and (max-width:420px) {
+      #boton3 {
+          height: 100%;
       }
   }
   body {
@@ -74,5 +86,9 @@
 
   }
   #espaciovacio {
-    height: 220px;
+    height: 100px;
   }
+  #reglon {
+    margin-block-start: 2%;
+  }
+ 

@@ -224,7 +224,7 @@ p{
   border-radius: 25px;
   z-index: -1;
   width: 155%;
-  height: 125%;
+  height: 145%;
   background:rgb(121, 24, 129);
   color:white;
 }
@@ -279,7 +279,7 @@ p{
   align-items: center;
   padding: 0 20px;
   min-width: 244px;
-  height: 50px;
+  height: 70px;
 
   font-size: 16px;
   color: #fff;

@@ -25,7 +25,18 @@ a{
     margin-left: 20px;
 }
 .form-control2 {
-    border-radius: 23px;
+    margin-left: 2%;
+    width: 10%;
+    
+}
+#Ingresar {
+    border-radius: 25px;
+    width: 100%;
+    background-color:rgb(138, 71, 145);
+    color:white;
+}
+#Ingresar:hover{
+background:rgb(77, 16, 83);
 
 }
 #inicio2 {
@@ -65,15 +76,17 @@ a{
     }
    .form-control2 {
        width: 60%;
-        margin-left: 10%;       
+        margin-left: 13%;       
       margin-block-start: 5%;
    } 
+
    }
    
 
 @media (max-width: 360px) {
     .form-control2 {
-        margin-block-start: 15%;
+        margin-block-start: 7%;
+        margin-left: 13%;
     }
     .titulologin {
     margin-block-start: 2%;
