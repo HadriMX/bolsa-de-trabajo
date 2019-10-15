@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
   //getters
   vacantes: Vacante[];
   areas: Area[];
+  infoVacante: Vacante;
   
   //ngModels de la busqueda
   // SelectedSalario: string = "0";
@@ -74,9 +75,13 @@ export class MenuComponent implements OnInit {
   buscar() {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
 
-    alert(this.busqueda.InputTitulo + " " + this.busqueda.InputUbicacion + " " + this.busqueda.SelectedSalario + " " + this.busqueda.SelectedFecha + " " + this.busqueda.SelectedArea)
+    // alert(this.busqueda.InputTitulo + " " + this.busqueda.InputUbicacion + " " + this.busqueda.SelectedSalario + " " + this.busqueda.SelectedFecha + " " + this.busqueda.SelectedArea)
     this.getVacantes();
 
+  }
+
+  mostrarDetalleVacante(Vacante){
+    this.infoVacante = Vacante;
   }
 
   limpiarFiltros(){
