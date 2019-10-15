@@ -69,7 +69,8 @@
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
-                    <button class="btn btn-primary" data-target="#vermas" data-toggle="modal" data-backdrop="static" data-keyboard="false">
+                    <button class="btn btn-primary" data-target="#vermas" data-toggle="modal" data-backdrop="static"
+                      data-keyboard="false">
                       Editar
                     </button>
 
@@ -125,14 +126,15 @@
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
-                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                    <td mat-cell *matCellDef="let element" class="action-link">
-                      <button class="btn btn-primary" data-target="#areas1" data-toggle="modal" data-backdrop="static" data-keyboard="false">
-                        Editar
-                      </button>
-  
-                    </td>
-                  </ng-container>
+                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td mat-cell *matCellDef="let element" class="action-link">
+                    <button class="btn btn-primary" data-target="#areas1" data-toggle="modal" data-backdrop="static"
+                      data-keyboard="false">
+                      Editar
+                    </button>
+
+                  </td>
+                </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="ColumnasAreas"></tr>
                 <tr mat-row *matRowDef="let row; columns: ColumnasAreas;"></tr>
@@ -265,51 +267,51 @@
 
 <!-- Modal para Areas de estudio -->
 <div class="modal fade" id="areas1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-  
-          <h5 id="exampleModalLabel" style="margin-left:28%; color:white;">Modificar Categoria</h5>
-        </div>
-        <div class="modal-body">
-          <div style="margin-left: 60px;">
-            <div class="row">
-              <div class="col-lg-6 col-sm-6 col-12">
-                <h6 style="margin-block-start: 20px;">Id:</h6>
-              </div>
-              <div class="col-lg-6 col-sm-6 col-12">
-                <h6 style="margin-block-start: 20px;">----------</h6>
-              </div>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
+
+        <h5 id="exampleModalLabel" style="margin-left:28%; color:white;">Modificar Categoria</h5>
+      </div>
+      <div class="modal-body">
+        <div style="margin-left: 60px;">
+          <div class="row">
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 20px;">Id:</h6>
             </div>
-            <div class="row">
-              <div class="col-lg-6 col-sm-6 col-12">
-                <h6 style="margin-block-start: 30px;">Nombre:</h6>
-              </div>
-              <div class="col-lg-6 col-sm-6 col-12">
-                <h6 style="margin-block-start: 30px;">-----</h6>
-              </div>
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 20px;">----------</h6>
             </div>
-            <div class="row">
-              <div class="col-lg-6 col-sm-6 col-12">
-                <h6 style="margin-block-start: 30px;">Estatus</h6>
-              </div>
-              <div class="col-lg-6 col-sm-6 col-12">
-                <h6 style="margin-block-start: 30px;">-------------------</h6>
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">Nombre:</h6>
             </div>
-            <div class="row">
-              <div class="col-md-3">
-  
-              </div>
-              <div>
-                <button class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
-              </div>
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">-----</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">Estatus</h6>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-12">
+              <h6 style="margin-block-start: 30px;">-------------------</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div>
+              <button class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
             </div>
           </div>
         </div>
-        <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
+      </div>
+      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
+</div>

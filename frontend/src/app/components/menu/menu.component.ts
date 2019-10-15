@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Vacante} from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
@@ -6,6 +6,7 @@ import { AdminService } from '../../services/admin.service';
 import { FormBuilder, FormGroup, ControlContainer } from '@angular/forms';
 import { Area } from 'src/app/models/admin';
 import { Busqueda } from 'src/app/models/busqueda';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-menu',
@@ -84,4 +85,20 @@ export class MenuComponent implements OnInit {
     this.busqueda.SelectedArea = "0";
     
   }
+
+  arriba() {
+    $('#body, html').animate({
+      scrollTop: '0px'
+    }, 300);
+  }
+
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll(event) {
+
+    if ($(window).scrollTop() > 200) {
+      $('.ir-arriba').slideDown(300);
+    } else {
+      $('.ir-arriba').slideUp(300);
+    }
+  } 
 }

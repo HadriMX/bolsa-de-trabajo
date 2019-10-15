@@ -21,11 +21,12 @@ import { registerLocaleData } from '@angular/common';
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
 
 
-import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-  MatSortModule, MatTableModule } from "@angular/material";
+import {
+  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+  MatSortModule, MatTableModule
+} from "@angular/material";
 
 registerLocaleData(localeEsAr);
 
@@ -58,7 +59,6 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    MaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -78,7 +78,7 @@ const routes: Routes = [
       multi: true
     },
     CookieService,
-    AuthGuard,{ provide: LOCALE_ID, useValue: 'es-Ar' } 
+    AuthGuard, { provide: LOCALE_ID, useValue: 'es-Ar' }
   ],
   bootstrap: [AppComponent]
 })
