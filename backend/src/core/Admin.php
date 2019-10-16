@@ -56,11 +56,22 @@ class Admin {
         return $output;
     }
 
-    public static function get_categorias(){
+    public static function get_categoriasAdmin(){
         $db = new Db();
         $conn = $db->getConn();
         
-        $stmt = $conn->prepare("SELECT  * FROM categorias_activas");
+        $stmt = $conn->prepare("SELECT  * FROM tipos_empresa");
+        
+        $stmt->execute();
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("",$r);
+    }
+
+    public static function get_areasAdmin(){
+        $db = new Db();
+        $conn = $db->getConn();
+        
+        $stmt = $conn->prepare("SELECT  * FROM areas_estudio");
         
         $stmt->execute();
         $r = $db->readResult($stmt->get_result());
