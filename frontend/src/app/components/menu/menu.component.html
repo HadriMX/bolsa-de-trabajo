@@ -1,7 +1,6 @@
 <app-headertittle></app-headertittle>
 <!--inicia del cuerpo de la pagina del menu -->
 <html>
-
 <head>
     <meta charset="UTF-8">
     <TItle>Sitio web responsivo</TItle>
@@ -80,7 +79,7 @@
     </div>
     <div *ngFor="let vacante of vacantes" id="vacantecontenedor">
         <div data-toggle="modal" data-target="#datosvacante" id="vacantesmenu" class="row">
-            <div data-toggle="modal" data-target="#datosvacante" class="col-lg-9 col-sm-9 col-9 ">
+            <div (click)="mostrarinfo(vacante)" data-toggle="modal" data-target="#datosvacante" class="col-lg-9 col-sm-9 col-9 ">
                 <h6 style="color:yellow;">{{vacante.titulo_vacante}}</h6>
             </div>
             <div class="col-lg-3 col-sm-3 col-3">
@@ -112,181 +111,7 @@
 </footer>
 
 </html>
-<!--===============================================================================================-->
-<!-- Modal de los datos de los usuarios -->
-<div class="modal fade" id="datoscompletos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-                <h5 id="exampleModalLabel" class="col-12" style="margin-left:230px; color:white;">Registro de
-                    informacion</h5>
-            </div>
-            <div class="modal-body" style="background-color: rgb(235, 235, 235);">
-                <div style="margin-left:20px;" class="container">
-                    <h6>Mi informacion </h6>
-                    <div class="border border-dark col-sm-12 col-12"
-                        style="width: 730px; height: 410px; margin-top: 5px; background-color: white">
-                        <h6 style="margin-left: 5px;">Datos personales</h6>
-                        <div class="row" style="margin-left: 15px;">
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Nombre:</h6>
-                            </div>
-                            <div class="col-lg-4  col-3" style="margin-left: 12px;">
-                                <input class="form-control input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Telefono:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 12px;">
-                                <input class=" form-control input100" type="number">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 15px;">
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Primer apellido:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px; margin-block-start: 10px;">
-                                <input id="input100" class="input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Correo electronico:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 30px; margin-block-start: 10px">
-                                <input id="input100" class="input100" type="email">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 15px;">
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Segundo apellido:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px; margin-block-start: 10px">
-                                <input id="input100" class="input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Genero:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px;">
-                                <select class="form-control" name="select" style="margin-top: 10px; ">
-                                    <option value="value1" selected>Hombre</option>
-                                    <option value="value2">Mujer</option>
-                                </select>
-                            </div>
-                            <div class="row" style="margin-left: 15px;">
 
-                            </div>
-
-                        </div>
-                        <div class="row" style="margin-left: 15px;">
-                            <div class="col-lg-4 col-2" id="titulo">
-                                <h6>Fechad de nacimiento:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3">
-                                <input class="form-control" style="background-color: thistle;" id="date" type="date">
-                            </div>
-
-                        </div>
-
-                        <h6 style="margin-left: 30px; margin-top: 20px;">Direccion</h6>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Estado:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px;">
-                                <select name="select" style="margin-top: 10px; width:100px;">
-                                    <option value="value1" selected>Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-1 col-1" id="titulo">
-                                <h6>Ciudad:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 30px;">
-                                <input id="input100" class="input100" type="text">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>Colonia:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px;">
-                                <input id="input100" class="input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-1" id="titulo">
-                                <h6>Calle:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 30px;">
-                                <input id="input100" class="input100" type="text">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-1 col-2" id="titulo">
-                                <h6>CP:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px;">
-                                <input id="input100" class="input100" type="number">
-                            </div>
-                        </div>
-                    </div>
-                    <!--Aqui empieza la segunda tabla de llenado de datos-->
-                    <div class="border border-dark col-sm-12 col-12"
-                        style="width:730px; height: 200px; margin-top: 30px; background-color: white;">
-                        <h6 style="margin-left: 5px;">Datos Laborales</h6>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-3 col-6" id="titulo">
-                                <h6>Grado de estudios:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px;">
-                                <select name="select" style="margin-top: 10px; width:100px;">
-                                    <option value="value1" selected>Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-3 col-6" id="titulo">
-                                <h6>Area de estudios:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px;">
-                                <select name="select" style="margin-top: 10px; width:100px;">
-                                    <option value="value1" selected>Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-3 col-6" id="titulo">
-                                <h6>Subarea de estudios:</h6>
-                            </div>
-                            <div class="col-lg-4 col-3" style="margin-left: 10px;">
-                                <select name="select" style="margin-top: 10px; width:100px;">
-                                    <option value="value1" selected>Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-3 col-5" id="titulo">
-                                <h6>Subir Curriculum:</h6>
-                            </div>
-                            <div class="col-lg-4 col-6" id="titulo" style="margin-left: 10px;">
-                                <button style="border-radius: 5px; background-color:dimgray; color: white;"
-                                    class=" border border-dark">Icono - Examinar</button>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Omitir</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-
-            </div>
-        </div>
-    </div>
-</div>
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
 <div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -299,7 +124,7 @@
             </div>
             <div class="modal-body">
                 <div style="margin-left: 60px;">
-                    <h4 style="margin-block-start: 20px; color:blue;">--------</h4>
+                    <h4 style="margin-block-start: 20px; color:blue;">{{infovacante.id_vacante}}</h4>
                     <h6 style="margin-block-start: 30px;">----------</h6>
                     <h6 style="margin-block-start: 30px;">Contratacion:</h6>
                     <h6>----------------</h6>
@@ -317,7 +142,7 @@
 
                         </div>
                         <div>
-                            <button class="btn btn-primary"
+                            <button id="postular"  class="btn btn-primary"
                                 style="margin-block-start: 30px; height:50px; width:200px;">Postularme</button>
 
                         </div>

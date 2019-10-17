@@ -19,6 +19,8 @@ export class MenuComponent implements OnInit {
 
   //getters
   vacantes: Vacante[];
+  infovacante: Vacante;
+  dato: number = 0;
   areas: Area[];
   
   //ngModels de la busqueda
@@ -73,17 +75,17 @@ export class MenuComponent implements OnInit {
 
   buscar() {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
-
-    alert(this.busqueda.InputTitulo + " " + this.busqueda.InputUbicacion + " " + this.busqueda.SelectedSalario + " " + this.busqueda.SelectedFecha + " " + this.busqueda.SelectedArea)
     this.getVacantes();
 
+  }
+  mostrarinfo(vacante) {
+    this.infovacante = vacante;
   }
 
   limpiarFiltros(){
     this.busqueda.SelectedSalario = "0";
     this.busqueda.SelectedFecha = "0";
     this.busqueda.SelectedArea = "0";
-    
   }
 
   arriba() {
@@ -94,11 +96,11 @@ export class MenuComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
-
-    if ($(window).scrollTop() > 200) {
-      $('.ir-arriba').slideDown(300);
-    } else {
-      $('.ir-arriba').slideUp(300);
+    if ($(window).scrollTop() > 200 ) {
+          $('.ir-arriba').slideDown(300); 
+    } else { 
+        this.dato = 0;
+        $('.ir-arriba').slideUp(300);
     }
   } 
 }
