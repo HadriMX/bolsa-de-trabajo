@@ -34,16 +34,27 @@
       <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
       <div class="conteiner">
         <div *ngIf="estado">
-          <div class="row" style="margin-left: 5%; margin-top: 3%; ; ">
-            <input [(ngModel)]="nuevaCategoria.nombre_categoria" class="form-control" id="categoria" type="text"
-              style="width: 50%" placeholder="Agregar una categoria">
-            <button class="btn btn-primary" style="margin-left: 2%;" (click)="add_CategoriaEmpresa()">Agregar</button>
+          <div class="row">
+            <div class="col-lg-5 col-sm-5 col-5">
+              <div style="margin-right: 40%; margin-top: 4%;  margin-left:12%; width: 100%; ">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" type="text"
+                    placeholder="Nombre de la categoria">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-3">
+              <button mat-flat-button
+                style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
+                (click)="add_CategoriaEmpresa()">Registrar</button>
+            </div>
           </div>
           <div style="margin-left: 5%; margin-top: 1%; ; ">
             <h5>Categorias para las empresas</h5>
             <div style="margin-right: 10%; margin-top: 1%; ; ">
               <mat-form-field>
-                <input matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Filtrar" class="form-control">
+                <input matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Filtrar">
               </mat-form-field>
             </div>
             <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll">
@@ -70,10 +81,9 @@
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
-                    <button class="btn btn-primary" data-target="#vermas" data-toggle="modal" data-backdrop="static"
-                      data-keyboard="false" (click)="detalleCategoria(element)">
-                      Editar
-                    </button>
+                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
+                      data-target="#ModificarCAT" data-toggle="modal" data-backdrop="static"
+                      (click)="detalleCategoria(element)">Editar</button>
 
                   </td>
                 </ng-container>
@@ -93,16 +103,25 @@
       </div>
       <!-- En esta parte comienza la configuracion de areas de estudio -->
       <div class="conteiner">
+
         <div *ngIf="estado2">
-          <div style="margin-right: 25%; margin-top: 1%;  margin-left:5%; ">
-            <mat-form-field >
-              <input matInput [(ngModel)]="nuevaArea.nombre" id="area" type="text" style="width: 50%"
-              placeholder="Nombre de area de estudio">
-              <button class="btn btn-primary" style="margin-left:100%;" (click)="add_areaEstudio()">Registrar</button> 
-            </mat-form-field>
-            
-          
+          <div class="row">
+            <div class="col-lg-5 col-sm-5 col-5">
+              <div style="margin-right: 40%; margin-top: 4%;  margin-left:12%; width: 100%; ">
+                <mat-form-field>
+                  <input matInput [(ngModel)]="nuevaArea.nombre" id="area" type="text"
+                    placeholder="Nombre de area de estudio">
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-3">
+              <button mat-flat-button
+                style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
+                (click)="add_areaEstudio()">Registrar</button>
+            </div>
           </div>
+
           <div style="margin-left: 5%; margin-top: 1%; ; ">
             <h5>Lista de areas de estudio</h5>
             <div style="margin-right: 10%; margin-top: 1%; ; ">
@@ -134,10 +153,9 @@
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
-                    <button class="btn btn-primary" data-target="#areas1" data-toggle="modal" data-backdrop="static"
-                      data-keyboard="false" (click)="detalleArea(element)">
-                      Editar
-                    </button>
+                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
+                      data-target="#areas1" data-toggle="modal" data-backdrop="static"
+                      (click)="detalleArea(element)">Editar</button>
 
                   </td>
                 </ng-container>
@@ -221,7 +239,8 @@
 <!--===============================================================================================-->
 
 <!-- Modal para Modificar Categoria de la empresa -->
-<div class="modal fade" id="vermas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModificarCAT" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
@@ -235,7 +254,7 @@
               <h6 style="margin-block-start: 20px;">Id:</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 20px;">{{infoCategoria.id_tipo_empresa}}</h6>
+              <input type="text" style="margin-block-start: 20px;" value="{{infoCategoria.id_tipo_empresa}}" disabled>
             </div>
           </div>
           <div class="row">
@@ -243,7 +262,7 @@
               <h6 style="margin-block-start: 30px;">Nombre:</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">{{infoCategoria.nombre_empresa}}</h6>
+              <input type="text" style="margin-block-start: 30px;" value="{{infoCategoria.nombre_empresa}}">
             </div>
           </div>
           <div class="row">
@@ -251,7 +270,7 @@
               <h6 style="margin-block-start: 30px;">Estatus</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">{{infoCategoria.estatus}}</h6>
+              <input type="text" style="margin-block-start: 30px;" value="{{infoCategoria.estatus}}">
             </div>
           </div>
           <div class="row">
@@ -282,13 +301,13 @@
         <h5 id="exampleModalLabel" style="margin-left:28%; color:white;">Modificar Categoria</h5>
       </div>
       <div class="modal-body">
-        <div style="margin-left: 60px;">
+        <div style="margin-left: 10%;">
           <div class="row">
             <div class="col-lg-6 col-sm-6 col-12">
               <h6 style="margin-block-start: 20px;">Id:</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 20px;">{{infoArea.id_area_estudio}}</h6>
+              <input type="text" style="margin-block-start: 30px" value="{{infoArea.id_area_estudio}}" disabled>
             </div>
           </div>
           <div class="row">
@@ -296,7 +315,7 @@
               <h6 style="margin-block-start: 30px;">Nombre:</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">{{infoArea.nombre}}</h6>
+              <input type="text" style="margin-block-start: 30px" value="{{infoArea.nombre}}">
             </div>
           </div>
           <div class="row">
@@ -304,7 +323,7 @@
               <h6 style="margin-block-start: 30px;">Estatus</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">{{infoArea.estatus}}</h6>
+              <input type="text" style="margin-block-start: 30px; " value="{{infoArea.estatus}}">
             </div>
           </div>
           <div class="row">
