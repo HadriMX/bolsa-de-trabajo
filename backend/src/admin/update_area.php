@@ -11,7 +11,7 @@ header('content-type: application/json; charset=utf-8');
 $post = json_decode(file_get_contents("php://input"));
 
 
-$categoria = (array) $post;
+$areaEstudio = (array) $post;
 
-echo json_encode (Admin::update_categoria($categoria));
+echo json_encode (Admin::update_areaEstudio($areaEstudio));
 ?> 

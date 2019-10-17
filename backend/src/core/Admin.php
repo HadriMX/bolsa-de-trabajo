@@ -39,20 +39,51 @@ class Admin {
         return $output;
     }
 
-    public static function update_categoria(string $estatus){
+    public static function update_categoria( array $categoria){
         $db = new Db();
         $conn = $db->getConn();
-        $insertar = $conn->prepare("REPLACE INTO tipos_empresa (estatus)VALUES (?)");
-        $insertar->bind_param("s",$estatus);
-        $resultado = $insertar->execute();
-        if ($resultado==true) {
-            $output = new SuccessResult("Modificación correcta", true);
+        $stmt = $conn->prepare("REPLACE INTO tipos_empresa (id_tipo_empresa,nombre_empresa,estatus,)VALUES (?,?,?)");
+
+        $id_tipo_empresa= $categoria['id_tipo_empresa'];
+        $nombre_empresa= $categoria['nombre_empresa'];
+        $estatus=$categoria['estatus'];
+
+        $stmt->bind_param("i,s,s",$id_tipo_empresa,$nombre_empresa,$estatus);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $output = new SuccessResult("Update OK", true);
+        } else {
+            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
-        else {
-            $err = new ErrorResult("Error", 401);
-            $output = $err;
+
+        $stmt->close();
+
+        return $output;
+    }
+
+    
+    public static function update_areaEstudio( array $areaEstudio){
+        $db = new Db();
+        $conn = $db->getConn();
+        $stmt = $conn->prepare("REPLACE INTO areas_estudio (id_area_estudio,nombre,estatus,)VALUES (?,?,?)");
+
+        $id_area_estudio=$areaEstudio['id_area_estudio'];
+        $nombre=$areaEstudio['nombre'];
+        $estatus=$areaEstudio['estatus'];
+
+
+        $stmt->bind_param("i,s,s",$id_area_estudio,$nombre,$estatus);
+        $stmt->execute();
+
+       if ($stmt->affected_rows > 0) {
+            $output = new SuccessResult("Update OK", true);
+        } else {
+            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
-        
+
+        $stmt->close();
+
         return $output;
     }
 
