@@ -21,6 +21,7 @@ import { registerLocaleData } from '@angular/common';
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material';
 
 
 import {
@@ -67,6 +68,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatButtonModule,
   ],
   exports: [
     RouterModule

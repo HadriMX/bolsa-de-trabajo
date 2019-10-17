@@ -5,7 +5,7 @@ export class Area {
 }
 
 export class Cat_empresa{
-    id:number;
+    id_tipo_empresa:number;
     nombre_categoria:string;
     estatus:string;
 }
