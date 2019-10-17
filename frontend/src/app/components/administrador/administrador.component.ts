@@ -21,8 +21,10 @@ export class AdministradorComponent implements OnInit {
     nombre:'',
     estatus:''
   }
+
+  
   @Input() nuevaCategoria: Cat_empresa = {
-    id: 0,
+    id_tipo_empresa: 0,
     nombre_categoria: '',
     estatus: ''
   }
@@ -39,6 +41,17 @@ export class AdministradorComponent implements OnInit {
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
   opc: any;
+  infoCategoria: Cat_empresa={
+    id_tipo_empresa:0,
+    nombre_categoria:'',
+    estatus:''
+  }
+
+  infoArea: Area={
+    id_area_estudio:0,
+    nombre:'',
+    estatus:''
+  }
   private paginator: MatPaginator;
   private sort: MatSort;
   public dialog: MatDialog;
@@ -90,8 +103,17 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
+  detalleCategoria(Cat_empresa){
+    this.infoCategoria = Cat_empresa;
+  }
+
+  detalleArea(Area){
+    this.infoArea= Area;
+  }
+
+
   MostrarAreas() {
-    this.adminservice.get_areas()
+    this.adminservice.get_areasAdmin()
       .subscribe((response) => {
         if (response.success) {
           this.datosarea = response.data;
@@ -104,10 +126,8 @@ export class AdministradorComponent implements OnInit {
   }
 
 
-
-
   MostrarCategorias() {
-    this.adminservice.get_categorias()
+    this.adminservice.get_categoriasAdmin()
       .subscribe((response) => {
         if (response.success) {
           this.datoscategoria = response.data;

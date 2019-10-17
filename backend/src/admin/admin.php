@@ -14,7 +14,7 @@ header('content-type: application/json; charset=utf-8');
 
 $post = json_decode(file_get_contents("php://input"));
 
-$area_estudio = "$post->nombre_area";
+$area_estudio = "$post->nombre";
 $categoria="$post->nombre_categoria";
 $estatus="A";
 
