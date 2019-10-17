@@ -13,6 +13,7 @@ class Db {
     public function __construct()
     {
         $this->conn = new mysqli($this->server_name, $this->username, $this->pwd, $this->db_name);
+        $this->conn->set_charset("utf8");
     }
 
     public function getConn()
