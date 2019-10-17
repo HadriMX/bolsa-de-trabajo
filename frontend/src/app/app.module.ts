@@ -15,9 +15,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService as AuthGuard } from './auth/auth.guard';
 import { LoginGuardService as LoginGuard } from './auth/login.guard';
-import localeEsAr from '@angular/common/locales/es-AR';
+import localeEsMx from '@angular/common/locales/es-MX';
 import { registerLocaleData } from '@angular/common';
-
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,7 +28,7 @@ import {
   MatSortModule, MatTableModule
 } from "@angular/material";
 
-registerLocaleData(localeEsAr);
+registerLocaleData(localeEsMx);
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
@@ -80,7 +79,7 @@ const routes: Routes = [
       multi: true
     },
     CookieService,
-    AuthGuard, { provide: LOCALE_ID, useValue: 'es-Ar' }
+    AuthGuard, { provide: LOCALE_ID, useValue: 'es-Mx' }
   ],
   bootstrap: [AppComponent]
 })

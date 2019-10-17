@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, ControlContainer } from '@angular/forms';
 import { Area } from 'src/app/models/admin';
 import { Busqueda } from 'src/app/models/busqueda';
 import * as $ from 'jquery';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'app-menu',
@@ -16,17 +17,14 @@ import * as $ from 'jquery';
 export class MenuComponent implements OnInit {
 
   cursor: boolean = false;
+ 
 
   //getters
-  vacantes: Vacante[];
-  areas: Area[];
+  vacantes: Vacante[] = [];
+  areas: Area[] = [];
+  infoVacante: Vacante = new Vacante();
   
-  //ngModels de la busqueda
-  // SelectedSalario: string = "0";
-  // SelectedFecha: string = "0";
-  // SelectedArea: string = "0";
-  // InputTitulo: string = "";
-  // InputUbicacion: string = "";
+
 
   @Input() busqueda: Busqueda = {
     SelectedSalario: "0",
@@ -37,7 +35,7 @@ export class MenuComponent implements OnInit {
   }
   
 
-  constructor(private vacantesService : VacantesService, private AdminService : AdminService) {}
+  constructor(private vacantesService : VacantesService, private AdminService : AdminService, private currentUserService : CurrentUserService) {}
 
   ngOnInit() {
    this.getVacantes();
@@ -74,9 +72,13 @@ export class MenuComponent implements OnInit {
   buscar() {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
 
-    alert(this.busqueda.InputTitulo + " " + this.busqueda.InputUbicacion + " " + this.busqueda.SelectedSalario + " " + this.busqueda.SelectedFecha + " " + this.busqueda.SelectedArea)
+    // alert(this.busqueda.InputTitulo + " " + this.busqueda.InputUbicacion + " " + this.busqueda.SelectedSalario + " " + this.busqueda.SelectedFecha + " " + this.busqueda.SelectedArea)
     this.getVacantes();
 
+  }
+
+  mostrarDetalleVacante(Vacante){
+    this.infoVacante = Vacante;
   }
 
   limpiarFiltros(){
