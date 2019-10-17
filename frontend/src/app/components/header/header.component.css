@@ -21,8 +21,18 @@ a{
 #contrasena{
     margin-left: 10px;
 }
-.btn{
-    margin-left: 20px;
+#boton1:hover {
+    background:rgb(16, 39, 83);
+  
+  }
+  #boton1 {
+    border-radius: 25px;
+    z-index: -1;
+    width: 80%;
+    height: 145%;
+    background:rgb(142, 36, 168);
+    color:white;
+    border: none;
 }
 .form-control2 {
     margin-left: 2%;
