@@ -40,6 +40,7 @@ table {
 }
 .btn {
     border-radius: 15px;
+    border: none;
     color:white;
     background-color:rgb(121, 24, 129);
 
@@ -56,3 +57,4 @@ th{
     overflow: auto;
 }
   
+
