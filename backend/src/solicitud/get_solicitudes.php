@@ -10,5 +10,4 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('content-type: application/json; charset=utf-8');
 
 $post = json_decode(file_get_contents("php://input"));
-echo json_encode (Admin::get_solicitudes());
-?>
+echo json_encode (Solicitud::get_solicitudes());

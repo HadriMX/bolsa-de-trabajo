@@ -1,15 +1,16 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
-
-
 require_once '../autoload.inc.php';
+
+error_reporting(E_ERROR | E_PARSE);
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Methods: POST');
 header('content-type: application/json; charset=utf-8');
 
 $post = json_decode(file_get_contents("php://input"));
-echo json_encode (Admin::get_areasAdmin());
 
-?>
+$categoria = (array) $post;
+
+echo json_encode (Categoria::update_categoria($categoria));
+?> 

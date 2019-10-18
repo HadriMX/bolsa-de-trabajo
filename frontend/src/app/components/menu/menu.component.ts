@@ -2,9 +2,9 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Vacante} from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
-import { AdminService } from '../../services/admin.service';
+import { AreaService } from '../../services/area.service';
 import { FormBuilder, FormGroup, ControlContainer } from '@angular/forms';
-import { Area } from 'src/app/models/admin';
+import { Area } from 'src/app/models/area';
 import { Busqueda } from 'src/app/models/busqueda';
 import * as $ from 'jquery';
 import { CurrentUserService } from 'src/app/services/current-user.service';
@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit {
   }
   
 
-  constructor(private vacantesService : VacantesService, private AdminService : AdminService, private currentUserService : CurrentUserService) {}
+  constructor(private vacantesService : VacantesService, private AreaService : AreaService, private currentUserService : CurrentUserService) {}
 
   ngOnInit() {
    this.getVacantes();
@@ -56,7 +56,7 @@ export class MenuComponent implements OnInit {
   }
 
   getAreas(){
-    this.AdminService.get_areas()
+    this.AreaService.get_areasAdmin()
     .subscribe((response) => {
       if (response.success)
       {

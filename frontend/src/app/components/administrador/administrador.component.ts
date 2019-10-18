@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
-import { Area, Cat_empresa } from 'src/app/models/admin';
+import { Area } from 'src/app/models/area';
+import { Cat_empresa } from 'src/app/models/categoria'
 import Swal from 'sweetalert2';
-import { AdminService } from '../../services/admin.service';
+import { AreaService } from '../../services/area.service';
+import { CatEmpresaService} from '../../services/cat-empresa.service'
+import { SolicitudService } from '../../services/solicitud.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,6 +19,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
+
   @Input() nuevaArea : Area={
     id_area_estudio:0,
     nombre:'',
@@ -40,6 +44,7 @@ export class AdministradorComponent implements OnInit {
   estadoimagen = true;
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
+  btnModificarCategoria: boolean;
   opc: any;
   infoCategoria: Cat_empresa={
     id_tipo_empresa:0,
@@ -57,8 +62,8 @@ export class AdministradorComponent implements OnInit {
   public dialog: MatDialog;
 
 
-  ColumnasCategorias: string[] = ['id_tipo_empresa', 'nombre_empresa', 'estatus','acciones'];
-  ColumnasAreas: string[] = ['id_area_estudio', 'nombre', 'estatus','acciones'];
+  ColumnasCategorias: string[] = ['nombre_empresa', 'estatus','acciones'];
+  ColumnasAreas: string[] = ['nombre', 'estatus','acciones'];
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
 
@@ -90,9 +95,9 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  constructor(private adminservice: AdminService) { }
+  constructor(private areaService: AreaService, private categoriaService:CatEmpresaService, private solicitudService:SolicitudService) { }
   MostrarSolicitudes() {
-    this.adminservice.get_solicitudes()
+    this.solicitudService.get_solicitudes()
       .subscribe((response) => {
         if (response.success) {
           this.datos_solicitud = response.data;
@@ -113,7 +118,7 @@ export class AdministradorComponent implements OnInit {
 
 
   MostrarAreas() {
-    this.adminservice.get_areasAdmin()
+    this.areaService.get_areasAdmin()
       .subscribe((response) => {
         if (response.success) {
           this.datosarea = response.data;
@@ -127,7 +132,7 @@ export class AdministradorComponent implements OnInit {
 
 
   MostrarCategorias() {
-    this.adminservice.get_categoriasAdmin()
+    this.categoriaService.get_categoriasAdmin()
       .subscribe((response) => {
         if (response.success) {
           this.datoscategoria = response.data;
@@ -151,7 +156,7 @@ export class AdministradorComponent implements OnInit {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarArea = true;
-      this.adminservice.add_area(this.nuevaArea)
+      this.areaService.add_area(this.nuevaArea)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("correcto", response.message, 'success');
@@ -173,7 +178,29 @@ export class AdministradorComponent implements OnInit {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarCategoria = true;
-      this.adminservice.add_categoria(this.nuevaCategoria)
+      this.categoriaService.add_categoria(this.nuevaCategoria)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("Correcto", response.message, 'success')
+            this.datoscategoria.push(nombre);
+            this.MostrarCategorias();
+          }
+          else {
+            Swal.fire("Error", response.message, 'error');
+          }
+          this.btnAgregarCategoria = false;
+          $('#categoria').val('');
+        });
+    }
+  }
+
+  update_categoria(){
+    const nombre = $('#CategoriaMod').val();
+    if (nombre === '') {
+      Swal.fire("No ingreso ningun valor");
+    } else {
+      this.btnModificarCategoria = true;
+      this.categoriaService.update_categoria(this.nuevaCategoria)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
