@@ -26,7 +26,10 @@ li.dropdown {
   }
   
   
-  .dropdown-content a:hover {background-color: #aa2baa}
+  .dropdown-content a:hover {
+    background-color: #aa2baa;
+    color:white;
+  }
   
   .dropdown:hover .dropdown-content {
     display: block;

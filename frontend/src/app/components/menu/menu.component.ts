@@ -99,7 +99,6 @@ export class MenuComponent implements OnInit {
     if ($(window).scrollTop() > 200 ) {
           $('.ir-arriba').slideDown(300); 
     } else { 
-        this.dato = 0;
         $('.ir-arriba').slideUp(300);
     }
   } 

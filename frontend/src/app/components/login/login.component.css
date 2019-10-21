@@ -14,7 +14,9 @@ legend {
 }
 
 
-  
+  #preferencialaboral{
+    margin-left: 2%;
+  }
  
 
   input{
@@ -98,10 +100,11 @@ button:hover {
 .login100-form-title {
   display: block;
   width: 100%;
-  font-size: 39px;
+  font-size: 34px;
   color: #333333;
   line-height: 1.2;
   text-align: left;
+  margin-left: 24%;
 }
 
 
@@ -114,9 +117,8 @@ button:hover {
   position: relative;
   border-bottom: 2px solid #dbdbdb;
   margin-bottom: 15px;
+  margin-left: 1%;
 }
-
-
 #electronico {
   margin-top: 20px;
 }
@@ -223,10 +225,11 @@ p{
 #boton1 {
   border-radius: 25px;
   z-index: -1;
-  width: 155%;
+  width: 100%;
   height: 145%;
   background:rgb(121, 24, 129);
   color:white;
+  margin-left: 50%;
 }
 #boton2:hover{
   background:rgb(77, 16, 83);
@@ -262,6 +265,7 @@ p{
   }
   .login100-form-title {
     font-size: 25px;
+    margin-left: 21%;
   }
   #boton1 {
     width: 100%;
@@ -385,24 +389,37 @@ p{
   background-image: url('/assets/trapiche.jpg');
    width: 100%;
 }
-@media (min-width: 587px) and (max-width:977px) {
+@media (min-width: 587px) and (max-width:983px) {
   .login100-more {
-    height: 300%;
+    height: 350px;
   }
   .align-items-center {
-    height: 300%;
+    height: 100px;
   }
   .justify-content-center {
-    height: 300%;
+    height: 100px;
   }
-  
+  .wrap-login100 {
+    margin-left: 65%;
+    width: 100%;
+  }
+  #boton1 {
+    margin-left: 4%;
+  }
+  .login100-form-title{
+    font-size: 30px;
+    margin-left: 10%;
+    width: 100%;
+  }
 }
-
 
 @media (max-width: 576px) {
   .wrap-login100 {
-    padding-left: 15px;
+    padding-left: 13px;
     padding-right: 15px;
   }
+  #boton1{
+    margin-left: 18%;
+    width: 60%;
+  }
 }
-@media (min-width:)

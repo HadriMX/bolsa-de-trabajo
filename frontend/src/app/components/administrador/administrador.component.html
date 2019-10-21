@@ -6,33 +6,31 @@
   <!-- En esta parte se divide la pantalla en dos partes -->
   <div class="row" id="contenedor">
     <!-- Primera parte-->
-    <div class="col-lg-3 border border-dark" style="background-color: rgb(92, 13, 92);">
-      <div style="margin-left: 20%; margin-block-start: 2%; color:white">
-        <h6>Opciones de configuración</h6>
-      </div>
+    <div  class="col-lg-3 border border-dark" style=" background-color: rgb(92, 13, 92);">
       <div style="margin-block-start: 5%; margin-left: 1%; width: 100%;">
         <button (click)="categorias(3)" id="usuarios"
-          style="width: 100%; background-color: rgb(102, 5, 81); color: white; width: 100%" class="form-control">Ver
-          Solicitudes de Usuarios</button>
+          style="width: 100%; background-color: rgb(102, 5, 81); color: white; width: 100%"
+          class="form-control">Solicitudes</button>
       </div>
       <div style="margin-block-start: 5%; margin-left: 1%;">
         <button id="categoriaboton" (click)="categorias(1)" style="background-color: rgb(102, 5, 81); color: white;"
-          class="form-control">Registro categorias de empresas</button>
+          class="form-control">Categorias de empresas</button>
       </div>
       <div style="margin-block-start: 2%; margin-left: 1%;">
         <button id="areas" (click)="categorias(2)" style=" background-color: rgb(102, 5, 81); color: white;"
-          class="form-control">Registro de area de estudio</button>
+          class="form-control">Area de estudio</button>
       </div>
     </div>
     <!-- Segunda parte en que se divide -->
     <div class="col-lg-9 " id="contenedor2">
       <div *ngIf="estadoimagen" style="margin-left: 30%; margin-top: 3%; ">
-        <h4>Apartado de configuracion</h4>
+        <h4 style="margin-left: 5%;">Apartado de configuracion</h4>
         <img style="margin-block-start: 5%;" src="../../assets/settings.png" height="55%" width="55%"
           alt="Generic placeholder image">
       </div>
       <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
       <div class="conteiner">
+
         <div *ngIf="estado">
           <div class="row">
             <div class="col-lg-5 col-sm-5 col-5">
