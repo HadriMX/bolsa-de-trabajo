@@ -27,6 +27,7 @@ import {
   MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule
 } from "@angular/material";
+import { VerificacionComponent } from './components/verificacion/verificacion.component';
 
 registerLocaleData(localeEsMx);
 
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AuthGuard] },
   { path: 'vacantes', component: VacantesComponent, canActivate: [AuthGuard] },
+  { path: 'verificacion/:codigo', component: VerificacionComponent },
   { path: '**', component: LoginComponent, canActivate: [LoginGuard] }
 ];
 
@@ -51,6 +53,7 @@ const routes: Routes = [
     VacantesComponent,
     AdministradorComponent,
     EditarusuarioComponent,
+    VerificacionComponent,
 
   ],
   imports: [
