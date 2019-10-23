@@ -11,6 +11,8 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Usuario } from 'src/app/models/usuario';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import * as _ from 'underscore';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -27,7 +29,6 @@ export class MenuComponent implements OnInit {
   pager: any = {};
   // paged items
   pagedItems: any[];
-
 
   cursor: boolean = false;
   ubicacionCorrecta: boolean = false;
@@ -50,7 +51,7 @@ export class MenuComponent implements OnInit {
     InputUbicacion: "",
   }
 
-  constructor(private vacantesService: VacantesService, private AdminService: AdminService, private currentUserService: CurrentUserService, private PaginacionService: PaginacionService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private vacantesService: VacantesService, private AdminService: AdminService, private currentUserService: CurrentUserService, private PaginacionService: PaginacionService) { }
 
   ngOnInit() {
     this.getVacantes();
@@ -72,9 +73,21 @@ export class MenuComponent implements OnInit {
     this.vacantesService.getVacantes(this.busqueda)
       .subscribe((response) => {
         if (response.success) {
-          this.vacantes = response.data;
-          this.allItems = response.data;
-          this.setPage(1);
+          if(response.data.length >= 1 ){
+            this.vacantes = response.data;
+            this.allItems = response.data;
+            //setear pagina leyendo url
+            this.route.queryParams.subscribe(params => { //toma variable del url
+              if(params['pagina'] != null || params['pagina'] >= 0){
+                this.setPage(params['pagina']);
+              }else{
+                this.setPage(1);
+              }
+            });
+          }else{
+            Swal.fire("Error", 'No hay elementos que conincidan con tu busqueda: \n"' + this.busqueda.InputTitulo + '" \n', 'error');
+            this.busqueda.InputTitulo = ""
+          }
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -83,16 +96,29 @@ export class MenuComponent implements OnInit {
   }
 
   setPage(page: number) {
-    if (page < 1 || page > this.pager.totalPages) {
+    if (page < 1 ) {
+      this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
+      return;
+    }else if(page > this.pager.totalPages){
+      this.router.navigate(['/menu'], { queryParams: { pagina: this.pager.totalPages } });
       return;
     }
-    // get pager object from service
-    this.pager = this.PaginacionService.getPager(this.allItems.length, page);
 
+    // get pager object from service
+    this.pager = this.PaginacionService.getPager(this.allItems.length, page, 1);
+    
+    //setear pagina actual en el url
+    if(this.pager.currentPage >= this.pager.totalPages + 1){ //si se sale del limite
+      this.router.navigate(['/menu'], { queryParams: { pagina: this.pager.totalPages } });
+    }else if(this.pager.currentPage >= 1 || this.pager.currentPage <= this.pager.totalPages){//si se encuentra en el limite
+      this.router.navigate(['/menu'], { queryParams: { pagina: this.pager.currentPage } });
+    }else{
+      this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
+    }
+  
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
-
 
   getAreas() {
     this.AdminService.get_areas()
