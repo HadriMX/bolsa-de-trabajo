@@ -53,7 +53,7 @@ final class AuthTest extends TestCase
 
     public function testValidarPasswordIncorrectoQueNoUsaCaracterEspecial()
     {
-        $actual = Auth::validate_password("qwerty12345");
+        $actual = Auth::validate_password("1234abcd");
         $this->assertEquals(0, $actual);
     }
 
@@ -69,21 +69,21 @@ final class AuthTest extends TestCase
         $this->assertEquals(1, $actual);
     }
 
-    // public function testRegistrarUsuarioValido()
-    // {
-    //     $usuario = array(
-    //         'email' => 'chuga@gmail.com',
-    //         'password' => '1',
-    //         'id_tipo_usuario' => 1,
-    //     );
+    public function testRegistrarUsuarioValido()
+    {
+        $usuario = array(
+            'email' => 'alvaro@gmail.com',
+            'password' => '!1234abcd',
+            'id_tipo_usuario' => 1,
+        );
 
-    //     $actual = Auth::register($usuario);
+        $actual = Auth::register($usuario);
 
-    //     $this->assertInstanceOf(
-    //         SuccessResult::class,
-    //         $actual
-    //     );
-    // }
+        $this->assertInstanceOf(
+            SuccessResult::class,
+            $actual
+        );
+    }
 
     public function testVerificacionDeEmailConCodigoIncorrecto()
     {
@@ -97,12 +97,12 @@ final class AuthTest extends TestCase
         $this->assertEquals(4000, $actual->code);
     }
 
-    public function testVerificarEmail()
-    {
-        $actual = Auth::verify_email("17f46354263d7c184e83073725a7dfe6");
-        $this->assertInstanceOf(
-            SuccessResult::class,
-            $actual
-        );
-    }
+    // public function testVerificarEmail()
+    // {
+    //     $actual = Auth::verify_email("17f46354263d7c184e83073725a7dfe6");
+    //     $this->assertInstanceOf(
+    //         SuccessResult::class,
+    //         $actual
+    //     );
+    // }
 }

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { RouterModule, Routes, Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PostulacionesComponent } from './components/postulaciones/postulaciones.component';
 import { HeadertittleComponent } from './components/headertittle/headertittle.component';
 import { VacantesComponent } from './components/vacantes/vacantes.component';
@@ -20,9 +20,7 @@ import { registerLocaleData } from '@angular/common';
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material';
-
-
+import { MatButtonModule } from '@angular/material';
 import {
   MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule
@@ -39,7 +37,7 @@ const routes: Routes = [
   { path: 'administracion', component: AdministradorComponent, canActivate: [AuthGuard] },
   { path: 'vacantes', component: VacantesComponent, canActivate: [AuthGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
-  { path: '**', component: LoginComponent, canActivate: [LoginGuard] }
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
@@ -81,8 +79,12 @@ const routes: Routes = [
       useClass: AuthInterceptor,
       multi: true
     },
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-Mx'
+    },
     CookieService,
-    AuthGuard, { provide: LOCALE_ID, useValue: 'es-Mx' }
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

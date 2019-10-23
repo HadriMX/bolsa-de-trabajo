@@ -54,9 +54,9 @@ class Auth
         $codigoConfirmacion = md5(random_bytes(32));
         $idTipoUsuario = $usuario['id_tipo_usuario'];
 
-        if ($usuario['id_tipo_usuario'] == 1) { // el id de tipo usuario Candidato es 1
+        if ($usuario['id_tipo_usuario'] == 1) { // el id de Candidato es 1, id de Empresa es 2
             $estatus = "N";
-        } else {
+        } elseif ($usuario['id_tipo_usuario'] == 2) {
             $estatus = "A";
         }
 
@@ -404,7 +404,7 @@ class Auth
 
         $stmt->bind_param('s', $codigo);
         $stmt->execute();
-        
+
         if ($stmt->affected_rows > 0) {
             $output = new SuccessResult("Dirección email confirmada correctamente.", true);
         } else {

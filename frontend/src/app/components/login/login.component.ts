@@ -21,21 +21,20 @@ export class LoginComponent implements OnInit {
 
   btnCrearClicked: boolean;
 
-  constructor(private registroservice: RegistroService) { }
+  constructor(private registroService: RegistroService) { }
 
   ngOnInit() {
   }
-  
+
   crear() {
     this.btnCrearClicked = true;
-
-    this.registroservice.registrar(this.nuevoUsuario)
+    
+    this.registroService.registrar(this.nuevoUsuario)
       .subscribe((response) => {
-        if (response.success)
-        {
-          Swal.fire("correcto", response.message, 'success');
-          $("#input100").val('');
-          $("#input101").val('');
+        if (response.success) {
+          Swal.fire("Cuenta creada", "Comprueba tu bandeja de entrada para verificar tu correo electrónico y continuar con el registro.", 'success');
+          this.nuevoUsuario.email = '';
+          this.nuevoUsuario.password = '';
         }
         else {
           Swal.fire("Error", response.message, 'error');
