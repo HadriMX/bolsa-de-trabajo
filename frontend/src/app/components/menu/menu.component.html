@@ -114,7 +114,7 @@
         </div>
     </div>
     <div style="margin-left: 10%; margin-block-start:4%;">
-        <h6 style="color:black;">{{vacantes.length}} ofertas de empleo</h6>
+        <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
     </div>
 
     <!-- EMPIEZAN VACANTES -->
@@ -143,28 +143,17 @@
     </div>
     <!-- TERMINA VACANTES -->
 
-
     <!-- paginacion -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link" (click)="setUrl(1)">Primera</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link" (click)="setUrl(pager.currentPage - 1)">Anterior</a></li>
+                <li class="page-item active" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage == page}"><a class="page-link" (click)="setUrl(page)">{{page}}</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link" (click)="setUrl(+pager.currentPage + 1)">Siguiente</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link" (click)="setUrl(pager.totalPages)">Ultima</a></li>
+        </ul> 
+    </nav>
 
-    <div class="container text-center">
-        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-            <li [ngClass]="{disabled:pager.currentPage === 1}">
-                <button class="form-control" (click)="setPage(1)">Primera</button>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === 1}">
-                <button class="form-control" (click)="setPage(pager.currentPage - 1)">Anterior</button>
-            </li>
-            <li class="page-item" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                <button class="page-item" id="pagina{{page}}btn" (click)="setPage(page)">{{page}}</button>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                <button class="form-control" (click)="setPage(+pager.currentPage + 1)">Siguiente</button>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                <button class="form-control" (click)="setPage(pager.totalPages)">Ultima</button>
-            </li>
-        </ul>
-    </div>
 
     <div style="height: 30px">
         <!-- SEPARADOR ENTRE FOOTER Y ULTIMO ELEMENTO -->

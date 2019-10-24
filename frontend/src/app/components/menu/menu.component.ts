@@ -39,7 +39,7 @@ export class MenuComponent implements OnInit {
     "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"];
 
   //getters
-  vacantes: Vacante[] = [];
+  //vacantes: Vacante[] = [];
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
 
@@ -74,7 +74,7 @@ export class MenuComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           if(response.data.length >= 1 ){
-            this.vacantes = response.data;
+            // this.vacantes = response.data;
             this.allItems = response.data;
             //setear pagina leyendo url
             this.route.queryParams.subscribe(params => { //toma variable del url
@@ -95,6 +95,10 @@ export class MenuComponent implements OnInit {
       });
   }
 
+  setUrl(page: number){
+      this.router.navigate(['/menu'], { queryParams: { pagina: page } });
+  }
+
   setPage(page: number) {
     if (page < 1 ) {
       this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
@@ -107,7 +111,7 @@ export class MenuComponent implements OnInit {
     // get pager object from service
     this.pager = this.PaginacionService.getPager(this.allItems.length, page, 1);
     
-    //setear pagina actual en el url
+    // setear pagina actual en el url
     if(this.pager.currentPage >= this.pager.totalPages + 1){ //si se sale del limite
       this.router.navigate(['/menu'], { queryParams: { pagina: this.pager.totalPages } });
     }else if(this.pager.currentPage >= 1 || this.pager.currentPage <= this.pager.totalPages){//si se encuentra en el limite
@@ -115,9 +119,9 @@ export class MenuComponent implements OnInit {
     }else{
       this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
     }
-  
     // get current page of items
     this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.pager.currentPage = this.pager.currentPage;
   }
 
   getAreas() {
@@ -125,7 +129,6 @@ export class MenuComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           this.areas = response.data;
-          console.log(this.areas);
         }
         else {
           Swal.fire("Error", response.message, 'error');
