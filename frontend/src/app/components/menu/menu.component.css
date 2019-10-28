@@ -7,6 +7,7 @@ li.dropdown {
 }
 .drop-down-options-style {
    margin-left: 2px;   
+   
 }
 .drop-down-options-style select{
  
@@ -26,6 +27,9 @@ li.dropdown {
   border-left-color: transparent;
   border-left-width: 0px;
   
+}
+.pagination{
+  width: 100%;
 }
 input {
     margin-inline-end: 10px;
@@ -151,6 +155,7 @@ a{
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
+  
 }
 #sticky-footer {
   width: 100%; 
@@ -292,6 +297,7 @@ html {
     width:100%; 
     margin-block-start: 3%; 
     margin-top:1%;
+    font-size: 13px;;
   }
   #limpiar {
     margin-left: 17%;
@@ -302,6 +308,7 @@ html {
   .drop-down-options-style {
     margin-block-start: 1%;
   }
+
 }
 @media (max-width:320px) {
   .main {
@@ -361,4 +368,14 @@ html {
   cursor: pointer;
   background-color: rgb(157, 26, 184);
   color: white;
+}
+@media(max-width:619px) and (min-width:479px) {
+  .pagination {
+    margin-left: 15%;
+  }
+}
+@media(max-width:478px) and (min-width:320px) {
+  .pagination {
+    margin-left: 38%;
+  }
 }

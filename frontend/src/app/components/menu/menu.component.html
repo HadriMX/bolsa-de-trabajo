@@ -77,7 +77,7 @@
         <div class="container">
             <div class="row" id="busquedaavanzada">
                 <div class="drop-down-options-style col-lg-2 col-5 col-sm-3">
-                    <select id="drop-down-options" class="form-control" name="select"
+                    <select id="drop-down-options" class="form-control dropdown-toggle" name="select"
                         [(ngModel)]="busqueda.SelectedSalario">
                         <option value="0">Sueldos</option>
                         <option value="1">$0 - $5,000 MXN</option>
@@ -147,22 +147,24 @@
     <!-- TERMINA VACANTES -->
 
     <!-- paginacion -->
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link" (click)="setUrl(1)">Primera</a></li>
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link" (click)="setUrl(pager.currentPage - 1)">Anterior</a></li>
-                <li class="page-item active" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage == page}"><a class="page-link" (click)="setUrl(page)">{{page}}</a></li>
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link" (click)="setUrl(+pager.currentPage + 1)">Siguiente</a></li>
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link" (click)="setUrl(pager.totalPages)">Ultima</a></li>
-        </ul> 
+    <nav aria-label="Page navigation example" class="table-responsive mb-8">
+        <ul class="pagination justify-content-center pagination-sm">
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link"
+                        (click)="setUrl(1)">Primera</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link"
+                        (click)="setUrl(pager.currentPage - 1)">Anterior</a></li>
+                <li class="page-item active" *ngFor="let page of pager.pages"
+                    [ngClass]="{active:pager.currentPage == page}"><a class="page-link"
+                        (click)="setUrl(page)">{{page}}</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link"
+                        (click)="setUrl(+pager.currentPage + 1)">Siguiente</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link"
+                        (click)="setUrl(pager.totalPages)">Ultima</a></li>
+        </ul>
     </nav>
-
-
     <div style="height: 30px">
         <!-- SEPARADOR ENTRE FOOTER Y ULTIMO ELEMENTO -->
     </div>
-
-
 </div>
 <footer id="sticky-footer" class="static-bottom">
 

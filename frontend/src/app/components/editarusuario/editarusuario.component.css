@@ -72,6 +72,30 @@
       #boton3 {
           height: 100%;
       }
+    
+  }
+   @media (min-width:320px) and (max-width:564px) {
+      #espaciovacio{
+          margin-block-start: 600px;
+      }
+      #boton3{
+          width: 160px;
+          margin-left: 8%;
+      }
+      .segundoboton{
+          margin-left: 8%;
+      }
+  } 
+  @media (max-width:356px) {
+      #espaciovacio{
+        margin-block-start: 650px;
+      }
+      #boton3{
+          margin-left:0;
+      }
+      .segundoboton{
+        margin-left: 10%;
+    }
   }
   body {
     position: fixed; 
@@ -91,4 +115,3 @@
   #reglon {
     margin-block-start: 2%;
   }
- 
