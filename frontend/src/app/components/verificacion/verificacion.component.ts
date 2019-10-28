@@ -10,7 +10,7 @@ import { VerificacionEmailService } from 'src/app/services/verificacion-email.se
 export class VerificacionComponent implements OnInit {
 
   resultado: number = 0;
-  loaning :boolean;
+  loaning: boolean;
 
   constructor(private route: ActivatedRoute,
     private verificacionEmailService: VerificacionEmailService) { }
@@ -30,7 +30,7 @@ export class VerificacionComponent implements OnInit {
         this.resultado = 3;
         this.loaning = false;
       }
-    }); 
+    });
   }
 
 }

@@ -56,12 +56,6 @@
             <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll">
 
               <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
-                <!-- Columna para id -->
-                <ng-container matColumnDef="id_tipo_empresa">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id_tipo_empresa}} </td>
-                </ng-container>
-
                 <!-- Columna para nombre de la categoria -->
                 <ng-container matColumnDef="nombre_empresa">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
@@ -128,12 +122,6 @@
             <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll">
 
               <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
-                <!-- Columna para id -->
-                <ng-container matColumnDef="id_area_estudio">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.id_area_estudio}} </td>
-                </ng-container>
-
                 <!-- Columna para nombre del area de esutdio -->
                 <ng-container matColumnDef="nombre">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
@@ -266,7 +254,7 @@
               <h6 style="margin-block-start: 30px;">Estatus</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <input type="text" style="margin-block-start: 30px;" value="{{infoCategoria.estatus}}">
+              <input   type="text" id="CategoriaMod" style="margin-block-start: 30px;" value="{{infoCategoria.estatus}}">
             </div>
           </div>
           <div class="row">
@@ -274,7 +262,7 @@
 
             </div>
             <div>
-              <button class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
+              <button (click)="update_categoria()" class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
             </div>
           </div>
         </div>

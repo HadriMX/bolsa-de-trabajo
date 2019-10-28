@@ -9,8 +9,10 @@ spl_autoload_register(
             $classes = array(
                 'admin' => '/core/Admin.php',
                 'auth' => '/core/Auth.php',
+                'area' => '/core/Area.php',
+                'categoria' => '/core/Categoria.php',
                 'candidato' => '/core/Candidato.php',
-                'admin'=> '/core/Admin.php',
+                'solicitud' => '/core/Solicitud.php',
                 'db' => '/core/db_conn.php',
                 'errorresult' => '/core/error.php',
                 'mysessionhandler' => '/core/sess_handler.php',

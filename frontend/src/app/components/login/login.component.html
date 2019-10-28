@@ -74,17 +74,11 @@
           <div class="row">
             <div class="col-lg-10">
               <div id="preferencialaboral">
-                <div class="row">
-                  <div class="col-lg-7 col-sm-8 col-12">
-                      <h6>Seleccione el tipo de usuario:</h6>
-                  </div>
-                  <div class="col-lg-5 col-sm-4 col-4" >
-                      <select [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select" style=" width:200px;">
-                          <option value="1" selected>Candidato</option>
-                          <option value="2">Empresa</option>
-                        </select>
-                  </div>
-                </div>
+                <h6>Seleccione el tipo de usuario:</h6>
+                <select [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select" style="margin-top: 10px; width:200px;">
+                  <option value="1" selected>Aspirante</option>
+                  <option value="2">Empresa</option>
+                </select>
               </div>
             </div>
             <div class="col-lg-6">
