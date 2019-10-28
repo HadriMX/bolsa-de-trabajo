@@ -10,25 +10,25 @@ import { VerificacionEmailService } from 'src/app/services/verificacion-email.se
 export class VerificacionComponent implements OnInit {
 
   resultado: number = 0;
-  loading: boolean;
+  loaning: boolean;
 
   constructor(private route: ActivatedRoute,
     private verificacionEmailService: VerificacionEmailService) { }
 
   ngOnInit() {
-    this.loading = true;
+    this.loaning = true;
     var codigoConfirmacion = this.route.snapshot.params.codigo;
 
     this.verificacionEmailService.verificar(codigoConfirmacion).then(response => {
       if (response.success) {
         this.resultado = 1;
-        this.loading = false;
+        this.loaning = false;
       } else if (response.code == 4000) {
         this.resultado = 2;
-        this.loading = false;
+        this.loaning = false;
       } else if (response.code == 404) {
         this.resultado = 3;
-        this.loading = false;
+        this.loaning = false;
       }
     });
   }
