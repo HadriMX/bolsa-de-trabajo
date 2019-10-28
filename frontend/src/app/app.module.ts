@@ -86,6 +86,10 @@ const routes: Routes = [
       provide: LOCALE_ID,
       useValue: 'es-Mx'
     },
+    {
+      provide: LOCALE_ID,
+      useValue: 'es-Mx'
+    },
     CookieService,
     PaginacionService,
     AuthGuard
