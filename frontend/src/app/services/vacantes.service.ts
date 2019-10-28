@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Busqueda } from '../models/busqueda';
 import { CurrentUserService } from './current-user.service';
 import { HttpOptionsService } from './http-options.service';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'

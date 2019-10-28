@@ -11,9 +11,10 @@
     <meta name="viewport"
         content="width-device-width, user-scalable=no, initial-scale=1.0, maxium-scale=1.0, minium-scale=1.0">
 </head>
+
 <div id="body">
-    <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="/assets/arrowuo.png" height="15px"
-            width="15px" alt="Generic placeholder image">
+    <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="/assets/arrowuo.png" height="15px" width="15px"
+            alt="Generic placeholder image">
     </span>
 
     <div class="border border-dark main">
@@ -26,7 +27,44 @@
                 </div>
                 <div id="ubicacionspace" class="col-lg-3 col-sm-5 col-10">
                     <h6 id="titulo2" style="color:white;">Ubicación</h6>
-                    <input type="text" class="form-control" placeholder="Estado" [(ngModel)]="busqueda.InputUbicacion">
+                    <input class="form-control" placeholder="Estado" [(ngModel)]="busqueda.InputUbicacion"
+                        list="browsers">
+
+                    <datalist id="browsers">
+                        <option value="Aguascalientes"></option>
+                        <option value="Baja California">
+                        <option value="Baja California Sur">
+                        <option value="Campeche">
+                        <option value="Chiapas">
+                        <option value="Chihuahua">
+                        <option value="Ciudad de México">
+                        <option value="Coahuila">
+                        <option value="Colima">
+                        <option value="Durango">
+                        <option value="Guanajuato">
+                        <option value="Guerrero">
+                        <option value="Hidalgo">
+                        <option value="Jalisco">
+                        <option value="México">
+                        <option value="Michoacán">
+                        <option value="Morelos">
+                        <option value="Nayarit">
+                        <option value="Nuevo León">
+                        <option value="Oaxaca">
+                        <option value="Puebla">
+                        <option value="Querétaro">
+                        <option value="Quintana Roo">
+                        <option value="San Luis Potosí">
+                        <option value="Sinaloa">
+                        <option value="Sonora">
+                        <option value="Tabasco">
+                        <option value="Tamaulipas">
+                        <option value="Tlaxcala">
+                        <option value="Veracruz">
+                        <option value="Yucatán">
+                        <option value="Zacatecas">
+                    </datalist>
+
                 </div>
                 <div id="espaciobuscar" class=" col-lg-3 col-sm-5 col-7">
                     <button (click)="buscar()" class="Buscarspace btn btn-success">
@@ -76,34 +114,45 @@
         </div>
     </div>
     <div style="margin-left: 10%; margin-block-start:4%;">
-        <h6 style="color:black;">{{vacantes.length}} ofertas de empleo</h6>
+        <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
     </div>
 
     <!-- EMPIEZAN VACANTES -->
-    <div *ngFor="let vacante of vacantes; index as i" id="vacantecontenedor">
-        <div (click)="mostrarDetalleVacante(vacante)" data-toggle="modal" data-target="#datosvacante">
-        <div id="vacantesmenu" class="row">
-            <div class="col-lg-9 col-sm-9 col-9 ">
-                <h6 style="color:yellow;">{{vacante.titulo_vacante}}</h6>
+    <!-- items que estan siendo paginados -->
+    <div *ngFor="let item of pagedItems" id="vacantecontenedor">
+        <div (click)="mostrarDetalleVacante(item)" data-toggle="modal" data-target="#datosvacante">
+            <div id="vacantesmenu" class="row">
+                <div class="col-lg-9 col-sm-9 col-9 ">
+                    <h6 style="color:yellow;">{{item.titulo_vacante}}{{item.id_vacante}}</h6>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-3">
+                    <h6 style="color:white;">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                </div>
+                <div class="col-lg-9">
+                    <h6 style="color: white;">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)</h6>
+                </div>
+                <div class="col-lg-9">
+                    <h6 style="color:white;">{{item.entidad_federativa}}</h6>
+                </div>
+                <div class="col-lg-3">
+                </div>
             </div>
-            <div class="col-lg-3 col-sm-3 col-3">
-                <h6 style="color:white;">{{vacante.fecha_publicacion | date: 'longDate'}}</h6>
-            </div>
-            <div class="col-lg-9">
-                <h6 style="color: white;">{{vacante.nombre_empresa}} ({{vacante.sueldo | currency:'MXN'}} MXN)</h6>
-            </div>
-            <div class="col-lg-9">
-                <h6 style="color:white;">{{vacante.entidad_federativa}}</h6>
-            </div>
-            <div class="col-lg-3">
-            </div>
-        </div>
-        <h6 data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">
-            {{vacante.descripcion_puesto | slice:0:190}}...</h6>
+            <h6 data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">
+                {{item.descripcion_puesto | slice:0:190}}...</h6>
         </div>
     </div>
     <!-- TERMINA VACANTES -->
 
+    <!-- paginacion -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link" (click)="setUrl(1)">Primera</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link" (click)="setUrl(pager.currentPage - 1)">Anterior</a></li>
+                <li class="page-item active" *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage == page}"><a class="page-link" (click)="setUrl(page)">{{page}}</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link" (click)="setUrl(+pager.currentPage + 1)">Siguiente</a></li>
+                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link" (click)="setUrl(pager.totalPages)">Ultima</a></li>
+        </ul> 
+    </nav>
 
 
     <div style="height: 30px">
@@ -113,6 +162,7 @@
 
 </div>
 <footer id="sticky-footer" class="static-bottom">
+
     <div class="container text-center">
         <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
     </div>
@@ -131,8 +181,10 @@
             </div>
             <div class="modal-body">
                 <div style="margin-left: 60px;">
-                    <h4 style="margin-block-start: 20px; color:blue; font-size: 20px;">{{infoVacante.nombre_empresa}}</h4>
-                    <h6 style="margin-block-start: 30px;">{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h6>
+                    <h4 style="margin-block-start: 20px; color:blue; font-size: 20px;">{{infoVacante.nombre_empresa}}
+                    </h4>
+                    <h6 style="margin-block-start: 30px;">{{infoVacante.titulo_vacante}}
+                        ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h6>
                     <h6 style="margin-block-start: 1px;">{{infoVacante.entidad_federativa}}</h6>
                     <h6 style="margin-block-start: 10px;">{{infoVacante.descripcion_puesto}}</h6>
                     <h6 style="margin-block-start: 10px;">{{infoVacante.descripcion_puesto}}</h6>

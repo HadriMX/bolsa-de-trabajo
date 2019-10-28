@@ -297,3 +297,9 @@ html {
   background:rgb(67, 8, 71);
 
 }
+
+.page-button {
+  cursor: pointer;
+  background-color: rgb(157, 26, 184);
+  color: white;
+}

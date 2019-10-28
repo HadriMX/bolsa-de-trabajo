@@ -21,6 +21,9 @@ import { AuthInterceptorService as AuthInterceptor } from './services/auth-inter
 import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
+import { JwPaginationComponent } from 'jw-angular-pagination';
+import { PaginacionService } from 'src/app/services/paginacion.service';
+
 import {
   MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule
@@ -52,7 +55,7 @@ const routes: Routes = [
     AdministradorComponent,
     EditarusuarioComponent,
     VerificacionComponent,
-
+    JwPaginationComponent
   ],
   imports: [
     FormsModule,
@@ -77,13 +80,14 @@ const routes: Routes = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: LOCALE_ID,
       useValue: 'es-Mx'
     },
     CookieService,
+    PaginacionService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
