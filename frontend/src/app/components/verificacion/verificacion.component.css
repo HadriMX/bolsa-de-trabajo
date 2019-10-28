@@ -1,0 +1,45 @@
+#body{
+    height: 100%;
+    width: 100%;
+    background:linear-gradient( rgb(66, 2, 66),rgba(92, 3, 92, 0.836));
+        position: fixed;
+}
+.contenedor{
+    width: 100%;
+    margin-block-start: 10%;
+}
+#verificando {
+    margin-block-start: 7%;
+    color: white;
+}
+h1,h2,h3,h5,h6{
+    color: white;
+    margin-block-start: 6%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+h4 {
+    color: white;
+    margin-block-start: 15%;
+}
+p{
+    margin-block-start: 5%;
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+}
+#cuadrito {
+    background-color: rgba(39, 38, 38, 0.925);
+    width: 45%;
+    margin-left: 26%;
+    height: 350px;
+}
+.form-control{
+    background:rgb(121, 24, 129);
+    color:white;
+    width: 50%;
+    margin-left: 25%;
+    margin-block-start: 5%;
+
+}

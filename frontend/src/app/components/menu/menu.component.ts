@@ -77,7 +77,6 @@ export class MenuComponent implements OnInit {
 
   }
 
-
   mostrarDetalleVacante(Vacante){
     this.infoVacante = Vacante;
   }
@@ -86,6 +85,7 @@ export class MenuComponent implements OnInit {
     this.busqueda.SelectedSalario = "0";
     this.busqueda.SelectedFecha = "0";
     this.busqueda.SelectedArea = "0";
+    
   }
 
   arriba() {
@@ -96,10 +96,11 @@ export class MenuComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
-    if ($(window).scrollTop() > 200 ) {
-          $('.ir-arriba').slideDown(300); 
-    } else { 
-        $('.ir-arriba').slideUp(300);
+
+    if ($(window).scrollTop() > 200) {
+      $('.ir-arriba').slideDown(300);
+    } else {
+      $('.ir-arriba').slideUp(300);
     }
   } 
 }

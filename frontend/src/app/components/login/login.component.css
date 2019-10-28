@@ -14,9 +14,7 @@ legend {
 }
 
 
-  #preferencialaboral{
-    margin-left: 2%;
-  }
+  
  
 
   input{
@@ -100,11 +98,10 @@ button:hover {
 .login100-form-title {
   display: block;
   width: 100%;
-  font-size: 34px;
+  font-size: 39px;
   color: #333333;
   line-height: 1.2;
   text-align: left;
-  margin-left: 24%;
 }
 
 
@@ -117,8 +114,9 @@ button:hover {
   position: relative;
   border-bottom: 2px solid #dbdbdb;
   margin-bottom: 15px;
-  margin-left: 1%;
 }
+
+
 #electronico {
   margin-top: 20px;
 }
@@ -265,7 +263,6 @@ p{
   }
   .login100-form-title {
     font-size: 25px;
-    margin-left: 21%;
   }
   #boton1 {
     width: 100%;
@@ -411,7 +408,9 @@ p{
     margin-left: 10%;
     width: 100%;
   }
+  
 }
+
 
 @media (max-width: 576px) {
   .wrap-login100 {

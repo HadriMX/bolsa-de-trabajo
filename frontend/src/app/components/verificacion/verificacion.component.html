@@ -1,0 +1,31 @@
+<div id="body">
+
+
+    <div class="contenedor text-center">
+        <div id="cuadrito" class="text-center">
+            <img class="modal-title" src="../../assets/logo.png" style="margin-block-start: 5%;" height="80px"
+                width="150px" alt="Generic placeholder image">
+            <div *ngIf="resultado === 0">
+                <h4 id="verificando">Verificando</h4>
+                <div class="loaning" *ngIf="loaning">
+                    <img src="../../../assets/Spinner-1s-200px.gif" height="80px" width="80px">
+                </div>
+            </div>
+            <div *ngIf="resultado === 1">
+                <h5>Correo electrónico confirmado correctamente</h5>
+                <p id="p">
+                    Gracias por confirmar tu dirección de correo electrónico.
+                    Ahora debes esperar a que un administrador autorice tu solicitud de registro para poder ingresar.
+                </p>
+            </div>
+            <div *ngIf="resultado === 2">
+                <h5>La cuenta asociada a este correo electrónico ya ha sido verificada.</h5>
+                <p>Debes esperar a que un administrador autorice tu solicitud de registro para poder ingresar.</p>
+            </div>
+            <div *ngIf="resultado === 3">
+                <h6>No se encontró ninguna cuenta asociada a este código de verificación.</h6>
+            </div>
+            <button class="form-control">Continuar</button>
+        </div>
+    </div>
+</div>

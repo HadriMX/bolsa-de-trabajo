@@ -181,15 +181,16 @@ html {
 }
 #limpiar {
   color: white; 
-  margin-left: 22%;
+  margin-left: 7%;
   border-radius: 10px;
   background-color: rgb(128, 51, 128);
   height: 2%;
   font-size: 15px;
   border: none;
-  margin-block-start: 1%;
-
+  margin-block-start: 7px;
+  cursor: pointer;
 }
+
 .Buscarspace {
   width: 85%;
   height: 45%;
