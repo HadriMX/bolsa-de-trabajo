@@ -43,6 +43,8 @@ export class HeaderComponent implements OnInit {
             type: 'question',
             showCancelButton: true,
             cancelButtonText: 'Cancelar'
+          }).then(result => {
+            console.log(result);
           });
         }
         else {
