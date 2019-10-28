@@ -25,7 +25,7 @@
             <div *ngIf="resultado === 3">
                 <h6>No se encontró ninguna cuenta asociada a este código de verificación.</h6>
             </div>
-            <button class="form-control">Continuar</button>
+            <button *ngIf="loaning === false" class="form-control">Continuar</button>
         </div>
     </div>
 </div>
