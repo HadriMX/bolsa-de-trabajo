@@ -20,18 +20,20 @@
     <div class="border border-dark main">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-sm-5 col-10">
+                <div class="col-lg-5 col-sm-5   col-10">
                     <h6 id="titulo2" style="color:white;">Titulo de la vacante</h6>
                     <input type="text" class="form-control" placeholder="Titulo o Empresa"
                         [(ngModel)]="busqueda.InputTitulo">
                 </div>
-                <div id="ubicacionspace" class="col-lg-3 col-sm-5 col-10">
+
+
+                <div id="ubicacionspace" class="col-lg-5 col-sm-5 col-10">
                     <h6 id="titulo2" style="color:white;">Ubicación</h6>
                     <input class="form-control" placeholder="Estado" [(ngModel)]="busqueda.InputUbicacion"
                         list="browsers">
 
                     <datalist id="browsers">
-                        <option value="Aguascalientes"></option>
+                        <option value="Aguascalientes">
                         <option value="Baja California">
                         <option value="Baja California Sur">
                         <option value="Campeche">
@@ -64,9 +66,8 @@
                         <option value="Yucatán">
                         <option value="Zacatecas">
                     </datalist>
-
                 </div>
-                <div id="espaciobuscar" class=" col-lg-3 col-sm-5 col-7">
+                <div id="espaciobuscar" class=" col-lg-2 col-sm-5 col-7">
                     <button (click)="buscar()" class="Buscarspace btn btn-success">
                         Buscar
                     </button>
@@ -90,7 +91,7 @@
                         <option value="9">$80,000 - o más</option>
                     </select>
                 </div>
-                <div class="drop-down-options-style col-lg-2 col-5 col-sm-4">
+                <div class="drop-down-options-style col-lg-2 col-5 col-sm-3">
                     <select id="drop-down-options" class="form-control selectpicker" name="select"
                         [(ngModel)]="busqueda.SelectedFecha">
                         <option value="0">Fecha</option>
@@ -103,13 +104,15 @@
                     </select>
                 </div>
                 <div class="drop-down-options-style col-lg-2 col-8 col-sm-4">
-                    <select id="drop-down-options" class="form-control" name="select"
+                    <select id="drop-down-options" class="form-control selectpicker2" name="select"
                         [(ngModel)]="busqueda.SelectedArea">
                         <option value="0" selected>Áreas</option>
                         <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
                     </select>
                 </div>
-                <h6 id="limpiar" class=" col-lg-3 col-6 col-sm-5" (click)="limpiarFiltros()">Limpiar Filtros</h6>
+                <button id="limpiar" class=" form-control col-lg-2 col-6 col-sm-3" (click)="limpiarFiltros()">
+                    Limpiar Filtros
+                </button>
             </div>
         </div>
     </div>
@@ -163,7 +166,7 @@
 </div>
 <footer id="sticky-footer" class="static-bottom">
 
-    <div class="container text-center">
+    <div class="text-center">
         <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
     </div>
 </footer>
