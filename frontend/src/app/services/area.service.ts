@@ -11,6 +11,7 @@ export class AreaService {
   private endpointUrlAddArea = 'http://localhost/bdt/php/src/area/add_area.php';
   private endpointUrlGetAreas ='http://localhost/bdt/php/src/area/get_areas.php';
   private endpointUrlUpdateArea='http://localhost/bdt/php/src/area/update_area.php';
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

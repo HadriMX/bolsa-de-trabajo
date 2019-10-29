@@ -20,14 +20,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class AdministradorComponent implements OnInit {
 
-  @Input() nuevaArea : Area={
+  @Input() NuevaArea : Area={
     id_area_estudio:0,
     nombre:'',
     estatus:''
   }
 
   
-  @Input() nuevaCategoria: Cat_empresa = {
+  @Input() NuevaCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
     estatus: ''
@@ -45,6 +45,7 @@ export class AdministradorComponent implements OnInit {
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
   btnModificarCategoria: boolean;
+  btnModificarArea: boolean;
   opc: any;
   infoCategoria: Cat_empresa={
     id_tipo_empresa:0,
@@ -156,7 +157,7 @@ export class AdministradorComponent implements OnInit {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarArea = true;
-      this.areaService.add_area(this.nuevaArea)
+      this.areaService.add_area(this.NuevaArea)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("correcto", response.message, 'success');
@@ -178,7 +179,7 @@ export class AdministradorComponent implements OnInit {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarCategoria = true;
-      this.categoriaService.add_categoria(this.nuevaCategoria)
+      this.categoriaService.add_categoria(this.NuevaCategoria)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
@@ -195,23 +196,40 @@ export class AdministradorComponent implements OnInit {
   }
 
   update_categoria(){
-    const nombre = $('#CategoriaMod').val();
+    const nombre = $('#NomCategoria').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnModificarCategoria = true;
-      this.categoriaService.update_categoria(this.nuevaCategoria)
+      this.categoriaService.update_categoria(this.infoCategoria)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
-            this.datoscategoria.push(nombre);
-            this.MostrarCategorias();
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
           this.btnAgregarCategoria = false;
           $('#categoria').val('');
+        });
+    }
+  }
+
+  update_area(){
+    const nombre = $('#NomArea').val();
+    if (nombre === '') {
+      Swal.fire("No ingreso ningun valor");
+    } else {
+      this.btnModificarArea = true;
+      this.areaService.update_area(this.infoArea)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("Correcto", response.message, 'success')
+          }
+          else {
+            Swal.fire("Error", response.message, 'error');
+          }
+          this.btnAgregarArea = false;
         });
     }
   }

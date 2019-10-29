@@ -44,7 +44,7 @@ class Area{
     public static function update_areaEstudio( array $areaEstudio){
         $db = new Db();
         $conn = $db->getConn();
-        $stmt = $conn->prepare("REPLACE INTO areas_estudio (id_area_estudio,nombre,estatus,)VALUES (?,?,?)");
+        $stmt = $conn->prepare("REPLACE INTO areas_estudio (id_area_estudio,nombre,estatus) VALUES (?,?,?)");
 
         $id_area_estudio=$areaEstudio['id_area_estudio'];
         $nombre=$areaEstudio['nombre'];
@@ -59,7 +59,7 @@ class Area{
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
-
+ 
         $stmt->close();
 
         return $output;
