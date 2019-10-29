@@ -17,11 +17,12 @@ export class CurrentUserService {
     private httpOptions: HttpOptionsService) { }
 
   setUsuarioActual(usuario: Usuario) {
+    // TODO: guardar menos propiedades del usuario en lugar de stringify el usuario completo
     this.cookies.set(this.CURRENT_USER_COOKIE, JSON.stringify(usuario), 1);
   }
 
   deleteUsuarioActual(): Promise<ApiResponse<boolean>> {
-    var url = "http://localhost/bdt/php/src/logout.php?phpsessid=" + this.getPhpsessid();
+    var url = "http://localhost/bdt/php/src/logout.php";
     return this.http.post<ApiResponse<boolean>>(url, null, this.httpOptions).toPromise();
   }
 
@@ -64,6 +65,10 @@ export class CurrentUserService {
 
   haySesionActiva(): boolean {
     return this.cookies.check(this.CURRENT_USER_COOKIE) && this.tryParseJSON(this.cookies.get(this.CURRENT_USER_COOKIE));
+  }
+
+  haySesionAdminActiva(): boolean {
+    return this.haySesionActiva() && this.getUsuarioActual().id_tipo_usuario == 0;
   }
 
   // fuente: https://stackoverflow.com/a/20392392
