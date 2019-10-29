@@ -54,11 +54,18 @@ class Auth
         $codigoConfirmacion = md5(random_bytes(32));
         $idTipoUsuario = $usuario['id_tipo_usuario'];
 
-        if ($usuario['id_tipo_usuario'] == 1) { // el id de Candidato es 1, id de Empresa es 2
+        if ($usuario['id_tipo_usuario'] == 1) { // candidato
             $estatus = "N";
-        } elseif ($usuario['id_tipo_usuario'] == 2) {
+        } elseif ($usuario['id_tipo_usuario'] == 2) {   // empresa
+            $estatus = "A";
+        } elseif ($usuario['id_tipo_usuario'] == 0) {   // administrador
             $estatus = "A";
         }
+        /*
+        la razón por la que no hay una cláusula 'else' es para mantener separados
+        los tipos y si se necesitan más a futuro para que se tengan que agregar explícitamente
+        para evitar bugs
+        */
 
         $db = new Db();
         $conn = $db->getConn();

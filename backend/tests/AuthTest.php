@@ -69,21 +69,21 @@ final class AuthTest extends TestCase
         $this->assertEquals(1, $actual);
     }
 
-    public function testRegistrarUsuarioValido()
-    {
-        $usuario = array(
-            'email' => 'alvaro@gmail.com',
-            'password' => '!1234abcd',
-            'id_tipo_usuario' => 1,
-        );
+    // public function testRegistrarUsuarioValido()
+    // {
+    //     $usuario = array(
+    //         'email' => 'admin@volar.org.mx',
+    //         'password' => 'admin123#',
+    //         'id_tipo_usuario' => 0,
+    //     );
 
-        $actual = Auth::register($usuario);
+    //     $actual = Auth::register($usuario);
 
-        $this->assertInstanceOf(
-            SuccessResult::class,
-            $actual
-        );
-    }
+    //     $this->assertInstanceOf(
+    //         SuccessResult::class,
+    //         $actual
+    //     );
+    // }
 
     public function testVerificacionDeEmailConCodigoIncorrecto()
     {
