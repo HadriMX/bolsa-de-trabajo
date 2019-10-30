@@ -56,3 +56,8 @@ th{
 .container {
     overflow: auto;
 }
+
+.remover {
+  background-image: url('../../../assets/remove.png');
+  background: url('../../../assets/remove.png') no-repeat;
+}
