@@ -1,60 +1,80 @@
 <html>
-<app-headertittle></app-headertittle>
+<!-- Aqui empieza el navbar del administrador -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <img class="modal-title" src="../../assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
+    alt="Generic placeholder image">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
+          Usuarios <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a style="cursor: pointer;" class="nav-link" id="categoriaboton" (click)="categorias(1)">Categorias de
+          empresas</a>
+      </li>
+      <li class="nav-item active">
+        <a style="cursor: pointer;" class="nav-link" id="areas" (click)="categorias(2)">Areas de estudio</a>
+      </li>
+      <li class="nav-item active">
+          <a style="cursor: pointer;" class="nav-link" id="usuariosexistentes" >Usuarios registrados</a>
+        </li>
+      <li class="nav-item active ">
+        <a class="nav-link" style="width: 100%; color: rgb(160, 152, 230);" (click)="admin()">administrador <span
+            class="sr-only">(current) </span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <a id="prueba" style="color:white; margin-left: 10px; cursor: pointer;" >Cerrar sesion</a>
+    </form>
+  </div>
+</nav>
 <!-- En esta parte comienza el cuerpo de la pagina -->
 
 <body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: auto;">
   <!-- En esta parte se divide la pantalla en dos partes -->
   <div class="row" id="contenedor">
-    <!-- Primera parte-->
-    <div class="col-lg-3 border border-dark" style="background-color: rgb(92, 13, 92);">
-      <div style="margin-block-start: 5%; margin-left: 1%; width: 100%;">
-        <button (click)="categorias(3)" id="usuarios"
-          style="width: 100%; background-color: rgb(102, 5, 81); color: white; width: 100%" class="form-control">Solicitudes de Usuarios</button>
-      </div>
-      <div style="margin-block-start: 5%; margin-left: 1%;">
-        <button id="categoriaboton" (click)="categorias(1)" style="background-color: rgb(102, 5, 81); color: white;"
-          class="form-control">Categorias de empresas</button>
-      </div>
-      <div style="margin-block-start: 2%; margin-left: 1%;">
-        <button id="areas" (click)="categorias(2)" style=" background-color: rgb(102, 5, 81); color: white;"
-          class="form-control">Areas de estudio</button>
-      </div>
-    </div>
     <!-- Segunda parte en que se divide -->
-    <div class="col-lg-9 " id="contenedor2">
-      <div *ngIf="estadoimagen" style="margin-left: 30%; margin-top: 3%; ">
+    <div class="col-lg-12" id="contenedor2">
+      <div *ngIf="estadoimagen" id="estadoimagen">
         <h4>Apartado de configuracion</h4>
-        <img style="margin-block-start: 5%;" src="../../assets/settings.png" height="55%" width="55%"
+        <img style="margin-block-start: 5%;" src="../../assets/settings.png" height="15%" width="45%"
           alt="Generic placeholder image">
       </div>
       <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
       <div class="conteiner">
         <div *ngIf="estado">
-          <div class="row">
-            <div class="col-lg-5 col-sm-5 col-5">
-              <div style="margin-right: 40%; margin-top: 4%;  margin-left:12%; width: 100%; ">
-                <mat-form-field>
-                  <input matInput [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" type="text"
-                    placeholder="Nombre de la categoria">
-                </mat-form-field>
+          <div style="margin-left: 10%; margin-top: 1%; ; ">
+            <h5>Categorias para las empresas</h5>
+            <div class="row">
+              <div class="col-lg-4 col-sm-4 col-8">
+                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" type="text"
+                      placeholder="Nombre de la categoria">
+                  </mat-form-field>
 
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-2 col-2">
+                <button mat-flat-button
+                  style="margin-block-start: 8%; margin-left: 1%; border-radius: 18px; background-color: #660551; color:white;"
+                  (click)="add_CategoriaEmpresa()">Registrar</button>
+              </div>
+              <div class="col-lg-4 col-sm-4 col-12">
+                <div style="margin-right: 60%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
+                  <mat-form-field>
+                    <input matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Filtrar">
+                  </mat-form-field>
+                </div>
               </div>
             </div>
-            <div class="col-lg-3 col-sm-3 col-3">
-              <button mat-flat-button
-                style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
-                (click)="add_CategoriaEmpresa()">Registrar</button>
-            </div>
-          </div>
-          <div style="margin-left: 5%; margin-top: 1%; ; ">
-            <h5>Categorias para las empresas</h5>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
-              <mat-form-field>
-                <input matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Filtrar">
-              </mat-form-field>
-            </div>
-            <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll">
-
+            <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
               <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre de la categoria -->
                 <ng-container matColumnDef="nombre_empresa">
@@ -93,33 +113,34 @@
       </div>
       <!-- En esta parte comienza la configuracion de areas de estudio -->
       <div class="conteiner">
-
         <div *ngIf="estado2">
-          <div class="row">
-            <div class="col-lg-5 col-sm-5 col-5">
-              <div style="margin-right: 40%; margin-top: 4%;  margin-left:12%; width: 100%; ">
-                <mat-form-field>
-                  <input matInput [(ngModel)]="nuevaArea.nombre" id="area" type="text"
-                    placeholder="Nombre de area de estudio">
-                </mat-form-field>
+          <div style="margin-left: 10%; margin-top: 1%; ; ">
+            <h5>Lista de areas de estudio</h5>
+            <div class="row">
+              <div class="col-lg-4 col-sm-4 col-8">
+                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
+                  <mat-form-field>
+                    <input matInput [(ngModel)]="nuevaArea.nombre" id="area" type="text"
+                      placeholder="Nombre de area de estudio">
+                  </mat-form-field>
 
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-2 col-2">
+                <button mat-flat-button
+                  style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
+                  (click)="add_areaEstudio()">Registrar</button>
+              </div>
+              <div class="col-lg-4 col-sm-4 col-12">
+                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
+                  <mat-form-field>
+                    <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
+                  </mat-form-field>
+                </div>
               </div>
             </div>
-            <div class="col-lg-3 col-sm-3 col-3">
-              <button mat-flat-button
-                style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
-                (click)="add_areaEstudio()">Registrar</button>
-            </div>
-          </div>
 
-          <div style="margin-left: 5%; margin-top: 1%; ; ">
-            <h5>Lista de areas de estudio</h5>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
-              <mat-form-field>
-                <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
-              </mat-form-field>
-            </div>
-            <div class="border border-dark" style="width: 90%; height:300px; background-color:white; overflow-y:scroll">
+            <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
 
               <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre del area de esutdio -->
@@ -254,7 +275,7 @@
               <h6 style="margin-block-start: 30px;">Estatus</h6>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <input   type="text" id="CategoriaMod" style="margin-block-start: 30px;" value="{{infoCategoria.estatus}}">
+              <input type="text" id="CategoriaMod" style="margin-block-start: 30px;" value="{{infoCategoria.estatus}}">
             </div>
           </div>
           <div class="row">
@@ -262,7 +283,8 @@
 
             </div>
             <div>
-              <button (click)="update_categoria()" class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
+              <button (click)="update_categoria()" class="btn btn-danger"
+                style="margin-block-start: 30px;">Modificar</button>
             </div>
           </div>
         </div>

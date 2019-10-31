@@ -3,13 +3,14 @@ import { Area } from 'src/app/models/area';
 import { Cat_empresa } from 'src/app/models/categoria'
 import Swal from 'sweetalert2';
 import { AreaService } from '../../services/area.service';
-import { CatEmpresaService} from '../../services/cat-empresa.service'
+import { CatEmpresaService } from '../../services/cat-empresa.service'
 import { SolicitudService } from '../../services/solicitud.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
+import { LoginService } from 'src/app/services/login.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 
 
@@ -19,14 +20,15 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
+    //  public usuarioActual: Usuario;
 
-  @Input() nuevaArea : Area={
-    id_area_estudio:0,
-    nombre:'',
-    estatus:''
+  @Input() nuevaArea: Area = {
+    id_area_estudio: 0,
+    nombre: '',
+    estatus: ''
   }
 
-  
+
   @Input() nuevaCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
@@ -46,24 +48,24 @@ export class AdministradorComponent implements OnInit {
   btnAgregarCategoria: boolean;
   btnModificarCategoria: boolean;
   opc: any;
-  infoCategoria: Cat_empresa={
-    id_tipo_empresa:0,
-    nombre_categoria:'',
-    estatus:''
+  infoCategoria: Cat_empresa = {
+    id_tipo_empresa: 0,
+    nombre_categoria: '',
+    estatus: ''
   }
 
-  infoArea: Area={
-    id_area_estudio:0,
-    nombre:'',
-    estatus:''
+  infoArea: Area = {
+    id_area_estudio: 0,
+    nombre: '',
+    estatus: ''
   }
   private paginator: MatPaginator;
   private sort: MatSort;
   public dialog: MatDialog;
 
 
-  ColumnasCategorias: string[] = ['nombre_empresa', 'estatus','acciones'];
-  ColumnasAreas: string[] = ['nombre', 'estatus','acciones'];
+  ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
+  ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
 
@@ -95,7 +97,9 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  constructor(private areaService: AreaService, private categoriaService:CatEmpresaService, private solicitudService:SolicitudService) { }
+  constructor(private areaService: AreaService, private categoriaService: CatEmpresaService,
+    private solicitudService: SolicitudService, private currentUserService: CurrentUserService,
+    private loginService: LoginService) { }
   MostrarSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
@@ -108,12 +112,12 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  detalleCategoria(Cat_empresa){
+  detalleCategoria(Cat_empresa) {
     this.infoCategoria = Cat_empresa;
   }
 
-  detalleArea(Area){
-    this.infoArea= Area;
+  detalleArea(Area) {
+    this.infoArea = Area;
   }
 
 
@@ -145,6 +149,8 @@ export class AdministradorComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.usuarioActual = this.currentUserService.getUsuarioActual();
+
     this.MostrarAreas();
     this.MostrarCategorias();
     this.MostrarSolicitudes();
@@ -194,7 +200,7 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  update_categoria(){
+  update_categoria() {
     const nombre = $('#CategoriaMod').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
@@ -215,7 +221,10 @@ export class AdministradorComponent implements OnInit {
         });
     }
   }
+  admin() {
+    Swal.fire("Pendiente",  'Hay que ver como controlar la info del usuario');
 
+  }
   eliminar(i) {
     this.datoscategoria.splice(i, 1);
   }
@@ -226,15 +235,17 @@ export class AdministradorComponent implements OnInit {
       if (this.estado === true) {
         this.estadoimagen = true;
         this.estado = false;
-        $('#categoriaboton').css('border-width', '1px');
+        $("#categoriaboton").css("border-bottom", "transparent");
 
       } else {
+        $("#categoriaboton").css("border-bottom", "1px solid white");
+        $("#areas").css("border-bottom", "transparent");
+        $("#usuarios").css("border-bottom", "transparent");
         this.estadoimagen = false;
         this.estado = true;
         this.estado2 = false;
         this.estado3 = false;
         this.estado4 = false;
-        this.funcioncolores1();
         this.opc = numero;
       }
       // Se selecciona Aareas de estudio
@@ -242,14 +253,17 @@ export class AdministradorComponent implements OnInit {
       if (this.estado2 === true) {
         this.estado2 = false;
         this.estadoimagen = true;
-        $('#areas').css('border-width', '1px');
+        $("#areas").css("border-bottom", "transparent");
+
       } else {
+        $("#areas").css("border-bottom", "1px solid white");
+        $("#usuarios").css("border-bottom", "transparent");
+        $("#categoriaboton").css("border-bottom", "transparent");
         this.estado2 = true;
         this.estado = false;
         this.estado3 = false;
         this.estado4 = false;
         this.estadoimagen = false;
-        this.funcioncolores2();
         this.opc = numero;
       }
       //Se selecciona las solicitudes de los usuarios    
@@ -257,50 +271,34 @@ export class AdministradorComponent implements OnInit {
       if (this.estado4 === true) {
         this.estado4 = false;
         this.estadoimagen = true;
-        $('#usuarios').css('border-width', '1px');
+        $("#usuarios").css("border-bottom", "transparent");
+
       } else {
+        $("#usuarios").css("border-bottom", "1px solid white");
+        $("#areas").css("border-bottom", "transparent");
+        $("#categoriaboton").css("border-bottom", "transparent");
+
         this.estado4 = true;
         this.estadoimagen = false;
         this.estado = false;
         this.estado2 = false;
         this.estado3 = false;
-        this.funcioncolores4();
       }
     }
   }
   // En esta parte se manejan los colores de los botones al momento de presionarlos
   //------------------------------------------------------------------------------------
-  funcioncolores1() {
-    $(function () {
-      $('#subareas').css('border-width', '1px');
-      $('#areas').css('border-width', '1px');
-      $('#categoriaboton').css('border', 'inset');
-      $('#usuarios').css('border-width', '1px');
-    })
-  }
-  funcioncolores2() {
-    $(function () {
-      $('#subareas').css('border-width', '1px');
-      $('#areas').css('border', 'inset');
-      $('#categoriaboton').css('border-width', '1px');
-      $('#usuarios').css('border-width', '1px');
-    })
-  }
-  funcioncolores3() {
-    $(function () {
-      $('#subareas').css('border', 'inset');
-      $('#areas').css('border-width', '1px');
-      $('#categoriaboton').css('border-width', '1px');
-      $('#usuarios').css('border-width', '1px');
-    })
-  }
-  funcioncolores4() {
-    $(function () {
-      $('#subareas').css('border-width', '1px');
-      $('#areas').css('border-width', '1px');
-      $('#categoriaboton').css('border-width', '1px');
-      $('#usuarios').css('border', 'inset');
-    })
-  }
+  
   //------------------------------------------------------------------------------------
+  // logout() {
+  //   this.loginService.logout().then(
+  //     response => {
+  //       if (response.success) {
+  //         this.router.navigateByUrl("/login");
+  //       } else {
+  //         Swal.fire('Error en el servidor', response.message, 'error');
+  //       }
+  //     },
+  //     reason => console.log(reason));
+  // }
 }
