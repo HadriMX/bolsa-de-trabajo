@@ -51,7 +51,7 @@ class Area{
         $estatus=$areaEstudio['estatus'];
 
 
-        $stmt->bind_param("i,s,s",$id_area_estudio,$nombre,$estatus);
+        $stmt->bind_param("iss",$id_area_estudio,$nombre,$estatus);
         $stmt->execute();
 
        if ($stmt->affected_rows > 0) {

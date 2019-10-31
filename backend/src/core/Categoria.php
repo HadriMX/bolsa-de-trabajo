@@ -42,7 +42,7 @@ class Categoria{
         $nombre_empresa= $categoria['nombre_empresa'];
         $estatus=$categoria['estatus'];
 
-        $stmt->bind_param("i,s,s",$id_tipo_empresa,$nombre_empresa,$estatus);
+        $stmt->bind_param("iss",$id_tipo_empresa,$nombre_empresa,$estatus);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {

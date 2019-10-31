@@ -46,6 +46,7 @@ export class AdministradorComponent implements OnInit {
   btnAgregarCategoria: boolean;
   btnModificarCategoria: boolean;
   btnModificarArea: boolean;
+  btncerrar_area: boolean;
   opc: any;
   infoCategoria: Cat_empresa={
     id_tipo_empresa:0,
@@ -232,6 +233,10 @@ export class AdministradorComponent implements OnInit {
           this.btnAgregarArea = false;
         });
     }
+  }
+
+  cerrar_area(){
+    
   }
 
   eliminar(i) {
