@@ -70,8 +70,8 @@
                 <ng-container matColumnDef="estatus">
 
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <!-- <td mat-cell *matCellDef="let element" ngIf="element.estatus==='A'">Alta</td> -->
-                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                  <td mat-cell *matCellDef="let element"> {{estatus_categorias(element.estatus)}} </td>
+  
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
@@ -136,7 +136,7 @@
                 <!-- Columna para estatus -->
                 <ng-container matColumnDef="estatus">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                  <td mat-cell *matCellDef="let element"> {{estatus_areas(element.estatus)}} </td>
                 </ng-container>
 
 
@@ -232,7 +232,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modificar Area</h5>
+        <h5 class="modal-title">Modificar Categoria</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -249,29 +249,22 @@
             </mat-form-field>
           </div>
         </div>
-
-
         <div class="row">
           <div class="col-lg-2 col-sm-2 col-2">
             <p style="margin-top: 30%;">Estatus:</p>
           </div>
           <div class="col-lg-6 col-sm-6 col-12">
-            <select class="form-control select-sm">
+            <select class="form-control select-sm" [(ngModel)]="infoCategoria.estatus">
               <option *ngIf="infoCategoria.estatus==='A'" value="{{infoCategoria.estatus}}">Alta</option>
               <option *ngIf="infoCategoria.estatus==='B'" value="{{infoCategoria.estatus}}">Baja</option>
-              <option *ngIf="infoCategoria.estatus==='B'">Alta</option>
-              <option *ngIf="infoCategoria.estatus==='A'">Baja</option>
+              <option *ngIf="infoCategoria.estatus==='B'" value="A">Alta</option>
+              <option *ngIf="infoCategoria.estatus==='A'" value="B">Baja</option>
             </select>
           </div>
-
         </div>
-
-
-
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeAddExpenseModal>Cerrar</button>
         <button type="button" (click)="update_categoria()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
@@ -299,29 +292,38 @@
             </mat-form-field>
           </div>
         </div>
-
-
         <div class="row">
           <div class="col-lg-2 col-sm-2 col-2">
             <p style="margin-top: 30%;">Estatus:</p>
           </div>
           <div class="col-lg-6 col-sm-6 col-12">
-            <select class="form-control select-sm">
+            <select class="form-control select-sm"  [(ngModel)]="infoArea.estatus">
               <option *ngIf="infoArea.estatus==='A'" value="{{infoArea.estatus}}">Alta</option>
               <option *ngIf="infoArea.estatus==='B'" value="{{infoArea.estatus}}">Baja</option>
-              <option *ngIf="infoArea.estatus==='B'">Alta</option>
-              <option *ngIf="infoArea.estatus==='A'">Baja</option>
+              <option *ngIf="infoArea.estatus==='B'" value="A">Alta</option>
+              <option *ngIf="infoArea.estatus==='A'" value="B">Baja</option>
             </select>
           </div>
-
         </div>
-
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button"  (click)="preguntar()"class="btn btn-secondary" >Cerrar</button>
         <button type="button" (click)="update_area()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
+  </div>
+</div>
+
+
+<div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
+  <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="modal-body">
+              <p>This Is A Warning Message</p>
+              <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
+          </div>
+      </div>
   </div>
 </div>

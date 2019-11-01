@@ -1,14 +1,16 @@
-import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Area } from 'src/app/models/area';
 import { Cat_empresa } from 'src/app/models/categoria'
 import Swal from 'sweetalert2';
 import { AreaService } from '../../services/area.service';
-import { CatEmpresaService} from '../../services/cat-empresa.service'
+import { CatEmpresaService } from '../../services/cat-empresa.service'
 import { SolicitudService } from '../../services/solicitud.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
+
+
 
 
 
@@ -20,13 +22,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class AdministradorComponent implements OnInit {
 
-  @Input() NuevaArea : Area={
-    id_area_estudio:0,
-    nombre:'',
-    estatus:''
+  @Input() NuevaArea: Area = {
+    id_area_estudio: 0,
+    nombre: '',
+    estatus: ''
   }
 
-  
   @Input() NuevaCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
@@ -48,24 +49,27 @@ export class AdministradorComponent implements OnInit {
   btnModificarArea: boolean;
   btncerrar_area: boolean;
   opc: any;
-  infoCategoria: Cat_empresa={
-    id_tipo_empresa:0,
-    nombre_categoria:'',
-    estatus:''
+  AuxArea:string;
+
+
+  infoCategoria: Cat_empresa = {
+    id_tipo_empresa: 0,
+    nombre_categoria: '',
+    estatus: ''
   }
 
-  infoArea: Area={
-    id_area_estudio:0,
-    nombre:'',
-    estatus:''
+  infoArea: Area = {
+    id_area_estudio: 0,
+    nombre: '',
+    estatus: ''
   }
   private paginator: MatPaginator;
   private sort: MatSort;
   public dialog: MatDialog;
 
 
-  ColumnasCategorias: string[] = ['nombre_empresa', 'estatus','acciones'];
-  ColumnasAreas: string[] = ['nombre', 'estatus','acciones'];
+  ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
+  ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
 
@@ -97,7 +101,7 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  constructor(private areaService: AreaService, private categoriaService:CatEmpresaService, private solicitudService:SolicitudService) { }
+  constructor(private areaService: AreaService, private categoriaService: CatEmpresaService, private solicitudService: SolicitudService) { }
   MostrarSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
@@ -110,13 +114,28 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  detalleCategoria(Cat_empresa){
+  detalleCategoria(Cat_empresa) {
     this.infoCategoria = Cat_empresa;
   }
 
-  detalleArea(Area){
-    this.infoArea= Area;
+  detalleArea(Area) {
+    this.infoArea = Area;
+    this.AuxArea = this.infoArea.nombre;
   }
+
+  estatus_areas(status: string) {
+    if (status === 'A')
+      return "Alta";
+    else
+      return "Baja";
+  }
+  estatus_categorias(status: string) {
+    if (status === 'A')
+      return "Alta";
+    else
+      return "Baja";
+  }
+
 
 
   MostrarAreas() {
@@ -174,6 +193,51 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
+
+  
+
+  preguntar(){
+    if (this.AuxArea!=this.infoArea.nombre) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      
+      swalWithBootstrapButtons.fire({
+        title: 'Salir sin guardar',
+        text: "No guardaste tus cambios",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Salir',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+            this.CerrarModales();
+            this.infoArea.nombre=this.AuxArea;
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
+    }
+  }
+  cerrar(){
+ 
+    
+
+   
+  }
+
   add_CategoriaEmpresa() {
     const nombre = $('#categoria').val();
     if (nombre === '') {
@@ -196,7 +260,7 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  update_categoria(){
+  update_categoria() {
     const nombre = $('#NomCategoria').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
@@ -206,17 +270,16 @@ export class AdministradorComponent implements OnInit {
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
+            this.CerrarModales();
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
-          this.btnAgregarCategoria = false;
-          $('#categoria').val('');
         });
     }
   }
 
-  update_area(){
+  update_area() {
     const nombre = $('#NomArea').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
@@ -226,17 +289,24 @@ export class AdministradorComponent implements OnInit {
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
+            this.CerrarModales();
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
-          this.btnAgregarArea = false;
         });
     }
   }
 
-  cerrar_area(){
-    
+ 
+
+
+
+
+
+  CerrarModales(){
+    $('#areas1').modal('hide');
+    $('#ModificarCAT').modal('hide');
   }
 
   eliminar(i) {
