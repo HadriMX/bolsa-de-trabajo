@@ -16,7 +16,9 @@
 h4 {
   margin-left: 5%;
 }
-
+h6,h5 {
+  color: white;
+}
 .dropdown-content a:hover {background-color: #aa2baa ; color: white}
 
 .dropdown:hover .dropdown-content {
@@ -85,7 +87,7 @@ th{
     overflow: auto;
 }
 #estadoimagen{
-  margin-left: 35%;
+  margin-left: 5%;
   margin-top: 3%; 
 }
 a{
@@ -102,6 +104,13 @@ a:after {
 a:hover:after { transform: scaleX(1); }
 a.fromRight:after{ transform-origin:100% 50%; }
 a.fromLeft:after{  transform-origin:  0% 50%; }
+
+.btnuser{
+  width: 25%;
+  margin-block-start: 2%;
+  margin-left: 35%;
+  border-radius: 20px;
+}
   @media (max-width:1000px) and (min-width:320px) {
     h4{
       margin-left: 1%;

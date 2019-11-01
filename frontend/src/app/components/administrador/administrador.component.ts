@@ -20,7 +20,7 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
-    //  public usuarioActual: Usuario;
+  //  public usuarioActual: Usuario;
 
   @Input() nuevaArea: Area = {
     id_area_estudio: 0,
@@ -39,10 +39,7 @@ export class AdministradorComponent implements OnInit {
   datossubarea = [];
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
-  estado = false;
-  estado2 = false;
-  estado3 = false;
-  estado4 = false;
+  estado = 0;
   estadoimagen = true;
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
@@ -222,7 +219,7 @@ export class AdministradorComponent implements OnInit {
     }
   }
   admin() {
-    Swal.fire("Pendiente",  'Hay que ver como controlar la info del usuario');
+    Swal.fire("Pendiente", 'Hay que ver como controlar la info del usuario');
 
   }
   eliminar(i) {
@@ -232,26 +229,23 @@ export class AdministradorComponent implements OnInit {
   categorias(numero) {
     // Se selecciona Categorias de las empresas 
     if (numero === 1) {
-      if (this.estado === true) {
+      if (this.estado === 1) {
         this.estadoimagen = true;
-        this.estado = false;
+        this.estado = 0;
         $("#categoriaboton").css("border-bottom", "transparent");
-
       } else {
         $("#categoriaboton").css("border-bottom", "1px solid white");
         $("#areas").css("border-bottom", "transparent");
         $("#usuarios").css("border-bottom", "transparent");
+        $("#usuariosactivos").css("border-bottom", "transparent");
         this.estadoimagen = false;
-        this.estado = true;
-        this.estado2 = false;
-        this.estado3 = false;
-        this.estado4 = false;
+        this.estado = 1;
         this.opc = numero;
       }
       // Se selecciona Aareas de estudio
     } else if (numero === 2) {
-      if (this.estado2 === true) {
-        this.estado2 = false;
+      if (this.estado === 2) {
+        this.estado = 0;
         this.estadoimagen = true;
         $("#areas").css("border-bottom", "transparent");
 
@@ -259,17 +253,15 @@ export class AdministradorComponent implements OnInit {
         $("#areas").css("border-bottom", "1px solid white");
         $("#usuarios").css("border-bottom", "transparent");
         $("#categoriaboton").css("border-bottom", "transparent");
-        this.estado2 = true;
-        this.estado = false;
-        this.estado3 = false;
-        this.estado4 = false;
+        $("#usuariosactivos").css("border-bottom", "transparent");
+        this.estado = 2;
         this.estadoimagen = false;
         this.opc = numero;
       }
       //Se selecciona las solicitudes de los usuarios    
     } else if (numero == 3) {
-      if (this.estado4 === true) {
-        this.estado4 = false;
+      if (this.estado === 3) {
+        this.estado = 0;
         this.estadoimagen = true;
         $("#usuarios").css("border-bottom", "transparent");
 
@@ -277,18 +269,29 @@ export class AdministradorComponent implements OnInit {
         $("#usuarios").css("border-bottom", "1px solid white");
         $("#areas").css("border-bottom", "transparent");
         $("#categoriaboton").css("border-bottom", "transparent");
-
-        this.estado4 = true;
+        $("#usuariosactivos").css("border-bottom", "transparent");
+        this.estado = 3;
         this.estadoimagen = false;
-        this.estado = false;
-        this.estado2 = false;
-        this.estado3 = false;
+
+      } 
+    } else if (numero === 4) {
+      if (this.estado === 4) {
+        this.estado = 0;
+        this.estadoimagen = true;
+        $("#usuariosactivos").css("border-bottom", "transparent");
+      } else {
+        $("#usuario").css("border-bottom", "transparent");
+        $("#usuariosactivos").css("border-bottom", "1px solid white");
+        $("#areas").css("border-bottom", "transparent");
+        $("#categoriaboton").css("border-bottom", "transparent");
+        this.estado = 4;
+        this.estadoimagen = false;
       }
     }
   }
   // En esta parte se manejan los colores de los botones al momento de presionarlos
   //------------------------------------------------------------------------------------
-  
+
   //------------------------------------------------------------------------------------
   // logout() {
   //   this.loginService.logout().then(
