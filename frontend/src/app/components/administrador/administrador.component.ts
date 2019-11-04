@@ -12,8 +12,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LoginService } from 'src/app/services/login.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 
-
-
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',

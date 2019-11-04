@@ -111,6 +111,9 @@ a.fromLeft:after{  transform-origin:  0% 50%; }
   margin-left: 35%;
   border-radius: 20px;
 }
+#usuarios:active{
+  border-bottom: 1px solid white;
+}
   @media (max-width:1000px) and (min-width:320px) {
     h4{
       margin-left: 1%;
