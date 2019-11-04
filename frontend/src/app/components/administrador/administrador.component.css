@@ -1,52 +1,85 @@
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(121, 24, 129);
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: white;
+  padding: 10px 40px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+h4 {
+  margin-left: 5%;
+}
+h6,
+h5 {
+  color: white;
+}
+.dropdown-content a:hover {
+  background-color: #aa2baa;
+  color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+nav.navbar {
+  background-color: rgb(121, 24, 129);
+}
+
 /*---------------------------------------------*/
 input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: none;
-    -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  -webkit-appearance: none;
 }
 body {
-    background-color: rgb(206, 211, 208); 	
-    position: fixed; 
-    width:100%; 
-    height:100%; 
-    overflow: auto;
+  background-color: rgb(206, 211, 208);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 /* Structure */
 table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  th.mat-sort-header-sorted {
-    color: black;
-  }
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
 #contenedor {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 #contenedor2 {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 .btn {
-    border-radius: 15px;
-    border: none;
-    color:white;
-    background-color:rgb(121, 24, 129);
-
+  border-radius: 15px;
+  border: none;
+  color: white;
+  background-color: rgb(121, 24, 129);
 }
 
-th{
+th {
   color: #ffffff;
   background-color: rgb(153, 103, 158);
 }
@@ -54,10 +87,57 @@ th{
   color: white;
 }
 .container {
-    overflow: auto;
+  overflow: auto;
+}
+#estadoimagen {
+  margin-left: 5%;
+  margin-top: 3%;
+}
+a {
+  font-size: 14px;
+  margin-top: 2%;
+}
+a:after {
+  display: block;
+  content: "";
+  border-bottom: solid 3px white;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+}
+a:hover:after {
+  transform: scaleX(1);
+}
+a.fromRight:after {
+  transform-origin: 100% 50%;
+}
+a.fromLeft:after {
+  transform-origin: 0% 50%;
+}
+
+.btnuser {
+  width: 25%;
+  margin-block-start: 2%;
+  margin-left: 35%;
+  border-radius: 20px;
+}
+@media (max-width: 1000px) and (min-width: 320px) {
+  h4 {
+    margin-left: 1%;
+  }
+}
+@media (max-width: 800px) and (min-width: 622px) {
+  h4 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 621px) {
+  h4 {
+    font-size: 17px;
+    margin-right: 20%;
+  }
 }
 
 .remover {
-  background-image: url('../../../assets/remove.png');
-  background: url('../../../assets/remove.png') no-repeat;
+  background-image: url("../../../assets/remove.png");
+  background: url("../../../assets/remove.png") no-repeat;
 }

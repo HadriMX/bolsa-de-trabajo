@@ -55,7 +55,6 @@
           <span class="login100-form-title p-b-59">
             Registrar cuenta
           </span>
-
           <div id="electronico" class="wrap-input100 validate-input"
             data-validate="Valid email is required: ex@abc.xyz">
             <span style="color:black;" class="label-input100">Correo electronico</span>
@@ -63,25 +62,24 @@
               type="email" name="email" placeholder="Correo electrónico..." required>
             <span class="focus-input100"></span>
           </div>
-
           <div id="contrasenaa" class="wrap-input100 validate-input" data-validate="Password is required">
             <span style="color:black;" class="label-input100">Contraseña</span>
             <input [(ngModel)]="nuevoUsuario.password" name="password" id="input101" class="input100 form-control"
               type="password" name="pass" placeholder="*************" required>
             <span class="focus-input100"></span>
           </div>
-
           <div class="row">
             <div class="col-lg-10">
               <div id="preferencialaboral">
                 <h6>Seleccione el tipo de usuario:</h6>
-                <select [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select" style="margin-top: 10px; width:200px;">
+                <select class="form-control border border-primary" [(ngModel)]="nuevoUsuario.id_tipo_usuario"
+                  name="select" style="margin-top: 10px; width:100%; ">
                   <option value="1" selected>Aspirante</option>
                   <option value="2">Empresa</option>
                 </select>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-8">
               <div style="margin-top: 20px;">
                 <div>
                   <div class="login100-form-bgbtn"></div>
@@ -92,7 +90,6 @@
               </div>
             </div>
           </div>
-
         </form>
       </div>
     </div>

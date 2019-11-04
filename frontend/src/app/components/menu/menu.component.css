@@ -43,3 +43,13 @@ li {
   color: white;
   background-color: rgb(91, 6, 112);
 }
+@media(max-width:619px) and (min-width:479px) {
+  .pagination {
+    margin-left: 15%;
+  }
+}
+@media(max-width:478px) and (min-width:320px) {
+  .pagination {
+    margin-left: 38%;
+  }
+}

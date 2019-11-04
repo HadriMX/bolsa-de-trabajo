@@ -65,12 +65,12 @@ background:rgb(77, 16, 83);
      width: 70%;
  }
  #inicio2 {
-    margin-left: 36%;
+    margin-left: 46%;
  }
  .form-control2 {
      margin-block-start: 5%;
      width: 60%;
-     margin-left: 6%;
+     margin-left: 21%;
     }
 }
  @media (min-width: 462px) and (max-width: 575px)  {
@@ -85,9 +85,9 @@ background:rgb(77, 16, 83);
         width: 60%;
     }
    .form-control2 {
-       width: 60%;
-        margin-left: 13%;       
-      margin-block-start: 5%;
+        width: 60%;
+        margin-left: 20%;       
+        margin-block-start: 5%;
    } 
 
    }
@@ -96,7 +96,7 @@ background:rgb(77, 16, 83);
 @media (max-width: 360px) {
     .form-control2 {
         margin-block-start: 7%;
-        margin-left: 13%;
+        margin-left: 22%;
     }
     .titulologin {
     margin-block-start: 2%;

@@ -68,9 +68,7 @@ li.dropdown {
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-#opcion{
-  background: url('https://api.iconify.design/dashicons:arrow-down-alt.svg') no-repeat center center / contain;
-}
+
 .dropdown-content a {
   color: white;
   padding: 10px 40px;

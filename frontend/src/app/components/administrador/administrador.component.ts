@@ -8,7 +8,9 @@ import { SolicitudService } from '../../services/solicitud.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { LoginService } from 'src/app/services/login.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'app-administrador',
@@ -16,6 +18,7 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
+  //  public usuarioActual: Usuario;
 
   @Input() NuevaArea: Area = {
     id_area_estudio: 0,
@@ -33,10 +36,7 @@ export class AdministradorComponent implements OnInit {
   datossubarea = [];
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
-  estado = false;
-  estado2 = false;
-  estado3 = false;
-  estado4 = false;
+  estado = 0;
   estadoimagen = true;
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
@@ -96,7 +96,9 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  constructor(private areaService: AreaService, private categoriaService: CatEmpresaService, private solicitudService: SolicitudService) { }
+  constructor(private areaService: AreaService, private categoriaService: CatEmpresaService,
+    private solicitudService: SolicitudService, private currentUserService: CurrentUserService,
+    private loginService: LoginService) { }
   MostrarSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
@@ -161,6 +163,8 @@ export class AdministradorComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.usuarioActual = this.currentUserService.getUsuarioActual();
+
     this.MostrarAreas();
     this.MostrarCategorias();
     this.MostrarSolicitudes();
@@ -292,7 +296,9 @@ export class AdministradorComponent implements OnInit {
         });
     }
   }
-
+  admin() {
+    Swal.fire("Pendiente", 'Hay que ver como controlar la info del usuario');
+  }
 
 
 
@@ -311,84 +317,79 @@ export class AdministradorComponent implements OnInit {
   categorias(numero) {
     // Se selecciona Categorias de las empresas 
     if (numero === 1) {
-      if (this.estado === true) {
+      if (this.estado === 1) {
         this.estadoimagen = true;
-        this.estado = false;
-        $('#categoriaboton').css('border-width', '1px');
-
+        this.estado = 0;
+        $("#categoriaboton").css("border-bottom", "transparent");
       } else {
+        $("#categoriaboton").css("border-bottom", "1px solid white");
+        $("#areas").css("border-bottom", "transparent");
+        $("#usuarios").css("border-bottom", "transparent");
+        $("#usuariosactivos").css("border-bottom", "transparent");
         this.estadoimagen = false;
-        this.estado = true;
-        this.estado2 = false;
-        this.estado3 = false;
-        this.estado4 = false;
-        this.funcioncolores1();
+        this.estado = 1;
         this.opc = numero;
       }
       // Se selecciona Aareas de estudio
     } else if (numero === 2) {
-      if (this.estado2 === true) {
-        this.estado2 = false;
+      if (this.estado === 2) {
+        this.estado = 0;
         this.estadoimagen = true;
-        $('#areas').css('border-width', '1px');
+        $("#areas").css("border-bottom", "transparent");
+
       } else {
-        this.estado2 = true;
-        this.estado = false;
-        this.estado3 = false;
-        this.estado4 = false;
+        $("#areas").css("border-bottom", "1px solid white");
+        $("#usuarios").css("border-bottom", "transparent");
+        $("#categoriaboton").css("border-bottom", "transparent");
+        $("#usuariosactivos").css("border-bottom", "transparent");
+        this.estado = 2;
         this.estadoimagen = false;
-        this.funcioncolores2();
         this.opc = numero;
       }
       //Se selecciona las solicitudes de los usuarios    
     } else if (numero == 3) {
-      if (this.estado4 === true) {
-        this.estado4 = false;
+      if (this.estado === 3) {
+        this.estado = 0;
         this.estadoimagen = true;
-        $('#usuarios').css('border-width', '1px');
+        $("#usuarios").css("border-bottom", "transparent");
+
       } else {
-        this.estado4 = true;
+        $("#usuarios").css("border-bottom", "1px solid white");
+        $("#areas").css("border-bottom", "transparent");
+        $("#categoriaboton").css("border-bottom", "transparent");
+        $("#usuariosactivos").css("border-bottom", "transparent");
+        this.estado = 3;
         this.estadoimagen = false;
-        this.estado = false;
-        this.estado2 = false;
-        this.estado3 = false;
-        this.funcioncolores4();
+
+      }
+    } else if (numero === 4) {
+      if (this.estado === 4) {
+        this.estado = 0;
+        this.estadoimagen = true;
+        $("#usuariosactivos").css("border-bottom", "transparent");
+      } else {
+        $("#usuario").css("border-bottom", "transparent");
+        $("#usuariosactivos").css("border-bottom", "1px solid white");
+        $("#areas").css("border-bottom", "transparent");
+        $("#categoriaboton").css("border-bottom", "transparent");
+        this.estado = 4;
+        this.estadoimagen = false;
       }
     }
   }
   // En esta parte se manejan los colores de los botones al momento de presionarlos
   //------------------------------------------------------------------------------------
-  funcioncolores1() {
-    $(function () {
-      $('#subareas').css('border-width', '1px');
-      $('#areas').css('border-width', '1px');
-      $('#categoriaboton').css('border', 'inset');
-      $('#usuarios').css('border-width', '1px');
-    })
-  }
-  funcioncolores2() {
-    $(function () {
-      $('#subareas').css('border-width', '1px');
-      $('#areas').css('border', 'inset');
-      $('#categoriaboton').css('border-width', '1px');
-      $('#usuarios').css('border-width', '1px');
-    })
-  }
-  funcioncolores3() {
-    $(function () {
-      $('#subareas').css('border', 'inset');
-      $('#areas').css('border-width', '1px');
-      $('#categoriaboton').css('border-width', '1px');
-      $('#usuarios').css('border-width', '1px');
-    })
-  }
-  funcioncolores4() {
-    $(function () {
-      $('#subareas').css('border-width', '1px');
-      $('#areas').css('border-width', '1px');
-      $('#categoriaboton').css('border-width', '1px');
-      $('#usuarios').css('border', 'inset');
-    })
-  }
+
   //------------------------------------------------------------------------------------
+  // logout() {
+  //   this.loginService.logout().then(
+  //     response => {
+  //       if (response.success) {
+  //         this.router.navigateByUrl("/login");
+  //       } else {
+  //         Swal.fire('Error en el servidor', response.message, 'error');
+  //       }
+  //     },
+  //     reason => console.log(reason));
+  // }
 }
