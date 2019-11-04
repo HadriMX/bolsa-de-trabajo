@@ -17,11 +17,9 @@ export class CandidatoService {
   private endpointUrl = 'http://localhost/bdt/php/src/candidato/postular_candidato.php';
 
   constructor(private http: HttpClient,
-    private httpOptions: HttpOptionsService,
-    private currentUserService: CurrentUserService) { }
+    private httpOptions: HttpOptionsService) { }
 
     addPostulacion(id_vacante: number): Observable<ApiResponse<Postulacion>> {
-      var url = this.currentUserService.agregarPhpsessidEnUrl(this.endpointUrl);
-      return this.http.post<ApiResponse<Postulacion>>(url, { id_vacante: id_vacante } , this.httpOptions);
+      return this.http.post<ApiResponse<Postulacion>>(this.endpointUrl, { id_vacante: id_vacante } , this.httpOptions);
     }
 }
