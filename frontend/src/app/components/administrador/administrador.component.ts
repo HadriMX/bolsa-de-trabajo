@@ -305,7 +305,7 @@ export class AdministradorComponent implements OnInit {
 
 
   CerrarModales(){
-    $('#areas1').modal('hide');
+    $('#areas1').modal('hide'); 
     $('#ModificarCAT').modal('hide');
   }
 
