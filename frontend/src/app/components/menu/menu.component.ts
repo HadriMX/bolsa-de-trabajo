@@ -171,7 +171,19 @@ export class MenuComponent implements OnInit {
 
   postularCandidato(id_vacante: number ){
     this.postulacion.id_vacante = id_vacante;
-    this.candidatoService.addPostulacion(this.postulacion.id_vacante)
+
+
+    Swal.fire({
+      title: '¿Estás seguro de postularte a esta vacante?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, postularme!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.candidatoService.addPostulacion(this.postulacion.id_vacante)
       .subscribe((response) => {
         if (response.success) {
           Swal.fire("Exito",response.message,"success");
@@ -180,6 +192,8 @@ export class MenuComponent implements OnInit {
           Swal.fire("Error", response.message, 'error');
         }
       });
+      }
+    })
   }
 
   @HostListener('window:scroll', ['$event']) // for window scroll events
