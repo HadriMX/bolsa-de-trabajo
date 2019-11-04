@@ -130,7 +130,8 @@
                 <!-- EMPIEZAN VACANTES -->
                 <!-- items que estan siendo paginados -->
                 <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-2 py-2">
-                    <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal" data-target="#datosvacante">
+                    <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
+                        data-target="#datosvacante">
                         <div class="row">
                             <div class="col-9">
                                 <h6 style="color: yellow;">
@@ -226,8 +227,8 @@
 
                         </div>
                         <div>
-                            <button class="btn btn-primary"
-                                style="margin-block-start: 30px; height:50px; width:200px;">Postularme</button>
+                            <button class="btn btn-primary" style="margin-block-start: 30px; height:50px; width:200px;"
+                                (click)="postularCandidato(infoVacante.id_vacante)">Postularme</button>
 
                         </div>
 

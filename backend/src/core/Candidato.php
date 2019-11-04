@@ -57,4 +57,9 @@ class Candidato
 
         return $output;
     }
+
+    public static function postular($id_vacante, $id_candidato, $fecha){
+
+        return new SuccessResult("Llegó a funcion postular", true);
+    }
 }

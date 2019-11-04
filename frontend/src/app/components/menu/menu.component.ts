@@ -11,6 +11,8 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Postulacion } from 'src/app/models/postulacion';
+import { CandidatoService } from 'src/app/services/candidato.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,12 +22,8 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
 
   //paginacion
-
-  // array of all items to be paged
   allItems: Vacante[] = [];
-  // pager object
   pager: any = {};
-  // paged items
   pagedItems: any[];
 
   cursor: boolean = false;
@@ -37,9 +35,9 @@ export class MenuComponent implements OnInit {
     "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"];
 
   //getters
-  //vacantes: Vacante[] = [];
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
+  
 
   @Input() busqueda: Busqueda = {
     SelectedSalario: "0",
@@ -49,7 +47,15 @@ export class MenuComponent implements OnInit {
     InputUbicacion: "",
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, private vacantesService: VacantesService, private areaService: AreaService, private currentUserService: CurrentUserService, private PaginacionService: PaginacionService) { }
+  @Input() postulacion: Postulacion = {
+    id_vacante: 0,
+    id_candidato: 0,
+    estatus: 'A'
+  }
+
+  constructor(private route: ActivatedRoute, private router: Router, private vacantesService: VacantesService, 
+    private areaService: AreaService, private currentUserService: CurrentUserService, 
+    private PaginacionService: PaginacionService, private candidatoService: CandidatoService) { }
 
   ngOnInit() {
     this.getVacantes();
@@ -72,7 +78,6 @@ export class MenuComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           if (response.data.length >= 1) {
-            // this.vacantes = response.data;
             this.allItems = response.data;
             //setear pagina leyendo url
             this.route.queryParams.subscribe(params => { //toma variable del url
@@ -123,7 +128,7 @@ export class MenuComponent implements OnInit {
   }
 
   getAreas() {
-    this.areaService.get_areasAdmin()
+    this.areaService.get_areasMenu()
       .subscribe((response) => {
         if (response.success) {
           this.areas = response.data;
@@ -136,7 +141,6 @@ export class MenuComponent implements OnInit {
 
   buscar() {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
-
     this.ComprobarUbicacion();
     if (this.busqueda.InputUbicacion == "") {
       this.getVacantes();
@@ -163,6 +167,33 @@ export class MenuComponent implements OnInit {
     $('#body, html').animate({
       scrollTop: '0px'
     }, 300);
+  }
+
+  postularCandidato(id_vacante: number ){
+    this.postulacion.id_vacante = id_vacante;
+
+
+    Swal.fire({
+      title: '¿Estás seguro de postularte a esta vacante?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, postularme!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.candidatoService.addPostulacion(this.postulacion.id_vacante)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Exito",response.message,"success");
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+      }
+    })
   }
 
   @HostListener('window:scroll', ['$event']) // for window scroll events

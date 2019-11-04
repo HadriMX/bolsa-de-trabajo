@@ -30,7 +30,7 @@ class Area{
         return new SuccessResult("",$r);
     }
 
-    public static function get_areas(){
+    public static function get_areasMenu(){
         $db = new Db();
         $conn = $db->getConn();
         
