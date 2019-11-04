@@ -15,6 +15,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService as AuthGuard } from './auth/auth.guard';
 import { LoginGuardService as LoginGuard } from './auth/login.guard';
+import { AdminGuardService as AdminGuard } from './auth/admin.guard';
 import localeEsMx from '@angular/common/locales/es-MX';
 import { registerLocaleData } from '@angular/common';
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
@@ -37,7 +38,7 @@ const routes: Routes = [
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'postulaciones', component: PostulacionesComponent, canActivate: [AuthGuard] },
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
-  { path: 'administracion', component: AdministradorComponent, canActivate: [AuthGuard] },
+  { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
   { path: 'vacantes', component: VacantesComponent, canActivate: [AuthGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
   { path: '**', redirectTo: '/login' }

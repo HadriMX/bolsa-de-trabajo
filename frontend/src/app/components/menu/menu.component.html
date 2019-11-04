@@ -1,179 +1,208 @@
 <app-headertittle></app-headertittle>
+
 <!--inicia del cuerpo de la pagina del menu -->
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <TItle>Sitio web responsivo</TItle>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport"
-        content="width-device-width, user-scalable=no, initial-scale=1.0, maxium-scale=1.0, minium-scale=1.0">
-</head>
-
 <div id="body">
-    <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="/assets/arrowuo.png" height="15px" width="15px"
-            alt="Generic placeholder image">
-    </span>
-
-    <div class="border border-dark main">
+    <div id="cabeceraBusqueda" class="container-fluid">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-sm-5   col-10">
-                    <h6 id="titulo2" style="color:white;">Titulo de la vacante</h6>
-                    <input type="text" class="form-control" placeholder="Titulo o Empresa"
-                        [(ngModel)]="busqueda.InputTitulo">
+            <div class="row pt-3 pb-1 align-items-end">
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <h6 id="titulo2" style="color:white;">Título de la vacante</h6>
+                        <input type="text" class="form-control" placeholder="Ingeniero en software"
+                            [(ngModel)]="busqueda.InputTitulo">
+                    </div>
                 </div>
 
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <h6 id="titulo2" style="color:white;">Ubicación</h6>
+                        <input class="form-control" placeholder="Sinaloa" [(ngModel)]="busqueda.InputUbicacion"
+                            list="browsers">
 
-                <div id="ubicacionspace" class="col-lg-5 col-sm-5 col-10">
-                    <h6 id="titulo2" style="color:white;">Ubicación</h6>
-                    <input class="form-control" placeholder="Estado" [(ngModel)]="busqueda.InputUbicacion"
-                        list="browsers">
-
-                    <datalist id="browsers">
-                        <option value="Aguascalientes">
-                        <option value="Baja California">
-                        <option value="Baja California Sur">
-                        <option value="Campeche">
-                        <option value="Chiapas">
-                        <option value="Chihuahua">
-                        <option value="Ciudad de México">
-                        <option value="Coahuila">
-                        <option value="Colima">
-                        <option value="Durango">
-                        <option value="Guanajuato">
-                        <option value="Guerrero">
-                        <option value="Hidalgo">
-                        <option value="Jalisco">
-                        <option value="México">
-                        <option value="Michoacán">
-                        <option value="Morelos">
-                        <option value="Nayarit">
-                        <option value="Nuevo León">
-                        <option value="Oaxaca">
-                        <option value="Puebla">
-                        <option value="Querétaro">
-                        <option value="Quintana Roo">
-                        <option value="San Luis Potosí">
-                        <option value="Sinaloa">
-                        <option value="Sonora">
-                        <option value="Tabasco">
-                        <option value="Tamaulipas">
-                        <option value="Tlaxcala">
-                        <option value="Veracruz">
-                        <option value="Yucatán">
-                        <option value="Zacatecas">
-                    </datalist>
+                        <datalist id="browsers">
+                            <option value="Aguascalientes">
+                            <option value="Baja California">
+                            <option value="Baja California Sur">
+                            <option value="Campeche">
+                            <option value="Chiapas">
+                            <option value="Chihuahua">
+                            <option value="Ciudad de México">
+                            <option value="Coahuila">
+                            <option value="Colima">
+                            <option value="Durango">
+                            <option value="Guanajuato">
+                            <option value="Guerrero">
+                            <option value="Hidalgo">
+                            <option value="Jalisco">
+                            <option value="México">
+                            <option value="Michoacán">
+                            <option value="Morelos">
+                            <option value="Nayarit">
+                            <option value="Nuevo León">
+                            <option value="Oaxaca">
+                            <option value="Puebla">
+                            <option value="Querétaro">
+                            <option value="Quintana Roo">
+                            <option value="San Luis Potosí">
+                            <option value="Sinaloa">
+                            <option value="Sonora">
+                            <option value="Tabasco">
+                            <option value="Tamaulipas">
+                            <option value="Tlaxcala">
+                            <option value="Veracruz">
+                            <option value="Yucatán">
+                            <option value="Zacatecas">
+                        </datalist>
+                    </div>
                 </div>
-                <div id="espaciobuscar" class=" col-lg-2 col-sm-5 col-7">
-                    <button (click)="buscar()" class="Buscarspace btn btn-success">
-                        Buscar
+                <div class="w-100 d-none d-sm-none"></div>
+                <div id="espaciobuscar" class="col-sm-3">
+                    <div class="form-group">
+                        <button (click)="buscar()" class="btn btn-success form-control">
+                            BUSCAR
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pb-2">
+                <div class="form-group col-sm-3">
+                    <div class="drop-down-options-style">
+                        <select id="drop-down-options" class="form-control" name="select"
+                            [(ngModel)]="busqueda.SelectedSalario">
+                            <option value="0">Sueldos</option>
+                            <option value="1">$0 - $5,000 MXN</option>
+                            <option value="2">$5,000 - $10,000 MXN</option>
+                            <option value="3">$10,000 - $15,000 MXN</option>
+                            <option value="4">$15,000 - $20,000 MXN</option>
+                            <option value="5">$20,000 - $30,000 MXN</option>
+                            <option value="6">$30,000 - $40,000 MXN</option>
+                            <option value="7">$40,000 - $60,000 MXN</option>
+                            <option value="8">$60,000 - $80,000 MXN</option>
+                            <option value="9">$80,000 - o más</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <div class="drop-down-options-style">
+                        <select id="drop-down-options" class="form-control selectpicker" name="select"
+                            [(ngModel)]="busqueda.SelectedFecha">
+                            <option value="0">Fecha</option>
+                            <option value="1">Hace 1 semana</option>
+                            <option value="2">Hace 2 semanas</option>
+                            <option value="3">Hace 1 mes</option>
+                            <option value="4">Hace 2 meses</option>
+                            <option value="5">Hace 4 meses</option>
+                            <option value="6">Hace 6 meses</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-sm-3">
+                    <div class="drop-down-options-style">
+                        <select id="drop-down-options" class="form-control selectpicker2" name="select"
+                            [(ngModel)]="busqueda.SelectedArea">
+                            <option value="0" selected>Áreas</option>
+                            <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <button id="limpiar" class="btn btn-outline-secondary form-control" (click)="limpiarFiltros()">
+                        LIMPIAR FILTROS
                     </button>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="row" id="busquedaavanzada">
-                <div class="drop-down-options-style col-lg-2 col-5 col-sm-3">
-                    <select id="drop-down-options" class="form-control dropdown-toggle" name="select"
-                        [(ngModel)]="busqueda.SelectedSalario">
-                        <option value="0">Sueldos</option>
-                        <option value="1">$0 - $5,000 MXN</option>
-                        <option value="2">$5,000 - $10,000 MXN</option>
-                        <option value="3">$10,000 - $15,000 MXN</option>
-                        <option value="4">$15,000 - $20,000 MXN</option>
-                        <option value="5">$20,000 - $30,000 MXN</option>
-                        <option value="6">$30,000 - $40,000 MXN</option>
-                        <option value="7">$40,000 - $60,000 MXN</option>
-                        <option value="8">$60,000 - $80,000 MXN</option>
-                        <option value="9">$80,000 - o más</option>
-                    </select>
-                </div>
-                <div class="drop-down-options-style col-lg-2 col-5 col-sm-3">
-                    <select id="drop-down-options" class="form-control selectpicker" name="select"
-                        [(ngModel)]="busqueda.SelectedFecha">
-                        <option value="0">Fecha</option>
-                        <option value="1">Hace 1 semana</option>
-                        <option value="2">Hace 2 semanas</option>
-                        <option value="3">Hace 1 mes</option>
-                        <option value="4">Hace 2 meses</option>
-                        <option value="5">Hace 4 meses</option>
-                        <option value="6">Hace 6 meses</option>
-                    </select>
-                </div>
-                <div class="drop-down-options-style col-lg-2 col-8 col-sm-4">
-                    <select id="drop-down-options" class="form-control selectpicker2" name="select"
-                        [(ngModel)]="busqueda.SelectedArea">
-                        <option value="0" selected>Áreas</option>
-                        <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
-                    </select>
-                </div>
-                <button id="limpiar" class=" form-control col-lg-2 col-6 col-sm-3" (click)="limpiarFiltros()">
-                    Limpiar Filtros
-                </button>
+    </div>
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col">
+                <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
             </div>
         </div>
-    </div>
-    <div style="margin-left: 10%; margin-block-start:4%;">
-        <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
-    </div>
 
-    <!-- EMPIEZAN VACANTES -->
-    <!-- items que estan siendo paginados -->
-    <div *ngFor="let item of pagedItems" id="vacantecontenedor">
-        <div (click)="mostrarDetalleVacante(item)" data-toggle="modal" data-target="#datosvacante">
-            <div id="vacantesmenu" class="row">
-                <div class="col-lg-9 col-sm-9 col-9 ">
-                    <h6 style="color:yellow;">{{item.titulo_vacante}}{{item.id_vacante}}</h6>
+        <div class="row">
+            <div class="col mx-1">
+                <!-- EMPIEZAN VACANTES -->
+                <!-- items que estan siendo paginados -->
+                <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-2 py-2">
+                    <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
+                        data-target="#datosvacante">
+                        <div class="row">
+                            <div class="col-9">
+                                <h6 style="color: yellow;">
+                                    <strong>{{item.titulo_vacante}}{{item.id_vacante}}</strong>
+                                </h6>
+                            </div>
+                            <div class="col-3">
+                                <h6>{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h6>{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h6>{{item.entidad_federativa}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <p class="d-none d-sm-block">
+                                    {{item.descripcion_puesto | slice:0:190}}...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-sm-3 col-3">
-                    <h6 style="color:white;">{{item.fecha_publicacion | date: 'longDate'}}</h6>
-                </div>
-                <div class="col-lg-9">
-                    <h6 style="color: white;">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)</h6>
-                </div>
-                <div class="col-lg-9">
-                    <h6 style="color:white;">{{item.entidad_federativa}}</h6>
-                </div>
-                <div class="col-lg-3">
-                </div>
+                <!-- TERMINA VACANTES -->
             </div>
-            <h6 data-toggle="modal" data-target="#datosvacante" id="vacantesmenu">
-                {{item.descripcion_puesto | slice:0:190}}...</h6>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- paginacion -->
+            <nav aria-label="Paginación">
+                <ul class="pagination">
+                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}">
+                        <a class="page-link" (click)="setUrl(1)">Primera</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}">
+                        <a class="page-link" (click)="setUrl(pager.currentPage - 1)">&laquo;</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of pager.pages"
+                        [ngClass]="{active:pager.currentPage == page}">
+                        <a class="page-link" (click)="setUrl(page)">{{page}}</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                        <a class="page-link" (click)="setUrl(+pager.currentPage + 1)">&raquo;</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                        <a class="page-link" (click)="setUrl(pager.totalPages)">Última</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
-    <!-- TERMINA VACANTES -->
 
-    <!-- paginacion -->
-    <nav aria-label="Page navigation example" class="table-responsive mb-8">
-        <ul class="pagination justify-content-center pagination-sm">
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link"
-                        (click)="setUrl(1)">Primera</a></li>
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}"><a class="page-link"
-                        (click)="setUrl(pager.currentPage - 1)">Anterior</a></li>
-                <li class="page-item active" *ngFor="let page of pager.pages"
-                    [ngClass]="{active:pager.currentPage == page}"><a class="page-link"
-                        (click)="setUrl(page)">{{page}}</a></li>
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link"
-                        (click)="setUrl(+pager.currentPage + 1)">Siguiente</a></li>
-                <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}"><a class="page-link"
-                        (click)="setUrl(pager.totalPages)">Ultima</a></li>
-        </ul>
-    </nav>
-    <div style="height: 30px">
-        <!-- SEPARADOR ENTRE FOOTER Y ULTIMO ELEMENTO -->
-    </div>
-</div>
-<footer id="sticky-footer" class="static-bottom">
+    <span (click)="arriba()" class="ir-arriba ">
+        <img id="imagen" src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
+    </span>
 
-    <div class="text-center">
+    <footer id="footer" class="text-center">
         <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
-    </div>
-</footer>
+    </footer>
+</div>
 
-</html>
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
 <div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -198,8 +227,8 @@
 
                         </div>
                         <div>
-                            <button class="btn btn-primary"
-                                style="margin-block-start: 30px; height:50px; width:200px;">Postularme</button>
+                            <button class="btn btn-primary" style="margin-block-start: 30px; height:50px; width:200px;"
+                                (click)="postularCandidato(infoVacante.id_vacante)">Postularme</button>
 
                         </div>
 

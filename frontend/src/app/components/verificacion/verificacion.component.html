@@ -1,12 +1,12 @@
 <div id="body">
     <div class="contenedor text-center">
         <div id="cuadrito" class="text-center">
-            <img class="modal-title" src="../../assets/logo.png" style="margin-block-start: 5%;" height="80px"
+            <img class="modal-title" src="/assets/logo.png" style="margin-block-start: 5%;" height="80px"
                 width="150px" alt="Generic placeholder image">
             <div *ngIf="resultado === 0">
                 <h4 id="verificando">Verificando</h4>
                 <div class="loaning" *ngIf="loaning">
-                    <img src="../../../assets/Spinner-1s-200px.gif" height="80px" width="80px">
+                    <img src="/assets/Spinner-1s-200px.gif" height="80px" width="80px">
                 </div>
             </div>
             <div *ngIf="resultado === 1">
@@ -23,7 +23,7 @@
             <div *ngIf="resultado === 3">
                 <h6>No se encontró ninguna cuenta asociada a este código de verificación.</h6>
             </div>
-            <button *ngIf="loaning === false" class="form-control">Continuar</button>
+            <button *ngIf="resultado !== 0" class="form-control">Continuar</button>
         </div>
     </div>
 </div>

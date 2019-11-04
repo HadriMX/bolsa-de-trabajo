@@ -1,7 +1,6 @@
-<html>
 <!-- Aqui empieza el navbar del administrador -->
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <img class="modal-title" src="../../assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
+  <img class="modal-title" src="/assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
     alt="Generic placeholder image">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +10,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" (click)="categorias()" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios auxiliar <span class="sr-only">(current)</span></a>
+            <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios auxiliar <span class="sr-only">(current)</span></a>
           </li>
       <li class="nav-item active">
         <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
@@ -55,7 +54,7 @@
                   <h6>Correo electronico:</h6>
                   <input type="text" class="form-control" placeholder="ejemplo@hotmail.com">
                 </div>
-                <div class="col-lg-5 col-sm-6 col-10">
+                <div class="col-lg-5 col-sm-6 col-10" style="margin-left: 5%;">
                   <h6>Nombre:</h6>
                   <input type="text" class="form-control" placeholder="Usuario">
                 </div>
@@ -65,7 +64,7 @@
                   <h6>Contraseña:</h6>
                   <input type="password" class="form-control">
                 </div>
-                <div class="col-lg-5 col-sm-6 col-10">
+                <div class="col-lg-5 col-sm-6 col-10"  style="margin-left: 5%;">
                   <h6>Confirmar contraseña:</h6>
                   <input type="password" class="form-control" placeholder="password">
                 </div>
@@ -80,27 +79,25 @@
       <div class="conteiner">
         <div *ngIf="estado === 1">
           <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <h5 style="color: black;">Categorias para las empresas</h5>
             <div class="row">
-              <div class="col-lg-4 col-sm-4 col-8">
+              <div class="col-lg-4 col-sm-8 col-8">
                 <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
                   <mat-form-field>
-                    <input matInput [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" type="text"
+                    <input matInput [(ngModel)]="NuevaCategoria.nombre_categoria" id="categoria" type="text"
                       placeholder="Nombre de la categoria">
                   </mat-form-field>
 
                 </div>
               </div>
-              <div class="col-lg-2 col-sm-2 col-2">
+              <div class="col-lg-2 col-sm-4 col-4">
                 <button mat-flat-button
                   style="margin-block-start: 8%; margin-left: 1%; border-radius: 18px; background-color: #660551; color:white;"
                   (click)="add_CategoriaEmpresa()">Registrar</button>
               </div>
-              <div class="col-lg-4 col-sm-4 col-12">
-                <div style="margin-right: 60%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
-                  <mat-form-field>
-                    <input matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Filtrar">
-                  </mat-form-field>
+              <div class="col-lg-4 col-sm-2 col-4 d-none d-lg-block">
+                <div class="menu">
+                  <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar" type="text">
+                  <div class="search"></div>
                 </div>
               </div>
             </div>
@@ -114,8 +111,10 @@
 
                 <!-- Columna para estatus -->
                 <ng-container matColumnDef="estatus">
+
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                  <td mat-cell *matCellDef="let element"> {{estatus_categorias(element.estatus)}} </td>
+
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
@@ -144,12 +143,11 @@
       <div class="conteiner">
         <div *ngIf="estado === 2">
           <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <h5 style="color: black;">Lista de areas de estudio</h5>
             <div class="row">
               <div class="col-lg-4 col-sm-4 col-8">
                 <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
                   <mat-form-field>
-                    <input matInput [(ngModel)]="nuevaArea.nombre" id="area" type="text"
+                    <input matInput [(ngModel)]="NuevaArea.nombre" id="area" type="text"
                       placeholder="Nombre de area de estudio">
                   </mat-form-field>
 
@@ -161,11 +159,10 @@
                   (click)="add_areaEstudio()">Registrar</button>
               </div>
               <div class="col-lg-4 col-sm-4 col-12">
-                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
-                  <mat-form-field>
-                    <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
-                  </mat-form-field>
-                </div>
+                  <div class="menu">
+                      <input id="input" matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Buscar" type="text">
+                      <div class="search"></div>
+                    </div>
               </div>
             </div>
 
@@ -181,8 +178,9 @@
                 <!-- Columna para estatus -->
                 <ng-container matColumnDef="estatus">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                  <td mat-cell *matCellDef="let element"> {{estatus_areas(element.estatus)}} </td>
                 </ng-container>
+
 
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
@@ -190,7 +188,6 @@
                     <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
                       data-target="#areas1" data-toggle="modal" data-backdrop="static"
                       (click)="detalleArea(element)">Editar</button>
-
                   </td>
                 </ng-container>
 
@@ -211,34 +208,29 @@
       <div class="container-fluid" style="overflow: auto;">
         <div *ngIf="estado === 3">
           <div style="margin-left: 1%; margin-top: 1%;">
-            <h5 style="color: black;">Solicitudes </h5>
             <div *ngFor="let val of datos_solicitud; index as i"
               class="border border-primary border-left-0 border-right-0"
               style="width: 99%; height:50%; margin-block-start: 3%;">
-              <h6 style="font-size: 20px;">Nombre del usuario: {{val.nombre}}</h6>
+              <h6 style="font-size: 20px; color:black;">Nombre del usuario: {{val.nombre}}</h6>
               <div class="row">
-                <div class="col-lg-8 col-sm-8 col-8">
+                <div class="col-lg-12 col-sm-12 col-12">
                   <div class="row">
                     <div class="col-lg-6 col-sm-6 col-9">
-                      <h6 style="margin-block-start: 2%;">Telefono: {{val.telefono}}</h6>
+                      <h6 style="margin-block-start: 2%; color:black;">Telefono: {{val.telefono}}</h6>
                     </div>
                     <div class="col-lg-5 col-sm-6 col-12">
-                      <h6 style="margin-block-start: 2%;">Correo Electronico: {{val.email}}</h6>
+                      <h6 style="margin-block-start: 2%; color:black;">Correo Electronico: {{val.email}}</h6>
                     </div>
                   </div>
                   <div class="row" style="margin-block-start: 1%;">
                     <div class="col-lg-6 col-sm-6 col-9">
-                      <h6>Genero: {{val.genero}}</h6>
+                      <h6 style="color:black;">Genero: {{val.genero}}</h6>
                     </div>
                     <div class="col-lg-5 col-sm-6 col-12">
-                      <h6>Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
+                      <h6 style="color:black;" >Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
                       <button class="form*control btn" style="margin-block-end: 4%;">Aceptar Solicitud</button>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-4 col-sm-4 col-4 d-none d-sm-block">
-                  <img style="margin-left: 35%;" src="../../assets/man-user.png" height="75%" width="40%"
-                    alt="Generic placeholder image">
                 </div>
               </div>
             </div>
@@ -253,7 +245,6 @@
       <div class="conteiner">
         <div *ngIf="estado === 4">
           <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <h5 style="color: black;">Usuarios Registrados</h5>
             <div class="row">
               <div class="col-lg-4 col-sm-4 col-5">
                 <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
@@ -309,127 +300,105 @@
   </div>
 </body>
 <!--===============================================================================================-->
-<!-- Modal de los datos de los usuarios -->
-<div class="modal fade" id="datocategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-        <h5 id="exampleModalLabel" style="color:white;">Deseas Eliminar esta categoria</h5>
-      </div>
-      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-        <button (click)="eliminar([i])" type="button" class="btn btn-primary" data-dismiss="modal">Si</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-</html>
-<!--===============================================================================================-->
 
 <!-- Modal para Modificar Categoria de la empresa -->
-<div class="modal fade" id="ModificarCAT" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" tabindex="-1" role="dialog" id="ModificarCAT">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-
-        <h5 id="exampleModalLabel" style="margin-left:28%; color:white;">Modificar Categoria</h5>
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar Categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
-        <div style="margin-left: 60px;">
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 20px;">Id:</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <input type="text" style="margin-block-start: 20px;" value="{{infoCategoria.id_tipo_empresa}}" disabled>
-            </div>
+        <div class="row">
+          <div class="col-lg-2 col-sm-2 col-2">
+            <p style="margin-top: 30%;">Nombre:</p>
           </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Nombre:</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <input type="text" style="margin-block-start: 30px;" value="{{infoCategoria.nombre_empresa}}">
-            </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <mat-form-field style="margin-right: 5%; ">
+              <input matInput [(ngModel)]="infoCategoria.nombre_empresa" placeholder="Categoria"
+                value="{{infoCategoria.nombre_empresa}}" id="NomCategoria">
+            </mat-form-field>
           </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Estatus</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <input type="text" id="CategoriaMod" style="margin-block-start: 30px;" value="{{infoCategoria.estatus}}">
-            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-2 col-sm-2 col-2">
+            <p style="margin-top: 30%;">Estatus:</p>
           </div>
-          <div class="row">
-            <div class="col-md-3">
-
-            </div>
-            <div>
-              <button (click)="update_categoria()" class="btn btn-danger"
-                style="margin-block-start: 30px;">Modificar</button>
-            </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <select class="form-control select-sm" [(ngModel)]="infoCategoria.estatus">
+              <option *ngIf="infoCategoria.estatus==='A'" value="{{infoCategoria.estatus}}">Alta</option>
+              <option *ngIf="infoCategoria.estatus==='B'" value="{{infoCategoria.estatus}}">Baja</option>
+              <option *ngIf="infoCategoria.estatus==='B'" value="A">Alta</option>
+              <option *ngIf="infoCategoria.estatus==='A'" value="B">Baja</option>
+            </select>
           </div>
         </div>
       </div>
-      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeAddExpenseModal>Cerrar</button>
+        <button type="button" (click)="update_categoria()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
   </div>
 </div>
 
-
-
-<!-- Modal para Areas de estudio -->
-<div class="modal fade" id="areas1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-
-        <h5 id="exampleModalLabel" style="margin-left:28%; color:white;">Modificar Categoria</h5>
-      </div>
-      <div class="modal-body">
-        <div style="margin-left: 10%;">
+  <!-- Modal para Modificar Area de estudio -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="areas1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modificar Area</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
           <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 20px;">Id:</h6>
+            <div class="col-lg-2 col-sm-2 col-2">
+              <p style="margin-top: 30%;">Nombre:</p>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <input type="text" style="margin-block-start: 30px" value="{{infoArea.id_area_estudio}}" disabled>
+              <mat-form-field>
+                <input matInput [(ngModel)]="infoArea.nombre" placeholder="Area" value="{{infoArea.nombre}}"
+                  id="NomArea">
+              </mat-form-field>
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Nombre:</h6>
+            <div class="col-lg-2 col-sm-2 col-2">
+              <p style="margin-top: 30%;">Estatus:</p>
             </div>
             <div class="col-lg-6 col-sm-6 col-12">
-              <input type="text" style="margin-block-start: 30px" value="{{infoArea.nombre}}">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Estatus</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <input type="text" style="margin-block-start: 30px; " value="{{infoArea.estatus}}">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-
-            </div>
-            <div>
-              <button class="btn btn-danger" style="margin-block-start: 30px;">Modificar</button>
+              <select class="form-control select-sm" [(ngModel)]="infoArea.estatus">
+                <option *ngIf="infoArea.estatus==='A'" value="{{infoArea.estatus}}">Alta</option>
+                <option *ngIf="infoArea.estatus==='B'" value="{{infoArea.estatus}}">Baja</option>
+                <option *ngIf="infoArea.estatus==='B'" value="A">Alta</option>
+                <option *ngIf="infoArea.estatus==='A'" value="B">Baja</option>
+              </select>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <div class="modal-footer">
+          <button type="button" (click)="preguntar()" class="btn btn-secondary">Cerrar</button>
+          <button type="button" (click)="update_area()" class="btn btn-primary">Guardar Cambios</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+
+  <div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>This Is A Warning Message</p>
+          <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

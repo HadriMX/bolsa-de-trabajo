@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
+
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: rgb(121, 24, 129);
   min-width: 300px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 .dropdown-content a {
@@ -16,67 +18,70 @@
 h4 {
   margin-left: 5%;
 }
-h6,h5 {
+h6,
+h5 {
   color: white;
 }
-.dropdown-content a:hover {background-color: #aa2baa ; color: white}
+.dropdown-content a:hover {
+  background-color: #aa2baa;
+  color: white;
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
 nav.navbar {
-  background-color:rgb(121, 24, 129);
+  background-color: rgb(121, 24, 129);
 }
 
 /*---------------------------------------------*/
 input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: none;
-    -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  -webkit-appearance: none;
 }
 body {
-    background-color: rgb(206, 211, 208); 	
-    position: fixed; 
-    width:100%; 
-    height:100%; 
-    overflow: auto;
+  background-color: rgb(206, 211, 208);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 /* Structure */
 table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  th.mat-sort-header-sorted {
-    color: black;
-  }
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
 #contenedor {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 #contenedor2 {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 .btn {
-    border-radius: 15px;
-    border: none;
-    color:white;
-    background-color:rgb(121, 24, 129);
-
+  border-radius: 15px;
+  border: none;
+  color: white;
+  background-color: rgb(121, 24, 129);
 }
 
-th{
+th {
   color: #ffffff;
   background-color: rgb(153, 103, 158);
 }
@@ -84,50 +89,178 @@ th{
   color: white;
 }
 .container {
-    overflow: auto;
+  overflow: auto;
 }
-#estadoimagen{
+#estadoimagen {
   margin-left: 5%;
-  margin-top: 3%; 
+  margin-top: 3%;
 }
-a{
+a {
   font-size: 14px;
   margin-top: 2%;
 }
 a:after {
-  display:block;
-  content: '';
-  border-bottom: solid 3px white;  
-  transform: scaleX(0);  
+  display: block;
+  content: "";
+  border-bottom: solid 3px white;
+  transform: scaleX(0);
   transition: transform 250ms ease-in-out;
 }
-a:hover:after { transform: scaleX(1); }
-a.fromRight:after{ transform-origin:100% 50%; }
-a.fromLeft:after{  transform-origin:  0% 50%; }
+a:hover:after {
+  transform: scaleX(1);
+}
+a.fromRight:after {
+  transform-origin: 100% 50%;
+}
+a.fromLeft:after {
+  transform-origin: 0% 50%;
+}
 
-.btnuser{
+.btnuser {
   width: 25%;
   margin-block-start: 2%;
   margin-left: 35%;
   border-radius: 20px;
-}
-#usuarios:active{
-  border-bottom: 1px solid white;
 }
   @media (max-width:1000px) and (min-width:320px) {
     h4{
       margin-left: 1%;
     }
   }
-  @media (max-width:800px) and (min-width:622px) {
-    h4{
-      font-size: 20px;
+@media (max-width: 1000px) and (min-width: 320px) {
+  h4 {
+    margin-left: 1%;
+  }
+}
+@media (max-width: 800px) and (min-width: 622px) {
+  h4 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 621px) {
+  h4 {
+    font-size: 17px;
+    margin-right: 20%;
+  }
+}
+
+.remover {
+  background-image: url("../../../assets/remove.png");
+  background: url("../../../assets/remove.png") no-repeat;
+}
+/* Css del boton de buscar */
+
+.menu {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  height: 100px;
+  margin-left: 42%;
+}
+  .search {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: rgb(121, 24, 129);
+    border-radius: 50%;
+    transition: all 1s;
+    z-index: 4;
+  }
+    .search:hover {
+      cursor: pointer;
     }
+    .search::before {
+      content: "";
+      position: absolute;
+      margin: auto;
+      top: 22px;
+      right: 0;
+      bottom: 0;
+      left: 22px;
+      width: 6px;
+      height: 2px;
+      background: white;
+      transform: rotate(45deg);
+      transition: all .5s;
+    }
+    .search::after {
+      content: "";
+      position: absolute;
+      margin: auto;
+      top: -5px;
+      right: 0;
+      bottom: 0;
+      left: -5px;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 2px solid white;
+      transition: all .5s;
+    }
+  #input {
+    font-family: 'Inconsolata', monospace;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 37px;
+    outline: none;
+    border: none;
+    /* // border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+    background: rgb(121, 24, 129);
+    color: white;
+    padding: 0 80px 0 20px;
+    border-radius: 30px;
+
+    transition: all 1s;
+    opacity: 0;
+    z-index: 5;
+    letter-spacing: 0.1em;
   }
-    @media (max-width:621px) {
-      h4{
-        font-size: 17px;
-        margin-right: 20%;
+    #input:hover {
+      cursor: pointer;
+    }
+    #input:focus {
+      width: 250px;
+      opacity: 1;
+      cursor: text;
+    }
+    #input:focus ~ .search {
+      right: -250px;
+      background: #151515;
+      z-index: 6;
+    }
+    #input::before {
+        top: 0;
+        left: 0;
+        width: 25px;
       }
-  }
+      #input::after {
+        top: 0;
+        left: 0;
+        width: 25px;
+        height: 2px;
+        border: none;
+        background: white;
+        border-radius: 0%;
+        transform: rotate(-45deg);
+      }
+    
+    #input::placeholder {
+      color: white;
+      opacity: 0.5;
+      font-weight: bolder;
+    }
 

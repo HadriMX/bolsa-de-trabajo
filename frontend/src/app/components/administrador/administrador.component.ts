@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Area } from 'src/app/models/area';
 import { Cat_empresa } from 'src/app/models/categoria'
 import Swal from 'sweetalert2';
@@ -20,14 +20,13 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 export class AdministradorComponent implements OnInit {
   //  public usuarioActual: Usuario;
 
-  @Input() nuevaArea: Area = {
+  @Input() NuevaArea: Area = {
     id_area_estudio: 0,
     nombre: '',
     estatus: ''
   }
 
-
-  @Input() nuevaCategoria: Cat_empresa = {
+  @Input() NuevaCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
     estatus: ''
@@ -38,11 +37,16 @@ export class AdministradorComponent implements OnInit {
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
-  estadoimagen = true;
+  estadoimagen = false;
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
   btnModificarCategoria: boolean;
+  btnModificarArea: boolean;
+  btncerrar_area: boolean;
   opc: any;
+  AuxArea: string;
+
+
   infoCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
@@ -113,7 +117,22 @@ export class AdministradorComponent implements OnInit {
 
   detalleArea(Area) {
     this.infoArea = Area;
+    this.AuxArea = this.infoArea.nombre;
   }
+
+  estatus_areas(status: string) {
+    if (status === 'A')
+      return "Alta";
+    else
+      return "Baja";
+  }
+  estatus_categorias(status: string) {
+    if (status === 'A')
+      return "Alta";
+    else
+      return "Baja";
+  }
+
 
 
   MostrarAreas() {
@@ -157,7 +176,7 @@ export class AdministradorComponent implements OnInit {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarArea = true;
-      this.areaService.add_area(this.nuevaArea)
+      this.areaService.add_area(this.NuevaArea)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("correcto", response.message, 'success');
@@ -173,13 +192,58 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
+
+
+
+  preguntar() {
+    if (this.AuxArea != this.infoArea.nombre) {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Salir sin guardar',
+        text: "No guardaste tus cambios",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Salir',
+        cancelButtonText: 'Cancelar',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          this.CerrarModales();
+          this.infoArea.nombre = this.AuxArea;
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
+    }
+  }
+  cerrar() {
+
+
+
+
+  }
+
   add_CategoriaEmpresa() {
     const nombre = $('#categoria').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarCategoria = true;
-      this.categoriaService.add_categoria(this.nuevaCategoria)
+      this.categoriaService.add_categoria(this.NuevaCategoria)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
@@ -196,30 +260,56 @@ export class AdministradorComponent implements OnInit {
   }
 
   update_categoria() {
-    const nombre = $('#CategoriaMod').val();
+    const nombre = $('#NomCategoria').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnModificarCategoria = true;
-      this.categoriaService.update_categoria(this.nuevaCategoria)
+      this.categoriaService.update_categoria(this.infoCategoria)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
-            this.datoscategoria.push(nombre);
-            this.MostrarCategorias();
+            this.CerrarModales();
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
-          this.btnAgregarCategoria = false;
-          $('#categoria').val('');
+        });
+    }
+  }
+
+  update_area() {
+    const nombre = $('#NomArea').val();
+    if (nombre === '') {
+      Swal.fire("No ingreso ningun valor");
+    } else {
+      this.btnModificarArea = true;
+      this.areaService.update_area(this.infoArea)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("Correcto", response.message, 'success')
+            this.CerrarModales();
+          }
+          else {
+            Swal.fire("Error", response.message, 'error');
+          }
         });
     }
   }
   admin() {
     Swal.fire("Pendiente", 'Hay que ver como controlar la info del usuario');
-
   }
+
+
+
+
+
+
+  CerrarModales() {
+    $('#areas1').modal('hide');
+    $('#ModificarCAT').modal('hide');
+  }
+
   eliminar(i) {
     this.datoscategoria.splice(i, 1);
   }
@@ -228,64 +318,60 @@ export class AdministradorComponent implements OnInit {
     // Se selecciona Categorias de las empresas 
     if (numero === 1) {
       if (this.estado === 1) {
-        this.estadoimagen = true;
         this.estado = 0;
         $("#categoriaboton").css("border-bottom", "transparent");
       } else {
         $("#categoriaboton").css("border-bottom", "1px solid white");
-        $("#areas").css("border-bottom", "transparent");
-        $("#usuarios").css("border-bottom", "transparent");
-        $("#usuariosactivos").css("border-bottom", "transparent");
-        this.estadoimagen = false;
+        $("#areas,#usuarios,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
         this.estado = 1;
         this.opc = numero;
+        this.estadoimagen = false;
       }
       // Se selecciona Aareas de estudio
     } else if (numero === 2) {
       if (this.estado === 2) {
         this.estado = 0;
-        this.estadoimagen = true;
         $("#areas").css("border-bottom", "transparent");
-
       } else {
         $("#areas").css("border-bottom", "1px solid white");
-        $("#usuarios").css("border-bottom", "transparent");
-        $("#categoriaboton").css("border-bottom", "transparent");
-        $("#usuariosactivos").css("border-bottom", "transparent");
-        this.estado = 2;
+        $("#usuarios,#categoriaboton,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
         this.estadoimagen = false;
+        this.estado = 2;
         this.opc = numero;
       }
       //Se selecciona las solicitudes de los usuarios    
     } else if (numero == 3) {
       if (this.estado === 3) {
         this.estado = 0;
-        this.estadoimagen = true;
         $("#usuarios").css("border-bottom", "transparent");
-
       } else {
         $("#usuarios").css("border-bottom", "1px solid white");
-        $("#areas").css("border-bottom", "transparent");
-        $("#categoriaboton").css("border-bottom", "transparent");
-        $("#usuariosactivos").css("border-bottom", "transparent");
+        $("#areas,#categoriaboton,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
         this.estado = 3;
         this.estadoimagen = false;
-
-      } 
+      }
     } else if (numero === 4) {
       if (this.estado === 4) {
         this.estado = 0;
-        this.estadoimagen = true;
         $("#usuariosactivos").css("border-bottom", "transparent");
       } else {
-        $("#usuario").css("border-bottom", "transparent");
+        $("#usuario,#areas,#categoriaboton,#Auxiliares").css("border-bottom", "transparent");
         $("#usuariosactivos").css("border-bottom", "1px solid white");
-        $("#areas").css("border-bottom", "transparent");
-        $("#categoriaboton").css("border-bottom", "transparent");
-        this.estado = 4;
         this.estadoimagen = false;
+        this.estado = 4;
       }
+    } else {
+       if (this.estadoimagen === true) {
+        this.estadoimagen = false;
+        $("#Auxiliares").css("border-bottom", "transparent");
+       } else {
+        $("#usuario,#usuariosactivos,#areas,#categoriaboton").css("border-bottom", "transparent");
+        $("#Auxiliares").css("border-bottom", "1px solid white");
+        this.estadoimagen = true;
+        this.estado = 0;
+       }
     }
+    
   }
   // En esta parte se manejan los colores de los botones al momento de presionarlos
   //------------------------------------------------------------------------------------
