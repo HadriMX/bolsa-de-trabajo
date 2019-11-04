@@ -20,7 +20,7 @@ export class CatEmpresaService {
 
   add_categoria(categoria:Cat_empresa):Observable<ApiResponse<Cat_empresa>>{
     return this.http.post<ApiResponse<Cat_empresa>>(this.endpointUrlAddCategoria, categoria ,this.httpOptions);
-  }
+  } 
 
   get_categoriasAdmin(): Observable<ApiResponse<Cat_empresa[]>> {
     return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlGeCategorias, this.httpOptions);

@@ -21,3 +21,4 @@ $estatus = "A";
 if ($area_estudio != '') {
     echo json_encode(Area::add_area($area_estudio, $estatus));
 }
+ 

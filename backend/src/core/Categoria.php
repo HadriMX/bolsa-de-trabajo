@@ -36,13 +36,13 @@ class Categoria{
     public static function update_categoria( array $categoria){
         $db = new Db();
         $conn = $db->getConn();
-        $stmt = $conn->prepare("REPLACE INTO tipos_empresa (id_tipo_empresa,nombre_empresa,estatus,)VALUES (?,?,?)");
+        $stmt = $conn->prepare("REPLACE into tipos_empresa (id_tipo_empresa,nombre_empresa,estatus) VALUES (?,?,?)");
 
         $id_tipo_empresa= $categoria['id_tipo_empresa'];
         $nombre_empresa= $categoria['nombre_empresa'];
         $estatus=$categoria['estatus'];
 
-        $stmt->bind_param("i,s,s",$id_tipo_empresa,$nombre_empresa,$estatus);
+        $stmt->bind_param("iss",$id_tipo_empresa,$nombre_empresa,$estatus);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
