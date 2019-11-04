@@ -1,6 +1,6 @@
 <!-- Aqui empieza el navbar del administrador -->
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <img class="modal-title" src="../../assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
+  <img class="modal-title" src="/assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
     alt="Generic placeholder image">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,25 +39,6 @@
 <body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: auto;">
   <!-- En esta parte se divide la pantalla en dos partes -->
   <div class="row" id="contenedor">
-    <!-- Primera parte-->
-    <div class="col-lg-3 border border-dark" style="background-color: rgb(92, 13, 92);">
-      <div style="margin-left: 20%; margin-block-start: 2%; color:white">
-        <h6>Opciones de configuración</h6>
-      </div>
-      <div style="margin-block-start: 5%; margin-left: 1%; width: 100%;">
-        <button (click)="categorias(3)" id="usuarios"
-          style="width: 100%; background-color: rgb(102, 5, 81); color: white; width: 100%" class="form-control">Ver
-          Solicitudes de Usuarios</button>
-      </div>
-      <div style="margin-block-start: 5%; margin-left: 1%;">
-        <button id="categoriaboton" (click)="categorias(1)" style="background-color: rgb(102, 5, 81); color: white;"
-          class="form-control">Registro categorias de empresas</button>
-      </div>
-      <div style="margin-block-start: 2%; margin-left: 1%;">
-        <button id="areas" (click)="categorias(2)" style=" background-color: rgb(102, 5, 81); color: white;"
-          class="form-control">Registro de area de estudio</button>
-      </div>
-    </div>
     <!-- Segunda parte en que se divide -->
     <div class="col-lg-12" id="contenedor2">
       <div *ngIf="estadoimagen" id="estadoimagen">
@@ -344,8 +325,8 @@
           </div>
           <div class="col-lg-6 col-sm-6 col-12">
             <mat-form-field style="margin-right: 5%; ">
-              <input matInput [(ngModel)]="infoCategoria.nombre_categoria" placeholder="Categoria"
-                value="{{infoCategoria.nombre_categoria}}" id="NomCategoria">
+              <input matInput [(ngModel)]="infoCategoria.nombre_empresa" placeholder="Categoria"
+                value="{{infoCategoria.nombre_empresa}}" id="NomCategoria">
             </mat-form-field>
           </div>
         </div>
@@ -360,33 +341,16 @@
               <option *ngIf="infoCategoria.estatus==='B'" value="A">Alta</option>
               <option *ngIf="infoCategoria.estatus==='A'" value="B">Baja</option>
             </select>
-            <div class="row">
-              <div class="col-lg-6 col-sm-6 col-12">
-                <h6 style="margin-block-start: 30px;">Estatus</h6>
-              </div>
-              <div class="col-lg-6 col-sm-6 col-12">
-                <input type="text" id="CategoriaMod" style="margin-block-start: 30px;"
-                  value="{{infoCategoria.estatus}}">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-
-              </div>
-              <div>
-                <button (click)="update_categoria()" class="btn btn-danger"
-                  style="margin-block-start: 30px;">Modificar</button>
-              </div>
-            </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeAddExpenseModal>Cerrar</button>
-          <button type="button" (click)="update_categoria()" class="btn btn-primary">Guardar Cambios</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeAddExpenseModal>Cerrar</button>
+        <button type="button" (click)="update_categoria()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
   </div>
+</div>
 
   <!-- Modal para Modificar Area de estudio -->
   <div class="modal fade" tabindex="-1" role="dialog" id="areas1">
