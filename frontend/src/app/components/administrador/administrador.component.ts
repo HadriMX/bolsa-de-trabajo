@@ -10,11 +10,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material';
 
-
-
-
-
-
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',
@@ -49,7 +44,7 @@ export class AdministradorComponent implements OnInit {
   btnModificarArea: boolean;
   btncerrar_area: boolean;
   opc: any;
-  AuxArea:string;
+  AuxArea: string;
 
 
   infoCategoria: Cat_empresa = {
@@ -194,10 +189,10 @@ export class AdministradorComponent implements OnInit {
   }
 
 
-  
 
-  preguntar(){
-    if (this.AuxArea!=this.infoArea.nombre) {
+
+  preguntar() {
+    if (this.AuxArea != this.infoArea.nombre) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
@@ -205,7 +200,7 @@ export class AdministradorComponent implements OnInit {
         },
         buttonsStyling: false
       })
-      
+
       swalWithBootstrapButtons.fire({
         title: 'Salir sin guardar',
         text: "No guardaste tus cambios",
@@ -216,8 +211,8 @@ export class AdministradorComponent implements OnInit {
         reverseButtons: true
       }).then((result) => {
         if (result.value) {
-            this.CerrarModales();
-            this.infoArea.nombre=this.AuxArea;
+          this.CerrarModales();
+          this.infoArea.nombre = this.AuxArea;
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
@@ -231,11 +226,11 @@ export class AdministradorComponent implements OnInit {
       })
     }
   }
-  cerrar(){
- 
-    
+  cerrar() {
 
-   
+
+
+
   }
 
   add_CategoriaEmpresa() {
@@ -298,14 +293,14 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
- 
 
 
 
 
 
-  CerrarModales(){
-    $('#areas1').modal('hide'); 
+
+  CerrarModales() {
+    $('#areas1').modal('hide');
     $('#ModificarCAT').modal('hide');
   }
 
