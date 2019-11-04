@@ -21,6 +21,7 @@ body {
   border-radius: 20px;
   font-family: "Poppins", sans-serif;
   letter-spacing: 0.1em;
+  border: none;
 }
 
 .btn-outline-secondary {
