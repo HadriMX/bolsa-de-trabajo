@@ -3,7 +3,6 @@ import Swal from 'sweetalert2';
 import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
 import { AreaService } from '../../services/area.service';
-import { FormBuilder, FormGroup, ControlContainer } from '@angular/forms';
 import { Area } from 'src/app/models/area';
 import { Busqueda } from 'src/app/models/busqueda';
 import * as $ from 'jquery';
