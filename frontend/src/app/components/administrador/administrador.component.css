@@ -33,8 +33,7 @@ h5 {
 nav.navbar {
   background-color: rgb(121, 24, 129);
 }
-
-/*---------------------------------------------*/
+/* -------------------------------------------*/ 
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: none;
@@ -150,117 +149,45 @@ a.fromLeft:after {
 }
 /* Css del boton de buscar */
 
-.menu {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 300px;
-  height: 100px;
-  margin-left: 42%;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+
+#input {
+  width: 80%;
+  margin-left: 40%;
+  padding: 12px 24px;
+  margin-block-start: 4%;
+  background-color: transparent;
+  transition: transform 250ms ease-in-out;
+  font-size: 14px;
+  line-height: 18px;
+  
+  color: #575756;
+/*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
+
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: 95% center;
+  border-radius: 50px;
+  border: 1px solid #575756;
+  transition: all 250ms ease-in-out;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
-  .search {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    background: rgb(121, 24, 129);
-    border-radius: 50%;
-    transition: all 1s;
-    z-index: 4;
+  #input::placeholder {
+      color: color(#575756 a(0.8));
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
   }
-    .search:hover {
-      cursor: pointer;
-    }
-    .search::before {
-      content: "";
-      position: absolute;
-      margin: auto;
-      top: 22px;
-      right: 0;
-      bottom: 0;
-      left: 22px;
-      width: 6px;
-      height: 2px;
-      background: white;
-      transform: rotate(45deg);
-      transition: all .5s;
-    }
-    .search::after {
-      content: "";
-      position: absolute;
-      margin: auto;
-      top: -5px;
-      right: 0;
-      bottom: 0;
-      left: -5px;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      border: 2px solid white;
-      transition: all .5s;
-    }
-  #input {
-    font-family: 'Inconsolata', monospace;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 37px;
-    outline: none;
-    border: none;
-    /* // border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
-    background: rgb(121, 24, 129);
-    color: white;
-    padding: 0 80px 0 20px;
-    border-radius: 30px;
-
-    transition: all 1s;
-    opacity: 0;
-    z-index: 5;
-    letter-spacing: 0.1em;
+  
+  #input:hover,
+  #input:focus {
+      padding: 12px 0;
+      outline: 0;
+      border: 1px solid transparent;
+      border-bottom: 1px solid #575756;
+      border-radius: 0;
+      background-position: 100% center;
   }
-    #input:hover {
-      cursor: pointer;
-    }
-    #input:focus {
-      width: 250px;
-      opacity: 1;
-      cursor: text;
-    }
-    #input:focus ~ .search {
-      right: -250px;
-      background: #151515;
-      z-index: 6;
-    }
-    #input::before {
-        top: 0;
-        left: 0;
-        width: 25px;
-      }
-      #input::after {
-        top: 0;
-        left: 0;
-        width: 25px;
-        height: 2px;
-        border: none;
-        background: white;
-        border-radius: 0%;
-        transform: rotate(-45deg);
-      }
-    
-    #input::placeholder {
-      color: white;
-      opacity: 0.5;
-      font-weight: bolder;
-    }
-
+  /* aqui empieza el diseño para el boton de registrar */
+  

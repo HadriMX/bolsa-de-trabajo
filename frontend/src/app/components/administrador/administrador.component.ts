@@ -314,6 +314,7 @@ export class AdministradorComponent implements OnInit {
     this.datoscategoria.splice(i, 1);
   }
 
+
   categorias(numero) {
     // Se selecciona Categorias de las empresas 
     if (numero === 1) {
@@ -355,7 +356,7 @@ export class AdministradorComponent implements OnInit {
         this.estado = 0;
         $("#usuariosactivos").css("border-bottom", "transparent");
       } else {
-        $("#usuario,#areas,#categoriaboton,#Auxiliares").css("border-bottom", "transparent");
+        $("#usuarios,#areas,#categoriaboton,#Auxiliares").css("border-bottom", "transparent");
         $("#usuariosactivos").css("border-bottom", "1px solid white");
         this.estadoimagen = false;
         this.estado = 4;
@@ -365,7 +366,7 @@ export class AdministradorComponent implements OnInit {
         this.estadoimagen = false;
         $("#Auxiliares").css("border-bottom", "transparent");
        } else {
-        $("#usuario,#usuariosactivos,#areas,#categoriaboton").css("border-bottom", "transparent");
+        $("#usuarios,#usuariosactivos,#areas,#categoriaboton").css("border-bottom", "transparent");
         $("#Auxiliares").css("border-bottom", "1px solid white");
         this.estadoimagen = true;
         this.estado = 0;
@@ -373,6 +374,8 @@ export class AdministradorComponent implements OnInit {
     }
     
   }
+ 
+
   // En esta parte se manejan los colores de los botones al momento de presionarlos
   //------------------------------------------------------------------------------------
 

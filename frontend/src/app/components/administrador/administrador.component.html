@@ -9,9 +9,10 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios auxiliar <span class="sr-only">(current)</span></a>
-          </li>
+      <li class="nav-item active">
+        <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios
+          auxiliar <span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
           Usuarios <span class="sr-only">(current)</span></a>
@@ -64,7 +65,7 @@
                   <h6>Contraseña:</h6>
                   <input type="password" class="form-control">
                 </div>
-                <div class="col-lg-5 col-sm-6 col-10"  style="margin-left: 5%;">
+                <div class="col-lg-5 col-sm-6 col-10" style="margin-left: 5%;">
                   <h6>Confirmar contraseña:</h6>
                   <input type="password" class="form-control" placeholder="password">
                 </div>
@@ -82,6 +83,7 @@
             <div class="row">
               <div class="col-lg-4 col-sm-8 col-8">
                 <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
+                    
                   <mat-form-field>
                     <input matInput [(ngModel)]="NuevaCategoria.nombre_categoria" id="categoria" type="text"
                       placeholder="Nombre de la categoria">
@@ -95,13 +97,11 @@
                   (click)="add_CategoriaEmpresa()">Registrar</button>
               </div>
               <div class="col-lg-4 col-sm-2 col-4 d-none d-lg-block">
-                <div class="menu">
-                  <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar" type="text">
-                  <div class="search"></div>
-                </div>
+                <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar"
+                  type="text">
               </div>
             </div>
-            <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
+            <div class="border border-dark" style="margin-block-start: 1px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
               <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre de la categoria -->
                 <ng-container matColumnDef="nombre_empresa">
@@ -145,7 +145,8 @@
           <div style="margin-left: 10%; margin-top: 1%; ; ">
             <div class="row">
               <div class="col-lg-4 col-sm-4 col-8">
-                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
+
+                <div id="registro" style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
                   <mat-form-field>
                     <input matInput [(ngModel)]="NuevaArea.nombre" id="area" type="text"
                       placeholder="Nombre de area de estudio">
@@ -154,19 +155,23 @@
                 </div>
               </div>
               <div class="col-lg-2 col-sm-2 col-2">
-                <button mat-flat-button
-                  style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
-                  (click)="add_areaEstudio()">Registrar</button>
+                <div id="registro">
+                  <button mat-flat-button
+                    style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
+                    (click)="add_areaEstudio()">Registrar</button>
+                </div>
+
               </div>
               <div class="col-lg-4 col-sm-4 col-12">
-                  <div class="menu">
-                      <input id="input" matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Buscar" type="text">
-                      <div class="search"></div>
-                    </div>
+                <div class="menu">
+                  <input id="input" matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Buscar"
+                    type="text">
+                  <div class="search"></div>
+                </div>
               </div>
             </div>
 
-            <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
+            <div class="border border-dark" style="margin-block-start: 5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
 
               <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre del area de esutdio -->
@@ -227,7 +232,7 @@
                       <h6 style="color:black;">Genero: {{val.genero}}</h6>
                     </div>
                     <div class="col-lg-5 col-sm-6 col-12">
-                      <h6 style="color:black;" >Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
+                      <h6 style="color:black;">Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
                       <button class="form*control btn" style="margin-block-end: 4%;">Aceptar Solicitud</button>
                     </div>
                   </div>
@@ -306,7 +311,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modificar Categoria</h5>
+        <h5 style="color:black;" class="modal-title">Modificar Categoria</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -345,60 +350,59 @@
   </div>
 </div>
 
-  <!-- Modal para Modificar Area de estudio -->
-  <div class="modal fade" tabindex="-1" role="dialog" id="areas1">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modificar Area</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-lg-2 col-sm-2 col-2">
-              <p style="margin-top: 30%;">Nombre:</p>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <mat-form-field>
-                <input matInput [(ngModel)]="infoArea.nombre" placeholder="Area" value="{{infoArea.nombre}}"
-                  id="NomArea">
-              </mat-form-field>
-            </div>
+<!-- Modal para Modificar Area de estudio -->
+<div class="modal fade" tabindex="-1" role="dialog" id="areas1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="color:black;" class="modal-title">Modificar Area</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-2 col-sm-2 col-2">
+            <p style="margin-top: 30%;">Nombre:</p>
           </div>
-          <div class="row">
-            <div class="col-lg-2 col-sm-2 col-2">
-              <p style="margin-top: 30%;">Estatus:</p>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <select class="form-control select-sm" [(ngModel)]="infoArea.estatus">
-                <option *ngIf="infoArea.estatus==='A'" value="{{infoArea.estatus}}">Alta</option>
-                <option *ngIf="infoArea.estatus==='B'" value="{{infoArea.estatus}}">Baja</option>
-                <option *ngIf="infoArea.estatus==='B'" value="A">Alta</option>
-                <option *ngIf="infoArea.estatus==='A'" value="B">Baja</option>
-              </select>
-            </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <mat-form-field>
+              <input matInput [(ngModel)]="infoArea.nombre" placeholder="Area" value="{{infoArea.nombre}}" id="NomArea">
+            </mat-form-field>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" (click)="preguntar()" class="btn btn-secondary">Cerrar</button>
-          <button type="button" (click)="update_area()" class="btn btn-primary">Guardar Cambios</button>
+        <div class="row">
+          <div class="col-lg-2 col-sm-2 col-2">
+            <p style="margin-top: 30%;">Estatus:</p>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <select class="form-control select-sm" [(ngModel)]="infoArea.estatus">
+              <option *ngIf="infoArea.estatus==='A'" value="{{infoArea.estatus}}">Alta</option>
+              <option *ngIf="infoArea.estatus==='B'" value="{{infoArea.estatus}}">Baja</option>
+              <option *ngIf="infoArea.estatus==='B'" value="A">Alta</option>
+              <option *ngIf="infoArea.estatus==='A'" value="B">Baja</option>
+            </select>
+          </div>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="preguntar()" class="btn btn-secondary">Cerrar</button>
+        <button type="button" (click)="update_area()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
   </div>
+</div>
 
 
-  <div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-          <p>This Is A Warning Message</p>
-          <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
-        </div>
+<div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>This Is A Warning Message</p>
+        <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
       </div>
     </div>
   </div>
+</div>
