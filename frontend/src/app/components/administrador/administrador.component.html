@@ -81,27 +81,29 @@
         <div *ngIf="estado === 1">
           <div style="margin-left: 10%; margin-top: 1%; ; ">
             <div class="row">
-              <div class="col-lg-4 col-sm-8 col-8">
-                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
-                    
-                  <mat-form-field>
-                    <input matInput [(ngModel)]="NuevaCategoria.nombre_categoria" id="categoria" type="text"
-                      placeholder="Nombre de la categoria">
-                  </mat-form-field>
-
+              <div class="col-lg-4 col-sm-6 col-6">
+                <div style="margin-right: 40%;  margin-left:1%; width: 100%; ">
+                  <div class="searchBox">
+                    <input [(ngModel)]="NuevaCategoria.nombre_categoria" id="categoria"  class="searchInput" type="text" name="" placeholder="Nombre de la categoria">
+                    <button class="searchButton" (click)="inputeffec()">
+                      <i class="material-icons">
+                        note_add
+                      </i>
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-2 col-sm-4 col-4">
-                <button mat-flat-button
-                  style="margin-block-start: 8%; margin-left: 1%; border-radius: 18px; background-color: #660551; color:white;"
+              <div class="col-lg-2 col-sm-3 col-3">
+                <button class="btnregistrar" mat-flat-button
                   (click)="add_CategoriaEmpresa()">Registrar</button>
               </div>
-              <div class="col-lg-4 col-sm-2 col-4 d-none d-lg-block">
+              <div class="col-lg-4 col-sm-3 col-3">
                 <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar"
                   type="text">
               </div>
             </div>
-            <div class="border border-dark" style="margin-block-start: 1px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
+            <div class="border border-dark"
+              style="margin-block-start:5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
               <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre de la categoria -->
                 <ng-container matColumnDef="nombre_empresa">
@@ -145,19 +147,20 @@
           <div style="margin-left: 10%; margin-top: 1%; ; ">
             <div class="row">
               <div class="col-lg-4 col-sm-4 col-8">
-
-                <div id="registro" style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
-                  <mat-form-field>
-                    <input matInput [(ngModel)]="NuevaArea.nombre" id="area" type="text"
-                      placeholder="Nombre de area de estudio">
-                  </mat-form-field>
-
+                <div  style="margin-right: 40%; margin-left:1%; width: 100%; ">
+                  <div class="searchBox2">
+                      <input [(ngModel)]="NuevaArea.nombre" id="area"  class="searchInput2" type="text" name="" placeholder="Nombre de la area">
+                      <button class="searchButton2" (click)="inputeffec2()">
+                        <i class="material-icons">
+                          note_add
+                        </i>
+                      </button>
+                    </div>
                 </div>
               </div>
               <div class="col-lg-2 col-sm-2 col-2">
-                <div id="registro">
-                  <button mat-flat-button
-                    style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
+                <div >
+                    <button class="btnregistrar2" mat-flat-button
                     (click)="add_areaEstudio()">Registrar</button>
                 </div>
 
@@ -171,7 +174,8 @@
               </div>
             </div>
 
-            <div class="border border-dark" style="margin-block-start: 5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
+            <div class="border border-dark"
+              style="margin-block-start: 5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
 
               <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre del area de esutdio -->

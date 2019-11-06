@@ -189,5 +189,101 @@ a.fromLeft:after {
       border-radius: 0;
       background-position: 100% center;
   }
-  /* aqui empieza el diseño para el boton de registrar */
-  
+  /* aqui empieza el diseño para el boton de registrar en el modulo de categoria */
+  .btnregistrar{
+    margin-block-start: 10%; 
+    margin-left: 1%; 
+    border-radius: 18px; 
+    background-color: #660551; 
+    color:white;
+    display: none;  
+  }
+  .searchBox {
+    position: absolute;
+    transform:  translate(-1%,50%);
+    background: #660551;
+    height: 40px;
+    border-radius: 40px;
+}
+
+.searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+
+}
+
+@media screen and (max-width: 620px) {
+.searchBox:hover > .searchInput {
+    width: 150px;
+    padding: 0 6px;
+}
+}
+.searchButton {
+  color: white;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #660551;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+}
+/* aqui empieza el diseño para el modulo de areas */
+.btnregistrar2{
+  margin-block-start: 10%; 
+  margin-left: 1%; 
+  border-radius: 18px; 
+  background-color: #660551; 
+  color:white;
+  display: none;  
+}
+.searchBox2 {
+  position: absolute;
+  transform:  translate(-1%,50%);
+  background: #660551;
+  height: 40px;
+  border-radius: 40px;
+}
+
+.searchInput2 {
+  border:none;
+  background: none;
+  outline:none;
+  float:left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+
+}
+
+@media screen and (max-width: 620px) {
+.searchBox2:hover > .searchInput2 {
+  width: 150px;
+  padding: 0 6px;
+}
+}
+.searchButton2 {
+color: white;
+float: right;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background: #660551;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: 0.4s;
+}
