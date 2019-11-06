@@ -25,13 +25,13 @@ div#cabeceraBusqueda {
   color: #fff;
   font-size: inherit;
   width: 100%;
-  padding: .5em;
-  padding-right: 2.5em; 
+  padding: 0.5em;
+  padding-right: 2.5em;
   border: 0;
   margin: 0;
   border-radius: 3px;
   text-indent: 0.01px;
-  text-overflow: '';
+  text-overflow: "";
   -webkit-appearance: button; /* hide default arrow in chrome OSX */
 }
 
@@ -42,18 +42,20 @@ div#cabeceraBusqueda {
   pointer-events: none;
 }
 
-.custom-dropdown::after { /*  Custom dropdown arrow */
+/*  Custom dropdown arrow */
+.custom-dropdown::after {
   content: "\25BC";
   height: 1em;
-  font-size: .625em;
+  font-size: 0.625em;
   line-height: 1;
   right: 1.2em;
   top: 50%;
-  margin-top: -.5em;
+  margin-top: -0.5em;
   color: white !important;
 }
 
-.custom-dropdown::before { /*  Custom dropdown arrow cover */
+/*  Custom dropdown arrow cover */
+.custom-dropdown::before {
   width: 2em;
   right: 0;
   top: 0;
@@ -62,19 +64,19 @@ div#cabeceraBusqueda {
 }
 
 .custom-dropdown select[disabled] {
-  color: rgba(0,0,0,.3);
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .custom-dropdown select[disabled]::after {
-  color: rgba(0,0,0,.1);
+  color: rgba(0, 0, 0, 0.1);
 }
 
 .custom-dropdown::before {
-  background-color: rgba(0,0,0,.15);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 .custom-dropdown::after {
-  color: rgba(0,0,0,.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 #vacantecontenedor {
@@ -109,4 +111,22 @@ li {
   height: 3rem;
   color: white;
   background-color: rgb(91, 6, 112);
+}
+
+.ir-arriba {
+  display: none;
+  padding: 16px;
+  background-repeat: no-repeat;
+  background: rgb(121, 24, 129);
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.ir-arriba:hover {
+  background: rgb(67, 8, 71);
 }

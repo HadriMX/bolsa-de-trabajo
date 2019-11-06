@@ -6,7 +6,6 @@ import { AreaService } from '../../services/area.service';
 import { Area } from 'src/app/models/area';
 import { Busqueda } from 'src/app/models/busqueda';
 import * as $ from 'jquery';
-import { CurrentUserService } from 'src/app/services/current-user.service';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -37,8 +36,7 @@ export class MenuComponent implements OnInit {
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
   
-
-  @Input() busqueda: Busqueda = {
+  busqueda: Busqueda = {
     SelectedSalario: "0",
     SelectedFecha: "0",
     SelectedArea: "0",
@@ -46,15 +44,18 @@ export class MenuComponent implements OnInit {
     InputUbicacion: "",
   }
 
-  @Input() postulacion: Postulacion = {
+  postulacion: Postulacion = {
     id_vacante: 0,
     id_candidato: 0,
     estatus: 'A'
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, private vacantesService: VacantesService, 
-    private areaService: AreaService, private currentUserService: CurrentUserService, 
-    private PaginacionService: PaginacionService, private candidatoService: CandidatoService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private vacantesService: VacantesService,
+    private areaService: AreaService,
+    private PaginacionService: PaginacionService,
+    private candidatoService: CandidatoService) { }
 
   ngOnInit() {
     this.getVacantes();
@@ -168,7 +169,7 @@ export class MenuComponent implements OnInit {
     }, 300);
   }
 
-  postularCandidato(id_vacante: number ){
+  postularCandidato(id_vacante: number) {
     this.postulacion.id_vacante = id_vacante;
 
 
@@ -183,14 +184,14 @@ export class MenuComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         this.candidatoService.addPostulacion(this.postulacion.id_vacante)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Exito",response.message,"success");
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire("Exito", response.message, "success");
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
       }
     })
   }
