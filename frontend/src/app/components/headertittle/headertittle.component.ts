@@ -12,7 +12,7 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 })
 export class HeadertittleComponent implements OnInit {
 
-  public usuarioActual : Usuario;
+  public usuarioActual: Usuario;
 
   constructor(private currentUserService: CurrentUserService, private router: Router,
     private loginService: LoginService) { }
