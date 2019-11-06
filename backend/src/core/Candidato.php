@@ -62,4 +62,15 @@ class Candidato
 
         return new SuccessResult("Has sido postulado correctamente", true);
     }
+
+    public static function get_candidatos(){
+        $db = new Db();
+        $conn = $db->getConn();
+        
+        $stmt = $conn->prepare("SELECT  * FROM candidatosvista");
+
+        $stmt->execute();
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("",$r);
+    }
 }
