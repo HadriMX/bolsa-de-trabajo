@@ -1,20 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
-  <img class="modal-title" src="/assets/logo.png" routerLink="/menu" height="40px"
-    width="100px" alt="Generic placeholder image">
+  <img class="modal-title" src="/assets/logo.png" routerLink="/menu" height="40px" width="100px"
+    alt="Generic placeholder image">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <h5 id="titulopag" routerLink="/administracion">BOLSA DE TRABAJO</h5>
-    <li class="dropdown ml-auto">
-      <a style="color:white" class="dropbtn dropdown-toggle">{{ usuarioActual.email }}</a>
-      <div class="dropdown-content">
-        <a style="color:white" routerLink="/menu">Menú principal</a>
-        <a style="color:white" routerLink="/editarusuario">Información de la cuenta</a>
-        <a style="color:white" routerLink="/postulaciones">Mis postulaciones</a>
-        <a style="color:white" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
+
+    <ul class="navbar-nav ml-auto">
+      <div class="dropdown show">
+        <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <span style="color: white;">{{ usuarioActual.email }}</span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" routerLink="/menu">Menú principal</a>
+          <a class="dropdown-item" routerLink="/editarusuario">Información de la cuenta</a>
+          <a class="dropdown-item" routerLink="/postulaciones">Mis postulaciones</a>
+          <a class="dropdown-item" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
+        </div>
       </div>
-    </li>
+    </ul>
   </div>
 </nav>
