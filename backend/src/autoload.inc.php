@@ -12,6 +12,7 @@ spl_autoload_register(
                 'area' => '/core/Area.php',
                 'categoria' => '/core/Categoria.php',
                 'candidato' => '/core/Candidato.php',
+                'empresa' => '/core/Empresa.php',
                 'solicitud' => '/core/Solicitud.php',
                 'db' => '/core/db_conn.php',
                 'errorresult' => '/core/error.php',
