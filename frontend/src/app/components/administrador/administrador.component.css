@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
 
 .dropdown-content {
   display: none;
@@ -149,7 +150,7 @@ a.fromLeft:after {
 }
 /* Css del boton de buscar */
 
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+
 
 #input {
   width: 80%;
