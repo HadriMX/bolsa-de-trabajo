@@ -21,12 +21,11 @@ import { registerLocaleData } from '@angular/common';
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatTabsModule } from '@angular/material';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 
 import {
-  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+  MatButtonModule, MatTabsModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule
 } from "@angular/material";
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
@@ -83,10 +82,6 @@ const routes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    },
-    {
-      provide: LOCALE_ID,
-      useValue: 'es-Mx'
     },
     {
       provide: LOCALE_ID,

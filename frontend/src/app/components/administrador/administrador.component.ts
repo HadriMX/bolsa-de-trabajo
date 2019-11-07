@@ -8,7 +8,7 @@ import { SolicitudService } from '../../services/solicitud.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { LoginService } from 'src/app/services/login.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { CandidatoService } from 'src/app/services/candidato.service';
@@ -20,10 +20,10 @@ import { CandidatoService } from 'src/app/services/candidato.service';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
-  
+
   @Input() nuevaArea: Area = {
     id_area_estudio: 0,
-    nombre: '', 
+    nombre: '',
     estatus: ''
   }
 
@@ -35,8 +35,8 @@ export class AdministradorComponent implements OnInit {
   }
   datoscategoria = [];
   datosarea = [];
-  datosCandidato=[];
-  datosEmpresa=[];
+  datosCandidato = [];
+  datosEmpresa = [];
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
@@ -50,7 +50,7 @@ export class AdministradorComponent implements OnInit {
   AuxArea: string;
   AuxCategoria: string;
   AuxStatusCategoria: string;
-  AuxStatusArea:string;
+  AuxStatusArea: string;
 
   infoCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
@@ -70,9 +70,9 @@ export class AdministradorComponent implements OnInit {
 
 
   ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
-  ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones']; 
-  ColumnasCandidatos: string[]=['email','candidato','estatus'];
-  ColumnasEmpresas: string[]=['email','empresa','rfc','estatus']
+  ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
+  ColumnasCandidatos: string[] = ['email', 'candidato', 'estatus'];
+  ColumnasEmpresas: string[] = ['email', 'empresa', 'rfc', 'estatus']
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
   dataSource_Candidatos = new MatTableDataSource<any>();
@@ -107,8 +107,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   constructor(private areaService: AreaService, private categoriaService: CatEmpresaService,
-    private solicitudService: SolicitudService, private currentUserService: CurrentUserService,
-    private loginService: LoginService, private candidatoService:CandidatoService) { }
+    private solicitudService: SolicitudService, private candidatoService: CandidatoService) { }
   GetSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
@@ -123,14 +122,14 @@ export class AdministradorComponent implements OnInit {
 
   detalleCategoria(Cat_empresa) {
     this.infoCategoria = Cat_empresa;
-    this.AuxCategoria=this.infoCategoria.nombre_empresa;
-    this.AuxStatusCategoria=this.infoCategoria.estatus;
+    this.AuxCategoria = this.infoCategoria.nombre_empresa;
+    this.AuxStatusCategoria = this.infoCategoria.estatus;
   }
 
   detalleArea(Area) {
     this.infoArea = Area;
-    this.AuxArea = this.infoArea.nombre; 
-    this.AuxStatusArea=this.infoArea.estatus;
+    this.AuxArea = this.infoArea.nombre;
+    this.AuxStatusArea = this.infoArea.estatus;
   }
 
   estatus_areas(status: string) {
@@ -162,7 +161,7 @@ export class AdministradorComponent implements OnInit {
   }
 
 
-    GetCategorias() {
+  GetCategorias() {
     this.categoriaService.get_categoriasAdmin()
       .subscribe((response) => {
         if (response.success) {
@@ -208,7 +207,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   preguntarArea() {
-    if ( (this.AuxArea!==this.infoArea.nombre)||(this.AuxStatusArea!==this.infoArea.estatus)) {
+    if ((this.AuxArea !== this.infoArea.nombre) || (this.AuxStatusArea !== this.infoArea.estatus)) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
@@ -225,22 +224,22 @@ export class AdministradorComponent implements OnInit {
         cancelButtonText: 'No',
       }).then((result) => {
         if (result.value) {
-      
+
           this.infoArea.nombre = this.AuxArea;
-          this.infoArea.estatus= this.AuxStatusArea;
+          this.infoArea.estatus = this.AuxStatusArea;
           this.CerrarModales();
         } else if (
           result.dismiss === Swal.DismissReason.cancel
         ) {
         }
       })
-    }else{
+    } else {
       this.CerrarModales();
     }
   }
 
   preguntarCategoria() {
-    if ( (this.AuxCategoria!==this.infoCategoria.nombre_empresa)||(this.AuxStatusCategoria!==this.infoCategoria.estatus)) {
+    if ((this.AuxCategoria !== this.infoCategoria.nombre_empresa) || (this.AuxStatusCategoria !== this.infoCategoria.estatus)) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
@@ -257,16 +256,16 @@ export class AdministradorComponent implements OnInit {
         cancelButtonText: 'No',
       }).then((result) => {
         if (result.value) {
-      
+
           this.infoCategoria.nombre_empresa = this.AuxCategoria;
-          this.infoCategoria.estatus= this.AuxStatusCategoria;
+          this.infoCategoria.estatus = this.AuxStatusCategoria;
           this.CerrarModales();
         } else if (
           result.dismiss === Swal.DismissReason.cancel
         ) {
         }
       })
-    }else{
+    } else {
       this.CerrarModales();
     }
   }
@@ -313,20 +312,20 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  GetCandidatos(){
+  GetCandidatos() {
     this.candidatoService.get_candidatos()
-    .subscribe((response) => {
-      if (response.success) {
-        this.datosCandidato = response.data;
-        this.dataSource_Candidatos.data = this.datosCandidato;
-      }
-      else {
-        Swal.fire("Error", response.message, 'error');
-      }
-    });
+      .subscribe((response) => {
+        if (response.success) {
+          this.datosCandidato = response.data;
+          this.dataSource_Candidatos.data = this.datosCandidato;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
   }
 
-  GetEmpresas(){
+  GetEmpresas() {
 
   }
 
