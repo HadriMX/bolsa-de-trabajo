@@ -62,7 +62,6 @@ export class AdministradorComponent implements OnInit {
   private sort: MatSort;
   public dialog: MatDialog;
   inputbooleano:boolean = false;
-  inputbooleano2:boolean = false;
 
   ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
   ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
@@ -250,7 +249,7 @@ export class AdministradorComponent implements OnInit {
             Swal.fire("Correcto", response.message, 'success')
             this.datoscategoria.push(nombre);
             this.MostrarCategorias();
-            this.inputeffec(2);
+            this.inputeffec();
 
           }
           else {
@@ -320,7 +319,6 @@ export class AdministradorComponent implements OnInit {
 
   categorias(numero) {
     this.inputbooleano = false;
-    this.inputbooleano2 = false;
     // Se selecciona Categorias de las empresas 
     if (numero === 1) {
       if (this.estado === 1) {
@@ -381,7 +379,7 @@ export class AdministradorComponent implements OnInit {
   }
   inputeffec() {
     if (this.inputbooleano === false) {
-      $(".searchBox:hover > .searchInput").css("width", "240px");
+      $(".searchBox:hover > .searchInput").css("width", "330px");
       $(".btnregistrar").css({
        "margin-block-start":"10%", 
        "border-radius":"18px",
@@ -397,23 +395,7 @@ export class AdministradorComponent implements OnInit {
     }
 
   }
-  inputeffec2() {
-    if (this.inputbooleano2 === false) {
-      $(".searchBox2:hover > .searchInput2").css("width", "240px");
-      $(".btnregistrar2").css({
-       "margin-block-start":"10%", 
-       "border-radius":"18px",
-       "background-color":"#660551",
-       "color":"white",
-       "display":"inline-block",       
-      });
-      this.inputbooleano2 = true;
-    } else if (this.inputbooleano2 === true) {
-      $(".searchBox2:hover > .searchInput2").css("width", "0px");
-      this.inputbooleano2 = false;
-      $(".btnregistrar2").css("display", "none");
-    }
-  }
+
   // En esta parte se manejan los colores de los botones al momento de presionarlos
   //------------------------------------------------------------------------------------
 

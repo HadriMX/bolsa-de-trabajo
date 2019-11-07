@@ -21,9 +21,10 @@ import { registerLocaleData } from '@angular/common';
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
 import * as $ from 'jquery';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatTab } from '@angular/material';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { PaginacionService } from 'src/app/services/paginacion.service';
+import { MatTabsModule } from '@angular/material';
 
 import {
   MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
@@ -73,6 +74,7 @@ const routes: Routes = [
     MatSortModule,
     MatProgressSpinnerModule,
     MatButtonModule,
+    MatTabsModule,
   ],
   exports: [
     RouterModule
