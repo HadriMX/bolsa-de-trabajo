@@ -10,6 +10,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
+        <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios
+          auxiliar <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
           Usuarios <span class="sr-only">(current)</span></a>
       </li>
@@ -42,65 +46,110 @@
     <!-- Segunda parte en que se divide -->
     <div class="col-lg-12" id="contenedor2">
       <div *ngIf="estadoimagen" id="estadoimagen">
-        <div class="row">
-          <div class="col-lg-10 col-sm-7 col-12" style="margin-left: 7%;">
-            <div style="width: 100%; margin-block-start: 7%; background-color: rgb(121, 24, 129);">
-              <h5 style="text-align: center;  padding-block-start: 3%;">Registrar Usuario Auxiliar Administrativo</h5>
-              <div class="row" style="padding-left:10%;">
-                <div class="col-lg-5 col-sm-6 col-10">
-                  <h6>Correo electronico:</h6>
-                  <input type="text" class="form-control" placeholder="ejemplo@hotmail.com">
-                </div>
-                <div class="col-lg-5 col-sm-6 col-10">
-                  <h6>Nombre:</h6>
-                  <input type="text" class="form-control" placeholder="Usuario">
+        <mat-tab-group >
+          <mat-tab label="Registrar">
+            <div class="row">
+              <div class="col-lg-10 col-sm-7 col-12" style="margin-left: 7%;">
+                <div style="width: 100%; margin-block-start: 7%; background-color: rgb(121, 24, 129);">
+                  <h5 style="text-align: center;  padding-block-start: 3%;">Registrar usuario auxiliar administrativo
+                  </h5>
+                  <div class="row" style="padding-left:10%;">
+                    <div class="col-lg-5 col-sm-6 col-10">
+                      <h6>Correo electronico:</h6>
+                      <input type="text" class="form-control" placeholder="ejemplo@hotmail.com">
+                    </div>
+                    <div class="col-lg-5 col-sm-6 col-10" style="margin-left: 5%;">
+                      <h6>Nombre:</h6>
+                      <input type="text" class="form-control" placeholder="Usuario">
+                    </div>
+                  </div>
+                  <div class="row" style="padding-left: 10%; padding-block-start: 2%;">
+                    <div class="col-lg-5 col-sm-6 col-10">
+                      <h6>Contraseña:</h6>
+                      <input type="password" class="form-control">
+                    </div>
+                    <div class="col-lg-5 col-sm-6 col-10" style="margin-left: 5%;">
+                      <h6>Confirmar contraseña:</h6>
+                      <input type="password" class="form-control" placeholder="password">
+                    </div>
+                  </div>
+                  <button class="btnuser form-control">Registrar</button>
+                  <div style="height: 20px;"></div>
                 </div>
               </div>
-              <div class="row" style="padding-left: 10%; padding-block-start: 2%;">
-                <div class="col-lg-5 col-sm-6 col-10">
-                  <h6>Contraseña:</h6>
-                  <input type="password" class="form-control">
-                </div>
-                <div class="col-lg-5 col-sm-6 col-10">
-                  <h6>Confirmar contraseña:</h6>
-                  <input type="password" class="form-control" placeholder="password">
-                </div>
-              </div>
-              <button class="btnuser form-control">Registrar</button>
-              <div style="height: 20px;"></div>
             </div>
-          </div>
-        </div>
+          </mat-tab>
+          <mat-tab label="Editar registros">
+            <div class="border border-dark"
+              style="margin-block-start:5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
+              <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
+                <!-- Columna para nombre de la categoria -->
+                <ng-container matColumnDef="nombre_empresa">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                  <td mat-cell *matCellDef="let element">  </td>
+                </ng-container>
+
+                <!-- Columna para estatus -->
+                <ng-container matColumnDef="estatus">
+
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                  <td mat-cell *matCellDef="let element">  </td>
+
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td mat-cell *matCellDef="let element" class="action-link">
+                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
+                      data-target="#ModificarCAT" data-toggle="modal" data-backdrop="static"
+                      (click)="detalleCategoria(element)">Editar</button>
+
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="ColumnasCategorias"></tr>
+                <tr mat-row *matRowDef="let row; columns: ColumnasCategorias;"></tr>
+              </table>
+
+
+            </div>
+            <div style="margin-right: 10%; margin-top: 1%; ; ">
+              <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+            </div>
+          </mat-tab>
+
+
+        </mat-tab-group>
+
       </div>
       <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
       <div class="conteiner">
         <div *ngIf="estado === 1">
           <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <h5 style="color: black;">Categorias para las empresas</h5>
             <div class="row">
-              <div class="col-lg-4 col-sm-4 col-8">
-                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
-                  <mat-form-field>
-                    <input matInput [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" type="text"
-                      placeholder="Nombre de la categoria">
-                  </mat-form-field>
-
+              <div class="col-lg-4 col-sm-6 col-6">
+                <div style="margin-right: 40%;  margin-left:1%; width: 100%; ">
+                  <div class="searchBox">
+                    <input [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" class="searchInput" type="text"
+                      name="" placeholder="Nombre de la categoria">
+                    <button class="searchButton" (click)="inputeffec()">
+                      <i class="material-icons">
+                        note_add
+                      </i>
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-2 col-sm-2 col-2">
-                <button mat-flat-button
-                  style="margin-block-start: 8%; margin-left: 1%; border-radius: 18px; background-color: #660551; color:white;"
-                  (click)="add_CategoriaEmpresa()">Registrar</button>
+              <div class="col-lg-2 col-sm-3 col-6 " >
+                <button class="btnregistrar" mat-flat-button (click)="add_CategoriaEmpresa()">Registrar</button>
               </div>
-              <div class="col-lg-4 col-sm-4 col-12">
-                <div style="margin-right: 60%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
-                  <mat-form-field>
-                    <input matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Filtrar">
-                  </mat-form-field>
-                </div>
+              <div class="col-lg-4 col-sm-3 col-12 ">
+                <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar"
+                  type="text">
               </div>
             </div>
-            <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
+            <div class="border border-dark"
+              style="margin-block-start:5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
               <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre de la categoria -->
                 <ng-container matColumnDef="nombre_empresa">
@@ -142,32 +191,37 @@
       <div class="conteiner">
         <div *ngIf="estado === 2">
           <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <h5 style="color: black;">Lista de areas de estudio</h5>
             <div class="row">
               <div class="col-lg-4 col-sm-4 col-8">
-                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%; ">
-                  <mat-form-field>
-                    <input matInput [(ngModel)]="nuevaArea.nombre" id="area" type="text"
-                      placeholder="Nombre de area de estudio">
-                  </mat-form-field>
-
+                <div style="margin-right: 40%; margin-left:1%; width: 100%; ">
+                  <div class="searchBox">
+                    <input [(ngModel)]="nuevaArea.nombre" id="area" class="searchInput" type="text" name=""
+                      placeholder="Nombre de la area">
+                    <button class="searchButton" (click)="inputeffec()">
+                      <i class="material-icons">
+                        note_add
+                      </i>
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="col-lg-2 col-sm-2 col-2">
-                <button mat-flat-button
-                  style="margin-block-start: 8%; margin-left: 10%; border-radius: 18px; background-color: #660551; color:white;"
-                  (click)="add_areaEstudio()">Registrar</button>
+                <div>
+                  <button class="btnregistrar" mat-flat-button (click)="add_areaEstudio()">Registrar</button>
+                </div>
+
               </div>
               <div class="col-lg-4 col-sm-4 col-12">
-                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
-                  <mat-form-field>
-                    <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
-                  </mat-form-field>
+                <div class="menu">
+                  <input id="input" matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Buscar"
+                    type="text">
+                  <div class="search"></div>
                 </div>
               </div>
             </div>
 
-            <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
+            <div class="border border-dark"
+              style="margin-block-start: 5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
 
               <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre del area de esutdio -->
@@ -208,34 +262,29 @@
       <div class="container-fluid" style="overflow: auto;">
         <div *ngIf="estado === 3">
           <div style="margin-left: 1%; margin-top: 1%;">
-            <h5 style="color: black;">Solicitudes </h5>
             <div *ngFor="let val of datos_solicitud; index as i"
               class="border border-primary border-left-0 border-right-0"
               style="width: 99%; height:50%; margin-block-start: 3%;">
-              <h6 style="font-size: 20px;">Nombre del usuario: {{val.nombre}}</h6>
+              <h6 style="font-size: 20px; color:black;">Nombre del usuario: {{val.nombre}}</h6>
               <div class="row">
-                <div class="col-lg-8 col-sm-8 col-8">
+                <div class="col-lg-12 col-sm-12 col-12">
                   <div class="row">
                     <div class="col-lg-6 col-sm-6 col-9">
-                      <h6 style="margin-block-start: 2%;">Telefono: {{val.telefono}}</h6>
+                      <h6 style="margin-block-start: 2%; color:black;">Telefono: {{val.telefono}}</h6>
                     </div>
                     <div class="col-lg-5 col-sm-6 col-12">
-                      <h6 style="margin-block-start: 2%;">Correo Electronico: {{val.email}}</h6>
+                      <h6 style="margin-block-start: 2%; color:black;">Correo Electronico: {{val.email}}</h6>
                     </div>
                   </div>
                   <div class="row" style="margin-block-start: 1%;">
                     <div class="col-lg-6 col-sm-6 col-9">
-                      <h6>Genero: {{val.genero}}</h6>
+                      <h6 style="color:black;">Genero: {{val.genero}}</h6>
                     </div>
                     <div class="col-lg-5 col-sm-6 col-12">
-                      <h6>Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
+                      <h6 style="color:black;">Fecha de nacimiento: {{val.fecha_nacimiento}}</h6>
                       <button class="form*control btn" style="margin-block-end: 4%;">Aceptar Solicitud</button>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-4 col-sm-4 col-4 d-none d-sm-block">
-                  <img style="margin-left: 35%;" src="../../assets/man-user.png" height="75%" width="40%"
-                    alt="Generic placeholder image">
                 </div>
               </div>
             </div>

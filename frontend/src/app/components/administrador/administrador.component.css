@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -31,8 +33,7 @@ h5 {
 nav.navbar {
   background-color: rgb(121, 24, 129);
 }
-
-/*---------------------------------------------*/
+/* -------------------------------------------*/ 
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: none;
@@ -120,6 +121,11 @@ a.fromLeft:after {
   margin-left: 35%;
   border-radius: 20px;
 }
+  @media (max-width:1000px) and (min-width:320px) {
+    h4{
+      margin-left: 1%;
+    }
+  }
 @media (max-width: 1000px) and (min-width: 320px) {
   h4 {
     margin-left: 1%;
@@ -140,4 +146,98 @@ a.fromLeft:after {
 .remover {
   background-image: url("../../../assets/remove.png");
   background: url("../../../assets/remove.png") no-repeat;
+}
+/* Css del boton de buscar */
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+
+#input {
+  width: 80%;
+  margin-left: 40%;
+  padding: 12px 24px;
+  margin-block-start: 4%;
+  background-color: transparent;
+  transition: transform 250ms ease-in-out;
+  font-size: 14px;
+  line-height: 18px;
+  
+  color: #575756;
+/*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
+
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: 95% center;
+  border-radius: 50px;
+  border: 1px solid #575756;
+  transition: all 250ms ease-in-out;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+  #input::placeholder {
+      color: color(#575756 a(0.8));
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+  }
+  
+  #input:hover,
+  #input:focus {
+      padding: 12px 0;
+      outline: 0;
+      border: 1px solid transparent;
+      border-bottom: 1px solid #575756;
+      border-radius: 0;
+      background-position: 100% center;
+  }
+  /* aqui empieza el diseño para el boton de registrar en el modulo de categoria */
+  .btnregistrar{
+    margin-block-start: 10%; 
+    margin-left: 1%; 
+    border-radius: 18px; 
+    background-color: #660551; 
+    color:white;
+    display: none;  
+  }
+  .searchBox {
+    position: absolute;
+    transform:  translate(-1%,50%);
+    background: #660551;
+    height: 40px;
+    border-radius: 40px;
+}
+
+.searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+
+}
+
+@media screen and (max-width: 620px) {
+.searchBox:hover > .searchInput {
+    width: 150px;
+    padding: 0 6px;
+}
+#input {
+  margin-left: 7%;
+}
+}
+.searchButton {
+  color: white;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #660551;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
 }

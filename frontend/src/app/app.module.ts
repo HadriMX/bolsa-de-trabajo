@@ -73,6 +73,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatTabsModule,
     MatButtonModule,
+    MatTabsModule,
   ],
   exports: [
     RouterModule

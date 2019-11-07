@@ -9,8 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material';
-import { LoginService } from 'src/app/services/login.service';
-import { CurrentUserService } from 'src/app/services/current-user.service';
 import { CandidatoService } from 'src/app/services/candidato.service';
 
 
@@ -40,7 +38,7 @@ export class AdministradorComponent implements OnInit {
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
-  estadoimagen = true;
+  estadoimagen = false;
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
   btnModificarCategoria: boolean;
@@ -67,7 +65,7 @@ export class AdministradorComponent implements OnInit {
   private paginator: MatPaginator;
   private sort: MatSort;
   public dialog: MatDialog;
-
+  inputbooleano: boolean = false;
 
   ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
   ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
@@ -283,6 +281,8 @@ export class AdministradorComponent implements OnInit {
             Swal.fire("Correcto", response.message, 'success')
             this.datoscategoria.push(nombre);
             this.GetCategorias();
+            this.inputeffec();
+
           }
           else {
             Swal.fire("Error", response.message, 'error');
@@ -360,67 +360,83 @@ export class AdministradorComponent implements OnInit {
     this.datoscategoria.splice(i, 1);
   }
 
+
   categorias(numero) {
+    this.inputbooleano = false;
     // Se selecciona Categorias de las empresas 
     if (numero === 1) {
       if (this.estado === 1) {
-        this.estadoimagen = true;
         this.estado = 0;
         $("#categoriaboton").css("border-bottom", "transparent");
       } else {
         $("#categoriaboton").css("border-bottom", "1px solid white");
-        $("#areas").css("border-bottom", "transparent");
-        $("#usuarios").css("border-bottom", "transparent");
-        $("#usuariosactivos").css("border-bottom", "transparent");
-        this.estadoimagen = false;
+        $("#areas,#usuarios,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
         this.estado = 1;
         this.opc = numero;
+        this.estadoimagen = false;
       }
       // Se selecciona Aareas de estudio
     } else if (numero === 2) {
       if (this.estado === 2) {
         this.estado = 0;
-        this.estadoimagen = true;
         $("#areas").css("border-bottom", "transparent");
-
       } else {
         $("#areas").css("border-bottom", "1px solid white");
-        $("#usuarios").css("border-bottom", "transparent");
-        $("#categoriaboton").css("border-bottom", "transparent");
-        $("#usuariosactivos").css("border-bottom", "transparent");
-        this.estado = 2;
+        $("#usuarios,#categoriaboton,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
         this.estadoimagen = false;
+        this.estado = 2;
         this.opc = numero;
       }
       //Se selecciona las solicitudes de los usuarios    
     } else if (numero == 3) {
       if (this.estado === 3) {
         this.estado = 0;
-        this.estadoimagen = true;
         $("#usuarios").css("border-bottom", "transparent");
-
       } else {
         $("#usuarios").css("border-bottom", "1px solid white");
-        $("#areas").css("border-bottom", "transparent");
-        $("#categoriaboton").css("border-bottom", "transparent");
-        $("#usuariosactivos").css("border-bottom", "transparent");
+        $("#areas,#categoriaboton,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
         this.estado = 3;
         this.estadoimagen = false;
-
       }
     } else if (numero === 4) {
       if (this.estado === 4) {
         this.estado = 0;
-        this.estadoimagen = true;
         $("#usuariosactivos").css("border-bottom", "transparent");
       } else {
-        $("#usuario").css("border-bottom", "transparent");
+        $("#usuarios,#areas,#categoriaboton,#Auxiliares").css("border-bottom", "transparent");
         $("#usuariosactivos").css("border-bottom", "1px solid white");
-        $("#areas").css("border-bottom", "transparent");
-        $("#categoriaboton").css("border-bottom", "transparent");
-        this.estado = 4;
         this.estadoimagen = false;
+        this.estado = 4;
+      }
+    } else {
+      if (this.estadoimagen === true) {
+        this.estadoimagen = false;
+        $("#Auxiliares").css("border-bottom", "transparent");
+      } else {
+        $("#usuarios,#usuariosactivos,#areas,#categoriaboton").css("border-bottom", "transparent");
+        $("#Auxiliares").css("border-bottom", "1px solid white");
+        this.estadoimagen = true;
+        this.estado = 0;
       }
     }
+
+  }
+  inputeffec() {
+    if (this.inputbooleano === false) {
+      $(".searchBox:hover > .searchInput").css("width", "330px");
+      $(".btnregistrar").css({
+        "margin-block-start": "10%",
+        "border-radius": "18px",
+        "background-color": "#660551",
+        "color": "white",
+        "display": "inline-block",
+      });
+      this.inputbooleano = true;
+    } else if (this.inputbooleano === true) {
+      $(".searchBox:hover > .searchInput").css("width", "0px");
+      this.inputbooleano = false;
+      $(".btnregistrar").css("display", "none");
+    }
+
   }
 }
