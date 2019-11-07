@@ -4,7 +4,6 @@ import { Postulacion } from '../models/postulacion';
 import { Candidato } from '../models/candidato';
 import { ApiResponse } from '../models/api_response';
 import { Observable } from 'rxjs';
-import { CurrentUserService } from './current-user.service';
 import { HttpOptionsService } from './http-options.service';
 
 

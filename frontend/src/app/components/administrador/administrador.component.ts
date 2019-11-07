@@ -29,12 +29,13 @@ export class AdministradorComponent implements OnInit {
   @Input() NuevaCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
-    nombre_empresa:'',
+    nombre_empresa:'', 
     estatus: ''
   }
   datoscategoria = [];
   datosarea = [];
   datosCandidato=[];
+  datosEmpresa=[];
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
@@ -70,9 +71,11 @@ export class AdministradorComponent implements OnInit {
   ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
   ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones']; 
   ColumnasCandidatos: string[]=['email','candidato','estatus'];
+  ColumnasEmpresas: string[]=['email','empresa','rfc','estatus']
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
   dataSource_Candidatos = new MatTableDataSource<any>();
+  dataSource_Empresas = new MatTableDataSource<any>();
 
   //Filtro para los catalagos de areas de estudio y categorias de empresas
   applyFilterAreas(filterValue: string) {
@@ -105,7 +108,7 @@ export class AdministradorComponent implements OnInit {
   constructor(private areaService: AreaService, private categoriaService: CatEmpresaService,
     private solicitudService: SolicitudService, private currentUserService: CurrentUserService,
     private loginService: LoginService, private candidatoService:CandidatoService) { }
-  MostrarSolicitudes() {
+  GetSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
         if (response.success) {
@@ -144,7 +147,7 @@ export class AdministradorComponent implements OnInit {
 
 
 
-  MostrarAreas() {
+  GetAreas() {
     this.areaService.get_areasAdmin()
       .subscribe((response) => {
         if (response.success) {
@@ -158,7 +161,7 @@ export class AdministradorComponent implements OnInit {
   }
 
 
-    MostrarCategorias() {
+    GetCategorias() {
     this.categoriaService.get_categoriasAdmin()
       .subscribe((response) => {
         if (response.success) {
@@ -174,10 +177,11 @@ export class AdministradorComponent implements OnInit {
   ngOnInit() {
     // this.usuarioActual = this.currentUserService.getUsuarioActual();
 
-    this.MostrarAreas();
-    this.MostrarCategorias();
-    this.MostrarSolicitudes();
-    this.get_candidatos();
+    this.GetAreas();
+    this.GetCategorias();
+    this.GetSolicitudes();
+    this.GetCandidatos();
+    this.GetEmpresas();
   }
 
   add_areaEstudio() {
@@ -191,7 +195,7 @@ export class AdministradorComponent implements OnInit {
           if (response.success) {
             Swal.fire("correcto", "response.message", 'success');
             this.datosarea.push(nombre);
-            this.MostrarAreas();
+            this.GetAreas();
           }
           else {
             Swal.fire("Error", response.message, 'error');
@@ -278,7 +282,7 @@ export class AdministradorComponent implements OnInit {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
             this.datoscategoria.push(nombre);
-            this.MostrarCategorias();
+            this.GetCategorias();
           }
           else {
             Swal.fire("Error", response.message, 'error');
@@ -308,7 +312,7 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  get_candidatos(){
+  GetCandidatos(){
     this.candidatoService.get_candidatos()
     .subscribe((response) => {
       if (response.success) {
@@ -319,6 +323,10 @@ export class AdministradorComponent implements OnInit {
         Swal.fire("Error", response.message, 'error');
       }
     });
+  }
+
+  GetEmpresas(){
+
   }
 
   update_area() {
