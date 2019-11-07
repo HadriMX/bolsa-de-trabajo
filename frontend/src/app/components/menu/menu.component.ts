@@ -60,6 +60,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.getVacantes();
     this.getAreas();
+    
   }
 
   ComprobarUbicacion() {
@@ -103,6 +104,7 @@ export class MenuComponent implements OnInit {
   }
 
   setPage(page: number) {
+    this.arriba();
     if (page < 1) {
       this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
       return;
@@ -112,7 +114,7 @@ export class MenuComponent implements OnInit {
     }
 
     // get pager object from service
-    this.pager = this.PaginacionService.getPager(this.allItems.length, page, 2);
+    this.pager = this.PaginacionService.getPager(this.allItems.length, page, 10);
 
     // setear pagina actual en el url
     if (this.pager.currentPage >= this.pager.totalPages + 1) { //si se sale del limite
@@ -180,7 +182,7 @@ export class MenuComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, postularme!',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
         this.candidatoService.addPostulacion(this.postulacion.id_vacante)
