@@ -1,49 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
+  <img class="modal-title" src="/assets/logo.png" routerLink="/menu" height="40px" width="100px"
+    alt="Generic placeholder image">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <h5 id="titulopag" routerLink="/administracion">BOLSA DE TRABAJO</h5>
 
-    <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+    <ul class="navbar-nav ml-auto">
+      <div class="dropdown show">
+        <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <span style="color: white;">{{ usuarioActual.email }}</span>
+        </a>
 
-<form>
-  <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
-    <img class="modal-title" src="../../assets/logo.png" style="margin-left: 1%;" routerLink="/menu" height="40px"
-      width="100px" alt="Generic placeholder image">
-    <!--
-       <h5 style="color:white; margin-left: 5px;" > 
-          Volar Iap
-       </h5>
-           -->
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- asdsad -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <h5 id="titulopag" routerLink="/administracion">BOLSA DE TRABAJO</h5>
-      <form class="micuenta">
-        <li class="dropdown">
-          <!-- <a style="color:white" class="dropbtn">Opciones</a> -->
-          
-          <span ><a style="color:white" class="dropbtn dropdown-toggle">Opciones</a></span>
-          <div class="dropdown-content">
-            <a style="color:white" routerLink="/menu">Menú principal</a>
-            <a style="color:white" routerLink="/editarusuario">Información de la cuenta</a>
-            <a style="color:white" routerLink="/postulaciones">Mis postulaciones</a>
-            <a style="color:white" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
-          </div>
-        </li>
-      </form>
-      <form style="margin-left: 360px; display: none;" class="micuenta">
-        <li class="dropdown">
-          <a style="color:white" class="dropbtn">Opciones</a>
-          <div class="dropdown-content">
-            <a style="color:rgb(241, 233, 233)" routerLink="/menu">Menú principal</a>
-            <a style="color:rgb(150, 149, 149)" routerLink="/moduloconfiguracion">Información de la cuenta</a>
-            <a style="color:rgb(150, 149, 149)" routerLink="/postulaciones">Registrar tipo de empresa</a>
-            <a style="color:rgb(150, 149, 149)" routerLink="/postulaciones">Registrar areas de estudio</a>
-            <a style="color:rgb(150, 149, 149)" routerLink="/moduloregistro">Cerrar sesión</a>
-          </div>
-        </li>
-      </form>
-      <h6 id="prueba" style="color:white; margin-left: 10px;">{{ usuarioActual.email }}</h6>
-    </div>
-  </nav>
-</form>
+        <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" routerLink="/menu">Menú principal</a>
+          <a class="dropdown-item" routerLink="/editarusuario">Información de la cuenta</a>
+          <a class="dropdown-item" routerLink="/postulaciones">Mis postulaciones</a>
+          <a class="dropdown-item" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
+        </div>
+      </div>
+    </ul>
+  </div>
+</nav>
