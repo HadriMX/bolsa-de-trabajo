@@ -3,11 +3,9 @@ import Swal from 'sweetalert2';
 import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
 import { AreaService } from '../../services/area.service';
-import { FormBuilder, FormGroup, ControlContainer } from '@angular/forms';
 import { Area } from 'src/app/models/area';
 import { Busqueda } from 'src/app/models/busqueda';
 import * as $ from 'jquery';
-import { CurrentUserService } from 'src/app/services/current-user.service';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -38,8 +36,7 @@ export class MenuComponent implements OnInit {
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
   
-
-  @Input() busqueda: Busqueda = {
+  busqueda: Busqueda = {
     SelectedSalario: "0",
     SelectedFecha: "0",
     SelectedArea: "0",
@@ -47,19 +44,23 @@ export class MenuComponent implements OnInit {
     InputUbicacion: "",
   }
 
-  @Input() postulacion: Postulacion = {
+  postulacion: Postulacion = {
     id_vacante: 0,
     id_candidato: 0,
     estatus: 'A'
   }
 
-  constructor(private route: ActivatedRoute, private router: Router, private vacantesService: VacantesService, 
-    private areaService: AreaService, private currentUserService: CurrentUserService, 
-    private PaginacionService: PaginacionService, private candidatoService: CandidatoService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private vacantesService: VacantesService,
+    private areaService: AreaService,
+    private PaginacionService: PaginacionService,
+    private candidatoService: CandidatoService) { }
 
   ngOnInit() {
     this.getVacantes();
     this.getAreas();
+    
   }
 
   ComprobarUbicacion() {
@@ -103,6 +104,7 @@ export class MenuComponent implements OnInit {
   }
 
   setPage(page: number) {
+    this.arriba();
     if (page < 1) {
       this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
       return;
@@ -112,7 +114,7 @@ export class MenuComponent implements OnInit {
     }
 
     // get pager object from service
-    this.pager = this.PaginacionService.getPager(this.allItems.length, page, 2);
+    this.pager = this.PaginacionService.getPager(this.allItems.length, page, 10);
 
     // setear pagina actual en el url
     if (this.pager.currentPage >= this.pager.totalPages + 1) { //si se sale del limite
@@ -169,7 +171,7 @@ export class MenuComponent implements OnInit {
     }, 300);
   }
 
-  postularCandidato(id_vacante: number ){
+  postularCandidato(id_vacante: number) {
     this.postulacion.id_vacante = id_vacante;
 
 
@@ -180,18 +182,18 @@ export class MenuComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, postularme!',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
         this.candidatoService.addPostulacion(this.postulacion.id_vacante)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Exito",response.message,"success");
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire("Exito", response.message, "success");
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
       }
     })
   }

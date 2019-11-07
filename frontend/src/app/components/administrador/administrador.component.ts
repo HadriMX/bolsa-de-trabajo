@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Area } from 'src/app/models/area';
 import { Cat_empresa } from 'src/app/models/categoria'
 import Swal from 'sweetalert2';
@@ -8,9 +8,7 @@ import { SolicitudService } from '../../services/solicitud.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { LoginService } from 'src/app/services/login.service';
-import { CurrentUserService } from 'src/app/services/current-user.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-administrador',
@@ -18,17 +16,17 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
   styleUrls: ['./administrador.component.css']
 })
 export class AdministradorComponent implements OnInit {
-  //  public usuarioActual: Usuario;
-
-  @Input() NuevaArea: Area = {
+  
+  @Input() nuevaArea: Area = {
     id_area_estudio: 0,
     nombre: '',
     estatus: ''
   }
 
-  @Input() NuevaCategoria: Cat_empresa = {
+  @Input() nuevaCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
+    nombre_empresa: '',
     estatus: ''
   }
   datoscategoria = [];
@@ -50,6 +48,7 @@ export class AdministradorComponent implements OnInit {
   infoCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
+    nombre_empresa: '',
     estatus: ''
   }
 
@@ -97,8 +96,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   constructor(private areaService: AreaService, private categoriaService: CatEmpresaService,
-    private solicitudService: SolicitudService, private currentUserService: CurrentUserService,
-    private loginService: LoginService) { }
+    private solicitudService: SolicitudService) { }
   MostrarSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
@@ -176,7 +174,7 @@ export class AdministradorComponent implements OnInit {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarArea = true;
-      this.areaService.add_area(this.NuevaArea)
+      this.areaService.add_area(this.nuevaArea)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("correcto", response.message, 'success');
@@ -243,7 +241,7 @@ export class AdministradorComponent implements OnInit {
       Swal.fire("No ingreso ningun valor");
     } else {
       this.btnAgregarCategoria = true;
-      this.categoriaService.add_categoria(this.NuevaCategoria)
+      this.categoriaService.add_categoria(this.nuevaCategoria)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')

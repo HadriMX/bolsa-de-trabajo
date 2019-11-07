@@ -90,12 +90,13 @@ function getVacantes($titulo,$ubicacion,$idsueldo,$idfecha,$idarea)
         $nombreArea = $nombreResult[0]["nombre"];
     }
 
-    $stmt = $conn->prepare("SELECT * FROM vacantes_activos WHERE ((titulo_vacante LIKE ?) or ?) AND ((entidad_federativa LIKE ?) or ?) AND ((sueldo >= ? AND sueldo <= ?) or ?) AND ((fecha_publicacion >= (NOW() - INTERVAL ? DAY)) or ? ) AND ((area_estudio LIKE ?) or ? )");
+    $id_usuario = $_SESSION["currentUser"]["id_usuario"];
+    $stmt = $conn->prepare("SELECT * FROM vacantes_activos WHERE ((titulo_vacante LIKE ?) or ?) AND ((entidad_federativa LIKE ?) or ?) AND ((sueldo >= ? AND sueldo <= ?) or ?) AND ((fecha_publicacion >= (NOW() - INTERVAL ? DAY)) or ? ) AND ((area_estudio LIKE ?) or ? ) AND (id_vacante NOT IN (SELECT id_vacante FROM postulados WHERE id_usuario = ?))");
     $titulo = "%".$titulo."%";
     $ubicacion = "%".$ubicacion."%";
     $nombreArea = "%".$nombreArea."%";
-
-    $stmt->bind_param("sisissisisi",$titulo,$tituloBool,$ubicacion,$ubicacionBool,$sueldoInicial,$sueldoFinal,$sueldoBool,$dias,$fechaBool,$nombreArea,$areaBool);
+    
+    $stmt->bind_param("sisissisisii",$titulo,$tituloBool,$ubicacion,$ubicacionBool,$sueldoInicial,$sueldoFinal,$sueldoBool,$dias,$fechaBool,$nombreArea,$areaBool,$id_usuario);
 
     $stmt->execute();
     $r = $db->readResult($stmt->get_result());
