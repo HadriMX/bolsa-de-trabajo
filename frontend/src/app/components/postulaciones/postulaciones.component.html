@@ -4,32 +4,80 @@
   <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="../../assets/arrowuo.png" height="15px" width="15px"
       alt="Generic placeholder image">
   </span>
-  <div style="height: 35px; background-color: transparent;">
-  </div>
+
   <div class="container ">
-    <h4>Mis postulaciones</h4>
-    <div *ngFor="let dat of varios; index as i" style="margin-block-start: 2%;"
-      class=" border border-success border-left-0 border-right-0">
-      <div class="row">
-        <div>
-          <div style="margin-block-start: 2%;" class="col-12 col-sm-12 col-md-12">
+    <mat-tab-group id="mattab" dynamicHeight>
+      <mat-tab label="Postulaciones pendientes">
+        <div *ngFor="let dat of varios; index as i" style="margin-block-start: 2%;"
+          class=" border border-success border-left-0 border-right-0">
+          <div class="row">
             <div>
-              <h6>Desarollo de software</h6>
-              <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
-              <h6>DESARROLLO EMPRESARIAL</h6>
-              <div class="row" style="margin-left: 1px;">
-                <div class="col-lg-8 col-sm-8 col-5">
-                  <h6 style="margin-block-start:3%;">Fecha</h6>
-                </div>
-                <div class="col-lg-4 col-sm-4 col-5">
-                  <button class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+              <div class="col-12 col-sm-12 col-md-12">
+                <h6>Desarollo de software</h6>
+                <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
+                <h6>DESARROLLO EMPRESARIAL</h6>
+                <div class="row" style="margin-left: 1px;">
+                  <div class="col-lg-8 col-sm-8 col-5">
+                    <h6 style="margin-block-start:3%;">Fecha</h6>
+                  </div>
+                  <div class="col-lg-4 col-sm-4 col-5">
+                    <button class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </mat-tab>
+      <mat-tab label="Postulaciones Aceptadas">
+        <div *ngFor="let dat of varios; index as i" style="margin-block-start: 2%;"
+          class=" border border-success border-left-0 border-right-0">
+          <div class="row">
+            <div>
+              <div class="col-12 col-sm-12 col-md-12">
+                <h6>Desarollo de software</h6>
+                <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
+                <h6>DESARROLLO EMPRESARIAL</h6>
+                <div class="row" style="margin-left: 1px;">
+                  <div class="col-lg-8 col-sm-8 col-5">
+                    <h6 style="margin-block-start:3%;">Fecha</h6>
+                  </div>
+                  <div class="col-lg-4 col-sm-4 col-5">
+                    <button class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Postulaciones Canceladas">
+        <div *ngFor="let dat of varios; index as i" style="margin-block-start: 2%;"
+          class=" border border-success border-left-0 border-right-0">
+          <div class="row">
+            <div>
+              <div class="col-12 col-sm-12 col-md-12">
+                <h6>Desarollo de software</h6>
+                <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
+                <h6>DESARROLLO EMPRESARIAL</h6>
+                <div class="row" style="margin-left: 1px;">
+                  <div class="col-lg-8 col-sm-8 col-5">
+                    <h6 style="margin-block-start:3%;">Fecha</h6>
+                  </div>
+                  <div class="col-lg-4 col-sm-4 col-5">
+                    <button class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </mat-tab>
+    </mat-tab-group>
+
+
 
     <div style="height: 70px;">
 
@@ -43,7 +91,7 @@
 <!--===============================================================================================-->
 <!-- Modal de los datos de los usuarios -->
 
-<div  class="modal fade" id="vermas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="vermas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
