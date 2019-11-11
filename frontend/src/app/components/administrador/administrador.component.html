@@ -130,7 +130,7 @@
                 <div style="  margin-left:1%; width: 100%; ">
                   <div class="searchBox">
                     <input [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" class="searchInput" type="text"
-                      name="" placeholder=" Nombre de la categoria">
+                      name="" placeholder="Nombre de la categoria">
                     <button class="searchButton" (click)="inputeffec()">
                       <i class="material-icons">
                         note_add
@@ -168,7 +168,7 @@
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
                     <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#ModificarCAT" data-toggle="modal" data-backdrop="static"
+                      data-target="#ModalModificarCat" data-toggle="modal" data-backdrop="static"
                       (click)="detalleCategoria(element)">Editar</button>
 
                   </td>
@@ -181,7 +181,7 @@
 
             </div>
             <div style="margin-right: 10%; margin-top: 1%; ; ">
-              <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+              <mat-paginator #PaginatorCategorias [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
         </div>
@@ -235,12 +235,11 @@
                   <td mat-cell *matCellDef="let element"> {{estatus_areas(element.estatus)}} </td>
                 </ng-container>
 
-
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
                     <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#areas1" data-toggle="modal" data-backdrop="static"
+                      data-target="#ModalModificarAreas" data-toggle="modal" data-backdrop="static"
                       (click)="detalleArea(element)">Editar</button>
                   </td>
                 </ng-container>
@@ -251,7 +250,7 @@
 
             </div>
             <div style="margin-right: 10%; margin-top: 1%; ; ">
-              <mat-paginator #PaginatorAreas [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+              <mat-paginator #PaginatorAreas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
         </div>
@@ -297,58 +296,71 @@
       </div>
       <!-- En esta parte comienza la configuracion de los usuarios registrados -->
       <div class="conteiner">
+
         <div *ngIf="estado === 4">
-          <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <div class="row">
-              <div class="col-lg-4 col-sm-4 col-5">
-                <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
-                  <mat-form-field>
-                    <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
-                  </mat-form-field>
+          <mat-tab-group>
+            <mat-tab label="Candidatos">
+              <div style="margin-left: 10%; margin-top: 1%; ; ">
+                <div class="row">
+                  <div class="col-lg-4 col-sm-4 col-5">
+                    <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
+                      </mat-form-field>
+                    </div>
+                  </div>
                 </div>
+
+                <div class="border border-dark"
+                  style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
+
+                  <table mat-table [dataSource]="dataSource_Candidatos" matSort
+                    class="lessons-table mat-elevation-z8">
+                    <!-- Columna para email del candidato -->
+                    <ng-container matColumnDef="email">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+
+                    <!-- Columna para el nombre del candidato -->
+                    <ng-container matColumnDef="candidato">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Candidato </th>
+                      <td mat-cell *matCellDef="let element"> {{element.candidato}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="estatus">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                      <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                    </ng-container>
+                    <!-- <ng-container matColumnDef="acciones">
+                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                      <td mat-cell *matCellDef="let element" class="action-link">
+                        <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
+                          data-target="#areas1" data-toggle="modal" data-backdrop="static"
+                          (click)="detalleArea(element)">Editar</button>
+
+                      </td>
+                    </ng-container> -->
+
+                    <tr mat-header-row *matHeaderRowDef="ColumnasCandidatos"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ColumnasCandidatos;"></tr>
+                  </table>
+
+                </div>
+                <div style="margin-right: 10%; margin-top: 1%; ; ">
+                  <mat-paginator #PaginatorAreas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
+                </div>
+
               </div>
-              <!-- <div class="col-lg-4 col-sm-4 col-5">
-              <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;">
-                <h6 style="cursor: pointer;">Mostrar auxiliares del administrador</h6>
-              </div>
-            </div> -->
-            </div>
+            </mat-tab>
+            <mat-tab label="Empresas">
 
-            <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
-
-              <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
-                <!-- Columna para nombre del usuario -->
-                <ng-container matColumnDef="nombre">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                </ng-container>
-
-                <!-- Columna para estatus -->
-                <ng-container matColumnDef="estatus">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="acciones">
-                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                  <td mat-cell *matCellDef="let element" class="action-link">
-                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#areas1" data-toggle="modal" data-backdrop="static"
-                      (click)="detalleArea(element)">Editar</button>
-
-                  </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="ColumnasAreas"></tr>
-                <tr mat-row *matRowDef="let row; columns: ColumnasAreas;"></tr>
-              </table>
-
-            </div>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
-              <mat-paginator #PaginatorAreas [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
-            </div>
-          </div>
+            </mat-tab>
+          </mat-tab-group>
         </div>
+
+
+
       </div>
     </div>
   </div>
@@ -356,12 +368,13 @@
 <!--===============================================================================================-->
 
 <!-- Modal para Modificar Categoria de la empresa -->
-<div class="modal fade" tabindex="-1" role="dialog" id="ModificarCAT">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalModificarCat" data-controls-modal="ModalModificarCat"
+  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="color:black;" class="modal-title">Modificar Categoria</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title">Modificar Categoria</h5>
+        <button type="button" class="close" (click)="preguntarCategoria()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -392,7 +405,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeAddExpenseModal>Cerrar</button>
+        <button type="button" (click)="preguntarCategoria()" class="btn btn-secondary">Cerrar</button>
         <button type="button" (click)="update_categoria()" class="btn btn-primary">Guardar Cambios</button>
       </div>
     </div>
@@ -400,12 +413,13 @@
 </div>
 
 <!-- Modal para Modificar Area de estudio -->
-<div class="modal fade" tabindex="-1" role="dialog" id="areas1">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" tabindex="-1" role="dialog" id="ModalModificarAreas" data-controls-modal="ModalModificarAreas"
+  data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="color:black;" class="modal-title">Modificar Area</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title">Modificar Area</h5>
+        <button type="button" class="close" (click)="preguntarArea()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -435,22 +449,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="preguntar()" class="btn btn-secondary">Cerrar</button>
+        <button type="button" (click)="preguntarArea()" class="btn btn-secondary">Cerrar</button>
         <button type="button" (click)="update_area()" class="btn btn-primary">Guardar Cambios</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div id="Warning" class="modal fade" role="dialog" data-backdrop="false">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>This Is A Warning Message</p>
-        <button type="button" class="btn btn-danger confirmclosed">Confirm Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel Close</button>
       </div>
     </div>
   </div>
