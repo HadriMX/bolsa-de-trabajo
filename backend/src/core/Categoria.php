@@ -15,7 +15,7 @@ class Categoria{
                 $output = new SuccessResult("Registro correcto", true);
             }
             else {
-                $err = new ErrorResult("Error de registro", 401);
+                $err = new ErrorResult("Error de registro", 501);
                 $output = $err;
             }
         }

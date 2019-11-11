@@ -128,11 +128,11 @@
                 <!-- items que estan siendo paginados -->
                 <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-2 py-2">
                     <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
-                        data-target="#datosvacante">
+                        data-target="#datosvacantes">
                         <div class="row">
                             <div class="col-9">
                                 <h6 style="color: yellow;">
-                                    <strong>{{item.titulo_vacante}}{{item.id_vacante}}</strong>
+                                    <strong>{{item.titulo_vacante}}</strong>
                                 </h6>
                             </div>
                             <div class="col-3">
@@ -202,8 +202,8 @@
 
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
-<div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="datosvacantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-controls-modal="datosvacante" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: rgb(87, 4, 87);">

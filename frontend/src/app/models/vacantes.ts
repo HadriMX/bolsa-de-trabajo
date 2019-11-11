@@ -8,8 +8,6 @@ export class Vacante {
     descripcion_puesto: string;
     id_area_puesto: number;
     area_estudio: string;
-    id_subarea_estudio: number;
-    subarea_estudio: string;
     sueldo: number;
     genero: string;
     direccion: string;

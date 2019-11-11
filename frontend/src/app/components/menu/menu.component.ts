@@ -44,12 +44,6 @@ export class MenuComponent implements OnInit {
     InputUbicacion: "",
   }
 
-  postulacion: Postulacion = {
-    id_vacante: 0,
-    id_candidato: 0,
-    estatus: 'A'
-  }
-
   constructor(private route: ActivatedRoute,
     private router: Router,
     private vacantesService: VacantesService,
@@ -172,8 +166,6 @@ export class MenuComponent implements OnInit {
   }
 
   postularCandidato(id_vacante: number) {
-    this.postulacion.id_vacante = id_vacante;
-
 
     Swal.fire({
       title: '¿Estás seguro de postularte a esta vacante?',
@@ -185,10 +177,12 @@ export class MenuComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.candidatoService.addPostulacion(this.postulacion.id_vacante)
+        this.candidatoService.addPostulacion(id_vacante)
           .subscribe((response) => {
             if (response.success) {
               Swal.fire("Exito", response.message, "success");
+              this.getVacantes();
+              this.cerrarModales();
             }
             else {
               Swal.fire("Error", response.message, 'error');
@@ -196,6 +190,10 @@ export class MenuComponent implements OnInit {
           });
       }
     })
+  }
+
+  cerrarModales(){
+    $('#datosvacantes').modal('hide');
   }
 
   @HostListener('window:scroll', ['$event']) // for window scroll events

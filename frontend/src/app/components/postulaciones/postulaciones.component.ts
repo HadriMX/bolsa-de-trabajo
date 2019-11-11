@@ -18,6 +18,7 @@ export class PostulacionesComponent implements OnInit {
     }, 500);
   }
 
+
 @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
 
