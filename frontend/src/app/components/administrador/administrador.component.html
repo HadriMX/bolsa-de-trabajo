@@ -40,13 +40,13 @@
 </nav>
 <!-- En esta parte comienza el cuerpo de la pagina -->
 
-<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%; overflow: auto;">
+<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%;">
   <!-- En esta parte se divide la pantalla en dos partes -->
   <div class="row" id="contenedor">
     <!-- Segunda parte en que se divide -->
     <div class="col-lg-12" id="contenedor2">
       <div *ngIf="estadoimagen" id="estadoimagen">
-        <mat-tab-group >
+        <mat-tab-group>
           <mat-tab label="Registrar">
             <div class="row">
               <div class="col-lg-10 col-sm-7 col-12" style="margin-left: 7%;">
@@ -86,14 +86,14 @@
                 <!-- Columna para nombre de la categoria -->
                 <ng-container matColumnDef="nombre_empresa">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                  <td mat-cell *matCellDef="let element">  </td>
+                  <td mat-cell *matCellDef="let element"> </td>
                 </ng-container>
 
                 <!-- Columna para estatus -->
                 <ng-container matColumnDef="estatus">
 
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element">  </td>
+                  <td mat-cell *matCellDef="let element"> </td>
 
                 </ng-container>
 
@@ -128,7 +128,7 @@
           <div style="margin-left: 10%; margin-top: 1%; ; ">
             <div class="row">
               <div class="col-lg-4 col-sm-6 col-6">
-                <div style="margin-right: 40%;  margin-left:1%; width: 100%; ">
+                <div style="  margin-left:1%; width: 100%; ">
                   <div class="searchBox">
                     <input [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" class="searchInput" type="text"
                       name="" placeholder="Nombre de la categoria">
@@ -140,7 +140,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-2 col-sm-3 col-6 " >
+              <div class="col-lg-2 col-sm-3 col-6 ">
                 <button class="btnregistrar" mat-flat-button (click)="add_CategoriaEmpresa()">Registrar</button>
               </div>
               <div class="col-lg-4 col-sm-3 col-12 ">

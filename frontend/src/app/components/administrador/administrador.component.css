@@ -73,6 +73,7 @@ th.mat-sort-header-sorted {
   width: 100%;
   height: 100%;
   overflow: auto;
+  
 }
 .btn {
   border-radius: 15px;
@@ -93,7 +94,6 @@ th {
 }
 #estadoimagen {
   margin-left: 5%;
-  margin-top: 3%;
 }
 a {
   font-size: 14px;
@@ -150,8 +150,6 @@ a.fromLeft:after {
 }
 /* Css del boton de buscar */
 
-
-
 #input {
   width: 80%;
   margin-left: 40%;
@@ -206,7 +204,9 @@ a.fromLeft:after {
     height: 40px;
     border-radius: 40px;
 }
-
+.searchInput::placeholder{
+  color:white;
+} 
 .searchInput {
     border:none;
     background: none;
@@ -241,4 +241,17 @@ a.fromLeft:after {
   justify-content: center;
   align-items: center;
   transition: 0.4s;
+}
+/* aqui inicia el color de los placeholder  */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(47, 28, 117);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgb(47, 28, 117);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgb(47, 28, 117);
 }
