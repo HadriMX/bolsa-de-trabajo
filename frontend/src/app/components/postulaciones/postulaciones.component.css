@@ -10,13 +10,16 @@
   .container {
     width:54%; 
   }
- 
-  #mattab {
-    overflow: hidden;
+  .row {
+    margin-left: 5%;
   }
+
   @media (min-width:246px) and (max-width:767px) {
     .container {
       width: 100%;
+    }
+    .row {
+      margin-left: 0%;
     }
   }
 

@@ -12,4 +12,4 @@ export class EditarusuarioComponent implements OnInit {
   ngOnInit() {
   }
   
-}
+}1
