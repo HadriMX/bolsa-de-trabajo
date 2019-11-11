@@ -6,7 +6,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <h5 id="titulopag" routerLink="/administracion">BOLSA DE TRABAJO</h5>
+    <h5 id="titulopag">BOLSA DE TRABAJO</h5>
 
     <ul class="navbar-nav ml-auto">
       <div class="dropdown show">
@@ -17,10 +17,13 @@
 
         <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
           <a class="dropdown-item" routerLink="/menu">Menú principal</a>
-          <a class="dropdown-item" routerLink="/editarusuario">Información de la cuenta</a>
-          <a class="dropdown-item" routerLink="/postulaciones">Mis postulaciones</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" routerLink="/administracion">Menú administrativo</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario != 0" class="dropdown-item" routerLink="/editarusuario">Información de la cuenta</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario == 1" class="dropdown-item" routerLink="/postulaciones">Mis postulaciones</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario == 2" class="dropdown-item" routerLink="/vacantes">Mis vacantes</a>
           <a class="dropdown-item" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
         </div>
+        
       </div>
     </ul>
   </div>

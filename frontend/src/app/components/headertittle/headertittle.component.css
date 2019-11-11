@@ -43,8 +43,7 @@ input {
 #titulopag {
   color: white;
   text-align: center;
-  margin-left: 20%;
-  width: 40%;
+  width: 100%;
 }
 
 @media (max-width: 985px) {
