@@ -76,7 +76,13 @@ li.dropdown {
     background-size: cover;
     min-height: 90vh;
 }
-
+textarea{
+ width: 80%; 
+ margin-block-start: 10px; 
+ margin-left: 1%; 
+ resize: none;
+ font-size: 13px;
+}
 #page-content {
   flex: 1 0 auto;
 }
@@ -96,12 +102,11 @@ li.dropdown {
   .container {
     width: 100%;
   }
+  .row {
+    margin-left: 0%;
+  }
 }
-#espacioinput {
-  width: 400px; 
-  margin-block-start: 10px;
-  margin-left: 1%;
-}
+
 @media (max-width:992px) {
   #espacioinput {
     margin-left: 0;

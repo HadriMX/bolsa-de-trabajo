@@ -8,29 +8,45 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios
-          auxiliar <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
-          Usuarios <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a style="cursor: pointer;" class="nav-link" id="categoriaboton" (click)="categorias(1)">Categorias de
-          empresas</a>
-      </li>
-      <li class="nav-item active">
-        <a style="cursor: pointer;" class="nav-link" id="areas" (click)="categorias(2)">Areas de estudio</a>
-      </li>
-      <li class="nav-item active">
-        <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">Usuarios
-          registrados</a>
-      </li>
-      <li class="nav-item active ">
-        <a class="nav-link" style="width: 100%; color: rgb(160, 152, 230);" (click)="admin()">administrador <span
-            class="sr-only">(current) </span></a>
-      </li>
+        <li class="nav-item active">
+            <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Usuarios <span class="sr-only">(current)</span> 
+                <div class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuLink">
+                  <li class="nav-item active">
+                      <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios
+                        auxiliar <span class="sr-only">(current)</span>
+                      </a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
+                        Usuarios <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                      <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">Usuarios
+                        registrados</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a style="cursor: pointer;"  class="nav-link" >Vacantes</a>
+                  </li>
+                </div>
+            </a>
+        </li>     
+        <li class="nav-item active">
+            <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Categorias <span class="sr-only">(current)</span> 
+                <div class="dropdown-menu  dropdown-content" aria-labelledby="dropdownMenuLink">
+                    <li class="nav-item active">
+                        <a style="cursor: pointer;" class="nav-link" id="categoriaboton" (click)="categorias(1)">Categorias de
+                          empresas</a>
+                    </li>  
+                    <li class="nav-item active">
+                        <a style="cursor: pointer;" class="nav-link" id="areas" (click)="categorias(2)">Areas de estudio</a>
+                    </li>
+                    <li class="nav-item active ">
+                        <a class="nav-link" style="width: 100%; color: rgb(160, 152, 230);" (click)="admin()">administrador <span
+                            class="sr-only">(current) </span></a>
+                    </li> -->
+                </div>
+            </a>
+        </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <a id="prueba" style="color:white; margin-left: 10px; cursor: pointer;">Cerrar sesion</a>
@@ -40,14 +56,12 @@
 <!-- En esta parte comienza el cuerpo de la pagina -->
 
 <body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%;">
-  <!-- En esta parte se divide la pantalla en dos partes -->
   <div class="row" id="contenedor">
-    <!-- Segunda parte en que se divide -->
     <div class="col-lg-12" id="contenedor2">
-      <div *ngIf="estadoimagen" id="estadoimagen">
-        <mat-tab-group>  
-          <mat-tab label="Registrar" style="margin-left: 25%;">
-            <div class="row">
+      <div *ngIf="estadoimagen" >
+        <mat-tab-group dynamicHeight >  
+          <mat-tab label="Registrar">
+            <div class="row" id="estadoimagen">
               <div class="col-lg-10 col-sm-7 col-12" style="margin-left: 7%;">
                 <div style="width: 100%; margin-block-start: 7%; background-color: rgb(121, 24, 129);">
                   <h5 style="text-align: center;  padding-block-start: 3%;">Registrar usuario auxiliar administrativo
@@ -57,7 +71,7 @@
                       <h6>Correo electronico:</h6>
                       <input type="text" class="form-control" placeholder="ejemplo@hotmail.com">
                     </div>
-                    <div class="col-lg-5 col-sm-6 col-10" style="margin-left: 5%;">
+                    <div class="col-lg-5 col-sm-6 col-10">
                       <h6>Nombre:</h6>
                       <input type="text" class="form-control" placeholder="Usuario">
                     </div>
@@ -67,7 +81,7 @@
                       <h6>Contraseña:</h6>
                       <input type="password" class="form-control">
                     </div>
-                    <div class="col-lg-5 col-sm-6 col-10" style="margin-left: 5%;">
+                    <div class="col-lg-5 col-sm-6 col-10">
                       <h6>Confirmar contraseña:</h6>
                       <input type="password" class="form-control" placeholder="password">
                     </div>
@@ -79,8 +93,8 @@
             </div>
           </mat-tab>
           <mat-tab label="Editar registros">
-            <div class="border border-dark"
-              style="margin-block-start:5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
+            <div id="estadoimagen">
+            <div class="border border-dark"style="margin-block-start:15px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
               <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
                 <!-- Columna para nombre de la categoria -->
                 <ng-container matColumnDef="nombre_empresa">
@@ -112,14 +126,12 @@
 
 
             </div>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
+            <div style=" margin-top: 1%; ; ">
               <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
             </div>
+          </div>  
           </mat-tab>
-
-
         </mat-tab-group>
-
       </div>
       <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
       <div class="conteiner">
@@ -178,9 +190,8 @@
                 <tr mat-row *matRowDef="let row; columns: ColumnasCategorias;"></tr>
               </table>
 
-
             </div>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
+            <div style="margin-right: 10%; margin-top: 1%; ">
               <mat-paginator #PaginatorCategorias [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
@@ -255,8 +266,6 @@
           </div>
         </div>
       </div>
-      <!-- En esta parte comienza la configuracion de areas de estudio y las subareas -->
-
       <!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
       <div class="container-fluid" style="overflow: auto;">
         <div *ngIf="estado === 3">
