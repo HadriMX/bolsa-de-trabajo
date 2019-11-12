@@ -190,11 +190,11 @@
             </nav>
         </div>
     </div>
-
-    <footer id="footer" class="text-center">
-        <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
-    </footer>
 </div>
+
+<footer id="footer" class="text-center">
+    <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
+</footer>
 
 <span (click)="arriba()" class="ir-arriba">
     <img src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
@@ -215,16 +215,22 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <h4>{{infoVacante.nombre_empresa}}</h4>
-                    <h6>{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h6>
+                    <h4>{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h4>
+                    <h6>{{infoVacante.nombre_empresa}}</h6>
                     <h6>{{infoVacante.entidad_federativa}}</h6>
                     <h6>{{infoVacante.descripcion_puesto}}</h6>
                     <h6>{{infoVacante.descripcion_puesto}}</h6>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
+                <button *ngIf="usuarioActual.id_tipo_usuario == 1" class="btn btn-primary"
+                    (click)="postularCandidato(infoVacante.id_vacante)">
                     Postularme
+                </button>
+
+                <button *ngIf="usuarioActual.id_tipo_usuario == 0" class="btn btn-danger"
+                    (click)="darDeBajaVacante(infoVacante)">
+                    Eliminar
                 </button>
             </div>
         </div>
