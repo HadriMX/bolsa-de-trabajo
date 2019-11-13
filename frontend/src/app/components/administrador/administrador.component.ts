@@ -10,7 +10,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material';
 import { CandidatoService } from 'src/app/services/candidato.service';
-
+// importaciones para las vacantes
+import { Vacante } from 'src/app/models/vacantes';
+import { VacantesService } from '../../services/vacantes.service';
+import { Busqueda } from 'src/app/models/busqueda';
 
 @Component({
   selector: 'app-administrador',
@@ -31,6 +34,7 @@ export class AdministradorComponent implements OnInit {
     nombre_empresa: '',
     estatus: ''
   }
+
   datoscategoria = [];
   datosarea = [];
   datosCandidato = [];
@@ -103,9 +107,21 @@ export class AdministradorComponent implements OnInit {
       this.dataSource_AreasEstudio.paginator = this.paginator;
     }
   }
+  // variales para las vacantes  
+  infoVacante: Vacante = new Vacante();
+  busqueda: Busqueda = {
+    SelectedSalario: "0",
+    SelectedFecha: "0",
+    SelectedArea: "0",
+    InputTitulo: "",
+    InputUbicacion: "",
+  }
+  allItems: Vacante[] = [];
 
   constructor(private areaService: AreaService, private categoriaService: CatEmpresaService,
-    private solicitudService: SolicitudService, private candidatoService: CandidatoService) { }
+    private solicitudService: SolicitudService, private candidatoService: CandidatoService,
+    private vacantesService: VacantesService,) { }
+
   GetSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
@@ -174,7 +190,6 @@ export class AdministradorComponent implements OnInit {
 
   ngOnInit() {
     // this.usuarioActual = this.currentUserService.getUsuarioActual();
-
     this.GetAreas();
     this.GetCategorias();
     this.GetSolicitudes();
@@ -350,17 +365,13 @@ export class AdministradorComponent implements OnInit {
   admin() {
     Swal.fire("Pendiente", 'Hay que ver como controlar la info del usuario');
   }
-
   CerrarModales() {
     (<any>$('#ModalModificarAreas')).modal('hide');
     (<any>$('#ModalModificarCat')).modal('hide');
   }
-
   eliminar(i) {
     this.datoscategoria.splice(i, 1);
   }
-
-
   categorias(numero) {
     this.inputbooleano = false;
     // Se selecciona Categorias de las empresas 
@@ -370,7 +381,7 @@ export class AdministradorComponent implements OnInit {
         $("#categoriaboton").css("border-bottom", "transparent");
       } else {
         $("#categoriaboton").css("border-bottom", "1px solid white");
-        $("#areas,#usuarios,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
+        $("#areas,#usuarios,#usuariosactivos,#Auxiliares,#vacantesadmin").css("border-bottom", "transparent");
         this.estado = 1;
         this.opc = numero;
         this.estadoimagen = false;
@@ -382,7 +393,7 @@ export class AdministradorComponent implements OnInit {
         $("#areas").css("border-bottom", "transparent");
       } else {
         $("#areas").css("border-bottom", "1px solid white");
-        $("#usuarios,#categoriaboton,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
+        $("#usuarios,#categoriaboton,#usuariosactivos,#Auxiliares,#vacantesadmin").css("border-bottom", "transparent");
         this.estadoimagen = false;
         this.estado = 2;
         this.opc = numero;
@@ -394,7 +405,7 @@ export class AdministradorComponent implements OnInit {
         $("#usuarios").css("border-bottom", "transparent");
       } else {
         $("#usuarios").css("border-bottom", "1px solid white");
-        $("#areas,#categoriaboton,#usuariosactivos,#Auxiliares").css("border-bottom", "transparent");
+        $("#areas,#categoriaboton,#usuariosactivos,#Auxiliares,#vacantesadmin").css("border-bottom", "transparent");
         this.estado = 3;
         this.estadoimagen = false;
       }
@@ -403,17 +414,27 @@ export class AdministradorComponent implements OnInit {
         this.estado = 0;
         $("#usuariosactivos").css("border-bottom", "transparent");
       } else {
-        $("#usuarios,#areas,#categoriaboton,#Auxiliares").css("border-bottom", "transparent");
+        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css("border-bottom", "transparent");
         $("#usuariosactivos").css("border-bottom", "1px solid white");
         this.estadoimagen = false;
         this.estado = 4;
+      }
+    } else if (numero == 6) {
+      if (this.estado === 6) {
+        this.estado = 0;
+        $("#vacantesadmin").css("border-bottom", "transparent");
+      } else {
+        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#usuariosactivos").css("border-bottom", "transparent");
+        $("#vacantesadmin").css("border-bottom", "1px solid white");
+        this.estadoimagen = false;
+        this.estado = 6;
       }
     } else {
       if (this.estadoimagen === true) {
         this.estadoimagen = false;
         $("#Auxiliares").css("border-bottom", "transparent");
       } else {
-        $("#usuarios,#usuariosactivos,#areas,#categoriaboton").css("border-bottom", "transparent");
+        $("#usuarios,#usuariosactivos,#areas,#categoriaboton,#vacantesadmin").css("border-bottom", "transparent");
         $("#Auxiliares").css("border-bottom", "1px solid white");
         this.estadoimagen = true;
         this.estado = 0;
@@ -439,4 +460,7 @@ export class AdministradorComponent implements OnInit {
     }
 
   }
+  // aqui comienza el codigo de las vacantes que se muestran en el menu
+
+  
 }

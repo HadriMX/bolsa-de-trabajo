@@ -25,7 +25,7 @@
                         registrados</a>
                   </li>
                   <li class="nav-item active">
-                      <a style="cursor: pointer;"  class="nav-link" >Vacantes</a>
+                      <a style="cursor: pointer;" id="vacantesadmin" class="nav-link" (click)="categorias(6)">Vacantes</a>
                   </li>
                 </div>
             </a>
@@ -43,7 +43,7 @@
                     <li class="nav-item active ">
                         <a class="nav-link" style="width: 100%; color: rgb(160, 152, 230);" (click)="admin()">administrador <span
                             class="sr-only">(current) </span></a>
-                    </li> -->
+                    </li>
                 </div>
             </a>
         </li>
@@ -142,7 +142,7 @@
                 <div style="  margin-left:1%; width: 100%; ">
                   <div class="searchBox">
                     <input [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" class="searchInput" type="text"
-                      name="" placeholder="Nombre de la categoria">
+                      autocomplete="off" placeholder="Nombre de la categoria">
                     <button class="searchButton" (click)="inputeffec()">
                       <i class="material-icons">
                         note_add
@@ -205,8 +205,8 @@
               <div class="col-lg-4 col-sm-4 col-8">
                 <div style="margin-right: 40%; margin-left:1%; width: 100%; ">
                   <div class="searchBox">
-                    <input [(ngModel)]="nuevaArea.nombre" id="area" class="searchInput" type="text" name=""
-                      placeholder="Nombre de la area">
+                    <input [(ngModel)]="nuevaArea.nombre" id="area" class="searchInput" type="text" 
+                    autocomplete="off" placeholder="Nombre de la area">
                     <button class="searchButton" (click)="inputeffec()">
                       <i class="material-icons">
                         note_add
@@ -305,7 +305,6 @@
       </div>
       <!-- En esta parte comienza la configuracion de los usuarios registrados -->
       <div class="conteiner">
-
         <div *ngIf="estado === 4">
           <mat-tab-group>
             <mat-tab label="Candidatos">
@@ -367,10 +366,13 @@
             </mat-tab>
           </mat-tab-group>
         </div>
-
-
-
       </div>
+          <!-- En esta parte comienza la configuracion de las vacantes de los usuarios -->
+          <div class="conteiner">
+            <div *ngIf="estado === 6">
+              
+            </div>
+        </div>
     </div>
   </div>
 </body>
@@ -463,4 +465,34 @@
       </div>
     </div>
   </div>
+</div>
+<!--===============================================================================================-->
+<!-- Modal de los datos de las vacantes -->
+<div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: rgb(87, 4, 87);">
+                <h5 style="color: white;">Detalles de la vacante</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span style="color: white;" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h4>{{infoVacante.nombre_empresa}}</h4>
+                    <h6>{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h6>
+                    <h6>{{infoVacante.entidad_federativa}}</h6>
+                    <h6>{{infoVacante.descripcion_puesto}}</h6>
+                    <h6>{{infoVacante.descripcion_puesto}}</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
+                    Postularme
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

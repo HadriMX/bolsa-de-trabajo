@@ -191,7 +191,7 @@ a.fromLeft:after {
   /* aqui empieza el diseño para el boton de registrar en el modulo de categoria */
   .btnregistrar{
     margin-block-start: 10%; 
-    margin-left: 1%; 
+    margin-left: 1px;
     border-radius: 18px; 
     background-color: #660551; 
     color:white;
