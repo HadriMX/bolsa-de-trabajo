@@ -119,7 +119,7 @@ a.fromLeft:after {
 .btnuser {
   width: 25%;
   margin-block-start: 2%;
-  margin-left: 35%;
+  margin-left: 37%;
   border-radius: 20px;
 }
   @media (max-width:1000px) and (min-width:320px) {

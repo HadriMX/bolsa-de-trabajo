@@ -8,49 +8,51 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Usuarios <span class="sr-only">(current)</span> 
-                <div class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuLink">
-                  <li class="nav-item active">
-                      <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios
-                        auxiliar <span class="sr-only">(current)</span>
-                      </a>
-                  </li>
-                  <li class="nav-item active">
-                      <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
-                        Usuarios <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active">
-                      <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">Usuarios
-                        registrados</a>
-                  </li>
-                  <li class="nav-item active">
-                      <a style="cursor: pointer;" id="vacantesadmin" class="nav-link" (click)="categorias(6)">Vacantes</a>
-                  </li>
-                </div>
-            </a>
-        </li>     
-        <li class="nav-item active">
-            <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Categorias <span class="sr-only">(current)</span> 
-                <div class="dropdown-menu  dropdown-content" aria-labelledby="dropdownMenuLink">
-                    <li class="nav-item active">
-                        <a style="cursor: pointer;" class="nav-link" id="categoriaboton" (click)="categorias(1)">Categorias de
-                          empresas</a>
-                    </li>  
-                    <li class="nav-item active">
-                        <a style="cursor: pointer;" class="nav-link" id="areas" (click)="categorias(2)">Areas de estudio</a>
-                    </li>
-                    <li class="nav-item active ">
-                        <a class="nav-link" style="width: 100%; color: rgb(160, 152, 230);" (click)="admin()">administrador <span
-                            class="sr-only">(current) </span></a>
-                    </li>
-                </div>
-            </a>
-        </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <a id="prueba" style="color:white; margin-left: 10px; cursor: pointer;">Cerrar sesion</a>
-    </form>
+      <li class="nav-item active">
+        <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Usuarios <span
+            class="sr-only">(current)</span>
+          <div class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuLink">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios
+          auxiliar <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
+          Usuarios <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">Usuarios
+          registrados</a>
+      </li>
+      <li class="nav-item active">
+        <a style="cursor: pointer;" id="vacantesadmin" class="nav-link" (click)="categorias(6)">Vacantes</a>
+      </li>
+  </div>
+  </a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Categorias <span
+        class="sr-only">(current)</span>
+      <div class="dropdown-menu  dropdown-content" aria-labelledby="dropdownMenuLink">
+  <li class="nav-item active">
+    <a style="cursor: pointer;" class="nav-link" id="categoriaboton" (click)="categorias(1)">Categorias de
+      empresas</a>
+  </li>
+  <li class="nav-item active">
+    <a style="cursor: pointer;" class="nav-link" id="areas" (click)="categorias(2)">Areas de estudio</a>
+  </li>
+  <li class="nav-item active ">
+    <a class="nav-link" style="width: 100%; color: rgb(160, 152, 230);" (click)="admin()">administrador <span
+        class="sr-only">(current) </span></a>
+  </li>
+  </div>
+  </a>
+  </li>
+  </ul>
+  <form class="form-inline my-2 my-lg-0">
+    <a id="prueba" style="color:white; margin-left: 10px; cursor: pointer;">Cerrar sesion</a>
+  </form>
   </div>
 </nav>
 <!-- En esta parte comienza el cuerpo de la pagina -->
@@ -58,15 +60,15 @@
 <body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%;">
   <div class="row" id="contenedor">
     <div class="col-lg-12" id="contenedor2">
-      <div *ngIf="estadoimagen" >
-        <mat-tab-group dynamicHeight >  
+      <div *ngIf="estadoimagen">
+        <mat-tab-group dynamicHeight>
           <mat-tab label="Registrar">
             <div class="row" id="estadoimagen">
               <div class="col-lg-10 col-sm-7 col-12" style="margin-left: 7%;">
                 <div style="width: 100%; margin-block-start: 7%; background-color: rgb(121, 24, 129);">
                   <h5 style="text-align: center;  padding-block-start: 3%;">Registrar usuario auxiliar administrativo
                   </h5>
-                  <div class="row" style="padding-left:10%;">
+                  <div class="row" style="padding-left:13%;">
                     <div class="col-lg-5 col-sm-6 col-10">
                       <h6>Correo electronico:</h6>
                       <input type="text" class="form-control" placeholder="ejemplo@hotmail.com">
@@ -76,7 +78,7 @@
                       <input type="text" class="form-control" placeholder="Usuario">
                     </div>
                   </div>
-                  <div class="row" style="padding-left: 10%; padding-block-start: 2%;">
+                  <div class="row" style="padding-left: 13%; padding-block-start: 2%;">
                     <div class="col-lg-5 col-sm-6 col-10">
                       <h6>Contraseña:</h6>
                       <input type="password" class="form-control">
@@ -94,42 +96,44 @@
           </mat-tab>
           <mat-tab label="Editar registros">
             <div id="estadoimagen">
-            <div class="border border-dark"style="margin-block-start:15px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
-              <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
-                <!-- Columna para nombre de la categoria -->
-                <ng-container matColumnDef="nombre_empresa">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                  <td mat-cell *matCellDef="let element"> </td>
-                </ng-container>
+              <div class="border border-dark"
+                style="margin-block-start:15px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
+                <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
+                  <!-- Columna para nombre de la categoria -->
+                  <ng-container matColumnDef="nombre_empresa">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                    <td mat-cell *matCellDef="let element"> </td>
+                  </ng-container>
 
-                <!-- Columna para estatus -->
-                <ng-container matColumnDef="estatus">
+                  <!-- Columna para estatus -->
+                  <ng-container matColumnDef="estatus">
 
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                    <td mat-cell *matCellDef="let element"> </td>
 
-                </ng-container>
+                  </ng-container>
 
-                <ng-container matColumnDef="acciones">
-                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                  <td mat-cell *matCellDef="let element" class="action-link">
-                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#ModificarCAT" data-toggle="modal" data-backdrop="static"
-                      (click)="detalleCategoria(element)">Editar</button>
+                  <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element" class="action-link">
+                      <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
+                        data-target="#ModificarCAT" data-toggle="modal" data-backdrop="static"
+                        (click)="detalleCategoria(element)">Editar</button>
 
-                  </td>
-                </ng-container>
+                    </td>
+                  </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="ColumnasCategorias"></tr>
-                <tr mat-row *matRowDef="let row; columns: ColumnasCategorias;"></tr>
-              </table>
+                  <tr mat-header-row *matHeaderRowDef="ColumnasCategorias"></tr>
+                  <tr mat-row *matRowDef="let row; columns: ColumnasCategorias;"></tr>
+                </table>
 
 
+              </div>
+              <div style=" margin-top: 1%; ; ">
+                <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
+                </mat-paginator>
+              </div>
             </div>
-            <div style=" margin-top: 1%; ; ">
-              <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
-            </div>
-          </div>  
           </mat-tab>
         </mat-tab-group>
       </div>
@@ -205,8 +209,8 @@
               <div class="col-lg-4 col-sm-4 col-8">
                 <div style="margin-right: 40%; margin-left:1%; width: 100%; ">
                   <div class="searchBox">
-                    <input [(ngModel)]="nuevaArea.nombre" id="area" class="searchInput" type="text" 
-                    autocomplete="off" placeholder="Nombre de la area">
+                    <input [(ngModel)]="nuevaArea.nombre" id="area" class="searchInput" type="text" autocomplete="off"
+                      placeholder="Nombre de la area">
                     <button class="searchButton" (click)="inputeffec()">
                       <i class="material-icons">
                         note_add
@@ -322,8 +326,7 @@
                 <div class="border border-dark"
                   style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
 
-                  <table mat-table [dataSource]="dataSource_Candidatos" matSort
-                    class="lessons-table mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource_Candidatos" matSort class="lessons-table mat-elevation-z8">
                     <!-- Columna para email del candidato -->
                     <ng-container matColumnDef="email">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
@@ -335,7 +338,7 @@
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Candidato </th>
                       <td mat-cell *matCellDef="let element"> {{element.candidato}} </td>
                     </ng-container>
-                    
+
                     <ng-container matColumnDef="estatus">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
                       <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
@@ -367,12 +370,190 @@
           </mat-tab-group>
         </div>
       </div>
-          <!-- En esta parte comienza la configuracion de las vacantes de los usuarios -->
-          <div class="conteiner">
-            <div *ngIf="estado === 6">
-              
-            </div>
+      <!-- En esta parte comienza la configuracion de las vacantes de los usuarios -->
+      <div class="conteiner">
+        <div *ngIf="estado === 6">
+
         </div>
+      </div>
+      <!-- aqui comienza el codigo para el dashBoard  -->
+      <div class="conteiner">
+        <div *ngIf="estadoimagen === false">
+          <!-- dashBoard -->
+          <!-- <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="card card-stats">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-5 col-md-4">
+                          <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-globe text-warning"></i>
+                          </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                          <div class="numbers">
+                            <p class="card-category">Capacity</p>
+                            <p class="card-title">150GB
+                              <p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer ">
+                      <hr>
+                      <div class="stats">
+                        <i class="fa fa-refresh"></i> Update Now
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="card card-stats">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-5 col-md-4">
+                          <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-money-coins text-success"></i>
+                          </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                          <div class="numbers">
+                            <p class="card-category">Revenue</p>
+                            <p class="card-title">$ 1,345
+                              <p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer ">
+                      <hr>
+                      <div class="stats">
+                        <i class="fa fa-calendar-o"></i> Last day
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="card card-stats">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-5 col-md-4">
+                          <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-vector text-danger"></i>
+                          </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                          <div class="numbers">
+                            <p class="card-category">Errors</p>
+                            <p class="card-title">23
+                              <p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer ">
+                      <hr>
+                      <div class="stats">
+                        <i class="fa fa-clock-o"></i> In the last hour
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="card card-stats">
+                    <div class="card-body ">
+                      <div class="row">
+                        <div class="col-5 col-md-4">
+                          <div class="icon-big text-center icon-warning">
+                            <i class="nc-icon nc-favourite-28 text-primary"></i>
+                          </div>
+                        </div>
+                        <div class="col-7 col-md-8">
+                          <div class="numbers">
+                            <p class="card-category">Followers</p>
+                            <p class="card-title">+45K
+                              <p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer ">
+                      <hr>
+                      <div class="stats">
+                        <i class="fa fa-refresh"></i> Update now
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card ">
+                    <div class="card-header ">
+                      <h5 class="card-title">Users Behavior</h5>
+                      <p class="card-category">24 Hours performance</p>
+                    </div>
+                    <div class="card-body ">
+                      <canvas id=chartHours width="400" height="100"></canvas>
+                    </div>
+                    <div class="card-footer ">
+                      <hr>
+                      <div class="stats">
+                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card ">
+                    <div class="card-header ">
+                      <h5 class="card-title">Email Statistics</h5>
+                      <p class="card-category">Last Campaign Performance</p>
+                    </div>
+                    <div class="card-body ">
+                      <canvas id="chartEmail"></canvas>
+                    </div>
+                    <div class="card-footer ">
+                      <div class="legend">
+                        <i class="fa fa-circle text-primary"></i> Opened
+                        <i class="fa fa-circle text-warning"></i> Read
+                        <i class="fa fa-circle text-danger"></i> Deleted
+                        <i class="fa fa-circle text-gray"></i> Unopened
+                      </div>
+                      <hr>
+                      <div class="stats">
+                        <i class="fa fa-calendar"></i> Number of emails sent
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="card card-chart">
+                    <div class="card-header">
+                      <h5 class="card-title">NASDAQ: AAPL</h5>
+                      <p class="card-category">Line Chart with Points</p>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="speedChart" width="400" height="100"></canvas>
+                    </div>
+                    <div class="card-footer">
+                      <div class="chart-legend">
+                        <i class="fa fa-circle text-info"></i> Tesla Model S
+                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
+                      </div>
+                      <hr/>
+                      <div class="card-stats">
+                        <i class="fa fa-check"></i> Data information certified
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+
+        </div>
+      </div>
     </div>
   </div>
 </body>
@@ -469,30 +650,30 @@
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
 <div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: rgb(87, 4, 87);">
-                <h5 style="color: white;">Detalles de la vacante</h5>
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: rgb(87, 4, 87);">
+        <h5 style="color: white;">Detalles de la vacante</h5>
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span style="color: white;" aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <h4>{{infoVacante.nombre_empresa}}</h4>
-                    <h6>{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h6>
-                    <h6>{{infoVacante.entidad_federativa}}</h6>
-                    <h6>{{infoVacante.descripcion_puesto}}</h6>
-                    <h6>{{infoVacante.descripcion_puesto}}</h6>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
-                    Postularme
-                </button>
-            </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span style="color: white;" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h4>{{infoVacante.nombre_empresa}}</h4>
+          <h6>{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h6>
+          <h6>{{infoVacante.entidad_federativa}}</h6>
+          <h6>{{infoVacante.descripcion_puesto}}</h6>
+          <h6>{{infoVacante.descripcion_puesto}}</h6>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
+          Postularme
+        </button>
+      </div>
     </div>
+  </div>
 </div>

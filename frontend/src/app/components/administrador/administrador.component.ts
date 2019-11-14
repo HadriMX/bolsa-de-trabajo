@@ -53,6 +53,12 @@ export class AdministradorComponent implements OnInit {
   AuxCategoria: string;
   AuxStatusCategoria: string;
   AuxStatusArea: string;
+  // variables del dashboard
+  public canvas : any;
+  public ctx;
+  public chartColor;
+  public chartEmail;
+  public chartHours;
 
   infoCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
@@ -195,6 +201,7 @@ export class AdministradorComponent implements OnInit {
     this.GetSolicitudes();
     this.GetCandidatos();
     this.GetEmpresas();
+    
   }
 
   add_areaEstudio() {
@@ -463,4 +470,7 @@ export class AdministradorComponent implements OnInit {
   // aqui comienza el codigo de las vacantes que se muestran en el menu
 
   
+
+  // aqui comienza el codigo para el dashboard 
+
 }
