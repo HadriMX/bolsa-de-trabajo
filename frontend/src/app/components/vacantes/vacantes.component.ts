@@ -1,5 +1,7 @@
 import { Component, OnInit,HostListener } from '@angular/core';
 import * as $ from 'jquery';
+import { Vacante } from 'src/app/models/vacantes';
+import { VacantesService } from 'src/app/services/vacantes.service';
 
 @Component({
   selector: 'app-vacantes',
@@ -7,13 +9,20 @@ import * as $ from 'jquery';
   styleUrls: ['./vacantes.component.css']
 })
 export class VacantesComponent implements OnInit {
-  varios = [1,2,3,4,5,6,7];
 
-  constructor() { }
+  vacantes: Vacante[] = [];
+
+  constructor(private vacantesService: VacantesService) { }
 
   ngOnInit() {
+    this.vacantesService.getMisVacantes().subscribe(response => {
+      if (response.success) {
+        this.vacantes = response.data;
+      }
+    });
    // $("#editarinfoempresa").modal("show");
   }
+
   arriba() {
     $('#body, html').animate({
       scrollTop:'0px'
