@@ -14,6 +14,7 @@ spl_autoload_register(
                 'candidato' => '/core/Candidato.php',
                 'empresa' => '/core/Empresa.php',
                 'solicitud' => '/core/Solicitud.php',
+                'postulacion' => '/core/Postulacion.php',
                 'db' => '/core/db_conn.php',
                 'errorresult' => '/core/error.php',
                 'mysessionhandler' => '/core/sess_handler.php',

@@ -4,13 +4,14 @@ import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
 import { AreaService } from '../../services/area.service';
 import { Area } from 'src/app/models/area';
+// import * as $ from 'jquery';
 import { Busqueda } from 'src/app/models/busqueda';
-import * as $ from 'jquery';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Postulacion } from 'src/app/models/postulacion';
 import { CandidatoService } from 'src/app/services/candidato.service';
+import { PostulacionService } from 'src/app/services/postulacion.service';
 
 @Component({
   selector: 'app-menu',
@@ -49,7 +50,8 @@ export class MenuComponent implements OnInit {
     private vacantesService: VacantesService,
     private areaService: AreaService,
     private PaginacionService: PaginacionService,
-    private candidatoService: CandidatoService) { }
+    private candidatoService: CandidatoService,
+    private postulacionService: PostulacionService) { }
 
   ngOnInit() {
     this.getVacantes();
@@ -98,7 +100,8 @@ export class MenuComponent implements OnInit {
   }
 
   setPage(page: number) {
-    this.arriba();
+    // this.arriba();
+    this.gotoTop();
     if (page < 1) {
       this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
       return;
@@ -159,11 +162,11 @@ export class MenuComponent implements OnInit {
     this.busqueda.SelectedArea = "0";
   }
 
-  arriba() {
-    $('#body, html').animate({
-      scrollTop: '0px'
-    }, 300);
-  }
+  // arriba() {
+  //   // $('#body, html').animate({
+  //   //   scrollTop: '0px'
+  //   // }, 300);
+  // }
 
   postularCandidato(id_vacante: number) {
 
@@ -177,7 +180,7 @@ export class MenuComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.candidatoService.addPostulacion(id_vacante)
+        this.postulacionService.addPostulacion(id_vacante)
           .subscribe((response) => {
             if (response.success) {
               Swal.fire("Exito", response.message, "success");
@@ -193,16 +196,39 @@ export class MenuComponent implements OnInit {
   }
 
   cerrarModales(){
-    $('#datosvacantes').modal('hide');
+    (<any>$('#datosvacantes')).modal('hide');
   }
 
-  @HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll(event) {
+  // @HostListener('window:scroll', ['$event']) // for window scroll events
+  // onScroll(event) {
 
-    if ($(window).scrollTop() > 200) {
-      $('.ir-arriba').slideDown(300);
+  //   if ($(window).scrollTop() > 200) {
+  //     $('.ir-arriba').slideDown(300);
+  //   } else {
+  //     $('.ir-arriba').slideUp(300);
+  //   }
+  // }
+
+  isShow: boolean;
+  topPosToStartShowing = 100;
+
+  // Scrollup funciones
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
     } else {
-      $('.ir-arriba').slideUp(300);
+      this.isShow = false;
     }
   }
+  // Scrollup funciones
+  gotoTop() {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
+
 }

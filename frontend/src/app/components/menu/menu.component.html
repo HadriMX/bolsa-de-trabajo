@@ -1,6 +1,7 @@
 <app-headertittle></app-headertittle>
 
 <!--inicia del cuerpo de la pagina del menu -->
+
 <div id="body">
     <div id="cabeceraBusqueda" class="container-fluid">
         <div class="container">
@@ -196,9 +197,12 @@
     </footer>
 </div>
 
-<span (click)="arriba()" class="ir-arriba">
+<!-- <span (click)="arriba()" class="ir-arriba">
     <img src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
-</span>
+</span> -->
+
+<img *ngIf="isShow" class="scrollup_img" (click)="gotoTop()" src="../../../assets/scrollup.png" alt=""
+            style="width: 60px;">
 
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
