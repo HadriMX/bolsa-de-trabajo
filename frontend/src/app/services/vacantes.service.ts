@@ -20,7 +20,7 @@ export class VacantesService {
   }
 
   getMisVacantes(): Observable<ApiResponse<Vacante[]>> {
-    var url = 'http://localhost/bdt/php/src/vacante/get_vacantes.php';
+    var url = 'http://localhost/bdt/php/src/vacante/get_mis_vacantes.php';
     return this.http.get<ApiResponse<Vacante[]>>(url, this.httpOptions);
   }
 }
