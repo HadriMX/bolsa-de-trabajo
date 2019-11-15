@@ -113,7 +113,7 @@ li {
   background-color: rgb(91, 6, 112);
 }
 
-.ir-arriba {
+/* .ir-arriba {
   display: none;
   padding: 16px;
   background-repeat: no-repeat;
@@ -129,4 +129,14 @@ li {
 
 .ir-arriba:hover {
   background: rgb(67, 8, 71);
+} */
+
+.scrollup_img {
+  z-index: 2;
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }

@@ -14,8 +14,8 @@ export class VacantesService {
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
 
-  getVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
-    var url = 'http://localhost/bdt/php/src/vacante/vacante.php';
+  busquedaVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
+    var url = 'http://localhost/bdt/php/src/vacante/busqueda_vacante.php';
     return this.http.post<ApiResponse<Vacante[]>>(url, busqueda, this.httpOptions);
   }
 

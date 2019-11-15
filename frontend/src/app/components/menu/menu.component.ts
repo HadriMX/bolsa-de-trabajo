@@ -4,8 +4,8 @@ import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
 import { AreaService } from '../../services/area.service';
 import { Area } from 'src/app/models/area';
+// import * as $ from 'jquery';
 import { Busqueda } from 'src/app/models/busqueda';
-import * as $ from 'jquery';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { Postulacion } from 'src/app/models/postulacion';
 import { CandidatoService } from 'src/app/services/candidato.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Usuario } from 'src/app/models/usuario';
+import { PostulacionService } from 'src/app/services/postulacion.service';
 
 @Component({
   selector: 'app-menu',
@@ -47,22 +48,17 @@ export class MenuComponent implements OnInit {
     InputUbicacion: "",
   }
 
-  postulacion: Postulacion = {
-    id_vacante: 0,
-    id_candidato: 0,
-    estatus: 'A'
-  }
-
   constructor(private route: ActivatedRoute,
     private router: Router,
     private vacantesService: VacantesService,
     private areaService: AreaService,
     private PaginacionService: PaginacionService,
     private candidatoService: CandidatoService,
-    private currentUserService: CurrentUserService) { }
+    private currentUserService: CurrentUserService,
+    private postulacionService: PostulacionService) { }
 
   ngOnInit() {
-    this.getVacantes();
+    this.busquedaVacantes();
     this.getAreas();
     this.usuarioActual = this.currentUserService.getUsuarioActual();
   }
@@ -78,8 +74,8 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  getVacantes() {
-    this.vacantesService.getVacantes(this.busqueda)
+  busquedaVacantes() {
+    this.vacantesService.busquedaVacantes(this.busqueda)
       .subscribe((response) => {
         if (response.success) {
           if (response.data.length >= 1) {
@@ -108,7 +104,8 @@ export class MenuComponent implements OnInit {
   }
 
   setPage(page: number) {
-    this.arriba();
+    // this.arriba();
+    this.gotoTop();
     if (page < 1) {
       this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
       return;
@@ -149,9 +146,9 @@ export class MenuComponent implements OnInit {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
     this.ComprobarUbicacion();
     if (this.busqueda.InputUbicacion == "") {
-      this.getVacantes();
+      this.busquedaVacantes();
     } else if (this.ubicacionCorrecta) {
-      this.getVacantes();
+      this.busquedaVacantes();
     } else {
       this.busqueda.InputUbicacion = "";
       Swal.fire("AJALEEEEEE", "AJALEEEEx2 Elige una ubicacion de la lista", "error");
@@ -167,17 +164,16 @@ export class MenuComponent implements OnInit {
     this.busqueda.SelectedSalario = "0";
     this.busqueda.SelectedFecha = "0";
     this.busqueda.SelectedArea = "0";
+    this.busquedaVacantes();
   }
 
-  arriba() {
-    $('#body, html').animate({
-      scrollTop: '0px'
-    }, 300);
-  }
+  // arriba() {
+  //   // $('#body, html').animate({
+  //   //   scrollTop: '0px'
+  //   // }, 300);
+  // }
 
   postularCandidato(id_vacante: number) {
-    this.postulacion.id_vacante = id_vacante;
-
 
     Swal.fire({
       title: '¿Estás seguro de postularte a esta vacante?',
@@ -189,10 +185,12 @@ export class MenuComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
-        this.candidatoService.addPostulacion(this.postulacion.id_vacante)
+        this.postulacionService.addPostulacion(id_vacante)
           .subscribe((response) => {
             if (response.success) {
               Swal.fire("Exito", response.message, "success");
+              this.busquedaVacantes();
+              this.cerrarModales();
             }
             else {
               Swal.fire("Error", response.message, 'error');
@@ -202,13 +200,31 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  @HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll(event) {
+  cerrarModales(){
+    (<any>$('#datosvacantes')).modal('hide');
+  }
 
-    if ($(window).scrollTop() > 200) {
-      $('.ir-arriba').slideDown(300);
+  // @HostListener('window:scroll', ['$event']) // for window scroll events
+  // onScroll(event) {
+
+  //   if ($(window).scrollTop() > 200) {
+  //     $('.ir-arriba').slideDown(300);
+  //   } else {
+  //     $('.ir-arriba').slideUp(300);
+  //   }
+  // }
+
+  isShow: boolean;
+  topPosToStartShowing = 100;
+
+  // Scrollup funciones
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
     } else {
-      $('.ir-arriba').slideUp(300);
+      this.isShow = false;
     }
   }
 
@@ -219,4 +235,13 @@ export class MenuComponent implements OnInit {
   }
 
   /**************** */
+  // Scrollup funciones
+  gotoTop() {
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
+  }
+
 }

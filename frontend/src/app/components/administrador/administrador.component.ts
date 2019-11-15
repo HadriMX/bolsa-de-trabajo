@@ -358,8 +358,8 @@ export class AdministradorComponent implements OnInit {
   }
 
   CerrarModales() {
-    $('#ModalModificarAreas').modal('hide');
-    $('#ModalModificarCat').modal('hide');
+    (<any>$('#ModalModificarAreas')).modal('hide');
+    (<any>$('#ModalModificarCat')).modal('hide');
   }
 
   eliminar(i) {

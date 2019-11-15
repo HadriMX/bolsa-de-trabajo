@@ -9,7 +9,7 @@
         "request": "launch",
         "reAttach": true,
         "name": "Launch FireFox",
-        "url": "http://localhost/index.html",
+        "url": "http://localhost:4200/",
         "webRoot": "${workspaceFolder}"
     },
     {

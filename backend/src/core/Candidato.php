@@ -58,10 +58,6 @@ class Candidato
         return $output;
     }
 
-    public static function postular($id_vacante, $id_candidato, $fecha){
-        return new SuccessResult("Has sido postulado correctamente", true);
-    }
-
     public static function get_candidatos(){
         $db = new Db();
         $conn = $db->getConn();
