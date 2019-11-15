@@ -54,7 +54,7 @@ export class MenuComponent implements OnInit {
     private postulacionService: PostulacionService) { }
 
   ngOnInit() {
-    this.getVacantes();
+    this.busquedaVacantes();
     this.getAreas();
     
   }
@@ -70,8 +70,8 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  getVacantes() {
-    this.vacantesService.getVacantes(this.busqueda)
+  busquedaVacantes() {
+    this.vacantesService.busquedaVacantes(this.busqueda)
       .subscribe((response) => {
         if (response.success) {
           if (response.data.length >= 1) {
@@ -142,9 +142,9 @@ export class MenuComponent implements OnInit {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
     this.ComprobarUbicacion();
     if (this.busqueda.InputUbicacion == "") {
-      this.getVacantes();
+      this.busquedaVacantes();
     } else if (this.ubicacionCorrecta) {
-      this.getVacantes();
+      this.busquedaVacantes();
     } else {
       this.busqueda.InputUbicacion = "";
       Swal.fire("AJALEEEEEE", "AJALEEEEx2 Elige una ubicacion de la lista", "error");
@@ -160,7 +160,7 @@ export class MenuComponent implements OnInit {
     this.busqueda.SelectedSalario = "0";
     this.busqueda.SelectedFecha = "0";
     this.busqueda.SelectedArea = "0";
-    this.getVacantes();
+    this.busquedaVacantes();
   }
 
   // arriba() {
@@ -185,7 +185,7 @@ export class MenuComponent implements OnInit {
           .subscribe((response) => {
             if (response.success) {
               Swal.fire("Exito", response.message, "success");
-              this.getVacantes();
+              this.busquedaVacantes();
               this.cerrarModales();
             }
             else {

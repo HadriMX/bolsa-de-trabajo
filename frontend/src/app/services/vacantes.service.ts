@@ -11,12 +11,12 @@ import { HttpOptionsService } from './http-options.service';
 })
 export class VacantesService {
 
-  private endpointUrl = 'http://localhost/bdt/php/src/vacante/vacante.php';
+  private endpointUrl = 'http://localhost/bdt/php/src/vacante/busqueda_vacante.php';
 
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
 
-  getVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
+  busquedaVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
     return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrl, busqueda, this.httpOptions);
   }
 }
