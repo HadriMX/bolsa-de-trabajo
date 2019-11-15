@@ -155,11 +155,12 @@ a.fromLeft:after {
 /* Css del boton de buscar */
 
 #input {
+  background-color: rgba(255, 255, 255, 0.507); 
+  border-radius: 20px; 
   width: 80%;
   margin-left: 40%;
   padding: 12px 24px;
   margin-block-start: 4%;
-  background-color: transparent;
   transition: transform 250ms ease-in-out;
   font-size: 14px;
   line-height: 18px;
@@ -171,11 +172,11 @@ a.fromLeft:after {
   background-repeat: no-repeat;
   background-size: 18px 18px;
   background-position: 95% center;
-  border-radius: 50px;
   border: 1px solid #575756;
   transition: all 250ms ease-in-out;
   backface-visibility: hidden;
   transform-style: preserve-3d;
+  
 }
   #input::placeholder {
       color: color(#575756 a(0.8));
@@ -188,10 +189,11 @@ a.fromLeft:after {
       padding: 12px 0;
       outline: 0;
       border: 1px solid transparent;
-      border-bottom: 1px solid #575756;
-      border-radius: 0;
+      border-bottom: none;
+      border-radius: 20px;
       background-position: 100% center;
-  }
+      padding-left: 10px;
+    }
   /* aqui empieza el diseño para el boton de registrar en el modulo de categoria */
   .btnregistrar{
     margin-block-start: 10%; 
