@@ -42,7 +42,7 @@ class Vacante
         return $output;
     }
 
-    public static function get()
+    public static function get_mis_vacantes()
     {
         $db = new Db();
         $conn = $db->getConn();
