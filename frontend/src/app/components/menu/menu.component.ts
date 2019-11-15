@@ -160,6 +160,7 @@ export class MenuComponent implements OnInit {
     this.busqueda.SelectedSalario = "0";
     this.busqueda.SelectedFecha = "0";
     this.busqueda.SelectedArea = "0";
+    this.getVacantes();
   }
 
   // arriba() {
