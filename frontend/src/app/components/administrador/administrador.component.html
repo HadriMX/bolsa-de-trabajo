@@ -564,7 +564,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modificar Categoria</h5>
+        <h5 class="modal-title" style="color: black;">Modificar categoría</h5>
         <button type="button" class="close" (click)="preguntarCategoria()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -609,7 +609,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modificar Area</h5>
+        <h5 class="modal-title" style="color: black;">Modificar área</h5>
         <button type="button" class="close" (click)="preguntarArea()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -642,36 +642,6 @@
       <div class="modal-footer">
         <button type="button" (click)="preguntarArea()" class="btn btn-secondary">Cerrar</button>
         <button type="button" (click)="update_area()" class="btn btn-primary">Guardar Cambios</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--===============================================================================================-->
-<!-- Modal de los datos de las vacantes -->
-<div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: rgb(87, 4, 87);">
-        <h5 style="color: white;">Detalles de la vacante</h5>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span style="color: white;" aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div>
-          <h4>{{infoVacante.nombre_empresa}}</h4>
-          <h6>{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h6>
-          <h6>{{infoVacante.entidad_federativa}}</h6>
-          <h6>{{infoVacante.descripcion_puesto}}</h6>
-          <h6>{{infoVacante.descripcion_puesto}}</h6>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
-          Postularme
-        </button>
       </div>
     </div>
   </div>
