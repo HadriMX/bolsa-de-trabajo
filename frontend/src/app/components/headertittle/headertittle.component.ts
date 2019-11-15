@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-headertittle',

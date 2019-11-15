@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { RegistroService } from '../../services/registro.service';
 import Swal from 'sweetalert2';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',

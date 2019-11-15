@@ -9,7 +9,9 @@
     height: 100%;
 
 }
-
+h6{
+    margin-block-start: 8px;
+}
 #titulo-css {
     margin-left: 1%; 
     font-size: 20px;
@@ -64,18 +66,21 @@
           width: 250%;
       }
       #espaciovacio {
-          height: 300px;
+          height: 200px;
       }
   }
   @media (min-width:320px) and (max-width:420px) {
       #boton3 {
           height: 100%;
+          width: 120px;
       }
     
   }
-   @media (min-width:320px) and (max-width:564px) {
+   @media (min-width:357px) and (max-width:564px) {
       #espaciovacio{
-          margin-block-start: 600px;
+          height:600px;
+          margin-block-start: 725px;
+
       }
       #boton3{
           width: 160px;
@@ -87,7 +92,8 @@
   } 
   @media (max-width:356px) {
       #espaciovacio{
-        margin-block-start: 650px;
+        height: 650px;
+        margin-block-start: 800px;
       }
       #boton3{
           margin-left:0;
