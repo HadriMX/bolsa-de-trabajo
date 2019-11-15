@@ -159,7 +159,7 @@
                 <button class="btnregistrar" mat-flat-button (click)="add_CategoriaEmpresa()">Registrar</button>
               </div>
               <div class="col-lg-4 col-sm-3 col-12 ">
-                <input id="input" style="background-color: rgba(255, 255, 255, 0.507); " matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar"
+                <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar"
                   type="text">
               </div>
             </div>
