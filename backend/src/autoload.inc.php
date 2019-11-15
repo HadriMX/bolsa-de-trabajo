@@ -8,16 +8,17 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'admin' => '/core/Admin.php',
-                'auth' => '/core/Auth.php',
                 'area' => '/core/Area.php',
-                'categoria' => '/core/Categoria.php',
+                'auth' => '/core/Auth.php',
                 'candidato' => '/core/Candidato.php',
-                'empresa' => '/core/Empresa.php',
-                'solicitud' => '/core/Solicitud.php',
+                'categoria' => '/core/Categoria.php',
                 'db' => '/core/db_conn.php',
+                'empresa' => '/core/Empresa.php',
                 'errorresult' => '/core/error.php',
                 'mysessionhandler' => '/core/sess_handler.php',
-                'successresult' => '/core/success.php'
+                'solicitud' => '/core/Solicitud.php',
+                'successresult' => '/core/success.php',
+                'vacante' => '/core/Vacante.php'
             );
         }
         $cn = strtolower($class);

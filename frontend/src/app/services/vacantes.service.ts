@@ -11,12 +11,16 @@ import { HttpOptionsService } from './http-options.service';
 })
 export class VacantesService {
 
-  private endpointUrl = 'http://localhost/bdt/php/src/vacante/vacante.php';
-
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
 
   getVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
-    return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrl, busqueda, this.httpOptions);
+    var url = 'http://localhost/bdt/php/src/vacante/vacante.php';
+    return this.http.post<ApiResponse<Vacante[]>>(url, busqueda, this.httpOptions);
+  }
+
+  getMisVacantes(): Observable<ApiResponse<Vacante[]>> {
+    var url = 'http://localhost/bdt/php/src/vacante/get_mis_vacantes.php';
+    return this.http.get<ApiResponse<Vacante[]>>(url, this.httpOptions);
   }
 }

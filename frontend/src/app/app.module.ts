@@ -13,9 +13,11 @@ import { AdministradorComponent } from './components/administrador/administrador
 import { EditarusuarioComponent } from './components/editarusuario/editarusuario.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthGuardService as AuthGuard } from './auth/auth.guard';
-import { LoginGuardService as LoginGuard } from './auth/login.guard';
-import { AdminGuardService as AdminGuard } from './auth/admin.guard';
+import { AuthGuardService as AuthGuard } from './guards/auth.guard';
+import { LoginGuardService as LoginGuard } from './guards/login.guard';
+import { AdminGuardService as AdminGuard } from './guards/admin.guard';
+import { EmpresaGuardService as EmpresaGuard } from './guards/empresa.guard';
+import { CandidatoGuardService as CandidatoGuard } from './guards/candidato.guard';
 import localeEsMx from '@angular/common/locales/es-MX';
 import { registerLocaleData } from '@angular/common';
 import { AuthInterceptorService as AuthInterceptor } from './services/auth-interceptor.service';
@@ -35,10 +37,10 @@ registerLocaleData(localeEsMx);
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
-  { path: 'postulaciones', component: PostulacionesComponent, canActivate: [AuthGuard] },
+  { path: 'postulaciones', component: PostulacionesComponent, canActivate: [CandidatoGuard] },
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
-  { path: 'vacantes', component: VacantesComponent, canActivate: [AuthGuard] },
+  { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
   { path: '**', redirectTo: '/login' }
 ];

@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Postulacion } from 'src/app/models/postulacion';
 import { CandidatoService } from 'src/app/services/candidato.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-menu',
@@ -35,6 +37,7 @@ export class MenuComponent implements OnInit {
   //getters
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
+  usuarioActual: Usuario;
   
   busqueda: Busqueda = {
     SelectedSalario: "0",
@@ -55,17 +58,18 @@ export class MenuComponent implements OnInit {
     private vacantesService: VacantesService,
     private areaService: AreaService,
     private PaginacionService: PaginacionService,
-    private candidatoService: CandidatoService) { }
+    private candidatoService: CandidatoService,
+    private currentUserService: CurrentUserService) { }
 
   ngOnInit() {
     this.getVacantes();
     this.getAreas();
-    
+    this.usuarioActual = this.currentUserService.getUsuarioActual();
   }
 
   ComprobarUbicacion() {
-    for (let i of this.estados) {
-      if (i == this.busqueda.InputUbicacion) {
+    for (let estado of this.estados) {
+      if (estado == this.busqueda.InputUbicacion) {
         this.ubicacionCorrecta = true;
         return 0;
       } else {
@@ -207,4 +211,12 @@ export class MenuComponent implements OnInit {
       $('.ir-arriba').slideUp(300);
     }
   }
+
+  /* administración */
+
+  darDeBajaVacante(vacante: Vacante) {
+    alert('Aquí se va a dar de baja');
+  }
+
+  /**************** */
 }

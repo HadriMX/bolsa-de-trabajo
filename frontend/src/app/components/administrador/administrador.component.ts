@@ -10,6 +10,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material';
 import { CandidatoService } from 'src/app/services/candidato.service';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -104,8 +106,12 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  constructor(private areaService: AreaService, private categoriaService: CatEmpresaService,
-    private solicitudService: SolicitudService, private candidatoService: CandidatoService) { }
+  constructor(private areaService: AreaService,
+    private categoriaService: CatEmpresaService,
+    private solicitudService: SolicitudService,
+    private candidatoService: CandidatoService,
+    private loginService: LoginService,
+    private router: Router) { }
   GetSolicitudes() {
     this.solicitudService.get_solicitudes()
       .subscribe((response) => {
@@ -437,6 +443,17 @@ export class AdministradorComponent implements OnInit {
       this.inputbooleano = false;
       $(".btnregistrar").css("display", "none");
     }
+  }
 
+  logout() {
+    this.loginService.logout().then(
+      response => {
+        if (response.success) {
+          this.router.navigateByUrl("/login");
+        } else {
+          Swal.fire('Error en el servidor', response.message, 'error');
+        }
+      },
+      reason => console.log(reason));
   }
 }

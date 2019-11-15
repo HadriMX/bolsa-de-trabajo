@@ -1,6 +1,9 @@
-## ejecutar dentro de la carpeta /src
 ## generar autoloader
+## dentro de /src
 & "C:\xampp\php\php.exe" "C:\xampp\htdocs\bdt\php\tests\phpab.phar" -o autoload.inc.php ./
+
+## dentro de /tests
+& "C:\xampp\php\php.exe" "C:\xampp\htdocs\bdt\php\tests\phpab.phar" -o autoload.inc.php ../src
 
 ## ejecutar dentro de la carpeta /tests
 ## correr todo los tests
