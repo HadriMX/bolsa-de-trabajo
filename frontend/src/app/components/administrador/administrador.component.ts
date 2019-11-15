@@ -54,11 +54,11 @@ export class AdministradorComponent implements OnInit {
   AuxStatusCategoria: string;
   AuxStatusArea: string;
   // variables del dashboard
-  public canvas : any;
-  public ctx;
-  public chartColor;
-  public chartEmail;
-  public chartHours;
+   canvas : any;
+   ctx;
+   chartColor;
+   chartEmail;
+   chartHours;
 
   infoCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
@@ -196,12 +196,12 @@ export class AdministradorComponent implements OnInit {
 
   ngOnInit() {
     // this.usuarioActual = this.currentUserService.getUsuarioActual();
+    this.dashboard();
     this.GetAreas();
     this.GetCategorias();
     this.GetSolicitudes();
     this.GetCandidatos();
     this.GetEmpresas();
-    
   }
 
   add_areaEstudio() {
@@ -472,5 +472,9 @@ export class AdministradorComponent implements OnInit {
   
 
   // aqui comienza el codigo para el dashboard 
+  dashboard() {
+    // aqui va el codigo para el dashboard
+    
+  }
 
 }

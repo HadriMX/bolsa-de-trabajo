@@ -80,7 +80,7 @@ textarea{
  width: 80%; 
  margin-block-start: 10px; 
  margin-left: 1%; 
- resize: none;
+ /* resize: none; */
  font-size: 13px;
 }
 #page-content {
