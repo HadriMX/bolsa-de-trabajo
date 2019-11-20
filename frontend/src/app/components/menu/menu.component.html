@@ -197,12 +197,9 @@
     <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
 </footer>
 
-<!-- <span (click)="arriba()" class="ir-arriba">
+ <span *ngIf="isShow"  (click)="gotoTop()" class="ir-arriba">
     <img src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
-</span> -->
-
-<img *ngIf="isShow" class="scrollup_img" (click)="gotoTop()" src="../../../assets/scrollup.png" alt=""
-            style="width: 60px;">
+</span> 
 
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->

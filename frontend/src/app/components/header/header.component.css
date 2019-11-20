@@ -53,6 +53,11 @@ background:rgb(77, 16, 83);
     margin-left: 35%;
     color:beige;
 }
+@media(min-width:1500px) {
+    #inicio2{
+        margin-left: 44%;
+    }
+}
 @media (max-width: 461px)  {
  .titulologin2 {
     margin-block-start: 5%;

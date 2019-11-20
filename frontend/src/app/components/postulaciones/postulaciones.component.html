@@ -9,8 +9,7 @@
 
     <mat-tab-group id="mattab" dynamicHeight>
       <mat-tab label="Postulaciones pendientes">
-        <div *ngFor="let item of postulacionesPendientes" style="margin-block-start: 2%;"
-          class=" border border-success border-left-0 border-right-0">
+        <div *ngFor="let item of postulacionesPendientes" style="border-bottom: 1px solid purple;margin-block-start: 2%;">
           <div class="row">
             <div>
               <div class="col-12 col-sm-12 col-md-12">
@@ -18,7 +17,7 @@
                 <h6>{{item.nombre_empresa}}</h6>
                 <h6>{{item.area_estudio}}</h6>
                 <div class="row" style="margin-left: 1px;">
-                  <div class="col-lg-8 col-sm-8 col-5">
+                  <div class="col-lg-8 col-sm-8 col-12">
                     <h6 style="margin-block-start:3%;">Te postulaste: {{item.fecha_postulacion}}</h6>
                     <h6 style="margin-block-start:3%;">{{item.descripcion_puesto | slice:0:100}}...</h6>
                   </div>
@@ -32,8 +31,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Postulaciones Aceptadas">
-        <div *ngFor="let item of postulacionesAceptadas" style="margin-block-start: 2%;"
-          class=" border border-success border-left-0 border-right-0">
+        <div *ngFor="let item of postulacionesAceptadas" style="margin-block-start: 2%;border-bottom: 1px solid purple;">
           <div class="row">
             <div>
               <div class="col-12 col-sm-12 col-md-12">
@@ -56,8 +54,7 @@
 
       </mat-tab>
       <mat-tab label="Postulaciones Canceladas">
-        <div *ngFor="let item of postulacionesRechazadas" style="margin-block-start: 2%;"
-          class=" border border-success border-left-0 border-right-0">
+        <div *ngFor="let item of postulacionesRechazadas" style="margin-block-start: 2%;border-bottom: 1px solid purple;">
           <div class="row">
             <div>
               <div class="col-12 col-sm-12 col-md-12">
@@ -77,7 +74,6 @@
             </div>
           </div>
         </div>
-
       </mat-tab>
     </mat-tab-group>
     <div style="height: 70px;"></div>
