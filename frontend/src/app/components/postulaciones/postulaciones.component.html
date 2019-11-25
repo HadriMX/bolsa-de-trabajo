@@ -23,7 +23,7 @@
                     <h6 style="margin-block-start:3%;">{{item.descripcion_puesto | slice:0:100}}...</h6>
                   </div>
                   <div class="col-lg-4 col-sm-4 col-5">
-                    <button class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                    <button class="btn2" data-toggle="modal" data-target="#vermas" (click)="mostrarDetalleVacante(item,1)">Ver mas</button>
                   </div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
                     <h6 style="margin-block-start:3%;">{{item.descripcion_puesto | slice:0:100}}...</h6>
                   </div>
                   <div class="col-lg-4 col-sm-4 col-5">
-                    <button class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                    <button class="btn2" data-toggle="modal" data-target="#vermas" (click)="mostrarDetalleVacante(item,0)">Ver mas</button>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@
         </div>
 
       </mat-tab>
-      <mat-tab label="Postulaciones Canceladas">
+      <mat-tab label="Postulaciones Rechazadas">
         <div *ngFor="let item of postulacionesRechazadas" style="margin-block-start: 2%;"
           class=" border border-success border-left-0 border-right-0">
           <div class="row">
@@ -70,7 +70,7 @@
                     <h6 style="margin-block-start:3%;">{{item.descripcion_puesto | slice:0:100}}...</h6>
                   </div>
                   <div class="col-lg-4 col-sm-4 col-5">
-                    <button class="btn2" data-toggle="modal" data-target="#vermas">Ver mas</button>
+                    <button class="btn2" data-toggle="modal" data-target="#vermas" (click)="mostrarDetalleVacante(item,0)">Ver mas</button>
                   </div>
                 </div>
               </div>
@@ -96,71 +96,36 @@
         <h5 id="exampleModalLabel" style="color:white;">INFORMACION DE LA POSTULACION</h5>
       </div>
       <div class="modal-body">
-        <div style="margin-left: 60px;">
+        <div style="margin-left: 0px;">
           <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h4 style="margin-block-start: 20px; color:blue;">--------</h4>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <h4 style=" color:blue;">{{infoVacante.titulo_vacante}}----{{infoVacante.id_vacante}}</h4>
             </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 20px;">----------</h6>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6>{{infoVacante.nombre_empresa}}</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6>Puesto: {{infoVacante.puesto}} ({{infoVacante.sueldo | currency:'MXN'}})</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6>{{infoVacante.descripcion_puesto}}</h6>
             </div>
           </div>
           <div class="row">
             <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Contratacion:</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">----------------</h6>
+              <h6>{{infoVacante.fecha_vacante | date: 'longDate'}}</h6>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Salario neto mensual</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">-------------------</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Experiencia</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">------</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">-----------</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Genero</h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Indefenido</h6>
-            </div>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <h6 style="margin-block-start: 30px;">Fecha de postulacion -------------- </h6>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-
-            </div>
-            <div>
-              <button class="btn btn-danger" style="margin-block-start: 30px;">Cancelar mi postulacion</button>
-
-            </div>
-
-          </div>
-
-
         </div>
       </div>
-      <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-        <button type="button" class="btn3 form-control" data-dismiss="modal">Salir</button>
+      <div class="modal-footer" style="background-color: transparent  ;">
+          <button class="btn btn-danger" *ngIf="botonCancelar === 1" (click)="cancelarPostulacion(infoVacante.id_vacante)">Cancelar mi postulacion</button>
       </div>
     </div>
   </div>
