@@ -34,26 +34,9 @@ input {
   margin-inline-end: 10px;
 }
 
-@media (min-width: 985px) {
-  .micuenta {
-    margin-left: 15%;
-  }
-}
-
 #titulopag {
   color: white;
   text-align: center;
   width: 100%;
-}
-
-@media (max-width: 985px) {
-  #titulopag {
-    color: white;
-    width: 80%;
-    margin-left: 10%;
-    margin-block-start: 2%;
-  }
-  #prueba {
-    margin-block-start: 1%;
-  }
+  font-size: large;
 }
