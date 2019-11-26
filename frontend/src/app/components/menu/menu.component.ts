@@ -26,6 +26,7 @@ export class MenuComponent implements OnInit {
   allItems: Vacante[] = [];
   pager: any = {};
   pagedItems: any[];
+  isLoading = true;
 
   cursor: boolean = false;
   ubicacionCorrecta: boolean = false;
@@ -75,6 +76,8 @@ export class MenuComponent implements OnInit {
   }
 
   busquedaVacantes() {
+    this.isLoading = true;
+
     this.vacantesService.busquedaVacantes(this.busqueda)
       .subscribe((response) => {
         if (response.success) {
@@ -87,6 +90,8 @@ export class MenuComponent implements OnInit {
               } else {
                 this.setPage(1);
               }
+
+              this.isLoading = false;
             });
           } else {
             Swal.fire("Error", 'No hay elementos que conincidan con tu busqueda: \n"' + this.busqueda.InputTitulo + '" \n', 'error');

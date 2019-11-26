@@ -122,8 +122,17 @@
                 <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
             </div>
         </div>
+        
+        <div *ngIf="isLoading" class="row my-2 justify-content-center">
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
 
-        <div class="row">
+        <div *ngIf="!isLoading" class="row">
             <div class="col mx-1">
                 <!-- EMPIEZAN VACANTES -->
                 <!-- items que estan siendo paginados -->
@@ -167,7 +176,7 @@
             </div>
         </div>
 
-        <div class="row justify-content-center">
+        <div *ngIf="!isLoading" class="row justify-content-center">
             <!-- paginacion -->
             <nav aria-label="Paginación">
                 <ul class="pagination">
@@ -201,7 +210,7 @@
     <img src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
 </span> -->
 
-<img *ngIf="isShow" class="scrollup_img" (click)="gotoTop()" src="../../../assets/scrollup.png" alt=""
+<img *ngIf="isShow" class="scrollup_img" (click)="gotoTop()" src="/assets/scrollup.png" alt=""
             style="width: 60px;">
 
 <!--===============================================================================================-->
