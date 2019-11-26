@@ -1,5 +1,4 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import * as $ from 'jquery';
 import { VacantesService } from 'src/app/services/vacantes.service';
 import { Postulacion } from 'src/app/models/postulacion';
 import { PostulacionService } from 'src/app/services/postulacion.service';
@@ -79,13 +78,14 @@ export class PostulacionesComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, cancelar!',
-      cancelButtonText: 'No'
+      cancelButtonText: 'No'  
     }).then((result) => {
       if (result.value) {
         this.postulacionesService.deletePostulacion(id_vacante)
           .subscribe((response) => {
             if (response.success) {
               Swal.fire("Exito", response.message, "success");
+              this.cerrarModales();
               this.getPostulacionesPendientes();
               this.getPostulacionesRechazadas();
               this.getPostulacionesAceptadas();
@@ -98,6 +98,10 @@ export class PostulacionesComponent implements OnInit {
     })
   }
 
+  cerrarModales(){
+    (<any>$('#vermas .close')).click();
+  }
+
   arriba() {
     $('#body, html').animate({
       scrollTop:'0px'
@@ -105,13 +109,13 @@ export class PostulacionesComponent implements OnInit {
   }
 
 
-@HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll(event) {
+// @HostListener('window:scroll', ['$event']) // for window scroll events
+//   onScroll(event) {
 
-    if ($(window).scrollTop() > 200) {
-      $('.ir-arriba').slideDown(300);
-    } else {
-      $('.ir-arriba').slideUp(300);
-    }
-  }  
+//     if ($(window).scrollTop() > 200) {
+//       $('.ir-arriba').slideDown(300);
+//     } else {
+//       $('.ir-arriba').slideUp(300);
+//     }
+//   }  
 }

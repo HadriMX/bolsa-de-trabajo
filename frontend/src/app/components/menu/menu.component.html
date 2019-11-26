@@ -117,13 +117,19 @@
     </div>
 
     <div class="container">
+        <div *ngIf="noVacantesDisponibles">
+            No hay vacantes papá
+        </div>    
+    </div>
+    
+    <div class="container" *ngIf="!noVacantesDisponibles">
         <div class="row mt-3">
             <div class="col">
                 <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="!noVacantesDisponibles">
             <div class="col mx-1">
                 <!-- EMPIEZAN VACANTES -->
                 <!-- items que estan siendo paginados -->
@@ -166,6 +172,8 @@
                 <!-- TERMINA VACANTES -->
             </div>
         </div>
+
+        
 
         <div class="row justify-content-center">
             <!-- paginacion -->

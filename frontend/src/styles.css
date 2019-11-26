@@ -9,6 +9,8 @@ body {
   font-family: "Montserrat", "Helvetica Neue", sans-serif;
   position: relative;
   min-height: 100%;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 
 html,
