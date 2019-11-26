@@ -80,6 +80,7 @@ export class MenuComponent implements OnInit {
 
   busquedaVacantes() {
     this.isLoading = true;
+    console.log("buscando...");
 
     this.vacantesService.busquedaVacantes(this.busqueda)
       .subscribe((response) => {
@@ -94,8 +95,6 @@ export class MenuComponent implements OnInit {
               } else {
                 this.setPage(1);
               }
-
-              this.isLoading = false;
             });
           } else {
             this.noVacantesDisponibles = true;
@@ -107,6 +106,8 @@ export class MenuComponent implements OnInit {
         else {
           Swal.fire("Error", response.message, 'error');
         }
+
+        this.isLoading = false;
       });
   }
 
