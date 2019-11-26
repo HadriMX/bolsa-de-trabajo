@@ -16,6 +16,20 @@ class Postulacion {
         }
     }
 
+    public static function deletePostulacion($id_vacante, $id_candidato){
+        $db = new Db();
+        $conn = $db->getConn();
+        $borrar = $conn->prepare("DELETE FROM postulados WHERE id_candidato = ? AND id_vacante = ?");
+        $borrar->bind_param("ii",$id_candidato,$id_vacante);
+        $resultado = $borrar->execute();
+        if ($resultado==true) {
+            return new SuccessResult("Tu postulación ha sido cancelada correctamente", true);
+        }
+        else {
+            return new ErrorResult("Error de cancelación", 501);
+        }
+    }
+
     public static function getPostulaciones($estatus , $id_candidato){
         $db = new Db();
         $conn = $db->getConn();
