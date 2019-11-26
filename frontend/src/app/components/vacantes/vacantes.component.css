@@ -44,7 +44,14 @@ li.dropdown {
   .btn{
     width: 100%;
     margin-block-start: 2%;
-    margin-left: 40%;
+    margin-left: 10%;
+    background-color: rgb(121, 24, 129);
+    color:white;
+  }
+  @media(max-width:465px) {
+    .btn{
+      margin-left: 0;
+    }
   }
   #texto {
     margin-block-start: 10px;
@@ -68,6 +75,15 @@ li.dropdown {
 #mattab{
   widows: 100%;
 }
+#vacantecontenedor{
+  margin-block-start: 2%; 
+  margin-left: 11%;
+}
+@media (min-width:992px) and (max-width:1111px) {
+  #vacantecontenedor{
+    margin-left: 0;
+  }
+}
 #body {
     background-image: url('/assets/background.png');
     background-repeat: no-repeat;
@@ -77,7 +93,7 @@ li.dropdown {
     min-height: 90vh;
 }
 textarea{
- width: 80%; 
+ width: 97%; 
  margin-block-start: 10px; 
  margin-left: 1%; 
  /* resize: none; */
@@ -101,9 +117,6 @@ textarea{
 @media (min-width:246px) and (max-width:767px) {
   .container {
     width: 100%;
-  }
-  .row {
-    margin-left: 0%;
   }
 }
 

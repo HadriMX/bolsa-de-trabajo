@@ -9,30 +9,30 @@
             <mat-tab label="Vacantes Publicadas">
                 <div class="row" id="registrarvacante">
                     <div class="col-lg-7 col-sm-7 col-7" style="margin-block-start: 1%;">
-                        <button class="btn btn-info" data-toggle="modal" data-target="#agregarvacante">
+                        <button class="btn" style="margin-left: 36%;" data-toggle="modal" data-target="#agregarvacante">
                             Agregar Vacante
                         </button>
                     </div>
                 </div>
-                <div *ngFor="let dat of vacantes; index as i" style="margin-block-start: 3%;"
-                    class=" border border-success border-left-0 border-right-0">
+                <div *ngFor="let dat of vacantes; index as i"
+                    style="margin-block-start: 3%;border-bottom: 1px solid purple;">
                     <div class="row">
                         <div>
-                            <div style="margin-block-start: 2%; margin-left: 11%;" class="col-12 col-sm-12 col-12">
+                            <div id="vacantecontenedor" class="col-12 col-sm-12 col-12">
                                 <div>
                                     <h6>Desarollo de software</h6>
                                     <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
                                     <h6>DESARROLLO EMPRESARIAL</h6>
                                     <div class="row" style="margin-left: 1px;">
-                                        <div class="col-lg-6 col-sm-6 col-3">
+                                        <div class="col-lg-6 col-sm-12 col-12">
                                             <h6 style="margin-block-start:3%;">Fecha</h6>
                                         </div>
-                                        <div class="col-lg-3 col-sm-3 col-4">
+                                        <div class="col-lg-3 col-sm-5 col-5">
                                             <button class="btn2" data-toggle="modal" data-target="#datosvacante">
                                                 Ver mas
                                             </button>
                                         </div>
-                                        <div class="col-lg-3 col-sm-3 col-4">
+                                        <div class="col-lg-3 col-sm-5 col-5">
                                             <button class="btn2">
                                                 Solicitudes
                                             </button>
@@ -45,25 +45,25 @@
                 </div>
             </mat-tab>
             <mat-tab label="Vacantes Canceladas">
-                <div *ngFor="let dat of vacantes; index as i" style="margin-block-start: 2%;"
-                    class=" border border-success border-left-0 border-right-0">
+                <div *ngFor="let dat of vacantes; index as i"
+                    style="margin-block-start: 2%;border-bottom: 1px solid purple;">
                     <div class="row">
                         <div>
-                            <div style="margin-block-start: 2%; margin-left: 11%;" class="col-12 col-sm-12 col-12">
+                            <div id="vacantecontenedor" class="col-12 col-sm-12 col-12">
                                 <div>
                                     <h6>Desarollo de software</h6>
                                     <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
                                     <h6>DESARROLLO EMPRESARIAL</h6>
                                     <div class="row" style="margin-left: 1px;">
-                                        <div class="col-lg-6 col-sm-6 col-3">
+                                        <div class="col-lg-6 col-sm-12 col-12">
                                             <h6 style="margin-block-start:3%;">Fecha</h6>
                                         </div>
-                                        <div class="col-lg-3 col-sm-3 col-4">
+                                        <div class="col-lg-3 col-sm-5 col-5">
                                             <button class="btn2" data-toggle="modal" data-target="#datosvacante">
-                                                Vermas
+                                                Ver mas
                                             </button>
                                         </div>
-                                        <div class="col-lg-3 col-sm-3 col-4">
+                                        <div class="col-lg-3 col-sm-5 col-5">
                                             <button class="btn2">
                                                 Solicitudes
                                             </button>
@@ -76,8 +76,6 @@
                 </div>
             </mat-tab>
         </mat-tab-group>
-
-
         <div style="height: 70px; background-color: transparent;">
         </div>
     </div>
@@ -150,7 +148,7 @@
                     <h6 style="margin-block-start: 30px;">Fecha de postulacion -------------- </h6>
 
                     <div class="row">
-                        <div class=" col-lg-4 col-sm-2 col-2">
+                        <div class=" col-lg-4 col-sm-2 col-1">
 
                         </div>
                         <div>
@@ -178,57 +176,80 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <h5 style="margin-left: 35%;">Datos de la vacante</h5>
-                    <div style="margin-left: 20px;">
+                    <h5 style="text-align: center;">Datos de la vacante</h5>
+                    <div>
                         <div class="row">
-                            <h6 style="margin-block-start: 15px;">Titulo de la vacante:</h6>
-                            <input class="form-control" style="width: 60%; margin-block-start: 10px; margin-left: 1%;"
-                                placeholder="titulo">
+                            <div class="col-lg-12 col-sm-6 col-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-12 col-12">
+                                        <h6 style="margin-block-start: 15px;">Titulo de la vacante:</h6>
+                                    </div>
+                                    <div class="col-lg-9 col-sm-12 col-12">
+                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
+                                            placeholder="titulo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-6 col-12">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h6 style="margin-block-start: 15px;">Nombre del puesto:</h6>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
+                                            placeholder="titulo"> </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <h6 style="margin-block-start: 15px;">Nombre del puesto:</h6>
-                            <input class="form-control" style="width: 60%; margin-block-start: 10px;  margin-left: 1%;"
-                                placeholder="titulo">
-                        </div>
-                        <div class="row">
+                        <div class="row" style="margin-left: 3px;">
                             <h6 style="margin-block-start: 15px;">Descripcion del puesto:</h6>
                             <textarea rows="4" class="form-control"></textarea>
                         </div>
                         <div class="row">
-                            <h6 style="margin-block-start: 15px;">Area de estudio deseada</h6>
-                            <select class="form-control" name="select"
-                                style="margin-left: 10px; width:120px; margin-block-start: 10px;">
-                                <option value="">Opciones</option>
-                                <option value="value1"> Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
-                            <h6 style="margin-left: 3px;margin-block-start: 15px;">Subarea de estudio deseada</h6>
-                            <select class="form-control" name="select"
-                                style="margin-left: 10px; width:120px; margin-block-start: 10px;">
-                                <option value="">Opciones</option>
-                                <option value="value1"> Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
+                            <div class="col-lg-3">
+                                <h6 style="margin-block-start: 15px;">Area de estudio</h6>
+                            </div>
+                            <div class="col-lg-9">
+                                <select class="form-control" name="select"
+                                    style=" width:100%; margin-block-start: 8px;">
+                                    <option value="">Opciones</option>
+                                    <option value="value1"> Ejemplo 1</option>
+                                    <option value="value2">Ejemplo 2</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="row">
-                            <h6 style="margin-block-start: 15px;">Genero</h6>
-                            <select class="form-control" name="select"
-                                style="margin-left: 26px; width:120px; margin-block-start: 10px;">
-                                <option value="">Opciones</option>
-                                <option value="value1"> Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
+                            <div class="col-lg-5">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h6 style="margin-block-start: 15px;">Genero</h6>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="select"
+                                            style="width:100%; margin-block-start: 6px;">
+                                            <option value="">Opciones</option>
+                                            <option value="value1"> Ejemplo 1</option>
+                                            <option value="value2">Ejemplo 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h6 style="margin-block-start: 15px;">Sueldo</h6>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
+                                            placeholder="titulo">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-left:3px;">
                             <h6 style="margin-block-start: 15px;">Direccion</h6>
-                            <textarea class="form-control"></textarea>
-
-                        </div>
-                        <div class="row">
-                            <h6 style="margin-block-start: 15px;">Sueldo</h6>
-                            <input class="form-control"
-                                style="width: 200px; margin-block-start: 10px; margin-left: 10px;" placeholder="titulo">
-
+                            <textarea rows="4" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -397,53 +418,80 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <h5 style="margin-left: 35%;">Datos de la vacante</h5>
-                    <div style="margin-left: 5%;">
+                    <h5 style="text-align: center;">Datos de la vacante</h5>
+                    <div>
                         <div class="row">
-                            <h6 style="margin-block-start: 15px;">Titulo de la vacante</h6>
-                            <input class="form-control" style="width: 60%;" id="espacioinput" placeholder="titulo">
+                            <div class="col-lg-12 col-sm-6 col-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-12 col-12">
+                                        <h6 style="margin-block-start: 15px;">Titulo de la vacante:</h6>
+                                    </div>
+                                    <div class="col-lg-9 col-sm-12 col-12">
+                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
+                                            placeholder="titulo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-6 col-12">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h6 style="margin-block-start: 15px;">Nombre del puesto:</h6>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
+                                            placeholder="titulo"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-left: 3px;">
+                            <h6 style="margin-block-start: 15px;">Descripcion del puesto:</h6>
+                            <textarea rows="4" class="form-control"></textarea>
                         </div>
                         <div class="row">
-                            <h6 style="margin-block-start: 15px;">Nombre del puesto</h6>
-                            <input class="form-control" style="width: 60%;" id="espacioinput" placeholder="titulo">
+                            <div class="col-lg-3">
+                                <h6 style="margin-block-start: 15px;">Area de estudio</h6>
+                            </div>
+                            <div class="col-lg-9">
+                                <select class="form-control" name="select"
+                                    style=" width:100%; margin-block-start: 8px;">
+                                    <option value="">Opciones</option>
+                                    <option value="value1"> Ejemplo 1</option>
+                                    <option value="value2">Ejemplo 2</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div class="row">
-                            <h6 style="margin-block-start: 15px;">Descripcion del puesto</h6>
-                            <textarea rows="4" class="form-control" id="espacioinput"></textarea>
+                            <div class="col-lg-5">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h6 style="margin-block-start: 15px;">Genero</h6>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" name="select"
+                                            style="width:100%; margin-block-start: 6px;">
+                                            <option value="">Opciones</option>
+                                            <option value="value1"> Ejemplo 1</option>
+                                            <option value="value2">Ejemplo 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <h6 style="margin-block-start: 15px;">Sueldo</h6>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
+                                            placeholder="titulo">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <h6 style="margin-block-start: 15px;">Area de estudio deseada</h6>
-                            <select class="form-control" name="select"
-                                style="margin-left: 10px; width:120px; margin-block-start: 10px;">
-                                <option value="">Opciones</option>
-                                <option value="value1"> Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
-                            <h6 style="margin-left:3px;margin-block-start: 15px;">Subarea de estudio deseada</h6>
-                            <select class="form-control" name="select"
-                                style="margin-left: 10px; width:170px; margin-block-start: 10px;">
-                                <option value="">Opciones</option>
-                                <option value="value1"> Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <h6 style="margin-block-start: 15px;">Genero</h6>
-                            <select class="form-control" name="select"
-                                style="margin-left: 26px; width:120px; margin-block-start: 10px;">
-                                <option value="">Opciones</option>
-                                <option value="value1"> Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
-                        </div>
-                        <div class="row">
+                        <div class="row" style="margin-left:3px;">
                             <h6 style="margin-block-start: 15px;">Direccion</h6>
-                            <textarea class="form-control"></textarea>
-                        </div>
-                        <div class="row">
-                            <h6 style="margin-block-start: 15px;">Sueldo</h6>
-                            <input class="form-control"
-                                style="width: 200px; margin-block-start: 10px; margin-left: 10px;" placeholder="titulo">
+                            <textarea rows="4" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>

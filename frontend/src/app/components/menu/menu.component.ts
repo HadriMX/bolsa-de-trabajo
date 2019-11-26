@@ -227,7 +227,7 @@ export class MenuComponent implements OnInit {
   // }
 
   isShow: boolean;
-  topPosToStartShowing = 100;
+  topPosToStartShowing = 300;
 
   // Scrollup funciones
   @HostListener('window:scroll')

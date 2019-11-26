@@ -1,6 +1,6 @@
 <!-- Aqui empieza el navbar del administrador -->
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <img class="modal-title" src="/assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
+  <img routerLink="/menu"  class="modal-title" src="/assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
     alt="Generic placeholder image">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,16 +13,16 @@
             class="sr-only">(current)</span>
           <div class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuLink">
       <li class="nav-item active">
-        <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Usuarios
-          auxiliar <span class="sr-only">(current)</span>
+        <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Auxiliares
+          Administrativos <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" (click)="categorias(3)" id="usuarios" style="width: 100%; cursor: pointer; ">Solicitudes de
-          Usuarios <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="categorias(3)" id="usuarios"
+          style="width: 100%; cursor: pointer; ">Solicitudes<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">Usuarios
+        <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">
           registrados</a>
       </li>
       <li class="nav-item active">
@@ -95,7 +95,7 @@
           <mat-tab label="Editar registros">
             <div id="estadoimagen">
               <div class="border border-dark"
-                style="margin-block-start:15px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
+                style="margin-block-start:15px; width: 100%; height:350px; background-color:white; overflow-y:scroll">
                 <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
                   <!-- Columna para nombre de la categoria -->
                   <ng-container matColumnDef="nombre_empresa">
@@ -313,7 +313,7 @@
               <div style="margin-left: 10%; margin-top: 1%; ; ">
                 <div class="row">
                   <div class="col-lg-4 col-sm-4 col-5">
-                    <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
+                    <div style="margin-right: 40%; margin-left:1%; width: 100%;  ">
                       <mat-form-field>
                         <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
                       </mat-form-field>

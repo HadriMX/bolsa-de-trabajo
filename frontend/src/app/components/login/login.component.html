@@ -7,7 +7,7 @@
     <div class="col-lg-7 col-sm-12 login100-more d-none d-sm-block" id="carrusellogin">
       <div class="row align-items-center" style=" height: 100%;">
         <div class="row justify-content-center w-100">
-          <div id="carouselExampleIndicators"  class="carousel slide w-75" data-ride="carousel">
+          <div id="carouselExampleIndicators" class="carousel slide w-75" data-ride="carousel">
             <ol class="carousel-indicators">
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -58,13 +58,13 @@
           <div id="electronico" class="wrap-input100 validate-input"
             data-validate="Valid email is required: ex@abc.xyz">
             <span style="color:black;" class="label-input100">Correo electronico</span>
-            <input [(ngModel)]="nuevoUsuario.email" name="email" id="input100" class="input100 form-control"
-              type="email" name="email" placeholder="Correo electrónico..." required>
+            <input [(ngModel)]="nuevoUsuario.email" name="email" id="input100" class="form-control" type="email"
+              placeholder="Correo electrónico..." required>
             <span class="focus-input100"></span>
           </div>
           <div id="contrasenaa" class="wrap-input100 validate-input" data-validate="Password is required">
             <span style="color:black;" class="label-input100">Contraseña</span>
-            <input [(ngModel)]="nuevoUsuario.password" name="password" id="input101" class="input100 form-control"
+            <input [(ngModel)]="nuevoUsuario.password" name="password" id="input100" class=" form-control"
               type="password" name="pass" placeholder="*************" required>
             <span class="focus-input100"></span>
           </div>
@@ -79,14 +79,11 @@
                 </select>
               </div>
             </div>
-            <div class="col-lg-8">
-              <div style="margin-top: 20px;">
-                <div>
-                  <div class="login100-form-bgbtn"></div>
-                  <button (click)="crear()" id="boton1" class="form-control">
-                    Crear cuenta
-                  </button>
-                </div>
+            <div class="boton1 col-lg-10">
+              <div>
+                <button (click)="crear()" id="boton1" class="form-control">
+                  Crear cuenta
+                </button>
               </div>
             </div>
           </div>
