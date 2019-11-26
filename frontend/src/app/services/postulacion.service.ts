@@ -11,6 +11,7 @@ export class PostulacionService {
 
   private endpointUrlAddPostulacion = 'http://localhost/bdt/php/src/postulacion/postular_candidato.php';
   private endpointUrlGetPostPendientes = 'http://localhost/bdt/php/src/postulacion/getPostulaciones.php';
+  private endpointUrlDeletePostulacion = 'http://localhost/bdt/php/src/postulacion/deletePostulacion.php';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,6 +25,10 @@ export class PostulacionService {
 
   getPostulaciones(estatus: string): Observable<ApiResponse<Postulacion[]>>{
     return this.http.post<ApiResponse<Postulacion[]>>(this.endpointUrlGetPostPendientes, { estatus: estatus }, this.httpOptions);
+  }
+
+  deletePostulacion(id_vacante: number): Observable<ApiResponse<Postulacion>>{
+    return this.http.post<ApiResponse<Postulacion>>(this.endpointUrlDeletePostulacion, { id_vacante: id_vacante} , this.httpOptions);
   }
 
 }

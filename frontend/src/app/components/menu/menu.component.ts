@@ -40,6 +40,9 @@ export class MenuComponent implements OnInit {
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
   usuarioActual: Usuario;
+
+  //otros
+  noVacantesDisponibles: boolean = false;
   
   busqueda: Busqueda = {
     SelectedSalario: "0",
@@ -82,6 +85,7 @@ export class MenuComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           if (response.data.length >= 1) {
+            this.noVacantesDisponibles = false;
             this.allItems = response.data;
             //setear pagina leyendo url
             this.route.queryParams.subscribe(params => { //toma variable del url
@@ -94,8 +98,10 @@ export class MenuComponent implements OnInit {
               this.isLoading = false;
             });
           } else {
-            Swal.fire("Error", 'No hay elementos que conincidan con tu busqueda: \n"' + this.busqueda.InputTitulo + '" \n', 'error');
-            this.busqueda.InputTitulo = ""
+            this.noVacantesDisponibles = true;
+            console.log(this.noVacantesDisponibles);
+            // Swal.fire("Error", 'No hay elementos que conincidan con tu busqueda: \n"' + this.busqueda.InputTitulo + '" \n', 'error');
+            // this.busqueda.InputTitulo = ""
           }
         }
         else {
@@ -206,7 +212,7 @@ export class MenuComponent implements OnInit {
   }
 
   cerrarModales(){
-    (<any>$('#datosvacantes')).modal('hide');
+    (<any>$('#datosvacantes .close')).click();
   }
 
   // @HostListener('window:scroll', ['$event']) // for window scroll events

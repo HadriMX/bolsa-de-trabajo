@@ -116,14 +116,14 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col">
-                <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
-            </div>
-        </div>
-        
-        <div *ngIf="isLoading" class="row my-2 justify-content-center">
+    <div *ngIf="!isLoading && noVacantesDisponibles" class="container">
+        <div>
+            No hay vacantes papá
+        </div>    
+    </div>
+
+    <div *ngIf="isLoading" class="container">
+        <div class="row mt-5 pt-5 justify-content-center">
             <div class="lds-ring">
                 <div></div>
                 <div></div>
@@ -132,7 +132,20 @@
             </div>
         </div>
 
-        <div *ngIf="!isLoading" class="row">
+        <div class="row justify-content-center">
+            Cargando...
+        </div>
+    </div>
+    
+    
+    <div *ngIf="!isLoading && !noVacantesDisponibles" class="container">
+        <div class="row mt-3">
+            <div class="col">
+                <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
+            </div>
+        </div>
+        
+        <div class="row">
             <div class="col mx-1">
                 <!-- EMPIEZAN VACANTES -->
                 <!-- items que estan siendo paginados -->

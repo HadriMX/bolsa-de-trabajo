@@ -10,9 +10,6 @@
   .container {
     width:54%; 
   }
-  .row {
-    margin-left: 5%;
-  }
 
   @media (min-width:246px) and (max-width:767px) {
     .container {

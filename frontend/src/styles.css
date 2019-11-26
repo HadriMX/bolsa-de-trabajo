@@ -10,6 +10,7 @@ body {
   position: relative;
   min-height: 100%;
   padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 
 html,

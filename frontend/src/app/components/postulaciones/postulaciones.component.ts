@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import * as $ from 'jquery';
 import { VacantesService } from 'src/app/services/vacantes.service';
 import { Postulacion } from 'src/app/models/postulacion';
 import { PostulacionService } from 'src/app/services/postulacion.service';
 import Swal from 'sweetalert2';
+import { Vacante } from 'src/app/models/vacantes';
 
 @Component({
   selector: 'app-postulaciones',
@@ -15,6 +15,8 @@ export class PostulacionesComponent implements OnInit {
   postulacionesPendientes: Postulacion[] = [];
   postulacionesAceptadas: Postulacion[] = [];
   postulacionesRechazadas: Postulacion[] = [];
+  infoVacante: Postulacion = new Postulacion();
+  botonCancelar: number = 0;
 
   varios = [1,2,3,4,5];
   constructor(private postulacionesService: PostulacionService) { }
@@ -60,7 +62,45 @@ export class PostulacionesComponent implements OnInit {
       }
     });
   }
-  
+
+  mostrarDetalleVacante(item, aux: number) {
+    this.infoVacante = item;
+    this.botonCancelar = aux;
+  }
+
+  cancelarPostulacion(vacante){
+    let id_vacante = vacante;
+
+    Swal.fire({
+      title: '¿Estás seguro de cancelar tu postulación?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cancelar!',
+      cancelButtonText: 'No'  
+    }).then((result) => {
+      if (result.value) {
+        this.postulacionesService.deletePostulacion(id_vacante)
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire("Exito", response.message, "success");
+              this.cerrarModales();
+              this.getPostulacionesPendientes();
+              this.getPostulacionesRechazadas();
+              this.getPostulacionesAceptadas();
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
+      }
+    })
+  }
+
+  cerrarModales(){
+    (<any>$('#vermas .close')).click();
+  }
 
   arriba() {
     $('#body, html').animate({
@@ -69,13 +109,13 @@ export class PostulacionesComponent implements OnInit {
   }
 
 
-@HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll(event) {
+// @HostListener('window:scroll', ['$event']) // for window scroll events
+//   onScroll(event) {
 
-    if ($(window).scrollTop() > 200) {
-      $('.ir-arriba').slideDown(300);
-    } else {
-      $('.ir-arriba').slideUp(300);
-    }
-  }  
+//     if ($(window).scrollTop() > 200) {
+//       $('.ir-arriba').slideDown(300);
+//     } else {
+//       $('.ir-arriba').slideUp(300);
+//     }
+//   }  
 }
