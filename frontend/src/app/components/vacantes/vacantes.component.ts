@@ -11,6 +11,7 @@ import { VacantesService } from 'src/app/services/vacantes.service';
 export class VacantesComponent implements OnInit {
 
   vacantes: Vacante[] = [];
+  isLoading = true;
 
   constructor(private vacantesService: VacantesService) { }
 
@@ -19,6 +20,8 @@ export class VacantesComponent implements OnInit {
       if (response.success) {
         this.vacantes = response.data;
       }
+
+      this.isLoading = false;
     });
    // $("#editarinfoempresa").modal("show");
   }

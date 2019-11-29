@@ -17,6 +17,7 @@ export class PostulacionesComponent implements OnInit {
   postulacionesRechazadas: Postulacion[] = [];
   infoVacante: Postulacion = new Postulacion();
   botonCancelar: number = 0;
+  isLoading = true;
 
   varios = [1,2,3,4,5];
   constructor(private postulacionesService: PostulacionService) { }
@@ -36,6 +37,8 @@ export class PostulacionesComponent implements OnInit {
         else {
           Swal.fire("Error", response.message, 'error');
         }
+
+        this.isLoading = false;
       });
   }
 

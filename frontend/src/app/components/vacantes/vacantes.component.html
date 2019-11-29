@@ -1,9 +1,10 @@
 <app-headertittle></app-headertittle>
-<html>
+
 <div id="body">
-    <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="../../assets/arrowuo.png" height="15px"
+    <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="/assets/arrowuo.png" height="15px"
             width="15px" alt="Generic placeholder image">
     </span>
+
     <div class="container">
         <mat-tab-group id="mattab" dynamicHeight>
             <mat-tab label="Vacantes Publicadas">
@@ -76,13 +77,12 @@
                 </div>
             </mat-tab>
         </mat-tab-group>
-        <div style="height: 70px; background-color: transparent;">
+        
+        <div *ngIf="isLoading" class="container">
+            <app-loading></app-loading>
         </div>
     </div>
 </div>
-
-</html>
-
 
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
