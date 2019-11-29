@@ -119,7 +119,7 @@
     <div *ngIf="!isLoading && noVacantesDisponibles" class="container">
         <div>
             No hay vacantes papá
-        </div>    
+        </div>
     </div>
 
     <div *ngIf="isLoading" class="container">
@@ -136,15 +136,15 @@
             Cargando...
         </div>
     </div>
-    
-    
+
+
     <div *ngIf="!isLoading && !noVacantesDisponibles" class="container">
         <div class="row mt-3">
             <div class="col">
                 <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col mx-1">
                 <!-- EMPIEZAN VACANTES -->
@@ -219,9 +219,9 @@
     <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
 </footer>
 
- <span *ngIf="isShow"  (click)="gotoTop()" class="ir-arriba">
+<span *ngIf="isShow" (click)="gotoTop()" class="ir-arriba">
     <img src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
-</span> 
+</span>
 
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
@@ -238,11 +238,40 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <h4>{{infoVacante.titulo_vacante}} ({{infoVacante.sueldo | currency:'MXN'}} MXN)</h4>
-                    <h6>{{infoVacante.nombre_empresa}}</h6>
-                    <h6>{{infoVacante.entidad_federativa}}</h6>
-                    <h6>{{infoVacante.descripcion_puesto}}</h6>
-                    <h6>{{infoVacante.descripcion_puesto}}</h6>
+                    <div>
+                        <h3>{{infoVacante.titulo_vacante}} </h3>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <h6>{{infoVacante.nombre_empresa}}</h6>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <h6>{{infoVacante.genero}}</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <h6>{{infoVacante.puesto}}</h6>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <h6>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <h6>{{infoVacante.entidad_federativa}}</h6>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <h6>{{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-block-start: 2%;">Descripcion</h4>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                            <h6>{{infoVacante.descripcion_puesto}}</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
