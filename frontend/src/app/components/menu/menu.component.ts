@@ -163,7 +163,11 @@ export class MenuComponent implements OnInit {
       this.busquedaVacantes();
     } else {
       this.busqueda.InputUbicacion = "";
-      Swal.fire("AJALEEEEEE", "AJALEEEEx2 Elige una ubicacion de la lista", "error");
+      Swal.fire({
+        title: 'Elige una ubicación de la lista',
+        type: 'error',
+        confirmButtonText: 'Aceptar',
+        });
     }
 
   }
