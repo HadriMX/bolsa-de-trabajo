@@ -29,6 +29,6 @@ export class CandidatoService {
   }
 
   reactivar_candidato(id_usuario): Observable<ApiResponse<Candidato>> {
-    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlDeleteCandidato, id_usuario, this.httpOptions);
+    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlReactivarCandidato, id_usuario, this.httpOptions);
   }
 }
