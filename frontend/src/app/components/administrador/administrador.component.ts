@@ -449,9 +449,13 @@ export class AdministradorComponent implements OnInit {
       return "Baja";
   }
 
-  radioChangeEmpresas( estatus:string) {
+  radioChangeEmpresas(estatus: string) {
     this.applyFilterEmpresas(estatus);
-}
+  }
+
+  radioChangeCandidatos(estatus: string) {
+    this.applyFilterCandidatos(estatus);
+  }
 
 
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
