@@ -31,6 +31,7 @@ import {
   MatSortModule, MatTableModule
 } from "@angular/material";
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 registerLocaleData(localeEsMx);
 
@@ -57,7 +58,8 @@ const routes: Routes = [
     AdministradorComponent,
     EditarusuarioComponent,
     VerificacionComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    LoadingComponent
   ],
   imports: [
     FormsModule,
