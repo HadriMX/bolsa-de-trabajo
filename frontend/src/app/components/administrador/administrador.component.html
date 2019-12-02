@@ -375,6 +375,13 @@
                       <mat-form-field>
                         <input matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Filtrar">
                       </mat-form-field>
+                      <input type="radio"  (click)="radioChange('Baja')"> Usuario eliminados
+                      
+                      <mat-radio-group >
+                        
+                        <mat-radio-button (click)="radioChange('Alta')" aria-checked="false">Usuario activos</mat-radio-button>
+                      </mat-radio-group>
+                      
                     </div>
                   </div>
                 </div>
