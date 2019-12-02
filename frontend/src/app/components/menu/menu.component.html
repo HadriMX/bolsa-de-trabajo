@@ -117,8 +117,11 @@
     </div>
 
     <div *ngIf="!isLoading && noVacantesDisponibles" class="container">
-        <div>
-            No hay vacantes papá
+        <div class="border" id="espacioNovacante">
+            <div id="espacioAviso">
+                    <h4>No hay vacantes disponibles</h4>
+                    <img src="/assets/warning.png" width="30%" height="30%" alt="">
+            </div>
         </div>
     </div>
 

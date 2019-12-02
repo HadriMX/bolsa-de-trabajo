@@ -311,16 +311,11 @@
           <mat-tab-group>
             <mat-tab label="Candidatos">
               <div style="margin-left: 10%; margin-top: 1%; ; ">
-                <div class="row">
-                  <div class="col-lg-4 col-sm-4 col-5">
-                    <div style="margin-right: 40%; margin-left:1%; width: 100%;  ">
-                      <mat-form-field>
-                        <input matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Filtrar">
-                      </mat-form-field>
-                    </div>
+                  <div style="width: 40%;">
+                    <mat-form-field>
+                      <input matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Filtrar">
+                    </mat-form-field>
                   </div>
-                </div>
-
                 <div class="border border-dark"
                   style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
 
@@ -369,15 +364,14 @@
             </mat-tab>
             <mat-tab label="Empresas" onclick="categorias(4.1)">
               <div style="margin-left: 10%; margin-top: 1%; ; ">
-                <div class="row">
-                  <div class="col-lg-4 col-sm-4 col-5">
-                    <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
-                      <mat-form-field>
-                        <input matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Filtrar">
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
+                      <div style="width: 40%;">
+                        <mat-form-field>
+                          <input matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Filtrar">
+                        </mat-form-field>
+                      
+                      </div>
+           
+             
 
                 <div class="border border-dark"
                   style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
