@@ -315,7 +315,7 @@
                   <div class="col-lg-4 col-sm-4 col-5">
                     <div style="margin-right: 40%; margin-left:1%; width: 100%;  ">
                       <mat-form-field>
-                        <input matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Filtrar">
+                        <input matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Filtrar">
                       </mat-form-field>
                     </div>
                   </div>
@@ -341,15 +341,19 @@
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
                       <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
                     </ng-container>
-                    <!-- <ng-container matColumnDef="acciones">
+                    <ng-container matColumnDef="acciones">
                       <th mat-header-cell *matHeaderCellDef> Acciones </th>
                       <td mat-cell *matCellDef="let element" class="action-link">
-                        <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                          data-target="#areas1" data-toggle="modal" data-backdrop="static"
-                          (click)="detalleArea(element)">Editar</button>
-
+                        <button mat-flat-button *ngIf="element.estatus==='Alta'"
+                          (click)="deleteCandidato(element.id_usuario)">
+                          <img src="../../../assets/x-button.png" width="20px" height="20px" alt="">
+                        </button>
+                        <button mat-flat-button *ngIf="element.estatus==='Baja'"
+                          (click)="reactivarCandidato(element.id_usuario)">
+                          <img src="../../../assets/plus.png" width="20px" height="20px" alt="">
+                        </button>
                       </td>
-                    </ng-container> -->
+                    </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="ColumnasCandidatos"></tr>
                     <tr mat-row *matRowDef="let row; columns: ColumnasCandidatos;"></tr>
@@ -357,12 +361,75 @@
 
                 </div>
                 <div style="margin-right: 10%; margin-top: 1%; ; ">
-                  <mat-paginator #PaginatorAreas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
+                  <mat-paginator #PaginatorCandidatos [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
+                  </mat-paginator>
                 </div>
 
               </div>
             </mat-tab>
-            <mat-tab label="Empresas">
+            <mat-tab label="Empresas" onclick="categorias(4.1)">
+              <div style="margin-left: 10%; margin-top: 1%; ; ">
+                <div class="row">
+                  <div class="col-lg-4 col-sm-4 col-5">
+                    <div style="margin-right: 40%; margin-top: 4%;  margin-left:1%; width: 100%;  ">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Filtrar">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border border-dark"
+                  style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
+
+                  <table mat-table [dataSource]="dataSource_Empresas" matSort class="lessons-table mat-elevation-z8">
+                    <!-- Columna para email de la empresa -->
+                    <ng-container matColumnDef="email">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+
+                    <!-- Columna para el nombre de la empresa -->
+                    <ng-container matColumnDef="empresa">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre_empresa}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="telefono">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+                      <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estatus">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                      <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="acciones">
+                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                      <td mat-cell *matCellDef="let element" class="action-link">
+                        <button mat-flat-button *ngIf="element.estatus==='Alta'"
+                          (click)="deleteEmpresa(element.id_usuario)">
+                          <img src="../../../assets/x-button.png" width="20px" height="20px" alt="">
+                        </button>
+                        <button mat-flat-button *ngIf="element.estatus==='Baja'"
+                          (click)="reactivarEmpresa(element.id_usuario)">
+                          <img src="../../../assets/plus.png" width="20px" height="20px" alt="">
+                        </button>
+
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="ColumnasEmpresas"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ColumnasEmpresas;"></tr>
+                  </table>
+
+                </div>
+                <div style="margin-right: 10%; margin-top: 1%; ; ">
+                  <mat-paginator #PaginatorEmpresas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
+                  </mat-paginator>
+                </div>
+
+              </div>
 
             </mat-tab>
           </mat-tab-group>
@@ -377,179 +444,6 @@
       <!-- aqui comienza el codigo para el dashBoard  -->
       <div class="conteiner">
         <div *ngIf="estadoimagen === false">
-          <!-- dashBoard -->
-
-          <!-- <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                    <div class="card-body ">
-                      <div class="row">
-                        <div class="col-5 col-md-4">
-                          <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-globe text-warning"></i>
-                          </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                          <div class="numbers">
-                            <p class="card-category">Capacity</p>
-                            <p class="card-title">150GB
-                              <p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-footer ">
-                      <hr>
-                      <div class="stats">
-                        <i class="fa fa-refresh"></i> Update Now
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                    <div class="card-body ">
-                      <div class="row">
-                        <div class="col-5 col-md-4">
-                          <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-money-coins text-success"></i>
-                          </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                          <div class="numbers">
-                            <p class="card-category">Revenue</p>
-                            <p class="card-title">$ 1,345
-                              <p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-footer ">
-                      <hr>
-                      <div class="stats">
-                        <i class="fa fa-calendar-o"></i> Last day
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                    <div class="card-body ">
-                      <div class="row">
-                        <div class="col-5 col-md-4">
-                          <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-vector text-danger"></i>
-                          </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                          <div class="numbers">
-                            <p class="card-category">Errors</p>
-                            <p class="card-title">23
-                              <p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-footer ">
-                      <hr>
-                      <div class="stats">
-                        <i class="fa fa-clock-o"></i> In the last hour
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <div class="card card-stats">
-                    <div class="card-body ">
-                      <div class="row">
-                        <div class="col-5 col-md-4">
-                          <div class="icon-big text-center icon-warning">
-                            <i class="nc-icon nc-favourite-28 text-primary"></i>
-                          </div>
-                        </div>
-                        <div class="col-7 col-md-8">
-                          <div class="numbers">
-                            <p class="card-category">Followers</p>
-                            <p class="card-title">+45K
-                              <p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-footer ">
-                      <hr>
-                      <div class="stats">
-                        <i class="fa fa-refresh"></i> Update now
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="card ">
-                    <div class="card-header ">
-                      <h5 class="card-title">Users Behavior</h5>
-                      <p class="card-category">24 Hours performance</p>
-                    </div>
-                    <div class="card-body ">
-                      <canvas id=chartHours width="400" height="100"></canvas>
-                    </div>
-                    <div class="card-footer ">
-                      <hr>
-                      <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card ">
-                    <div class="card-header ">
-                      <h5 class="card-title">Email Statistics</h5>
-                      <p class="card-category">Last Campaign Performance</p>
-                    </div>
-                    <div class="card-body ">
-                      <canvas id="chartEmail"></canvas>
-                    </div>
-                    <div class="card-footer ">
-                      <div class="legend">
-                        <i class="fa fa-circle text-primary"></i> Opened
-                        <i class="fa fa-circle text-warning"></i> Read
-                        <i class="fa fa-circle text-danger"></i> Deleted
-                        <i class="fa fa-circle text-gray"></i> Unopened
-                      </div>
-                      <hr>
-                      <div class="stats">
-                        <i class="fa fa-calendar"></i> Number of emails sent
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-8">
-                  <div class="card card-chart">
-                    <div class="card-header">
-                      <h5 class="card-title">NASDAQ: AAPL</h5>
-                      <p class="card-category">Line Chart with Points</p>
-                    </div>
-                    <div class="card-body">
-                      <canvas id="speedChart" width="400" height="100"></canvas>
-                    </div>
-                    <div class="card-footer">
-                      <div class="chart-legend">
-                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                      </div>
-                      <hr/>
-                      <div class="card-stats">
-                        <i class="fa fa-check"></i> Data information certified
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
 
         </div>
       </div>

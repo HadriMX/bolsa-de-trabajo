@@ -10,6 +10,25 @@ import { HttpOptionsService } from './http-options.service';
   providedIn: 'root'
 })
 export class EmpresaService {
+  
+  private endpointUrlGetEmpresas = 'http://localhost/bdt/php/src/empresa/get_empresas.php';
+  private endpointUrlDeleteEmpresa='http://localhost/bdt/php/src/empresa/delete_empresa.php';
+  private endpointUrlReactivar ='http://localhost/bdt/php/src/empresa/reactivar_empresa.php';
 
-  constructor() { }
+  constructor(private http: HttpClient,
+    private httpOptions: HttpOptionsService) { }
+
+    get_empresas():Observable<ApiResponse<Empresa[]>> {
+      return this.http.get<ApiResponse<Empresa[]>>(this.endpointUrlGetEmpresas, this.httpOptions);
+    }
+
+  delete_empresa(id_usuario):Observable<ApiResponse<Empresa>> {
+    return this.http.post<ApiResponse<Empresa>>(this.endpointUrlDeleteEmpresa,id_usuario, this.httpOptions);
+  }
+
+  reactivarEmpresa(id_usuario):Observable<ApiResponse<Empresa>> {
+    return this.http.post<ApiResponse<Empresa>>(this.endpointUrlReactivar,id_usuario, this.httpOptions);
+  }
+
+
 }
