@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
 import { Busqueda } from 'src/app/models/busqueda';
-
+import { EmpresaService } from 'src/app/services/empresa.service';
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',
@@ -80,38 +80,47 @@ export class AdministradorComponent implements OnInit {
 
   ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
   ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
-  ColumnasCandidatos: string[] = ['email', 'candidato', 'estatus'];
-  ColumnasEmpresas: string[] = ['email', 'empresa', 'rfc', 'estatus']
+  ColumnasCandidatos: string[] = ['email', 'candidato', 'estatus', 'acciones'];
+  ColumnasEmpresas: string[] = ['email', 'empresa', 'telefono', 'estatus', 'acciones']
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
   dataSource_Candidatos = new MatTableDataSource<any>();
   dataSource_Empresas = new MatTableDataSource<any>();
 
-  //Filtro para los catalagos de areas de estudio y categorias de empresas
+  //Filtro para los catalagos de areas de estudio, categorias y usuarios
   applyFilterAreas(filterValue: string) {
     this.dataSource_AreasEstudio.filter = filterValue.trim().toLowerCase();
   }
   applyFilterCategorias(filterValue: string) {
     this.dataSource_Categorias.filter = filterValue.trim().toLowerCase();
   }
+  applyFilterCandidatos(filterValue: string) {
+    this.dataSource_Candidatos.filter = filterValue.trim().toLowerCase();
+  }
+  applyFilterEmpresas(filterValue: string) {
+    this.dataSource_Empresas.filter = filterValue.trim().toLowerCase();
+  }
 
   //Ordenamiento de los datos de las tablas
   @ViewChild(MatSort, { static: false }) set matSort(ms: MatSort) {
     this.sort = ms;
-
     this.dataSource_AreasEstudio.sort = this.sort;
     this.dataSource_Categorias.sort = this.sort;
+    this.dataSource_Candidatos.sort = this.sort;
+    this.dataSource_Empresas.sort = this.sort;
   }
 
   //Paginación de las tablas
   @ViewChild(MatPaginator, { static: false }) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
-    this.dataSource_AreasEstudio.paginator = this.paginator;
     if (this.opc === 1) {
       this.dataSource_Categorias.paginator = this.paginator
     }
-    else {
+    else if (this.opc === 2) {
       this.dataSource_AreasEstudio.paginator = this.paginator;
+    }
+    else if (this.opc === 4) {
+      this.dataSource_Candidatos.paginator = this.paginator;
     }
   }
   // variales para las vacantes  
@@ -130,48 +139,68 @@ export class AdministradorComponent implements OnInit {
     private solicitudService: SolicitudService,
     private candidatoService: CandidatoService,
     private loginService: LoginService,
+    private empresaService: EmpresaService,
     private vacantesService: VacantesService,
     private router: Router) { }
-  GetSolicitudes() {
-    this.solicitudService.get_solicitudes()
-      .subscribe((response) => {
-        if (response.success) {
-          this.datos_solicitud = response.data;
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
+
+
+  ngOnInit() {
+    // this.usuarioActual = this.currentUserService.getUsuarioActual();
+    this.dashboard();
+    this.getAreas();
+    this.getCategorias();
+    this.getSolicitudes();
+    this.getCandidatos();
+    this.getEmpresas();
+  }
+  //METODOS CRUD (C)
+  add_areaEstudio() {
+    const nombre = $('#area').val();
+    if (nombre === '') {
+      Swal.fire("No ingreso ningun valor");
+    } else {
+      this.btnAgregarArea = true;
+      this.areaService.add_area(this.nuevaArea)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("correcto", "response.message", 'success');
+            this.datosarea.push(nombre);
+            this.getAreas();
+          }
+          else {
+            Swal.fire("Error", response.message, 'error');
+          }
+          this.btnAgregarArea = false;
+          $('#area').val('');
+        });
+    }
   }
 
-  detalleCategoria(Cat_empresa) {
-    this.infoCategoria = Cat_empresa;
-    this.AuxCategoria = this.infoCategoria.nombre_empresa;
-    this.AuxStatusCategoria = this.infoCategoria.estatus;
+  add_CategoriaEmpresa() {
+    const nombre = $('#categoria').val();
+    if (nombre === '') {
+      Swal.fire("No ingreso ningun valor");
+    } else {
+      this.btnAgregarCategoria = true;
+      this.categoriaService.add_categoria(this.nuevaCategoria)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("Correcto", response.message, 'success')
+            this.datoscategoria.push(nombre);
+            this.getCategorias();
+            this.inputeffec();
+          }
+          else {
+            Swal.fire("Error", response.message, 'error');
+          }
+          this.btnAgregarCategoria = false;
+          $('#categoria').val('');
+        });
+    }
   }
 
-  detalleArea(Area) {
-    this.infoArea = Area;
-    this.AuxArea = this.infoArea.nombre;
-    this.AuxStatusArea = this.infoArea.estatus;
-  }
-
-  estatus_areas(status: string) {
-    if (status === 'A')
-      return "Alta";
-    else
-      return "Baja";
-  }
-  estatus_categorias(status: string) {
-    if (status === 'A')
-      return "Alta";
-    else
-      return "Baja";
-  }
-
-
-
-  GetAreas() {
+  //METODOS CRUD (R)
+  getAreas() {
     this.areaService.get_areasAdmin()
       .subscribe((response) => {
         if (response.success) {
@@ -184,8 +213,7 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-
-  GetCategorias() {
+  getCategorias() {
     this.categoriaService.get_categoriasAdmin()
       .subscribe((response) => {
         if (response.success) {
@@ -198,39 +226,151 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  ngOnInit() {
-    // this.usuarioActual = this.currentUserService.getUsuarioActual();
-    this.dashboard();
-    this.GetAreas();
-    this.GetCategorias();
-    this.GetSolicitudes();
-    this.GetCandidatos();
-    this.GetEmpresas();
+  getCandidatos() {
+    this.candidatoService.get_candidatos()
+      .subscribe((response) => {
+        if (response.success) {
+          this.datosCandidato = response.data;
+          this.dataSource_Candidatos.data = this.datosCandidato;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
   }
 
-  add_areaEstudio() {
-    const nombre = $('#area').val();
+  getEmpresas() {
+    this.empresaService.get_empresas()
+      .subscribe((response) => {
+        if (response.success) {
+          this.datosEmpresa = response.data;
+          this.dataSource_Empresas.data = this.datosEmpresa;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  getSolicitudes() {
+    this.solicitudService.get_solicitudes()
+      .subscribe((response) => {
+        if (response.success) {
+          this.datos_solicitud = response.data;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  detalleArea(Area) {
+    this.infoArea = Area;
+    this.AuxArea = this.infoArea.nombre;
+    this.AuxStatusArea = this.infoArea.estatus;
+  }
+
+  detalleCategoria(Cat_empresa) {
+    this.infoCategoria = Cat_empresa;
+    this.AuxCategoria = this.infoCategoria.nombre_empresa;
+    this.AuxStatusCategoria = this.infoCategoria.estatus;
+  }
+
+  //METODOS CRUD (U)
+  update_area() {
+    const nombre = $('#NomArea').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
     } else {
-      this.btnAgregarArea = true;
-      this.areaService.add_area(this.nuevaArea)
+      this.btnModificarArea = true;
+      this.areaService.update_area(this.infoArea)
         .subscribe((response) => {
           if (response.success) {
-            Swal.fire("correcto", "response.message", 'success');
-            this.datosarea.push(nombre);
-            this.GetAreas();
+            Swal.fire("Correcto", "Cambios guardados", 'success')
+            this.CerrarModales();
           }
           else {
-            Swal.fire("Error", response.message, 'error');
+            Swal.fire("Error", "Error al modificar", 'error');
           }
-          this.btnAgregarArea = false;
-          $('#area').val('');
         });
     }
   }
 
-  preguntarArea() {
+  update_categoria() {
+    const nombre = $('#NomCategoria').val();
+    if (nombre === '') {
+      Swal.fire("No ingreso ningun valor");
+    } else {
+      this.btnModificarCategoria = true;
+      this.categoriaService.update_categoria(this.infoCategoria)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("Correcto", "Cambios guardados", 'success')
+            this.CerrarModales();
+          }
+          else {
+            Swal.fire("Error", "Error al modificar", 'error');
+          }
+        });
+    }
+  }
+
+  reactivarCandidato(id) {
+    this.candidatoService.reactivar_candidato(id)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success');
+          this.getCandidatos();
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      })
+  }
+
+  reactivarEmpresa(id) {
+    this.empresaService.reactivarEmpresa(id)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success')
+          this.getEmpresas();
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+
+  //METODOS CRUD (D)
+  deleteCandidato(id) {
+    this.candidatoService.delete_candidato(id)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success');
+          this.getCandidatos();
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      })
+  }
+
+  deleteEmpresa(id) {
+    this.empresaService.delete_empresa(id)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success')
+          this.getEmpresas();
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  //UTILIDADES
+  preguntarArea() {//Avisar si hay cambios sin guardar al modificar un area de estudio
     if ((this.AuxArea !== this.infoArea.nombre) || (this.AuxStatusArea !== this.infoArea.estatus)) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -262,7 +402,7 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  preguntarCategoria() {
+  preguntarCategoria() {//Avisar si hay cambios sin guardar al modificar una categoria
     if ((this.AuxCategoria !== this.infoCategoria.nombre_empresa) || (this.AuxStatusCategoria !== this.infoCategoria.estatus)) {
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -294,84 +434,23 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-
-  add_CategoriaEmpresa() {
-    const nombre = $('#categoria').val();
-    if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
-    } else {
-      this.btnAgregarCategoria = true;
-      this.categoriaService.add_categoria(this.nuevaCategoria)
-        .subscribe((response) => {
-          if (response.success) {
-            Swal.fire("Correcto", response.message, 'success')
-            this.datoscategoria.push(nombre);
-            this.GetCategorias();
-            this.inputeffec();
-
-          }
-          else {
-            Swal.fire("Error", response.message, 'error');
-          }
-          this.btnAgregarCategoria = false;
-          $('#categoria').val('');
-        });
-    }
+  estatus_areas(status: string) {
+    if (status === 'A')
+      return "Alta";
+    else
+      return "Baja";
   }
 
-  update_categoria() {
-    const nombre = $('#NomCategoria').val();
-    if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
-    } else {
-      this.btnModificarCategoria = true;
-      this.categoriaService.update_categoria(this.infoCategoria)
-        .subscribe((response) => {
-          if (response.success) {
-            Swal.fire("Correcto", "Cambios guardados", 'success')
-            this.CerrarModales();
-          }
-          else {
-            Swal.fire("Error", "Error al modificar", 'error');
-          }
-        });
-    }
+  estatus_categorias(status: string) {
+    if (status === 'A')
+      return "Alta";
+    else
+      return "Baja";
   }
 
-  GetCandidatos() {
-    this.candidatoService.get_candidatos()
-      .subscribe((response) => {
-        if (response.success) {
-          this.datosCandidato = response.data;
-          this.dataSource_Candidatos.data = this.datosCandidato;
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
-  }
-
-  GetEmpresas() {
-
-  }
-
-  update_area() {
-    const nombre = $('#NomArea').val();
-    if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
-    } else {
-      this.btnModificarArea = true;
-      this.areaService.update_area(this.infoArea)
-        .subscribe((response) => {
-          if (response.success) {
-            Swal.fire("Correcto", "Cambios guardados", 'success')
-            this.CerrarModales();
-          }
-          else {
-            Swal.fire("Error", "Error al modificar", 'error');
-          }
-        });
-    }
+  //UTILIDADES PARA EL ENCARGADO DE DISEÑO
+  eliminar(i) {
+    this.datoscategoria.splice(i, 1);
   }
   admin() {
     Swal.fire("Pendiente", 'Hay que ver como controlar la info del usuario');
@@ -380,9 +459,7 @@ export class AdministradorComponent implements OnInit {
     (<any>$('#ModalModificarAreas')).modal('hide');
     (<any>$('#ModalModificarCat')).modal('hide');
   }
-  eliminar(i) {
-    this.datoscategoria.splice(i, 1);
-  }
+
   categorias(numero) {
     this.inputbooleano = false;
     // Se selecciona Categorias de las empresas 
@@ -420,6 +497,7 @@ export class AdministradorComponent implements OnInit {
         this.estado = 3;
         this.estadoimagen = false;
       }
+      //Se selecciona el apartado de usuarios registrados 
     } else if (numero === 4) {
       if (this.estado === 4) {
         this.estado = 0;
@@ -427,9 +505,13 @@ export class AdministradorComponent implements OnInit {
       } else {
         $("#usuarios,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css("border-bottom", "transparent");
         $("#usuariosactivos").css("border-bottom", "1px solid white");
+        this.opc = numero;
         this.estadoimagen = false;
         this.estado = 4;
+
       }
+    } else if (numero === 4.1) {
+      this.opc = numero;
     } else if (numero == 6) {
       if (this.estado === 6) {
         this.estado = 0;
