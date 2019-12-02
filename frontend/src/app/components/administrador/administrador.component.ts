@@ -16,6 +16,7 @@ import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
 import { Busqueda } from 'src/app/models/busqueda';
 import { EmpresaService } from 'src/app/services/empresa.service';
+
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',
@@ -447,6 +448,15 @@ export class AdministradorComponent implements OnInit {
     else
       return "Baja";
   }
+
+  radioChangeEmpresas(estatus: string) {
+    this.applyFilterEmpresas(estatus);
+  }
+
+  radioChangeCandidatos(estatus: string) {
+    this.applyFilterCandidatos(estatus);
+  }
+
 
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
   eliminar(i) {

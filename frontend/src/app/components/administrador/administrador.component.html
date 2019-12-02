@@ -1,7 +1,7 @@
 <!-- Aqui empieza el navbar del administrador -->
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <img routerLink="/menu"  class="modal-title" src="/assets/logo.png" style="margin-left: 1%;" height="40px" width="100px"
-    alt="Generic placeholder image">
+  <img routerLink="/menu" class="modal-title" src="/assets/logo.png" style="margin-left: 1%;" height="40px"
+    width="100px" alt="Generic placeholder image">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -311,10 +311,21 @@
           <mat-tab-group>
             <mat-tab label="Candidatos">
               <div style="margin-left: 10%; margin-top: 1%; ; ">
-                  <div style="width: 40%;">
-                    <mat-form-field>
-                      <input matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Filtrar">
-                    </mat-form-field>
+                <div class="row">
+                  <div class="col-lg-4 col-sm-4 col-5">
+                    <div style="margin-right: 40%; margin-left:1%; width: 100%;  ">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Filtrar">
+                      </mat-form-field>
+                      <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                            value="option1" (click)="radioChangeCandidatos('Alta')">Usuarios Activos
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2"  (click)="radioChangeCandidatos('Baja')"> Usuarios Eliminados
+                        </div>
+                    </div>
                   </div>
                 <div class="border border-dark"
                   style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
@@ -341,11 +352,11 @@
                       <td mat-cell *matCellDef="let element" class="action-link">
                         <button mat-flat-button *ngIf="element.estatus==='Alta'"
                           (click)="deleteCandidato(element.id_usuario)">
-                          <img src="../../../assets/x-button.png" width="20px" height="20px" alt="">
+                          <img src="/assets/x-button.png" width="20px" height="20px" alt="">
                         </button>
                         <button mat-flat-button *ngIf="element.estatus==='Baja'"
                           (click)="reactivarCandidato(element.id_usuario)">
-                          <img src="../../../assets/plus.png" width="20px" height="20px" alt="">
+                          <img src="/assets/plus.png" width="20px" height="20px" alt="">
                         </button>
                       </td>
                     </ng-container>
@@ -355,7 +366,7 @@
                   </table>
 
                 </div>
-                <div style="margin-right: 10%; margin-top: 1%; ; ">
+                <div style="margin-right: 10%; margin-top: 1%;">
                   <mat-paginator #PaginatorCandidatos [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
                   </mat-paginator>
                 </div>
@@ -364,14 +375,21 @@
             </mat-tab>
             <mat-tab label="Empresas" onclick="categorias(4.1)">
               <div style="margin-left: 10%; margin-top: 1%; ; ">
-                      <div style="width: 40%;">
-                        <mat-form-field>
-                          <input matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Filtrar">
-                        </mat-form-field>
-                      
+        
+                    <div style="width: 40%;  ">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Filtrar">
+                      </mat-form-field>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                          value="option1" (click)="radioChangeEmpresas('Alta')">Usuarios Activos
                       </div>
-           
-             
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                          value="option2"  (click)="radioChangeEmpresas('Baja')"> Usuarios Eliminados
+                      </div>
+                    </div>
+                
 
                 <div class="border border-dark"
                   style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
@@ -403,11 +421,11 @@
                       <td mat-cell *matCellDef="let element" class="action-link">
                         <button mat-flat-button *ngIf="element.estatus==='Alta'"
                           (click)="deleteEmpresa(element.id_usuario)">
-                          <img src="../../../assets/x-button.png" width="20px" height="20px" alt="">
+                          <img src="/assets/x-button.png" width="20px" height="20px" alt="">
                         </button>
                         <button mat-flat-button *ngIf="element.estatus==='Baja'"
                           (click)="reactivarEmpresa(element.id_usuario)">
-                          <img src="../../../assets/plus.png" width="20px" height="20px" alt="">
+                          <img src="/assets/plus.png" width="20px" height="20px" alt="">
                         </button>
 
                       </td>
