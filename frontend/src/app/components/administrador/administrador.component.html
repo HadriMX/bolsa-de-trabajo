@@ -310,26 +310,27 @@
         <div *ngIf="estado === 4">
           <mat-tab-group>
             <mat-tab label="Candidatos">
-              <div style="margin-left: 10%; margin-top: 1%; ; ">
-                <div class="row">
-                  <div class="col-lg-4 col-sm-4 col-5">
-                    <div style="margin-right: 40%; margin-left:1%; width: 100%;  ">
-                      <mat-form-field>
-                        <input matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Filtrar">
-                      </mat-form-field>
+              <div style="margin-left: 10%; margin-top: 1%;">
+                <div class="row" style="width: 98%;">
+                  <div class="col-lg-6 col-sm-4 col-5">
+                    <div>
                       <div class="form-check">
-                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                            value="option1" (click)="radioChangeCandidatos('Alta')">Usuarios Activos
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                            value="option2"  (click)="radioChangeCandidatos('Baja')"> Usuarios Eliminados
-                        </div>
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                          value="option1" (click)="radioChangeCandidatos('Alta')">Usuarios Activos
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                          value="option2" (click)="radioChangeCandidatos('Baja')"> Usuarios Eliminados
+                      </div>
                     </div>
                   </div>
-                <div class="border border-dark"
-                  style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
+                  <div class="col-lg-4 col-sm-4 col-4">
+                    <input id="input" matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Buscar"
+                      type="text">
+                  </div>
+                </div>
 
+                <div class="border border-dark" style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
                   <table mat-table [dataSource]="dataSource_Candidatos" matSort class="lessons-table mat-elevation-z8">
                     <!-- Columna para email del candidato -->
                     <ng-container matColumnDef="email">
@@ -370,27 +371,34 @@
                   <mat-paginator #PaginatorCandidatos [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
                   </mat-paginator>
                 </div>
-
               </div>
             </mat-tab>
             <mat-tab label="Empresas" onclick="categorias(4.1)">
               <div style="margin-left: 10%; margin-top: 1%; ; ">
-        
-                    <div style="width: 40%;  ">
-                      <mat-form-field>
+                <div>
+                  <!-- <mat-form-field>
                         <input matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Filtrar">
-                      </mat-form-field>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                          value="option1" (click)="radioChangeEmpresas('Alta')">Usuarios Activos
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                          value="option2"  (click)="radioChangeEmpresas('Baja')"> Usuarios Eliminados
-                      </div>
+                      </mat-form-field> -->
+                  <div class="row" style="width: 98%;">
+                    <div class="col-lg-6 col-sm-4 col-5">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                            value="option1" (click)="radioChangeEmpresas('Alta')">Usuarios Activos
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                            value="option2" (click)="radioChangeEmpresas('Baja')"> Usuarios Eliminados
+                        </div>
                     </div>
-                
-
+                    <div class="col-lg-4 col-sm-4 col-4">
+                      <!-- <mat-form-field>
+                            <input matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Filtrar">
+                          </mat-form-field> -->
+                      <input id="input" matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Buscar"
+                        type="text">
+                    </div>
+                  </div>
+                </div>
                 <div class="border border-dark"
                   style="width: 90%; height:350px; background-color:white; overflow-y:scroll">
 
