@@ -58,11 +58,13 @@ class Candidato
         return $output;
     }
 
-    public static function get_candidatos(){
+    public static function get_candidatos($estatus){
         $db = new Db();
         $conn = $db->getConn();
         
-        $stmt = $conn->prepare("SELECT  * FROM candidatosvista");
+        $stmt = $conn->prepare("SELECT  * FROM candidatosvista where estatus=?");
+        $stmt->bind_param('s', $estatus);
+        $stmt->execute();
 
         $stmt->execute();
         $r = $db->readResult($stmt->get_result());
