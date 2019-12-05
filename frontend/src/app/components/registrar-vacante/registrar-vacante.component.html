@@ -1,0 +1,38 @@
+<app-headertittle></app-headertittle>
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h2>Registrar vacante</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="tituloVacante">Título de la vacante</label>
+                <input class="form-control" type="text" name="tituloVacante" id="tituloVacante">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="nombrePuesto">Nombre del puesto</label>
+                <input class="form-control" type="text" name="nombrePuesto" id="nombrePuesto">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="descripcionPuesto">Descripción</label>
+                <ckeditor [editor]="Editor" [config]="EditorConfig" [(ngModel)]="nuevaVacante.descripcion_puesto"></ckeditor>
+            </div>
+        </div>
+    </div>
+
+    <button (click)="test()">Dale</button>
+</div>

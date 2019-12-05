@@ -7,6 +7,7 @@ export class Vacante {
     puesto: string;
     descripcion_puesto: string;
     id_area_puesto: number;
+    id_area_estudio: number;
     area_estudio: string;
     sueldo: number;
     genero: string;
@@ -16,4 +17,17 @@ export class Vacante {
     estatus: string;
     // categoria: string;   FALTAN EN LA BD AL REGRISTRAR VACANTE
     // subcategoria: string;
+
+    constructor() {
+        this.titulo_vacante = '';
+        this.id_empresa = -1;
+        this.puesto = '';
+        this.descripcion_puesto = '';
+        this.id_area_estudio = -1;
+        this.sueldo = 0;
+        this.genero = '';
+        this.direccion = '';
+        this.id_entidad_federativa = -1;
+        this.estatus = '';
+    }
 }
