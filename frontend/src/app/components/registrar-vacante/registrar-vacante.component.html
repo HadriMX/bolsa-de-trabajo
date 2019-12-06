@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col">
-            <h2>Registrar vacante</h2>
+            <h3>REGISTRAR VACANTE</h3>
         </div>
     </div>
 
@@ -11,7 +11,8 @@
         <div class="col">
             <div class="form-group">
                 <label for="tituloVacante">Título de la vacante</label>
-                <input class="form-control" type="text" name="tituloVacante" id="tituloVacante">
+                <input class="form-control" type="text" name="tituloVacante" id="tituloVacante"
+                    [(ngModel)]="nuevaVacante.titulo_vacante">
             </div>
         </div>
     </div>
@@ -20,19 +21,110 @@
         <div class="col">
             <div class="form-group">
                 <label for="nombrePuesto">Nombre del puesto</label>
-                <input class="form-control" type="text" name="nombrePuesto" id="nombrePuesto">
+                <input class="form-control" type="text" name="nombrePuesto" id="nombrePuesto"
+                    [(ngModel)]="nuevaVacante.puesto">
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-sm-4">
             <div class="form-group">
-                <label for="descripcionPuesto">Descripción</label>
-                <ckeditor [editor]="Editor" [config]="EditorConfig" [(ngModel)]="nuevaVacante.descripcion_puesto"></ckeditor>
+                <label for="sueldo">Sueldo</label>
+                <input class="form-control" type="text" name="sueldo" id="sueldo" data-type="currency"
+                    [(ngModel)]="nuevaVacante.sueldo">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="genero">Género</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" [(ngModel)]="nuevaVacante.genero">
+                        <option value="0" selected>Seleccionar</option>
+                        <option value="I">Indistinto</option>
+                        <option value="H">Hombre</option>
+                        <option value="M">Mujer</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="idAreaEstudio">Área de estudio</label>
+                <select class="form-control" [(ngModel)]="nuevaVacante.id_area_estudio">
+                    <option value="0" selected>Seleccionar</option>
+                    <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
+                </select>
             </div>
         </div>
     </div>
 
-    <button (click)="test()">Dale</button>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input class="form-control" type="text" name="direccion" id="direccion"
+                    [(ngModel)]="nuevaVacante.direccion">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="direccion">Entidad federativa</label>
+                <input class="form-control" list="browsers" [(ngModel)]="nuevaVacante.entidad_federativa">
+                
+                <datalist id="browsers">
+                    <option value="Aguascalientes">
+                    <option value="Baja California">
+                    <option value="Baja California Sur">
+                    <option value="Campeche">
+                    <option value="Chiapas">
+                    <option value="Chihuahua">
+                    <option value="Ciudad de México">
+                    <option value="Coahuila">
+                    <option value="Colima">
+                    <option value="Durango">
+                    <option value="Guanajuato">
+                    <option value="Guerrero">
+                    <option value="Hidalgo">
+                    <option value="Jalisco">
+                    <option value="México">
+                    <option value="Michoacán">
+                    <option value="Morelos">
+                    <option value="Nayarit">
+                    <option value="Nuevo León">
+                    <option value="Oaxaca">
+                    <option value="Puebla">
+                    <option value="Querétaro">
+                    <option value="Quintana Roo">
+                    <option value="San Luis Potosí">
+                    <option value="Sinaloa">
+                    <option value="Sonora">
+                    <option value="Tabasco">
+                    <option value="Tamaulipas">
+                    <option value="Tlaxcala">
+                    <option value="Veracruz">
+                    <option value="Yucatán">
+                    <option value="Zacatecas">
+                </datalist>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="descripcionPuesto">Descripción</label>
+                <ckeditor [editor]="Editor" [config]="EditorConfig" [(ngModel)]="nuevaVacante.descripcion_puesto">
+                </ckeditor>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-end pb-4">
+        <div class="col text-right">
+            <button class="btn btn-outline-secondary btn-lg btn-wide mx-2 text-dark">CANCELAR</button>
+            <button class="btn btn-primary btn-lg btn-wide mx-2">REGISTRAR</button>
+        </div>
+    </div>
 </div>
