@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { RegistroService } from '../../services/registro.service';
 import Swal from 'sweetalert2';
 import * as $ from 'jquery';
+import { IAppPage } from 'src/app/interfaces/app-page';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,12 @@ import * as $ from 'jquery';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
-  @Input() nuevoUsuario: Usuario = {
+export class LoginComponent implements OnInit, IAppPage {
+  
+  public showFooter = false;
+  public goTopEnabled = false;
+
+  nuevoUsuario: Usuario = {
     id_usuario: 0,
     email: '',
     password: '',

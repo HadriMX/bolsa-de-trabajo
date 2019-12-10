@@ -2,13 +2,18 @@ import { Component, OnInit,HostListener } from '@angular/core';
 import * as $ from 'jquery';
 import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from 'src/app/services/vacantes.service';
+import { IAppPage } from 'src/app/interfaces/app-page';
 
 @Component({
   selector: 'app-vacantes',
   templateUrl: './vacantes.component.html',
   styleUrls: ['./vacantes.component.css']
 })
-export class VacantesComponent implements OnInit {
+export class VacantesComponent implements OnInit, IAppPage {
+  
+  showFooter = true;
+  goTopEnabled = true;
+  goTop?: Function;
 
   vacantes: Vacante[] = [];
   isLoading = true;

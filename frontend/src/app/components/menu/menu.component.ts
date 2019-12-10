@@ -14,13 +14,18 @@ import { CandidatoService } from 'src/app/services/candidato.service';
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Usuario } from 'src/app/models/usuario';
 import { PostulacionService } from 'src/app/services/postulacion.service';
+import { IAppPage } from 'src/app/interfaces/app-page';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, IAppPage {
+
+  public showFooter = true;
+  public goTopEnabled = true;
+  public goTop = function() { };
 
   //paginacion
   allItems: Vacante[] = [];
@@ -117,7 +122,7 @@ export class MenuComponent implements OnInit {
 
   setPage(page: number) {
     // this.arriba();
-    this.gotoTop();
+    this.goTop();
     if (page < 1) {
       this.router.navigate(['/menu'], { queryParams: { pagina: 1 } });
       return;
@@ -229,35 +234,10 @@ export class MenuComponent implements OnInit {
   //     $('.ir-arriba').slideUp(300);
   //   }
   // }
-
-  isShow: boolean;
-  topPosToStartShowing = 300;
-
-  // Scrollup funciones
-  @HostListener('window:scroll')
-  checkScroll() {
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (scrollPosition >= this.topPosToStartShowing) {
-      this.isShow = true;
-    } else {
-      this.isShow = false;
-    }
-  }
-
+  
   /* administración */
 
   darDeBajaVacante(vacante: Vacante) {
     alert('Aquí se va a dar de baja');
   }
-
-  /**************** */
-  // Scrollup funciones
-  gotoTop() {
-    window.scroll({ 
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
-    });
-  }
-
 }

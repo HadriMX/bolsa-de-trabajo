@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<div class="body-content">
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+</div>
+
+<span *ngIf="goTopEnabled" [hidden]="!showGoTopArrow" (click)="goTop()" class="ir-arriba">
+    <img src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
+</span>
+
+<div *ngIf="showFooter" style="padding-top: 3rem;">
+    <footer class="page-footer text-center">
+        <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
+    </footer>
+</div>
