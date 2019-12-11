@@ -84,9 +84,25 @@ th.mat-sort-header-sorted {
   border-radius: 15px;
   border: none;
   color: white;
-  background-color: rgb(121, 24, 129);
+  background-color: rgb(152, 93, 158);
+  margin-block-start: 30%;  
+  width: 95%;
+  margin-block-end: 1%;
 }
-
+ @media (max-width:574px) {
+   .btn{
+    margin-block-start: 5%;
+    margin-left: 2%;
+    margin-block-end: 2%;
+   }
+ } 
+ @media (min-width:576px) and (max-width:963px) {
+   .btn {
+     margin-block-start:40%;
+     width: 100%;
+     height: 40%;
+   }
+ }
 th {
   color: #ffffff;
   background-color: rgb(153, 103, 158);
@@ -224,7 +240,6 @@ a.fromLeft:after {
     transition: 0.4s;
     line-height: 40px;
     width: 0px;
-
 }
 
 @media screen and (max-width: 620px) {
