@@ -19,7 +19,7 @@ export class PostulacionesComponent implements OnInit {
   botonCancelar: number = 0;
   isLoading = true;
 
-  varios = [1,2,3,4,5];
+  varios = [1, 2, 3, 4, 5];
   constructor(private postulacionesService: PostulacionService) { }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class PostulacionesComponent implements OnInit {
     this.getPostulacionesAceptadas();
   }
 
-  getPostulacionesPendientes(){
+  getPostulacionesPendientes() {
     this.postulacionesService.getPostulaciones('P')
       .subscribe((response) => {
         if (response.success) {
@@ -42,28 +42,28 @@ export class PostulacionesComponent implements OnInit {
       });
   }
 
-  getPostulacionesRechazadas(){
+  getPostulacionesRechazadas() {
     this.postulacionesService.getPostulaciones('R')
-    .subscribe((response) => {
-      if (response.success) {
-        this.postulacionesRechazadas = response.data;
-      }
-      else {
-        Swal.fire("Error", response.message, 'error');
-      }
-    });
+      .subscribe((response) => {
+        if (response.success) {
+          this.postulacionesRechazadas = response.data;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
   }
 
-  getPostulacionesAceptadas(){
+  getPostulacionesAceptadas() {
     this.postulacionesService.getPostulaciones('A')
-    .subscribe((response) => {
-      if (response.success) {
-        this.postulacionesAceptadas = response.data;
-      }
-      else {
-        Swal.fire("Error", response.message, 'error');
-      }
-    });
+      .subscribe((response) => {
+        if (response.success) {
+          this.postulacionesAceptadas = response.data;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
   }
 
   mostrarDetalleVacante(item, aux: number) {
@@ -71,7 +71,7 @@ export class PostulacionesComponent implements OnInit {
     this.botonCancelar = aux;
   }
 
-  cancelarPostulacion(vacante){
+  cancelarPostulacion(vacante) {
     let id_vacante = vacante;
 
     Swal.fire({
@@ -81,7 +81,7 @@ export class PostulacionesComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, cancelar!',
-      cancelButtonText: 'No'  
+      cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
         this.postulacionesService.deletePostulacion(id_vacante)
@@ -101,24 +101,8 @@ export class PostulacionesComponent implements OnInit {
     })
   }
 
-  cerrarModales(){
+  cerrarModales() {
     (<any>$('#vermas .close')).click();
   }
 
-  arriba() {
-    $('#body, html').animate({
-      scrollTop:'0px'
-    }, 500);
-  }
-
-
-// @HostListener('window:scroll', ['$event']) // for window scroll events
-//   onScroll(event) {
-
-//     if ($(window).scrollTop() > 200) {
-//       $('.ir-arriba').slideDown(300);
-//     } else {
-//       $('.ir-arriba').slideUp(300);
-//     }
-//   }  
 }

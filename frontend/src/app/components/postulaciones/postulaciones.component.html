@@ -1,10 +1,6 @@
 <app-headertittle></app-headertittle>
 <html>
 <div id="body">
-  <span (click)="arriba()" class="ir-arriba"><img id="imagen" src="/assets/arrowuo.png" height="15px" width="15px"
-      alt="Ir arriba">
-  </span>
-
   <div class="container">
     <mat-tab-group id="mattab" dynamicHeight>
       <mat-tab label="Postulaciones pendientes">
@@ -19,11 +15,11 @@
                 <div class="row" style="margin-left: 1px;">
                   <div class="col-lg-8 col-sm-12 col-12">
                     <h6 style="margin-block-start:3%;">Te postulaste: {{item.fecha_postulacion}}</h6>
-                    <h6 style="margin-block-start:3%;">{{item.descripcion_puesto | slice:0:100}}...</h6>
+                    <h6 style="margin-block-start:3%;">{{item.descripcion_puesto_plain_text | slice: 0:100}}...</h6>
                   </div>
                   <div class="col-lg-4 col-sm-4 col-5">
                     <button class="btn2" data-toggle="modal" data-target="#vermas"
-                      (click)="mostrarDetalleVacante(item,1)">Ver mas</button>
+                      (click)="mostrarDetalleVacante(item,1)">Ver más</button>
                   </div>
                 </div>
               </div>
@@ -43,11 +39,11 @@
                 <div class="row" style="margin-left: 1px;">
                   <div class="col-lg-8 col-sm-12 col-12">
                     <h6 style="margin-block-start:3%;">Te postulaste: {{item.fecha_postulacion}}</h6>
-                    <h6 style="margin-block-start:3%;">{{item.descripcion_puesto | slice:0:100}}...</h6>
+                    <h6 style="margin-block-start:3%;">{{item.descripcion_puesto_plain_text | slice: 0:100}}...</h6>
                   </div>
                   <div class="col-lg-4 col-sm-4 col-5">
                     <button class="btn2" data-toggle="modal" data-target="#vermas"
-                      (click)="mostrarDetalleVacante(item,0)">Ver mas</button>
+                      (click)="mostrarDetalleVacante(item,0)">Ver más</button>
                   </div>
                 </div>
               </div>
@@ -68,11 +64,11 @@
                 <div class="row" style="margin-left: 1px;">
                   <div class="col-lg-8 col-sm-8 col-12">
                     <h6 style="margin-block-start:3%;">Te postulaste: {{item.fecha_postulacion}}</h6>
-                    <h6 style="margin-block-start:3%;">{{item.descripcion_puesto | slice:0:100}}...</h6>
+                    <h6 style="margin-block-start:3%;">{{item.descripcion_puesto_plain_text | slice: 0:100}}...</h6>
                   </div>
                   <div class="col-lg-4 col-sm-4 col-5">
                     <button class="btn2" data-toggle="modal" data-target="#vermas"
-                      (click)="mostrarDetalleVacante(item,0)">Ver mas</button>
+                      (click)="mostrarDetalleVacante(item,0)">Ver más</button>
                   </div>
                 </div>
               </div>
@@ -99,7 +95,7 @@
     <div class="modal-content">
       <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
 
-        <h5 id="exampleModalLabel" style="color:white;">INFORMACION DE LA POSTULACION</h5>
+        <h5 id="exampleModalLabel" style="color:white;">INFORMACIÓN DE LA POSTULACION</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span style="color: white;" aria-hidden="true">&times;</span>
         </button>
@@ -135,18 +131,18 @@
               <h6>{{infoVacante.fecha_vacante | date: 'longDate'}}</h6>
             </div>
           </div>
-          <h4 style="margin-block-start: 2%;">Descripcion</h4>
+          <h4 style="margin-block-start: 2%;">Descripción</h4>
 
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-              <h6>{{infoVacante.descripcion_puesto}}</h6>
+              <span [innerHTML]="infoVacante.descripcion_puesto"></span>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer" style="background-color: transparent  ;">
         <button class="btn btn-danger" *ngIf="botonCancelar === 1"
-          (click)="cancelarPostulacion(infoVacante.id_vacante)">Cancelar mi postulacion</button>
+          (click)="cancelarPostulacion(infoVacante.id_vacante)">Cancelar mi postulación</button>
       </div>
     </div>
   </div>

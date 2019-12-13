@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit, IAppPage {
   //paginacion
   allItems: Vacante[] = [];
   pager: any = {};
-  pagedItems: any[];
+  pagedItems: Vacante[];
   isLoading = true;
 
   cursor: boolean = false;

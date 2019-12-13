@@ -168,7 +168,7 @@
                         <div class="row">
                             <div class="col">
                                 <p class="d-none d-sm-block">
-                                    {{item.descripcion_puesto | slice:0:190}}...
+                                    {{item.descripcion_puesto_plain_text | slice:0:190}}...
                                 </p>
                             </div>
                         </div>
@@ -247,10 +247,10 @@
                         </div>
                     </div>
 
-                    <h4 style="margin-block-start: 2%;">Descripcion</h4>
+                    <h4 style="margin-block-start: 2%;">Descripción</h4>
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-12">
-                            <h6>{{infoVacante.descripcion_puesto}}</h6>
+                            <span [innerHTML]="infoVacante.descripcion_puesto"></span>
                         </div>
                     </div>
                 </div>

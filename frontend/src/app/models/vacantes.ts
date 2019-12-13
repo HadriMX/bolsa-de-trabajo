@@ -6,6 +6,7 @@ export class Vacante {
     nombre_empresa: string;
     puesto: string;
     descripcion_puesto: string;
+    descripcion_puesto_plain_text: string;
     id_area_puesto: number;
     id_area_estudio: number;
     area_estudio: string;
@@ -23,6 +24,7 @@ export class Vacante {
         this.id_empresa = -1;
         this.puesto = '';
         this.descripcion_puesto = '';
+        this.descripcion_puesto_plain_text = '';
         this.id_area_estudio = -1;
         this.sueldo = 0;
         this.genero = '';

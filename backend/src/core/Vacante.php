@@ -6,28 +6,31 @@ class Vacante
     {
         $db = new Db();
         $conn = $db->getConn();
-        $stmt = $conn->prepare("INSERT INTO vacantes(titulo_vacante, id_usuario, puesto, descripcion_puesto, id_area_estudio, sueldo, genero, direccion, id_entidad_federativa) VALUES (?,?,?,?,?,?,?,?,?)");
-        
+        $stmt = $conn->prepare("INSERT INTO vacantes(titulo_vacante, id_usuario, puesto, descripcion_puesto, descripcion_puesto_plain_text, id_area_estudio, sueldo, genero, direccion, id_entidad_federativa) VALUES (?,?,?,?,?,?,?,?,?,?)");
+
         $titulo_vacante = $vacante['titulo_vacante'];
         $id_usuario = $vacante['id_usuario'];
         $puesto = $vacante['puesto'];
         $descripcion_puesto = $vacante['descripcion_puesto'];
+        $descripcion_puesto_plain_text = $vacante['descripcion_puesto_plain_text'];
         $id_area_estudio = $vacante['id_area_estudio'];
         $sueldo = $vacante['sueldo'];
         $genero = $vacante['genero'];
         $direccion = $vacante['direccion'];
         $id_entidad_federativa = $vacante['id_entidad_federativa'];
 
-        $stmt->bind_param("sissidssi",
+        $stmt->bind_param("sisssidssi",
             $titulo_vacante,
             $id_usuario,
             $puesto,
             $descripcion_puesto,
+            $descripcion_puesto_plain_text,
             $id_area_estudio,
             $sueldo,
             $genero,
             $direccion,
-            $id_entidad_federativa);
+            $id_entidad_federativa
+        );
 
         $stmt->execute();
 

@@ -17,7 +17,6 @@ export class AppComponent {
     this.showFooter = component.showFooter;
     this.goTopEnabled = component.goTopEnabled;
     component.goTop = this.goTop;
-    console.log(this.goTopEnabled);
   }
 
   // Scrollup funciones
