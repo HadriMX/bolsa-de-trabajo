@@ -30,11 +30,11 @@
                         <span>Datos personales</span>
                     </h6>
                     <!-- Comienza la division de la pantalla en dos partes -->
-                    <div class="row" style="margin-left: 2%;">
+                    <div class="row" style="margin-left: 1px;">
                         <!-- Primera parte -->
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-5 col-12" >
+                                <div class="col-lg-4 col-sm-5 col-12">
                                     <h6>Nombre:</h6>
                                 </div>
                                 <div class="col-lg-8 col-sm-3 col-6">
@@ -72,8 +72,7 @@
                                 </div>
                                 <div class="col-lg-8 col-sm-10 col-12">
                                     <div>
-                                        <input class="form-control" style="background-color: thistle; width: 70%;"
-                                            id="date" type="date">
+                                        <input class="form-control" style=" width: 70%;" id="date" type="date">
                                     </div>
                                 </div>
                             </div>
@@ -117,13 +116,13 @@
                             </div>
                         </div>
                     </div>
-                    <div style="width: 98%; margin-left: 4%; margin-block-start: 2%; ">
+                    <div style="width: 98%; margin-left: 25px; margin-block-start: 2%; ">
                         <h6 style="margin-block-start: 1%; ">Direccion</h6>
                         <div class="row">
                             <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
                                 <h6>Estado:</h6>
                             </div>
-                            <div class="col-lg-2 col-sm-2 col-10" style="margin-block-start: 1%; ">
+                            <div class="col-lg-3 col-sm-2 col-10" style="margin-block-start: 1%; ">
                                 <select class="form-control" name="select" style="width: 100%;">
                                     <option value="value1" selected>Ejemplo 1</option>
                                     <option value="value2">Ejemplo 2</option>
@@ -132,14 +131,14 @@
                             <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
                                 <h6>Ciudad:</h6>
                             </div>
-                            <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; ">
+                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
                                 <input placeholder="Ingrese la ciudad" style="width: 100%;" id="input100"
                                     class="form-control input100" type="text">
                             </div>
                             <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
                                 <h6>Colonia:</h6>
                             </div>
-                            <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; ">
+                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
                                 <input placeholder="Ingrese la colonia" style="width: 100%;" id="input100"
                                     class=" form-control input100" type="text">
                             </div>
@@ -148,16 +147,60 @@
                             <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
                                 <h6>Calle:</h6>
                             </div>
-                            <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; ">
+                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
                                 <input placeholder="Ingrese la calle" style="width: 100%;" id="input100"
                                     class="form-control input100" type="text">
                             </div>
                             <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
                                 <h6>CP:</h6>
                             </div>
-                            <div class="col-lg-2 col-sm-3 col-10" style="margin-block-start: 1%; ">
+                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
                                 <input placeholder="Ingrese el codigo postal" style="width: 100%;" id="input100"
                                     class="form-control input100" type="text">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-block-start: 1%;">
+                            <div class="col-lg-5 col-sm-12 col-12">
+                                <div class="row">
+                                    <div class="col-lg-2 col-sm-2 col-12">
+                                        <h6>curp</h6>
+                                    </div>
+                                    <div class="col-lg-8 col-sm-7 col-11">
+                                        <div class="input-group" style="width: 100%;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                    aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
+                                                <label class="custom-file-label" for="inputGroupFile01">Seleccionar
+                                                    Curp</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-sm-12 col-12">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-2 col-12">
+                                            <h6>Acta de nacimiento</h6>
+                                        </div>
+                                        <div class="col-lg-6 col-sm-7 col-11 ">
+                                            <div class="input-group" style="width: 100%;">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"
+                                                        id="inputGroupFileAddon01">Subir</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
+                                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar
+                                                        Acta</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -166,46 +209,96 @@
 
                 <!--Aqui empieza la segunda tabla de llenado de datos-->
                 <div class="laborals">
-                    <!-- <h6 id="titulo-css">Datos Laborales</h6> -->
-                    <!-- class="home-tittle"   -->
-                    <h6 id="titulo-css">
-                        <span>Datos Laborales</span>
-                    </h6>
-                    <div class="row" style="  margin-block-start: 10px;">
-                        <div class="col-lg-3 col-sm-3 col-7" id="titulo">
-                            <h6>Grado de estudios:</h6>
+                    <div class="row">
+                        <div class="col-lg-5 col-sm-5 col-12">
+                            <h6 id="titulo-css">
+                                <span>Datos Laborales</span>
+                            </h6>
+                            <div class="row" style="  margin-block-start: 10px;">
+                                <div class="col-lg-5 col-sm-3 col-7" id="titulo">
+                                    <h6>Grado de estudios:</h6>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-10">
+                                    <select class="form-control" name="select" style="margin-left: 5%; width:100%;">
+                                        <option value="value1" selected>Ejemplo 1</option>
+                                        <option value="value2">Ejemplo 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-block-start: 1%;">
+                                <div class="col-lg-5 col-sm-3 col-7" id="titulo">
+                                    <h6>Area de estudios:</h6>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-10">
+                                    <select class="form-control" name="select" style="margin-left: 5%;width:100%;">
+                                        <option value="value1" selected>Ejemplo 1</option>
+                                        <option value="value2">Ejemplo 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style=" margin-block-start: 1%;">
+                                <div class="col-lg-5 col-sm-3 col-7" id="titulo">
+                                    <h6>Subarea de estudios:</h6>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-10">
+                                    <select class="form-control" name="select" style="margin-left: 5%;width:100%;">
+                                        <option value="value1" selected>Ejemplo 1</option>
+                                        <option value="value2">Ejemplo 2</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6 col-10">
-                            <select class="form-control" name="select" style="margin-left: 5%; width:100%;">
-                                <option value="value1" selected>Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-block-start: 1%;">
-                        <div class="col-lg-3 col-sm-3 col-7" id="titulo">
-                            <h6>Area de estudios:</h6>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-10">
-                            <select class="form-control" name="select" style="margin-left: 5%;width:100%;">
-                                <option value="value1" selected>Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row" style=" margin-block-start: 1%;">
-                        <div class="col-lg-3 col-sm-3 col-7" id="titulo">
-                            <h6>Subarea de estudios:</h6>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-10">
-                            <select class="form-control" name="select" style="margin-left: 5%;width:100%;">
-                                <option value="value1" selected>Ejemplo 1</option>
-                                <option value="value2">Ejemplo 2</option>
-                            </select>
+                        <div class="col-lg-7 col-sm-7 col-12" style="margin-block-start:3%">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12 col-12">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-3 col-12">
+                                            <h6>Curriculum</h6>
+                                        </div>
+                                        <div class="col-lg-8 col-sm-8 col-12">
+
+                                            <div class="input-group" style="width: 100%;">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"
+                                                        id="inputGroupFileAddon01">Subir</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
+                                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar
+                                                        archivo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-sm-12 col-12" style="margin-block-start: 2%;">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-3 col-12">
+                                            <h6>otro</h6>
+                                        </div>
+                                        <div class="col-lg-8 col-sm-8 col-12">
+                                            <div class="input-group" style="width: 100%;">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"
+                                                        id="inputGroupFileAddon01">Subir</span>
+                                                </div>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
+                                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar
+                                                        archivo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-block-start: 2%;">
+                <div class="row" id="botonChange">
                     <div class="col-lg-5 col-sm-5 col-0">
 
                     </div>
@@ -219,7 +312,7 @@
             </div>
         </div>
     </div>
-    <div id="espaciovacio"> 
-    
+    <div id="espaciovacio">
+
     </div>
 </body>

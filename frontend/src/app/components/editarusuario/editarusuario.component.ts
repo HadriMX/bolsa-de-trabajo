@@ -17,4 +17,4 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   ngOnInit() {
   }
   
-}1
+}

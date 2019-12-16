@@ -28,7 +28,7 @@ a{
   #boton1 {
     border-radius: 25px;
     z-index: -1;
-    width: 80%;
+    width: 85%;
     height: 145%;
     background:rgb(142, 36, 168);
     color:white;
@@ -50,7 +50,7 @@ background:rgb(77, 16, 83);
 
 }
 #inicio2 {
-    margin-left: 35%;
+    margin-left: 31%;
     color:beige;
 }
 @media(min-width:1500px) {

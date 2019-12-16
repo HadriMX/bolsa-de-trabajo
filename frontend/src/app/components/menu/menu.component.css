@@ -103,3 +103,13 @@ li {
   background-color: transparent;
   cursor: pointer;
 }
+#espacioNovacante{
+  margin-block-start: 5%;
+  width: 50%;
+  margin-left: 25%;
+  height: 250px;
+  text-align: center;
+}
+#espacioAviso{
+  margin-block-start: 3%;
+}
