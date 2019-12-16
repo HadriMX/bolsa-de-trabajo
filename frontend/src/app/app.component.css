@@ -1,0 +1,34 @@
+.body-content {
+  background-image: url("/assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 90vh;
+}
+
+.ir-arriba {
+  padding:16px;
+  background-repeat: no-repeat;
+  background: rgb(121, 24, 129);
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.ir-arriba:hover {
+  background: rgb(67, 8, 71);
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3rem;
+  color: white;
+  background-color: rgb(91, 6, 112);
+}
