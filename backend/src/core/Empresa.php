@@ -2,11 +2,14 @@
 
 class Empresa
 {
-    public static function get_empresas(){
+    public static function get_empresas($estatus){
         $db = new Db();
         $conn = $db->getConn();
         
-        $stmt = $conn->prepare("SELECT  * FROM  empresasvista");
+        $stmt = $conn->prepare("SELECT  * FROM  empresasvista where estatus=?");
+        $stmt->bind_param('s', $estatus);
+        $stmt->execute();
+
 
         $stmt->execute();
         $r = $db->readResult($stmt->get_result());

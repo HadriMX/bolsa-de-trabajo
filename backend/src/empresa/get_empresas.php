@@ -12,5 +12,6 @@ require_once '../autoload.inc.php';
 require_once '../core/session_starter_admin.php';
 
 $post = json_decode(file_get_contents("php://input"));
-echo json_encode (Empresa::get_empresas());
+$estatus =$post->estatus;
+echo json_encode (Empresa::get_empresas($estatus));
 ?>

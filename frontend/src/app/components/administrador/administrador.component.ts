@@ -101,6 +101,7 @@ export class AdministradorComponent implements OnInit {
   applyFilterEmpresas(filterValue: string) {
     this.dataSource_Empresas.filter = filterValue.trim().toLowerCase();
   }
+  
 
   //Ordenamiento de los datos de las tablas
   @ViewChild(MatSort, { static: false }) set matSort(ms: MatSort) {
@@ -151,8 +152,8 @@ export class AdministradorComponent implements OnInit {
     this.getAreas();
     this.getCategorias();
     this.getSolicitudes();
-    this.getCandidatos();
-    this.getEmpresas();
+    this.getCandidatos('Alta');
+    this.getEmpresas('Alta');
   }
   //METODOS CRUD (C)
   add_areaEstudio() {
@@ -227,8 +228,8 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  getCandidatos() {
-    this.candidatoService.get_candidatos()
+  getCandidatos(estatus: string) {
+    this.candidatoService.get_candidatos(estatus)
       .subscribe((response) => {
         if (response.success) {
           this.datosCandidato = response.data;
@@ -240,8 +241,8 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  getEmpresas() {
-    this.empresaService.get_empresas()
+  getEmpresas(estatus:string) {
+    this.empresaService.get_empresas(estatus)
       .subscribe((response) => {
         if (response.success) {
           this.datosEmpresa = response.data;
@@ -321,7 +322,7 @@ export class AdministradorComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           Swal.fire("Correcto", response.message, 'success');
-          this.getCandidatos();
+          this.getCandidatos('Baja');
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -334,7 +335,7 @@ export class AdministradorComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           Swal.fire("Correcto", response.message, 'success')
-          this.getEmpresas();
+          this.getEmpresas('Baja');
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -349,7 +350,7 @@ export class AdministradorComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           Swal.fire("Correcto", response.message, 'success');
-          this.getCandidatos();
+          this.getCandidatos('Alta');
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -362,7 +363,7 @@ export class AdministradorComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           Swal.fire("Correcto", response.message, 'success')
-          this.getEmpresas();
+          this.getEmpresas('Alta');
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -448,15 +449,6 @@ export class AdministradorComponent implements OnInit {
     else
       return "Baja";
   }
-
-  radioChangeEmpresas(estatus: string) {
-    this.applyFilterEmpresas(estatus);
-  }
-
-  radioChangeCandidatos(estatus: string) {
-    this.applyFilterCandidatos(estatus);
-  }
-
 
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
   eliminar(i) {
