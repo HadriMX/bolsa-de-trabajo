@@ -5,19 +5,19 @@
 <div id="body">
     <div id="cabeceraBusqueda" class="container-fluid">
         <div class="container">
-            <div class="row pt-3 pb-1 align-items-end">
+            <div class="row pt-3 align-items-end">
                 <div class="col-sm-5">
                     <div class="form-group">
-                        <h6 id="titulo2" style="color:white;">Título de la vacante</h6>
-                        <input type="text" class="form-control" placeholder="Ingeniero en software"
+                        <h6 class="font-weight-bold">Título de la vacante o empresa</h6>
+                        <input type="text" class="form-control" placeholder="Ej: Ingeniero en software"
                             [(ngModel)]="busqueda.InputTitulo">
                     </div>
                 </div>
 
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <h6 id="titulo2" style="color:white;">Ubicación</h6>
-                        <input class="form-control" placeholder="Sinaloa" [(ngModel)]="busqueda.InputUbicacion"
+                        <h6 class="font-weight-bold">Ubicación</h6>
+                        <input class="form-control" placeholder="Ej: Sinaloa" [(ngModel)]="busqueda.InputUbicacion"
                             list="browsers">
 
                         <datalist id="browsers">
@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="col-sm-3">
-                    <button id="limpiar" class="btn btn-outline-secondary text-white form-control" (click)="limpiarFiltros()">
+                    <button id="limpiar" class="btn btn-outline-secondary form-control" (click)="limpiarFiltros()">
                         LIMPIAR FILTROS
                     </button>
                 </div>
@@ -131,9 +131,9 @@
 
 
     <div *ngIf="!isLoading && !noVacantesDisponibles" class="container">
-        <div class="row mt-3">
+        <div class="row my-3">
             <div class="col">
-                <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
+                <h6 style="font-size: large;">{{allItems.length}} ofertas de empleo</h6>
             </div>
         </div>
 
@@ -141,30 +141,30 @@
             <div class="col mx-1">
                 <!-- EMPIEZAN VACANTES -->
                 <!-- items que estan siendo paginados -->
-                <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-2 py-2">
+                <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-3 py-2">
                     <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
                         data-target="#datosvacantes">
                         <div class="row">
                             <div class="col-9">
-                                <h6 style="color: yellow;">
+                                <h6 style="color: rgb(121, 24, 129);">
                                     <strong>{{item.titulo_vacante}}</strong>
                                 </h6>
                             </div>
                             <div class="col-3">
-                                <h6>{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                                <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <h6>{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
+                                <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
                                 </h6>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <h6>{{item.entidad_federativa}}</h6>
+                                <h6 class="font-weight-bold">{{item.entidad_federativa}}</h6>
                             </div>
                         </div>
 
@@ -181,7 +181,7 @@
             </div>
         </div>
 
-        <div *ngIf="!isLoading" class="row justify-content-center">
+        <div *ngIf="!isLoading" class="row justify-content-center mt-3">
             <!-- paginacion -->
             <nav aria-label="Paginación">
                 <ul class="pagination">

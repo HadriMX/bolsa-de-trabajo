@@ -42,3 +42,14 @@ body {
 .text-dark {
   color: #5D0877 !important;
 }
+
+.page-item.active .page-link {
+    background-color: rgb(121, 24, 129);
+    border-color: rgb(121, 24, 129);
+}
+
+.page-item.active .page-link:hover {
+    background-color: rgb(106, 22, 114);
+    border-color:  rgb(106, 22, 114);
+    color: white;
+}
