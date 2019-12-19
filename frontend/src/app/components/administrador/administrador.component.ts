@@ -36,7 +36,6 @@ export class AdministradorComponent implements OnInit {
     nombre_empresa: '',
     estatus: ''
   }
-
   datoscategoria = [];
   datosarea = [];
   datosCandidato = [];
@@ -81,12 +80,13 @@ export class AdministradorComponent implements OnInit {
 
   ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
   ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
-  ColumnasCandidatos: string[] = ['email', 'candidato', 'estatus', 'acciones'];
-  ColumnasEmpresas: string[] = ['email', 'empresa', 'telefono', 'estatus', 'acciones']
+  ColumnasCandidatos: string[] = ['candidato', 'email', 'genero', 'telefono', 'estatus','acciones'];
+  ColumnasEmpresas: string[] = ['empresa', 'email', 'telefono', 'personaContacto', 'estatus','acciones']
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
   dataSource_Candidatos = new MatTableDataSource<any>();
   dataSource_Empresas = new MatTableDataSource<any>();
+
 
   //Filtro para los catalagos de areas de estudio, categorias y usuarios
   applyFilterAreas(filterValue: string) {
@@ -101,7 +101,17 @@ export class AdministradorComponent implements OnInit {
   applyFilterEmpresas(filterValue: string) {
     this.dataSource_Empresas.filter = filterValue.trim().toLowerCase();
   }
-  
+
+  swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success',
+      cancelButton: 'btn btn-danger'
+    },
+    buttonsStyling: false
+  });
+
+
+
 
   //Ordenamiento de los datos de las tablas
   @ViewChild(MatSort, { static: false }) set matSort(ms: MatSort) {
@@ -123,6 +133,9 @@ export class AdministradorComponent implements OnInit {
     }
     else if (this.opc === 4) {
       this.dataSource_Candidatos.paginator = this.paginator;
+    }
+    else if (this.opc === 5) {
+      this.dataSource_Empresas.paginator = this.paginator;
     }
   }
   // variales para las vacantes  
@@ -241,7 +254,7 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  getEmpresas(estatus:string) {
+  getEmpresas(estatus: string) {
     this.empresaService.get_empresas(estatus)
       .subscribe((response) => {
         if (response.success) {
@@ -318,70 +331,111 @@ export class AdministradorComponent implements OnInit {
   }
 
   reactivarCandidato(id) {
-    this.candidatoService.reactivar_candidato(id)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success');
-          this.getCandidatos('Baja');
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      })
+    this.swalWithBootstrapButtons.fire({
+      title: '¿Deseas reactivar el usuario?',
+      text: "La cuenta tendra acceso al sistema",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        this.candidatoService.reactivar_candidato(id)
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire("Correcto", response.message, 'success');
+              this.getCandidatos('Baja');
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
+      } else {
+      }
+    });
   }
 
   reactivarEmpresa(id) {
-    this.empresaService.reactivarEmpresa(id)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success')
-          this.getEmpresas('Baja');
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
+    this.swalWithBootstrapButtons.fire({
+      title: '¿Deseas reactivar el usuario?',
+      text: "La cuenta tendra acceso al sistema",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        this.empresaService.reactivarEmpresa(id)
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire("Correcto", response.message, 'success')
+              this.getEmpresas('Baja');
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
+      } else {
+      }
+    });
   }
 
 
   //METODOS CRUD (D)
   deleteCandidato(id) {
-    this.candidatoService.delete_candidato(id)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success');
-          this.getCandidatos('Alta');
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      })
+    this.swalWithBootstrapButtons.fire({
+      title: '¿Deseas eliminar el usuario?',
+      text: "La cuenta del usuario quedará inhabilitada",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        this.candidatoService.delete_candidato(id)
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire("Correcto", response.message, 'success');
+              this.getCandidatos('Alta');
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
+      } else {
+      }
+    });
   }
 
   deleteEmpresa(id) {
-    this.empresaService.delete_empresa(id)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success')
-          this.getEmpresas('Alta');
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
+    this.swalWithBootstrapButtons.fire({
+      title: '¿Deseas eliminar el usuario?',
+      text: "La cuenta del usuario quedará inhabilitada",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        this.empresaService.delete_empresa(id)
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire("Correcto", response.message, 'success')
+              this.getEmpresas('Alta');
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
+      } else {
+      }
+    });
   }
 
   //UTILIDADES
   preguntarArea() {//Avisar si hay cambios sin guardar al modificar un area de estudio
     if ((this.AuxArea !== this.infoArea.nombre) || (this.AuxStatusArea !== this.infoArea.estatus)) {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      swalWithBootstrapButtons.fire({
+      this.swalWithBootstrapButtons.fire({
         title: '¿Salir sin guardar?',
         text: "Hay cambios pendientes",
         type: 'warning',
@@ -406,14 +460,7 @@ export class AdministradorComponent implements OnInit {
 
   preguntarCategoria() {//Avisar si hay cambios sin guardar al modificar una categoria
     if ((this.AuxCategoria !== this.infoCategoria.nombre_empresa) || (this.AuxStatusCategoria !== this.infoCategoria.estatus)) {
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      swalWithBootstrapButtons.fire({
+      this.swalWithBootstrapButtons.fire({
         title: '¿Salir sin guardar?',
         text: "Hay cambios pendientes",
         type: 'warning',
@@ -499,7 +546,7 @@ export class AdministradorComponent implements OnInit {
         this.estado = 3;
         this.estadoimagen = false;
       }
-      //Se selecciona el apartado de usuarios registrados 
+      //Se selecciona el apartado de usuarios candidatos registrados 
     } else if (numero === 4) {
       if (this.estado === 4) {
         this.estado = 0;
@@ -512,8 +559,18 @@ export class AdministradorComponent implements OnInit {
         this.estado = 4;
 
       }
-    } else if (numero === 4.1) {
-      this.opc = numero;
+    } else if (numero === 5) {
+      if (this.estado === 5) {
+        this.estado = 0;
+        $("#empresasActivas").css("border-bottom", "transparent");
+      } else {
+        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css("border-bottom", "transparent");
+        $("#empresasActivas").css("border-bottom", "1px solid white");
+        this.opc = numero;
+        this.estadoimagen = false;
+        this.estado = 5;
+
+      }
     } else if (numero == 6) {
       if (this.estado === 6) {
         this.estado = 0;

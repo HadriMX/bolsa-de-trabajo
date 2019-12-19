@@ -28,7 +28,7 @@ import * as $ from 'jquery';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {
   MatButtonModule, MatTabsModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-  MatSortModule, MatTableModule
+  MatSortModule, MatTableModule, MatSlideToggleModule
 } from "@angular/material";
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -81,6 +81,7 @@ const routes: Routes = [
     MatTabsModule,
     MatButtonModule,
     MatTabsModule,
+    MatSlideToggleModule,
     CKEditorModule
   ],
   exports: [

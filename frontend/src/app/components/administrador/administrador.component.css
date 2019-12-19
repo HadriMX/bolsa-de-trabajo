@@ -276,3 +276,13 @@ a.fromLeft:after {
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: rgb(47, 28, 117);
 }
+
+/* CSS to change Default/'Accent' color */
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #7F1881; /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color:#99679E;  /*replace with your color*/
+}

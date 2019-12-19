@@ -23,7 +23,11 @@
       </li>
       <li class="nav-item active">
         <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">
-          registrados</a>
+          Candidatos</a>
+      </li>
+      <li class="nav-item active">
+        <a style="cursor: pointer;" id="empresasActivas" class="nav-link" (click)="categorias(5)">
+          Empresas</a>
       </li>
       <li class="nav-item active">
         <a style="cursor: pointer;" id="vacantesadmin" class="nav-link" (click)="categorias(6)">Vacantes</a>
@@ -313,147 +317,161 @@
           </div>
         </div>
       </div>
-      <!-- En esta parte comienza la configuracion de los usuarios registrados -->
+      <!-- En esta parte comienza la configuracion de los candidatos registrados -->
       <div class="conteiner">
         <div *ngIf="estado === 4">
-          <mat-tab-group>
-            <mat-tab label="Candidatos">
-              <div style="margin-left: 10%; margin-top: 1%;">
-                <div class="row" style="width: 98%;">
-                  <div class="col-lg-6 col-sm-4 col-5">
-                    <div class="form-check" style="margin-block-start: 2%;">
-                      <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosActivos"
-                        value="option1" (click)="getCandidatos('Alta')"checked>Usuarios activos
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosEliminados"
-                        value="option2" (click)="getCandidatos('Baja')"> Usuarios Eliminados
-                    </div>
-                  </div>
-                  <div class="col-lg-4 col-sm-4 col-4">
-                    <input id="input" matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Buscar"
-                      type="text">
-                  </div>
+          <div style="margin-left: 10%; margin-top: 1%;">
+            <div class="row" style="width: 98%;">
+              <div class="col-lg-6 col-sm-4 col-5">
+                <div class="form-check" style="margin-block-start: 2%;">
+                  <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosActivos"
+                    value="option1" (click)="getCandidatos('Alta')" checked>Usuarios activos
                 </div>
-
-                <div class="border border-dark"
-                  style="width: 90%; height:350px; margin-block-start: 1%;  background-color:white; overflow-y:scroll">
-                  <table mat-table [dataSource]="dataSource_Candidatos" matSort class="lessons-table mat-elevation-z8">
-                    <!-- Columna para email del candidato -->
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
-
-                    <!-- Columna para el nombre del candidato -->
-                    <ng-container matColumnDef="candidato">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Candidato </th>
-                      <td mat-cell *matCellDef="let element"> {{element.candidato}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="estatus">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                      <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="acciones">
-                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                      <td mat-cell *matCellDef="let element" class="action-link">
-                        <button mat-flat-button *ngIf="element.estatus==='Alta'"
-                          (click)="deleteCandidato(element.id_usuario)">
-                          <img src="/assets/x-button.png" width="20px" height="20px" alt="">
-                        </button>
-                        <button mat-flat-button *ngIf="element.estatus==='Baja'"
-                          (click)="reactivarCandidato(element.id_usuario)">
-                          <img src="/assets/plus.png" width="20px" height="20px" alt="">
-                        </button>
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="ColumnasCandidatos"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ColumnasCandidatos;"></tr>
-                  </table>
-
-                </div>
-                <div style="margin-right: 10%; margin-top: 1%;">
-                  <mat-paginator #PaginatorCandidatos [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
-                  </mat-paginator>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosEliminados"
+                    value="option2" (click)="getCandidatos('Baja')"> Usuarios inactivos
                 </div>
               </div>
-            </mat-tab>
-            <mat-tab label="Empresas" onclick="categorias(4.1)">
-              <div style="margin-left: 10%; margin-top: 1%; ; ">
-                <div>
-                  <div class="row" style="width: 98%;">
-                    <div class="col-lg-6 col-sm-4 col-5">
-                      <div class="form-check" style="margin-block-start: 2%;">
-                        <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaActivos"
-                          value="option1" (click)="getEmpresas('Alta')" checked>Usuarios Activos
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaEliminados"
-                          value="option2" (click)="getEmpresas('Baja')">Usuarios Eliminados
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-4">
-                      <input id="input" matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Buscar"
-                        type="text">
-                    </div>
+              <div class="col-lg-4 col-sm-4 col-4">
+                <input id="input" matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Buscar"
+                  type="text">
+              </div>
+            </div>
+
+            <div class="border border-dark"
+              style="width: 90%; height:350px; margin-block-start: 1%;  background-color:white; overflow-y:scroll">
+              <table mat-table [dataSource]="dataSource_Candidatos" matSort class="lessons-table mat-elevation-z8">
+                <!-- Columna para el nombre del candidato -->
+                <ng-container matColumnDef="candidato">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Candidato </th>
+                  <td mat-cell *matCellDef="let element"> {{element.candidato}} </td>
+                </ng-container>
+
+                <!-- Columna para email del candidato -->
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="genero">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Genero </th>
+                  <td mat-cell *matCellDef="let element"> {{element.genero}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="telefono">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> teléfono </th>
+                  <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="estatus">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td mat-cell *matCellDef="let element" class="action-link">
+                  
+                    <button mat-flat-button *ngIf="element.estatus==='Alta'"
+                      (click)="deleteCandidato(element.id_usuario)">
+                      <img src="/assets/x-button.png" width="20px" height="20px" alt="">
+                    </button>
+                    <button mat-flat-button *ngIf="element.estatus==='Baja'"
+                      (click)="reactivarCandidato(element.id_usuario)">
+                      <img src="/assets/plus.png" width="20px" height="20px" alt="">
+                    </button>
+
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="ColumnasCandidatos"></tr>
+                <tr mat-row *matRowDef="let row; columns: ColumnasCandidatos;"></tr>
+              </table>
+
+            </div>
+            <div style="margin-right: 10%; margin-top: 1%;">
+              <mat-paginator #PaginatorCandidatos [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- En esta parte comienza la configuracion de las empresas registradas -->
+      <div class="conteiner">
+        <div *ngIf="estado === 5">
+          <div style="margin-left: 10%; margin-top: 1%; ; ">
+            <div>
+              <div class="row" style="width: 98%;">
+                <div class="col-lg-6 col-sm-4 col-5">
+                  <div class="form-check" style="margin-block-start: 2%;">
+                    <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaActivos"
+                      value="option1" (click)="getEmpresas('Alta')" checked>Empresas activas
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaEliminados"
+                      value="option2" (click)="getEmpresas('Baja')">Empresas inactivas
                   </div>
                 </div>
-                <div class="border border-dark"
-                  style="width: 90%; height:350px;  margin-block-start: 1%; background-color:white; overflow-y:scroll">
-
-                  <table mat-table [dataSource]="dataSource_Empresas" matSort class="lessons-table mat-elevation-z8">
-                    <!-- Columna para email de la empresa -->
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
-
-                    <!-- Columna para el nombre de la empresa -->
-                    <ng-container matColumnDef="empresa">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa </th>
-                      <td mat-cell *matCellDef="let element"> {{element.nombre_empresa}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="telefono">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
-                      <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="estatus">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                      <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="acciones">
-                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                      <td mat-cell *matCellDef="let element" class="action-link">
-                        <button mat-flat-button *ngIf="element.estatus==='Alta'"
-                          (click)="deleteEmpresa(element.id_usuario)">
-                          <img src="/assets/x-button.png" width="20px" height="20px" alt="">
-                        </button>
-                        <button mat-flat-button *ngIf="element.estatus==='Baja'"
-                          (click)="reactivarEmpresa(element.id_usuario)">
-                          <img src="/assets/plus.png" width="20px" height="20px" alt="">
-                        </button>
-
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="ColumnasEmpresas"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ColumnasEmpresas;"></tr>
-                  </table>
-
+                <div class="col-lg-4 col-sm-4 col-4">
+                  <input id="input" matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Buscar"
+                    type="text">
                 </div>
-                <div style="margin-right: 10%; margin-top: 1%; ; ">
-                  <mat-paginator #PaginatorEmpresas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
-                  </mat-paginator>
-                </div>
-
               </div>
+            </div>
+            <div class="border border-dark"
+              style="width: 90%; height:350px;  margin-block-start: 1%; background-color:white; overflow-y:scroll">
 
-            </mat-tab>
-          </mat-tab-group>
+              <table mat-table [dataSource]="dataSource_Empresas" matSort class="lessons-table mat-elevation-z8">
+                <!-- Columna para el nombre de la empresa -->
+                <ng-container matColumnDef="empresa">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre_empresa}} </td>
+                </ng-container>
+
+                <!-- Columna para email de la empresa -->
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="telefono">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> teléfono </th>
+                  <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="personaContacto">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Persona contacto </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre_persona_contacto}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="estatus">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Estatus </th>
+                  <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td mat-cell *matCellDef="let element" class="action-link">
+                    <button mat-flat-button *ngIf="element.estatus==='Alta'"
+                      (click)="deleteEmpresa(element.id_usuario)">
+                      <img src="/assets/x-button.png" width="20px" height="20px" alt="">
+                    </button>
+                    <button mat-flat-button *ngIf="element.estatus==='Baja'"
+                      (click)="reactivarEmpresa(element.id_usuario)">
+                      <img src="/assets/plus.png" width="20px" height="20px" alt="">
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="ColumnasEmpresas"></tr>
+                <tr mat-row *matRowDef="let row; columns: ColumnasEmpresas;"></tr>
+              </table>
+            </div>
+            <div style="margin-right: 10%; margin-top: 1%; ; ">
+              <mat-paginator #PaginatorEmpresas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
+              </mat-paginator>
+            </div>
+          </div>
         </div>
       </div>
       <!-- En esta parte comienza la configuracion de las vacantes de los usuarios -->
