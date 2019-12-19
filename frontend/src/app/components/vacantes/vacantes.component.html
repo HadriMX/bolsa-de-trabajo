@@ -1,16 +1,12 @@
 <app-headertittle></app-headertittle>
 
 <div id="body">
-    <span (click)="arriba()" class="ir-arriba "><img id="imagen" src="/assets/arrowuo.png" height="15px"
-            width="15px" alt="Generic placeholder image">
-    </span>
-
     <div class="container">
         <mat-tab-group id="mattab" dynamicHeight>
             <mat-tab label="Vacantes Publicadas">
                 <div class="row" id="registrarvacante">
                     <div class="col-lg-7 col-sm-7 col-7" style="margin-block-start: 1%;">
-                        <button class="btn" style="margin-left: 36%;" data-toggle="modal" data-target="#agregarvacante">
+                        <button routerLink="registrar" class="btn" style="margin-left: 36%;">
                             Agregar Vacante
                         </button>
                     </div>
@@ -102,7 +98,7 @@
                         </div>
                         <div data-toggle="modal" data-target="#vacanteeditar" data-dismiss="modal">
                             <BUtton class="form-control btn" >
-                                <h6>Editar <img style="margin-left: 5px;" src="../../assets/edit.png" height="25px"
+                                <h6>Editar <img style="margin-left: 5px;" src="/assets/edit.png" height="25px"
                                     width="25px" alt="Generic placeholder image"></h6>
                         
                             </BUtton>
@@ -395,7 +391,7 @@
                         </div>
                         <div class="col-lg-6 col-sm-6 col-6">
                             <div style="margin-left: 80%;">
-                                <img class="modal-title" src="../../assets/img.png" height="60px" width="60px"
+                                <img class="modal-title" src="/assets/img.png" height="60px" width="60px"
                                     alt="Generic placeholder image">
                             </div>
                         </div>

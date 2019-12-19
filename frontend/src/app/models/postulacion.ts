@@ -1,4 +1,4 @@
-export class Postulacion{
+export class Postulacion {
     id_vacante: number;
     titulo_vacante: string;
     fecha_vacante: string;
@@ -6,6 +6,7 @@ export class Postulacion{
     nombre_empresa: string;
     puesto: string;
     descripcion_puesto: string;
+    descripcion_puesto_plain_text: string;
     id_area_estudio: number;
     area_estudio: string;
     sueldo: string;

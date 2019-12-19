@@ -25,13 +25,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwPaginationComponent } from 'jw-angular-pagination';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import * as $ from 'jquery';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {
   MatButtonModule, MatTabsModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule
 } from "@angular/material";
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
 
 registerLocaleData(localeEsMx);
 
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
   { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
+  { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
   { path: '**', redirectTo: '/login' }
 ];
@@ -59,7 +61,8 @@ const routes: Routes = [
     EditarusuarioComponent,
     VerificacionComponent,
     JwPaginationComponent,
-    LoadingComponent
+    LoadingComponent,
+    RegistrarVacanteComponent
   ],
   imports: [
     FormsModule,
@@ -78,6 +81,7 @@ const routes: Routes = [
     MatTabsModule,
     MatButtonModule,
     MatTabsModule,
+    CKEditorModule
   ],
   exports: [
     RouterModule

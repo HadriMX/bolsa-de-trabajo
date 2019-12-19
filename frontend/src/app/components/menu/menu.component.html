@@ -5,19 +5,19 @@
 <div id="body">
     <div id="cabeceraBusqueda" class="container-fluid">
         <div class="container">
-            <div class="row pt-3 pb-1 align-items-end">
+            <div class="row pt-3 align-items-end">
                 <div class="col-sm-5">
                     <div class="form-group">
-                        <h6 id="titulo2" style="color:white;">Título de la vacante</h6>
-                        <input type="text" class="form-control" placeholder="Ingeniero en software"
+                        <h6 class="font-weight-bold">Título de la vacante o empresa</h6>
+                        <input type="text" class="form-control" placeholder="Ej: Ingeniero en software"
                             [(ngModel)]="busqueda.InputTitulo">
                     </div>
                 </div>
 
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <h6 id="titulo2" style="color:white;">Ubicación</h6>
-                        <input class="form-control" placeholder="Sinaloa" [(ngModel)]="busqueda.InputUbicacion"
+                        <h6 class="font-weight-bold">Ubicación</h6>
+                        <input class="form-control" placeholder="Ej: Sinaloa" [(ngModel)]="busqueda.InputUbicacion"
                             list="browsers">
 
                         <datalist id="browsers">
@@ -119,8 +119,8 @@
     <div *ngIf="!isLoading && noVacantesDisponibles" class="container">
         <div class="border" id="espacioNovacante">
             <div id="espacioAviso">
-                    <h4>No hay vacantes disponibles</h4>
-                    <img src="/assets/warning.png" width="30%" height="30%" alt="">
+                <h4>No hay vacantes disponibles</h4>
+                <img src="/assets/warning.png" width="30%" height="30%" alt="">
             </div>
         </div>
     </div>
@@ -131,9 +131,9 @@
 
 
     <div *ngIf="!isLoading && !noVacantesDisponibles" class="container">
-        <div class="row mt-3">
+        <div class="row my-3">
             <div class="col">
-                <h6 style="color:black;">{{allItems.length}} ofertas de empleo</h6>
+                <h6 style="font-size: large;">{{allItems.length}} ofertas de empleo</h6>
             </div>
         </div>
 
@@ -141,37 +141,37 @@
             <div class="col mx-1">
                 <!-- EMPIEZAN VACANTES -->
                 <!-- items que estan siendo paginados -->
-                <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-2 py-2">
+                <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-3 py-2">
                     <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
                         data-target="#datosvacantes">
                         <div class="row">
                             <div class="col-9">
-                                <h6 style="color: yellow;">
+                                <h6 style="color: rgb(121, 24, 129);">
                                     <strong>{{item.titulo_vacante}}</strong>
                                 </h6>
                             </div>
                             <div class="col-3">
-                                <h6>{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                                <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <h6>{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
+                                <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
                                 </h6>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <h6>{{item.entidad_federativa}}</h6>
+                                <h6 class="font-weight-bold">{{item.entidad_federativa}}</h6>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
                                 <p class="d-none d-sm-block">
-                                    {{item.descripcion_puesto | slice:0:190}}...
+                                    {{item.descripcion_puesto_plain_text | slice:0:190}}...
                                 </p>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
             </div>
         </div>
 
-        <div *ngIf="!isLoading" class="row justify-content-center">
+        <div *ngIf="!isLoading" class="row justify-content-center mt-3">
             <!-- paginacion -->
             <nav aria-label="Paginación">
                 <ul class="pagination">
@@ -207,66 +207,57 @@
     </div>
 </div>
 
-<footer id="footer" class="text-center">
-    <small>Copyright &copy; VOLAR IAP ✔ 🐱‍👤</small>
-</footer>
-
-<span *ngIf="isShow" (click)="gotoTop()" class="ir-arriba">
-    <img src="/assets/arrowuo.png" height="15px" width="15px" alt="Arriba">
-</span>
-
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
 <div class="modal fade" id="datosvacantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true" data-controls-modal="datosvacante" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: rgb(87, 4, 87);">
-                <h5 style="color: white;">Detalles de la vacante</h5>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span style="color: white;" aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <div>
-                        <h3>{{infoVacante.titulo_vacante}} </h3>
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <h6>{{infoVacante.nombre_empresa}}</h6>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <h6>{{infoVacante.genero}}</h6>
-                            </div>
+            <div class="modal-header mx-2" style="border-bottom: 1px solid rgb(121, 24, 129);">
+                <div class="container">
+                    <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 text-left">
+                            <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <h6>{{infoVacante.puesto}}</h6>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <h6>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <h6>{{infoVacante.entidad_federativa}}</h6>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <h6>{{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
-                            </div>
+                        <div class="col-md-6 text-md-right">
+                            <h6>{{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
                         </div>
                     </div>
 
-                    <h4 style="margin-block-start: 2%;">Descripcion</h4>
+                    <div class="row justify-content-between">
+                        <div class="col-md-8 text-left">
+                            <h6>{{infoVacante.nombre_empresa}}</h6>
+                        </div>
+                        <div class="col-md-4 text-md-right">
+                            <h6>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 text-left">
+                            <h6>{{infoVacante.entidad_federativa}}</h6>
+                        </div>
+                        <div class="col-md-6 text-md-right">
+                            <h6><span class="font-weight-light text-muted">Género preferente </span> {{infoVacante.genero}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-2">
+                <div class="container">
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-12">
-                            <h6>{{infoVacante.descripcion_puesto}}</h6>
+                            <span style="text-align: justify;" [innerHTML]="infoVacante.descripcion_puesto"></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer mx-2" style="border-top: 1px solid rgb(121, 24, 129);">
                 <button *ngIf="usuarioActual.id_tipo_usuario == 1" class="btn btn-primary"
                     (click)="postularCandidato(infoVacante.id_vacante)">
                     Postularme

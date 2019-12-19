@@ -322,12 +322,12 @@
                 <div class="row" style="width: 98%;">
                   <div class="col-lg-6 col-sm-4 col-5">
                     <div class="form-check" style="margin-block-start: 2%;">
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                        value="option1" (click)="radioChangeCandidatos('Alta')">Usuarios activos
+                      <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosActivos"
+                        value="option1" (click)="getCandidatos('Alta')">Usuarios activos
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                        value="option2" (click)="radioChangeCandidatos('Baja')"> Usuarios Eliminados
+                      <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosEliminados"
+                        value="option2" (click)="getCandidatos('Baja')"> Usuarios Eliminados
                     </div>
                   </div>
                   <div class="col-lg-4 col-sm-4 col-4">
@@ -386,12 +386,12 @@
                   <div class="row" style="width: 98%;">
                     <div class="col-lg-6 col-sm-4 col-5">
                       <div class="form-check" style="margin-block-start: 2%;">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                          value="option1" (click)="radioChangeEmpresas('Alta')">Usuarios Activos
+                        <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaActivos"
+                          value="option1" (click)="getEmpresas('Alta')" checked>Usuarios Activos
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                          value="option2" (click)="radioChangeEmpresas('Baja')"> Usuarios Eliminados
+                        <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaEliminados"
+                          value="option2" (click)="getEmpresas('Baja')">Usuarios Eliminados
                       </div>
                     </div>
                     <div class="col-lg-4 col-sm-4 col-4">

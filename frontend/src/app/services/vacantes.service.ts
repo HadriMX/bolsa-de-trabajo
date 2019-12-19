@@ -15,12 +15,18 @@ export class VacantesService {
     private httpOptions: HttpOptionsService) { }
 
   busquedaVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
-    var url = 'http://localhost/bdt/php/src/vacante/busqueda_vacante.php';
+    let url = 'http://localhost/bdt/php/src/vacante/busqueda_vacante.php';
     return this.http.post<ApiResponse<Vacante[]>>(url, busqueda, this.httpOptions);
   }
 
   getMisVacantes(): Observable<ApiResponse<Vacante[]>> {
-    var url = 'http://localhost/bdt/php/src/vacante/get_mis_vacantes.php';
+    let url = 'http://localhost/bdt/php/src/vacante/get_mis_vacantes.php';
     return this.http.get<ApiResponse<Vacante[]>>(url, this.httpOptions);
   }
+
+  addVacante(vacante: Vacante): Observable<ApiResponse<Vacante>> {
+    let url = 'http://localhost/bdt/php/src/vacante/add_vacante.php';
+    return this.http.post<ApiResponse<Vacante>>(url, vacante, this.httpOptions);
+  }
+  
 }

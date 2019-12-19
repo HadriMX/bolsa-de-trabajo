@@ -1,15 +1,8 @@
-div#body {
-  background-image: url("/assets/background.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  background-size: cover;
-  padding-bottom: 3rem;
-  min-height: 90vh;
-}
-
 div#cabeceraBusqueda {
-  background-color: rgb(91, 6, 112);
+  background-color: white;
+  -webkit-box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
 }
 
 /* Custom dropdown */
@@ -21,13 +14,10 @@ div#cabeceraBusqueda {
 }
 
 .custom-dropdown select {
-  background-color: #6f42c1;
-  color: #fff;
   font-size: inherit;
   width: 100%;
   padding: 0.5em;
   padding-right: 2.5em;
-  border: 0;
   margin: 0;
   border-radius: 3px;
   text-indent: 0.01px;
@@ -51,7 +41,7 @@ div#cabeceraBusqueda {
   right: 1.2em;
   top: 50%;
   margin-top: -0.5em;
-  color: white !important;
+  color: black !important;
 }
 
 /*  Custom dropdown arrow cover */
@@ -80,55 +70,31 @@ div#cabeceraBusqueda {
 }
 
 #vacantecontenedor {
-  background: rgba(18, 11, 119, 0.502);
-  border-radius: 0px 0px 30px 0px;
+  background: white;
   cursor: pointer;
   min-height: 11em;
+  border-left: 5px solid rgb(121, 24, 129);
+  -webkit-box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
 }
 
 #vacantecontenedor:hover {
   -webkit-transform: scale(1.01);
   -ms-transform: scale(1.01);
   transform: scale(1.01);
-
-  background: rgba(40, 32, 153, 0.502);
+  background: rgb(224, 224, 224);
 }
 
 #vacantesmenu {
   margin-block-start: 5px;
   margin-left: 2%;
-  color: white;
+  color: black;
 }
 
 li {
   cursor: pointer;
 }
-
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 3rem;
-  color: white;
-  background-color: rgb(91, 6, 112);
-}
-
-.ir-arriba {
-  padding:16px;
-  background-repeat: no-repeat;
-  background: rgb(121, 24, 129);
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
-.ir-arriba:hover {
-  background: rgb(67, 8, 71);
-} */
 
 .scrollup_img {
   z-index: 2;
@@ -139,13 +105,13 @@ li {
   background-color: transparent;
   cursor: pointer;
 }
-#espacioNovacante{
+#espacioNovacante {
   margin-block-start: 5%;
   width: 50%;
   margin-left: 25%;
   height: 250px;
   text-align: center;
 }
-#espacioAviso{
+#espacioAviso {
   margin-block-start: 3%;
 }

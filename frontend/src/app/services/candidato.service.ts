@@ -20,8 +20,8 @@ export class CandidatoService {
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
 
-  get_candidatos(): Observable<ApiResponse<Candidato[]>> {
-    return this.http.get<ApiResponse<Candidato[]>>(this.endpointUrlGetCandidatos, this.httpOptions);
+  get_candidatos(estatus: string): Observable<ApiResponse<Candidato[]>> {
+    return this.http.post<ApiResponse<Candidato[]>>(this.endpointUrlGetCandidatos,{estatus:estatus}, this.httpOptions);
   }
 
   delete_candidato(id_usuario): Observable<ApiResponse<Candidato>> {
