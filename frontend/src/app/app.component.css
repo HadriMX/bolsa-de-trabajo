@@ -4,7 +4,7 @@
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  min-height: 90vh;
+  min-height: 120vh;
 }
 
 .ir-arriba {
@@ -25,10 +25,23 @@
 }
 
 .page-footer {
-  position: absolute;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  margin: 0px;
+  position: relative;
   bottom: 0;
   width: 100%;
-  height: 3rem;
+  height: 100%;
   color: white;
   background-color: rgb(91, 6, 112);
+}
+#icon{
+  width: 24px;
+  height: 24px;
+}
+
+#logo_jap{
+  width: 131px; 
+  height: 51;
+  padding-bottom: 5px;
 }

@@ -43,13 +43,21 @@ body {
   color: #5D0877 !important;
 }
 
+
+.page-link{
+  color: rgb(121, 24, 129) !important;
+  border-radius: 16px;
+  margin: 0px 5px 0px 5px;
+}
+
 .page-item.active .page-link {
     background-color: rgb(121, 24, 129);
     border-color: rgb(121, 24, 129);
+    color: white !important;
 }
 
 .page-item.active .page-link:hover {
     background-color: rgb(106, 22, 114);
     border-color:  rgb(106, 22, 114);
-    color: white;
+    color: white !important;
 }
