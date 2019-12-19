@@ -80,8 +80,9 @@ export class PostulacionesComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, cancelar!',
-      cancelButtonText: 'No'
+      cancelButtonText: 'No',
+      confirmButtonText: 'Sí, cancelar postulación'
+      
     }).then((result) => {
       if (result.value) {
         this.postulacionesService.deletePostulacion(id_vacante)
@@ -102,7 +103,7 @@ export class PostulacionesComponent implements OnInit {
   }
 
   cerrarModales() {
-    (<any>$('#vermas .close')).click();
+    (<any>$('#datosPostulacion .close')).click();
   }
 
 }

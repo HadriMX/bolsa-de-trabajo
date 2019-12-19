@@ -202,7 +202,7 @@ export class MenuComponent implements OnInit, IAppPage {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, postularme!',
+      confirmButtonText: 'Sí, postularme',
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {

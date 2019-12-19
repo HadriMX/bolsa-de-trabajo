@@ -164,7 +164,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <h6 class="font-weight-bold">{{item.entidad_federativa}}</h6>
+                                <h6 class="font-weight-bold">{{item.entidad_federativa}} <span class="font-weight-light text-muted" >|</span> {{item.area_estudio}}</h6>
                             </div>
                         </div>
 
@@ -221,7 +221,7 @@
                             <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
                         </div>
                         <div class="col-md-6 text-md-right">
-                            <h6>{{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
+                            <h6><span class="font-weight-light text-muted">Publicada </span> {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
                         </div>
                     </div>
 
@@ -230,13 +230,13 @@
                             <h6>{{infoVacante.nombre_empresa}}</h6>
                         </div>
                         <div class="col-md-4 text-md-right">
-                            <h6>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
+                            <h6><span class="font-weight-light text-muted">Sueldo </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
                         </div>
                     </div>
 
                     <div class="row justify-content-between">
                         <div class="col-md-6 text-left">
-                            <h6>{{infoVacante.entidad_federativa}}</h6>
+                            <h6>{{infoVacante.entidad_federativa}} <span class="font-weight-light text-muted" >|</span> {{infoVacante.area_estudio}}</h6>
                         </div>
                         <div class="col-md-6 text-md-right">
                             <h6><span class="font-weight-light text-muted">Género preferente </span> {{infoVacante.genero}}</h6>
