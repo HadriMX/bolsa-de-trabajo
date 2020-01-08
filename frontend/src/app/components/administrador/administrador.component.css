@@ -105,7 +105,7 @@ th.mat-sort-header-sorted {
  }
 th {
   color: #ffffff;
-  background-color: rgb(153, 103, 158);
+  background-color: #791881;
 }
 ::ng-deep .mat-sort-header-arrow {
   color: white;
@@ -286,3 +286,6 @@ a.fromLeft:after {
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
   background-color:#99679E;  /*replace with your color*/
 }
+
+
+

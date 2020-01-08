@@ -131,7 +131,7 @@
 
 
               </div>
-              <div style=" margin-top: 1%; ; ">
+              <div >
                 <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
                 </mat-paginator>
               </div>
@@ -197,7 +197,7 @@
               </table>
 
             </div>
-            <div style="margin-right: 10%; margin-top: 1%; ">
+            <div style="margin-right: 10%;">
               <mat-paginator #PaginatorCategorias [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
@@ -249,15 +249,26 @@
                 <!-- Columna para estatus -->
                 <ng-container matColumnDef="estatus">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{estatus_areas(element.estatus)}} </td>
+                  <td mat-cell *matCellDef="let element"> {{estatus_areas(element.estatus)}}
+                    <button mat-flat-button *ngIf="element.estatus==='A'"
+                    (click)="detalleArea(element);updateEstatusArea('B')">
+                    <i class="material-icons">delete</i>
+                  
+                  </button>  
+                  <button mat-flat-button *ngIf="element.estatus==='B'"
+                      (click)="detalleArea(element);updateEstatusArea('A')">
+                      <i class="material-icons">add</i>
+                    </button>
+                  </td>
+                  
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
                     <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#ModalModificarAreas" data-toggle="modal" data-backdrop="static"
-                      (click)="detalleArea(element)">Editar</button>
+                     
+                      (click)="detalleArea(element);editar()">Editar</button>
                   </td>
                 </ng-container>
 
@@ -266,7 +277,7 @@
               </table>
 
             </div>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
+            <div style="margin-right: 10%;">
               <mat-paginator #PaginatorAreas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
             </div>
           </div>
@@ -389,7 +400,7 @@
               </table>
 
             </div>
-            <div style="margin-right: 10%; margin-top: 1%;">
+            <div style="margin-right: 10%">
               <mat-paginator #PaginatorCandidatos [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
               </mat-paginator>
             </div>
@@ -435,7 +446,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="telefono">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> teléfono </th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </th>
                   <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
                 </ng-container>
 
@@ -467,7 +478,7 @@
                 <tr mat-row *matRowDef="let row; columns: ColumnasEmpresas;"></tr>
               </table>
             </div>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
+            <div style="margin-right: 10%; ">
               <mat-paginator #PaginatorEmpresas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
               </mat-paginator>
             </div>
@@ -482,7 +493,7 @@
             <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
               <!-- Columna para nombre de la categoria -->
               <ng-container matColumnDef="nombre_empresa">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong> Nombre </strong></th>
                 <td mat-cell *matCellDef="let element"> </td>
               </ng-container>
 
@@ -497,8 +508,8 @@
               <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let element" class="action-link">
-                  <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                    data-target="#ModificarCAT" data-toggle="modal" data-backdrop="static"
+                  <button mat-flat-button 
+                    data-target="#ModificarCAT" data-toggle="modal"class="btn btn-outline-secondary form-control" data-backdrop="static"
                     (click)="detalleCategoria(element)">Editar</button>
 
                 </td>
@@ -510,7 +521,7 @@
 
 
           </div>
-          <div style=" margin-top: 1%; ; ">
+          <div >
             <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
             </mat-paginator>
           </div>

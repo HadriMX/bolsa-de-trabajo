@@ -46,7 +46,7 @@ class Categoria{
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("Update OK", true);
+            $output = new SuccessResult("Cambios guardados", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }

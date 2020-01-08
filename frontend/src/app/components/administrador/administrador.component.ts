@@ -80,8 +80,8 @@ export class AdministradorComponent implements OnInit {
 
   ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
   ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
-  ColumnasCandidatos: string[] = ['candidato', 'email', 'genero', 'telefono', 'estatus','acciones'];
-  ColumnasEmpresas: string[] = ['empresa', 'email', 'telefono', 'personaContacto', 'estatus','acciones']
+  ColumnasCandidatos: string[] = ['candidato', 'email', 'genero', 'telefono', 'estatus', 'acciones'];
+  ColumnasEmpresas: string[] = ['empresa', 'email', 'telefono', 'personaContacto', 'estatus', 'acciones']
   dataSource_AreasEstudio = new MatTableDataSource<any>();
   dataSource_Categorias = new MatTableDataSource<any>();
   dataSource_Candidatos = new MatTableDataSource<any>();
@@ -292,41 +292,67 @@ export class AdministradorComponent implements OnInit {
   }
 
   //METODOS CRUD (U)
-  update_area() {
-    const nombre = $('#NomArea').val();
-    if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
-    } else {
-      this.btnModificarArea = true;
-      this.areaService.update_area(this.infoArea)
-        .subscribe((response) => {
-          if (response.success) {
-            Swal.fire("Correcto", "Cambios guardados", 'success')
-            this.CerrarModales();
-          }
-          else {
-            Swal.fire("Error", "Error al modificar", 'error');
-          }
-        });
-    }
+  update_area(nombre: string) {
+    this.btnModificarArea = true;
+    this.infoArea.nombre = nombre;
+    this.areaService.update_area(this.infoArea)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success')
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
   }
 
-  update_categoria() {
-    const nombre = $('#NomCategoria').val();
-    if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
-    } else {
-      this.btnModificarCategoria = true;
-      this.categoriaService.update_categoria(this.infoCategoria)
-        .subscribe((response) => {
-          if (response.success) {
-            Swal.fire("Correcto", "Cambios guardados", 'success')
-            this.CerrarModales();
-          }
-          else {
-            Swal.fire("Error", "Error al modificar", 'error');
-          }
-        });
+  updateEstatusArea(estatus: string) {
+    this.infoArea.estatus = estatus;
+    this.areaService.update_area(this.infoArea)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success');
+        } else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  update_categoria(nombre: string) {
+    this.btnModificarCategoria = true;
+    this.infoCategoria.nombre_empresa = nombre;
+    this.categoriaService.update_categoria(this.infoCategoria)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success')
+          this.CerrarModales();
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+
+  }
+  async editar(tipo) {
+   
+    const { value: nombre } = await Swal.fire({
+      title: 'Ingrese el nuevo nombre',
+      input: 'text',
+      showCancelButton: true,
+      showConfirmButton:true,
+      confirmButtonColor:'#3085d6',
+      confirmButtonText:'Modificar',
+      cancelButtonColor:'#d33',
+      cancelButtonText:'Cancelar',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'El nombre no puede estar vacío'
+        }
+      }
+    })
+
+    if (nombre) {
+      this.update_area(nombre);
     }
   }
 
