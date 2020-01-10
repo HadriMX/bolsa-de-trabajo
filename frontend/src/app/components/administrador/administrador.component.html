@@ -140,78 +140,192 @@
         </mat-tab-group>
       </div>
       <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="conteiner">
         <div *ngIf="estado === 1">
           <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <div class="row">
-              <div class="col-lg-4 col-sm-6 col-6">
-                <div style="  margin-left:1%; width: 100%; ">
-                  <div class="searchBox">
-                    <input [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" class="searchInput" type="text"
-                      autocomplete="off" placeholder="Nombre de la categoria">
-                    <button class="searchButton" (click)="inputeffec()">
-                      <i class="material-icons">
-                        note_add
-                      </i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-3 col-6 ">
-                <button class="btnregistrar" mat-flat-button (click)="add_CategoriaEmpresa()">Registrar</button>
-              </div>
-              <div class="col-lg-4 col-sm-3 col-12 ">
-                <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar"
-                  type="text">
-              </div>
-            </div>
-            <div class="border border-dark"
-              style="margin-block-start:5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
-              <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
-                <!-- Columna para nombre de la categoria -->
-                <ng-container matColumnDef="nombre_empresa">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre_empresa}} </td>
-                </ng-container>
-
-                <!-- Columna para estatus -->
-                <ng-container matColumnDef="estatus">
-
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{estatus_categorias(element.estatus)}}
-                    <mat-slide-toggle #toggleElement *ngIf="element.estatus==='A'" [checked]="activo"
-                      (change)="detalleCategoria(element);updateEstatusCategoria('B')">
-                    </mat-slide-toggle>
-                    <mat-slide-toggle #toggleElement *ngIf="element.estatus==='B'" [checked]="inactivo"
-                      (change)="detalleCategoria(element);updateEstatusCategoria('A')">
-                    </mat-slide-toggle>
+            <h3>Dynamic Columns</h3>
+            <p-table [columns]="cols" [value]="datoscategoria">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns">
+                    {{col.header}}
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
                   </td>
-
-                </ng-container>
-
-                <ng-container matColumnDef="acciones">
-                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                  <td mat-cell *matCellDef="let element" class="action-link">
-                    <button (click)="detalleCategoria(element);editar('categoria')" style="background-color: transparent;
-                    border: none;">
-                      <i class="material-icons">edit</i>
-                    </button>
-
-
-                  </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="ColumnasCategorias"></tr>
-                <tr mat-row *matRowDef="let row; columns: ColumnasCategorias;"></tr>
-              </table>
-
-            </div>
-            <div style="margin-right: 10%;">
-              <mat-paginator #PaginatorCategorias [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
-            </div>
+                </tr>
+              </ng-template>
+            </p-table>
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- En esta parte comienza la configuracion de areas de estudio -->
       <div class="conteiner">
         <div *ngIf="estado === 2">

@@ -64,6 +64,9 @@ export class AdministradorComponent implements OnInit {
   chartEmail;
   chartHours;
 
+  cols: any[];
+ 
+
   infoCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
     nombre_categoria: '',
@@ -172,6 +175,11 @@ export class AdministradorComponent implements OnInit {
     this.getSolicitudes();
     this.getCandidatos('Alta');
     this.getEmpresas('Alta');
+
+    this.cols = [
+      { field: 'nombre_empresa', header: 'nombre' },
+      {field: 'estatus', header: 'estatus' }
+  ];
   }
   //METODOS CRUD (C)
   add_areaEstudio() {

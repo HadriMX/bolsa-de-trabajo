@@ -29,8 +29,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import {
   MatButtonModule, MatTabsModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
-  MatSortModule, MatTableModule, MatSlideToggleModule
+  MatSortModule, MatTableModule, MatSlideToggleModule, MatSlideToggle
 } from "@angular/material";
+
+import {TableModule} from 'primeng/table'
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
@@ -83,7 +85,9 @@ const routes: Routes = [
     MatButtonModule,
     MatTabsModule,
     CKEditorModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    MatSlideToggleModule,
+    TableModule
   ],
   exports: [
     RouterModule
