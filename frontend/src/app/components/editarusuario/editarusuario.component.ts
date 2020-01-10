@@ -8,13 +8,15 @@ import { IAppPage } from 'src/app/interfaces/app-page';
 })
 export class EditarusuarioComponent implements OnInit, IAppPage {
   
-  showFooter = false;
-  goTopEnabled = false;
+  showFooter = true;
+  goTopEnabled = true;
   goTop?: Function;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+    
   }
-  
+
 }

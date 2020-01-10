@@ -11,308 +11,209 @@
 </head>
 <!-- En esta parte comienza el cuerpo de la pagina -->
 
-<body>
-    <!-- Comienza la division de la pagina en dos contenedores -->
-    <div id="contenedor" style="margin-left: 2%; ">
-        <div>
-            <div class="row" style="margin-block-start: 1%;">
-                <div class="col-lg-7 col-sm-6 col-2">
-                    <h4 style=" color:rgb(3, 21, 58); margin-left: 1%;">Cuenta</h4>
 
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h3>INFORMACIÓN DE LA CUENTA</h3>
+        </div>
+    </div>
+    <h6 id="titulo">
+        <span>DATOS PERSONALES</span>
+    </h6>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <label for="nombre">Nombre*</label>
+            <input id="nombre" name="nombre" class="form-control" type="text" placeholder="Ej. Luis Antonio"
+                autocomplete="off">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <label for="apellido1">Primer Apellido*</label>
+            <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder="Ej. Hernandez"
+                autocomplete="off">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <label for="apellido2">Segundo Apellido</label>
+            <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder="Ej. García"
+                autocomplete="off">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="fechaNacimiento">Fecha de Nacimiento*</label>
+            <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="telefono">Teléfono*</label>
+            <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
+                autocomplete="off">
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+            <label for="genero">Género*</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="genero" id="genero">
+                    <option value="" selected disabled>Seleccione el género</option>
+                    <option value="Hombre">Masculino</option>
+                    <option value="Mujer">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </span>
+        </div>
+    </div>
+
+    <h6 id="titulo" style="margin-top: 50px">
+        DIRECCIÓN
+    </h6>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
+            <label for="estado">Entidad Federativa*</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="estado" id="estado">
+                    <option value="" selected disabled>Seleccione la entidad federativa</option>
+                    <option value="">Sinaloa</option>
+                    <option value="">Sonora</option>
+                    <option value="">Chihuahua</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <label for="ciudad">Ciudad*</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="ciudad" id="ciudad">
+                    <option value="" selected disabled>Seleccione la ciudad</option>
+                    <option value="">Ejemplo 1</option>
+                    <option value="">Ejemplo 2</option>
+                    <option value="">Ejemplo 3</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
+            <label for="colonia">Colonia*</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="colonia" id="colonia">
+                    <option value="" selected disabled>Seleccione la colonia</option>
+                    <option value="">Ejemplo 1</option>
+                    <option value="">Ejemplo 2</option>
+                    <option value="">Ejemplo 3</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <label for="calle">Calle*</label>
+            <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
+                placeholder="Ej. Miguel Hidalgo">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <label for="codigoPostal">Codigo Postal*</label>
+            <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
+                placeholder="Ej. 81271">
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <label for="numExterior">Numero Exterior*</label>
+            <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
+                placeholder="Ej. 856">
+        </div>
+    </div>
+
+    <h6 id="titulo" style="margin-top: 50px">
+        DATOS ACADEMICOS
+    </h6>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
+            <label for="nivelEstudios">Ultimo Nivel de Estudios*</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="nivelEstudios" id="nivelEstudios">
+                    <option value="" selected disabled>Seleccione un nivel</option>
+                    <option value="">Preparatoria</option>
+                    <option value="">Universidad</option>
+                    <option value="">Posgrado</option>
+                    <option value="">Maestria</option>
+                    <option value="">Doctorado</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+            <label for="escuela">Escuela*</label>
+            <input id="escuela" name="escuela" class="form-control" type="text"
+                placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="carreraEspecialidad">Carrera/Especialidad*</label>
+            <input id="carreraEspecialidad" name="carreraEspecialidad" class="form-control" type="text"
+                placeholder="Ej. Ingenieria de Software" autocomplete="off">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="anioEscolar">Año Escolar</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="anioEscolar" id="anioEscolar">
+                    <option value="" selected disabled>Seleccione un año</option>
+                    <option value="">Primero</option>
+                    <option value="">Segundo</option>
+                    <option value="">Tercero</option>
+                    <option value="">Cuarto</option>
+                    <option value="">Quinto</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="promedioFinal">Promedio Final</label>
+            <input id="promedioFinal" name="promedioFinal" class="form-control" type="text"
+                placeholder="Ej. 85 ó 8.5" autocomplete="off">
+        </div>
+    </div>
+
+    <h6 id="titulo" style="margin-top: 50px">
+        ARCHIVOS DE VALIDACIÓN
+    </h6>
+    <label for="" style="margin-bottom: 10px">Para poder validar tus datos y comprobar que eres quien dices ser, es necesario subir ciertos archivos para concluir con tu registro.</label>
+    <div class="row">
+        <!-- CURP -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="input-group" style="width: 100%;">
+                <div id="inputFile" class="input-group-prepend">
+                    <span class="input-group-text" id="fileCurp">CURP</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="fileCurp"
+                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es">
+                    <label class="custom-file-label" for="inputGroupFile01">Selecciona uno o más archivos</label>
                 </div>
             </div>
-            <div style="margin-block-start: 1%;">
-                <!-- Comienza el apartado de la cuenta del usuario -->
-                <div
-                    style="width:96%; height: 30%; margin-block-start: 1%; margin-top: 5px; background-color: transparent;">
-                    <!-- <h6 id="titulo-css">Datos personales</h6> -->
-                    <h6 id="titulo-css">
-                        <span>Datos personales</span>
-                    </h6>
-                    <!-- Comienza la division de la pantalla en dos partes -->
-                    <div class="row" style="margin-left: 1px;">
-                        <!-- Primera parte -->
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-5 col-12">
-                                    <h6>Nombre:</h6>
-                                </div>
-                                <div class="col-lg-8 col-sm-3 col-6">
-                                    <div>
-                                        <input placeholder="Ingrese su nombre" id="input100"
-                                            class="form-control input100" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-5 col-12">
-                                    <h6>Primer apellido:</h6>
-                                </div>
-                                <div class="col-lg-8 col-sm-3 col-6">
-                                    <div>
-                                        <input placeholder="Ingrese su primer apellido" id="input100"
-                                            class=" form-control input100" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-5 col-12">
-                                    <h6>Segundo apellido:</h6>
-                                </div>
-                                <div class="col-lg-8 col-sm-3 col-6">
-                                    <div>
-                                        <input placeholder="Ingrese su segundo apellido" id="input100"
-                                            class=" form-control input100" type="email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-7 col-12">
-                                    <h6>Fechad de nacimiento:</h6>
-                                </div>
-                                <div class="col-lg-8 col-sm-10 col-12">
-                                    <div>
-                                        <input class="form-control" style=" width: 70%;" id="date" type="date">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Segunda parte -->
-                        <div class="col-lg-6 col-sm-6 col-12 ">
-                            <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-5 col-12">
-                                    <h6>Telefono:</h6>
-                                </div>
-                                <div class="col-lg-8 col-sm-3 col-6">
-                                    <div>
-                                        <input placeholder="Ingrese su telefono" id="input100"
-                                            class="form-control input100" type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-5 col-12">
-                                    <h6>Correo electronico:</h6>
-                                </div>
-                                <div class="col-lg-8 col-sm-3 col-6">
-                                    <div>
-                                        <input placeholder="Ingrese su correo electronico" id="input100"
-                                            class="form-control input100" type="email">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-block-start: 3%;">
-                                <div class="col-lg-4 col-sm-5 col-12">
-                                    <h6>Genero:</h6>
-                                </div>
-                                <div class="col-lg-8 col-sm-4 col-12">
-                                    <div>
-                                        <select class="form-control" name="select" style=" width:70%;">
-                                            <option value="value1" selected>Hombre</option>
-                                            <option value="value2">Mujer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="width: 98%; margin-left: 25px; margin-block-start: 2%; ">
-                        <h6 style="margin-block-start: 1%; ">Direccion</h6>
-                        <div class="row">
-                            <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
-                                <h6>Estado:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-2 col-10" style="margin-block-start: 1%; ">
-                                <select class="form-control" name="select" style="width: 100%;">
-                                    <option value="value1" selected>Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
-                                <h6>Ciudad:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
-                                <input placeholder="Ingrese la ciudad" style="width: 100%;" id="input100"
-                                    class="form-control input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
-                                <h6>Colonia:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
-                                <input placeholder="Ingrese la colonia" style="width: 100%;" id="input100"
-                                    class=" form-control input100" type="text">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-block-start: 1%;">
-                            <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
-                                <h6>Calle:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
-                                <input placeholder="Ingrese la calle" style="width: 100%;" id="input100"
-                                    class="form-control input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-sm-1 col-12" style="margin-block-start: 12px; ">
-                                <h6>CP:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-10" style="margin-block-start: 1%; ">
-                                <input placeholder="Ingrese el codigo postal" style="width: 100%;" id="input100"
-                                    class="form-control input100" type="text">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-block-start: 1%;">
-                            <div class="col-lg-5 col-sm-12 col-12">
-                                <div class="row">
-                                    <div class="col-lg-2 col-sm-2 col-12">
-                                        <h6>curp</h6>
-                                    </div>
-                                    <div class="col-lg-8 col-sm-7 col-11">
-                                        <div class="input-group" style="width: 100%;">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                    aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
-                                                <label class="custom-file-label" for="inputGroupFile01">Seleccionar
-                                                    Curp</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-sm-12 col-12">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-sm-2 col-12">
-                                            <h6>Acta de nacimiento</h6>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-7 col-11 ">
-                                            <div class="input-group" style="width: 100%;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"
-                                                        id="inputGroupFileAddon01">Subir</span>
-                                                </div>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
-                                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar
-                                                        Acta</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-
+        </div>
+        <!-- ID -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="input-group" style="width: 100%;">
+                <div id="inputFile" class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">IDENTIFICACIÓN</span>
                 </div>
-
-                <!--Aqui empieza la segunda tabla de llenado de datos-->
-                <div class="laborals">
-                    <div class="row">
-                        <div class="col-lg-5 col-sm-5 col-12">
-                            <h6 id="titulo-css">
-                                <span>Datos Laborales</span>
-                            </h6>
-                            <div class="row" style="  margin-block-start: 10px;">
-                                <div class="col-lg-5 col-sm-3 col-7" id="titulo">
-                                    <h6>Grado de estudios:</h6>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-10">
-                                    <select class="form-control" name="select" style="margin-left: 5%; width:100%;">
-                                        <option value="value1" selected>Ejemplo 1</option>
-                                        <option value="value2">Ejemplo 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-block-start: 1%;">
-                                <div class="col-lg-5 col-sm-3 col-7" id="titulo">
-                                    <h6>Area de estudios:</h6>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-10">
-                                    <select class="form-control" name="select" style="margin-left: 5%;width:100%;">
-                                        <option value="value1" selected>Ejemplo 1</option>
-                                        <option value="value2">Ejemplo 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" style=" margin-block-start: 1%;">
-                                <div class="col-lg-5 col-sm-3 col-7" id="titulo">
-                                    <h6>Subarea de estudios:</h6>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-10">
-                                    <select class="form-control" name="select" style="margin-left: 5%;width:100%;">
-                                        <option value="value1" selected>Ejemplo 1</option>
-                                        <option value="value2">Ejemplo 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-sm-7 col-12" style="margin-block-start:3%">
-                            <div class="row">
-                                <div class="col-lg-12 col-sm-12 col-12">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-sm-3 col-12">
-                                            <h6>Curriculum</h6>
-                                        </div>
-                                        <div class="col-lg-8 col-sm-8 col-12">
-
-                                            <div class="input-group" style="width: 100%;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"
-                                                        id="inputGroupFileAddon01">Subir</span>
-                                                </div>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
-                                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar
-                                                        archivo</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-sm-12 col-12" style="margin-block-start: 2%;">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-sm-3 col-12">
-                                            <h6>otro</h6>
-                                        </div>
-                                        <div class="col-lg-8 col-sm-8 col-12">
-                                            <div class="input-group" style="width: 100%;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"
-                                                        id="inputGroupFileAddon01">Subir</span>
-                                                </div>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf">>
-                                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar
-                                                        archivo</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="fileIdentificacion"
+                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es">
+                    <label class="custom-file-label" for="fileIdentificacion">Selecciona uno o más archivos</label>
                 </div>
-                <div class="row" id="botonChange">
-                    <div class="col-lg-5 col-sm-5 col-0">
-
-                    </div>
-                    <div class="col-lg-3 col-sm-3 col-4">
-                        <button id="boton3" class="form-control">Editar informacion</button>
-                    </div>
-                    <div class="segundoboton col-lg-3 col-sm-3 col-4">
-                        <button id="boton3" class="form-control">Guardar cambios</button>
-                    </div>
+            </div>
+        </div>
+        <!-- CURRICULUM -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="input-group" style="width: 100%;">
+                <div id="inputFile" class="input-group-prepend">
+                    <span class="input-group-text" id="fileCurriculum">CURRICULUM</span>
+                </div>
+                <div class="custom-file">
+                    <input #file type="file" class="custom-file-input" id="fileCurriculum"
+                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es" (change)="updateFile(file)">
+                    <label class="custom-file-label" for="inputGroupFile01">Selecciona uno o más archivos</label>
                 </div>
             </div>
         </div>
     </div>
-    <div id="espaciovacio">
-
+    <div class="row justify-content-end pb-4">
+        <div class="col text-right">
+            <!-- <button (click)="cancelar()" class="btn btn-outline-secondary btn-lg btn-wide mx-2 text-dark" style="background-color: white;">CANCELAR</button> -->
+            <button class="btn btn-primary btn-lg btn-wide mx-2">GUARDAR</button>
+        </div>
     </div>
-</body>
+    <div id="separador" style="height: 150px;">
+    </div>
+</div>
