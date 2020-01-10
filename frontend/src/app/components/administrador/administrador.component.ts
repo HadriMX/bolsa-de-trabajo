@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Area } from 'src/app/models/area';
 import { Cat_empresa } from 'src/app/models/categoria'
 import Swal from 'sweetalert2';
@@ -36,6 +36,7 @@ export class AdministradorComponent implements OnInit {
     nombre_empresa: '',
     estatus: ''
   }
+  isLoading = false;
   datoscategoria = [];
   datosarea = [];
   datosCandidato = [];
@@ -44,6 +45,8 @@ export class AdministradorComponent implements OnInit {
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
   estadoimagen = false;
+  activo:boolean=true;
+  inactivo:boolean=false;
   btnAgregarArea: boolean;
   btnAgregarCategoria: boolean;
   btnModificarCategoria: boolean;
@@ -73,6 +76,7 @@ export class AdministradorComponent implements OnInit {
     nombre: '',
     estatus: ''
   }
+
   private paginator: MatPaginator;
   private sort: MatSort;
   public dialog: MatDialog;
@@ -121,6 +125,7 @@ export class AdministradorComponent implements OnInit {
     this.dataSource_Candidatos.sort = this.sort;
     this.dataSource_Empresas.sort = this.sort;
   }
+
 
   //Paginación de las tablas
   @ViewChild(MatPaginator, { static: false }) set matPaginator(mp: MatPaginator) {
@@ -228,7 +233,7 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  getCategorias() {
+   getCategorias() {
     this.categoriaService.get_categoriasAdmin()
       .subscribe((response) => {
         if (response.success) {
@@ -287,6 +292,7 @@ export class AdministradorComponent implements OnInit {
 
   detalleCategoria(Cat_empresa) {
     this.infoCategoria = Cat_empresa;
+
     this.AuxCategoria = this.infoCategoria.nombre_empresa;
     this.AuxStatusCategoria = this.infoCategoria.estatus;
   }
@@ -307,6 +313,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   updateEstatusArea(estatus: string) {
+    this.isLoading = true;
     this.infoArea.estatus = estatus;
     this.areaService.update_area(this.infoArea)
       .subscribe((response) => {
@@ -315,10 +322,12 @@ export class AdministradorComponent implements OnInit {
         } else {
           Swal.fire("Error", response.message, 'error');
         }
+      this.isLoading=false
       });
   }
 
   update_categoria(nombre: string) {
+    this.isLoading=true;
     this.btnModificarCategoria = true;
     this.infoCategoria.nombre_empresa = nombre;
     this.categoriaService.update_categoria(this.infoCategoria)
@@ -330,11 +339,25 @@ export class AdministradorComponent implements OnInit {
         else {
           Swal.fire("Error", response.message, 'error');
         }
+        this.isLoading=false;
       });
-
   }
+  updateEstatusCategoria(estatus:string,){
+    this.isLoading=true;
+  
+    this.infoCategoria.estatus = estatus;
+    this.categoriaService.update_categoria(this.infoCategoria)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire("Correcto", response.message, 'success');
+        } else {
+          Swal.fire("Error", response.message, 'error');
+        }
+        this.isLoading=false;
+      });
+  }
+
   async editar(tipo) {
-   
     const { value: nombre } = await Swal.fire({
       title: 'Ingrese el nuevo nombre',
       input: 'text',
@@ -350,9 +373,12 @@ export class AdministradorComponent implements OnInit {
         }
       }
     })
-
     if (nombre) {
-      this.update_area(nombre);
+      if (tipo==='area')
+        this.update_area(nombre);
+      else{
+        this.update_categoria(nombre);
+      }
     }
   }
 

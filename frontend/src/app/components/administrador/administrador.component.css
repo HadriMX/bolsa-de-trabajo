@@ -104,11 +104,11 @@ th.mat-sort-header-sorted {
    }
  }
 th {
-  color: #ffffff;
-  background-color: #791881;
+  color: #000000;
+  font-weight: bold;
 }
 ::ng-deep .mat-sort-header-arrow {
-  color: white;
+  color:#000000;
 }
 .container {
   overflow: auto;

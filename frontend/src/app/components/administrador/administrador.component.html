@@ -131,7 +131,7 @@
 
 
               </div>
-              <div >
+              <div>
                 <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
                 </mat-paginator>
               </div>
@@ -178,16 +178,25 @@
                 <ng-container matColumnDef="estatus">
 
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{estatus_categorias(element.estatus)}} </td>
+                  <td mat-cell *matCellDef="let element"> {{estatus_categorias(element.estatus)}}
+                    <mat-slide-toggle #toggleElement *ngIf="element.estatus==='A'" [checked]="activo"
+                      (change)="detalleCategoria(element);updateEstatusCategoria('B')">
+                    </mat-slide-toggle>
+                    <mat-slide-toggle #toggleElement *ngIf="element.estatus==='B'" [checked]="inactivo"
+                      (change)="detalleCategoria(element);updateEstatusCategoria('A')">
+                    </mat-slide-toggle>
+                  </td>
 
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
-                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#ModalModificarCat" data-toggle="modal" data-backdrop="static"
-                      (click)="detalleCategoria(element)">Editar</button>
+                    <button (click)="detalleCategoria(element);editar('categoria')" style="background-color: transparent;
+                    border: none;">
+                      <i class="material-icons">edit</i>
+                    </button>
+
 
                   </td>
                 </ng-container>
@@ -250,25 +259,24 @@
                 <ng-container matColumnDef="estatus">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
                   <td mat-cell *matCellDef="let element"> {{estatus_areas(element.estatus)}}
-                    <button mat-flat-button *ngIf="element.estatus==='A'"
-                    (click)="detalleArea(element);updateEstatusArea('B')">
-                    <i class="material-icons">delete</i>
-                  
-                  </button>  
-                  <button mat-flat-button *ngIf="element.estatus==='B'"
-                      (click)="detalleArea(element);updateEstatusArea('A')">
-                      <i class="material-icons">add</i>
-                    </button>
+                    <mat-slide-toggle *ngIf="element.estatus==='A'" [checked]="activo"
+                      (change)="detalleArea(element);updateEstatusArea('B')">
+                    </mat-slide-toggle>
+                    <mat-slide-toggle *ngIf="element.estatus==='B'" [checked]="inactivo"
+                      (change)="detalleArea(element);updateEstatusArea('A')">
+                    </mat-slide-toggle>
                   </td>
-                  
+
                 </ng-container>
 
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
-                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                     
-                      (click)="detalleArea(element);editar()">Editar</button>
+                    <button (click)="detalleArea(element);editar('area')" style="background-color: transparent;
+                    border: none;">
+                      <i class="material-icons">edit</i>
+                    </button>
+
                   </td>
                 </ng-container>
 
@@ -382,7 +390,7 @@
                 <ng-container matColumnDef="acciones">
                   <th mat-header-cell *matHeaderCellDef> Acciones </th>
                   <td mat-cell *matCellDef="let element" class="action-link">
-                  
+
                     <button mat-flat-button *ngIf="element.estatus==='Alta'"
                       (click)="deleteCandidato(element.id_usuario)">
                       <img src="/assets/x-button.png" width="20px" height="20px" alt="">
@@ -508,8 +516,8 @@
               <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let element" class="action-link">
-                  <button mat-flat-button 
-                    data-target="#ModificarCAT" data-toggle="modal"class="btn btn-outline-secondary form-control" data-backdrop="static"
+                  <button mat-flat-button data-target="#ModificarCAT" data-toggle="modal"
+                    class="btn btn-outline-secondary form-control" data-backdrop="static"
                     (click)="detalleCategoria(element)">Editar</button>
 
                 </td>
@@ -521,7 +529,7 @@
 
 
           </div>
-          <div >
+          <div>
             <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
             </mat-paginator>
           </div>
@@ -625,4 +633,9 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<div *ngIf="isLoading" class="container">
+  <app-loading></app-loading>
 </div>
