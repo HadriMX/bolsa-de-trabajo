@@ -26,7 +26,7 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import * as $ from 'jquery';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { AutoCompleteModule } from '@bit/primefaces.primeng.autocomplete'
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import {
   MatButtonModule, MatTabsModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule
