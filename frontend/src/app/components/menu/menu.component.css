@@ -22,7 +22,11 @@ div#cabeceraBusqueda {
   border-radius: 3px;
   text-indent: 0.01px;
   text-overflow: "";
-  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  -webkit-appearance: none; /* hide default arrow in chrome OSX */
+  -moz-appearance: none; /* Mozilla */
+  -o-appearance: button; /* Opera */
+  -ms-appearance: button; /* Internet Explorer */
+  appearance: none; /* CSS3 */
 }
 
 .custom-dropdown::before,

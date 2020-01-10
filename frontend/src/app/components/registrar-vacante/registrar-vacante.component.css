@@ -1,3 +1,7 @@
+@import 'https://cdn.jsdelivr.net/npm/primeng@8.0.2/resources/themes/nova-light/theme.css';
+@import 'https://cdn.jsdelivr.net/npm/primeng@8.0.2/resources/primeng.min.css';
+@import 'https://cdn.jsdelivr.net/npm/primeicons@1.0.0/primeicons.css';
+
 :host ::ng-deep .ck-editor__editable_inline {
     min-height: 300px;
 }
