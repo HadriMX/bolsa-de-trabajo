@@ -18,6 +18,7 @@ export class RegistrarVacanteComponent implements OnInit {
   areas: Area[] = [];
   nuevaVacante = new Vacante();
   editor: any;
+  entidadesFiltradas: any[];
 
   public ClassicEditor = ClassicEditor;
   public EditorConfig = {
@@ -46,19 +47,68 @@ export class RegistrarVacanteComponent implements OnInit {
       });
   }
 
+  filtrarEntidades(event: any) {
+    let query = event.query;
+    let entidades = [
+      { "id": 1, "nombre": "Aguascalientes" },
+      { "id": 2, "nombre": "Baja California" },
+      { "id": 3, "nombre": "Baja California Sur" },
+      { "id": 4, "nombre": "Campeche" },
+      { "id": 5, "nombre": "Chiapas" },
+      { "id": 6, "nombre": "Chihuahua" },
+      { "id": 7, "nombre": "CDMX" },
+      { "id": 8, "nombre": "Coahuila" },
+      { "id": 9, "nombre": "Colima" },
+      { "id": 10, "nombre": "Durango" },
+      { "id": 11, "nombre": "Guanajuato" },
+      { "id": 12, "nombre": "Guerrero" },
+      { "id": 13, "nombre": "Hidalgo" },
+      { "id": 14, "nombre": "Jalisco" },
+      { "id": 15, "nombre": "México" },
+      { "id": 16, "nombre": "Michoacán" },
+      { "id": 17, "nombre": "Morelos" },
+      { "id": 18, "nombre": "Nayarit" },
+      { "id": 19, "nombre": "Nuevo León" },
+      { "id": 20, "nombre": "Oaxaca" },
+      { "id": 21, "nombre": "Puebla" },
+      { "id": 22, "nombre": "Querétaro" },
+      { "id": 23, "nombre": "Quintana Roo" },
+      { "id": 24, "nombre": "San Luis Potosí" },
+      { "id": 25, "nombre": "Sinaloa" },
+      { "id": 26, "nombre": "Sonora" },
+      { "id": 27, "nombre": "Tabasco" },
+      { "id": 28, "nombre": "Tamaulipas" },
+      { "id": 29, "nombre": "Tlaxcala" },
+      { "id": 30, "nombre": "Veracruz" },
+      { "id": 31, "nombre": "Yucatán" },
+      { "id": 32, "nombre": "Zacatecas" }
+    ];
+
+    this.entidadesFiltradas = [];
+
+    for (let i = 0; i < entidades.length; i++) {
+      let entidad = entidades[i];
+      if (entidad.nombre.toLowerCase().startsWith(query.toLowerCase())) {
+        this.entidadesFiltradas.push(entidad);
+      }
+    }
+  }
+
   registrarVacante() {
     this.nuevaVacante.descripcion_puesto_plain_text = viewToPlainText(this.editor.editing.view.document.getRoot());
 
-    this.vacantesService.addVacante(this.nuevaVacante)
-      .subscribe(response => {
-        if (response.success) {
-          console.log("Simón");
-        }
-      })
+    console.log(this.nuevaVacante);
+
+    // this.vacantesService.addVacante(this.nuevaVacante)
+    //   .subscribe(response => {
+    //     if (response.success) {
+    //       console.log("Simón");
+    //     }
+    //   });
   }
 
   cancelar() {
-    
+
   }
 
 }
