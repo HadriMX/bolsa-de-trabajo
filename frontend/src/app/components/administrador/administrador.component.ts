@@ -45,6 +45,7 @@ export class AdministradorComponent implements OnInit {
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
   estadoimagen = false;
+  displayDialog:boolean;
   activo:boolean=true;
   inactivo:boolean=false;
   btnAgregarArea: boolean;
@@ -180,6 +181,8 @@ export class AdministradorComponent implements OnInit {
       { field: 'nombre_empresa', header: 'nombre' },
       {field: 'estatus', header: 'estatus' }
   ];
+
+  
   }
   //METODOS CRUD (C)
   add_areaEstudio() {
@@ -205,7 +208,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   add_CategoriaEmpresa() {
-    const nombre = $('#categoria').val();
+    const nombre = $('#categoria23').val();
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
     } else {
@@ -217,12 +220,14 @@ export class AdministradorComponent implements OnInit {
             this.datoscategoria.push(nombre);
             this.getCategorias();
             this.inputeffec();
+            this.displayDialog=false;
+            $('#categoria23').val('');
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
           this.btnAgregarCategoria = false;
-          $('#categoria').val('');
+          
         });
     }
   }
@@ -240,6 +245,11 @@ export class AdministradorComponent implements OnInit {
         }
       });
   }
+
+  showDialogToAdd() {
+   
+    this.displayDialog = true;
+}
 
    getCategorias() {
     this.categoriaService.get_categoriasAdmin()
