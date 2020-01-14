@@ -36,6 +36,7 @@ import {TableModule} from 'primeng/table'
 import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
+import {DropdownModule} from 'primeng/dropdown';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
@@ -93,7 +94,8 @@ const routes: Routes = [
     TableModule,
     DialogModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    DropdownModule
   ],
   exports: [
     RouterModule

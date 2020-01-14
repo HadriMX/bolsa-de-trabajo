@@ -48,10 +48,6 @@ export class AdministradorComponent implements OnInit {
   displayDialog:boolean;
   activo:boolean=true;
   inactivo:boolean=false;
-  btnAgregarArea: boolean;
-  btnAgregarCategoria: boolean;
-  btnModificarCategoria: boolean;
-  btnModificarArea: boolean;
   btncerrar_area: boolean;
   opc: any;
   AuxArea: string;
@@ -66,6 +62,11 @@ export class AdministradorComponent implements OnInit {
   chartHours;
 
   cols: any[];
+  clonedTodos: { [s: string]: Cat_empresa; } = {};
+
+
+  estatus123: any[];
+
  
 
   infoCategoria: Cat_empresa = {
@@ -178,9 +179,14 @@ export class AdministradorComponent implements OnInit {
     this.getEmpresas('Alta');
 
     this.cols = [
-      { field: 'nombre_empresa', header: 'nombre' },
-      {field: 'estatus', header: 'estatus' }
+      { field: 'nombre_empresa', header: 'Nombre' },
+      {field: 'estatus', header: 'Estatus' }
   ];
+
+    this.estatus123=[
+      {label: 'Alta', value:'A'},
+      {label:'Baja',value:'B'}
+    ]
 
   
   }
@@ -190,7 +196,6 @@ export class AdministradorComponent implements OnInit {
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
     } else {
-      this.btnAgregarArea = true;
       this.areaService.add_area(this.nuevaArea)
         .subscribe((response) => {
           if (response.success) {
@@ -201,7 +206,6 @@ export class AdministradorComponent implements OnInit {
           else {
             Swal.fire("Error", response.message, 'error');
           }
-          this.btnAgregarArea = false;
           $('#area').val('');
         });
     }
@@ -212,7 +216,6 @@ export class AdministradorComponent implements OnInit {
     if (nombre === '') {
       Swal.fire("No ingreso ningun valor");
     } else {
-      this.btnAgregarCategoria = true;
       this.categoriaService.add_categoria(this.nuevaCategoria)
         .subscribe((response) => {
           if (response.success) {
@@ -226,7 +229,6 @@ export class AdministradorComponent implements OnInit {
           else {
             Swal.fire("Error", response.message, 'error');
           }
-          this.btnAgregarCategoria = false;
           
         });
     }
@@ -256,7 +258,6 @@ export class AdministradorComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           this.datoscategoria = response.data;
-          this.dataSource_Categorias.data = this.datoscategoria;
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -317,7 +318,6 @@ export class AdministradorComponent implements OnInit {
 
   //METODOS CRUD (U)
   update_area(nombre: string) {
-    this.btnModificarArea = true;
     this.infoArea.nombre = nombre;
     this.areaService.update_area(this.infoArea)
       .subscribe((response) => {
@@ -344,21 +344,20 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  update_categoria(nombre: string) {
-    this.isLoading=true;
-    this.btnModificarCategoria = true;
-    this.infoCategoria.nombre_empresa = nombre;
-    this.categoriaService.update_categoria(this.infoCategoria)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success')
-          this.CerrarModales();
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-        this.isLoading=false;
-      });
+  updateCategoria() {
+  
+      
+      this.categoriaService.update_categoria(this.infoCategoria)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("Correcto", "Cambios guardados", 'success')
+            this.CerrarModales();
+          }
+          else {
+            Swal.fire("Error", "Error al modificar", 'error');
+          }
+        });
+    
   }
   updateEstatusCategoria(estatus:string,){
     this.isLoading=true;
@@ -375,30 +374,7 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  async editar(tipo) {
-    const { value: nombre } = await Swal.fire({
-      title: 'Ingrese el nuevo nombre',
-      input: 'text',
-      showCancelButton: true,
-      showConfirmButton:true,
-      confirmButtonColor:'#3085d6',
-      confirmButtonText:'Modificar',
-      cancelButtonColor:'#d33',
-      cancelButtonText:'Cancelar',
-      inputValidator: (value) => {
-        if (!value) {
-          return 'El nombre no puede estar vacío'
-        }
-      }
-    })
-    if (nombre) {
-      if (tipo==='area')
-        this.update_area(nombre);
-      else{
-        this.update_categoria(nombre);
-      }
-    }
-  }
+
 
   reactivarCandidato(id) {
     this.swalWithBootstrapButtons.fire({
@@ -503,54 +479,13 @@ export class AdministradorComponent implements OnInit {
   }
 
   //UTILIDADES
-  preguntarArea() {//Avisar si hay cambios sin guardar al modificar un area de estudio
-    if ((this.AuxArea !== this.infoArea.nombre) || (this.AuxStatusArea !== this.infoArea.estatus)) {
-      this.swalWithBootstrapButtons.fire({
-        title: '¿Salir sin guardar?',
-        text: "Hay cambios pendientes",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No',
-      }).then((result) => {
-        if (result.value) {
 
-          this.infoArea.nombre = this.AuxArea;
-          this.infoArea.estatus = this.AuxStatusArea;
-          this.CerrarModales();
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-        }
-      })
-    } else {
-      this.CerrarModales();
-    }
+  onRowEditInit(todo:Cat_empresa) {
+  this.clonedTodos[todo.id_tipo_empresa]={...todo};
   }
-
-  preguntarCategoria() {//Avisar si hay cambios sin guardar al modificar una categoria
-    if ((this.AuxCategoria !== this.infoCategoria.nombre_empresa) || (this.AuxStatusCategoria !== this.infoCategoria.estatus)) {
-      this.swalWithBootstrapButtons.fire({
-        title: '¿Salir sin guardar?',
-        text: "Hay cambios pendientes",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Si',
-        cancelButtonText: 'No',
-      }).then((result) => {
-        if (result.value) {
-
-          this.infoCategoria.nombre_empresa = this.AuxCategoria;
-          this.infoCategoria.estatus = this.AuxStatusCategoria;
-          this.CerrarModales();
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-        }
-      })
-    } else {
-      this.CerrarModales();
-    }
+  onRowEditCancel(todo: Cat_empresa, index: number) {
+    this.datoscategoria[index] = this.clonedTodos[todo.id_tipo_empresa];
+    delete this.clonedTodos[todo.id_tipo_empresa];
   }
 
   estatus_areas(status: string) {
@@ -568,9 +503,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
-  eliminar(i) {
-    this.datoscategoria.splice(i, 1);
-  }
+ 
   admin() {
     Swal.fire("Pendiente", 'Hay que ver como controlar la info del usuario');
   }

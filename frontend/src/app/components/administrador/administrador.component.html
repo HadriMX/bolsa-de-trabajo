@@ -216,9 +216,9 @@
 
       <div class="conteiner">
         <div *ngIf="estado === 1">
-          <div style="margin-left: 10%; margin-top: 1%; ; ">
+          <div style="margin-left: 5%;margin-top: 1%; ; ">
             <p-table #dt [value]="datoscategoria" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
-              [globalFilterFields]="['nombre_empresa']">
+              [globalFilterFields]="['nombre_empresa']" editMode="row" dataKey="id_tipo_empresa" >
               <ng-template pTemplate="caption">
                 <div style="text-align: right">
                   <i class="material-icons">search</i>
@@ -228,14 +228,41 @@
               </ng-template>
               <ng-template pTemplate="header">
                 <tr>
-                  <th>Nombre</th>
-                  <th>Estatus</th>
+                  <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                  <th style="width:8em"></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-datoscategoria>
-                <tr>
-                  <td>{{datoscategoria.nombre_empresa}}</td>
-                  <td>{{estatus_categorias(datoscategoria.estatus)}}</td>
+              <ng-template pTemplate="body" let-datoscategoria  let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="datoscategoria">
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="infoCategoria.nombre_empresa" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{datoscategoria.nombre_empresa}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="estatus123" [(ngModel)]="infoCategoria.estatus" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{estatus_categorias(datoscategoria.estatus)}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="text-align:center">
+                    <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" (click)="onRowEditInit(datoscategoria);detalleCategoria(datoscategoria)"></button>
+                    <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="updateCategoria()"></button>
+                    <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(datoscategoria, ri)"></button>
+                </td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="summary" let-rowData>
@@ -771,7 +798,7 @@
 
 <p-dialog header="Categoria" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
   [modal]="true" [style]="{width: '300px'}" id="nuevacat">
-  <div class="ui-g ui-fluid" >
+  <div class="ui-g ui-fluid">
     <div class="ui-g-12">
       <div class="ui-g-4">
         <label for="vin">Nombre</label>
@@ -783,8 +810,30 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Eliminar" style="background-color: red; border-color: red;"></button>
-      <button type="button" pButton icon="fa fa-check" (click)="add_CategoriaEmpresa()" label="Guardar" ></button>
+      <button type="button" pButton icon="fa fa-check" (click)="add_CategoriaEmpresa()" label="Guardar"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
+
+<p-dialog header="Categoria" [(visible)]="modificarCat" [focusOnShow]="false" [responsive]="true" showEffect="fade"
+  [modal]="true" [style]="{width: '300px'}">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="vin">Nombre</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="categoria23" [(ngModel)]="nuevaCategoria.nombre_categoria" autofocus />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Eliminar"
+        style="background-color: red; border-color: red;"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="add_CategoriaEmpresa()" label="Guardar"></button>
     </div>
   </p-footer>
 </p-dialog>
