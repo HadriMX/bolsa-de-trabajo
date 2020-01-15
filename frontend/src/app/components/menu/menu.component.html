@@ -21,38 +21,7 @@
                             list="browsers">
 
                         <datalist id="browsers">
-                            <option value="Aguascalientes">
-                            <option value="Baja California">
-                            <option value="Baja California Sur">
-                            <option value="Campeche">
-                            <option value="Chiapas">
-                            <option value="Chihuahua">
-                            <option value="Ciudad de México">
-                            <option value="Coahuila">
-                            <option value="Colima">
-                            <option value="Durango">
-                            <option value="Guanajuato">
-                            <option value="Guerrero">
-                            <option value="Hidalgo">
-                            <option value="Jalisco">
-                            <option value="México">
-                            <option value="Michoacán">
-                            <option value="Morelos">
-                            <option value="Nayarit">
-                            <option value="Nuevo León">
-                            <option value="Oaxaca">
-                            <option value="Puebla">
-                            <option value="Querétaro">
-                            <option value="Quintana Roo">
-                            <option value="San Luis Potosí">
-                            <option value="Sinaloa">
-                            <option value="Sonora">
-                            <option value="Tabasco">
-                            <option value="Tamaulipas">
-                            <option value="Tlaxcala">
-                            <option value="Veracruz">
-                            <option value="Yucatán">
-                            <option value="Zacatecas">
+                            <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.nombre">
                         </datalist>
                     </div>
                 </div>
@@ -120,7 +89,7 @@
     </div>
 
     <div *ngIf="!isLoading && noVacantesDisponibles" class="container">
-        <div class="border" id="espacioNovacante">
+        <div id="espacioNovacante">
             <div id="espacioAviso">
                 <h4>No hay vacantes disponibles</h4>
                 <img src="/assets/warning.png" width="30%" height="30%" alt="">
@@ -223,28 +192,37 @@
                         <div class="col-md-6 text-left">
                             <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
                         </div>
+                    </div>
+
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 text-left">
+                            <h6> <span class="font-weight-light text-muted" >Empresa </span>{{infoVacante.nombre_empresa}}</h6>
+                        </div>
                         <div class="col-md-6 text-md-right">
                             <h6><span class="font-weight-light text-muted">Publicada </span> {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
                         </div>
                     </div>
 
                     <div class="row justify-content-between">
-                        <div class="col-md-8 text-left">
-                            <h6>{{infoVacante.nombre_empresa}}</h6>
+                        <div class="col-md-6 text-left">
+                            <h6> <span class="font-weight-light text-muted" >Ubicación </span>{{infoVacante.entidad_federativa}}</h6>
                         </div>
-                        <div class="col-md-4 text-md-right">
+                        <div class="col-md-6 text-md-right">
                             <h6><span class="font-weight-light text-muted">Sueldo </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
                         </div>
                     </div>
 
                     <div class="row justify-content-between">
                         <div class="col-md-6 text-left">
-                            <h6>{{infoVacante.entidad_federativa}} <span class="font-weight-light text-muted" >|</span> {{infoVacante.area_estudio}}</h6>
+                            <h6><span class="font-weight-light text-muted" > Area </span>{{infoVacante.area_estudio}}</h6>
                         </div>
                         <div class="col-md-6 text-md-right">
                             <h6><span class="font-weight-light text-muted">Género preferente </span> {{infoVacante.genero}}</h6>
                         </div>
                     </div>
+
+                    
+                    
                 </div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

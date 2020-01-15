@@ -5,7 +5,12 @@
     <mat-tab-group id="mattab" dynamicHeight>
       <mat-tab label="Postulaciones pendientes">
         <div *ngIf="postulacionesPendientes.length === 0 && !isLoading">
-          No hay postulaciones pendientes
+          <div id="espacioNovacante">
+            <div id="espacioAviso">
+              <h4>No hay postulaciones pendientes</h4>
+              <img src="/assets/warning.png" width="30%" height="30%" alt="">
+            </div>
+          </div>
         </div>
         <div *ngFor="let item of postulacionesPendientes" id="postulacionesContenedor" class="my-3 py-2">
           <div id="postulacionesMenu" (click)="mostrarDetalleVacante(item,1)" data-toggle="modal"
@@ -47,7 +52,12 @@
       </mat-tab>
       <mat-tab label="Postulaciones Aceptadas">
         <div *ngIf="postulacionesAceptadas.length === 0">
-          no cuentas aún con un historial de postulaciones aceptadas
+          <div id="espacioNovacante">
+            <div id="espacioAviso">
+              <h4>Aún no tienes postulaciones aceptadas</h4>
+              <img src="/assets/warning.png" width="30%" height="30%" alt="">
+            </div>
+          </div>
         </div>
         <div *ngFor="let item of postulacionesAceptadas" class="my-3 py-2">
           <div id="vacantesmenu" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"
@@ -89,7 +99,12 @@
       </mat-tab>
       <mat-tab label="Postulaciones Rechazadas">
         <div *ngIf="postulacionesRechazadas.length === 0">
-          no cuentas aún con un historial de postulaciones rechazadas
+          <div id="espacioNovacante">
+            <div id="espacioAviso">
+              <h4>Aún no tienes postulaciones rechazadas</h4>
+              <img src="/assets/warning.png" width="30%" height="30%" alt="">
+            </div>
+          </div>
         </div>
         <div *ngFor="let item of postulacionesRechazadas" class="my-3 py-2">
           <div id="vacantesmenu" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"

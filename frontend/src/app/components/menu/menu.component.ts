@@ -15,6 +15,8 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Usuario } from 'src/app/models/usuario';
 import { PostulacionService } from 'src/app/services/postulacion.service';
 import { IAppPage } from 'src/app/interfaces/app-page';
+import { EntidadesFederativasService } from 'src/app/services/entidades-federativas.service';
+import { EntidadFederativa } from 'src/app/models/entidadFederativa';
 
 @Component({
   selector: 'app-menu',
@@ -42,6 +44,7 @@ export class MenuComponent implements OnInit, IAppPage {
     "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"];
 
   //getters
+  entidadesFederativas: EntidadFederativa[] = [];
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
   usuarioActual: Usuario;
@@ -64,28 +67,19 @@ export class MenuComponent implements OnInit, IAppPage {
     private PaginacionService: PaginacionService,
     private candidatoService: CandidatoService,
     private currentUserService: CurrentUserService,
-    private postulacionService: PostulacionService) { }
+    private postulacionService: PostulacionService,
+    private entidadFederativaService: EntidadesFederativasService) { }
 
   ngOnInit() {
     this.busquedaVacantes();
     this.getAreas();
+    this.getEntidadesFederativas();
     this.usuarioActual = this.currentUserService.getUsuarioActual();
-  }
-
-  ComprobarUbicacion() {
-    for (let estado of this.estados) {
-      if (estado == this.busqueda.InputUbicacion) {
-        this.ubicacionCorrecta = true;
-        return 0;
-      } else {
-        this.ubicacionCorrecta = false;
-      }
-    }
   }
 
   busquedaVacantes() {
     this.isLoading = true;
-    console.log("buscando...");
+    // console.log("buscando...");
 
     this.vacantesService.busquedaVacantes(this.busqueda)
       .subscribe((response) => {
@@ -103,7 +97,7 @@ export class MenuComponent implements OnInit, IAppPage {
             });
           } else {
             this.noVacantesDisponibles = true;
-            console.log(this.noVacantesDisponibles);
+            // console.log(this.noVacantesDisponibles);
             // Swal.fire("Error", 'No hay elementos que conincidan con tu busqueda: \n"' + this.busqueda.InputTitulo + '" \n', 'error');
             // this.busqueda.InputTitulo = ""
           }
@@ -157,6 +151,31 @@ export class MenuComponent implements OnInit, IAppPage {
           Swal.fire("Error", response.message, 'error');
         }
       });
+  }
+
+  getEntidadesFederativas() {
+    this.entidadFederativaService.getEntidadesFederativas()
+      .subscribe((response) => {
+        if (response.success) {
+          this.entidadesFederativas = response.data;
+          // console.log(this.entidadesFederativas);
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  ComprobarUbicacion() {
+    for (let estado of this.entidadesFederativas) {
+      if (estado['nombre'] == this.busqueda.InputUbicacion) {
+        this.ubicacionCorrecta = true;
+        return 0;
+      } else {
+        this.ubicacionCorrecta = false;
+      }
+      // console.log(estado['nombre']);
+    }
   }
 
   buscar() {

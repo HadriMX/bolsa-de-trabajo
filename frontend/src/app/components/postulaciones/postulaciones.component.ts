@@ -88,11 +88,11 @@ export class PostulacionesComponent implements OnInit {
         this.postulacionesService.deletePostulacion(id_vacante)
           .subscribe((response) => {
             if (response.success) {
-              Swal.fire("Exito", response.message, "success");
-              this.cerrarModales();
               this.getPostulacionesPendientes();
               this.getPostulacionesRechazadas();
               this.getPostulacionesAceptadas();
+              Swal.fire("Exito", response.message, "success");
+              this.cerrarModales();
             }
             else {
               Swal.fire("Error", response.message, 'error');

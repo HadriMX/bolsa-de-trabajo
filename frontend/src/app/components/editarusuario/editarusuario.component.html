@@ -45,11 +45,6 @@
             <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off">
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="telefono">Teléfono*</label>
-            <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
-                autocomplete="off">
-        </div>
-        <div class="col-lg-4 col-md-12 col-sm-12 col-12">
             <label for="genero">Género*</label>
             <span class="custom-dropdown">
                 <select class="form-control" name="genero" id="genero">
@@ -60,56 +55,67 @@
                 </select>
             </span>
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="telefono">Teléfono*</label>
+            <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
+                autocomplete="off">
+        </div>
+        
     </div>
 
     <h6 id="titulo" style="margin-top: 50px">
         DIRECCIÓN
     </h6>
     <div class="row">
-        <div class="col-lg-6 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
+        <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="estado">Entidad Federativa*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="estado" id="estado">
-                    <option value="" selected disabled>Seleccione la entidad federativa</option>
-                    <option value="">Sinaloa</option>
-                    <option value="">Sonora</option>
-                    <option value="">Chihuahua</option>
+                <select class="form-control" name="estado" id="estado" [(ngModel)]="EntidadFederativa" (change)="getMunicipios()">
+                    <option value="0" selected disabled>Seleccione la entidad federativa</option>
+                    <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">{{entidad.nombre}}</option>
                 </select>
             </span>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="ciudad">Municipio*</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="Municipio" (change)="getCiudades()">
+                    <option value="0" selected disabled>Seleccione el municipio</option>
+                    <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">{{municipio.nombre}}</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="ciudad">Ciudad*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="ciudad" id="ciudad">
-                    <option value="" selected disabled>Seleccione la ciudad</option>
-                    <option value="">Ejemplo 1</option>
-                    <option value="">Ejemplo 2</option>
-                    <option value="">Ejemplo 3</option>
+                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="Ciudad" >
+                    <option value="0" selected disabled>Seleccione la ciudad</option>
+                    <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_municipio">{{ciudad.nombre}}</option>
                 </select>
             </span>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="colonia">Colonia*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="colonia" id="colonia">
-                    <option value="" selected disabled>Seleccione la colonia</option>
+                <select class="form-control" name="colonia" id="colonia" [(ngModel)]="Colonia">
+                    <option value="0" selected disabled>Seleccione la colonia</option>
                     <option value="">Ejemplo 1</option>
                     <option value="">Ejemplo 2</option>
                     <option value="">Ejemplo 3</option>
                 </select>
             </span>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <label for="calle">Calle*</label>
-            <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. Miguel Hidalgo">
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+        </div>  
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="codigoPostal">Codigo Postal*</label>
             <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
                 placeholder="Ej. 81271">
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="col-lg-8 col-md-6 col-sm-12 col-12">
+            <label for="calle">Calle*</label>
+            <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
+                placeholder="Ej. Miguel Hidalgo">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="numExterior">Numero Exterior*</label>
             <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
                 placeholder="Ej. 856">
@@ -120,46 +126,28 @@
         DATOS ACADEMICOS
     </h6>
     <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="nivelEstudios">Ultimo Nivel de Estudios*</label>
             <span class="custom-dropdown">
                 <select class="form-control" name="nivelEstudios" id="nivelEstudios">
-                    <option value="" selected disabled>Seleccione un nivel</option>
-                    <option value="">Preparatoria</option>
-                    <option value="">Universidad</option>
-                    <option value="">Posgrado</option>
-                    <option value="">Maestria</option>
-                    <option value="">Doctorado</option>
+                    <option value="" selected disabled>Seleccione un nivel de estudios</option>
+                    <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}</option>
                 </select>
             </span>
         </div>
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <label for="areaEstudio">Area de Estudio*</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="areaEstudio" id="areaEstudio" [(ngModel)]="Area">
+                    <option value="0" selected disabled>Seleccione el area de estudio</option>
+                    <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <label for="escuela">Escuela*</label>
             <input id="escuela" name="escuela" class="form-control" type="text"
                 placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="carreraEspecialidad">Carrera/Especialidad*</label>
-            <input id="carreraEspecialidad" name="carreraEspecialidad" class="form-control" type="text"
-                placeholder="Ej. Ingenieria de Software" autocomplete="off">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="anioEscolar">Año Escolar</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="anioEscolar" id="anioEscolar">
-                    <option value="" selected disabled>Seleccione un año</option>
-                    <option value="">Primero</option>
-                    <option value="">Segundo</option>
-                    <option value="">Tercero</option>
-                    <option value="">Cuarto</option>
-                    <option value="">Quinto</option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="promedioFinal">Promedio Final</label>
-            <input id="promedioFinal" name="promedioFinal" class="form-control" type="text"
-                placeholder="Ej. 85 ó 8.5" autocomplete="off">
         </div>
     </div>
 
@@ -211,7 +199,7 @@
     <div class="row justify-content-end pb-4">
         <div class="col text-right">
             <!-- <button (click)="cancelar()" class="btn btn-outline-secondary btn-lg btn-wide mx-2 text-dark" style="background-color: white;">CANCELAR</button> -->
-            <button class="btn btn-primary btn-lg btn-wide mx-2">GUARDAR</button>
+            <button class="btn btn-primary btn-lg btn-wide mx-2" (click)="guardarCambios()">GUARDAR</button>
         </div>
     </div>
     <div id="separador" style="height: 150px;">
