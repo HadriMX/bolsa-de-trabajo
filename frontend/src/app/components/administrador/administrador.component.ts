@@ -16,11 +16,25 @@ import { Vacante } from 'src/app/models/vacantes';
 import { VacantesService } from '../../services/vacantes.service';
 import { Busqueda } from 'src/app/models/busqueda';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',
-  styleUrls: ['./administrador.component.css']
+  styleUrls: ['./administrador.component.css'],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state('void', style({
+        transform: 'translateX(-10%)',
+        opacity: 0
+      })),
+      state('active', style({
+        transform: 'translateX(0)',
+        opacity: 1
+      })),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ]
 })
 export class AdministradorComponent implements OnInit {
 
@@ -37,23 +51,20 @@ export class AdministradorComponent implements OnInit {
     estatus: ''
   }
   isLoading = false;
-  datoscategoria = [];
-  datosarea = [];
+  datosCategoria = [];
+  datosArea = [];
   datosCandidato = [];
   datosEmpresa = [];
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
   estadoimagen = false;
-  displayDialog:boolean;
-  activo:boolean=true;
-  inactivo:boolean=false;
+  displayDialogCategoria: boolean;
+  displayDialogArea: boolean;
+  activo: boolean = true;
+  inactivo: boolean = false;
   btncerrar_area: boolean;
   opc: any;
-  AuxArea: string;
-  AuxCategoria: string;
-  AuxStatusCategoria: string;
-  AuxStatusArea: string;
   // variables del dashboard
   canvas: any;
   ctx;
@@ -61,13 +72,15 @@ export class AdministradorComponent implements OnInit {
   chartEmail;
   chartHours;
 
-  cols: any[];
-  clonedTodos: { [s: string]: Cat_empresa; } = {};
+  columnasCategoria: any[];
+  columnasArea: any[];
+  columnasCandidato: any[];
+  columnasEmpresa: any[];
+  clonCategoria: { [s: string]: Cat_empresa; } = {};
+  clonArea: { [s: string]: Area } = {};
 
 
-  estatus123: any[];
-
- 
+  estatus: any[];
 
   infoCategoria: Cat_empresa = {
     id_tipo_empresa: 0,
@@ -87,29 +100,9 @@ export class AdministradorComponent implements OnInit {
   public dialog: MatDialog;
   inputbooleano: boolean = false;
 
-  ColumnasCategorias: string[] = ['nombre_empresa', 'estatus', 'acciones'];
-  ColumnasAreas: string[] = ['nombre', 'estatus', 'acciones'];
-  ColumnasCandidatos: string[] = ['candidato', 'email', 'genero', 'telefono', 'estatus', 'acciones'];
   ColumnasEmpresas: string[] = ['empresa', 'email', 'telefono', 'personaContacto', 'estatus', 'acciones']
-  dataSource_AreasEstudio = new MatTableDataSource<any>();
-  dataSource_Categorias = new MatTableDataSource<any>();
-  dataSource_Candidatos = new MatTableDataSource<any>();
-  dataSource_Empresas = new MatTableDataSource<any>();
 
 
-  //Filtro para los catalagos de areas de estudio, categorias y usuarios
-  applyFilterAreas(filterValue: string) {
-    this.dataSource_AreasEstudio.filter = filterValue.trim().toLowerCase();
-  }
-  applyFilterCategorias(filterValue: string) {
-    this.dataSource_Categorias.filter = filterValue.trim().toLowerCase();
-  }
-  applyFilterCandidatos(filterValue: string) {
-    this.dataSource_Candidatos.filter = filterValue.trim().toLowerCase();
-  }
-  applyFilterEmpresas(filterValue: string) {
-    this.dataSource_Empresas.filter = filterValue.trim().toLowerCase();
-  }
 
   swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -119,35 +112,6 @@ export class AdministradorComponent implements OnInit {
     buttonsStyling: false
   });
 
-
-
-
-  //Ordenamiento de los datos de las tablas
-  @ViewChild(MatSort, { static: false }) set matSort(ms: MatSort) {
-    this.sort = ms;
-    this.dataSource_AreasEstudio.sort = this.sort;
-    this.dataSource_Categorias.sort = this.sort;
-    this.dataSource_Candidatos.sort = this.sort;
-    this.dataSource_Empresas.sort = this.sort;
-  }
-
-
-  //Paginación de las tablas
-  @ViewChild(MatPaginator, { static: false }) set matPaginator(mp: MatPaginator) {
-    this.paginator = mp;
-    if (this.opc === 1) {
-      this.dataSource_Categorias.paginator = this.paginator
-    }
-    else if (this.opc === 2) {
-      this.dataSource_AreasEstudio.paginator = this.paginator;
-    }
-    else if (this.opc === 4) {
-      this.dataSource_Candidatos.paginator = this.paginator;
-    }
-    else if (this.opc === 5) {
-      this.dataSource_Empresas.paginator = this.paginator;
-    }
-  }
   // variales para las vacantes  
   infoVacante: Vacante = new Vacante();
   busqueda: Busqueda = {
@@ -178,58 +142,80 @@ export class AdministradorComponent implements OnInit {
     this.getCandidatos('Alta');
     this.getEmpresas('Alta');
 
-    this.cols = [
+    this.columnasCategoria = [
       { field: 'nombre_empresa', header: 'Nombre' },
-      {field: 'estatus', header: 'Estatus' }
-  ];
+      { field: 'estatus', header: 'Estatus' }
+    ];
 
-    this.estatus123=[
-      {label: 'Alta', value:'A'},
-      {label:'Baja',value:'B'}
+    this.columnasArea = [
+      { field: 'nombre', header: 'Nombre' },
+      { field: 'estatus', header: 'Estatus' }
     ]
 
-  
+    this.columnasCandidato = [
+      { field: 'candidato', header: 'Candidato' },
+      { field: 'email', header: 'Email' },
+      { field: 'genero', header: 'Genero' },
+      { field: 'telefono', header: 'Teléfono' },
+      { field: 'estatus', header: 'Estatus' }
+    ]
+
+    this.columnasEmpresa = [
+      { field: 'nombre_empresa', header: 'Empresa' },
+      { field: 'email', header: 'Email' },
+      { field: 'telefono', header: 'Teléfono' },
+      { field: 'nombre_persona_contacto', header: 'Persona contacto' },
+      { field: 'status', header: 'Estatus' }
+    ]
+
+    this.estatus = [
+      { label: 'Alta', value: 'A' },
+      { label: 'Baja', value: 'B' }
+    ]
+
+
   }
   //METODOS CRUD (C)
   add_areaEstudio() {
-    const nombre = $('#area').val();
+    const nombre = $('#nomArea').val();
     if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
+      Swal.fire('Error', "No ingreso ningun valor", 'error');
     } else {
       this.areaService.add_area(this.nuevaArea)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("correcto", "response.message", 'success');
-            this.datosarea.push(nombre);
+            this.datosArea.push(nombre);
             this.getAreas();
+            this.displayDialogArea = false;
+            $('#nomArea').val('');
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
-          $('#area').val('');
+
         });
     }
   }
 
   add_CategoriaEmpresa() {
-    const nombre = $('#categoria23').val();
+    const nombre = $('#nomCategoria').val();
     if (nombre === '') {
-      Swal.fire("No ingreso ningun valor");
+      Swal.fire('Error', "No ingreso ningun valor", 'error');
     } else {
       this.categoriaService.add_categoria(this.nuevaCategoria)
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
-            this.datoscategoria.push(nombre);
+            this.datosCategoria.push(nombre);
             this.getCategorias();
-            this.inputeffec();
-            this.displayDialog=false;
-            $('#categoria23').val('');
+            this.displayDialogCategoria = false;
+            $('#nomCategoria').val('');
           }
           else {
             Swal.fire("Error", response.message, 'error');
           }
-          
+
         });
     }
   }
@@ -239,8 +225,7 @@ export class AdministradorComponent implements OnInit {
     this.areaService.get_areasAdmin()
       .subscribe((response) => {
         if (response.success) {
-          this.datosarea = response.data;
-          this.dataSource_AreasEstudio.data = this.datosarea;
+          this.datosArea = response.data;
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -248,21 +233,19 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  showDialogToAdd() {
-   
-    this.displayDialog = true;
-}
-
-   getCategorias() {
+  getCategorias() {
     this.categoriaService.get_categoriasAdmin()
       .subscribe((response) => {
+        this.isLoading = true;
         if (response.success) {
-          this.datoscategoria = response.data;
+          this.datosCategoria = response.data;
         }
         else {
           Swal.fire("Error", response.message, 'error');
         }
+        this.isLoading = false;
       });
+
   }
 
   getCandidatos(estatus: string) {
@@ -270,12 +253,12 @@ export class AdministradorComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           this.datosCandidato = response.data;
-          this.dataSource_Candidatos.data = this.datosCandidato;
         }
         else {
           Swal.fire("Error", response.message, 'error');
         }
       });
+
   }
 
   getEmpresas(estatus: string) {
@@ -283,7 +266,6 @@ export class AdministradorComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           this.datosEmpresa = response.data;
-          this.dataSource_Empresas.data = this.datosEmpresa;
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -305,76 +287,46 @@ export class AdministradorComponent implements OnInit {
 
   detalleArea(Area) {
     this.infoArea = Area;
-    this.AuxArea = this.infoArea.nombre;
-    this.AuxStatusArea = this.infoArea.estatus;
   }
 
   detalleCategoria(Cat_empresa) {
     this.infoCategoria = Cat_empresa;
-
-    this.AuxCategoria = this.infoCategoria.nombre_empresa;
-    this.AuxStatusCategoria = this.infoCategoria.estatus;
   }
 
   //METODOS CRUD (U)
-  update_area(nombre: string) {
-    this.infoArea.nombre = nombre;
-    this.areaService.update_area(this.infoArea)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success')
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
-  }
-
-  updateEstatusArea(estatus: string) {
-    this.isLoading = true;
-    this.infoArea.estatus = estatus;
-    this.areaService.update_area(this.infoArea)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success');
-        } else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      this.isLoading=false
-      });
+  updateArea() {
+    const nombre = $('#modArea').val();
+    if (nombre === '') {
+      Swal.fire('Error', "No ingreso ningun valor", 'error');
+    } else {
+      this.areaService.update_area(this.infoArea)
+        .subscribe((response) => {
+          if (response.success) {
+            Swal.fire("Correcto", response.message, 'success')
+          }
+          else {
+            Swal.fire("Error", response.message, 'error');
+          }
+        });
+    }
   }
 
   updateCategoria() {
-  
-      
+    const nombre = $('#modCategoria').val();
+    if (nombre === '') {
+      Swal.fire('Error', "No ingreso ningun valor", 'error');
+    } else {
       this.categoriaService.update_categoria(this.infoCategoria)
         .subscribe((response) => {
           if (response.success) {
-            Swal.fire("Correcto", "Cambios guardados", 'success')
-            this.CerrarModales();
+            Swal.fire("Correcto", response.message, 'success')
           }
           else {
-            Swal.fire("Error", "Error al modificar", 'error');
+            Swal.fire("Error", response.message, 'error');
           }
         });
-    
+    }
   }
-  updateEstatusCategoria(estatus:string,){
-    this.isLoading=true;
-  
-    this.infoCategoria.estatus = estatus;
-    this.categoriaService.update_categoria(this.infoCategoria)
-      .subscribe((response) => {
-        if (response.success) {
-          Swal.fire("Correcto", response.message, 'success');
-        } else {
-          Swal.fire("Error", response.message, 'error');
-        }
-        this.isLoading=false;
-      });
-  }
-
-
 
   reactivarCandidato(id) {
     this.swalWithBootstrapButtons.fire({
@@ -480,12 +432,30 @@ export class AdministradorComponent implements OnInit {
 
   //UTILIDADES
 
-  onRowEditInit(todo:Cat_empresa) {
-  this.clonedTodos[todo.id_tipo_empresa]={...todo};
+  onRowEditArea(datosCat: Cat_empresa) {
+    this.clonCategoria[datosCat.id_tipo_empresa] = { ...datosCat };
   }
-  onRowEditCancel(todo: Cat_empresa, index: number) {
-    this.datoscategoria[index] = this.clonedTodos[todo.id_tipo_empresa];
-    delete this.clonedTodos[todo.id_tipo_empresa];
+  onRowEditCancelArea(datosCat: Cat_empresa, index: number) {
+    this.datosCategoria[index] = this.clonCategoria[datosCat.id_tipo_empresa];
+    delete this.clonCategoria[datosCat.id_tipo_empresa];
+  }
+
+  onRowEditCategoria(datosArea: Area) {
+    this.clonArea[datosArea.id_area_estudio] = { ...datosArea };
+  }
+  onRowEditCancelCategoria(datosArea: Area, index: number) {
+    this.datosArea[index] = this.clonArea[datosArea.id_area_estudio];
+    delete this.clonArea[datosArea.id_area_estudio];
+  }
+
+
+
+  dialogAddCategoria() {
+    this.displayDialogCategoria = true;
+  }
+
+  dialogAddArea() {
+    this.displayDialogArea;
   }
 
   estatus_areas(status: string) {
@@ -503,7 +473,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
- 
+
   admin() {
     Swal.fire("Pendiente", 'Hay que ver como controlar la info del usuario');
   }
