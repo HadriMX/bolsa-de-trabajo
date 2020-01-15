@@ -37,11 +37,6 @@ export class MenuComponent implements OnInit, IAppPage {
 
   cursor: boolean = false;
   ubicacionCorrecta: boolean = false;
-  estados: string[] = [
-    "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Ciudad de México",
-    "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos",
-    "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora",
-    "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"];
 
   //getters
   entidadesFederativas: EntidadFederativa[] = [];
@@ -207,11 +202,6 @@ export class MenuComponent implements OnInit, IAppPage {
     this.busquedaVacantes();
   }
 
-  // arriba() {
-  //   // $('#body, html').animate({
-  //   //   scrollTop: '0px'
-  //   // }, 300);
-  // }
 
   postularCandidato(id_vacante: number) {
 
@@ -243,17 +233,6 @@ export class MenuComponent implements OnInit, IAppPage {
   cerrarModales(){
     (<any>$('#datosvacantes .close')).click();
   }
-
-  // @HostListener('window:scroll', ['$event']) // for window scroll events
-  // onScroll(event) {
-
-  //   if ($(window).scrollTop() > 200) {
-  //     $('.ir-arriba').slideDown(300);
-  //   } else {
-  //     $('.ir-arriba').slideUp(300);
-  //   }
-  // }
-  
   /* administración */
 
   darDeBajaVacante(vacante: Vacante) {

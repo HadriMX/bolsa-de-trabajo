@@ -11,6 +11,7 @@ import { Area } from 'src/app/models/area';
 import { AreaService } from 'src/app/services/area.service';
 import { GradoEstudio } from 'src/app/models/gradoEstudio';
 import { GradoEstudioService } from 'src/app/services/grado-estudio.service';
+import { Candidato } from 'src/app/models/candidato';
 
 @Component({
   selector: 'app-editarusuario',
@@ -30,14 +31,28 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   areas: Area[] = [];
   gradosEstudio: GradoEstudio[] = [];
   
-  //variables
-  EntidadFederativa = 0;
-  Municipio = 0;
-  Ciudad = 0;
-  Colonia = 0;
-  Area = 0;
-  Grado = 0;
-
+  infoCandidato: Candidato = {
+    nombre: "",
+    apellido1: "",
+    apellido2: "",
+    fecha_nacimiento: "",
+    genero: "0",
+    telefono: "",
+    id_entidad_federativa: 0,
+    id_municipio: 0,
+    id_ciudad: 0,
+    id_colonia: 0,
+    cp: "",
+    calle: "",
+    num_ext: "",
+    id_grado_estudio: 0,
+    id_area_estudio: 0,
+    escuela: "",
+    pathCURP: "",
+    pathIDENTIFICACION: "",
+    pathCURRICULUM: "",
+    id_tipo_usuario: 1
+  }
   constructor(
     private entidadFederativaService: EntidadesFederativasService,
     private municipioService: MunicipioService,
@@ -67,10 +82,10 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
 
   getMunicipios(){
     this.municipios = [];
-    this.Municipio = 0;
-    this.Ciudad = 0;
-    this.Colonia = 0;
-    this.municipioService.getMunicipios(this.EntidadFederativa)
+    this.infoCandidato.id_municipio = 0;
+    this.infoCandidato.id_ciudad = 0;
+    this.infoCandidato.id_colonia = 0;
+    this.municipioService.getMunicipios(this.infoCandidato.id_entidad_federativa)
       .subscribe((response) => {
         if (response.success) {
           this.municipios = response.data;
@@ -83,9 +98,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
 
   getCiudades(){
     this.ciudades = [];
-    this.Ciudad = 0;
-    this.Colonia = 0;
-    this.ciudadService.getCiudades(this.EntidadFederativa,this.Municipio)
+    this.infoCandidato.id_ciudad = 0;
+    this.infoCandidato.id_colonia = 0;
+    this.ciudadService.getCiudades(this.infoCandidato.id_entidad_federativa,this.infoCandidato.id_municipio)
       .subscribe((response) => {
         if (response.success) {
           this.ciudades = response.data;
@@ -119,6 +134,10 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
           Swal.fire("Error", response.message, 'error');
         }
       });
+  }
+
+  guardarCambios(){
+    console.log(this.infoCandidato);
   }
 
 }

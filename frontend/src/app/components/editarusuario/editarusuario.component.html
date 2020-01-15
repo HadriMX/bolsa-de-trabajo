@@ -26,29 +26,29 @@
         <div class="col-lg-6 col-md-12 col-sm-12 col-12">
             <label for="nombre">Nombre*</label>
             <input id="nombre" name="nombre" class="form-control" type="text" placeholder="Ej. Luis Antonio"
-                autocomplete="off">
+                autocomplete="off" [(ngModel)]="infoCandidato.nombre">
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-12">
             <label for="apellido1">Primer Apellido*</label>
             <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder="Ej. Hernandez"
-                autocomplete="off">
+                autocomplete="off" [(ngModel)]="infoCandidato.apellido1">
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-12">
             <label for="apellido2">Segundo Apellido</label>
             <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder="Ej. García"
-                autocomplete="off">
+                autocomplete="off" [(ngModel)]="infoCandidato.apellido2">
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="fechaNacimiento">Fecha de Nacimiento*</label>
-            <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off">
+            <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off" [(ngModel)]="infoCandidato.fecha_nacimiento">
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="genero">Género*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="genero" id="genero">
-                    <option value="" selected disabled>Seleccione el género</option>
+                <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero">
+                    <option value="0" selected disabled>Seleccione el género</option>
                     <option value="Hombre">Masculino</option>
                     <option value="Mujer">Femenino</option>
                     <option value="Otro">Otro</option>
@@ -58,7 +58,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="telefono">Teléfono*</label>
             <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
-                autocomplete="off">
+                autocomplete="off" [(ngModel)]="infoCandidato.telefono">
         </div>
         
     </div>
@@ -70,7 +70,7 @@
         <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="estado">Entidad Federativa*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="estado" id="estado" [(ngModel)]="EntidadFederativa" (change)="getMunicipios()">
+                <select class="form-control" name="estado" id="estado" [(ngModel)]="infoCandidato.id_entidad_federativa" (change)="getMunicipios()">
                     <option value="0" selected disabled>Seleccione la entidad federativa</option>
                     <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">{{entidad.nombre}}</option>
                 </select>
@@ -79,7 +79,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="ciudad">Municipio*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="Municipio" (change)="getCiudades()">
+                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoCandidato.id_municipio" (change)="getCiudades()">
                     <option value="0" selected disabled>Seleccione el municipio</option>
                     <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">{{municipio.nombre}}</option>
                 </select>
@@ -88,7 +88,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="ciudad">Ciudad*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="Ciudad" >
+                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoCandidato.id_ciudad" >
                     <option value="0" selected disabled>Seleccione la ciudad</option>
                     <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_municipio">{{ciudad.nombre}}</option>
                 </select>
@@ -97,28 +97,28 @@
         <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="colonia">Colonia*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="colonia" id="colonia" [(ngModel)]="Colonia">
+                <select class="form-control" name="colonia" id="colonia" [(ngModel)]="infoCandidato.id_colonia">
                     <option value="0" selected disabled>Seleccione la colonia</option>
-                    <option value="">Ejemplo 1</option>
-                    <option value="">Ejemplo 2</option>
-                    <option value="">Ejemplo 3</option>
+                    <option value="1">Ejemplo 1</option>
+                    <option value="2">Ejemplo 2</option>
+                    <option value="3">Ejemplo 3</option>
                 </select>
             </span>
         </div>  
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="codigoPostal">Codigo Postal*</label>
             <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. 81271">
+                placeholder="Ej. 81271" [(ngModel)]="infoCandidato.cp">
         </div>
         <div class="col-lg-8 col-md-6 col-sm-12 col-12">
             <label for="calle">Calle*</label>
             <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. Miguel Hidalgo">
+                placeholder="Ej. Miguel Hidalgo" [(ngModel)]="infoCandidato.calle">
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="numExterior">Numero Exterior*</label>
             <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. 856">
+                placeholder="Ej. 856" [(ngModel)]="infoCandidato.num_ext">
         </div>
     </div>
 
@@ -129,8 +129,8 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="nivelEstudios">Ultimo Nivel de Estudios*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="nivelEstudios" id="nivelEstudios">
-                    <option value="" selected disabled>Seleccione un nivel de estudios</option>
+                <select class="form-control" name="nivelEstudios" id="nivelEstudios" [(ngModel)]="infoCandidato.id_grado_estudio">
+                    <option value="0" selected disabled>Seleccione un nivel de estudios</option>
                     <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}</option>
                 </select>
             </span>
@@ -138,7 +138,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-12">
             <label for="areaEstudio">Area de Estudio*</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="areaEstudio" id="areaEstudio" [(ngModel)]="Area">
+                <select class="form-control" name="areaEstudio" id="areaEstudio" [(ngModel)]="infoCandidato.id_area_estudio">
                     <option value="0" selected disabled>Seleccione el area de estudio</option>
                     <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
                 </select>
@@ -147,7 +147,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <label for="escuela">Escuela*</label>
             <input id="escuela" name="escuela" class="form-control" type="text"
-                placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off">
+                placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off" [(ngModel)]="infoCandidato.escuela">
         </div>
     </div>
 

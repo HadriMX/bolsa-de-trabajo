@@ -11,6 +11,8 @@ header('content-type: application/json; charset=utf-8');
 
 
 $post = json_decode(file_get_contents("php://input"));
-echo json_encode (Area::get_areasMenu());
+$id_entidad = $post->id_entidad_federativa;
+$id_municipio = $post->id_municipio;
+echo json_encode (Ciudad::get_ciudades($id_entidad,$id_municipio));
 
 ?>
