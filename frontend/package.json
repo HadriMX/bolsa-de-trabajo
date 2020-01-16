@@ -32,6 +32,7 @@
     "jw-angular-pagination": "^1.1.0",
     "jw-paginate": "^1.0.4",
     "ngx-cookie-service": "^2.2.0",
+    "primeicons": "^2.0.0",
     "primeng": "^9.0.0-rc.2",
     "rxjs": "~6.4.0",
     "simplescrollup": "^1.1.0",

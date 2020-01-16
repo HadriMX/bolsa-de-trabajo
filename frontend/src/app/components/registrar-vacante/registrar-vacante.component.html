@@ -51,10 +51,11 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="idAreaEstudio">Área de estudio</label>
-                <input class="form-control" list="areasSeleccionables" [(ngModel)]="nuevaVacante.id_area_estudio">
-                <datalist id="areasSeleccionables">
-                    <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
-                </datalist>
+
+                <p-autoComplete [(ngModel)]="areaEstudioSeleccionada" [suggestions]="areasFiltradas"
+                    (completeMethod)="filtrarAreas($event)" field="nombre" placeholder="Ej: Informática"
+                    [minLength]="2" [forceSelection]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                </p-autoComplete>
             </div>
         </div>
     </div>
@@ -72,11 +73,10 @@
             <div class="form-group">
                 <label>Entidad federativa</label>
 
-                <p-autoComplete [(ngModel)]="nuevaVacante.id_entidad_federativa" [suggestions]="entidadesFiltradas"
-                    (completeMethod)="filtrarEntidades($event)" field="nombre" [size]="10" placeholder="Ej: Sinaloa"
-                    [minLength]="2" [dropdown]="true" [forceSelection]="true" [style]="{'width':'100%'}"
-                    [inputStyle]="{'width':'100%'}">
-                </p-autoComplete>
+                <select class="form-control" [(ngModel)]="nuevaVacante.id_entidad_federativa">
+                    <option value="-1" selected disabled>Seleccionar</option>
+                    <option *ngFor="let ef of entidadesFederativas" [value]="ef.id">{{ef.nombre}}</option>
+                </select>
             </div>
         </div>
     </div>
