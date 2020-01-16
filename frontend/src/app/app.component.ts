@@ -11,7 +11,7 @@ export class AppComponent {
   showFooter = true;
   goTopEnabled = true;
   showGoTopArrow = false;
-  topPosToStartShowing = 300;
+  topPosToStartShowing = 200;
   
   onActivate(component: IAppPage) {
     this.showFooter = component.showFooter;

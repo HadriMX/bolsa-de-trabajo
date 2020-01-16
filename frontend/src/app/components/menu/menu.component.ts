@@ -15,6 +15,8 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Usuario } from 'src/app/models/usuario';
 import { PostulacionService } from 'src/app/services/postulacion.service';
 import { IAppPage } from 'src/app/interfaces/app-page';
+import { EntidadesFederativasService } from 'src/app/services/entidades-federativas.service';
+import { EntidadFederativa } from 'src/app/models/entidadFederativa';
 
 @Component({
   selector: 'app-menu',
@@ -35,13 +37,9 @@ export class MenuComponent implements OnInit, IAppPage {
 
   cursor: boolean = false;
   ubicacionCorrecta: boolean = false;
-  estados: string[] = [
-    "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Chiapas", "Chihuahua", "Ciudad de México",
-    "Coahuila", "Colima", "Durango", "Guanajuato", "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos",
-    "Nayarit", "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí", "Sinaloa", "Sonora",
-    "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán", "Zacatecas"];
 
   //getters
+  entidadesFederativas: EntidadFederativa[] = [];
   areas: Area[] = [];
   infoVacante: Vacante = new Vacante();
   usuarioActual: Usuario;
@@ -64,28 +62,19 @@ export class MenuComponent implements OnInit, IAppPage {
     private PaginacionService: PaginacionService,
     private candidatoService: CandidatoService,
     private currentUserService: CurrentUserService,
-    private postulacionService: PostulacionService) { }
+    private postulacionService: PostulacionService,
+    private entidadFederativaService: EntidadesFederativasService) { }
 
   ngOnInit() {
     this.busquedaVacantes();
     this.getAreas();
+    this.getEntidadesFederativas();
     this.usuarioActual = this.currentUserService.getUsuarioActual();
-  }
-
-  ComprobarUbicacion() {
-    for (let estado of this.estados) {
-      if (estado == this.busqueda.InputUbicacion) {
-        this.ubicacionCorrecta = true;
-        return 0;
-      } else {
-        this.ubicacionCorrecta = false;
-      }
-    }
   }
 
   busquedaVacantes() {
     this.isLoading = true;
-    console.log("buscando...");
+    // console.log("buscando...");
 
     this.vacantesService.busquedaVacantes(this.busqueda)
       .subscribe((response) => {
@@ -103,7 +92,7 @@ export class MenuComponent implements OnInit, IAppPage {
             });
           } else {
             this.noVacantesDisponibles = true;
-            console.log(this.noVacantesDisponibles);
+            // console.log(this.noVacantesDisponibles);
             // Swal.fire("Error", 'No hay elementos que conincidan con tu busqueda: \n"' + this.busqueda.InputTitulo + '" \n', 'error');
             // this.busqueda.InputTitulo = ""
           }
@@ -159,6 +148,31 @@ export class MenuComponent implements OnInit, IAppPage {
       });
   }
 
+  getEntidadesFederativas() {
+    this.entidadFederativaService.getEntidadesFederativas()
+      .subscribe((response) => {
+        if (response.success) {
+          this.entidadesFederativas = response.data;
+          // console.log(this.entidadesFederativas);
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  ComprobarUbicacion() {
+    for (let estado of this.entidadesFederativas) {
+      if (estado['nombre'] == this.busqueda.InputUbicacion) {
+        this.ubicacionCorrecta = true;
+        return 0;
+      } else {
+        this.ubicacionCorrecta = false;
+      }
+      // console.log(estado['nombre']);
+    }
+  }
+
   buscar() {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
     this.ComprobarUbicacion();
@@ -188,11 +202,6 @@ export class MenuComponent implements OnInit, IAppPage {
     this.busquedaVacantes();
   }
 
-  // arriba() {
-  //   // $('#body, html').animate({
-  //   //   scrollTop: '0px'
-  //   // }, 300);
-  // }
 
   postularCandidato(id_vacante: number) {
 
@@ -202,7 +211,7 @@ export class MenuComponent implements OnInit, IAppPage {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, postularme!',
+      confirmButtonText: 'Sí, postularme',
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
@@ -224,17 +233,6 @@ export class MenuComponent implements OnInit, IAppPage {
   cerrarModales(){
     (<any>$('#datosvacantes .close')).click();
   }
-
-  // @HostListener('window:scroll', ['$event']) // for window scroll events
-  // onScroll(event) {
-
-  //   if ($(window).scrollTop() > 200) {
-  //     $('.ir-arriba').slideDown(300);
-  //   } else {
-  //     $('.ir-arriba').slideUp(300);
-  //   }
-  // }
-  
   /* administración */
 
   darDeBajaVacante(vacante: Vacante) {

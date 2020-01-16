@@ -11,6 +11,6 @@ header('content-type: application/json; charset=utf-8');
 
 
 $post = json_decode(file_get_contents("php://input"));
-echo json_encode (Area::get_areasMenu());
+echo json_encode (Grado::get_gradosEstudio());
 
 ?>

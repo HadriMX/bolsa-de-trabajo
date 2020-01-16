@@ -29,31 +29,30 @@ body {
   background-color: #7A26D3;
   border-color: #7A26D3;
 }
-
-.btn-success {
-  border: none;
-}
-
 .btn-primary:hover {
   background-color: #5D0877;
   border-color: #5D0877;
 }
-
+.btn-success {
+  border: none;
+}
 .text-dark {
   color: #5D0877 !important;
 }
-
-
 .page-link{
   color: rgb(121, 24, 129) !important;
   border-radius: 16px;
-  margin: 0px 5px 0px 5px;
+  margin: 0px 2px 0px 2px;
 }
 
 .page-item.active .page-link {
     background-color: rgb(121, 24, 129);
     border-color: rgb(121, 24, 129);
     color: white !important;
+}
+.page-item.disabled .page-link {
+  background-color: #e9ecef;
+  border-color: #dee2e6;
 }
 
 .page-item.active .page-link:hover {
