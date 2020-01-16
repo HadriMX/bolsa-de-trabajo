@@ -55,7 +55,7 @@ class Area{
         $stmt->execute();
 
        if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("Update OK", true);
+            $output = new SuccessResult("Mofificacón realizada", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }

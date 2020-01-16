@@ -40,8 +40,7 @@ input[type="number"] {
   appearance: none;
   -webkit-appearance: none;
 }
-body {
-  position: fixed;
+/* body {
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -51,7 +50,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   min-height: 90vh;
-}
+} */
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -78,7 +77,6 @@ th.mat-sort-header-sorted {
   width: 100%;
   height: 100%;
   overflow: auto;
-  
 }
 .btn {
   border-radius: 15px;
@@ -104,11 +102,11 @@ th.mat-sort-header-sorted {
    }
  }
 th {
-  color: #ffffff;
-  background-color: rgb(153, 103, 158);
+  color: #000000;
+  font-weight: bold;
 }
 ::ng-deep .mat-sort-header-arrow {
-  color: white;
+  color:#000000;
 }
 .container {
   overflow: auto;
@@ -276,3 +274,16 @@ a.fromLeft:after {
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: rgb(47, 28, 117);
 }
+
+/* CSS to change Default/'Accent' color */
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #7F1881; /*replace with your color*/
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color:#99679E;  /*replace with your color*/
+}
+
+
+

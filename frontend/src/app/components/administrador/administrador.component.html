@@ -23,7 +23,11 @@
       </li>
       <li class="nav-item active">
         <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">
-          registrados</a>
+          Candidatos</a>
+      </li>
+      <li class="nav-item active">
+        <a style="cursor: pointer;" id="empresasActivas" class="nav-link" (click)="categorias(5)">
+          Empresas</a>
       </li>
       <li class="nav-item active">
         <a style="cursor: pointer;" id="vacantesadmin" class="nav-link" (click)="categorias(6)">Vacantes</a>
@@ -32,7 +36,7 @@
   </a>
   </li>
   <li class="nav-item active">
-    <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Categorias <span
+    <a class="nav-link dropdown show" style="width: 100%; cursor: pointer; ">Catalogos <span
         class="sr-only">(current)</span>
       <div class="dropdown-menu  dropdown-content" aria-labelledby="dropdownMenuLink">
   <li class="nav-item active">
@@ -55,9 +59,9 @@
 </nav>
 <!-- En esta parte comienza el cuerpo de la pagina -->
 
-<body style="background-color: rgb(206, 211, 208); 	position: fixed; width:100%; height:100%;">
+
   <div class="row" id="contenedor">
-    <div class="col-lg-12" id="contenedor2">
+    <div class="col-lg-12" >
       <div *ngIf="estadoimagen">
         <mat-tab-group dynamicHeight>
           <mat-tab label="Registrar">
@@ -127,7 +131,7 @@
 
 
               </div>
-              <div style=" margin-top: 1%; ; ">
+              <div>
                 <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
                 </mat-paginator>
               </div>
@@ -136,138 +140,327 @@
         </mat-tab-group>
       </div>
       <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="conteiner">
         <div *ngIf="estado === 1">
-          <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <div class="row">
-              <div class="col-lg-4 col-sm-6 col-6">
-                <div style="  margin-left:1%; width: 100%; ">
-                  <div class="searchBox">
-                    <input [(ngModel)]="nuevaCategoria.nombre_categoria" id="categoria" class="searchInput" type="text"
-                      autocomplete="off" placeholder="Nombre de la categoria">
-                    <button class="searchButton" (click)="inputeffec()">
-                      <i class="material-icons">
-                        note_add
-                      </i>
-                    </button>
-                  </div>
+          <div style="margin-left: 5%;margin-top: 1%; ; ">
+            <p-table #dt [value]="datosCategoria" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
+              [globalFilterFields]="['nombre_empresa']" editMode="row" dataKey="id_tipo_empresa">
+              <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                  <i class="material-icons">search</i>
+                  <input type="text" pInputText size="50" placeholder="Filtrar"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
                 </div>
-              </div>
-              <div class="col-lg-2 col-sm-3 col-6 ">
-                <button class="btnregistrar" mat-flat-button (click)="add_CategoriaEmpresa()">Registrar</button>
-              </div>
-              <div class="col-lg-4 col-sm-3 col-12 ">
-                <input id="input" matInput (keyup)="applyFilterCategorias($event.target.value)" placeholder="Buscar"
-                  type="text">
-              </div>
-            </div>
-            <div class="border border-dark"
-              style="margin-block-start:5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
-              <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
-                <!-- Columna para nombre de la categoria -->
-                <ng-container matColumnDef="nombre_empresa">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre_empresa}} </td>
-                </ng-container>
-
-                <!-- Columna para estatus -->
-                <ng-container matColumnDef="estatus">
-
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{estatus_categorias(element.estatus)}} </td>
-
-                </ng-container>
-
-                <ng-container matColumnDef="acciones">
-                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                  <td mat-cell *matCellDef="let element" class="action-link">
-                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#ModalModificarCat" data-toggle="modal" data-backdrop="static"
-                      (click)="detalleCategoria(element)">Editar</button>
-
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th *ngFor="let columna of columnasCategoria" [pSortableColumn]="columna.field">
+                    {{columna.header}}
+                    <p-sortIcon [field]="columna.field"></p-sortIcon>
+                  </th>
+                  <th style="width:8em"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-datosCategoria let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="datosCategoria">
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="infoCategoria.nombre_empresa" id="modCategoria"
+                          required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{datosCategoria.nombre_empresa}}
+                      </ng-template>
+                    </p-cellEditor>
                   </td>
-                </ng-container>
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="estatus" [(ngModel)]="infoCategoria.estatus" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{estatus_categorias(datosCategoria.estatus)}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="text-align:center">
+                    <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                      class="ui-button-info"
+                      (click)="onRowEditCategoria(datosCategoria);detalleCategoria(datosCategoria)"></button>
+                    <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                      class="ui-button-success" style="margin-right: .5em" (click)="updateCategoria()"></button>
+                    <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                      class="ui-button-danger" (click)="onRowEditCancelCategoria(datosCategoria, ri)"></button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="summary" let-datosCategoria>
+                <div style="text-align:left">
+                  <button type="button" pButton icon="fa fa-plus" (click)="dialogAddCategoria()"
+                    label="Añadir"></button>
+                </div>
+              </ng-template>
+            </p-table>
 
-                <tr mat-header-row *matHeaderRowDef="ColumnasCategorias"></tr>
-                <tr mat-row *matRowDef="let row; columns: ColumnasCategorias;"></tr>
-              </table>
 
-            </div>
-            <div style="margin-right: 10%; margin-top: 1%; ">
-              <mat-paginator #PaginatorCategorias [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
-            </div>
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- En esta parte comienza la configuracion de areas de estudio -->
       <div class="conteiner">
         <div *ngIf="estado === 2">
-          <div style="margin-left: 10%; margin-top: 1%; ; ">
-            <div class="row">
-              <div class="col-lg-4 col-sm-4 col-8">
-                <div style="margin-right: 40%; margin-left:1%; width: 100%; ">
-                  <div class="searchBox">
-                    <input [(ngModel)]="nuevaArea.nombre" id="area" class="searchInput" type="text" autocomplete="off"
-                      placeholder="Nombre de la area">
-                    <button class="searchButton" (click)="inputeffec()">
-                      <i class="material-icons">
-                        note_add
-                      </i>
-                    </button>
-                  </div>
+          <div style="margin-left: 5%; margin-top: 1%; ; ">
+            <p-table #dt [value]="datosArea" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
+              [globalFilterFields]="['nombre']" editMode="row" dataKey="id_area_estudio">
+              <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                  <i class="material-icons">search</i>
+                  <input type="text" pInputText size="50" placeholder="Filtrar"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
                 </div>
-              </div>
-              <div class="col-lg-2 col-sm-2 col-2">
-                <div>
-                  <button class="btnregistrar" mat-flat-button (click)="add_areaEstudio()">Registrar</button>
-                </div>
-
-              </div>
-              <div class="col-lg-4 col-sm-4 col-12">
-                <div class="menu">
-                  <input id="input" matInput (keyup)="applyFilterAreas($event.target.value)" placeholder="Buscar"
-                    type="text">
-                  <div class="search"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="border border-dark"
-              style="margin-block-start: 5px; width: 90%; height:350px; background-color:white; overflow-y:scroll">
-
-              <table mat-table [dataSource]="dataSource_AreasEstudio" matSort class="lessons-table mat-elevation-z8">
-                <!-- Columna para nombre del area de esutdio -->
-                <ng-container matColumnDef="nombre">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
-                </ng-container>
-
-                <!-- Columna para estatus -->
-                <ng-container matColumnDef="estatus">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                  <td mat-cell *matCellDef="let element"> {{estatus_areas(element.estatus)}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="acciones">
-                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                  <td mat-cell *matCellDef="let element" class="action-link">
-                    <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                      data-target="#ModalModificarAreas" data-toggle="modal" data-backdrop="static"
-                      (click)="detalleArea(element)">Editar</button>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th *ngFor="let columna of columnasArea" [pSortableColumn]="columna.field">
+                    {{columna.header}}
+                    <p-sortIcon [field]="columna.field"></p-sortIcon>
+                  </th>
+                  <th style="width:8em"></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-datosArea let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="datosArea">
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="infoArea.nombre" id="modArea" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{datosArea.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
                   </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="ColumnasAreas"></tr>
-                <tr mat-row *matRowDef="let row; columns: ColumnasAreas;"></tr>
-              </table>
-
-            </div>
-            <div style="margin-right: 10%; margin-top: 1%; ; ">
-              <mat-paginator #PaginatorAreas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons></mat-paginator>
-            </div>
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="estatus" [(ngModel)]="infoArea.estatus" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{estatus_areas(datosArea.estatus)}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="text-align:center">
+                    <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                      class="ui-button-info" (click)="onRowEditArea(datosArea);detalleArea(datosArea)"></button>
+                    <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                      class="ui-button-success" style="margin-right: .5em" (click)="updateArea()"></button>
+                    <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                      class="ui-button-danger" (click)="onRowEditCancelArea(datosArea, ri)"></button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="summary" let-datosArea>
+                <div style="text-align:left">
+                  <button type="button" pButton icon="fa fa-plus" (click)="dialogAddArea()" label="Añadir"></button>
+                </div>
+              </ng-template>
+            </p-table>
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
       <div class="container-fluid" style="overflow: auto;">
         <div *ngIf="estado === 3">
@@ -313,149 +506,190 @@
           </div>
         </div>
       </div>
-      <!-- En esta parte comienza la configuracion de los usuarios registrados -->
+
+
+
+
+
+      <!-- En esta parte comienza la configuracion de los candidatos registrados -->
       <div class="conteiner">
         <div *ngIf="estado === 4">
-          <mat-tab-group>
-            <mat-tab label="Candidatos">
-              <div style="margin-left: 10%; margin-top: 1%;">
-                <div class="row" style="width: 98%;">
-                  <div class="col-lg-6 col-sm-4 col-5">
-                    <div class="form-check" style="margin-block-start: 2%;">
-                      <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosActivos"
-                        value="option1" (click)="getCandidatos('Alta')">Usuarios activos
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosEliminados"
-                        value="option2" (click)="getCandidatos('Baja')"> Usuarios Eliminados
-                    </div>
-                  </div>
-                  <div class="col-lg-4 col-sm-4 col-4">
-                    <input id="input" matInput (keyup)="applyFilterCandidatos($event.target.value)" placeholder="Buscar"
-                      type="text">
-                  </div>
+          <div style="margin-left: 10%; margin-top: 1%;">
+            <div class="row" style="width: 98%;">
+              <div class="col-lg-6 col-sm-4 col-5">
+                <div class="form-check" style="margin-block-start: 2%;">
+                  <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosActivos"
+                    value="option1" (click)="getCandidatos('Alta')" checked>Usuarios activos
                 </div>
-
-                <div class="border border-dark"
-                  style="width: 90%; height:350px; margin-block-start: 1%;  background-color:white; overflow-y:scroll">
-                  <table mat-table [dataSource]="dataSource_Candidatos" matSort class="lessons-table mat-elevation-z8">
-                    <!-- Columna para email del candidato -->
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
-
-                    <!-- Columna para el nombre del candidato -->
-                    <ng-container matColumnDef="candidato">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Candidato </th>
-                      <td mat-cell *matCellDef="let element"> {{element.candidato}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="estatus">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                      <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="acciones">
-                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                      <td mat-cell *matCellDef="let element" class="action-link">
-                        <button mat-flat-button *ngIf="element.estatus==='Alta'"
-                          (click)="deleteCandidato(element.id_usuario)">
-                          <img src="/assets/x-button.png" width="20px" height="20px" alt="">
-                        </button>
-                        <button mat-flat-button *ngIf="element.estatus==='Baja'"
-                          (click)="reactivarCandidato(element.id_usuario)">
-                          <img src="/assets/plus.png" width="20px" height="20px" alt="">
-                        </button>
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="ColumnasCandidatos"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ColumnasCandidatos;"></tr>
-                  </table>
-
-                </div>
-                <div style="margin-right: 10%; margin-top: 1%;">
-                  <mat-paginator #PaginatorCandidatos [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
-                  </mat-paginator>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosEliminados"
+                    value="option2" (click)="getCandidatos('Baja')"> Usuarios inactivos
                 </div>
               </div>
-            </mat-tab>
-            <mat-tab label="Empresas" onclick="categorias(4.1)">
-              <div style="margin-left: 10%; margin-top: 1%; ; ">
-                <div>
-                  <div class="row" style="width: 98%;">
-                    <div class="col-lg-6 col-sm-4 col-5">
-                      <div class="form-check" style="margin-block-start: 2%;">
-                        <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaActivos"
-                          value="option1" (click)="getEmpresas('Alta')" checked>Usuarios Activos
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaEliminados"
-                          value="option2" (click)="getEmpresas('Baja')">Usuarios Eliminados
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-4">
-                      <input id="input" matInput (keyup)="applyFilterEmpresas($event.target.value)" placeholder="Buscar"
-                        type="text">
-                    </div>
+              <p-table #dtCandidatos [columns]="columnasCandidato" [value]="datosCandidato" dataKey="id_usuario" [paginator]="true"
+                [rowsPerPageOptions]="[5,10,20]" [rows]="10" [globalFilterFields]="['candidato','genero','telefono','email']" >
+                <ng-template pTemplate="caption">
+                  <div style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Filtrar"
+                      (input)="dtCandidatos.filterGlobal($event.target.value, 'contains')" style="width:auto">
                   </div>
-                </div>
-                <div class="border border-dark"
-                  style="width: 90%; height:350px;  margin-block-start: 1%; background-color:white; overflow-y:scroll">
-
-                  <table mat-table [dataSource]="dataSource_Empresas" matSort class="lessons-table mat-elevation-z8">
-                    <!-- Columna para email de la empresa -->
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-                    </ng-container>
-
-                    <!-- Columna para el nombre de la empresa -->
-                    <ng-container matColumnDef="empresa">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa </th>
-                      <td mat-cell *matCellDef="let element"> {{element.nombre_empresa}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="telefono">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
-                      <td mat-cell *matCellDef="let element"> {{element.telefono}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="estatus">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
-                      <td mat-cell *matCellDef="let element"> {{element.estatus}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="acciones">
-                      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                      <td mat-cell *matCellDef="let element" class="action-link">
-                        <button mat-flat-button *ngIf="element.estatus==='Alta'"
-                          (click)="deleteEmpresa(element.id_usuario)">
-                          <img src="/assets/x-button.png" width="20px" height="20px" alt="">
-                        </button>
-                        <button mat-flat-button *ngIf="element.estatus==='Baja'"
-                          (click)="reactivarEmpresa(element.id_usuario)">
-                          <img src="/assets/plus.png" width="20px" height="20px" alt="">
-                        </button>
-
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="ColumnasEmpresas"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ColumnasEmpresas;"></tr>
-                  </table>
-
-                </div>
-                <div style="margin-right: 10%; margin-top: 1%; ; ">
-                  <mat-paginator #PaginatorEmpresas [pageSizeOptions]="[6, 12, 18]" showFirstLastButtons>
-                  </mat-paginator>
-                </div>
-
-              </div>
-
-            </mat-tab>
-          </mat-tab-group>
+                </ng-template>
+                <ng-template pTemplate="header" let-columnas>
+                  <tr>
+                    <th style="width: 3em"></th>
+                    <th *ngFor="let columna of columnasCandidato">
+                      {{columna.header}}
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columnas="columnas">
+                  <tr>
+                    <td>
+                      <a href="#" [pRowToggler]="rowData">
+                        <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                      </a>
+                    </td>
+                    <td *ngFor="let columna of columnasCandidato">
+                      {{rowData[columna.field]}}
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-rowData let-columnas="columnasCandidato">
+                  <tr>
+                    <td [attr.colspan]="columnasCandidato.length + 1">
+                      <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                        <div class="ui-g-12 ui-md-9">
+                          <div class="ui-g">
+                            <div class="ui-g-12">
+                              <b>Fecha de nacimiento:</b> {{rowData.fecha_nacimiento}}
+                            </div>
+                            <div class="ui-g-12">
+                              <b>Dirección:</b> {{rowData.direccion}}
+                            </div>
+                            <div class="ui-g-12">
+                              <b>Grado de estudio:</b> {{rowData.gradoestudio}}
+                            </div>
+                            <div class="ui-g-12">
+                              <b>Area de estudio:</b> {{rowData.areaestudio}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
+
+
+      <!-- En esta parte comienza la configuracion de las empresas registradas -->
+      <div class="conteiner">
+        <div *ngIf="estado === 5">
+          <div style="margin-left: 10%; margin-top: 1%; ; ">
+            <div class="row" style="width: 98%;">
+              <div class="col-lg-6 col-sm-4 col-5">
+                <div class="form-check" style="margin-block-start: 2%;">
+                  <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaActivos"
+                    value="option1" (click)="getEmpresas('Alta')" checked>Empresas activas
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaEliminados"
+                    value="option2" (click)="getEmpresas('Baja')">Empresas inactivas
+                </div>
+
+
+
+
+
+              </div>
+              <p-table #dt [columns]="columnasEmpresa" [value]="datosEmpresa" dataKey="id_usuario" [paginator]="true"
+              [rowsPerPageOptions]="[5,10,20]" [rows]="10" [globalFilterFields]="['empresa','email','telefono','nombre_persona_contacto']">
+              <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                  <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                  <input type="text" pInputText size="50" placeholder="Filtrar"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
+              </ng-template>
+                <ng-template pTemplate="header" let-columnas>
+                  <tr>
+                    <th style="width: 3em"></th>
+                    <th *ngFor="let columna of columnasEmpresa">
+                      {{columna.header}}
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columnas="columnas">
+                  <tr>
+                    <td>
+                      <a href="#" [pRowToggler]="rowData">
+                        <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                      </a>
+                    </td>
+                    <td *ngFor="let col of columnasEmpresa">
+                      {{rowData[col.field]}}
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="rowexpansion" let-rowData let-columnas="columnasEmpresa">
+                  <tr>
+                    <td [attr.colspan]="columnasEmpresa.length + 1">
+                      <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                        <div class="ui-g-12 ui-md-9">
+                          <div class="ui-g">
+                            <div class="ui-g-12">
+                              <b>RFC:</b> {{rowData.rfc}}
+                            </div>
+                            <div class="ui-g-12">
+                              <b>Dirección:</b> {{rowData.direccion}}
+                            </div>
+                            <div class="ui-g-12">
+                              <b>Página web:</b> {{rowData.pagina_web}}
+                            </div>
+                            <div class="ui-g-12">
+                              <b>Tipo de empresa:</b> {{rowData.tipoempresa}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- En esta parte comienza la configuracion de las vacantes de los usuarios -->
       <div class="container">
         <div *ngIf="estado === 6">
@@ -464,7 +698,7 @@
             <table mat-table [dataSource]="dataSource_Categorias" matSort class="lessons-table mat-elevation-z8">
               <!-- Columna para nombre de la categoria -->
               <ng-container matColumnDef="nombre_empresa">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> <strong> Nombre </strong></th>
                 <td mat-cell *matCellDef="let element"> </td>
               </ng-container>
 
@@ -479,8 +713,8 @@
               <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let element" class="action-link">
-                  <button mat-flat-button style="border-radius: 18px; background-color: #99679E; color:white"
-                    data-target="#ModificarCAT" data-toggle="modal" data-backdrop="static"
+                  <button mat-flat-button data-target="#ModificarCAT" data-toggle="modal"
+                    class="btn btn-outline-secondary form-control" data-backdrop="static"
                     (click)="detalleCategoria(element)">Editar</button>
 
                 </td>
@@ -492,7 +726,7 @@
 
 
           </div>
-          <div style=" margin-top: 1%; ; ">
+          <div>
             <mat-paginator #PaginatorCategorias [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons>
             </mat-paginator>
           </div>
@@ -506,94 +740,51 @@
       </div>
     </div>
   </div>
-</body>
+
 <!--===============================================================================================-->
 
-<!-- Modal para Modificar Categoria de la empresa -->
-<div class="modal fade" tabindex="-1" role="dialog" id="ModalModificarCat" data-controls-modal="ModalModificarCat"
-  data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" style="color: black;">Modificar categoría</h5>
-        <button type="button" class="close" (click)="preguntarCategoria()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-lg-2 col-sm-2 col-2">
-            <p style="margin-top: 30%;">Nombre:</p>
-          </div>
-          <div class="col-lg-6 col-sm-6 col-12">
-            <mat-form-field style="margin-right: 5%; ">
-              <input matInput [(ngModel)]="infoCategoria.nombre_empresa" placeholder="Categoria"
-                value="{{infoCategoria.nombre_empresa}}" id="NomCategoria">
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2 col-sm-2 col-2">
-            <p style="margin-top: 30%;">Estatus:</p>
-          </div>
-          <div class="col-lg-6 col-sm-6 col-12">
-            <select class="form-control select-sm" [(ngModel)]="infoCategoria.estatus">
-              <option *ngIf="infoCategoria.estatus==='A'" value="{{infoCategoria.estatus}}">Alta</option>
-              <option *ngIf="infoCategoria.estatus==='B'" value="{{infoCategoria.estatus}}">Baja</option>
-              <option *ngIf="infoCategoria.estatus==='B'" value="A">Alta</option>
-              <option *ngIf="infoCategoria.estatus==='A'" value="B">Baja</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="preguntarCategoria()" class="btn btn-secondary">Cerrar</button>
-        <button type="button" (click)="update_categoria()" class="btn btn-primary">Guardar Cambios</button>
-      </div>
-    </div>
-  </div>
+
+
+<div *ngIf="isLoading" class="container">
+  <app-loading></app-loading>
 </div>
 
-<!-- Modal para Modificar Area de estudio -->
-<div class="modal fade" tabindex="-1" role="dialog" id="ModalModificarAreas" data-controls-modal="ModalModificarAreas"
-  data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" style="color: black;">Modificar área</h5>
-        <button type="button" class="close" (click)="preguntarArea()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+
+<p-dialog header="Categoria" [(visible)]="displayDialogCategoria" [focusOnShow]="false" [responsive]="true"
+  showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label>Nombre</label>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-lg-2 col-sm-2 col-2">
-            <p style="margin-top: 30%;">Nombre:</p>
-          </div>
-          <div class="col-lg-6 col-sm-6 col-12">
-            <mat-form-field>
-              <input matInput [(ngModel)]="infoArea.nombre" placeholder="Area" value="{{infoArea.nombre}}" id="NomArea">
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2 col-sm-2 col-2">
-            <p style="margin-top: 30%;">Estatus:</p>
-          </div>
-          <div class="col-lg-6 col-sm-6 col-12">
-            <select class="form-control select-sm" [(ngModel)]="infoArea.estatus">
-              <option *ngIf="infoArea.estatus==='A'" value="{{infoArea.estatus}}">Alta</option>
-              <option *ngIf="infoArea.estatus==='B'" value="{{infoArea.estatus}}">Baja</option>
-              <option *ngIf="infoArea.estatus==='B'" value="A">Alta</option>
-              <option *ngIf="infoArea.estatus==='A'" value="B">Baja</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="preguntarArea()" class="btn btn-secondary">Cerrar</button>
-        <button type="button" (click)="update_area()" class="btn btn-primary">Guardar Cambios</button>
+      <div class="ui-g-8">
+        <input pInputText id="nomCategoria" [(ngModel)]="nuevaCategoria.nombre_categoria" autofocus />
       </div>
     </div>
   </div>
-</div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-check" (click)="add_CategoriaEmpresa()" label="Guardar"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog header="Area" [(visible)]="displayDialogArea" [focusOnShow]="false" [responsive]="true" showEffect="fade"
+  [modal]="true" [style]="{width: '300px'}">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label>Nombre</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="nomArea" [(ngModel)]="nuevaArea.nombre" autofocus />
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-check" (click)="add_areaEstudio()" label="Guardar"></button>
+    </div>
+  </p-footer>
+</p-dialog>

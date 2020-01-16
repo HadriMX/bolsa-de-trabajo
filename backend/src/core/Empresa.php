@@ -6,7 +6,7 @@ class Empresa
         $db = new Db();
         $conn = $db->getConn();
         
-        $stmt = $conn->prepare("SELECT  * FROM  empresasvista where estatus=?");
+        $stmt = $conn->prepare("SELECT  * FROM  empresasvista where status=?");
         $stmt->bind_param('s', $estatus);
         $stmt->execute();
 
