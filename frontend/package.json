@@ -32,6 +32,8 @@
     "jw-angular-pagination": "^1.1.0",
     "jw-paginate": "^1.0.4",
     "ngx-cookie-service": "^2.2.0",
+    "primeicons": "^2.0.0",
+    "primeng": "^9.0.0-rc.2",
     "rxjs": "~6.4.0",
     "simplescrollup": "^1.1.0",
     "sweetalert2": "^8.18.6",
@@ -40,7 +42,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.802.2",
+    "@angular-devkit/build-angular": "^0.803.22",
     "@angular/cli": "~8.2.0",
     "@angular/compiler-cli": "^8.2.12",
     "@angular/language-service": "^8.2.12",
