@@ -50,6 +50,7 @@ export class AdministradorComponent implements OnInit {
     nombre_empresa: '',
     estatus: ''
   }
+  auxNombreCategoira;
   isLoading = false;
   datosCategoria = [];
   datosArea = [];
@@ -294,12 +295,13 @@ export class AdministradorComponent implements OnInit {
   }
 
   //METODOS CRUD (U)
-  updateArea() {
+  updateArea(idArea) {
+    var index = this.datosArea.map(function (datos) { return datos.id_area_estudio; }).indexOf(idArea);
     const nombre = $('#modArea').val();
     if (nombre === '') {
       Swal.fire('Error', "No ingreso ningun valor", 'error');
     } else {
-      this.areaService.update_area(this.infoArea)
+      this.areaService.update_area(this.datosArea[index])
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
@@ -311,12 +313,13 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  updateCategoria() {
+  updateCategoria(idCategoria) {
+    var index = this.datosCategoria.map(function (datos) { return datos.id_tipo_empresa; }).indexOf(idCategoria);
     const nombre = $('#modCategoria').val();
     if (nombre === '') {
       Swal.fire('Error', "No ingreso ningun valor", 'error');
     } else {
-      this.categoriaService.update_categoria(this.infoCategoria)
+      this.categoriaService.update_categoria(this.datosCategoria[index])
         .subscribe((response) => {
           if (response.success) {
             Swal.fire("Correcto", response.message, 'success')
@@ -432,21 +435,25 @@ export class AdministradorComponent implements OnInit {
 
   //UTILIDADES
 
-  onRowEditArea(datosCat: Cat_empresa) {
+  onRowEditCategoria(datosCat: Cat_empresa) {
     this.clonCategoria[datosCat.id_tipo_empresa] = { ...datosCat };
   }
-  onRowEditCancelArea(datosCat: Cat_empresa, index: number) {
-    this.datosCategoria[index] = this.clonCategoria[datosCat.id_tipo_empresa];
-    delete this.clonCategoria[datosCat.id_tipo_empresa];
+
+  onRowEditCancelCategoria(datos: Cat_empresa, index: number) {
+    this.datosCategoria[index] = this.clonCategoria[datos.id_tipo_empresa];
+    delete this.clonCategoria[datos.id_tipo_empresa];
   }
 
-  onRowEditCategoria(datosArea: Area) {
+  onRowEditCancelArea(datos: Area, index: number) {
+    this.datosArea[index] = this.clonArea[datos.id_area_estudio];
+    delete this.clonArea[datos.id_area_estudio];
+  }
+
+  onRowEditArea(datosArea: Area) {
     this.clonArea[datosArea.id_area_estudio] = { ...datosArea };
+
   }
-  onRowEditCancelCategoria(datosArea: Area, index: number) {
-    this.datosArea[index] = this.clonArea[datosArea.id_area_estudio];
-    delete this.clonArea[datosArea.id_area_estudio];
-  }
+ 
 
 
 
