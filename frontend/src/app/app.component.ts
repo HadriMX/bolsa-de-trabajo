@@ -4,8 +4,19 @@ import { IAppPage } from './interfaces/app-page';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  styles: [`
+  /deep/ .swal2-cancel{
+    color: #7A26D3 !important;
+    border: 1px solid #6c757d !important;
+  }
+  /deep/ .swal2-styled{
+    border-radius: 20px !important;
+    font-family: "Poppins", sans-serif;
+  }
+`]
 })
+
 export class AppComponent {
   title = 'Bolsa de trabajo';
   showFooter = true;

@@ -1,76 +1,61 @@
 <app-headertittle></app-headertittle>
+<html>
 
 <div id="body">
     <div class="container">
         <mat-tab-group id="mattab" dynamicHeight>
             <mat-tab label="Vacantes Publicadas">
-                <div class="row" id="registrarvacante">
-                    <div class="col-lg-7 col-sm-7 col-7" style="margin-block-start: 1%;">
-                        <button routerLink="registrar" class="btn" style="margin-left: 36%;">
+
+                <div class="row" id="registrarVacanteArea">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <button routerLink="registrar" id="registrarVacanteButton" class="btn btn-primary btn-lg btn-wide mx-2">
                             Agregar Vacante
                         </button>
                     </div>
                 </div>
-                <div *ngFor="let dat of vacantes; index as i"
-                    style="margin-block-start: 3%;border-bottom: 1px solid purple;">
-                    <div class="row">
-                        <div>
-                            <div id="vacantecontenedor" class="col-12 col-sm-12 col-12">
-                                <div>
-                                    <h6>Desarollo de software</h6>
-                                    <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
-                                    <h6>DESARROLLO EMPRESARIAL</h6>
-                                    <div class="row" style="margin-left: 1px;">
-                                        <div class="col-lg-12 col-sm-12 col-12">
-                                            <h6 style="margin-block-start:3%;">Fecha</h6>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-5 col-5">
-                                            <button class="btn2" data-toggle="modal" data-target="#datosvacante">
-                                                Ver mas
-                                            </button>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-5 col-5">
-                                            <button class="btn2">
-                                                Solicitudes
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
+                    <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"
+                      data-target="#datosPostulacion">
+                      <div class="row">
+                        <div class="col-9">
+                          <h6 style="color: rgb(121, 24, 129);">
+                            <strong>{{item.titulo_vacante}}</strong>
+                          </h6>
                         </div>
+                        <div class="col-3">
+                          <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                        </div>
+                      </div>
+          
+                      <div class="row">
+                        <div class="col">
+                          <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)</h6>
+                        </div>
+                      </div>
+          
+                      <div class="row">
+                        <div class="col">
+                          <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
+                              class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
+                        </div>
+                      </div>
+          
+                      <div class="row">
+                        <div class="col">
+                          <p class="d-sm-block">
+                            {{item.descripcion_puesto_plain_text | slice:0:190}}...
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                  </div>
+
             </mat-tab>
             <mat-tab label="Vacantes Canceladas">
-                <div *ngFor="let dat of vacantes; index as i"
-                    style="margin-block-start: 2%;border-bottom: 1px solid purple;">
-                    <div class="row">
-                        <div>
-                            <div id="vacantecontenedor" class="col-12 col-sm-12 col-12">
-                                <div>
-                                    <h6>Desarollo de software</h6>
-                                    <h6>Empresa importante en el giro informatico solicito PROGRAMADOR</h6>
-                                    <h6>DESARROLLO EMPRESARIAL</h6>
-                                    <div class="row" style="margin-left: 1px;">
-                                        <div class="col-lg-12 col-sm-12 col-12">
-                                            <h6 style="margin-block-start:3%;">Fecha</h6>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-5 col-5">
-                                            <button class="btn2" data-toggle="modal" data-target="#datosvacante">
-                                                Ver mas
-                                            </button>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-5 col-5">
-                                            <button class="btn2">
-                                                Solicitudes
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                NADA POR AQUI
+
             </mat-tab>
         </mat-tab-group>
         
@@ -79,7 +64,8 @@
         </div>
     </div>
 </div>
-
+    
+</html>
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
 <div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

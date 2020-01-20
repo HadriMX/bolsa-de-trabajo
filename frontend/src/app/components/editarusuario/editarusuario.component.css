@@ -78,14 +78,6 @@ select{
   #espacioabajo {
       margin-block-start: 4%;
   }
-  #boton3{
-    border-radius: 25px;
-    border: none;
-    width: 100%;
-    height: 120%;
-    background:rgb(121, 24, 129);
-    color:white;
-  }
   .custom-file-input ~ .custom-file-label:lang(es)::after {
     content: "Elegir";
   }

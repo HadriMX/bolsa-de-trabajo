@@ -27,7 +27,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   // getters
   entidadesFederativas: EntidadFederativa[] = [];
   municipios: Municipio[] = [];
-  ciudades: Ciudad[] = [];
+  // ciudades: Ciudad[] = [];
   areas: Area[] = [];
   gradosEstudio: GradoEstudio[] = [];
   
@@ -56,7 +56,6 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   constructor(
     private entidadFederativaService: EntidadesFederativasService,
     private municipioService: MunicipioService,
-    private ciudadService: CiudadService,
     private areaService: AreaService,
     private gradoEstudioService: GradoEstudioService ) {
   }
@@ -96,21 +95,21 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  getCiudades(){
-    this.ciudades = [];
-    this.infoCandidato.id_ciudad = 0;
-    this.infoCandidato.id_colonia = 0;
-    this.ciudadService.getCiudades(this.infoCandidato.id_entidad_federativa,this.infoCandidato.id_municipio)
-      .subscribe((response) => {
-        if (response.success) {
-          this.ciudades = response.data;
-          // console.log(this.ciudades);
-        }
-        else {
-          Swal.fire("Error", response.message, 'error');
-        }
-      });
-  }
+  // getCiudades(){
+  //   this.ciudades = [];
+  //   this.infoCandidato.id_ciudad = 0;
+  //   this.infoCandidato.id_colonia = 0;
+  //   this.ciudadService.getCiudades(this.infoCandidato.id_entidad_federativa,this.infoCandidato.id_municipio)
+  //     .subscribe((response) => {
+  //       if (response.success) {
+  //         this.ciudades = response.data;
+  //         // console.log(this.ciudades);
+  //       }
+  //       else {
+  //         Swal.fire("Error", response.message, 'error');
+  //       }
+  //     });
+  // }
 
   getAreas() {
     this.areaService.get_areasMenu()

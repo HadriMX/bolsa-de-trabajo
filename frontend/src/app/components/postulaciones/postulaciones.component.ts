@@ -76,12 +76,12 @@ export class PostulacionesComponent implements OnInit {
 
     Swal.fire({
       title: '¿Estás seguro de cancelar tu postulación?',
-      type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#7A26D3',
+      cancelButtonColor: 'white',
       cancelButtonText: 'No',
-      confirmButtonText: 'Sí, cancelar postulación'
+      confirmButtonText: 'Sí, cancelar postulación',
+      reverseButtons: true
       
     }).then((result) => {
       if (result.value) {
@@ -91,7 +91,14 @@ export class PostulacionesComponent implements OnInit {
               this.getPostulacionesPendientes();
               this.getPostulacionesRechazadas();
               this.getPostulacionesAceptadas();
-              Swal.fire("Exito", response.message, "success");
+              Swal.fire({
+                title: "Éxito", 
+                text: response.message,
+                type: "success",
+                focusConfirm: true,
+                confirmButtonText: "Jalate poes",
+                confirmButtonColor: '#7A26D3'
+              });
               this.cerrarModales();
             }
             else {
