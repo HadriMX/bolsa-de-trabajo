@@ -9,6 +9,7 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
+
 .dropdown-content a {
   color: white;
   padding: 10px 40px;
@@ -16,13 +17,16 @@
   display: block;
   text-align: left;
 }
+
 h4 {
   margin-left: 5%;
 }
+
 h6,
 h5 {
   color: white;
 }
+
 .dropdown-content a:hover {
   background-color: #aa2baa;
   color: white;
@@ -31,15 +35,18 @@ h5 {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 nav.navbar {
   background-color: rgb(121, 24, 129);
 }
-/* -------------------------------------------*/ 
+
+/* -------------------------------------------*/
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: none;
   -webkit-appearance: none;
 }
+
 /* body {
   width: 100%;
   height: 100%;
@@ -66,57 +73,69 @@ table {
   font-size: 14px;
   width: 100%;
 }
+
 th.mat-sort-header-sorted {
   color: black;
 }
+
 #contenedor {
   width: 100%;
   height: 100%;
 }
+
 #contenedor2 {
   width: 100%;
   height: 100%;
   overflow: auto;
 }
+
 .btn {
   border-radius: 15px;
   border: none;
   color: white;
   background-color: rgb(152, 93, 158);
-  margin-block-start: 30%;  
+  margin-block-start: 30%;
   width: 95%;
   margin-block-end: 1%;
 }
- @media (max-width:574px) {
-   .btn{
+
+@media (max-width:574px) {
+  .btn {
     margin-block-start: 5%;
     margin-left: 2%;
     margin-block-end: 2%;
-   }
- } 
- @media (min-width:576px) and (max-width:963px) {
-   .btn {
-     margin-block-start:40%;
-     width: 100%;
-     height: 40%;
-   }
- }
+  }
+}
+
+@media (min-width:576px) and (max-width:963px) {
+  .btn {
+    margin-block-start: 40%;
+    width: 100%;
+    height: 40%;
+  }
+}
+
 th {
   color: #000000;
   font-weight: bold;
 }
+
 ::ng-deep .mat-sort-header-arrow {
-  color:#000000;
+  color: #000000;
 }
+
 .container {
   overflow: auto;
 }
+
 #estadoimagen {
   margin-left: 3%;
 }
+
 a {
   font-size: 14px;
 }
+
 a:after {
   display: block;
   content: "";
@@ -124,12 +143,15 @@ a:after {
   transform: scaleX(0);
   transition: transform 250ms ease-in-out;
 }
+
 a:hover:after {
   transform: scaleX(1);
 }
+
 a.fromRight:after {
   transform-origin: 100% 50%;
 }
+
 a.fromLeft:after {
   transform-origin: 0% 50%;
 }
@@ -140,21 +162,87 @@ a.fromLeft:after {
   margin-left: 37%;
   border-radius: 20px;
 }
-  @media (max-width:1000px) and (min-width:320px) {
-    h4{
-      margin-left: 1%;
-    }
+
+.abc-datatable .ui-paginator {
+  margin: 0px;
+  padding: 0px !important;
+  background-color: #F5B52C;
+  border-radius: 1px;
+}
+
+th {
+  background-color: brown;
+}
+
+ui-paginator {
+  background-color: purple;
+}
+
+.btneditar {
+  background-color: #791881;
+  border-color: #791881;
+}
+
+:host::ng-deep .ui-table .ui-sortable-column.ui-state-highlight {
+  background-color: #791881;
+
+}
+
+:host::ng-deep.ui-button:enabled:hover {
+  background-color: #45003a;
+  color: #ffffff;
+  border-color: #45003a;
+}
+
+:host::ng-deep .ui-button:enabled:focus {
+  outline: 0 none;
+  outline-offset: 0px;
+  -webkit-box-shadow: 0 0 0 0.2em #45003a;
+  -moz-box-shadow: 0 0 0 0.2em #45003a;
+  box-shadow: 0 0 0 0.2em #45003a;
+}
+
+
+:host::ng-deep .ui-button:enabled:active {
+  background-color: #45003a;
+  color: #ffffff;
+  border-color: #45003a;
+}
+
+:host::ng-deep .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+  background-color: #791881;
+  color: #ffffff;
+}
+
+:host::ng-deep .ui-paginator .ui-paginator-pages .ui-paginator-page:not(.ui-state-active):hover {
+  background-color: #bb26c7;
+  color: #333333;
+}
+
+:host::ng-deep .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight,
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
+  color: #ffffff;
+  background-color: #791881;
+}
+
+@media (max-width:1000px) and (min-width:320px) {
+  h4 {
+    margin-left: 1%;
   }
+}
+
 @media (max-width: 1000px) and (min-width: 320px) {
   h4 {
     margin-left: 1%;
   }
 }
+
 @media (max-width: 800px) and (min-width: 622px) {
   h4 {
     font-size: 20px;
   }
 }
+
 @media (max-width: 621px) {
   h4 {
     font-size: 17px;
@@ -166,11 +254,12 @@ a.fromLeft:after {
   background-image: url("../../../assets/remove.png");
   background: url("../../../assets/remove.png") no-repeat;
 }
+
 /* Css del boton de buscar */
 
 #input {
-  background-color: rgba(255, 255, 255, 0.507); 
-  border-radius: 20px; 
+  background-color: rgba(255, 255, 255, 0.507);
+  border-radius: 20px;
   width: 80%;
   margin-left: 40%;
   padding: 12px 24px;
@@ -178,9 +267,9 @@ a.fromLeft:after {
   transition: transform 250ms ease-in-out;
   font-size: 14px;
   line-height: 18px;
-  
+
   color: #575756;
-/*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
+  /*         background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg); */
 
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -190,65 +279,72 @@ a.fromLeft:after {
   transition: all 250ms ease-in-out;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-  
+
 }
-  #input::placeholder {
-      color: color(#575756 a(0.8));
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-  }
-  
-  #input:hover,
-  #input:focus {
-      padding: 12px 0;
-      outline: 0;
-      border: 1px solid transparent;
-      border-bottom: none;
-      border-radius: 20px;
-      background-position: 100% center;
-      padding-left: 10px;
-    }
-  /* aqui empieza el diseño para el boton de registrar en el modulo de categoria */
-  .btnregistrar{
-    margin-block-start: 10%; 
-    margin-left: 1px;
-    border-radius: 18px; 
-    background-color: #660551; 
-    color:white;
-    display: none;  
-  }
-  .searchBox {
-    position: absolute;
-    transform:  translate(-1%,50%);
-    background: #660551;
-    height: 40px;
-    border-radius: 40px;
+
+#input::placeholder {
+  color: color(#575756 a(0.8));
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
-.searchInput::placeholder{
-  color:white;
-} 
+
+#input:hover,
+#input:focus {
+  padding: 12px 0;
+  outline: 0;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 20px;
+  background-position: 100% center;
+  padding-left: 10px;
+}
+
+/* aqui empieza el diseño para el boton de registrar en el modulo de categoria */
+.btnregistrar {
+  margin-block-start: 10%;
+  margin-left: 1px;
+  border-radius: 18px;
+  background-color: #660551;
+  color: white;
+  display: none;
+}
+
+.searchBox {
+  position: absolute;
+  transform: translate(-1%, 50%);
+  background: #660551;
+  height: 40px;
+  border-radius: 40px;
+}
+
+.searchInput::placeholder {
+  color: white;
+}
+
 .searchInput {
-    border:none;
-    background: none;
-    outline:none;
-    float:left;
-    padding: 0;
-    color: white;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
 }
 
 @media screen and (max-width: 620px) {
-.searchBox:hover > .searchInput {
+  .searchBox:hover>.searchInput {
     width: 150px;
     padding: 0 6px;
+  }
+
+  #input {
+    margin-left: 7%;
+  }
 }
-#input {
-  margin-left: 7%;
-}
-}
+
 .searchButton {
   color: white;
   float: right;
@@ -261,29 +357,23 @@ a.fromLeft:after {
   align-items: center;
   transition: 0.4s;
 }
+
 /* aqui inicia el color de los placeholder  */
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgb(47, 28, 117);
-  opacity: 1; /* Firefox */
+  opacity: 1;
+  /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
   color: rgb(47, 28, 117);
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
+::-ms-input-placeholder {
+  /* Microsoft Edge */
   color: rgb(47, 28, 117);
 }
 
 /* CSS to change Default/'Accent' color */
-
-::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-  background-color: #7F1881; /*replace with your color*/
-}
-
-::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-  background-color:#99679E;  /*replace with your color*/
-}
-
-
-

@@ -21,6 +21,16 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 @Component({
   selector: 'app-administrador',
   templateUrl: './administrador.component.html',
+  styles: [`
+  .ui-datatable .ui-datatable-header {
+    background-color: red;
+}
+
+.ui-datatable .ui-paginator {
+    background-color: yellow;
+}
+    `
+  ],
   styleUrls: ['./administrador.component.css'],
   animations: [
     trigger('rowExpansionTrigger', [
@@ -453,7 +463,8 @@ export class AdministradorComponent implements OnInit {
     this.clonArea[datosArea.id_area_estudio] = { ...datosArea };
 
   }
- 
+
+  
 
 
 
@@ -462,7 +473,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   dialogAddArea() {
-    this.displayDialogArea;
+    this.displayDialogArea=true;
   }
 
   estatus_areas(status: string) {
@@ -612,5 +623,7 @@ export class AdministradorComponent implements OnInit {
     // aqui va el codigo para el dashboard
 
   }
+
+
 
 }

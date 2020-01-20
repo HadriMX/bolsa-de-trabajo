@@ -13,7 +13,7 @@
             class="sr-only">(current)</span>
           <div class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuLink">
       <li class="nav-item active">
-        <a class="nav-link" (click)="categorias(5)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Auxiliares
+        <a class="nav-link" (click)="categorias(7)" id="Auxiliares" style="width: 100%; cursor: pointer; ">Auxiliares
           Administrativos <span class="sr-only">(current)</span>
         </a>
       </li>
@@ -218,7 +218,7 @@
         <div *ngIf="estado === 1">
           <div style="margin-left: 5%;margin-top: 1%; ; ">
             <p-table #dt [value]="datosCategoria" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
-              [globalFilterFields]="['nombre_empresa']" editMode="row" dataKey="id_tipo_empresa">
+              [globalFilterFields]="['nombre_empresa']" editMode="row" dataKey="id_tipo_empresa"  >
               <ng-template pTemplate="caption">
                 Categorias de empresas
                 <div style="text-align: right">
@@ -262,7 +262,7 @@
                   </td>
                   <td style="text-align:center">
                     <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
-                      class="ui-button-info"
+                      class="btneditar"
                       (click)="onRowEditCategoria(datosCategoria);detalleCategoria(datosCategoria)"></button>
                     <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
                       class="ui-button-success" style="margin-right: .5em" (click)="updateCategoria(datosCategoria.id_tipo_empresa)"></button>
@@ -274,7 +274,7 @@
               <ng-template pTemplate="summary" let-datosCategoria>
                 <div style="text-align:left">
                   <button type="button" pButton icon="fa fa-plus" (click)="dialogAddCategoria()"
-                    label="Añadir"></button>
+                    label="Añadir"  class="btneditar"></button>
                 </div>        
               </ng-template>
             </p-table>
@@ -383,6 +383,7 @@
           
               <ng-template pTemplate="caption">
                 Áreas de estudio
+                
                 <div style="text-align: right">
                   <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                   <input type="text" pInputText size="50" placeholder="Filtrar"
@@ -423,7 +424,7 @@
                   </td>
                   <td style="text-align:center">
                     <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
-                      class="ui-button-info" (click)="onRowEditArea(datosArea);detalleArea(datosArea)"></button>
+                      class="btneditar" (click)="onRowEditArea(datosArea);detalleArea(datosArea)"></button>
                     <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
                       class="ui-button-success" style="margin-right: .5em" (click)="updateArea(datosArea.id_area_estudio)"></button>
                     <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
@@ -433,7 +434,7 @@
               </ng-template>
               <ng-template pTemplate="summary" let-datosArea>
                 <div style="text-align:left">
-                  <button type="button" pButton icon="fa fa-plus" (click)="dialogAddArea()" label="Añadir"></button>
+                  <button type="button" pButton icon="fa fa-plus" (click)="dialogAddArea()" label="Añadir" class="btneditar"></button>
                 </div>
               </ng-template>
             </p-table>
@@ -767,7 +768,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-check" (click)="add_CategoriaEmpresa()" label="Guardar"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="add_CategoriaEmpresa()" label="Guardar" class="btneditar"></button>
     </div>
   </p-footer>
 </p-dialog>
@@ -787,7 +788,7 @@
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-check" (click)="add_areaEstudio()" label="Guardar"></button>
+      <button type="button" pButton icon="fa fa-check" (click)="add_areaEstudio()" label="Guardar" class="btneditar"></button>
     </div>
   </p-footer>
 </p-dialog>
