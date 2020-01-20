@@ -45,7 +45,7 @@ registerLocaleData(localeEsMx);
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
+  { path: 'menu', component: MenuComponent, canActivate: [CandidatoGuard] },
   { path: 'postulaciones', component: PostulacionesComponent, canActivate: [CandidatoGuard] },
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },

@@ -34,7 +34,15 @@ export class HeaderComponent implements OnInit {
         if (response.success)
         {
           this.currentUserService.setUsuarioActual(response.data);
-          this.router.navigateByUrl("/menu");
+
+          if (response.data.id_tipo_usuario == 2) // si es empresa
+          {
+            this.router.navigateByUrl("/vacantes");
+          }
+          else
+          {
+            this.router.navigateByUrl("/menu");
+          }
         }
         else if (response.code == 4011) {
           Swal.fire({

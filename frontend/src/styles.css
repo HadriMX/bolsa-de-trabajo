@@ -26,37 +26,40 @@ body {
 }
 
 .btn-primary {
-  background-color: #7A26D3;
-  border-color: #7A26D3;
+  background-color: #7a26d3;
+  border-color: #7a26d3;
 }
 .btn-primary:hover {
-  background-color: #5D0877;
-  border-color: #5D0877;
+  background-color: #5d0877;
+  border-color: #5d0877;
 }
+
 .btn-success {
   border: none;
 }
+
 .text-dark {
-  color: #5D0877 !important;
+  color: #5d0877 !important;
 }
-.page-link{
+
+.page-link {
   color: rgb(121, 24, 129) !important;
   border-radius: 16px;
   margin: 0px 2px 0px 2px;
 }
 
 .page-item.active .page-link {
-    background-color: rgb(121, 24, 129);
-    border-color: rgb(121, 24, 129);
-    color: white !important;
+  background-color: rgb(121, 24, 129);
+  border-color: rgb(121, 24, 129);
+  color: white !important;
 }
+
 .page-item.disabled .page-link {
   background-color: #e9ecef;
   border-color: #dee2e6;
 }
-
 .page-item.active .page-link:hover {
-    background-color: rgb(106, 22, 114);
-    border-color:  rgb(106, 22, 114);
-    color: white !important;
+  background-color: rgb(106, 22, 114);
+  border-color: rgb(106, 22, 114);
+  color: white !important;
 }

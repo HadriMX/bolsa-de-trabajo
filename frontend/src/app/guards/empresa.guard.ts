@@ -10,11 +10,14 @@ export class EmpresaGuardService implements CanActivate {
     constructor(public auth: CurrentUserService, public router: Router) { }
 
     canActivate(): boolean {
-        if (this.auth.haySesionAdminActiva() || this.auth.getUsuarioActual().id_tipo_usuario == 2) {
+        if (this.auth.haySesionAdminActiva() || this.auth.getUsuarioActual().id_tipo_usuario == 2)
             return true;
-        }
 
-        this.router.navigateByUrl('menu');
+        if (this.auth.getUsuarioActual().id_tipo_usuario == 2)
+            this.router.navigateByUrl("/vacantes");
+        else
+            this.router.navigateByUrl("/menu");
+
         return false;
     }
 }
