@@ -41,7 +41,7 @@ body {
 }
 .page-link{
   color: rgb(121, 24, 129) !important;
-  border-radius: 16px;
+  border-radius: 0px;
   margin: 0px 2px 0px 2px;
 }
 

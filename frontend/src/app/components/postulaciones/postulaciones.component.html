@@ -1,5 +1,4 @@
 <app-headertittle></app-headertittle>
-<html>
 <div id="body">
   <div class="container">
     <mat-tab-group id="mattab" dynamicHeight>
@@ -13,7 +12,54 @@
           </div>
         </div>
         <div *ngFor="let item of postulacionesPendientes" id="postulacionesContenedor" class="my-3 py-2">
-          <div id="postulacionesMenu" (click)="mostrarDetalleVacante(item,1)" data-toggle="modal"
+          <div id="postulacionesInfo" (click)="mostrarDetalleVacante(item,1)" data-toggle="modal"
+            data-target="#datosPostulacion">
+            <div class="row">
+              <div class="col-9">
+                <h6 style="color: rgb(121, 24, 129);">
+                  <strong>{{item.titulo_vacante}}</strong>
+                </h6>
+              </div>
+              <div class="col-3">
+                <h6 class="font-weight-bold">{{item.fecha_vacante | date: 'longDate'}}</h6>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
+                  <span class="font-weight-light text-muted">Te postulaste en {{item.fecha_postulacion}}</span> </h6>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
+                    class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <p class="d-sm-block">
+                  {{item.descripcion_puesto_plain_text | slice:0:190}}...
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Postulaciones Aceptadas">
+        <div *ngIf="postulacionesAceptadas.length === 0">
+          <div id="espacioNovacante">
+            <div id="espacioAviso">
+              <h4>Aún no tienes postulaciones aceptadas</h4>
+              <img src="/assets/warning.png" width="30%" height="30%" alt="">
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let item of postulacionesAceptadas" id="postulacionesContenedor" class="my-3 py-2">
+          <div id="postulacionesInfo" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"
             data-target="#datosPostulacion">
             <div class="row">
               <div class="col-9">
@@ -50,53 +96,6 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Postulaciones Aceptadas">
-        <div *ngIf="postulacionesAceptadas.length === 0">
-          <div id="espacioNovacante">
-            <div id="espacioAviso">
-              <h4>Aún no tienes postulaciones aceptadas</h4>
-              <img src="/assets/warning.png" width="30%" height="30%" alt="">
-            </div>
-          </div>
-        </div>
-        <div *ngFor="let item of postulacionesAceptadas" class="my-3 py-2">
-          <div id="vacantesmenu" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"
-            data-target="#datosPostulacion">
-            <div class="row">
-              <div class="col-9">
-                <h6 style="color: rgb(121, 24, 129);">
-                  <strong>{{item.titulo_vacante}}</strong>
-                </h6>
-              </div>
-              <div class="col-3">
-                <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
-                  <span class="font-weight-light text-muted">Te postulaste en {{item.fecha_postulacion}}</span> </h6>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
-                    class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
-                <p class="d-none d-sm-block">
-                  {{item.descripcion_puesto_plain_text | slice:0:190}}...
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
       <mat-tab label="Postulaciones Rechazadas">
         <div *ngIf="postulacionesRechazadas.length === 0">
           <div id="espacioNovacante">
@@ -106,8 +105,8 @@
             </div>
           </div>
         </div>
-        <div *ngFor="let item of postulacionesRechazadas" class="my-3 py-2">
-          <div id="vacantesmenu" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"
+        <div *ngFor="let item of postulacionesRechazadas" id="postulacionesContenedor" class="my-3 py-2">
+          <div id="postulacionesInfo" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"
             data-target="#datosPostulacion">
             <div class="row">
               <div class="col-9">
@@ -116,7 +115,7 @@
                 </h6>
               </div>
               <div class="col-3">
-                <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                <h6 class="font-weight-bold">{{item.fecha_vacante | date: 'longDate'}}</h6>
               </div>
             </div>
 
@@ -151,8 +150,6 @@
     </div>
   </div>
 </div>
-
-</html>
 
 <!--===============================================================================================-->
 <!-- Modal de los datos de los usuarios -->

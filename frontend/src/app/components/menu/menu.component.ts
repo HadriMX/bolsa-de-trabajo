@@ -207,18 +207,26 @@ export class MenuComponent implements OnInit, IAppPage {
 
     Swal.fire({
       title: '¿Estás seguro de postularte a esta vacante?',
-      type: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      focusConfirm: true,
+      confirmButtonColor: '#7A26D3',
+      cancelButtonColor: 'white',
+      cancelButtonText: 'No',
       confirmButtonText: 'Sí, postularme',
-      cancelButtonText: 'No'
+      reverseButtons: true
     }).then((result) => {
       if (result.value) {
         this.postulacionService.addPostulacion(id_vacante)
           .subscribe((response) => {
             if (response.success) {
-              Swal.fire("Exito", response.message, "success");
+              Swal.fire({
+                title: "Éxito", 
+                text: response.message,
+                type: "success",
+                focusConfirm: true,
+                confirmButtonText: "Jalate poes",
+                confirmButtonColor: '#7A26D3'
+              });
               this.busquedaVacantes();
               this.cerrarModales();
             }

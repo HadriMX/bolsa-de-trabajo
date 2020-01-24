@@ -117,12 +117,12 @@
                     <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
                         data-target="#datosvacantes">
                         <div class="row">
-                            <div class="col-9">
+                            <div class="col-lg-9 col-9">
                                 <h6 style="color: rgb(121, 24, 129);">
                                     <strong>{{item.titulo_vacante}}</strong>
                                 </h6>
                             </div>
-                            <div class="col-3">
+                            <div class="col-lg-3 col-3">
                                 <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <p class="d-none d-sm-block">
+                                <p class="d-sm-block">
                                     {{item.descripcion_puesto_plain_text | slice:0:190}}...
                                 </p>
                             </div>
@@ -161,14 +161,14 @@
                         <a class="page-link" (click)="setUrl(1)">Primera</a>
                     </li>
                     <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}">
-                        <a class="page-link" (click)="setUrl(pager.currentPage - 1)">&laquo;</a>
+                        <a class="page-link" (click)="setUrl(pager.currentPage - 1)">‹</a>
                     </li>
                     <li class="page-item" *ngFor="let page of pager.pages"
                         [ngClass]="{active:pager.currentPage == page}">
                         <a class="page-link" (click)="setUrl(page)">{{page}}</a>
                     </li>
                     <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
-                        <a class="page-link" (click)="setUrl(+pager.currentPage + 1)">&raquo;</a>
+                        <a class="page-link" (click)="setUrl(+pager.currentPage + 1)">›</a>
                     </li>
                     <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
                         <a class="page-link" (click)="setUrl(pager.totalPages)">Última</a>
