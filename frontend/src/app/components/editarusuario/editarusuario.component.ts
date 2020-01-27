@@ -40,8 +40,8 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     telefono: "",
     id_entidad_federativa: 0,
     id_municipio: 0,
-    id_ciudad: 0,
-    id_colonia: 0,
+    ciudad: "",
+    colonia: "",
     cp: "",
     calle: "",
     num_ext: "",
@@ -53,6 +53,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     pathCURRICULUM: "",
     id_tipo_usuario: 1
   }
+
   constructor(
     private entidadFederativaService: EntidadesFederativasService,
     private municipioService: MunicipioService,
@@ -82,8 +83,8 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   getMunicipios(){
     this.municipios = [];
     this.infoCandidato.id_municipio = 0;
-    this.infoCandidato.id_ciudad = 0;
-    this.infoCandidato.id_colonia = 0;
+    this.infoCandidato.ciudad = "";
+    this.infoCandidato.colonia = "";
     this.municipioService.getMunicipios(this.infoCandidato.id_entidad_federativa)
       .subscribe((response) => {
         if (response.success) {
@@ -94,22 +95,6 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
         }
       });
   }
-
-  // getCiudades(){
-  //   this.ciudades = [];
-  //   this.infoCandidato.id_ciudad = 0;
-  //   this.infoCandidato.id_colonia = 0;
-  //   this.ciudadService.getCiudades(this.infoCandidato.id_entidad_federativa,this.infoCandidato.id_municipio)
-  //     .subscribe((response) => {
-  //       if (response.success) {
-  //         this.ciudades = response.data;
-  //         // console.log(this.ciudades);
-  //       }
-  //       else {
-  //         Swal.fire("Error", response.message, 'error');
-  //       }
-  //     });
-  // }
 
   getAreas() {
     this.areaService.get_areasMenu()

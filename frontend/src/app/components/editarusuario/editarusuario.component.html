@@ -25,29 +25,29 @@
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 col-12">
             <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" class="form-control" type="text" placeholder="Ej. Luis Antonio"
-                autocomplete="off" [(ngModel)]="infoCandidato.nombre">
+            <input id="nombre" name="nombre" class="form-control" type="text" placeholder=""
+                autocomplete="off" [(ngModel)]="infoCandidato.nombre" disabled>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-12">
             <label for="apellido1">Primer Apellido</label>
-            <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder="Ej. Hernandez"
-                autocomplete="off" [(ngModel)]="infoCandidato.apellido1">
+            <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder=""
+                autocomplete="off" [(ngModel)]="infoCandidato.apellido1" disabled>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-            <label for="apellido2">Segundo Apellido*</label>
-            <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder="Ej. García"
-                autocomplete="off" [(ngModel)]="infoCandidato.apellido2">
+            <label for="apellido2">Segundo Apellido</label>
+            <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder=""
+                autocomplete="off" [(ngModel)]="infoCandidato.apellido2" disabled>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="fechaNacimiento">Fecha de Nacimiento</label>
-            <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off" [(ngModel)]="infoCandidato.fecha_nacimiento">
+            <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off" [(ngModel)]="infoCandidato.fecha_nacimiento" disabled>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="genero">Género</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero">
+                <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero" disabled>
                     <option value="0" selected disabled>Seleccione el género</option>
                     <option value="Hombre">Masculino</option>
                     <option value="Mujer">Femenino</option>
