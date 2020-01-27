@@ -17,7 +17,7 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" routerLink="/menu">Menú principal</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario != 2" class="dropdown-item" routerLink="/menu">Menú principal</a>
           <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" routerLink="/administracion">Menú
             administrativo</a>
           <a *ngIf="usuarioActual.id_tipo_usuario != 0" class="dropdown-item" routerLink="/editarusuario">Información de
