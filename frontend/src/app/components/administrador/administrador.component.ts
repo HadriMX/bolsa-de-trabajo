@@ -87,6 +87,7 @@ export class AdministradorComponent implements OnInit {
   columnasArea: any[];
   columnasCandidato: any[];
   columnasEmpresa: any[];
+  columnasSolicitud: any[];
   clonCategoria: { [s: string]: Cat_empresa; } = {};
   clonArea: { [s: string]: Area } = {};
 
@@ -177,6 +178,12 @@ export class AdministradorComponent implements OnInit {
       { field: 'telefono', header: 'Teléfono' },
       { field: 'nombre_persona_contacto', header: 'Persona contacto' },
       { field: 'status', header: 'Estatus' }
+    ]
+
+    this.columnasSolicitud=[
+      {field: 'candidato',header:'Candidato'},
+      {field: 'edad', header: 'Edad'},
+      {field: 'genero', header:'Genero'},
     ]
 
     this.estatus = [

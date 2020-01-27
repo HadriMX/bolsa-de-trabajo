@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900');
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700,900");
 
 .dropdown-content {
   display: none;
@@ -99,7 +99,7 @@ th.mat-sort-header-sorted {
   margin-block-end: 1%;
 }
 
-@media (max-width:574px) {
+@media (max-width: 574px) {
   .btn {
     margin-block-start: 5%;
     margin-left: 2%;
@@ -107,7 +107,7 @@ th.mat-sort-header-sorted {
   }
 }
 
-@media (min-width:576px) and (max-width:963px) {
+@media (min-width: 576px) and (max-width: 963px) {
   .btn {
     margin-block-start: 40%;
     width: 100%;
@@ -163,21 +163,6 @@ a.fromLeft:after {
   border-radius: 20px;
 }
 
-.abc-datatable .ui-paginator {
-  margin: 0px;
-  padding: 0px !important;
-  background-color: #F5B52C;
-  border-radius: 1px;
-}
-
-th {
-  background-color: brown;
-}
-
-ui-paginator {
-  background-color: purple;
-}
-
 .btneditar {
   background-color: #791881;
   border-color: #791881;
@@ -185,7 +170,6 @@ ui-paginator {
 
 :host::ng-deep .ui-table .ui-sortable-column.ui-state-highlight {
   background-color: #791881;
-
 }
 
 :host::ng-deep.ui-button:enabled:hover {
@@ -202,30 +186,45 @@ ui-paginator {
   box-shadow: 0 0 0 0.2em #45003a;
 }
 
-
 :host::ng-deep .ui-button:enabled:active {
   background-color: #45003a;
   color: #ffffff;
   border-color: #45003a;
 }
 
-:host::ng-deep .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+:host::ng-deep
+  .ui-paginator
+  .ui-paginator-pages
+  .ui-paginator-page.ui-state-active {
   background-color: #791881;
   color: #ffffff;
 }
 
-:host::ng-deep .ui-paginator .ui-paginator-pages .ui-paginator-page:not(.ui-state-active):hover {
+:host::ng-deep
+  .ui-paginator
+  .ui-paginator-pages
+  .ui-paginator-page:not(.ui-state-active):hover {
   background-color: #bb26c7;
   color: #333333;
 }
 
-:host::ng-deep .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item.ui-state-highlight,
-body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-highlight {
+:host__ng-deep .ui-datatable table {
+  table-layout: auto;
+}
+
+:host::ng-deep
+  .ui-dropdown-panel
+  .ui-dropdown-items
+  .ui-dropdown-item.ui-state-highlight,
+body
+  .ui-dropdown-panel
+  .ui-dropdown-items
+  .ui-dropdown-item-group.ui-state-highlight {
   color: #ffffff;
   background-color: #791881;
 }
 
-@media (max-width:1000px) and (min-width:320px) {
+@media (max-width: 1000px) and (min-width: 320px) {
   h4 {
     margin-left: 1%;
   }
@@ -279,7 +278,6 @@ body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-high
   transition: all 250ms ease-in-out;
   backface-visibility: hidden;
   transform-style: preserve-3d;
-
 }
 
 #input::placeholder {
@@ -335,7 +333,7 @@ body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item-group.ui-state-high
 }
 
 @media screen and (max-width: 620px) {
-  .searchBox:hover>.searchInput {
+  .searchBox:hover > .searchInput {
     width: 150px;
     padding: 0 6px;
   }
