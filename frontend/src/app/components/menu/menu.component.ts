@@ -121,7 +121,7 @@ export class MenuComponent implements OnInit, IAppPage {
     }
 
     // get pager object from service
-    this.pager = this.PaginacionService.getPager(this.allItems.length, page, 1);
+    this.pager = this.PaginacionService.getPager(this.allItems.length, page, 20);
 
     // setear pagina actual en el url
     if (this.pager.currentPage >= this.pager.totalPages + 1) { //si se sale del limite

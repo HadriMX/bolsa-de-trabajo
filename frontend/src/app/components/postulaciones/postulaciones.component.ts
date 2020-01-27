@@ -12,6 +12,10 @@ import { Vacante } from 'src/app/models/vacantes';
 })
 export class PostulacionesComponent implements OnInit {
 
+  public showFooter = true;
+  public goTopEnabled = true;
+  public goTop = function() { };
+  
   postulacionesPendientes: Postulacion[] = [];
   postulacionesAceptadas: Postulacion[] = [];
   postulacionesRechazadas: Postulacion[] = [];
