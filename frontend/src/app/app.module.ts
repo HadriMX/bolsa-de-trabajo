@@ -40,18 +40,20 @@ import {DropdownModule} from 'primeng/dropdown';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 registerLocaleData(localeEsMx);
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
+  { path: 'menu', component: MenuComponent, canActivate: [CandidatoGuard] },
   { path: 'postulaciones', component: PostulacionesComponent, canActivate: [CandidatoGuard] },
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
   { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
   { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
+  { path: 'registro', component: RegistroComponent },
   { path: '**', redirectTo: '/login' }
 ];
 
@@ -69,7 +71,8 @@ const routes: Routes = [
     VerificacionComponent,
     JwPaginationComponent,
     LoadingComponent,
-    RegistrarVacanteComponent
+    RegistrarVacanteComponent,
+    RegistroComponent
   ],
   imports: [
     FormsModule,

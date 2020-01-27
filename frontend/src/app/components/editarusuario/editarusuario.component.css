@@ -1,41 +1,45 @@
-#titulo{
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #404044;
+#titulo {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #404044;
 }
-label{
-    font-size: 15px;
-    font-weight: 400;
-    color: #404044;
+label {
+  font-size: 15px;
+  font-weight: 400;
+  color: #404044;
 }
-input{
-    font-size: 15px;
-    margin-bottom: 10px;
+input {
+  font-size: 15px;
+  margin-bottom: 10px;
 }
-select{
-    font-size: 15px;
-    margin-bottom: 10px;
+select {
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 /* Custom dropdown */
 .custom-dropdown {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-  }
-  
-  .custom-dropdown select {
-    font-size: inherit;
-    width: 100%;
-    padding: 0.5em;
-    padding-right: 2.5em;
-    margin: 0;
-    border-radius: 3px;
-    text-indent: 0.01px;
-    text-overflow: "";
-    -webkit-appearance: button; /* hide default arrow in chrome OSX */
-  }  
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.custom-dropdown select {
+  font-size: inherit;
+  width: 100%;
+  padding: 0.5em;
+  padding-right: 2.5em;
+  margin: 0;
+  border-radius: 3px;
+  text-indent: 0.01px;
+  text-overflow: "";
+  -webkit-appearance: none; /* hide default arrow in chrome OSX */
+  -moz-appearance: none; /* Mozilla */
+  -o-appearance: button; /* Opera */
+  -ms-appearance: button; /* Internet Explorer */
+  appearance: none; /* CSS3 */
+}
 .custom-dropdown::before,
 .custom-dropdown::after {
   content: "";
@@ -65,11 +69,11 @@ select{
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.input-group{
-    margin-bottom: 20px;
+.input-group {
+  margin-bottom: 20px;
 }
-#inputFile{
-    height: 37px;
+#inputFile {
+  height: 37px;
 }
 #boton3:hover{
     background:rgb(77, 16, 83);
@@ -181,8 +185,8 @@ select{
   #reglon {
     margin-block-start: 2%;
   } */
-  /* aqui comienza el diseño de los titulos de datos del usuario y laborales  */
-  /* Basic styles */
+/* aqui comienza el diseño de los titulos de datos del usuario y laborales  */
+/* Basic styles */
 /* *,
 *::before,
 *::after {
