@@ -3,6 +3,8 @@ export class Solicitudes{
     telefono:string;
     email:string;
     genero:string;
-    nombre:string;
-    fech_nac:string;
+    candidato:string;
+    edad:number;
+    escolaridad:string;
+    rutaCV:string;
 }

@@ -315,17 +315,17 @@
                 </td>
                 <td style="text-align: center;">
                   <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
-                    (click)="aceptarSolicitud(datos_solicitud.id_usuario)"></button>
+                    (click)="detalleSolicitud(datos_solicitud);aceptarCandidato(infoSolicitud[0].id_usuario)"></button>
                 </td>
                 <td style="text-align: center;">
                   <button pButton type="button" icon="pi pi-times" class="ui-button-danger"  style="margin-right: .5em"
-                  (click)="rechazarSolicitud(datos_solicitud.id_usuario)"></button>
+                  (click)="detalleSolicitud(datos_solicitud);rechazarCandidato(infoSolicitud[0].id_usuario)"></button>
                 </td>
               </tr>
             </ng-template>
             <ng-template pTemplate="rowexpansion" let-rowData let-columnas="columnasSolicitud">
               <tr>
-                <td [attr.colspan]="columnasSolicitud.length + 1">
+                <td [attr.colspan]="columnasSolicitud.length + 3">
                   <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
                     <div class="ui-g-12 ui-md-9">
                       <div class="ui-g">

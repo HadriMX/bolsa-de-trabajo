@@ -108,4 +108,42 @@ class Candidato
 
         return $output;
     }
+
+    public static function aceptarCandidato(int $id_usuario){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("UPDATE usuarios SET estatus='I' where id_usuario = ?");
+        $stmt->bind_param('i',$id_usuario);
+        $stmt->execute();
+        
+        if ($stmt->affected_rows > 0) {
+            $output=new SuccessResult("Candidato aceptado", true);
+            
+        } else {
+            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
+
+    public static function rechazarCandidato(int $id_usuario){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("UPDATE usuarios SET estatus='R' where id_usuario = ?");
+        $stmt->bind_param('i',$id_usuario);
+        $stmt->execute();
+        
+        if ($stmt->affected_rows > 0) {
+            $output=new SuccessResult("Candidato rechazado", true);
+            
+        } else {
+            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
+
+
 }
