@@ -16,6 +16,7 @@ export class CandidatoService {
   private endpointUrlGetCandidatos = 'http://localhost/bdt/php/src/candidato/get_candidato.php';
   private endpointUrlDeleteCandidato = 'http://localhost/bdt/php/src/candidato/delete_candidato.php';
   private endpointUrlReactivarCandidato= 'http://localhost/bdt/php/src/candidato/reactivar_candidato.php';
+  private endpointUrlGetCandidatoInfoCompleta = "http://localhost/bdt/php/src/candidato/get_candidatoInfoCompleta.php"
 
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
@@ -31,4 +32,9 @@ export class CandidatoService {
   reactivar_candidato(id_usuario): Observable<ApiResponse<Candidato>> {
     return this.http.post<ApiResponse<Candidato>>(this.endpointUrlReactivarCandidato, id_usuario, this.httpOptions);
   }
+
+  get_candidatosInfoCompleta(): Observable<ApiResponse<Candidato>>{
+    return this.http.get<ApiResponse<Candidato>>(this.endpointUrlGetCandidatoInfoCompleta, this.httpOptions);
+  }
+
 }

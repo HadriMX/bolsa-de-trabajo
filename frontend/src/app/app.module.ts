@@ -41,6 +41,7 @@ import { VerificacionComponent } from './components/verificacion/verificacion.co
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { OnlyNumber } from './directivas/only-number.directive';
 
 registerLocaleData(localeEsMx);
 
@@ -72,7 +73,8 @@ const routes: Routes = [
     JwPaginationComponent,
     LoadingComponent,
     RegistrarVacanteComponent,
-    RegistroComponent
+    RegistroComponent,
+    OnlyNumber
   ],
   imports: [
     FormsModule,

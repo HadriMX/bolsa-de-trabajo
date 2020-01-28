@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
 import { IAppPage } from 'src/app/interfaces/app-page';
 import { EntidadesFederativasService } from 'src/app/services/entidades-federativas.service';
 import { EntidadFederativa } from 'src/app/models/entidadFederativa';
@@ -12,6 +12,8 @@ import { AreaService } from 'src/app/services/area.service';
 import { GradoEstudio } from 'src/app/models/gradoEstudio';
 import { GradoEstudioService } from 'src/app/services/grado-estudio.service';
 import { Candidato } from 'src/app/models/candidato';
+import { CandidatoGuardService } from 'src/app/guards/candidato.guard';
+import { CandidatoService } from 'src/app/services/candidato.service';
 
 @Component({
   selector: 'app-editarusuario',
@@ -19,7 +21,7 @@ import { Candidato } from 'src/app/models/candidato';
   styleUrls: ['./editarusuario.component.css']
 })
 export class EditarusuarioComponent implements OnInit, IAppPage {
-  
+
   showFooter = true;
   goTopEnabled = true;
   goTop?: Function;
@@ -30,7 +32,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   // ciudades: Ciudad[] = [];
   areas: Area[] = [];
   gradosEstudio: GradoEstudio[] = [];
-  
+
   infoCandidato: Candidato = {
     nombre: "",
     apellido1: "",
@@ -58,13 +60,16 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     private entidadFederativaService: EntidadesFederativasService,
     private municipioService: MunicipioService,
     private areaService: AreaService,
-    private gradoEstudioService: GradoEstudioService ) {
+    private gradoEstudioService: GradoEstudioService,
+    private candidatoService: CandidatoService) {
   }
 
   ngOnInit() {
+    
     this.getEntidadesFederativas();
     this.getAreas();
     this.getGradosEstudio();
+    this.getInfoUsuario();
   }
 
   getEntidadesFederativas() {
@@ -80,12 +85,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  getMunicipios(){
-    this.municipios = [];
+  getMunicipios(id_entidad) {
     this.infoCandidato.id_municipio = 0;
-    this.infoCandidato.ciudad = "";
-    this.infoCandidato.colonia = "";
-    this.municipioService.getMunicipios(this.infoCandidato.id_entidad_federativa)
+    this.municipioService.getMunicipios(id_entidad)
       .subscribe((response) => {
         if (response.success) {
           this.municipios = response.data;
@@ -120,7 +122,21 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  guardarCambios(){
+  getInfoUsuario() {
+    this.candidatoService.get_candidatosInfoCompleta()
+      .subscribe((response) => {
+        if (response.success) {
+          // console.log(this.infoCandidato);
+          this.infoCandidato = response.data;
+          this.getMunicipios(this.infoCandidato.id_entidad_federativa);
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  guardarCambios() {
     console.log(this.infoCandidato);
   }
 

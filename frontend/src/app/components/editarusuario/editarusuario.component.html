@@ -49,16 +49,16 @@
             <span class="custom-dropdown">
                 <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero" disabled>
                     <option value="0" selected disabled>Seleccione el género</option>
-                    <option value="Hombre">Masculino</option>
-                    <option value="Mujer">Femenino</option>
-                    <option value="Otro">Otro</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                    <option value="O">Otro</option>
                 </select>
             </span>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="telefono">Teléfono</label>
             <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
-                autocomplete="off" [(ngModel)]="infoCandidato.telefono">
+                autocomplete="off" [(ngModel)]="infoCandidato.telefono" OnlyNumber="true" maxlength="12">
         </div>
         
     </div>
@@ -70,7 +70,7 @@
         <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="estado">Entidad Federativa</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="estado" id="estado" [(ngModel)]="infoCandidato.id_entidad_federativa" (change)="getMunicipios()">
+                <select class="form-control" name="estado" id="estado" [(ngModel)]="infoCandidato.id_entidad_federativa" disabled>
                     <option value="0" selected disabled>Seleccione la entidad federativa</option>
                     <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">{{entidad.nombre}}</option>
                 </select>
@@ -98,7 +98,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="codigoPostal">Codigo Postal</label>
             <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. 81271" [(ngModel)]="infoCandidato.cp">
+                placeholder="Ej. 81271" [(ngModel)]="infoCandidato.cp" OnlyNumber="true" maxlength="5">
         </div>
         <div class="col-lg-8 col-md-6 col-sm-12 col-12">
             <label for="calle">Calle</label>
@@ -108,7 +108,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12 col-12">
             <label for="numExterior">Numero Exterior</label>
             <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. 856" [(ngModel)]="infoCandidato.num_ext">
+                placeholder="Ej. 856" [(ngModel)]="infoCandidato.num_ext" OnlyNumber="true" maxlength="6">
         </div>
     </div>
 
@@ -119,7 +119,7 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
             <label for="nivelEstudios">Ultimo Nivel de Estudios</label>
             <span class="custom-dropdown">
-                <select class="form-control" name="nivelEstudios" id="nivelEstudios" [(ngModel)]="infoCandidato.id_grado_estudio">
+                <select class="form-control" name="nivelEstudios" id="nivelEstudios" [(ngModel)]="infoCandidato.id_grado_estudios" disabled>
                     <option value="0" selected disabled>Seleccione un nivel de estudios</option>
                     <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}</option>
                 </select>

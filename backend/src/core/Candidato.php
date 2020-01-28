@@ -71,6 +71,19 @@ class Candidato
         return new SuccessResult("",$r);
     }
 
+    public static function get_candidatosInfoCompleta(int $id_usuario){
+        $db = new Db();
+        $conn = $db->getConn();
+        
+        $stmt = $conn->prepare("SELECT * FROM bdt_bd.candidatos WHERE id_usuario = ?");
+        $stmt->bind_param('i', $id_usuario);
+        $stmt->execute();
+
+        $stmt->execute();
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("",$r[0]);
+    }
+
     public static function delete(int $id_usuario){
         $db = new Db();
         $conn = $db->getConn();
