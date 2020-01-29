@@ -432,7 +432,7 @@ export class AdministradorComponent implements OnInit {
   reactivarCandidato(id) {
     this.swalWithBootstrapButtons
       .fire({
-        title: "¿Deseas la cuenta del candidato?",
+        title: "¿Deseas reactivar la cuenta del candidato?",
         text: "La cuenta tendra acceso al sistema",
         type: "question",
         showCancelButton: true,

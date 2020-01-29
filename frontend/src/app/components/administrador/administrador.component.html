@@ -66,7 +66,7 @@
 
 <div class="container">
   <div *ngIf="estado===7">
-    <div style="margin-left: 10%; margin-right: 10%; margin-top: 1%;">
+    <div style="margin-top: 1%;">
 
 
 
@@ -143,7 +143,7 @@
 <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
 <div class="container">
   <div *ngIf="estado === 1">
-    <div style="margin-left: 10%; margin-right: 10%; margin-top: 1%;">
+    <div style="margin-top: 1%;">>
       <p-table #dt [value]="datosCategoria" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
         [globalFilterFields]="['nombre_empresa']" editMode="row" dataKey="id_tipo_empresa" [responsive]="true">
         <ng-template pTemplate="caption">
@@ -211,7 +211,7 @@
 <!-- En esta parte comienza la configuracion de areas de estudio -->
 <div class="container">
   <div *ngIf="estado === 2">
-    <div style="margin-left: 10%; margin-right: 10%; margin-top: 1%;">
+    <div style="margin-top: 1%;">>
       <p-table #dt [value]="datosArea" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
         [globalFilterFields]="['nombre']" editMode="row" dataKey="id_area_estudio" [responsive]="true">
 
@@ -281,7 +281,7 @@
 <!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
 <div class="container">
   <div *ngIf="estado === 3">
-    <div style="margin-left: 10%; margin-right: 10%; margin-top: 1%;">
+    <div style="margin-top: 1%;">
       <p-table #dtSolicitdudes [columns]="columnasSolicitud" [value]="datos_solicitud" dataKey="id_candidato"
         [paginator]="true" [rowsPerPageOptions]="[20,30,50]" [rows]="10"
         [globalFilterFields]="['candidato','telefono','email']">
@@ -352,7 +352,7 @@
 <!-- En esta parte comienza la configuracion de los candidatos registrados -->
 <div class="container">
   <div *ngIf="estado === 4">
-    <div style="margin-left: 10%; margin-right: 10%; margin-top: 1%;">
+    <div style="margin-top: 1%;">
       <div class="col-lg-6 col-sm-4 col-5">
         <div class="form-check" style="margin-block-start: 2%;">
           <input class="form-check-input" type="radio" name="filtroUsuarios" id="radioButtonUsuariosActivos"
@@ -436,7 +436,7 @@
 <!-- En esta parte comienza la configuracion de las empresas registradas -->
 <div class="container">
   <div *ngIf="estado === 5">
-    <div style="margin-left: 10%; margin-right: 10%; margin-top: 1%;">
+    <div style="margin-top: 1%;">
 
       <div class="col-lg-6 col-sm-4 col-5">
         <div class="form-check" style="margin-block-start: 2%;">
