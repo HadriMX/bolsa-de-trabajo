@@ -1,3 +1,5 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { IAppPage } from 'src/app/interfaces/app-page';
 import { EntidadesFederativasService } from 'src/app/services/entidades-federativas.service';
@@ -19,7 +21,7 @@ import { Candidato } from 'src/app/models/candidato';
   styleUrls: ['./editarusuario.component.css']
 })
 export class EditarusuarioComponent implements OnInit, IAppPage {
-  
+
   showFooter = true;
   goTopEnabled = true;
   goTop?: Function;
@@ -30,7 +32,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   // ciudades: Ciudad[] = [];
   areas: Area[] = [];
   gradosEstudio: GradoEstudio[] = [];
-  
+
+  uploadForm: FormGroup; 
+
   infoCandidato: Candidato = {
     nombre: "",
     apellido1: "",
@@ -53,14 +57,21 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     pathCURRICULUM: "",
     id_tipo_usuario: 1
   }
+
   constructor(
     private entidadFederativaService: EntidadesFederativasService,
     private municipioService: MunicipioService,
     private areaService: AreaService,
-    private gradoEstudioService: GradoEstudioService ) {
+    private gradoEstudioService: GradoEstudioService,
+    private formBuilder: FormBuilder,
+    private httpClient: HttpClient /* TODO: Mover a un servicio */) {
   }
 
   ngOnInit() {
+    this.uploadForm = this.formBuilder.group({
+      profile: ['']
+    });
+
     this.getEntidadesFederativas();
     this.getAreas();
     this.getGradosEstudio();
@@ -79,7 +90,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  getMunicipios(){
+  getMunicipios() {
     this.municipios = [];
     this.infoCandidato.id_municipio = 0;
     this.infoCandidato.id_ciudad = 0;
@@ -135,8 +146,26 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  guardarCambios(){
+  guardarCambios() {
     console.log(this.infoCandidato);
+  }
+
+  onFileSelect(event) {
+    console.log(event);
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.get('profile').setValue(file);
+    }
+  }
+
+  onSubmit() {
+    const formData = new FormData();
+    formData.append('archivo', this.uploadForm.get('profile').value);
+
+    this.httpClient.post<any>("http://localhost/bdt/php/src/upload_file.php?phpsessid=ti7b5v6f5bgqn3pd64di7pjq57&rename=curriculum.docx&no_replace=true", formData).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
   }
 
 }
