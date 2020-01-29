@@ -81,8 +81,8 @@ export class AdministradorComponent implements OnInit {
     edad:0,
     genero:''
   };
-  auxNombreCategoira;
-  isLoading = false;
+  accion;
+  loading = false;
   datosCategoria = [];
   datosArea = [];
   datosCandidato = [];
@@ -93,7 +93,7 @@ export class AdministradorComponent implements OnInit {
   estadoimagen = false;
   displayDialogCategoria: boolean;
   displayDialogArea: boolean;
-  activo: boolean = true;
+  activos: boolean = true;
   inactivo: boolean = false;
   usuario:boolean;
   btncerrar_area: boolean;
@@ -142,7 +142,9 @@ export class AdministradorComponent implements OnInit {
 
   swalWithBootstrapButtons = Swal.mixin({
     customClass: {},
-    buttonsStyling: true
+    buttonsStyling: true,
+    confirmButtonColor: "#7A26D3",
+        cancelButtonColor: "white"
   });
 
   // variales para las vacantes
@@ -267,27 +269,39 @@ export class AdministradorComponent implements OnInit {
 
   getCategorias() {
     this.categoriaService.get_categoriasAdmin().subscribe(response => {
-      this.isLoading = true;
       if (response.success) {
         this.datosCategoria = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
-      this.isLoading = false;
     });
   }
 
   getCandidatos(estatus: string) {
+    this.datosCandidato=null;
+    if(estatus==='Alta'){
+      this.activos=true
+    }else{
+      this.activos=false;
+    }
     this.candidatoService.get_candidatos(estatus).subscribe(response => {
+      this.loading=true;
       if (response.success) {
         this.datosCandidato = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
+      this.loading=false;
     });
   }
 
   getEmpresas(estatus: string) {
+    this.datosEmpresa=null;
+    if(estatus==='Alta'){
+      this.activos=true
+    }else{
+      this.activos=false;
+    }
     this.empresaService.get_empresas(estatus).subscribe(response => {
       if (response.success) {
         this.datosEmpresa = response.data;
@@ -373,8 +387,6 @@ export class AdministradorComponent implements OnInit {
         showCancelButton: true,
         confirmButtonText: "Si",
         cancelButtonText: "No",
-        confirmButtonColor: "#7A26D3",
-        cancelButtonColor: "white"
       })
       .then(result => {
         if (result.value) {
@@ -400,8 +412,6 @@ export class AdministradorComponent implements OnInit {
         showCancelButton: true,
         confirmButtonText: "Si",
         cancelButtonText: "No",
-        confirmButtonColor: "#7A26D3",
-        cancelButtonColor: "white"
       })
       .then(result => {
         if (result.value) {
@@ -422,9 +432,9 @@ export class AdministradorComponent implements OnInit {
   reactivarCandidato(id) {
     this.swalWithBootstrapButtons
       .fire({
-        title: "¿Deseas reactivar el usuario?",
+        title: "¿Deseas la cuenta del candidato?",
         text: "La cuenta tendra acceso al sistema",
-        type: "warning",
+        type: "question",
         showCancelButton: true,
         confirmButtonText: "Si",
         cancelButtonText: "No"
@@ -447,9 +457,9 @@ export class AdministradorComponent implements OnInit {
   reactivarEmpresa(id) {
     this.swalWithBootstrapButtons
       .fire({
-        title: "¿Deseas reactivar el usuario?",
+        title: "¿Deseas reactivar la cuenta de la empresa?",
         text: "La cuenta tendra acceso al sistema",
-        type: "warning",
+        type: "question",
         showCancelButton: true,
         confirmButtonText: "Si",
         cancelButtonText: "No"
@@ -470,12 +480,12 @@ export class AdministradorComponent implements OnInit {
   }
 
   //METODOS CRUD (D)
-  deleteCandidato(id) {
+  desactivarCandidato(id) {
     this.swalWithBootstrapButtons
       .fire({
-        title: "¿Deseas eliminar el usuario?",
-        text: "La cuenta del usuario quedará inhabilitada",
-        type: "warning",
+        title: "¿Deseas desactivar la cuenta?",
+        text: "El candidato no tendra acceso al sistema",
+        type: "question",
         showCancelButton: true,
         confirmButtonText: "Si",
         cancelButtonText: "No"
@@ -495,12 +505,12 @@ export class AdministradorComponent implements OnInit {
       });
   }
 
-  deleteEmpresa(id) {
+  desactivarEmpresa(id) {
     this.swalWithBootstrapButtons
       .fire({
-        title: "¿Deseas eliminar el usuario?",
+        title: "¿Deseas desactivar la cuenta de la empresa?",
         text: "La cuenta del usuario quedará inhabilitada",
-        type: "warning",
+        type: "question",
         showCancelButton: true,
         confirmButtonText: "Si",
         cancelButtonText: "No"
@@ -654,19 +664,25 @@ export class AdministradorComponent implements OnInit {
         this.estadoimagen = false;
         this.estado = 6;
       }
-    } else {
-      if (this.estadoimagen === true) {
-        this.estadoimagen = false;
+    } else if(numero==7){
+      if (this.estado===7){
+        this.estado=0;
         $("#Auxiliares").css("border-bottom", "transparent");
-      } else {
-        $(
-          "#usuarios,#usuariosactivos,#areas,#categoriaboton,#vacantesadmin"
-        ).css("border-bottom", "transparent");
+      } else{
+        $("#usuarios,#areas,#categoriaboton,#usuariosactivos,#vacantesadmin").css(
+          "border-bottom",
+          "transparent"
+        );
         $("#Auxiliares").css("border-bottom", "1px solid white");
-        this.estadoimagen = true;
-        this.estado = 0;
+        this.estadoimagen=false;
+        this.estado=7;
       }
+
     }
+    
+    
+    
+ 
   }
   inputeffec() {
     if (this.inputbooleano === false) {

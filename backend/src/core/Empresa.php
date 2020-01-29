@@ -25,7 +25,7 @@ class Empresa
         $stmt->execute();
         
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("El usuario ha sido eliminado", true);
+            $output = new SuccessResult("La cuenta de la empresa ha sido desactivada", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
@@ -44,7 +44,7 @@ class Empresa
         $stmt->execute();
         
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("El usuario ha sido activado", true);
+            $output = new SuccessResult("La cuenta de la empresa ha sido activada nuevamente", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }

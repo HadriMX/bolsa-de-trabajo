@@ -80,7 +80,7 @@ class Candidato
         $stmt->execute();
         
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("El usuario ha sido eliminado", true);
+            $output = new SuccessResult("La cuenta del candidato ha sido desactivada", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
@@ -99,7 +99,7 @@ class Candidato
         $stmt->execute();
         
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("El usuario ha sido activado", true);
+            $output = new SuccessResult("La cuenta del candidato ha sido activada nuevamente", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }

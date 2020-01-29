@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -37,6 +37,10 @@ import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
+import {PanelModule} from 'primeng/panel';
+import {ToastModule} from 'primeng/toast';
+import {MessageModule} from 'primeng/message';
+import {PasswordModule} from 'primeng/password';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
@@ -76,6 +80,7 @@ const routes: Routes = [
   ],
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
@@ -97,7 +102,11 @@ const routes: Routes = [
     TableModule,
     DialogModule,
     ButtonModule,
+    PanelModule,
+    ToastModule,
+    PasswordModule,
     InputTextModule,
+    MessageModule,
     DropdownModule
   ],
   exports: [
