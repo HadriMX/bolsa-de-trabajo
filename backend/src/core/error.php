@@ -1,6 +1,7 @@
 <?php
 
-class ErrorResult {
+class ErrorResult
+{
     public $message;
     public $code;
     public $success;
