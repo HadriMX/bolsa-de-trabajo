@@ -14,6 +14,8 @@ import { GradoEstudioService } from 'src/app/services/grado-estudio.service';
 import { Candidato } from 'src/app/models/candidato';
 import { CandidatoGuardService } from 'src/app/guards/candidato.guard';
 import { CandidatoService } from 'src/app/services/candidato.service';
+import { Usuario } from 'src/app/models/usuario';
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 @Component({
   selector: 'app-editarusuario',
@@ -25,11 +27,12 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   showFooter = true;
   goTopEnabled = true;
   goTop?: Function;
+  isLoading = true;
 
   // getters
   entidadesFederativas: EntidadFederativa[] = [];
   municipios: Municipio[] = [];
-  // ciudades: Ciudad[] = [];
+  usuarioActual: Usuario;
   areas: Area[] = [];
   gradosEstudio: GradoEstudio[] = [];
 
@@ -61,11 +64,12 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     private municipioService: MunicipioService,
     private areaService: AreaService,
     private gradoEstudioService: GradoEstudioService,
-    private candidatoService: CandidatoService) {
+    private candidatoService: CandidatoService,
+    private currentUserService: CurrentUserService) {
   }
 
   ngOnInit() {
-    
+    this.usuarioActual = this.currentUserService.getUsuarioActual();
     this.getEntidadesFederativas();
     this.getAreas();
     this.getGradosEstudio();
@@ -126,17 +130,32 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     this.candidatoService.get_candidatosInfoCompleta()
       .subscribe((response) => {
         if (response.success) {
-          // console.log(this.infoCandidato);
           this.infoCandidato = response.data;
           this.getMunicipios(this.infoCandidato.id_entidad_federativa);
         }
         else {
           Swal.fire("Error", response.message, 'error');
         }
+        this.isLoading = false;
       });
   }
 
   guardarCambios() {
+    // this.candidatoService.guardarInfoCandidato(this.infoCandidato)
+    // .subscribe((response)=> {
+    //   if(response.success){
+    //     Swal.fire({
+    //       title: "Éxito", 
+    //       text: response.message,
+    //       type: "success",
+    //       focusConfirm: true,
+    //       confirmButtonText: "Jalate poes",
+    //       confirmButtonColor: '#7A26D3'
+    //     });
+    //   }else{
+    //     Swal.fire("Error", response.message, 'error');
+    //   }
+    // });
     console.log(this.infoCandidato);
   }
 

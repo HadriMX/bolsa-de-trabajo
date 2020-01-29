@@ -80,7 +80,8 @@
                     <button id="limpiar" class="btn btn-outline-secondary form-control" (click)="limpiarFiltros()">
                         LIMPIAR FILTROS
                     </button>
-                    <button id="limpiar-short" class="btn btn-outline-secondary form-control" (click)="limpiarFiltros()">
+                    <button id="limpiar-short" class="btn btn-outline-secondary form-control"
+                        (click)="limpiarFiltros()">
                         LIMPIAR
                     </button>
                 </div>
@@ -129,14 +130,16 @@
 
                         <div class="row">
                             <div class="col">
-                                <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)
+                                <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}}
+                                    MXN)
                                 </h6>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
-                                <h6 class="font-weight-bold">{{item.entidad_federativa}} <span class="font-weight-light text-muted" >|</span> {{item.area_estudio}}</h6>
+                                <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
+                                        class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
                             </div>
                         </div>
 
@@ -196,33 +199,39 @@
 
                     <div class="row justify-content-between">
                         <div class="col-md-6 text-left">
-                            <h6> <span class="font-weight-light text-muted" >Empresa </span>{{infoVacante.nombre_empresa}}</h6>
+                            <h6> <span class="font-weight-light text-muted">Empresa
+                                </span>{{infoVacante.nombre_empresa}}</h6>
                         </div>
                         <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Publicada </span> {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
+                            <h6><span class="font-weight-light text-muted">Publicada </span>
+                                {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
                         </div>
                     </div>
 
                     <div class="row justify-content-between">
                         <div class="col-md-6 text-left">
-                            <h6> <span class="font-weight-light text-muted" >Ubicación </span>{{infoVacante.entidad_federativa}}</h6>
+                            <h6> <span class="font-weight-light text-muted">Ubicación
+                                </span>{{infoVacante.entidad_federativa}}</h6>
                         </div>
                         <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Sueldo </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
+                            <h6><span class="font-weight-light text-muted">Sueldo
+                                </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
                         </div>
                     </div>
 
                     <div class="row justify-content-between">
                         <div class="col-md-6 text-left">
-                            <h6><span class="font-weight-light text-muted" > Area </span>{{infoVacante.area_estudio}}</h6>
+                            <h6><span class="font-weight-light text-muted"> Area </span>{{infoVacante.area_estudio}}
+                            </h6>
                         </div>
                         <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Género preferente </span> {{infoVacante.genero}}</h6>
+                            <h6><span class="font-weight-light text-muted">Género preferente </span>
+                                {{infoVacante.genero}}</h6>
                         </div>
                     </div>
 
-                    
-                    
+
+
                 </div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -239,10 +248,21 @@
                 </div>
             </div>
             <div class="modal-footer mx-2" style="border-top: 1px solid rgb(121, 24, 129);">
-                <button *ngIf="usuarioActual.id_tipo_usuario == 1" class="btn btn-primary"
-                    (click)="postularCandidato(infoVacante.id_vacante)">
+                <button *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'A'"
+                    class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
                     Postularme
                 </button>
+                <span *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'I'" class="d-inline-block"
+                    tabindex="0" data-toggle="tooltip" title="No puedes postularte">
+                    <button class="btn btn-disabled" disabled>
+                        Postularme
+                    </button>
+                </span>
+                <button mat-raised-button matTooltip="Info about the action"
+                    aria-label="Button that displays a tooltip when focused or hovered over">
+                    Action
+                </button>
+
 
                 <button *ngIf="usuarioActual.id_tipo_usuario == 0" class="btn btn-danger"
                     (click)="darDeBajaVacante(infoVacante)">

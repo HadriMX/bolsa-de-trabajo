@@ -25,6 +25,17 @@ body {
   letter-spacing: 0.1em;
 }
 
+.btn-disabled{
+  color: white;
+  background-color: #474747;
+  border-color: none;
+  box-shadow: none;
+  cursor: default;
+}
+.btn-disabled:hover{
+  color: white;
+}
+
 .btn-primary {
   background-color: #7a26d3;
   border-color: #7a26d3;
