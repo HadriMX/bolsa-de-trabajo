@@ -70,12 +70,44 @@
 
 
 
-     
+
 
       <p-panel header="Registro de auxiliares administrativos">
-        </p-panel>
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              Email*:
+            </div>
+            <div class="ui-grid-col-6">
+              <input pInputText type="email" [(ngModel)]="auxiliarAdministrativo.email" />
+            </div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              Contraseña*:
+            </div>
+            <div class="ui-grid-col-6">
+              <input type="password" pPassword promptLabel="Ingrese una Contraseña" weakLabel="Débil"
+               mediumLabel="Medio"
+              strongLabel="Fuerte" [(ngModel)]="auxiliarAdministrativo.password" />
+            </div>
+          </div>
+          <div class="ui-grid-row" style="text-align: center;">
+            <div class="ui-grid-col-2"></div>
+            <div class="ui-grid-col-6">
+                <button pButton  label="Registrar" (click)="add_auxiliarAdministrativo()"></button>
+            </div>
+            <div class="ui-grid-col-4"></div>
+        </div>
+        </div>
+        
 
-   
+
+
+        
+      </p-panel>
+
+
 
 
     </div>

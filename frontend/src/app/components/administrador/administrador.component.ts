@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { Area } from "src/app/models/area";
 import { Cat_empresa } from "src/app/models/categoria";
+import { Usuario } from 'src/app/models/usuario';
+import {RegistroService} from 'src/app/services/registro.service';
 import { Solicitudes } from "../../models/solicitudes";
 import Swal from "sweetalert2";
 import { AreaService } from "../../services/area.service";
@@ -70,6 +72,15 @@ export class AdministradorComponent implements OnInit {
     nombre_empresa: "",
     estatus: ""
   };
+
+  auxiliarAdministrativo:Usuario={
+    id_usuario: 0,
+    email: '',
+    password: '',
+    id_tipo_usuario: 100,
+    estatus: '',
+    phpsessid: ''
+  }
 
   infoSolicitud: Solicitudes = {
     id_usuario: 0,
@@ -166,6 +177,7 @@ export class AdministradorComponent implements OnInit {
     private loginService: LoginService,
     private empresaService: EmpresaService,
     private vacantesService: VacantesService,
+    private registroService: RegistroService,
     private router: Router
   ) {}
 
@@ -254,6 +266,22 @@ export class AdministradorComponent implements OnInit {
           }
         });
     }
+  }
+
+  add_auxiliarAdministrativo(){
+    this.registroService.registrar(this.auxiliarAdministrativo)
+    .subscribe((response) => {
+      if (response.success) {
+        Swal.fire("Cuenta creada", "Auxiliar administrativo registrado exitosamente", 'success');
+        this.auxiliarAdministrativo.email = '';
+        this.auxiliarAdministrativo.password = '';
+      }
+      else {
+        Swal.fire("Error", response.message, 'error');
+      }
+
+    });
+    
   }
 
   //METODOS CRUD (R)

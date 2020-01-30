@@ -191,6 +191,11 @@ a.fromLeft:after {
   color: #ffffff;
   border-color: #45003a;
 }
+:host::ng-deep .ui-button {
+  background-color: #791881;
+  color: #ffffff;
+  border-color:  #791881;
+}
 
 :host::ng-deep
   .ui-paginator

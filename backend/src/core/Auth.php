@@ -60,6 +60,8 @@ class Auth
             $estatus = "A";
         } elseif ($usuario['id_tipo_usuario'] == 0) {   // administrador
             $estatus = "A";
+        } elseif ($usuario['id_tipo_usuario'] == 100){
+            $estatus = "A";
         }
         /*
         la razón por la que no hay una cláusula 'else' es para mantener separados
