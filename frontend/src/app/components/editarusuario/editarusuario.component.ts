@@ -14,6 +14,7 @@ import { AreaService } from 'src/app/services/area.service';
 import { GradoEstudio } from 'src/app/models/gradoEstudio';
 import { GradoEstudioService } from 'src/app/services/grado-estudio.service';
 import { Candidato } from 'src/app/models/candidato';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 @Component({
   selector: 'app-editarusuario',
@@ -33,7 +34,8 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   areas: Area[] = [];
   gradosEstudio: GradoEstudio[] = [];
 
-  uploadForm: FormGroup; 
+  uploadForm: FormGroup;
+  labelCurriculum = "Selecciona un archivo";
 
   infoCandidato: Candidato = {
     nombre: "",
@@ -64,8 +66,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     private areaService: AreaService,
     private gradoEstudioService: GradoEstudioService,
     private formBuilder: FormBuilder,
-    private httpClient: HttpClient /* TODO: Mover a un servicio */) {
-  }
+    private fileUpload: FileUploadService) { }
 
   ngOnInit() {
     this.uploadForm = this.formBuilder.group({
@@ -151,21 +152,27 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   }
 
   onFileSelect(event) {
-    console.log(event);
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.uploadForm.get('profile').setValue(file);
+      this.labelCurriculum = file.name;
     }
   }
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('archivo', this.uploadForm.get('profile').value);
-
-    this.httpClient.post<any>("http://localhost/bdt/php/src/upload_file.php?phpsessid=ti7b5v6f5bgqn3pd64di7pjq57&rename=curriculum.docx&no_replace=true", formData).subscribe(
+    let fileCurriculum = this.uploadForm.get('profile').value;
+    formData.append('archivo', fileCurriculum);
+    
+    let filename = "curriculum." + this.getFileExtension(fileCurriculum.name);
+    this.fileUpload.uploadFile(filename, formData).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)
     );
+  }
+
+  getFileExtension(filename: string) {
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
   }
 
 }
