@@ -7,8 +7,8 @@ export class Candidato{
     telefono: string;
     id_entidad_federativa: number;
     id_municipio: number;
-    id_ciudad: number;
-    id_colonia: number;
+    ciudad: string;
+    colonia: string;
     cp: string;
     calle: string;
     num_ext: string;

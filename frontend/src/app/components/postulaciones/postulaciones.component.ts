@@ -12,6 +12,10 @@ import { Vacante } from 'src/app/models/vacantes';
 })
 export class PostulacionesComponent implements OnInit {
 
+  public showFooter = true;
+  public goTopEnabled = true;
+  public goTop = function() { };
+  
   postulacionesPendientes: Postulacion[] = [];
   postulacionesAceptadas: Postulacion[] = [];
   postulacionesRechazadas: Postulacion[] = [];
@@ -96,7 +100,7 @@ export class PostulacionesComponent implements OnInit {
                 text: response.message,
                 type: "success",
                 focusConfirm: true,
-                confirmButtonText: "Jalate poes",
+                confirmButtonText: "Aceptar",
                 confirmButtonColor: '#7A26D3'
               });
               this.cerrarModales();
