@@ -66,51 +66,46 @@
 
 <div class="container">
   <div *ngIf="estado===7">
-    <div style="margin-top: 1%;">
-
-
-
-
-
-      <p-panel header="Registro de auxiliares administrativos">
-        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
-          <div class="ui-grid-row">
-            <div class="ui-grid-col-2">
-              Email*:
+    <p-tabView>
+      <p-tabPanel header="Registrar">
+        <div style="margin-top: 1%;">
+          <p-panel header="Registro de auxiliares administrativos">
+            <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                  Email*:
+                </div>
+                <div class="ui-grid-col-6">
+                  <input pInputText type="email" [(ngModel)]="auxiliarAdministrativo.email" />
+                </div>
+              </div>
+              <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                  Contraseña*:
+                </div>
+                <div class="ui-grid-col-6">
+                  <input type="password" pPassword promptLabel="Ingrese una Contraseña" weakLabel="Débil"
+                    mediumLabel="Medio" strongLabel="Fuerte" [(ngModel)]="auxiliarAdministrativo.password" />
+                </div>
+              </div>
+              <div class="ui-grid-row" style="text-align: center;">
+                <div class="ui-grid-col-2"></div>
+                <div class="ui-grid-col-6">
+                  <button pButton label="Registrar" (click)="add_auxiliarAdministrativo()"></button>
+                </div>
+                <div class="ui-grid-col-4"></div>
+              </div>
             </div>
-            <div class="ui-grid-col-6">
-              <input pInputText type="email" [(ngModel)]="auxiliarAdministrativo.email" />
-            </div>
-          </div>
-          <div class="ui-grid-row">
-            <div class="ui-grid-col-2">
-              Contraseña*:
-            </div>
-            <div class="ui-grid-col-6">
-              <input type="password" pPassword promptLabel="Ingrese una Contraseña" weakLabel="Débil"
-               mediumLabel="Medio"
-              strongLabel="Fuerte" [(ngModel)]="auxiliarAdministrativo.password" />
-            </div>
-          </div>
-          <div class="ui-grid-row" style="text-align: center;">
-            <div class="ui-grid-col-2"></div>
-            <div class="ui-grid-col-6">
-                <button pButton  label="Registrar" (click)="add_auxiliarAdministrativo()"></button>
-            </div>
-            <div class="ui-grid-col-4"></div>
+          </p-panel>
         </div>
-        </div>
-        
+      </p-tabPanel>
 
 
+      <p-tabPanel header="Registros">
+          
 
-        
-      </p-panel>
-
-
-
-
-    </div>
+      </p-tabPanel>
+    </p-tabView>
   </div>
 </div>
 
@@ -175,7 +170,7 @@
 <!-- En esta parte comienza la configuracion de de las categorias de la empresa -->
 <div class="container">
   <div *ngIf="estado === 1">
-    <div style="margin-top: 1%;">>
+    <div style="margin-top: 1%;">
       <p-table #dt [value]="datosCategoria" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
         [globalFilterFields]="['nombre_empresa']" editMode="row" dataKey="id_tipo_empresa" [responsive]="true">
         <ng-template pTemplate="caption">
@@ -222,7 +217,7 @@
               <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btneditar"
                 (click)="onRowEditCategoria(datosCategoria);detalleCategoria(datosCategoria)"></button>
               <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
-                class="ui-button-success" style="margin-right: .5em"
+                class="ui-button-success" id="btnEditarCategoria" style="margin-right: .5em"
                 (click)="updateCategoria(datosCategoria.id_tipo_empresa)"></button>
               <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
                 class="ui-button-danger" (click)="onRowEditCancelCategoria(datosCategoria, ri)"></button>
@@ -243,7 +238,7 @@
 <!-- En esta parte comienza la configuracion de areas de estudio -->
 <div class="container">
   <div *ngIf="estado === 2">
-    <div style="margin-top: 1%;">>
+    <div style="margin-top: 1%;">
       <p-table #dt [value]="datosArea" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
         [globalFilterFields]="['nombre']" editMode="row" dataKey="id_area_estudio" [responsive]="true">
 
@@ -316,7 +311,7 @@
     <div style="margin-top: 1%;">
       <p-table #dtSolicitdudes [columns]="columnasSolicitud" [value]="datos_solicitud" dataKey="id_candidato"
         [paginator]="true" [rowsPerPageOptions]="[20,30,50]" [rows]="10"
-        [globalFilterFields]="['candidato','telefono','email']">
+        [globalFilterFields]="['candidato','telefono','email']" [loading]="loading">
         <ng-template pTemplate="caption">
           Solicitudes de candidatos
           <div style="text-align: right">
@@ -482,7 +477,7 @@
       </div>
       <p-table #dt [columns]="columnasEmpresa" [value]="datosEmpresa" dataKey="id_usuario" [paginator]="true"
         [rowsPerPageOptions]="[5,10,20]" [rows]="10"
-        [globalFilterFields]="['empresa','email','telefono','nombre_persona_contacto']">
+        [globalFilterFields]="['empresa','email','telefono','nombre_persona_contacto']" [loading]="loading">
         <ng-template pTemplate="caption">
           Empresas
           <div style="text-align: right">
@@ -617,13 +612,6 @@
 </div>
 
 <!--===============================================================================================-->
-
-
-
-<div *ngIf="isLoading" class="container">
-  <app-loading></app-loading>
-</div>
-
 
 <p-dialog header="Categoria" [(visible)]="displayDialogCategoria" [focusOnShow]="false" [responsive]="true"
   showEffect="fade" [modal]="true" [style]="{width: '300px'}">

@@ -41,6 +41,7 @@ import {PanelModule} from 'primeng/panel';
 import {ToastModule} from 'primeng/toast';
 import {MessageModule} from 'primeng/message';
 import {PasswordModule} from 'primeng/password';
+import {TabViewModule} from 'primeng/tabview';
 import { VerificacionComponent } from './components/verificacion/verificacion.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
@@ -107,6 +108,7 @@ const routes: Routes = [
     PasswordModule,
     InputTextModule,
     MessageModule,
+    TabViewModule,
     DropdownModule
   ],
   exports: [

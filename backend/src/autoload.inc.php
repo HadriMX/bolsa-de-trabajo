@@ -9,6 +9,7 @@ spl_autoload_register(
             $classes = array(
                 'area' => '/core/Area.php',
                 'auth' => '/core/Auth.php',
+                'auxiliarAdmin' => '/core/AuxiliarAdmin.php',
                 'candidato' => '/core/Candidato.php',
                 'categoria' => '/core/Categoria.php',
                 'ciudad' => '/core/Ciudad.php',

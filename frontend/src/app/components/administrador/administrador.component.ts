@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { AreaService } from "../../services/area.service";
 import { CatEmpresaService } from "../../services/cat-empresa.service";
 import { SolicitudService } from "../../services/solicitud.service";
+import { AuxiliarService } from '../../services/auxiliar.service';
 import { MatDialog } from "@angular/material";
 import { CandidatoService } from "src/app/services/candidato.service";
 import { LoginService } from "src/app/services/login.service";
@@ -23,6 +24,7 @@ import {
   transition,
   animate
 } from "@angular/animations";
+
 
 @Component({
   selector: "app-administrador",
@@ -96,6 +98,7 @@ export class AdministradorComponent implements OnInit {
   loading = false;
   datosCategoria = [];
   datosArea = [];
+  datosAuxiliares =[];
   datosCandidato = [];
   datosEmpresa = [];
   datos_solicitud = [];
@@ -115,7 +118,6 @@ export class AdministradorComponent implements OnInit {
   chartColor;
   chartEmail;
   chartHours;
-
   columnasCategoria: any[];
   columnasArea: any[];
   columnasCandidato: any[];
@@ -176,6 +178,7 @@ export class AdministradorComponent implements OnInit {
     private candidatoService: CandidatoService,
     private loginService: LoginService,
     private empresaService: EmpresaService,
+    private auxiliaresService: AuxiliarService,
     private vacantesService: VacantesService,
     private registroService: RegistroService,
     private router: Router
@@ -188,6 +191,7 @@ export class AdministradorComponent implements OnInit {
     this.getCategorias();
     this.getSolicitudes();
     this.getCandidatos("Alta");
+    this.getAuxiliares("A");
     this.getEmpresas("Alta");
 
     this.columnasCategoria = [
@@ -295,6 +299,17 @@ export class AdministradorComponent implements OnInit {
     });
   }
 
+  getAuxiliares(estatus:string){
+    this.auxiliaresService.get_auxiliares(estatus).subscribe(response => {
+      if (response.success) {
+        this.datosAuxiliares = response.data;
+      } else {
+        Swal.fire("Error", response.message, "error");
+      }
+    });
+
+  }
+
   getCategorias() {
     this.categoriaService.get_categoriasAdmin().subscribe(response => {
       if (response.success) {
@@ -312,8 +327,9 @@ export class AdministradorComponent implements OnInit {
     }else{
       this.activos=false;
     }
+    this.loading=true;
     this.candidatoService.get_candidatos(estatus).subscribe(response => {
-      this.loading=true;
+      
       if (response.success) {
         this.datosCandidato = response.data;
       } else {
@@ -330,12 +346,14 @@ export class AdministradorComponent implements OnInit {
     }else{
       this.activos=false;
     }
+    this.loading=true;
     this.empresaService.get_empresas(estatus).subscribe(response => {
       if (response.success) {
         this.datosEmpresa = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
+      this.loading=false;
     });
   }
 
@@ -385,12 +403,12 @@ export class AdministradorComponent implements OnInit {
   }
 
   updateCategoria(idCategoria) {
+    const nombre = $("#modCategoria").val();
     var index = this.datosCategoria
       .map(function(datos) {
         return datos.id_tipo_empresa;
       })
       .indexOf(idCategoria);
-    const nombre = $("#modCategoria").val();
     if (nombre === "") {
       Swal.fire("Error", "No ingreso ningun valor", "error");
     } else {
@@ -423,6 +441,7 @@ export class AdministradorComponent implements OnInit {
             .subscribe(response => {
               if (response.success) {
                 Swal.fire("Correcto", response.message, "success");
+                this.getSolicitudes();
               } else {
                 Swal.fire("Error", response.message, "error");
               }
@@ -448,6 +467,7 @@ export class AdministradorComponent implements OnInit {
             .subscribe(response => {
               if (response.success) {
                 Swal.fire("Correcto", response.message, "success");
+                this.getSolicitudes();
               } else {
                 Swal.fire("Error", response.message, "error");
               }
@@ -596,6 +616,7 @@ export class AdministradorComponent implements OnInit {
     else return "Baja";
   }
 
+
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
 
   admin() {
@@ -670,7 +691,7 @@ export class AdministradorComponent implements OnInit {
         this.estado = 0;
         $("#empresasActivas").css("border-bottom", "transparent");
       } else {
-        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css(
+        $("#empresasActivas,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css(
           "border-bottom",
           "transparent"
         );

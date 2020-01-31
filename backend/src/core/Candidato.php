@@ -65,8 +65,6 @@ class Candidato
         $stmt = $conn->prepare("SELECT  * FROM candidatosvista where estatus=?");
         $stmt->bind_param('s', $estatus);
         $stmt->execute();
-
-        $stmt->execute();
         $r = $db->readResult($stmt->get_result());
         return new SuccessResult("",$r);
     }
