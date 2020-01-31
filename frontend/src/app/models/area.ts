@@ -1,5 +1,5 @@
 export class Area {
-    id_area_estudio: number;
+    id_area_estudios: number;
     nombre: string;
     estatus: string;
 }

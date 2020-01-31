@@ -12,8 +12,8 @@ export class Candidato{
     cp: string;
     calle: string;
     num_ext: string;
-    id_grado_estudio: number;
-    id_area_estudio: number;
+    id_grado_estudios: number;
+    id_area_estudios: number;
     escuela: string;
     pathCURP: string;
     pathIDENTIFICACION: string;

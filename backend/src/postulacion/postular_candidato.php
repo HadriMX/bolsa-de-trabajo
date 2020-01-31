@@ -16,8 +16,10 @@ error_reporting(E_ERROR | E_PARSE);
 
 $post = json_decode(file_get_contents("php://input"));
 
-$id_vacante = $post->id_vacante;
-$id_candidato = $_SESSION['currentUser']['id_usuario'];
-$fecha = (new \DateTime())->format('Y-m-d');
-
-echo json_encode(Postulacion::addPostulacion($id_vacante, $id_candidato, $fecha));
+if($_SESSION['currentUser']['estatus'] == 'A'){
+    $id_vacante = $post->id_vacante;
+    $id_candidato = $_SESSION['currentUser']['id_usuario'];
+    $fecha = (new \DateTime())->format('Y-m-d');
+    
+    echo json_encode(Postulacion::addPostulacion($id_vacante, $id_candidato, $fecha));
+}
