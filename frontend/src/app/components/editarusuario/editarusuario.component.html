@@ -144,57 +144,63 @@
         </div>
     </div>
 
-    <h6 id="titulo" style="margin-top: 50px">
-        ARCHIVOS DE VALIDACIÓN
-    </h6>
-    <label for="" style="margin-bottom: 10px">Para poder validar tus datos y comprobar que eres quien dices ser, es
-        necesario subir ciertos archivos para concluir con tu registro.</label>
-    <div class="row">
-        <!-- CURP -->
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="input-group" style="width: 100%;">
-                <div id="inputFile" class="input-group-prepend">
-                    <span class="input-group-text" id="fileCurp">CURP</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileCurp" aria-describedby="inputGroupFileAddon01"
-                        accept=".docx,.pdf" lang="es">
-                    <label class="custom-file-label" for="inputGroupFile01">Selecciona un archivo</label>
-                </div>
-            </div>
-        </div>
-        <!-- ID -->
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="input-group" style="width: 100%;">
-                <div id="inputFile" class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">IDENTIFICACIÓN</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileIdentificacion"
-                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es">
-                    <label class="custom-file-label" for="fileIdentificacion">Selecciona un archivo</label>
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <h6 id="titulo" style="margin-top: 50px">
+            ARCHIVOS DE VALIDACIÓN
+        </h6>
+        <label for="" style="margin-bottom: 10px">Para poder validar tus datos y comprobar que eres quien dices ser, es
+            necesario subir ciertos archivos para concluir con tu registro.</label>
+        <div class="row">
+
+            <!-- CURP -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="input-group" style="width: 100%;">
+                    <div id="inputFile" class="input-group-prepend">
+                        <span class="input-group-text" id="fileCurp">CURP</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileCurp"
+                            aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es">
+                        <label class="custom-file-label" for="inputGroupFile01">Selecciona uno o más archivos</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- CURRICULUM -->
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="input-group" style="width: 100%;">
-                <div id="inputFile" class="input-group-prepend">
-                    <span class="input-group-text" id="fileCurriculum">CURRICULUM</span>
-                </div>
-                <div class="custom-file">
-                    <input #file type="file" class="custom-file-input" id="fileCurriculum"
-                        aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es">
-                    <label class="custom-file-label" for="inputGroupFile01">Selecciona un archivo</label>
+            <!-- ID -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="input-group" style="width: 100%;">
+                    <div id="inputFile" class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">IDENTIFICACIÓN</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileIdentificacion"
+                            aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es">
+                        <label class="custom-file-label" for="fileIdentificacion">Selecciona uno o más archivos</label>
+                    </div>
                 </div>
             </div>
+            <!-- CURRICULUM -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="input-group" style="width: 100%;">
+                    <div id="inputFile" class="input-group-prepend">
+                        <span class="input-group-text" id="fileCurriculum">CURRICULUM</span>
+                    </div>
+                    <div class="custom-file">
+                        <input #file type="file" class="custom-file-input" id="fileCurriculum"
+                            aria-describedby="inputGroupFileAddon01" accept=".docx,.pdf" lang="es"
+                            (change)="onFileSelect($event)">
+                        <label id="labelCurriculum" class="custom-file-label" for="fileCurriculum">{{ labelCurriculum }}</label>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
-    <div class="row justify-content-end pb-4">
-        <div class="col text-right">
-            <button class="btn btn-primary mx-2" (click)="guardarCambios()">GUARDAR</button>
+        <div class="row justify-content-end pb-4">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-primary mx-2">GUARDAR</button>
+            </div>
         </div>
-    </div>
+    </form>
+
     <div id="separador" style="height: 150px;">
     </div>
 </div>

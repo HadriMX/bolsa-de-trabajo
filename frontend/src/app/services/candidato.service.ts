@@ -38,8 +38,8 @@ export class CandidatoService {
     return this.http.get<ApiResponse<Candidato>>(this.endpointUrlGetCandidatoInfoCompleta, this.httpOptions);
   }
 
-  guardarInfoCandidato(info : Candidato): Observable<ApiResponse<Candidato>>{
-    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlGuardarInfoCandidato, info, this.httpOptions);
+  guardarInfoCandidato(info : FormData): Observable<ApiResponse<Candidato>>{
+    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlGuardarInfoCandidato, info);
   }
 
 }

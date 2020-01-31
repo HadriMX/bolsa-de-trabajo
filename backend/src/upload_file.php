@@ -2,16 +2,16 @@
 
 error_reporting(E_ERROR | E_PARSE);
 
-header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-header('content-type: application/json; charset=utf-8');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Allow: POST, OPTIONS");
+header("Content-Type: application/json; charset=utf-8");
 
-require_once '../core/cors.php';
-require_once '../autoload.inc.php';
-require_once '../core/session_starter.php';
+require_once 'core/cors.php';
 
-$candidato = (array) json_decode($_POST['infoCandidato']);
+require_once 'autoload.inc.php';
+require_once 'core/session_starter.php';
 
 $uploadMaxFilesize = ini_get('upload_max_filesize');
 $newFileName = $_GET['rename'] ?? "";
@@ -35,10 +35,10 @@ $phpFileUploadErrors = array(
 $response = array();
 $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
 
-if ($_FILES['curriculum']) {
-    $uploadFileName = $_FILES['curriculum']['name'];
-    $tmpUploadedFilename = $_FILES['curriculum']['tmp_name'];
-    $error = $_FILES['curriculum']['error'];
+if ($_FILES['archivo']) {
+    $uploadFileName = $_FILES['archivo']['name'];
+    $tmpUploadedFilename = $_FILES['archivo']['tmp_name'];
+    $error = $_FILES['archivo']['error'];
 
     if ($error > 0) {
         $response = new ErrorResult($phpFileUploadErrors[$error], $error);
@@ -56,7 +56,7 @@ if ($_FILES['curriculum']) {
         if (move_uploaded_file($tmpUploadedFilename, $fullFilePath)) {
             $fileData = array('file_name' => $fileName);
 
-            // $response = new SuccessResult("Archivo subido correctamente.", $fileData);
+            $response = new SuccessResult("Archivo subido correctamente.", $fileData);
         } else {
             $response = new ErrorResult("Error al guardar el archivo en el servidor.", 500);
         }
@@ -65,8 +65,4 @@ if ($_FILES['curriculum']) {
     $response = new ErrorResult("No se envió ningún archivo.", 400);
 }
 
-if (empty($response))
-    $response = Candidato::update($candidato);
-
 echo json_encode($response);
- 

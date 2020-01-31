@@ -1,18 +1,17 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { IAppPage } from 'src/app/interfaces/app-page';
 import { EntidadesFederativasService } from 'src/app/services/entidades-federativas.service';
 import { EntidadFederativa } from 'src/app/models/entidadFederativa';
 import Swal from 'sweetalert2';
 import { MunicipioService } from 'src/app/services/municipio.service';
 import { Municipio } from 'src/app/models/municipio';
-import { CiudadService } from 'src/app/services/ciudad.service';
-import { Ciudad } from 'src/app/models/ciudad';
 import { Area } from 'src/app/models/area';
 import { AreaService } from 'src/app/services/area.service';
 import { GradoEstudio } from 'src/app/models/gradoEstudio';
 import { GradoEstudioService } from 'src/app/services/grado-estudio.service';
 import { Candidato } from 'src/app/models/candidato';
-import { CandidatoGuardService } from 'src/app/guards/candidato.guard';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 import { CandidatoService } from 'src/app/services/candidato.service';
 import { Usuario } from 'src/app/models/usuario';
 import { CurrentUserService } from 'src/app/services/current-user.service';
@@ -35,6 +34,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   usuarioActual: Usuario;
   areas: Area[] = [];
   gradosEstudio: GradoEstudio[] = [];
+
+  uploadForm: FormGroup;
+  labelCurriculum = "Selecciona un archivo";
 
   infoCandidato: Candidato = {
     nombre: "",
@@ -64,11 +66,16 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     private municipioService: MunicipioService,
     private areaService: AreaService,
     private gradoEstudioService: GradoEstudioService,
+    private formBuilder: FormBuilder,
+    private fileUpload: FileUploadService,
     private candidatoService: CandidatoService,
-    private currentUserService: CurrentUserService) {
-  }
+    private currentUserService: CurrentUserService) { }
 
   ngOnInit() {
+    this.uploadForm = this.formBuilder.group({
+      profile: ['']
+    });
+    
     this.usuarioActual = this.currentUserService.getUsuarioActual();
     this.getEntidadesFederativas();
     this.getAreas();
@@ -141,23 +148,48 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  guardarCambios() {
-    this.candidatoService.guardarInfoCandidato(this.infoCandidato)
-    .subscribe((response)=> {
-      if(response.success){
-        Swal.fire({
-          title: "Éxito", 
-          text: response.message,
-          type: "success",
-          focusConfirm: true,
-          confirmButtonText: "Aceptar",
-          confirmButtonColor: '#7A26D3'
-        });
-        this.getInfoUsuario();
-      }else{
-        Swal.fire("Error", response.message, 'error');
-      }
-    });
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.get('profile').setValue(file);
+      this.labelCurriculum = file.name;
+    }
+  }
+
+  onSubmit() {
+    const formData = new FormData();
+    let fileCurriculum = this.uploadForm.get('profile').value;
+    let filename = "curriculum." + this.getFileExtension(fileCurriculum.name);
+    // formData.append('identificacion', fileIdentificacion);
+    // formData.append('curp', fileCurp);
+    formData.append('curriculum', fileCurriculum), filename;
+    formData.append('infoCandidato', JSON.stringify(this.infoCandidato));
+
+    // this.fileUpload.uploadFile(filename, formData).subscribe(
+    //   (res) => console.log(res),
+    //   (err) => console.log(err)
+    // );
+
+    this.candidatoService.guardarInfoCandidato(formData)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire({
+            title: "Éxito",
+            text: response.message,
+            type: "success",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: '#7A26D3'
+          });
+          this.getInfoUsuario();
+        } else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  getFileExtension(filename: string) {
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
   }
 
 }
