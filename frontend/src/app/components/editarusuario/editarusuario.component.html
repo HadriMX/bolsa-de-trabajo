@@ -119,7 +119,7 @@
             <label for="nivelEstudios">Ultimo Nivel de Estudios</label>
             <span class="custom-dropdown">
                 <select class="form-control" name="nivelEstudios" id="nivelEstudios"
-                    [(ngModel)]="infoCandidato.id_grado_estudio" disabled>
+                    [(ngModel)]="infoCandidato.id_grado_estudios" disabled>
                     <option value="0" selected disabled>Seleccione un nivel de estudios</option>
                     <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}
                     </option>

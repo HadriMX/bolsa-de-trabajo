@@ -52,7 +52,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     cp: "",
     calle: "",
     num_ext: "",
-    id_grado_estudio: 0,
+    id_grado_estudios: 0,
     id_area_estudio: 0,
     escuela: "",
     pathCURP: "",
@@ -148,8 +148,29 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  guardarCambios() {
-    this.candidatoService.guardarInfoCandidato(this.infoCandidato)
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.get('profile').setValue(file);
+      this.labelCurriculum = file.name;
+    }
+  }
+
+  onSubmit() {
+    const formData = new FormData();
+    let fileCurriculum = this.uploadForm.get('profile').value;
+    let filename = "curriculum." + this.getFileExtension(fileCurriculum.name);
+    // formData.append('identificacion', fileIdentificacion);
+    // formData.append('curp', fileCurp);
+    formData.append('curriculum', fileCurriculum), filename;
+    formData.append('infoCandidato', JSON.stringify(this.infoCandidato));
+
+    // this.fileUpload.uploadFile(filename, formData).subscribe(
+    //   (res) => console.log(res),
+    //   (err) => console.log(err)
+    // );
+
+    this.candidatoService.guardarInfoCandidato(formData)
       .subscribe((response) => {
         if (response.success) {
           Swal.fire({
@@ -165,26 +186,6 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
           Swal.fire("Error", response.message, 'error');
         }
       });
-  }
-
-  onFileSelect(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.uploadForm.get('profile').setValue(file);
-      this.labelCurriculum = file.name;
-    }
-  }
-
-  onSubmit() {
-    const formData = new FormData();
-    let fileCurriculum = this.uploadForm.get('profile').value;
-    formData.append('archivo', fileCurriculum);
-
-    let filename = "curriculum." + this.getFileExtension(fileCurriculum.name);
-    this.fileUpload.uploadFile(filename, formData).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    );
   }
 
   getFileExtension(filename: string) {
