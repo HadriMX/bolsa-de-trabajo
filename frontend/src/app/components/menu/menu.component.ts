@@ -224,7 +224,7 @@ export class MenuComponent implements OnInit, IAppPage {
                 text: response.message,
                 type: "success",
                 focusConfirm: true,
-                confirmButtonText: "Jalate poes",
+                confirmButtonText: "Aceptar",
                 confirmButtonColor: '#7A26D3'
               });
               this.busquedaVacantes();

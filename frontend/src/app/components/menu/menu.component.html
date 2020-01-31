@@ -104,9 +104,10 @@
 
 
     <div *ngIf="!isLoading && !noVacantesDisponibles" class="container">
-        <div class="row my-3">
-            <div class="col">
-                <h6 style="font-size: large;">{{allItems.length}} ofertas de empleo</h6>
+        <div class="row my-3"  style="text-align: left;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <h6 *ngIf="usuarioActual.estatus == 'A'" style="font-size: large;">{{allItems.length}} ofertas de empleo</h6>
+                <label *ngIf="usuarioActual.estatus == 'I'" for="" style="color: red; font-size: 15;">La información de la cuenta sigue incompleta. Sólo podrás ver las vacantes pero no postularte.</label>
             </div>
         </div>
 
@@ -258,12 +259,6 @@
                         Postularme
                     </button>
                 </span>
-                <button mat-raised-button matTooltip="Info about the action"
-                    aria-label="Button that displays a tooltip when focused or hovered over">
-                    Action
-                </button>
-
-
                 <button *ngIf="usuarioActual.id_tipo_usuario == 0" class="btn btn-danger"
                     (click)="darDeBajaVacante(infoVacante)">
                     Eliminar

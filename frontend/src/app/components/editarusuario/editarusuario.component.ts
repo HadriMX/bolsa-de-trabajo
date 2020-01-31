@@ -127,6 +127,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   }
 
   getInfoUsuario() {
+    this.isLoading = true;
     this.candidatoService.get_candidatosInfoCompleta()
       .subscribe((response) => {
         if (response.success) {
@@ -141,22 +142,22 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   }
 
   guardarCambios() {
-    // this.candidatoService.guardarInfoCandidato(this.infoCandidato)
-    // .subscribe((response)=> {
-    //   if(response.success){
-    //     Swal.fire({
-    //       title: "Éxito", 
-    //       text: response.message,
-    //       type: "success",
-    //       focusConfirm: true,
-    //       confirmButtonText: "Jalate poes",
-    //       confirmButtonColor: '#7A26D3'
-    //     });
-    //   }else{
-    //     Swal.fire("Error", response.message, 'error');
-    //   }
-    // });
-    console.log(this.infoCandidato);
+    this.candidatoService.guardarInfoCandidato(this.infoCandidato)
+    .subscribe((response)=> {
+      if(response.success){
+        Swal.fire({
+          title: "Éxito", 
+          text: response.message,
+          type: "success",
+          focusConfirm: true,
+          confirmButtonText: "Aceptar",
+          confirmButtonColor: '#7A26D3'
+        });
+        this.getInfoUsuario();
+      }else{
+        Swal.fire("Error", response.message, 'error');
+      }
+    });
   }
 
 }
