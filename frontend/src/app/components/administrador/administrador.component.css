@@ -194,7 +194,47 @@ a.fromLeft:after {
 :host::ng-deep .ui-button {
   background-color: #791881;
   color: #ffffff;
-  border-color:  #791881;
+  border-color: #791881;
+}
+
+:host::ng-deep .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active {
+  background-color: #791881;
+  border-color: #791881;
+}
+
+:host::ng-deep .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-focus {
+  background-color: #45003a;
+  border-color: #45003a;
+}
+
+:host::ng-deep .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active,
+body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active {
+  background-color: #791881;
+  border: 1px solid #791881;
+}
+
+:host::ng-deep
+  .ui-tabview.ui-tabview-top
+  .ui-tabview-nav
+  li.ui-state-active:hover,
+body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active:hover,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active:hover,
+body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active:hover {
+  border: 1px solid #45003a;
+  background-color: #45003a;
+}
+
+:host::ng-deep .ui-tabview.ui-tabview-top .ui-tabview-nav li:focus,
+body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li:focus,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li:focus,
+body .ui-tabview.ui-tabview-right .ui-tabview-nav li:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  -webkit-box-shadow: 0 0 0 0.2em #45003a;
+  -moz-box-shadow: 0 0 0 0.2em #45003a;
+  box-shadow: 0 0 0 0.2em #45003a;
 }
 
 :host::ng-deep

@@ -17,6 +17,6 @@ export class AuxiliarService {
   constructor(private http: HttpClient) { }
 
   get_auxiliares(estatus:string): Observable<ApiResponse<Usuario[]>> {
-    return this.http.get<ApiResponse<Usuario[]>>(this.endpointUrlGetAuxiliares, this.httpOptions);
+    return this.http.post<ApiResponse<Usuario[]>>(this.endpointUrlGetAuxiliares,{ estatus: estatus }, this.httpOptions);
   }
 }

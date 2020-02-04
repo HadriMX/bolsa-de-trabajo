@@ -15,3 +15,5 @@ $post = json_decode(file_get_contents("php://input"));
 
 $estatus =$post->estatus;
 echo json_encode (AuxiliarAdmin::get_auxiliares($estatus));
+
+?> 

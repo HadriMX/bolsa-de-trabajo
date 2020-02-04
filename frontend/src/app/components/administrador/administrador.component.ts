@@ -123,6 +123,7 @@ export class AdministradorComponent implements OnInit {
   columnasCandidato: any[];
   columnasEmpresa: any[];
   columnasSolicitud: any[];
+  columnasAuxiliaresAdmin : any[];
   clonCategoria: { [s: string]: Cat_empresa } = {};
   clonArea: { [s: string]: Area } = {};
 
@@ -226,6 +227,11 @@ export class AdministradorComponent implements OnInit {
       { field: "genero", header: "Genero" }
     ];
 
+    this.columnasAuxiliaresAdmin =[
+      {field: "email", header:"Email"},
+      {field: "estatus", header:"Estatus"}
+    ]
+
     this.estatus = [
       { label: "Alta", value: "A" },
       { label: "Baja", value: "B" }
@@ -299,7 +305,7 @@ export class AdministradorComponent implements OnInit {
     });
   }
 
-  getAuxiliares(estatus:string){
+  getAuxiliares(estatus){
     this.auxiliaresService.get_auxiliares(estatus).subscribe(response => {
       if (response.success) {
         this.datosAuxiliares = response.data;
@@ -437,7 +443,7 @@ export class AdministradorComponent implements OnInit {
       .then(result => {
         if (result.value) {
           this.candidatoService
-            .aceptar_candidato(id_candidato)
+            .update_estatusCandidato("I",id_candidato)
             .subscribe(response => {
               if (response.success) {
                 Swal.fire("Correcto", response.message, "success");
@@ -463,7 +469,7 @@ export class AdministradorComponent implements OnInit {
       .then(result => {
         if (result.value) {
           this.candidatoService
-            .rechazar_candidato(id_candidato)
+            .update_estatusCandidato("R",id_candidato)
             .subscribe(response => {
               if (response.success) {
                 Swal.fire("Correcto", response.message, "success");
@@ -489,7 +495,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.candidatoService.reactivar_candidato(id).subscribe(response => {
+          this.candidatoService.update_estatusCandidato("A",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getCandidatos("Baja");
@@ -514,7 +520,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.empresaService.reactivarEmpresa(id).subscribe(response => {
+          this.empresaService.update_estatusEmpresa("A",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getEmpresas("Baja");
@@ -540,7 +546,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.candidatoService.delete_candidato(id).subscribe(response => {
+          this.candidatoService.update_estatusCandidato("B",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getCandidatos("Alta");
@@ -565,7 +571,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.empresaService.delete_empresa(id).subscribe(response => {
+          this.empresaService.update_estatusEmpresa("B",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getEmpresas("Alta");

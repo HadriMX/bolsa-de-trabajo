@@ -102,6 +102,52 @@
 
 
       <p-tabPanel header="Registros">
+
+
+
+        <p-table #dtAuxiliaresAdmins [columns]="columnasAuxiliaresAdmin" [value]="datosAuxiliares" dataKey="id_usuario"
+        [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
+        [globalFilterFields]="['email']" [loading]="loading">
+        <ng-template pTemplate="caption">
+          Auxiliares administrativos
+          <div style="text-align: right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Filtrar"
+              (input)="dtAuxiliaresAdmins.filterGlobal($event.target.value, 'contains')" style="width:auto">
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columnas>
+          <tr>
+            <th *ngFor="let columna of columnasAuxiliaresAdmin">
+              {{columna.header}}
+            </th>
+            <!-- <th *ngIf="activos" style="width:8em">Desactivar</th>
+            <th *ngIf="!activos" style="width:8em">Activar</th> -->
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columnas>
+          <tr>
+            <td>
+              {{columnas.email}}
+            </td>
+            <td *ngIf="columnas.estatus==='A'">Alta</td>
+            <td *ngIf="columnas.estatus==='B'">Baja</td>
+            <!-- <td *ngFor="let columna of columnasAuxiliaresAdmin">
+              {{rowData[columna.field]}}
+              
+            </td> -->
+            <!-- <td *ngIf="activos" style="text-align: center;">
+              <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
+                (click)="desactivarCandidato(rowData.id_usuario)"></button>
+            </td>
+            <td *ngIf="!activos" style="text-align: center;">
+              <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
+                (click)="reactivarCandidato(rowData.id_usuario)"></button>
+            </td> -->
+          </tr>
+        </ng-template>
+      </p-table>
+
           
 
       </p-tabPanel>

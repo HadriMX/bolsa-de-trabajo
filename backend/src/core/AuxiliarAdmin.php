@@ -1,11 +1,11 @@
 <?php
 
 class AuxiliarAdmin{
-    public static function get_auxiliares(string $estatus) {
+    public static function get_auxiliares($estatus) {
         $db = new Db();
         $conn = $db->getConn();
         
-        $stmt = $conn->prepare("SELECT email from usuarios WHERE  estatus =?");
+        $stmt = $conn->prepare("SELECT id_usuario,email,estatus FROM usuarios WHERE id_tipo_usuario=100 AND estatus =?");
         
         $stmt->bind_param('s', $estatus);
         $stmt->execute();
