@@ -15,8 +15,8 @@ export class Candidato{
     id_grado_estudios: number;
     id_area_estudio: number;
     escuela: string;
-    pathCURP: string;
-    pathIDENTIFICACION: string;
-    pathCURRICULUM: string;
+    ruta_curp: string;
+    ruta_id: string;
+    ruta_cv: string;
     id_tipo_usuario: number = 1;
 }

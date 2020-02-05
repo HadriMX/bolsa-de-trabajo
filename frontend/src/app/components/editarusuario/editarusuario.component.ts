@@ -55,9 +55,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     id_grado_estudios: 0,
     id_area_estudio: 0,
     escuela: "",
-    pathCURP: "",
-    pathIDENTIFICACION: "",
-    pathCURRICULUM: "",
+    ruta_curp: "",
+    ruta_id: "",
+    ruta_cv: "",
     id_tipo_usuario: 1
   }
 
@@ -67,7 +67,6 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     private areaService: AreaService,
     private gradoEstudioService: GradoEstudioService,
     private formBuilder: FormBuilder,
-    private fileUpload: FileUploadService,
     private candidatoService: CandidatoService,
     private currentUserService: CurrentUserService) { }
 
@@ -140,6 +139,10 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
         if (response.success) {
           this.infoCandidato = response.data;
           this.getMunicipios(this.infoCandidato.id_entidad_federativa);
+
+          if (this.infoCandidato.ruta_cv != null) {
+            this.labelCurriculum = this.infoCandidato.ruta_cv;
+          }
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -159,16 +162,10 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   onSubmit() {
     const formData = new FormData();
     let fileCurriculum = this.uploadForm.get('profile').value;
-    let filename = "curriculum." + this.getFileExtension(fileCurriculum.name);
     // formData.append('identificacion', fileIdentificacion);
     // formData.append('curp', fileCurp);
-    formData.append('curriculum', fileCurriculum), filename;
+    formData.append('curriculum', fileCurriculum);
     formData.append('infoCandidato', JSON.stringify(this.infoCandidato));
-
-    // this.fileUpload.uploadFile(filename, formData).subscribe(
-    //   (res) => console.log(res),
-    //   (err) => console.log(err)
-    // );
 
     this.candidatoService.guardarInfoCandidato(formData)
       .subscribe((response) => {
@@ -186,10 +183,6 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
           Swal.fire("Error", response.message, 'error');
         }
       });
-  }
-
-  getFileExtension(filename: string) {
-    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
   }
 
 }
