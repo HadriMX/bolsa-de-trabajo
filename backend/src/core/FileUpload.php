@@ -70,9 +70,10 @@ class FileUpload
     public static function check_file_exists(string $filename, $id_usuario)
     {
         $fileExists = false;
-
-        foreach (self::$allowedFileTypes as $extension) {
-            $fullFilePath = self::get_upload_dir() . "_" . $id_usuario . "_" . $filename . $extension;
+        
+        $extensions = array_keys(self::$allowedFileTypes);
+        foreach ($extensions as $ext) {
+            $fullFilePath = self::get_upload_dir() . "_" . $id_usuario . "_" . $filename . $ext;
 
             if (file_exists($fullFilePath))
                 return true;
