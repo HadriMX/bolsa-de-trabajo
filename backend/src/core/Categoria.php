@@ -22,6 +22,17 @@ class Categoria{
         return $output;
     }
 
+    public static function get_categoriasEmpresa(){
+        $db = new Db();
+        $conn = $db->getConn();
+        
+        $stmt = $conn->prepare("SELECT * FROM tipos_empresa WHERE estatus = 'A';");
+        
+        $stmt->execute();
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("",$r);
+    }
+
     public static function get_categoriasAdmin(){
         $db = new Db();
         $conn = $db->getConn();

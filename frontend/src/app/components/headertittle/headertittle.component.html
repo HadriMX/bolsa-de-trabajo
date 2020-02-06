@@ -20,8 +20,10 @@
           <a *ngIf="usuarioActual.id_tipo_usuario != 2" class="dropdown-item" routerLink="/menu">Menú principal</a>
           <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" routerLink="/administracion">Menú
             administrativo</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario != 0" class="dropdown-item" routerLink="/editarusuario">Información de
+          <a *ngIf="usuarioActual.id_tipo_usuario == 2" class="dropdown-item" routerLink="/editarempresa">Información de
             la cuenta</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario == 1" class="dropdown-item" routerLink="/editarusuario">Información de
+              la cuenta</a>
           <a *ngIf="usuarioActual.id_tipo_usuario == 1" class="dropdown-item" routerLink="/postulaciones">Mis
             postulaciones</a>
           <a *ngIf="usuarioActual.id_tipo_usuario == 2" class="dropdown-item" routerLink="/vacantes">Mis vacantes</a>

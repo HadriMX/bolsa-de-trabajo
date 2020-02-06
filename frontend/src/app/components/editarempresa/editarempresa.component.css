@@ -1,0 +1,87 @@
+#titulo {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #404044;
+  }
+  label {
+    font-size: 15px;
+    font-weight: 400;
+    color: #404044;
+  }
+  input {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  span {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  /* Custom dropdown */
+  .custom-dropdown {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+  }
+  
+  .custom-dropdown select {
+    font-size: inherit;
+    width: 100%;
+    padding: 0.5em;
+    padding-right: 2.5em;
+    margin: 0;
+    border-radius: 3px;
+    text-indent: 0.01px;
+    text-overflow: "";
+    -webkit-appearance: none; /* hide default arrow in chrome OSX */
+    -moz-appearance: none; /* Mozilla */
+    -o-appearance: button; /* Opera */
+    -ms-appearance: button; /* Internet Explorer */
+    appearance: none; /* CSS3 */
+  }
+  .custom-dropdown::before,
+  .custom-dropdown::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+  
+  /*  Custom dropdown arrow */
+  .custom-dropdown::after {
+    content: "\25BC";
+    height: 1em;
+    font-size: 0.625em;
+    line-height: 1;
+    right: 1.2em;
+    top: 50%;
+    margin-top: -0.5em;
+    color: black !important;
+  }
+  
+  /*  Custom dropdown arrow cover */
+  .custom-dropdown::before {
+    width: 2em;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 0 3px 3px 0;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  #inputFile {
+    height: 37px;
+  }
+  #boton3:hover{
+      background:rgb(77, 16, 83);
+    
+  }
+  #espacioabajo {
+        margin-block-start: 4%;
+  }
+  .custom-file-input ~ .custom-file-label:lang(es)::after {
+      content: "Elegir";
+  }

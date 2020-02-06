@@ -97,7 +97,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   }
 
   getMunicipios(id_entidad) {
-    this.infoCandidato.id_municipio = 0;
+    if(this.infoCandidato.id_municipio == null)
+        this.infoCandidato.id_municipio = 0;
+    
     this.municipioService.getMunicipios(id_entidad)
       .subscribe((response) => {
         if (response.success) {

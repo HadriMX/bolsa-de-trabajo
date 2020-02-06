@@ -14,6 +14,9 @@ export class EmpresaService {
   private endpointUrlGetEmpresas = 'http://localhost/bdt/php/src/empresa/get_empresas.php';
   private endpointUrlDeleteEmpresa = 'http://localhost/bdt/php/src/empresa/delete_empresa.php';
   private endpointUrlReactivar = 'http://localhost/bdt/php/src/empresa/reactivar_empresa.php';
+  private endpointUrlGetEmpresaInfoCompleta = 'http://localhost/bdt/php/src/empresa/get_empresaInfoCompleta.php';
+  private endpointUrlGuardarInfoEmpresa = "http://localhost/bdt/php/src/empresa/update_empresa.php";
+
 
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
@@ -28,6 +31,14 @@ export class EmpresaService {
 
   reactivarEmpresa(id_usuario: number): Observable<ApiResponse<Empresa>> {
     return this.http.post<ApiResponse<Empresa>>(this.endpointUrlReactivar, id_usuario, this.httpOptions);
+  }
+
+  get_empresaInfoCompleta(): Observable<ApiResponse<Empresa>>{
+    return this.http.get<ApiResponse<Empresa>>(this.endpointUrlGetEmpresaInfoCompleta, this.httpOptions);
+  }
+
+  guardarInfoEmpresa(infoEmpresa : Empresa): Observable<ApiResponse<Empresa>>{
+    return this.http.post<ApiResponse<Empresa>>(this.endpointUrlGuardarInfoEmpresa, infoEmpresa, this.httpOptions);
   }
 
 
