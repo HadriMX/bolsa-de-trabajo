@@ -46,6 +46,8 @@ import { VerificacionComponent } from './components/verificacion/verificacion.co
 import { LoadingComponent } from './components/loading/loading.component';
 import { RegistrarVacanteComponent } from './components/registrar-vacante/registrar-vacante.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
+import { PanelAuxiliarComponent } from './components/panel-auxiliar/panel-auxiliar.component';
 
 registerLocaleData(localeEsMx);
 
@@ -55,6 +57,7 @@ const routes: Routes = [
   { path: 'postulaciones', component: PostulacionesComponent, canActivate: [CandidatoGuard] },
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
+  { path: 'solicitudes' ,component:SolicitudesComponent,canActivate:[AdminGuard]},
   { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
   { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
@@ -77,7 +80,9 @@ const routes: Routes = [
     JwPaginationComponent,
     LoadingComponent,
     RegistrarVacanteComponent,
-    RegistroComponent
+    RegistroComponent,
+    SolicitudesComponent,
+    PanelAuxiliarComponent
   ],
   imports: [
     FormsModule,

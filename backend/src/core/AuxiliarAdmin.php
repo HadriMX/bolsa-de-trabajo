@@ -13,5 +13,26 @@ class AuxiliarAdmin{
         return new SuccessResult("",$r);
     }
 
+    public static function update_estatus_auxiliarAdmin($estatus, $id_usuario){
+        $db = new Db();
+        $conn = $db->getConn();
+        
+        $stmt = $conn->prepare("UPDATE usuarios SET estatus=? WHERE id_usuario = ?");
+        $stmt->bind_param('si',$estatus,$id_usuario);
+        $stmt->execute();
+        
+        if ($stmt->affected_rows > 0) {
+            if($estatus=="B"){
+                $output=new SuccessResult("Cuenta desactivada", true);
+            }elseif ($estatus=="A") {
+                $output = new SuccessResult("Cuenta activada nuevamente", true);
+            }
+        } else {
+            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
+
     
 }

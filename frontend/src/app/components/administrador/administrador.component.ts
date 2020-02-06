@@ -24,6 +24,7 @@ import {
   transition,
   animate
 } from "@angular/animations";
+import { CurrentUserService } from 'src/app/services/current-user.service';
 
 
 @Component({
@@ -105,9 +106,13 @@ export class AdministradorComponent implements OnInit {
   datos = [1, 2, 3, 4, 5, 6];
   estado = 0;
   estadoimagen = false;
+  titulo:string;
+  mensaje:string;
   displayDialogCategoria: boolean;
   displayDialogArea: boolean;
-  activos: boolean = true;
+  auxiliarActivo: boolean = true;
+  candidatoActivo:boolean=true;
+  empresaActiva:boolean=true;
   inactivo: boolean = false;
   usuario:boolean;
   btncerrar_area: boolean;
@@ -171,6 +176,7 @@ export class AdministradorComponent implements OnInit {
     InputUbicacion: ""
   };
   allItems: Vacante[] = [];
+  public usuarioActual: Usuario;
 
   constructor(
     private areaService: AreaService,
@@ -182,11 +188,12 @@ export class AdministradorComponent implements OnInit {
     private auxiliaresService: AuxiliarService,
     private vacantesService: VacantesService,
     private registroService: RegistroService,
-    private router: Router
+    private router: Router,
+    private currentUserService: CurrentUserService
   ) {}
 
   ngOnInit() {
-    // this.usuarioActual = this.currentUserService.getUsuarioActual();
+    this.usuarioActual = this.currentUserService.getUsuarioActual();
     this.dashboard();
     this.getAreas();
     this.getCategorias();
@@ -305,13 +312,21 @@ export class AdministradorComponent implements OnInit {
     });
   }
 
-  getAuxiliares(estatus){
+  getAuxiliares(estatus:string){
+    this.datosAuxiliares=null;
+    if(estatus==='A'){
+      this.auxiliarActivo=true;
+    }else{
+      this.auxiliarActivo=false;
+    }
+    this.loading=true;
     this.auxiliaresService.get_auxiliares(estatus).subscribe(response => {
       if (response.success) {
         this.datosAuxiliares = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
+      this.loading=false;
     });
 
   }
@@ -329,9 +344,9 @@ export class AdministradorComponent implements OnInit {
   getCandidatos(estatus: string) {
     this.datosCandidato=null;
     if(estatus==='Alta'){
-      this.activos=true
+      this.candidatoActivo=true
     }else{
-      this.activos=false;
+      this.candidatoActivo=false;
     }
     this.loading=true;
     this.candidatoService.get_candidatos(estatus).subscribe(response => {
@@ -348,9 +363,9 @@ export class AdministradorComponent implements OnInit {
   getEmpresas(estatus: string) {
     this.datosEmpresa=null;
     if(estatus==='Alta'){
-      this.activos=true
+      this.empresaActiva=true
     }else{
-      this.activos=false;
+      this.empresaActiva=false;
     }
     this.loading=true;
     this.empresaService.get_empresas(estatus).subscribe(response => {
@@ -531,6 +546,56 @@ export class AdministradorComponent implements OnInit {
         } else {
         }
       });
+  }
+
+  updateEstatusAuxiliar(id:number,estatus:string){
+    var mostrar;
+    if(estatus=='A'){
+      this.titulo="¿Deseas reactivar la cuenta del usuario?";
+      this.mensaje="La cuenta tendra acceso al sistema";
+      mostrar='B';
+    } else if(estatus=='B'){
+      this.titulo="¿Deseas desactivar la cuenta del usuario?"
+      this.mensaje="La cuenta no tendra acceso al sistema";
+      mostrar='A';
+    }
+    this.swalWithBootstrapButtons 
+    .fire({
+      title: this.titulo,
+      text: this.mensaje,
+      type: "question",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No"
+    })
+    .then(result => {
+      if (result.value) {
+        this.auxiliaresService.update_estatus_auxiliarAdmin(estatus,id).subscribe(response => {
+          if (response.success) {
+            this.swalWithBootstrapButtons 
+            .fire({
+              title: 'Correcto',
+              text: response.message,
+              type: "success",
+              showCancelButton: false,
+              confirmButtonText: "Entendido",
+            });
+            this.getAuxiliares(mostrar);
+
+          } else {
+            this.swalWithBootstrapButtons 
+            .fire({
+              title: 'Error',
+              text: response.message,
+              type: "error",
+              showCancelButton: false,
+              confirmButtonText: "Entendido",
+            });
+          }
+        });
+      } else {
+      }
+    });
   }
 
   //METODOS CRUD (D)
