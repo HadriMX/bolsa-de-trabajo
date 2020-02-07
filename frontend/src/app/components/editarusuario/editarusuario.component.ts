@@ -111,6 +111,8 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
         else {
           Swal.fire("Error", response.message, 'error');
         }
+
+        this.isLoading = false;
       });
   }
 
@@ -153,7 +155,6 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
         else {
           Swal.fire("Error", response.message, 'error');
         }
-        this.isLoading = false;
       });
   }
 
