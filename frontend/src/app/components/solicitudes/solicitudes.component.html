@@ -1,0 +1,72 @@
+<!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
+<app-navbar-admin></app-navbar-admin>
+<div class="container">
+  
+    <div>
+      <div style="margin-top: 1%;">
+        <p-table #dtSolicitdudes [columns]="columnasSolicitud" [value]="datos_solicitud" dataKey="id_candidato"
+          [paginator]="true" [rowsPerPageOptions]="[20,30,50]" [rows]="10"
+          [globalFilterFields]="['candidato','telefono','email']" [loading]="loading">
+          <ng-template pTemplate="caption">
+            Solicitudes de candidatos
+            <div style="text-align: right">
+              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" pInputText size="50" placeholder="Filtrar"
+                (input)="dtSolicitdudes.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columnas>
+            <tr>
+              <th style="width: 3em"></th>
+              <th *ngFor="let columna of columnasSolicitud">
+                {{columna.header}}
+              </th>
+              <th style="width:8em">Aceptar</th>
+              <th style="width:8em">Rechazar</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columnas="columnas">
+            <tr>
+              <td>
+                <a href="#" [pRowToggler]="rowData">
+                  <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                </a>
+              </td>
+              <td *ngFor="let columna of columnasSolicitud">
+                {{rowData[columna.field]}}
+              </td>
+              <td style="text-align: center;">
+                <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
+                  (click)="detalleSolicitud(datos_solicitud);aceptarCandidato(infoSolicitud[0].id_usuario)"></button>
+              </td>
+              <td style="text-align: center;">
+                <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
+                  (click)="detalleSolicitud(datos_solicitud);rechazarCandidato(infoSolicitud[0].id_usuario)"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="rowexpansion" let-rowData let-columnas="columnasSolicitud">
+            <tr>
+              <td [attr.colspan]="columnasSolicitud.length + 3">
+                <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                  <div class="ui-g-12 ui-md-9">
+                    <div class="ui-g">
+                      <div class="ui-g-12">
+                        <b>Escolaridad:</b> {{rowData.escolaridad}}
+                      </div>
+                      <div class="ui-g-12">
+                        <b>Teléfono:</b> {{rowData.telefono}}
+                      </div>
+                      <div class="ui-g-12">
+                        <b>Email:</b> {{rowData.email}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+</div>

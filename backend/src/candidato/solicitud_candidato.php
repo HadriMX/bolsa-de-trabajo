@@ -14,7 +14,10 @@ require_once '../core/session_starter_admin.php';
 
 $post = json_decode(file_get_contents("php://input"));
 
+
+
+$estatus = "$post->estatus";
 $id_usuario = (int) $post;
-echo json_encode(Candidato::reactivar($id_usuario));
+echo json_encode(Candidato::solicitudCandidato($estatus,$id_usuario));
 
 ?>

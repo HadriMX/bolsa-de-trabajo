@@ -3,11 +3,9 @@ import { Area } from "src/app/models/area";
 import { Cat_empresa } from "src/app/models/categoria";
 import { Usuario } from 'src/app/models/usuario';
 import {RegistroService} from 'src/app/services/registro.service';
-import { Solicitudes } from "../../models/solicitudes";
 import Swal from "sweetalert2";
 import { AreaService } from "../../services/area.service";
 import { CatEmpresaService } from "../../services/cat-empresa.service";
-import { SolicitudService } from "../../services/solicitud.service";
 import { AuxiliarService } from '../../services/auxiliar.service';
 import { MatDialog } from "@angular/material";
 import { CandidatoService } from "src/app/services/candidato.service";
@@ -24,6 +22,8 @@ import {
   transition,
   animate
 } from "@angular/animations";
+import { CurrentUserService } from 'src/app/services/current-user.service';
+import {NavbarAdminComponent} from 'src/app/components/navbar-admin/navbar-admin.component';
 
 
 @Component({
@@ -62,6 +62,8 @@ import {
   ]
 })
 export class AdministradorComponent implements OnInit {
+  @Input() numero;
+  @Input() estado = 0;
   @Input() nuevaArea: Area = {
     id_area_estudio: 0,
     nombre: "",
@@ -84,16 +86,6 @@ export class AdministradorComponent implements OnInit {
     phpsessid: ''
   }
 
-  infoSolicitud: Solicitudes = {
-    id_usuario: 0,
-    email: '',
-    escolaridad:'',
-    telefono:'',
-    rutaCV:'',
-    candidato: '',
-    edad:0,
-    genero:''
-  };
   accion;
   loading = false;
   datosCategoria = [];
@@ -101,13 +93,16 @@ export class AdministradorComponent implements OnInit {
   datosAuxiliares =[];
   datosCandidato = [];
   datosEmpresa = [];
-  datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
-  estado = 0;
+ 
   estadoimagen = false;
+  titulo:string;
+  mensaje:string;
   displayDialogCategoria: boolean;
   displayDialogArea: boolean;
-  activos: boolean = true;
+  auxiliarActivo: boolean = true;
+  candidatoActivo:boolean=true;
+  empresaActiva:boolean=true;
   inactivo: boolean = false;
   usuario:boolean;
   btncerrar_area: boolean;
@@ -122,7 +117,7 @@ export class AdministradorComponent implements OnInit {
   columnasArea: any[];
   columnasCandidato: any[];
   columnasEmpresa: any[];
-  columnasSolicitud: any[];
+  columnasAuxiliaresAdmin : any[];
   clonCategoria: { [s: string]: Cat_empresa } = {};
   clonArea: { [s: string]: Area } = {};
 
@@ -160,6 +155,8 @@ export class AdministradorComponent implements OnInit {
         cancelButtonColor: "white"
   });
 
+  
+
   // variales para las vacantes
   infoVacante: Vacante = new Vacante();
   busqueda: Busqueda = {
@@ -170,26 +167,26 @@ export class AdministradorComponent implements OnInit {
     InputUbicacion: ""
   };
   allItems: Vacante[] = [];
+  public usuarioActual: Usuario;
 
   constructor(
     private areaService: AreaService,
     private categoriaService: CatEmpresaService,
-    private solicitudService: SolicitudService,
     private candidatoService: CandidatoService,
     private loginService: LoginService,
     private empresaService: EmpresaService,
     private auxiliaresService: AuxiliarService,
     private vacantesService: VacantesService,
     private registroService: RegistroService,
-    private router: Router
+    private router: Router,
+    private currentUserService: CurrentUserService,
   ) {}
 
   ngOnInit() {
-    // this.usuarioActual = this.currentUserService.getUsuarioActual();
+    this.usuarioActual = this.currentUserService.getUsuarioActual();
     this.dashboard();
     this.getAreas();
     this.getCategorias();
-    this.getSolicitudes();
     this.getCandidatos("Alta");
     this.getAuxiliares("A");
     this.getEmpresas("Alta");
@@ -220,11 +217,10 @@ export class AdministradorComponent implements OnInit {
       { field: "status", header: "Estatus" }
     ];
 
-    this.columnasSolicitud = [
-      { field: "candidato", header: "Candidato" },
-      { field: "edad", header: "Edad" },
-      { field: "genero", header: "Genero" }
-    ];
+    this.columnasAuxiliaresAdmin =[
+      {field: "email", header:"Email"},
+      {field: "estatus", header:"Estatus"}
+    ]
 
     this.estatus = [
       { label: "Alta", value: "A" },
@@ -300,12 +296,20 @@ export class AdministradorComponent implements OnInit {
   }
 
   getAuxiliares(estatus:string){
+    this.datosAuxiliares=null;
+    if(estatus==='A'){
+      this.auxiliarActivo=true;
+    }else{
+      this.auxiliarActivo=false;
+    }
+    this.loading=true;
     this.auxiliaresService.get_auxiliares(estatus).subscribe(response => {
       if (response.success) {
         this.datosAuxiliares = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
+      this.loading=false;
     });
 
   }
@@ -323,9 +327,9 @@ export class AdministradorComponent implements OnInit {
   getCandidatos(estatus: string) {
     this.datosCandidato=null;
     if(estatus==='Alta'){
-      this.activos=true
+      this.candidatoActivo=true
     }else{
-      this.activos=false;
+      this.candidatoActivo=false;
     }
     this.loading=true;
     this.candidatoService.get_candidatos(estatus).subscribe(response => {
@@ -342,9 +346,9 @@ export class AdministradorComponent implements OnInit {
   getEmpresas(estatus: string) {
     this.datosEmpresa=null;
     if(estatus==='Alta'){
-      this.activos=true
+      this.empresaActiva=true
     }else{
-      this.activos=false;
+      this.empresaActiva=false;
     }
     this.loading=true;
     this.empresaService.get_empresas(estatus).subscribe(response => {
@@ -357,16 +361,6 @@ export class AdministradorComponent implements OnInit {
     });
   }
 
-  getSolicitudes() {
-    this.solicitudService.get_solicitudes().subscribe(response => {
-      if (response.success) {
-        this.datos_solicitud = response.data;
-      } else {
-        Swal.fire("Error", response.message, "error");
-      }
-    });
-  }
-
   detalleArea(Area) {
     this.infoArea = Area;
   }
@@ -375,9 +369,6 @@ export class AdministradorComponent implements OnInit {
     this.infoCategoria = Cat_empresa;
   }
 
-  detalleSolicitud(Solicitudes){
-    this.infoSolicitud=Solicitudes;
-  }
 
   //METODOS CRUD (U)
   updateArea(idArea) {
@@ -436,7 +427,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.candidatoService.reactivar_candidato(id).subscribe(response => {
+          this.candidatoService.update_estatusCandidato("A",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getCandidatos("Baja");
@@ -461,7 +452,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.empresaService.reactivarEmpresa(id).subscribe(response => {
+          this.empresaService.update_estatusEmpresa("A",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getEmpresas("Baja");
@@ -472,6 +463,56 @@ export class AdministradorComponent implements OnInit {
         } else {
         }
       });
+  }
+
+  updateEstatusAuxiliar(id:number,estatus:string){
+    var mostrar;
+    if(estatus=='A'){
+      this.titulo="¿Deseas reactivar la cuenta del usuario?";
+      this.mensaje="La cuenta tendra acceso al sistema";
+      mostrar='B';
+    } else if(estatus=='B'){
+      this.titulo="¿Deseas desactivar la cuenta del usuario?"
+      this.mensaje="La cuenta no tendra acceso al sistema";
+      mostrar='A';
+    }
+    this.swalWithBootstrapButtons 
+    .fire({
+      title: this.titulo,
+      text: this.mensaje,
+      type: "question",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No"
+    })
+    .then(result => {
+      if (result.value) {
+        this.auxiliaresService.update_estatus_auxiliarAdmin(estatus,id).subscribe(response => {
+          if (response.success) {
+            this.swalWithBootstrapButtons 
+            .fire({
+              title: 'Correcto',
+              text: response.message,
+              type: "success",
+              showCancelButton: false,
+              confirmButtonText: "Entendido",
+            });
+            this.getAuxiliares(mostrar);
+
+          } else {
+            this.swalWithBootstrapButtons 
+            .fire({
+              title: 'Error',
+              text: response.message,
+              type: "error",
+              showCancelButton: false,
+              confirmButtonText: "Entendido",
+            });
+          }
+        });
+      } else {
+      }
+    });
   }
 
   //METODOS CRUD (D)
@@ -487,7 +528,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.candidatoService.delete_candidato(id).subscribe(response => {
+          this.candidatoService.update_estatusCandidato("B",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getCandidatos("Alta");
@@ -512,7 +553,7 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.empresaService.delete_empresa(id).subscribe(response => {
+          this.empresaService.update_estatusEmpresa("B",id).subscribe(response => {
             if (response.success) {
               Swal.fire("Correcto", response.message, "success");
               this.getEmpresas("Alta");
@@ -572,9 +613,12 @@ export class AdministradorComponent implements OnInit {
   CerrarModales() {
     (<any>$("#ModalModificarAreas")).modal("hide");
     (<any>$("#ModalModificarCat")).modal("hide");
+    
+
   }
 
-  categorias(numero) {
+  categorias(numero: number) {
+    //numero= this.navBarComponentAdmin.numero;
     this.inputbooleano = false;
     // Se selecciona Categorias de las empresas
     if (numero === 1) {

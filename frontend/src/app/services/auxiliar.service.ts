@@ -10,6 +10,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class AuxiliarService {
 
   private endpointUrlGetAuxiliares = 'http://localhost/bdt/php/src/auxiliarAdmin/get_auxiliares.php';
+  private endpointUrlUpdateEstatusAuxiliarAdmin ='http://localhost/bdt/php/src/auxiliarAdmin/update_estatus_auxiliarAdmin.php'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,6 +18,12 @@ export class AuxiliarService {
   constructor(private http: HttpClient) { }
 
   get_auxiliares(estatus:string): Observable<ApiResponse<Usuario[]>> {
-    return this.http.get<ApiResponse<Usuario[]>>(this.endpointUrlGetAuxiliares, this.httpOptions);
+    return this.http.post<ApiResponse<Usuario[]>>(this.endpointUrlGetAuxiliares,{ estatus: estatus }, this.httpOptions);
   }
+
+  update_estatus_auxiliarAdmin(estatus,id_usuario): Observable<ApiResponse<Usuario>> {
+    return this.http.post<ApiResponse<Usuario>>(this.endpointUrlUpdateEstatusAuxiliarAdmin,{ estatus: estatus,id_usuario:id_usuario }, this.httpOptions);
+  }
+
+  
 }
