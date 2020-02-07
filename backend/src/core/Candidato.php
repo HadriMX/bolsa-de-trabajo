@@ -4,24 +4,18 @@ class Candidato
 {
     public static function update(array $candidato)
     {
-        $bandera = 0; //bandera 0 = datos completos, 1 = datos incompletos
+        $msj = "Tu información ha sido guardada correctamente.";
         $datosIncompletos = array(); //se guardarán los datos faltantes expecificamente
         $cadenaDatosIncompletos = "";
         $db = new Db();
         $conn = $db->getConn();
-        $stmt = $conn->prepare("REPLACE INTO candidatos(id_usuario, nombre, apellido1, apellido2, fecha_nacimiento, genero, telefono, id_entidad_federativa, id_municipio, ciudad, colonia, cp, calle, num_ext, id_grado_estudios, id_area_estudio, escuela, ruta_curp, ruta_id, ruta_cv) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = $conn->prepare("UPDATE candidatos SET telefono = ?, id_municipio = ?, ciudad = ?, colonia = ?, cp = ?, calle = ?, num_ext = ?, id_area_estudio = ?, escuela = ?, ruta_curp = ?, ruta_id = ?, ruta_cv = ? WHERE id_usuario = ?");
 
         //info personal
         $id_usuario = $candidato['id_usuario'];
-        $nombre = $candidato['nombre'];
-        $apellido1 = $candidato['apellido1'];
-        $apellido2 = $candidato['apellido2'];
-        $fecha_nacimiento = $candidato['fecha_nacimiento'];
-        $genero = $candidato['genero'];
         $telefono = trim($candidato['telefono']);
 
         //direccion
-        $id_entidad_federativa = $candidato['id_entidad_federativa'];
         $id_municipio = $candidato['id_municipio'];
         $ciudad = trim($candidato['ciudad']);
         $colonia = trim($candidato['colonia']);
@@ -30,7 +24,6 @@ class Candidato
         $num_ext = $candidato['num_ext'];
 
         //info academica
-        $id_grado_estudios = $candidato['id_grado_estudios'];
         $id_area_estudio = $candidato['id_area_estudio'];
         $escuela = trim($candidato['escuela']);
         $ruta_curp = $candidato['ruta_curp'];
@@ -38,27 +31,20 @@ class Candidato
         $ruta_cv = $candidato['ruta_cv'];
 
         $stmt->bind_param(
-            'issssssiisssssiissss',
-            $id_usuario,
-            $nombre,
-            $apellido1,
-            $apellido2,
-            $fecha_nacimiento,
-            $genero,
+            'sisssssissssi',
             $telefono,
-            $id_entidad_federativa,
             $id_municipio,
             $ciudad,
             $colonia,
             $cp,
             $calle,
             $num_ext,
-            $id_grado_estudios,
             $id_area_estudio,
             $escuela,
             $ruta_curp,
             $ruta_id,
-            $ruta_cv
+            $ruta_cv,
+            $id_usuario
         );
 
 
@@ -102,15 +88,23 @@ class Candidato
             }
 
             return new ErrorResult("Error: Datos incompletos. Porfavor llene todos los datos: " . $cadenaDatosIncompletos, 415);
+
         }else{
 
-            //se cambia el estatus del usuario de I -> A
+            if($_SESSION["currentUser"]["estatus"]=="I"){
+                $stmt2 = $conn->prepare("UPDATE usuarios SET estatus='A' where id_usuario = ?");
+                $stmt2->bind_param('i', $id_usuario);
+                $stmt2->execute();
+
+                $msj = "Tu información ha sido guardada correctamente. Vuelve a iniciar sesión para que se apliquen los cambios.";
+            }
+
         }
 
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("Tu información ha sido guardada correctamente", true);
+            $output = new SuccessResult($msj, true);
         } else {
             $output = new ErrorResult("Error: No se pudo guardar la información. Intentelo mas tarde", 515);
         }
