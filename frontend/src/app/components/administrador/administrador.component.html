@@ -22,7 +22,7 @@
           style="width: 100%; cursor: pointer; ">Solicitudes<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(4)">
+        <a style="cursor: pointer;" id="usuariosactivos" class="nav-link" (click)="categorias(3)">
           Candidatos</a>
       </li>
       <li class="nav-item active">
@@ -59,6 +59,7 @@
 </nav> -->
 
 
+<app-navbar-admin></app-navbar-admin>
 
 
 
@@ -89,38 +90,79 @@
 
 
 
-
+<!-- 
 <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
   <a class="navbar-brand" routerLink="/menu">
     <img src="/assets/logo-volar.png" alt="Logo Volar">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <span id="titulopag">Administración</span>
     <ul class="navbar-nav">
       <div class="dropdown show">
         <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <span style="color: white;">Usuarios</span>
         </a>
-
         <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
-          <a  class="dropdown-item" routerLink="/menu">Auxiliares administrativos</a>
-          <a  class="dropdown-item" routerLink="/administracion">Solicitudes</a>
-          <a  class="dropdown-item" routerLink="/editarusuario">Candidatos</a>
-          <a  class="dropdown-item" routerLink="/postulaciones">Empresas</a>
-          <a  class="dropdown-item" routerLink="/vacantes">Vacantes</a>
-          
+          <a class="dropdown-item" (click)="categorias(7)">Auxiliares administrativos</a>
+          <a class="dropdown-item" (click)="categorias(3)">Solicitudes</a>
+          <a class="dropdown-item" (click)="categorias(4)">Candidatos</a>
+          <a class="dropdown-item" (click)="categorias(5)">Empresas</a>
+          <a class="dropdown-item" routerLink="/vacantes">Vacantes</a>
+        </div>
+
+      </div>
+    </ul>
+
+
+    <ul class="navbar-nav">
+      <div class="dropdown show">
+  
+
+    <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" style="margin-left: 10%;">
+      <span style="color: white;">Catalogos</span>
+
+    </a>
+    <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" (click)="categorias(1)">Categorias de empresas</a>
+      <a class="dropdown-item" (click)="categorias(2)">Areas de estudio</a>
+    </div>
+  </div>
+</ul>
+
+  </div>
+  
+
+  
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <span id="titulopag">BOLSA DE TRABAJO</span>
+    <ul class="navbar-nav">
+      <div class="dropdown show">
+        <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <span style="color: white;">{{ usuarioActual.email }}</span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
+          <a *ngIf="usuarioActual.id_tipo_usuario != 2" class="dropdown-item" routerLink="/menu">Menú principal</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" routerLink="/administracion">Menú
+            administrativo</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario != 0" class="dropdown-item" routerLink="/editarusuario">Información de
+            la cuenta</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario == 1" class="dropdown-item" routerLink="/postulaciones">Mis
+            postulaciones</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario == 2" class="dropdown-item" routerLink="/vacantes">Mis vacantes</a>
+          <a class="dropdown-item" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
         </div>
 
       </div>
     </ul>
   </div>
-</nav>
+
+
+</nav> -->
 
 
 
@@ -278,46 +320,46 @@
 
 
         <p-table #dtAuxiliaresAdmins [columns]="columnasAuxiliaresAdmin" [value]="datosAuxiliares" dataKey="id_usuario"
-        [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
-        [globalFilterFields]="['email']" [loading]="loading">
-        <ng-template pTemplate="caption">
-          Auxiliares administrativos
-          <div style="text-align: right">
-            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input type="text" pInputText size="50" placeholder="Filtrar"
-              (input)="dtAuxiliaresAdmins.filterGlobal($event.target.value, 'contains')" style="width:auto">
-          </div>
-        </ng-template>
-        <ng-template pTemplate="header" let-columnas>
-          <tr>
-            <th *ngFor="let columna of columnasAuxiliaresAdmin">
-              {{columna.header}}
-            </th>
-            <th *ngIf="activos" style="width:8em">Desactivar</th>
-            <th *ngIf="!activos" style="width:8em">Activar</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columnas>
-          <tr>
-            <td>
-              {{columnas.email}}
-            </td>
-            <td *ngIf="columnas.estatus==='A'">Alta</td>
-            <td *ngIf="columnas.estatus==='B'">Baja</td>
-         
-            <td *ngIf="auxiliarActivo" style="text-align: center;">
-              <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
-                (click)="updateEstatusAuxiliar(rowData.id_usuario,'B')"></button>
-            </td>
-            <td *ngIf="!auxiliarActivo" style="text-align: center;">
-              <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
-                (click)="updateEstatusAuxiliar(rowData.id_usuario,'A')"></button>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
+          [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10" [globalFilterFields]="['email']"
+          [loading]="loading">
+          <ng-template pTemplate="caption">
+            Auxiliares administrativos
+            <div style="text-align: right">
+              <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+              <input type="text" pInputText size="50" placeholder="Filtrar"
+                (input)="dtAuxiliaresAdmins.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header" let-columnas>
+            <tr>
+              <th *ngFor="let columna of columnasAuxiliaresAdmin">
+                {{columna.header}}
+              </th>
+              <th *ngIf="activos" style="width:8em">Desactivar</th>
+              <th *ngIf="!activos" style="width:8em">Activar</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columnas>
+            <tr>
+              <td>
+                {{columnas.email}}
+              </td>
+              <td *ngIf="columnas.estatus==='A'">Alta</td>
+              <td *ngIf="columnas.estatus==='B'">Baja</td>
 
-          
+              <td *ngIf="auxiliarActivo" style="text-align: center;">
+                <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
+                  (click)="updateEstatusAuxiliar(rowData.id_usuario,'B')"></button>
+              </td>
+              <td *ngIf="!auxiliarActivo" style="text-align: center;">
+                <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
+                  (click)="updateEstatusAuxiliar(rowData.id_usuario,'A')"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+
 
       </p-tabPanel>
     </p-tabView>

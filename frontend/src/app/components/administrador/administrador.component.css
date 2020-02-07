@@ -1,29 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata:700");
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700,900");
 
+#buscador {
+  margin-left: 100px;
+}
+
+.link-no-underline:hover {
+  text-decoration: none !important;
+}
+
 .dropdown-content {
-  display: none;
-  position: absolute;
   background-color: rgb(121, 24, 129);
   min-width: 300px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 2;
 }
 
 .dropdown-content a {
-  color: white;
-  padding: 10px 40px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-h4 {
-  margin-left: 5%;
-}
-
-h6,
-h5 {
   color: white;
 }
 
@@ -32,19 +25,23 @@ h5 {
   color: white;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
+.dropdown-toggle::after {
+  color: white;
 }
 
 nav.navbar {
   background-color: rgb(121, 24, 129);
 }
 
-/* -------------------------------------------*/
-input[type="number"] {
-  -moz-appearance: textfield;
-  appearance: none;
-  -webkit-appearance: none;
+input {
+  margin-inline-end: 10px;
+}
+
+#titulopag {
+  color: white;
+  text-align: center;
+  width: 100%;
+  font-size: large;
 }
 
 /* body {
@@ -136,7 +133,7 @@ a {
   font-size: 14px;
 }
 
-a:after {
+/* a:after {
   display: block;
   content: "";
   border-bottom: solid 3px white;
@@ -154,7 +151,7 @@ a.fromRight:after {
 
 a.fromLeft:after {
   transform-origin: 0% 50%;
-}
+} */
 
 .btnuser {
   width: 25%;

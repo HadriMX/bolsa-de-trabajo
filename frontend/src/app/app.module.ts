@@ -48,6 +48,7 @@ import { RegistrarVacanteComponent } from './components/registrar-vacante/regist
 import { RegistroComponent } from './components/registro/registro.component';
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 import { PanelAuxiliarComponent } from './components/panel-auxiliar/panel-auxiliar.component';
+import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
 
 registerLocaleData(localeEsMx);
 
@@ -82,7 +83,8 @@ const routes: Routes = [
     RegistrarVacanteComponent,
     RegistroComponent,
     SolicitudesComponent,
-    PanelAuxiliarComponent
+    PanelAuxiliarComponent,
+    NavbarAdminComponent
   ],
   imports: [
     FormsModule,

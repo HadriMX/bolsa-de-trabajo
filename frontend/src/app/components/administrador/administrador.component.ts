@@ -25,6 +25,7 @@ import {
   animate
 } from "@angular/animations";
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import {NavbarAdminComponent} from 'src/app/components/navbar-admin/navbar-admin.component';
 
 
 @Component({
@@ -63,6 +64,8 @@ import { CurrentUserService } from 'src/app/services/current-user.service';
   ]
 })
 export class AdministradorComponent implements OnInit {
+  @Input() numero;
+  @Input() estado = 0;
   @Input() nuevaArea: Area = {
     id_area_estudio: 0,
     nombre: "",
@@ -104,7 +107,7 @@ export class AdministradorComponent implements OnInit {
   datosEmpresa = [];
   datos_solicitud = [];
   datos = [1, 2, 3, 4, 5, 6];
-  estado = 0;
+ 
   estadoimagen = false;
   titulo:string;
   mensaje:string;
@@ -189,7 +192,7 @@ export class AdministradorComponent implements OnInit {
     private vacantesService: VacantesService,
     private registroService: RegistroService,
     private router: Router,
-    private currentUserService: CurrentUserService
+    private currentUserService: CurrentUserService,
   ) {}
 
   ngOnInit() {
@@ -696,9 +699,12 @@ export class AdministradorComponent implements OnInit {
   CerrarModales() {
     (<any>$("#ModalModificarAreas")).modal("hide");
     (<any>$("#ModalModificarCat")).modal("hide");
+    
+
   }
 
-  categorias(numero) {
+  categorias(numero: number) {
+    //numero= this.navBarComponentAdmin.numero;
     this.inputbooleano = false;
     // Se selecciona Categorias de las empresas
     if (numero === 1) {

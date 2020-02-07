@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
+    <a class="navbar-brand" routerLink="/menu">
+      <img src="/assets/logo-volar.png" alt="Logo Volar">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <div class="dropdown show">
+          <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span style="color: white;">Usuarios</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" (click)="numero(7)">Auxiliares administrativos</a>
+            <a class="dropdown-item" (click)="numero(3)">Solicitudes</a>
+            <a class="dropdown-item" (click)="numero(4)">Candidatos</a>
+            <a class="dropdown-item" (click)="numero(5)">Empresas</a>
+            <a class="dropdown-item" routerLink="/vacantes">Vacantes</a>
+          </div>
+  
+        </div>
+      </ul>
+  
+  
+      <ul class="navbar-nav">
+        <div class="dropdown show">
+    
+  
+      <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" style="margin-left: 10%;">
+        <span style="color: white;">Catalogos</span>
+  
+      </a>
+      <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" (click)="numero(1)">Categorias de empresas</a>
+        <a class="dropdown-item" (click)="numero(2)">Areas de estudio</a>
+      </div>
+    </div>
+  </ul>
+  
+    </div>
+    
+  
+    
+  
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <span id="titulopag">BOLSA DE TRABAJO</span>
+      <ul class="navbar-nav">
+        <div class="dropdown show">
+          <a class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span style="color: white;">{{ usuarioActual.email }}</span>
+          </a>
+  
+          <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
+            <a *ngIf="usuarioActual.id_tipo_usuario != 2" class="dropdown-item" routerLink="/menu">Menú principal</a>
+            <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" routerLink="/administracion">Menú
+              administrativo</a>
+            <a *ngIf="usuarioActual.id_tipo_usuario != 0" class="dropdown-item" routerLink="/editarusuario">Información de
+              la cuenta</a>
+            <a *ngIf="usuarioActual.id_tipo_usuario == 1" class="dropdown-item" routerLink="/postulaciones">Mis
+              postulaciones</a>
+            <a *ngIf="usuarioActual.id_tipo_usuario == 2" class="dropdown-item" routerLink="/vacantes">Mis vacantes</a>
+            <a class="dropdown-item" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
+          </div>
+  
+        </div>
+      </ul>
+    </div>
+  
+  
+  </nav>
