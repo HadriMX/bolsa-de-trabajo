@@ -49,7 +49,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 export class AdministradorComponent implements OnInit {
 
   @Input() nuevaArea: Area = {
-    id_area_estudios: 0,
+    id_area_estudio: 0,
     nombre: '',
     estatus: ''
   }
@@ -101,7 +101,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   infoArea: Area = {
-    id_area_estudios: 0,
+    id_area_estudio: 0,
     nombre: '',
     estatus: ''
   }
@@ -455,12 +455,12 @@ export class AdministradorComponent implements OnInit {
   }
 
   onRowEditCancelArea(datos: Area, index: number) {
-    this.datosArea[index] = this.clonArea[datos.id_area_estudios];
-    delete this.clonArea[datos.id_area_estudios];
+    this.datosArea[index] = this.clonArea[datos.id_area_estudio];
+    delete this.clonArea[datos.id_area_estudio];
   }
 
   onRowEditArea(datosArea: Area) {
-    this.clonArea[datosArea.id_area_estudios] = { ...datosArea };
+    this.clonArea[datosArea.id_area_estudio] = { ...datosArea };
 
   }
 

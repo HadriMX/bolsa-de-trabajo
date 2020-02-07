@@ -98,7 +98,7 @@ export class RegistrarVacanteComponent implements OnInit {
   }
 
   registrarVacante() {
-    this.nuevaVacante.id_area_estudio = this.areaEstudioSeleccionada.id_area_estudios;
+    this.nuevaVacante.id_area_estudio = this.areaEstudioSeleccionada.id_area_estudio;
     this.nuevaVacante.descripcion_puesto_plain_text = viewToPlainText(this.editor.editing.view.document.getRoot());
 
     console.log(this.nuevaVacante);
@@ -112,7 +112,7 @@ export class RegistrarVacanteComponent implements OnInit {
   }
 
   cancelar() {
-
+    
   }
 
 }

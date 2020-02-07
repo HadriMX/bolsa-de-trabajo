@@ -112,7 +112,7 @@ export class EditarempresaComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           this.infoEmpresa = response.data;
-          console.log(this.infoEmpresa);
+          // console.log(this.infoEmpresa);
           this.getMunicipios();
           // console.log(this.infoEmpresa);
         }

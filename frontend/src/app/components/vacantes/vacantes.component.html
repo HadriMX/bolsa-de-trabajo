@@ -1,22 +1,22 @@
 <app-headertittle></app-headertittle>
-<html>
-
 <div id="body">
     <div class="container">
         <mat-tab-group id="mattab" dynamicHeight>
             <mat-tab label="Vacantes Publicadas">
 
-                <div class="row" id="registrarVacanteArea">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <button routerLink="registrar" id="registrarVacanteButton" class="btn btn-primary btn-lg btn-wide mx-2">
+                <div *ngIf="!isLoading" class="row" id="registrarVacanteArea">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="text-align: left; padding-top: 15px;">
+                        <h6 class="font-weight-bold" style="font-size: 20px;">Empresa: {{infoEmpresa.nombre_empresa}}</h6>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-12" style="text-align: right;">
+                        <button routerLink="registrar" id="registrarVacanteButton" class="btn btn-primary">
                             Agregar Vacante
                         </button>
                     </div>
                 </div>
 
                 <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
-                    <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,0)" data-toggle="modal"
-                      data-target="#datosPostulacion">
+                    <div id="vacantesInfo" (click)="mostrarDetalleVacante(item)" data-toggle="modal" data-target="#datosvacantes">
                       <div class="row">
                         <div class="col-9">
                           <h6 style="color: rgb(121, 24, 129);">
@@ -28,16 +28,16 @@
                         </div>
                       </div>
           
-                      <div class="row">
+                      <!-- <div class="row">
                         <div class="col">
                           <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)</h6>
                         </div>
-                      </div>
+                      </div> -->
           
                       <div class="row">
                         <div class="col">
                           <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
-                              class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
+                              class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6><h6 class="font-weight-bold">({{item.sueldo | currency:'MXN'}} MXN)</h6>
                         </div>
                       </div>
           
@@ -64,429 +64,85 @@
         </div>
     </div>
 </div>
-    
-</html>
+
 <!--===============================================================================================-->
 <!-- Modal de los datos de las vacantes -->
-<div class="modal fade" id="datosvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="datosvacantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-controls-modal="datosvacante" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-                <h5 class="col-8 col-sm-8 col-md-8" id="exampleModalLabel" style="font-size: 100%; color:white;">
-                    INFORMACION DE LA VACANTE</h5>
-            </div>
-            <div class="modal-body">
-                <div style="margin-left: 60px;">
-                    <div class="row" style="margin-block-start: 5%;">
-                        <div class="col-lg-10 col-sm-9 col-8">
-                            <h4 style="color:blue;">--------</h4>
-                        </div>
-                        <div data-toggle="modal" data-target="#vacanteeditar" data-dismiss="modal">
-                            <BUtton class="form-control btn" >
-                                <h6>Editar <img style="margin-left: 5px;" src="/assets/edit.png" height="25px"
-                                    width="25px" alt="Generic placeholder image"></h6>
-                        
-                            </BUtton>
-                            </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">----------</h6>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">Contratacion:</h6>
+            <div class="modal-header mx-2" style="border-bottom: 1px solid rgb(121, 24, 129);">
+                <div class="container">
+                    <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 text-left">
+                            <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">----------------</h6>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">Salario neto mensual</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">-------------------</h6>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">Experiencia</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">------</h6>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">-----------</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">Genero</h6>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <h6 style="margin-block-start: 30px;">Indefenido</h6>
-                        </div>
-                    </div>
-                    <h6 style="margin-block-start: 30px;">Fecha de postulacion -------------- </h6>
 
-                    <div class="row">
-                        <div class=" col-lg-4 col-sm-2 col-1">
-
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 text-left">
+                            <h6> <span class="font-weight-light text-muted">Empresa
+                                </span>{{infoVacante.nombre_empresa}}</h6>
                         </div>
-                        <div>
-                            <button class="btn btn-danger"
-                                style="margin-block-start: 10%;; height:70%; width:100%;">Cancelar Vacante</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-                <button type="button" class="botonfooter form-control" data-dismiss="modal">Salir</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--===============================================================================================-->
-<!-- Modal para registrar una vacante -->
-<div class="modal fade" id="agregarvacante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-                <h5 id="exampleModalLabel" style="color:white;font-size: 100%;">REGISTRO DE VACANTE
-                </h5>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <h5 style="text-align: center;">Datos de la vacante</h5>
-                    <div>
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="row">
-                                    <div class="col-lg-3 col-sm-12 col-12">
-                                        <h6 style="margin-block-start: 15px;">Titulo de la vacante:</h6>
-                                    </div>
-                                    <div class="col-lg-9 col-sm-12 col-12">
-                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
-                                            placeholder="titulo">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h6 style="margin-block-start: 15px;">Nombre del puesto:</h6>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
-                                            placeholder="titulo"> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 3px;">
-                            <h6 style="margin-block-start: 15px;">Descripcion del puesto:</h6>
-                            <textarea rows="4" class="form-control"></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <h6 style="margin-block-start: 15px;">Area de estudio</h6>
-                            </div>
-                            <div class="col-lg-9">
-                                <select class="form-control" name="select"
-                                    style=" width:100%; margin-block-start: 8px;">
-                                    <option value="">Opciones</option>
-                                    <option value="value1"> Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h6 style="margin-block-start: 15px;">Genero</h6>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <select class="form-control" name="select"
-                                            style="width:100%; margin-block-start: 6px;">
-                                            <option value="">Opciones</option>
-                                            <option value="value1"> Ejemplo 1</option>
-                                            <option value="value2">Ejemplo 2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h6 style="margin-block-start: 15px;">Sueldo</h6>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
-                                            placeholder="titulo">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left:3px;">
-                            <h6 style="margin-block-start: 15px;">Direccion</h6>
-                            <textarea rows="4" class="form-control"></textarea>
+                        <div class="col-md-6 text-md-right">
+                            <h6><span class="font-weight-light text-muted">Publicada </span>
+                                {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-                <button type="button" class="botonfooter form-control" id="botonfooter2"
-                    data-dismiss="modal">Registrar</button>
-                <button type="button" class="botonfooter form-control" id="botonfooter2"
-                    data-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--===============================================================================================-->
-<!-- Modal para editar la informacion del usuario -->
-<div class="modal fade" id="editarinfoempresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-                <h5 id="exampleModalLabel" style="color:white; font-size: 100%;">Editar informacion
-                </h5>
-            </div>
-            <div class="modal-body" style="overflow: auto">
-                <div>
 
-                    <h6>Informacion de la Empresa</h6>
-                    <div class="border border-dark" style="width: 99%; ">
-                        <h6 style="margin-left: 1%;">Datos de la Empresa</h6>
-                        <div class="row" style="margin-left: 1%;">
-                            <div class="col-lg-1 col-sm-2 col-3" id="titulo">
-                                <h6 autofocus required id="tamaño">Nombre:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;">
-                                <input class="form-control input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-sm-2 col-3" id="titulo">
-                                <h6 id="tamaño">Telefono:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;">
-                                <input class="form-control input100" type="number">
-                            </div>
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 text-left">
+                            <h6> <span class="font-weight-light text-muted">Ubicación
+                                </span>{{infoVacante.entidad_federativa}}</h6>
                         </div>
-
-                        <div class="row" style="margin-left: 15px;">
-                            <div class="col-lg-1 col-sm-1 col-3" id="titulo">
-                                <h6 id="tamaño">RFC:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%; ">
-                                <input class="form-control input100" type="email">
-                            </div>
-                            <div class="col-lg-2 col-sm-2 col-3" id="titulo">
-                                <h6 id="tamaño">Pagina web:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%; ">
-                                <input class="form-control input100" type="email">
-                            </div>
-
-                        </div>
-                        <div class="input-group" style="margin-block-start: 2%; width: 90%; margin-left: 2%;">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"
-                                    style="background-color: black; color:white;">Descripcion</span>
-                            </div>
-                            <textarea rows="4" class="form-control" aria-label="With textarea"></textarea>
-                        </div>
-                        <h6 style="margin-left: 30px; margin-top: 20px;">Direccion</h6>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-1 col-sm-2 col-2" id="titulo">
-                                <h6 id="tamaño">Estado:</h6>
-                            </div>
-                            <div class="col-lg-4 col-sm-4 col-9" style="margin-left: 2%;">
-                                <select class="form-control" name="select" style="margin-top: 10px; width:70%;">
-                                    <option value="value1" selected>Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-1 col-sm-2 col-2" id="titulo">
-                                <h6 id="tamaño">Ciudad:</h6>
-                            </div>
-                            <div class="col-lg-4 col-sm-3 col-7" style="margin-left: 2%;">
-                                <input class="form-control input100" type="text">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px;">
-                            <div class="col-lg-1 col-sm-2 col-2" id="titulo">
-                                <h6 id="tamaño">Colonia:</h6>
-                            </div>
-                            <div class="col-lg-4 col-sm-3 col-8" style="margin-left: 10px;">
-                                <input class="form-control input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-sm-1 col-2" id="titulo">
-                                <h6 id="tamaño">Calle:</h6>
-                            </div>
-                            <div class="col-lg-4 col-sm-4 col-7" style="margin-left: 2%;">
-                                <input class="form-control input100" type="text">
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 35px; margin-block-end: 2%;">
-                            <div class="col-lg-1 col-sm-2 col-2" id="titulo">
-                                <h6 id="tamaño">CP:</h6>
-                            </div>
-                            <div class="col-lg-4 col-sm-3 col-7" style="margin-left: 10px;">
-                                <input class="form-control input100" type="number">
-                            </div>
+                        <div class="col-md-6 text-md-right">
+                            <h6><span class="font-weight-light text-muted">Sueldo
+                                </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
                         </div>
                     </div>
-                    <!-- Aqui empieza el espacio para el contacto -->
-                    <div class="border border-dark" style="width: 99%; margin-block-start: 2%;">
-                        <h6 style="margin-left: 1%;">Datos del Contacto</h6>
-                        <div class="row" style="margin-left: 1%;">
-                            <div class="col-lg-1 col-sm-2 col-3" id="titulo">
-                                <h6 autofocus required id="tamaño">Nombre:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;">
-                                <input class=" form-control input100" type="text">
-                            </div>
-                            <div class="col-lg-1 col-sm-2 col-3" id="titulo">
-                                <h6 id="tamaño">Telefono:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-3 col-7" style="margin-left: 2%;">
-                                <input class="form-control input100" type="number">
-                            </div>
-                        </div>
 
-                        <div class="row" style="margin-left: 15px; margin-block-end: 5%;">
-                            <div class="col-lg-1 col-sm-1 col-3" id="titulo">
-                                <h6 id="tamaño">Correo Electronico:</h6>
-                            </div>
-                            <div class="col-lg-3 col-sm-5 col-7" style="margin-left: 4%; margin-block-start: 1%; ">
-                                <input class="form-control  input100" type="email">
-                            </div>
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 text-left">
+                            <h6><span class="font-weight-light text-muted"> Area </span>{{infoVacante.area_estudio}}
+                            </h6>
                         </div>
-                    </div>
-                    <div class="row" style="margin-block-start: 5%;">
-                        <div class="col-lg-4 col-sm-4 col-4">
-                            <div>
-                                <button class="form-control btn btn-primary">Seleccionar Logo</button>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-6">
-                            <div style="margin-left: 80%;">
-                                <img class="modal-title" src="/assets/img.png" height="60px" width="60px"
-                                    alt="Generic placeholder image">
-                            </div>
+                        <div class="col-md-6 text-md-right">
+                            <h6><span class="font-weight-light text-muted">Género preferente </span>
+                                {{infoVacante.genero}}</h6>
                         </div>
                     </div>
                 </div>
 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Omitir</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar Cambios</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--===============================================================================================-->
-<!-- Modal para editar una vacante -->
-<div style="overflow-y:scroll" class="modal fade" id="vacanteeditar" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header border border-dark" style="background-color: rgb(87, 4, 87);">
-                <h5 id="exampleModalLabel" style="font-size: 100%; color:white;"> EDITAR VACANTE</h5>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <h5 style="text-align: center;">Datos de la vacante</h5>
-                    <div>
-                        <div class="row">
-                            <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="row">
-                                    <div class="col-lg-3 col-sm-12 col-12">
-                                        <h6 style="margin-block-start: 15px;">Titulo de la vacante:</h6>
-                                    </div>
-                                    <div class="col-lg-9 col-sm-12 col-12">
-                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
-                                            placeholder="titulo">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h6 style="margin-block-start: 15px;">Nombre del puesto:</h6>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
-                                            placeholder="titulo"> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left: 3px;">
-                            <h6 style="margin-block-start: 15px;">Descripcion del puesto:</h6>
-                            <textarea rows="4" class="form-control"></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <h6 style="margin-block-start: 15px;">Area de estudio</h6>
-                            </div>
-                            <div class="col-lg-9">
-                                <select class="form-control" name="select"
-                                    style=" width:100%; margin-block-start: 8px;">
-                                    <option value="">Opciones</option>
-                                    <option value="value1"> Ejemplo 1</option>
-                                    <option value="value2">Ejemplo 2</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h6 style="margin-block-start: 15px;">Genero</h6>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <select class="form-control" name="select"
-                                            style="width:100%; margin-block-start: 6px;">
-                                            <option value="">Opciones</option>
-                                            <option value="value1"> Ejemplo 1</option>
-                                            <option value="value2">Ejemplo 2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <h6 style="margin-block-start: 15px;">Sueldo</h6>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" style="width: 100%; margin-block-start: 6px;"
-                                            placeholder="titulo">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-left:3px;">
-                            <h6 style="margin-block-start: 15px;">Direccion</h6>
-                            <textarea rows="4" class="form-control"></textarea>
+            <div class="modal-body mx-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-12">
+                            <span style="text-align: justify;" [innerHTML]="infoVacante.descripcion_puesto"></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" style="background-color: rgb(87, 4, 87);">
-                <button type="button" class="botonfooter form-control" id="botonfooter2"
-                    data-dismiss="modal">Listo</button>
-                <button type="button" class="botonfooter form-control" id="botonfooter2"
-                    data-dismiss="modal">Cerrar</button>
+            <div class="modal-footer mx-2" style="border-top: 1px solid rgb(121, 24, 129);">
+                
+                <!-- <span *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'I'" class="d-inline-block"
+                    tabindex="0" data-toggle="tooltip" title="No puedes postularte">
+                    <button class="btn btn-disabled" disabled>
+                        Postularme
+                    </button>
+                </span> -->
+                <button class="btn btn-primary">
+                    Ver postulaciones
+                </button>
+                <button class="btn btn-danger">
+                    Eliminar
+                </button>
             </div>
         </div>
     </div>
 </div>
+

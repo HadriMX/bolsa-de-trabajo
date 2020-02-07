@@ -176,6 +176,7 @@ export class MenuComponent implements OnInit, IAppPage {
   buscar() {
     // Swal.fire("Busqueda con exito!", "Se encontraron resultados de su busqueda!", "success");
     this.ComprobarUbicacion();
+    console.log(this.busqueda);
     if (this.busqueda.InputUbicacion == "") {
       this.busquedaVacantes();
     } else if (this.ubicacionCorrecta) {
