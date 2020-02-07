@@ -55,7 +55,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     calle: "",
     num_ext: "",
     id_grado_estudios: 0,
-    id_area_estudios: 0,
+    id_area_estudio: 0,
     escuela: "",
     ruta_curp: "",
     ruta_id: "",

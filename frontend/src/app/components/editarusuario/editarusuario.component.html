@@ -15,138 +15,139 @@
 </div>
 
 <div *ngIf="!isLoading" class="container">
-    <h6 id="titulo">
-        <span>DATOS PERSONALES </span>
-    </h6>
+        <h6 id="titulo">
+            <span>DATOS PERSONALES </span>
+        </h6>
 
-    <div class="row">
-        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" name="nombre" class="form-control" type="text" placeholder="" autocomplete="off"
-                [(ngModel)]="infoCandidato.nombre" disabled>
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="" autocomplete="off"
+                    [(ngModel)]="infoCandidato.nombre" disabled>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                <label for="apellido1">Primer Apellido</label>
+                <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder=""
+                    autocomplete="off" [(ngModel)]="infoCandidato.apellido1" disabled>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                <label for="apellido2">Segundo Apellido</label>
+                <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder=""
+                    autocomplete="off" [(ngModel)]="infoCandidato.apellido2" disabled>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-            <label for="apellido1">Primer Apellido</label>
-            <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder="" autocomplete="off"
-                [(ngModel)]="infoCandidato.apellido1" disabled>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-            <label for="apellido2">Segundo Apellido</label>
-            <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder="" autocomplete="off"
-                [(ngModel)]="infoCandidato.apellido2" disabled>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="fechaNacimiento">Fecha de Nacimiento</label>
-            <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off"
-                [(ngModel)]="infoCandidato.fecha_nacimiento" disabled required="required">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="genero">Género</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero" disabled>
-                    <option value="0" selected disabled>Seleccione el género</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Femenino</option>
-                    <option value="O">Otro</option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="telefono">Teléfono</label>
-            <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
-                autocomplete="off" [(ngModel)]="infoCandidato.telefono" OnlyNumber="true" maxlength="12">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off"
+                    [(ngModel)]="infoCandidato.fecha_nacimiento" disabled required="required">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="genero">Género</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero" disabled>
+                        <option value="0" selected disabled>Seleccione el género</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otro</option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
+                    autocomplete="off" [(ngModel)]="infoCandidato.telefono" OnlyNumber="true" maxlength="12">
+            </div>
+
         </div>
 
-    </div>
+        <h6 id="titulo" style="margin-top: 50px">
+            DOMICILIO
+        </h6>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
+                <label for="estado">Entidad Federativa</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="estado" id="estado"
+                        [(ngModel)]="infoCandidato.id_entidad_federativa" disabled>
+                        <option value="0" selected disabled>Seleccione la entidad federativa</option>
+                        <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">
+                            {{entidad.nombre}}</option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="ciudad">Municipio</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoCandidato.id_municipio">
+                        <option value="0" selected disabled>Seleccione el municipio</option>
+                        <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">
+                            {{municipio.nombre}}
+                        </option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="ciudad">Ciudad/Localidad</label>
+                <input id="ciudad" name="ciudad" class="form-control" type="text" placeholder="Ej. Los Mochis"
+                    autocomplete="off" [(ngModel)]="infoCandidato.ciudad">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
+                <label for="colonia">Colonia</label>
+                <input id="colonia" name="colonia" class="form-control" type="text" placeholder="Ej. Centro"
+                    autocomplete="off" [(ngModel)]="infoCandidato.colonia">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="codigoPostal">Codigo Postal</label>
+                <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
+                    placeholder="Ej. 81271" [(ngModel)]="infoCandidato.cp" OnlyNumber="true" maxlength="5">
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-12 col-12">
+                <label for="calle">Calle</label>
+                <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
+                    placeholder="Ej. Miguel Hidalgo" [(ngModel)]="infoCandidato.calle">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="numExterior">Numero Exterior</label>
+                <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
+                    placeholder="Ej. 856" [(ngModel)]="infoCandidato.num_ext" OnlyNumber="true" maxlength="6">
+            </div>
+        </div>
 
-    <h6 id="titulo" style="margin-top: 50px">
-        DOMICILIO
-    </h6>
-    <div class="row">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
-            <label for="estado">Entidad Federativa</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="estado" id="estado" [(ngModel)]="infoCandidato.id_entidad_federativa"
-                    disabled>
-                    <option value="0" selected disabled>Seleccione la entidad federativa</option>
-                    <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">
-                        {{entidad.nombre}}</option>
-                </select>
-            </span>
+        <h6 id="titulo" style="margin-top: 50px">
+            DATOS ACADEMICOS
+        </h6>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
+                <label for="nivelEstudios">Ultimo Nivel de Estudios</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="nivelEstudios" id="nivelEstudios"
+                        [(ngModel)]="infoCandidato.id_grado_estudios" disabled>
+                        <option value="0" selected disabled>Seleccione un nivel de estudios</option>
+                        <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}
+                        </option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <label for="areaEstudio">Area de Estudio</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="areaEstudio" id="areaEstudio"
+                        [(ngModel)]="infoCandidato.id_area_estudio">
+                        <option value="0" selected disabled>Seleccione el area de estudio</option>
+                        <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <label for="escuela">Escuela</label>
+                <input id="escuela" name="escuela" class="form-control" type="text"
+                    placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off"
+                    [(ngModel)]="infoCandidato.escuela">
+            </div>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="ciudad">Municipio</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoCandidato.id_municipio">
-                    <option value="0" selected disabled>Seleccione el municipio</option>
-                    <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">{{municipio.nombre}}
-                    </option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="ciudad">Ciudad/Localidad</label>
-            <input id="ciudad" name="ciudad" class="form-control" type="text" placeholder="Ej. Los Mochis"
-                autocomplete="off" [(ngModel)]="infoCandidato.ciudad">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
-            <label for="colonia">Colonia</label>
-            <input id="colonia" name="colonia" class="form-control" type="text" placeholder="Ej. Centro"
-                autocomplete="off" [(ngModel)]="infoCandidato.colonia">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="codigoPostal">Codigo Postal</label>
-            <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. 81271" [(ngModel)]="infoCandidato.cp" OnlyNumber="true" maxlength="5">
-        </div>
-        <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-            <label for="calle">Calle</label>
-            <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. Miguel Hidalgo" [(ngModel)]="infoCandidato.calle">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="numExterior">Numero Exterior</label>
-            <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. 856" [(ngModel)]="infoCandidato.num_ext" OnlyNumber="true" maxlength="6">
-        </div>
-    </div>
 
-    <h6 id="titulo" style="margin-top: 50px">
-        DATOS ACADEMICOS
-    </h6>
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
-            <label for="nivelEstudios">Ultimo Nivel de Estudios</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="nivelEstudios" id="nivelEstudios"
-                    [(ngModel)]="infoCandidato.id_grado_estudios" disabled>
-                    <option value="0" selected disabled>Seleccione un nivel de estudios</option>
-                    <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}
-                    </option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-            <label for="areaEstudio">Area de Estudio</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="areaEstudio" id="areaEstudio"
-                    [(ngModel)]="infoCandidato.id_area_estudios">
-                    <option value="0" selected disabled>Seleccione el area de estudio</option>
-                    <option *ngFor="let area of areas" [value]="area.id_area_estudios">{{area.nombre}}</option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <label for="escuela">Escuela</label>
-            <input id="escuela" name="escuela" class="form-control" type="text"
-                placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off"
-                [(ngModel)]="infoCandidato.escuela">
-        </div>
-    </div>
-
-    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
         <h6 id="titulo" style="margin-top: 50px">
             ARCHIVOS
         </h6>
