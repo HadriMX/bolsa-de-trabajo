@@ -37,6 +37,8 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
 
   uploadForm: FormGroup;
   labelCurriculum = "Selecciona un archivo";
+  labelIdentificacion = "Selecciona un archivo";
+  labelCurp = "Selecciona un archivo";
 
   infoCandidato: Candidato = {
     nombre: "",
@@ -72,7 +74,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
 
   ngOnInit() {
     this.uploadForm = this.formBuilder.group({
-      profile: ['']
+      archivoCurriculum: [''],
+      archivoIdentificacion: [''],
+      archivoCurp: ['']
     });
     
     this.usuarioActual = this.currentUserService.getUsuarioActual();
@@ -140,9 +144,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
           this.infoCandidato = response.data;
           this.getMunicipios(this.infoCandidato.id_entidad_federativa);
 
-          if (this.infoCandidato.ruta_cv != null) {
-            this.labelCurriculum = this.infoCandidato.ruta_cv;
-          }
+          this.labelCurriculum = this.infoCandidato.ruta_cv || this.labelCurriculum;
+          this.labelIdentificacion = this.infoCandidato.ruta_id || this.labelIdentificacion;
+          this.labelCurp = this.infoCandidato.ruta_curp || this.labelCurp;
         }
         else {
           Swal.fire("Error", response.message, 'error');
@@ -151,20 +155,38 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
       });
   }
 
-  onFileSelect(event) {
+  onFileSelectCurriculum(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.uploadForm.get('profile').setValue(file);
+      this.uploadForm.get('archivoCurriculum').setValue(file);
       this.labelCurriculum = file.name;
+    }
+  }
+
+  onFileSelectIdentificacion(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.get('archivoIdentificacion').setValue(file);
+      this.labelIdentificacion = file.name;
+    }
+  }
+
+  onFileSelectCurp(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.get('archivoCurp').setValue(file);
+      this.labelCurp = file.name;
     }
   }
 
   onSubmit() {
     const formData = new FormData();
-    let fileCurriculum = this.uploadForm.get('profile').value;
-    // formData.append('identificacion', fileIdentificacion);
-    // formData.append('curp', fileCurp);
+    let fileCurriculum = this.uploadForm.get('archivoCurriculum').value;
     formData.append('curriculum', fileCurriculum);
+    let fileIdentificacion = this.uploadForm.get('archivoIdentificacion').value;
+    formData.append('identificacion', fileIdentificacion);
+    let fileCurp = this.uploadForm.get('archivoCurp').value;
+    formData.append('curp', fileCurp);
     formData.append('infoCandidato', JSON.stringify(this.infoCandidato));
 
     this.candidatoService.guardarInfoCandidato(formData)
