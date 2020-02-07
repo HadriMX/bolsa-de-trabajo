@@ -20,13 +20,22 @@ class Auth
 
         $usuario = $r[0];
 
+        if ($usuario['id_tipo_usuario'] != 0 && $usuario['id_tipo_usuario'] != 100) {
+            if ($usuario['id_tipo_usuario'] == 1) {
+                $stmt = $conn->prepare("SELECT * FROM usuarios_candidatos WHERE id_usuario = ?");
+            } elseif ($usuario['id_tipo_usuario']) {
+                $stmt = $conn->prepare("SELECT * FROM usuarios_empresas WHERE id_usuario = ?");
+            }
+
+            $stmt->bind_param("i", $usuario['id_usuario']);
+            $stmt->execute();
+            $r = $db->readResult($stmt->get_result());
+            $usuario = $r[0];
+        }
+        
         $hashedPwd = $usuario['pw'];
         if (!password_verify($pwd, $hashedPwd)) {
             return new ErrorResult("Contraseña incorrecta. Intente de nuevo, por favor.", 401);
-        }
-
-        if ($usuario['estatus'] == 'N') {
-            return new ErrorResult("El usuario no está autorizado aún. Debes esperar a que un administrador autorice tu solicitud de registro.", 4011);
         }
 
         $isEmailVerificado = boolval($usuario['email_verificado']);
@@ -34,7 +43,17 @@ class Auth
             return new ErrorResult("No se puede iniciar sesión porque no se ha verificado la dirección email.", 4001);
         }
 
-        $usuario['pw'] = null; // limpiar antes de retornar
+        if ($usuario['estatus'] == 'N') {
+            return new ErrorResult("No se puede iniciar sesión porque no has completado tu registro.", 4031);
+        }
+
+        if ($usuario['estatus'] == 'P') {
+            return new ErrorResult("No se puede iniciar sesión porque aún no has sido autorizado. Debes esperar a que un administrador autorice tu solicitud de registro.", 4032);
+        }
+
+        // limpiar antes de retornar
+        $usuario['pw'] = null;
+        $usuario['codigo_confirmacion'] = null;
 
         return new SuccessResult("Login correcto", $usuario);
     }

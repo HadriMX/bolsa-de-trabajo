@@ -33,7 +33,7 @@ class Postulacion {
     public static function getPostulaciones($estatus , $id_candidato){
         $db = new Db();
         $conn = $db->getConn();
-        $stmt = $conn->prepare("SELECT * FROM postulaciones WHERE estatus = ? and id_candidato = ? ORDER BY fecha_postulacion");
+        $stmt = $conn->prepare("SELECT * FROM postulaciones WHERE estatus = ? and id_candidato = ? ORDER BY fecha_postulacion DESC");
         $stmt->bind_param("si",$estatus, $id_candidato);
         $stmt->execute();
         $r = $db->readResult($stmt->get_result());

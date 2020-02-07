@@ -16,8 +16,8 @@ export class CandidatoService {
   private endpointUrlGetCandidatos = 'http://localhost/bdt/php/src/candidato/get_candidato.php';
   private endpointUrlDeleteCandidato = 'http://localhost/bdt/php/src/candidato/delete_candidato.php';
   private endpointUrlReactivarCandidato = 'http://localhost/bdt/php/src/candidato/reactivar_candidato.php';
-  private endpointUrlAceptarCandidato = 'http://localhost/bdt/php/src/candidato/aceptar_candidato.php';
-  private endpointUrlRechazarCandidato = 'http://localhost/bdt/php/src/candidato/rechazar_candidato.php';
+  private endpointUrlGetCandidatoInfoCompleta = "http://localhost/bdt/php/src/candidato/get_candidatoInfoCompleta.php";
+  private endpointUrlGuardarInfoCandidato = "http://localhost/bdt/php/src/candidato/update_candidato.php";
 
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
@@ -34,11 +34,12 @@ export class CandidatoService {
     return this.http.post<ApiResponse<Candidato>>(this.endpointUrlReactivarCandidato, id_usuario, this.httpOptions);
   }
 
-  aceptar_candidato(id_usuario): Observable<ApiResponse<Candidato>> {
-    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlAceptarCandidato, id_usuario, this.httpOptions);
+  get_candidatosInfoCompleta(): Observable<ApiResponse<Candidato>> {
+    return this.http.get<ApiResponse<Candidato>>(this.endpointUrlGetCandidatoInfoCompleta, this.httpOptions);
   }
 
-  rechazar_candidato(id_usuario): Observable<ApiResponse<Candidato>> {
-    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlRechazarCandidato, id_usuario, this.httpOptions);
+  guardarInfoCandidato(info: FormData): Observable<ApiResponse<Candidato>> {
+    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlGuardarInfoCandidato, info);
   }
+
 }

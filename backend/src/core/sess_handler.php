@@ -13,8 +13,7 @@ class MySessionHandler implements SessionHandlerInterface
 
         if (is_a($this->link, 'ErrorResult')) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -37,9 +36,9 @@ class MySessionHandler implements SessionHandlerInterface
 
     public function write($id, $data)
     {
-        $DateTime = date('Y-m-d H:i:s');
-        $NewDateTime = date('Y-m-d H:i:s', strtotime($DateTime . ' + 24 hour'));
-        $result = mysqli_query($this->link, "REPLACE INTO Session SET Session_Id = '" . $id . "', Session_Expires = '" . $NewDateTime . "', Session_Data = '" . $data . "'");
+        $dateTime = date('Y-m-d H:i:s');
+        $newDateTime = date('Y-m-d H:i:s', strtotime($dateTime . ' + 24 hour'));
+        $result = mysqli_query($this->link, "REPLACE INTO Session SET Session_Id = '" . $id . "', Session_Expires = '" . $newDateTime . "', Session_Data = '" . $data . "'");
         return $result;
     }
 
@@ -51,7 +50,7 @@ class MySessionHandler implements SessionHandlerInterface
 
     public function gc($maxlifetime)
     {
-        $result = mysqli_query($this->link, "DELETE FROM Session WHERE ((UNIX_TIMESTAMP(Session_Expires) + " . $maxlifetime . ") < " . $maxlifetime . ")");
+        $result = mysqli_query($this->link, "DELETE FROM Session WHERE UNIX_TIMESTAMP(Session_Expires) < (UNIX_TIMESTAMP() - (" . $maxlifetime . "))");
         return $result;
     }
 }
