@@ -55,7 +55,7 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
     calle: "",
     num_ext: "",
     id_grado_estudios: 0,
-    id_area_estudio: 0,
+    id_area_estudios: 0,
     escuela: "",
     ruta_curp: "",
     ruta_id: "",
@@ -100,7 +100,9 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   }
 
   getMunicipios(id_entidad) {
-    this.infoCandidato.id_municipio = 0;
+    if(this.infoCandidato.id_municipio == null)
+        this.infoCandidato.id_municipio = 0;
+    
     this.municipioService.getMunicipios(id_entidad)
       .subscribe((response) => {
         if (response.success) {

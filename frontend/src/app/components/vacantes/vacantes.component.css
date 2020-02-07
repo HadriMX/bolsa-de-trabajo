@@ -1,11 +1,10 @@
 #registrarVacanteArea{
-  text-align: right;
-  width: 90%;
-  margin-left: 5%;
+  /* text-align: r; */
+  width: 93%;
+  margin-left: 2%;
 }
 #registrarVacanteButton{
   margin-top: 5px;
-  font-size: 15px;
 }
 #vacantesInfo {
   margin-block-start: 5px;

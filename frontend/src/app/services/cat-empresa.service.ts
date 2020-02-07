@@ -11,6 +11,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class CatEmpresaService {
   private endpointUrlAddCategoria = 'http://localhost/bdt/php/src/categoria/add_categoria.php';
   private endpointUrlGeCategorias ='http://localhost/bdt/php/src/categoria/get_categorias.php';
+  private endpointUrlGeCategoriasEmpresa ='http://localhost/bdt/php/src/categoria/get_categoriasEmpresa.php';
   private endpointUrlUpdateCategoria='http://localhost/bdt/php/src/categoria/update_categoria.php';
   
   httpOptions = {
@@ -24,6 +25,10 @@ export class CatEmpresaService {
 
   get_categoriasAdmin(): Observable<ApiResponse<Cat_empresa[]>> {
     return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlGeCategorias, this.httpOptions);
+  }
+
+  get_categoriasEmpresa(): Observable<ApiResponse<Cat_empresa[]>> {
+    return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlGeCategoriasEmpresa, this.httpOptions);
   }
 
   update_categoria(categoria:Cat_empresa):Observable<ApiResponse<Cat_empresa[]>>{

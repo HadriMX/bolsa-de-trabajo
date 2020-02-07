@@ -5,6 +5,8 @@ class Candidato
     public static function update(array $candidato)
     {
         $bandera = 0; //bandera 0 = datos completos, 1 = datos incompletos
+        $datosIncompletos = array(); //se guardarán los datos faltantes expecificamente
+        $cadenaDatosIncompletos = "";
         $db = new Db();
         $conn = $db->getConn();
         $stmt = $conn->prepare("REPLACE INTO candidatos(id_usuario, nombre, apellido1, apellido2, fecha_nacimiento, genero, telefono, id_entidad_federativa, id_municipio, ciudad, colonia, cp, calle, num_ext, id_grado_estudios, id_area_estudio, escuela, ruta_curp, ruta_id, ruta_cv) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -59,12 +61,56 @@ class Candidato
             $ruta_cv
         );
 
-        //Falta validar datos aún
+
+        if($telefono == null || $telefono == ""){
+            array_push($datosIncompletos,"Telefono");
+        }
+        if($id_municipio == null || $id_municipio == "" || $id_municipio == 0){
+            array_push($datosIncompletos,"Municipio");
+        }
+        if($ciudad == null || $ciudad == ""){
+            array_push($datosIncompletos,"Ciudad/Localidad");
+        }
+        if($colonia == null || $colonia == ""){
+            array_push($datosIncompletos,"Colonia");
+        }
+        if($cp == null || $cp == ""){
+            array_push($datosIncompletos,"Codigo postal");
+        }
+        if($calle == null || $calle == ""){
+            array_push($datosIncompletos,"Calle");
+        }
+        if($num_ext == null || $num_ext == ""){
+            array_push($datosIncompletos,"Numero exterior");
+        }
+        if($id_area_estudio == null || $id_area_estudio == ""){
+            array_push($datosIncompletos,"Area de estudio");
+        }
+        if($escuela == null || $escuela == ""){
+            array_push($datosIncompletos,"Escuela");
+        }
+
+        if(count($datosIncompletos) >= 1){
+
+            for ($i=0; $i < count($datosIncompletos); $i++) { 
+                $cadenaDatosIncompletos = $cadenaDatosIncompletos . $datosIncompletos[$i];
+                if($i == count($datosIncompletos) - 1){
+                    $cadenaDatosIncompletos = $cadenaDatosIncompletos . ".";
+                }else{
+                    $cadenaDatosIncompletos = $cadenaDatosIncompletos . ", ";
+                }
+            }
+
+            return new ErrorResult("Error: Datos incompletos. Porfavor llene todos los datos: " . $cadenaDatosIncompletos, 415);
+        }else{
+
+            //se cambia el estatus del usuario de I -> A
+        }
 
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("Tu información ha sido guardada correctamente (Falta validar)", true);
+            $output = new SuccessResult("Tu información ha sido guardada correctamente", true);
         } else {
             $output = new ErrorResult("Error: No se pudo guardar la información. Intentelo mas tarde", 515);
         }

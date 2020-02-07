@@ -132,9 +132,9 @@
             <label for="areaEstudio">Area de Estudio</label>
             <span class="custom-dropdown">
                 <select class="form-control" name="areaEstudio" id="areaEstudio"
-                    [(ngModel)]="infoCandidato.id_area_estudio">
+                    [(ngModel)]="infoCandidato.id_area_estudios">
                     <option value="0" selected disabled>Seleccione el area de estudio</option>
-                    <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
+                    <option *ngFor="let area of areas" [value]="area.id_area_estudios">{{area.nombre}}</option>
                 </select>
             </span>
         </div>

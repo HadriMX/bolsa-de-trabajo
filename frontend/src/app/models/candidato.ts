@@ -13,7 +13,7 @@ export class Candidato{
     calle: string;
     num_ext: string;
     id_grado_estudios: number;
-    id_area_estudio: number;
+    id_area_estudios: number;
     escuela: string;
     ruta_curp: string;
     ruta_id: string;
