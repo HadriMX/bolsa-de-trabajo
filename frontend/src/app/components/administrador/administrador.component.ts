@@ -424,59 +424,6 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  aceptarCandidato(id_candidato) {
-    this.swalWithBootstrapButtons
-      .fire({
-        title: "¿Deseas activar al candidato?",
-        text: "La cuenta tendra acceso al sistema",
-        type: "question",
-        showCancelButton: true,
-        confirmButtonText: "Si",
-        cancelButtonText: "No",
-      })
-      .then(result => {
-        if (result.value) {
-          this.candidatoService
-            .aceptar_candidato(id_candidato)
-            .subscribe(response => {
-              if (response.success) {
-                Swal.fire("Correcto", response.message, "success");
-                this.getSolicitudes();
-              } else {
-                Swal.fire("Error", response.message, "error");
-              }
-            });
-        } else {
-        }
-      });
-  }
-
-  rechazarCandidato(id_candidato) {
-    this.swalWithBootstrapButtons
-      .fire({
-        title: "¿Deseas rechazar al candidato?",
-        type: "question",
-        showCancelButton: true,
-        confirmButtonText: "Si",
-        cancelButtonText: "No",
-      })
-      .then(result => {
-        if (result.value) {
-          this.candidatoService
-            .rechazar_candidato(id_candidato)
-            .subscribe(response => {
-              if (response.success) {
-                Swal.fire("Correcto", response.message, "success");
-                this.getSolicitudes();
-              } else {
-                Swal.fire("Error", response.message, "error");
-              }
-            });
-        } else {
-        }
-      });
-  }
-
   reactivarCandidato(id) {
     this.swalWithBootstrapButtons
       .fire({
