@@ -49,6 +49,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 import { PanelAuxiliarComponent } from './components/panel-auxiliar/panel-auxiliar.component';
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
+import { AuxiliarGuard } from './guards/auxiliar.guard';
 
 registerLocaleData(localeEsMx);
 
@@ -58,7 +59,7 @@ const routes: Routes = [
   { path: 'postulaciones', component: PostulacionesComponent, canActivate: [CandidatoGuard] },
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
-  { path: 'solicitudes' ,component:SolicitudesComponent,canActivate:[AdminGuard]},
+  { path: 'solicitudes' ,component:SolicitudesComponent,canActivate:[AuxiliarGuard]},
   { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
   { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
@@ -133,7 +134,8 @@ const routes: Routes = [
     },
     CookieService,
     PaginacionService,
-    AuthGuard
+    AuthGuard,
+    AdministradorComponent
   ],
   bootstrap: [AppComponent]
 })
