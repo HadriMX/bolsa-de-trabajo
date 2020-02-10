@@ -16,7 +16,7 @@ export class AuthInterceptorService {
         private router: Router) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        var modifiedReq = request.clone({url: this.currentUserService.agregarPhpsessidEnUrl(request.url)});
+        var modifiedReq = request.clone({ url: this.currentUserService.agregarPhpsessidEnUrl(request.url) });
 
         return next.handle(modifiedReq).pipe(catchError(err => {
             if (err.status === 401) {

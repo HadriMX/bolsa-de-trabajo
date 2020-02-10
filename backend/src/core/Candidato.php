@@ -222,4 +222,32 @@ class Candidato
     }
 
 
+    public static function updateEstatusCandidato($estatus, $id_usuario){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("UPDATE usuarios SET estatus=? WHERE id_usuario = ?");
+        $stmt->bind_param('si',$estatus,$id_usuario);
+        $stmt->execute();
+
+
+        
+        if ($stmt->affected_rows > 0) {
+            if($estatus=="R"){
+                $output=new SuccessResult("Candidato rechazado", true);
+            }elseif ($estatus=="B") {
+                $output = new SuccessResult("La cuenta del candidato ha sido desactivada", true);
+            }elseif ($estatus=="A") {
+                $output = new SuccessResult("La cuenta del candidato ha sido activada nuevamente", true);
+            }elseif ($estatus=="I") {
+                $output=new SuccessResult("Candidato aceptado", true);
+            }  
+        } else {
+            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
+
+
 }

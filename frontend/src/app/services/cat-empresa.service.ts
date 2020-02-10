@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Cat_empresa } from 'src/app/models/categoria';
-import { Solicitudes } from 'src/app/models/solicitudes'
 import { ApiResponse } from 'src/app/models/api_response';
 import { Observable } from 'rxjs';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { HttpOptionsService } from './http-options.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatEmpresaService {
-  private endpointUrlAddCategoria = 'http://localhost/bdt/php/src/categoria/add_categoria.php';
-  private endpointUrlGeCategorias ='http://localhost/bdt/php/src/categoria/get_categorias.php';
-  private endpointUrlGeCategoriasEmpresa ='http://localhost/bdt/php/src/categoria/get_categoriasEmpresa.php';
-  private endpointUrlUpdateCategoria='http://localhost/bdt/php/src/categoria/update_categoria.php';
-  
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-  constructor(private http: HttpClient) { }
+  private endpointUrlAddCategoria = environment.hostUrl + 'categoria/add_categoria.php';
+  private endpointUrlGeCategorias = environment.hostUrl + 'categoria/get_categorias.php';
+  private endpointUrlGeCategoriasEmpresa = environment.hostUrl + 'categoria/get_categoriasEmpresa.php';
+  private endpointUrlUpdateCategoria = environment.hostUrl + 'categoria/update_categoria.php';
 
-  add_categoria(categoria:Cat_empresa):Observable<ApiResponse<Cat_empresa>>{
-    return this.http.post<ApiResponse<Cat_empresa>>(this.endpointUrlAddCategoria, categoria ,this.httpOptions);
-  } 
+  constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
+
+  add_categoria(categoria: Cat_empresa): Observable<ApiResponse<Cat_empresa>> {
+    return this.http.post<ApiResponse<Cat_empresa>>(this.endpointUrlAddCategoria, categoria, this.httpOptions);
+  }
 
   get_categoriasAdmin(): Observable<ApiResponse<Cat_empresa[]>> {
     return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlGeCategorias, this.httpOptions);
@@ -31,7 +29,7 @@ export class CatEmpresaService {
     return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlGeCategoriasEmpresa, this.httpOptions);
   }
 
-  update_categoria(categoria:Cat_empresa):Observable<ApiResponse<Cat_empresa[]>>{
-    return this.http.post<ApiResponse<Cat_empresa[]>>(this.endpointUrlUpdateCategoria, categoria ,this.httpOptions);
+  update_categoria(categoria: Cat_empresa): Observable<ApiResponse<Cat_empresa[]>> {
+    return this.http.post<ApiResponse<Cat_empresa[]>>(this.endpointUrlUpdateCategoria, categoria, this.httpOptions);
   }
 }

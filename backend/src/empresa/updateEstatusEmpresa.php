@@ -14,7 +14,8 @@ require_once '../core/session_starter_admin.php';
 
 $post = json_decode(file_get_contents("php://input"));
 
-$id_usuario = (int) $post;
-echo json_encode(Empresa::delete_empresa($id_usuario));
+$estatus =$post->estatus;
+$id_usuario = $post->id_usuario;
+echo json_encode(Empresa::updateEstatusEmpresa($estatus,$id_usuario));
 
 ?>

@@ -5,6 +5,7 @@ import { ApiResponse } from 'src/app/models/api_response';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpOptionsService } from './http-options.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class CurrentUserService {
   }
 
   deleteUsuarioActual(): Promise<ApiResponse<boolean>> {
-    var url = "http://localhost/bdt/php/src/logout.php";
+    let url = environment.hostUrl + 'logout.php';
     return this.http.post<ApiResponse<boolean>>(url, null, this.httpOptions).toPromise();
   }
 
@@ -36,7 +37,7 @@ export class CurrentUserService {
       });
     }
 
-    var url = "http://localhost/bdt/php/src/whoami.php?phpsessid=" + this.getPhpsessid();
+    let url = environment.hostUrl + 'whoami.php?phpsessid=' + this.getPhpsessid();
     return this.http.get<ApiResponse<Usuario>>(url, this.httpOptions);
   }
 

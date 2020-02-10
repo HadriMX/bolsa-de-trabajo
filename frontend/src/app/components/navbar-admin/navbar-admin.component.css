@@ -1,0 +1,42 @@
+#buscador {
+    margin-left: 100px;
+  }
+  
+  .link-no-underline:hover {
+    text-decoration: none !important;
+  }
+  
+  .dropdown-content {
+    background-color: rgb(121, 24, 129);
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+  
+  .dropdown-content a {
+    color: white;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #aa2baa;
+    color: white;
+  }
+  
+  .dropdown-toggle::after {
+    color: white;
+  }
+  
+  nav.navbar {
+    background-color: rgb(121, 24, 129);
+  }
+  
+  input {
+    margin-inline-end: 10px;
+  }
+  
+  #titulopag {
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-size: large;
+  }

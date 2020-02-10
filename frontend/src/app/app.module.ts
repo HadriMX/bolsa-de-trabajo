@@ -48,6 +48,10 @@ import { RegistrarVacanteComponent } from './components/registrar-vacante/regist
 import { RegistroComponent } from './components/registro/registro.component';
 import { OnlyNumber } from './directivas/only-number.directive';
 import { EditarempresaComponent } from './components/editarempresa/editarempresa.component';
+import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
+import { PanelAuxiliarComponent } from './components/panel-auxiliar/panel-auxiliar.component';
+import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
+import { AuxiliarGuard } from './guards/auxiliar.guard';
 
 registerLocaleData(localeEsMx);
 
@@ -58,6 +62,7 @@ const routes: Routes = [
   { path: 'editarusuario', component: EditarusuarioComponent, canActivate: [AuthGuard] },
   { path: 'editarempresa', component: EditarempresaComponent, canActivate: [EmpresaGuard] },
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
+  { path: 'solicitudes' ,component:SolicitudesComponent,canActivate:[AuxiliarGuard]},
   { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
   { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
@@ -82,7 +87,10 @@ const routes: Routes = [
     RegistrarVacanteComponent,
     RegistroComponent,
     OnlyNumber,
-    EditarempresaComponent
+    EditarempresaComponent,
+    SolicitudesComponent,
+    PanelAuxiliarComponent,
+    NavbarAdminComponent
   ],
   imports: [
     FormsModule,
@@ -131,7 +139,8 @@ const routes: Routes = [
     },
     CookieService,
     PaginacionService,
-    AuthGuard
+    AuthGuard,
+    AdministradorComponent
   ],
   bootstrap: [AppComponent]
 })

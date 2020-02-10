@@ -13,8 +13,11 @@ export class LoginGuardService implements CanActivate {
         if (!this.auth.haySesionActiva())
             return true;
         
-        if (this.auth.getUsuarioActual().id_tipo_usuario == 2)
+        if (this.auth.getUsuarioActual().id_tipo_usuario == 2){
             this.router.navigateByUrl("/vacantes");
+        } else if(this.auth.getUsuarioActual().id_tipo_usuario==100){
+            this.router.navigateByUrl("/solicitudes")
+        }
         else
             this.router.navigateByUrl("/menu");
         

@@ -13,4 +13,4 @@ require_once '../core/session_starter_admin.php';
 
 $post = json_decode(file_get_contents("php://input"));
 echo json_encode (Categoria::get_categoriasAdmin());
-?> 
+?>

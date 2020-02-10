@@ -14,11 +14,14 @@ export class CandidatoGuardService implements CanActivate {
             return true;
         }
 
-        if (this.auth.getUsuarioActual().id_tipo_usuario == 2)
+        if (this.auth.getUsuarioActual().id_tipo_usuario == 2){
             this.router.navigateByUrl("/vacantes");
-        else
+        }    
+        else if (this.auth.getUsuarioActual().id_tipo_usuario == 100){
+            this.router.navigateByUrl("/solicitudes");
+        }else{
             this.router.navigateByUrl("/menu");
-
+        }
         return false;
     }
 }
