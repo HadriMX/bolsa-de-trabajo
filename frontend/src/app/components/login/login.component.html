@@ -1,95 +1,51 @@
 <header>
   <app-header></app-header>
-
 </header>
-<div class="container-fluid " ng-app="myApp" ng-controller="myCtrl">
-  <div class="row" style="height: 100%; ">
-    <div class="col-lg-7 col-sm-12 login100-more d-none d-sm-block" id="carrusellogin">
-      <div class="row align-items-center" style=" height: 100%;">
-        <div class="row justify-content-center w-100">
-          <div id="carouselExampleIndicators" class="carousel slide w-75" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="" style="background: rgba(53, 52, 52, 0.502); padding: 10px; border-radius: 10px;">
-                  <h5 style="color:rgb(199, 219, 12); text-align: center;">Candidato</h5>
-                  <p style="color:white; font-size: 18px">Podrias postularte en las vacantes disponibles</p>
-                </div>
-
-              </div>
-              <div class="carousel-item">
-                <div class="" style="background:  rgba(53, 52, 52, 0.502); padding: 10px; border-radius: 10px;">
-                  <h5 style="color:rgb(199, 219, 12);  text-align: center;">Empresa</h5>
-                  <p style="color:white; font-size: 18px">Podras publicar vacantes y el usuario candidado se postulara</p>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="" style="background:  rgba(53, 52, 52, 0.502); padding: 10px; border-radius: 10px;">
-                  <h5 style="color:rgb(199, 219, 12);  text-align: center;">Volar</h5>
-                  <p style="color:white; font-size: 18px">institución sin fines de lucro del Estado de Sinaloa, 
-                    dedicada a la gestión, capacitación 
-                    y desarrollo de voluntarios para causas sociales de organizaciones legalmente constituidas, 
-                    especialmente para instituciones de asistencia privada.</p>
-                </div>
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
+<div class="container">
+  <div class="row" id="formulario-registro">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: center;">
+      <h1>Registro</h1>
+      <hr>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+      <!-- correo electronico
+        <input [(ngModel)]="nuevoUsuario.email" name="email" class="form-control" type="email"
+          placeholder="Correo electrónico"> -->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><img src="../../../assets/man-user.png" alt="" id="icon-input"></span>
         </div>
+        <input [(ngModel)]="nuevoUsuario.email" name="email" type="email" class="form-control"
+          placeholder="Correo electrónico" aria-label="Correo electrónico">
       </div>
     </div>
-    <div class="col-sm-5" style="height:100%; margin-block-start: 5%;">
-      <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-        <form class="login100-form validate-form">
-          <span class="login100-form-title p-b-59">
-            Registrar cuenta
-          </span>
-          <div id="electronico" class="wrap-input100 validate-input"
-            data-validate="Valid email is required: ex@abc.xyz">
-            <span style="color:black;" class="label-input100">Correo electronico</span>
-            <input [(ngModel)]="nuevoUsuario.email" name="email" id="input100" class="form-control" type="email"
-              placeholder="Correo electrónico..." required>
-            <span class="focus-input100"></span>
-          </div>
-          <div id="contrasenaa" class="wrap-input100 validate-input" data-validate="Password is required">
-            <span style="color:black;" class="label-input100">Contraseña</span>
-            <input [(ngModel)]="nuevoUsuario.password" name="password" id="input100" class=" form-control"
-              type="password" name="pass" placeholder="*************" required>
-            <span class="focus-input100"></span>
-          </div>
-          <div class="row">
-            <div class="col-lg-10">
-              <div id="preferencialaboral">
-                <h6>Seleccione el tipo de usuario:</h6>
-                <select class="form-control border border-primary" [(ngModel)]="nuevoUsuario.id_tipo_usuario"
-                  name="select" style="margin-top: 10px; width:100%; ">
-                  <option value="1" selected>Candidato</option>
-                  <option value="2">Empresa</option>
-                </select>
-              </div>
-            </div>
-            <div class="boton1 col-lg-10">
-              <div>
-                <button (click)="crear()" id="boton1" class="form-control">
-                  Crear cuenta
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+      <!-- <input [(ngModel)]="nuevoUsuario.password" name="password" class=" form-control" type="password" name="pass"
+          placeholder="Contraseña"> -->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><img src="../../../assets/password-icon.png" alt="" id="icon-input"></span>
+        </div>
+        <input [(ngModel)]="nuevoUsuario.password" name="password" type="password" class="form-control"
+          placeholder="Contraseña" aria-label="Contraseña">
       </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+      <h6>Tipo de usuario</h6>
+      <span class="custom-dropdown">
+        <select class="form-control" [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select"
+          style="padding-top: 10px; width:100%; ">
+          <option value="1" selected>Candidato</option>
+          <option value="2">Empresa</option>
+        </select>
+      </span>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: right;">
+      <hr>
+      <button (click)="crear()" class="btn btn-primary my-2">
+        Crear cuenta
+      </button>
     </div>
   </div>
 </div>

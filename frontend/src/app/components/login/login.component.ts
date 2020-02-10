@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit, IAppPage {
 
   crear() {
     this.btnCrearClicked = true;
-    
+    console.log(this.nuevoUsuario.id_tipo_usuario);
     this.registroService.registrar(this.nuevoUsuario)
       .subscribe((response) => {
         if (response.success) {
