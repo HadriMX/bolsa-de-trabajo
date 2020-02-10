@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Postulacion } from '../models/postulacion';
 import { Candidato } from '../models/candidato';
 import { ApiResponse } from '../models/api_response';
 import { Observable } from 'rxjs';
 import { HttpOptionsService } from './http-options.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -12,14 +12,12 @@ import { HttpOptionsService } from './http-options.service';
 })
 export class CandidatoService {
 
+  private endpointUrlGetCandidatos = environment.hostUrl + 'candidato/get_candidato.php';
+  private endpointUrlGetCandidatoInfoCompleta = environment.hostUrl + 'candidato/get_candidatoInfoCompleta.php';
+  private endpointUrlGuardarInfoCandidato = environment.hostUrl + 'candidato/update_candidato.php';
+  private endpointUrlUpdateEstatusCandidato = environment.hostUrl + 'candidato/updateEstatusCandidato.php';
 
-  private endpointUrlGetCandidatos = 'http://localhost/bdt/php/src/candidato/get_candidato.php';
-  private endpointUrlGetCandidatoInfoCompleta = "http://localhost/bdt/php/src/candidato/get_candidatoInfoCompleta.php";
-  private endpointUrlGuardarInfoCandidato = "http://localhost/bdt/php/src/candidato/update_candidato.php";
-  private endpointUrlUpdateEstatusCandidato = 'http://localhost/bdt/php/src/candidato/updateEstatusCandidato.php';
-
-  constructor(private http: HttpClient,
-    private httpOptions: HttpOptionsService) { }
+  constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
   get_candidatos(estatus: string): Observable<ApiResponse<Candidato[]>> {
     return this.http.post<ApiResponse<Candidato[]>>(this.endpointUrlGetCandidatos, { estatus: estatus }, this.httpOptions);

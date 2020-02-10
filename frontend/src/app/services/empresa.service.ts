@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Postulacion } from '../models/postulacion';
 import { Empresa } from '../models/empresa';
 import { ApiResponse } from '../models/api_response';
 import { Observable } from 'rxjs';
 import { HttpOptionsService } from './http-options.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpresaService {
 
-  private endpointUrlGetEmpresas = 'http://localhost/bdt/php/src/empresa/get_empresas.php';
-  private endpointUrlGetEmpresaInfoCompleta = 'http://localhost/bdt/php/src/empresa/get_empresaInfoCompleta.php';
-  private endpointUrlGuardarInfoEmpresa = "http://localhost/bdt/php/src/empresa/update_empresa.php";
-  private endpointUrlUpdateEstatusEmpresa = 'http://localhost/bdt/php/src/empresa/updateEstatusEmpresa.php';
+  private endpointUrlGetEmpresas = environment.hostUrl + 'empresa/get_empresas.php';
+  private endpointUrlGetEmpresaInfoCompleta = environment.hostUrl + 'empresa/get_empresaInfoCompleta.php';
+  private endpointUrlGuardarInfoEmpresa = environment.hostUrl + 'empresa/update_empresa.php';
+  private endpointUrlUpdateEstatusEmpresa = environment.hostUrl + 'empresa/updateEstatusEmpresa.php';
 
-  constructor(private http: HttpClient,
-    private httpOptions: HttpOptionsService) { }
+  constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
   get_empresas(estatus: string): Observable<ApiResponse<Empresa[]>> {
     return this.http.post<ApiResponse<Empresa[]>>(this.endpointUrlGetEmpresas, { estatus: estatus }, this.httpOptions);
@@ -34,6 +33,5 @@ export class EmpresaService {
   guardarInfoEmpresa(infoEmpresa: Empresa): Observable<ApiResponse<Empresa>> {
     return this.http.post<ApiResponse<Empresa>>(this.endpointUrlGuardarInfoEmpresa, infoEmpresa, this.httpOptions);
   }
-
-
+  
 }
