@@ -7,6 +7,15 @@
   }
 }
 
+.body-content {
+  background-image: url("/assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 120vh;
+}
+
 .btn2 {
   margin-block-end: 15%;
   background-color: rgb(121, 24, 129);

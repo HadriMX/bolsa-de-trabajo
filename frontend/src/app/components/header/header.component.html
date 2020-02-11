@@ -1,25 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
-  <a class="navbar-brand">
-    <img src="/assets/logo-volar.png" alt="Logo Volar">
-  </a>
+  <div class="row" style="width: 100%; margin: 0;">
 
-  <form class="form-inline ml-auto">
-    <input [(ngModel)]="loginInfo.email" name="email" class="form-control mx-1 my-sm-0 my-1" type="email" id="usuario"
-      placeholder="Correo electrónico" autofocus required />
-    <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control mx-1 my-sm-0 my-1" type="password" id="contrasena"
-      placeholder="Contraseña" required />
-    <button class="form-control btn btn-primary mx-1 my-md-0 my-1" [disabled]="btnIngresarClicked"
-      (click)="login()">Iniciar sesión</button>
-  </form>
+    <div class="col-lg-2 col-md-12 col-sm-12 col-12" style="text-align: center;">
+      <a class="navbar-brand">
+        <img src="/assets/logo-volar.png" alt="Logo Volar">
+      </a>
+    </div>
+
+    <div class="col-lg-10 col-md-12 col-sm-12 col-12">
+
+      <div class="row" id="contenedor_inputs">
+      <input [(ngModel)]="loginInfo.email" name="email" class="form-control" type="email" id="usuario"
+        placeholder="Correo electrónico" autofocus />
+
+      <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control" type="password"
+        id="contrasena" placeholder="Contraseña" />
+
+      <button class="form-control btn btn-primary" id="login" [disabled]="btnIngresarClicked" (click)="login()">Iniciar
+        sesión</button>
+      </div>
+
+    </div>
+
+  </div>
 </nav>
-
-
-<style type="text/css">
-  .ui-datatable .ui-datatable-header {
-      background-color: red;
-  }
-  
-  .ui-datatable .ui-paginator {
-      background-color: yellow;
-  }
-</style>

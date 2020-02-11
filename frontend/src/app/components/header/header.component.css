@@ -1,3 +1,32 @@
 nav.navbar {
     background-color:rgb(121, 24, 129);
+    width: 100%;
 }
+#login{
+    margin: 5px 0 0 5px;
+    max-width: 150px;
+    font-size: 15px;
+}
+#contrasena , #usuario{
+    max-width: 250px;
+    margin: 5px 5px 0 0px;
+}
+#contenedor_inputs{
+    justify-content: right;
+}
+
+@media (max-width: 991px) {
+    #contenedor_inputs{
+        justify-content: center;
+    }
+  }
+
+@media (max-width: 696px) {
+    #contrasena , #usuario{
+        max-width: 450px;
+        margin: 5px 5px 0 0px;
+    }
+    #login{
+        max-width: 450px;
+    }
+  }
