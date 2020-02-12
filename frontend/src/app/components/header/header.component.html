@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
   <div class="row" style="width: 100%; margin: 0;">
 
-    <div class="col-lg-2 col-md-12 col-sm-12 col-12" style="text-align: center;">
+    <div class="col-lg-2 col-md-2 col-sm-12 col-12" style="text-align: center;">
       <a class="navbar-brand">
         <img src="/assets/logo-volar.png" alt="Logo Volar">
       </a>
     </div>
 
-    <div class="col-lg-10 col-md-12 col-sm-12 col-12">
+    <div class="col-lg-10 col-md-10 col-sm-12 col-12">
 
       <div class="row" id="contenedor_inputs">
       <input [(ngModel)]="loginInfo.email" name="email" class="form-control" type="email" id="usuario"
@@ -16,7 +16,7 @@
       <input [(ngModel)]="loginInfo.pwd" name="pwd" class="form-control" type="password"
         id="contrasena" placeholder="Contraseña" />
 
-      <button class="form-control btn btn-primary" id="login" [disabled]="btnIngresarClicked" (click)="login()">Iniciar
+      <button class="form-control btn btn-primary" id="btn-login" [disabled]="btnIngresarClicked" (click)="login()">Iniciar
         sesión</button>
       </div>
 

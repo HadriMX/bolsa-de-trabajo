@@ -1,51 +1,69 @@
-<header>
-  <app-header></app-header>
-</header>
+<div class="body-content">
+  <header>
+    <app-header></app-header>
+  </header>
+  
+  <div class="container" style="margin: 0px 0px 0px 0px; width: 100%; max-width: 100%;">
+    <div class="row" id="formulario-registro">
+      <div class="col-lg-6 col-md-6 col-sm-0 col-0" style="text-align: center;">
+        <img src="../../../assets/volar_img.png" alt="" id="volar_img">
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-0 col-0">
+          <div class="row" style="height: 100%;">
+            <div class="col-lg-5 col-md-5 col-sm-5 col-5" >
+              <!-- relleno -->
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-6" style="border-left: 1px solid rgb(121, 24, 129)">
+              <!-- relleno -->
+            </div>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+        <div class="row" id="contenedor_row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12"  id="item_registro">
+            <h1 style="text-align: center;">Registro</h1>
+            <!-- <hr> -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><img src="../../../assets/man-user.png" alt="" id="icon-input"></span>
+              </div>
+              <input [(ngModel)]="nuevoUsuario.email" name="email" type="email" class="form-control"
+                placeholder="Correo electrónico" aria-label="Correo electrónico">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12"  id="item_registro">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><img src="../../../assets/password-icon.png" alt="" id="icon-input"></span>
+              </div>
+              <input [(ngModel)]="nuevoUsuario.password" name="password" type="password" class="form-control"
+                placeholder="Contraseña" aria-label="Contraseña">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12" id="item_registro">
+            <h6>Tipo de usuario</h6>
+            <span class="custom-dropdown">
+              <select class="form-control" [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select"
+                style="width:100%;">
+                <option value="1" selected>Candidato</option>
+                <option value="2">Empresa</option>
+              </select>
+            </span>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: right;">
+            <!-- <hr> -->
+            <button (click)="crear()" class="btn btn-primary" id="btn_registrar">
+              Crear cuenta
+            </button>
+            <div style="height: 5px;">
 
-<div class="container">
-  <div class="row" id="formulario-registro">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: center;">
-      <h1>Registro</h1>
-      <hr>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-      <!-- correo electronico
-        <input [(ngModel)]="nuevoUsuario.email" name="email" class="form-control" type="email"
-          placeholder="Correo electrónico"> -->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><img src="../../../assets/man-user.png" alt="" id="icon-input"></span>
+            </div>
+          </div>
         </div>
-        <input [(ngModel)]="nuevoUsuario.email" name="email" type="email" class="form-control"
-          placeholder="Correo electrónico" aria-label="Correo electrónico">
       </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-      <!-- <input [(ngModel)]="nuevoUsuario.password" name="password" class=" form-control" type="password" name="pass"
-          placeholder="Contraseña"> -->
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><img src="../../../assets/password-icon.png" alt="" id="icon-input"></span>
-        </div>
-        <input [(ngModel)]="nuevoUsuario.password" name="password" type="password" class="form-control"
-          placeholder="Contraseña" aria-label="Contraseña">
+      <div class="col-lg-1 col-md-1 col-sm-0 col-0">
+        <!-- RELLENO -->
       </div>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-      <h6>Tipo de usuario</h6>
-      <span class="custom-dropdown">
-        <select class="form-control" [(ngModel)]="nuevoUsuario.id_tipo_usuario" name="select"
-          style="padding-top: 10px; width:100%; ">
-          <option value="1" selected>Candidato</option>
-          <option value="2">Empresa</option>
-        </select>
-      </span>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-12" style="text-align: right;">
-      <hr>
-      <button (click)="crear()" class="btn btn-primary my-2">
-        Crear cuenta
-      </button>
     </div>
   </div>
 </div>

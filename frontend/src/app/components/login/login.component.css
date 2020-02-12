@@ -1,19 +1,38 @@
+.body-content {
+  background-image: url("/assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
 #formulario-registro{
   margin: 50px auto 0px auto;
-  /* border: 1px solid rgb(121,24,129); */
-  background-color: white;
-  width: 100%;
-  max-width: 500px;
 }
-
+#contenedor_row{
+  background-color: white;
+}
+#volar_img{
+  max-height: 500px;
+  height: 95%;
+  max-width: 600px;
+  width: 100%;
+}
+#item_registro{
+  margin: 10px 0px 0px 0px;
+}
+#btn_registrar{
+  margin: 10px 0px 10px 0px;
+}
 h1{
-  margin: 20px 0px 20px 0px;
+  margin: 0px 0px 30px 0px;
   color: black;
 }
 h6{
   color: black;
 }
 hr{
+  margin-bottom: 20px;
   border-top: 1px solid rgb(121, 24, 129);
 }
 
