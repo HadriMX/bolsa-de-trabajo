@@ -26,7 +26,7 @@ export class Vacante {
         this.descripcion_puesto = '';
         this.descripcion_puesto_plain_text = '';
         this.id_area_estudio = -1;
-        this.sueldo = 0;
+        this.sueldo = undefined;
         this.genero = '';
         this.direccion = '';
         this.id_entidad_federativa = -1;

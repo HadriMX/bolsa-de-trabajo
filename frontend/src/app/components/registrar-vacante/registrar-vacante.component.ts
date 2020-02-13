@@ -111,8 +111,4 @@ export class RegistrarVacanteComponent implements OnInit {
       });
   }
 
-  cancelar() {
-    
-  }
-
 }

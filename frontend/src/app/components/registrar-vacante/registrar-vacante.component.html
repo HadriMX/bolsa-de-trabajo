@@ -12,6 +12,7 @@
             <div class="form-group">
                 <label for="tituloVacante">Título de la vacante</label>
                 <input class="form-control" type="text" name="tituloVacante" id="tituloVacante"
+                    placeholder="Ej: Solicitamos fotógrafo profesional (urgente)"
                     [(ngModel)]="nuevaVacante.titulo_vacante">
             </div>
         </div>
@@ -22,7 +23,7 @@
             <div class="form-group">
                 <label for="nombrePuesto">Nombre del puesto</label>
                 <input class="form-control" type="text" name="nombrePuesto" id="nombrePuesto"
-                    [(ngModel)]="nuevaVacante.puesto">
+                    placeholder="Ej: Fotógrafo" [(ngModel)]="nuevaVacante.puesto">
             </div>
         </div>
     </div>
@@ -30,9 +31,9 @@
     <div class="row">
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="sueldo">Sueldo</label>
-                <input class="form-control" type="text" name="sueldo" id="sueldo" data-type="currency"
-                    [(ngModel)]="nuevaVacante.sueldo">
+                <label for="sueldo">Sueldo mensual</label>
+                <input class="form-control" type="text" name="sueldo" id="sueldo" OnlyNumber="true" maxlength="9"
+                    placeholder="Ej: 4800" [(ngModel)]="nuevaVacante.sueldo">
             </div>
         </div>
         <div class="col-sm-4">
@@ -53,8 +54,9 @@
                 <label for="idAreaEstudio">Área de estudio</label>
 
                 <p-autoComplete [(ngModel)]="areaEstudioSeleccionada" [suggestions]="areasFiltradas"
-                    (completeMethod)="filtrarAreas($event)" field="nombre" placeholder="Ej: Informática"
-                    [minLength]="2" [forceSelection]="true" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                    (completeMethod)="filtrarAreas($event)" field="nombre" placeholder="Ej: Informática" [minLength]="2"
+                    [forceSelection]="true" [style]="{'width':'100%'}"
+                    [inputStyle]="{'width':'100%', 'border':'1px solid #ced4da', 'height':'calc(1.5em + .75rem + 2px)', 'font-family':'Montserrat', 'font-size': '1rem', 'font-weight': '400', 'line-height': '1.5', 'color':'#495057'}">
                 </p-autoComplete>
             </div>
         </div>
@@ -64,7 +66,7 @@
         <div class="col-sm-8">
             <div class="form-group">
                 <label for="direccion">Dirección</label>
-                <input class="form-control" type="text" name="direccion" id="direccion"
+                <input class="form-control" type="text" name="direccion" id="direccion" placeholder="Ej: Calle Río Sinaloa #245 Pte, Interior B. Fracc. Scally."
                     [(ngModel)]="nuevaVacante.direccion">
             </div>
         </div>
@@ -93,8 +95,6 @@
     </div>
     <div class="row justify-content-end pb-4">
         <div class="col text-right">
-            <button (click)="cancelar()"
-                class="btn btn-outline-secondary mx-2 text-dark">CANCELAR</button>
             <button (click)="registrarVacante()" class="btn btn-primary mx-2">REGISTRAR</button>
         </div>
     </div>
