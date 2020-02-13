@@ -12,6 +12,7 @@ export class AreaService {
   private endpointUrlGetAreas ='http://localhost/bdt/php/src/area/get_areas.php';
   private endpointUrlUpdateArea='http://localhost/bdt/php/src/area/update_area.php';
   private endpointUrlGetAreasMenu ='http://localhost/bdt/php/src/area/get_areasMenu.php';
+  private endpointUrlGetAreasReporte= 'http://localhost/bdt/php/src/area/get_areasReporte.php';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,6 +29,10 @@ export class AreaService {
 
   get_areasMenu(): Observable<ApiResponse<Area[]>>{
     return this.http.get<ApiResponse<Area[]>>(this.endpointUrlGetAreasMenu, this.httpOptions);
+  }
+
+  get_areasReporte():Observable<ApiResponse<Area[]>>{
+    return this.http.get<ApiResponse<Area[]>>(this.endpointUrlGetAreasReporte,this.httpOptions);
   }
 
   update_area(area:Area):Observable<ApiResponse<Area[]>>{

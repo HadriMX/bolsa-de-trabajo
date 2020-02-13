@@ -99,3 +99,20 @@
     color: #ffffff;
     background-color: #791881;
   }
+
+  :host::ng-deep .ui-inputtext:enabled:focus:not(.ui-state-error) {
+    outline: 0 none;
+    outline-offset: 0;
+    -webkit-box-shadow: 0 0 0 0.2em #b079b4;
+    -moz-box-shadow: 0 0 0 0.2em #b079b4;
+    box-shadow: 0 0 0 0.2em #b079b4;
+    border-color: #bb26c7;
+  }
+
+  :host::ng-deep .ui-table .ui-sortable-column:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    -webkit-box-shadow: inset 0 0 0 0.2em #b079b4;
+    -moz-box-shadow: inset 0 0 0 0.2em #b079b4;
+    box-shadow: inset 0 0 0 0.2em #b079b4;
+  }

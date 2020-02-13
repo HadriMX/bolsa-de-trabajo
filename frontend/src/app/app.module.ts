@@ -140,7 +140,7 @@ const routes: Routes = [
     CookieService,
     PaginacionService,
     AuthGuard,
-    AdministradorComponent
+    AdministradorComponent,
   ],
   bootstrap: [AppComponent]
 })
