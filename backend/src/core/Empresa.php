@@ -147,7 +147,6 @@ class Empresa
         $stmt->bind_param('i', $id_usuario);
         $stmt->execute();
 
-        $stmt->execute();
         $r = $db->readResult($stmt->get_result());
         return new SuccessResult("",$r[0]);
     }

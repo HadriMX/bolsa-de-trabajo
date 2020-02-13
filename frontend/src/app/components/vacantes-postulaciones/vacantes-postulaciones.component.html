@@ -1,0 +1,13 @@
+<div class="body-content">
+    <app-headertittle></app-headertittle>
+
+    <div *ngIf="isLoading" class="container">
+        <app-loading></app-loading>
+    </div>
+
+    <div *ngIf="!isLoading" class="container">
+        <div *ngIf="accesoDenegado" style="margin-top: 100px; width: 100%; text-align: center;">
+            Acceso denegado papá, vayase para otro lado mejor. <a href="" [routerLink]="['/vacantes']">Sacame de aquí mejor. bye</a>
+        </div>
+    </div>
+</div>

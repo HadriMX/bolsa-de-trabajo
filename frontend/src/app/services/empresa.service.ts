@@ -16,8 +16,7 @@ export class EmpresaService {
   private endpointUrlReactivar = 'http://localhost/bdt/php/src/empresa/reactivar_empresa.php';
   private endpointUrlGetEmpresaInfoCompleta = 'http://localhost/bdt/php/src/empresa/get_empresaInfoCompleta.php';
   private endpointUrlGuardarInfoEmpresa = "http://localhost/bdt/php/src/empresa/update_empresa.php";
-
-
+  
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
 
@@ -41,5 +40,6 @@ export class EmpresaService {
     return this.http.post<ApiResponse<Empresa>>(this.endpointUrlGuardarInfoEmpresa, infoEmpresa, this.httpOptions);
   }
 
+ 
 
 }

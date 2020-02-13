@@ -6,6 +6,7 @@ import { IAppPage } from 'src/app/interfaces/app-page';
 import { Empresa } from 'src/app/models/empresa';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import Swal from 'sweetalert2';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-vacantes',
@@ -73,7 +74,6 @@ export class VacantesComponent implements OnInit, IAppPage {
   mostrarDetalleVacante(item) {
     this.infoVacante = item;
   }
-
 
   arriba() {
     $('#body, html').animate({

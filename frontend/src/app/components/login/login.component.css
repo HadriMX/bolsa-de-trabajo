@@ -1,5 +1,5 @@
 .body-content {
-  background-image: url("/assets/background.png");
+  /* background-image: url("/assets/background.png"); */
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
@@ -10,7 +10,7 @@
   margin: 50px auto 0px auto;
 }
 #contenedor_row{
-  background-color: white;
+  /* background-color: white; */
 }
 #volar_img{
   max-height: 500px;

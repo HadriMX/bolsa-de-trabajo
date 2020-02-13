@@ -139,9 +139,12 @@
                         Postularme
                     </button>
                 </span> -->
-                    <button class="btn btn-primary">
-                        Ver postulaciones
-                    </button>
+                    <a href="" [routerLink]="['/vacantes/postulaciones', infoVacante.id_vacante]">
+                        <button class="btn btn-primary">
+                            Ver postulaciones
+                        </button>
+                    </a>
+
                     <button class="btn btn-danger">
                         Eliminar
                     </button>

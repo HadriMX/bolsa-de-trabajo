@@ -48,6 +48,7 @@ import { RegistrarVacanteComponent } from './components/registrar-vacante/regist
 import { RegistroComponent } from './components/registro/registro.component';
 import { OnlyNumber } from './directivas/only-number.directive';
 import { EditarempresaComponent } from './components/editarempresa/editarempresa.component';
+import { VacantesPostulacionesComponent } from './components/vacantes-postulaciones/vacantes-postulaciones.component';
 
 registerLocaleData(localeEsMx);
 
@@ -60,6 +61,7 @@ const routes: Routes = [
   { path: 'administracion', component: AdministradorComponent, canActivate: [AdminGuard] },
   { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
   { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
+  { path: 'vacantes/postulaciones/:id', component: VacantesPostulacionesComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
   { path: 'registro', component: RegistroComponent },
   { path: '**', redirectTo: '/login' }
@@ -82,7 +84,8 @@ const routes: Routes = [
     RegistrarVacanteComponent,
     RegistroComponent,
     OnlyNumber,
-    EditarempresaComponent
+    EditarempresaComponent,
+    VacantesPostulacionesComponent
   ],
   imports: [
     FormsModule,

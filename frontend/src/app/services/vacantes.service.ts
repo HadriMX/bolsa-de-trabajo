@@ -28,5 +28,11 @@ export class VacantesService {
     let url = 'http://localhost/bdt/php/src/vacante/add_vacante.php';
     return this.http.post<ApiResponse<Vacante>>(url, vacante, this.httpOptions);
   }
+
+  comprobarVacanteEmpresa(id_vacante: number): Observable<ApiResponse<Vacante>>{
+    let url = 'http://localhost/bdt/php/src/vacante/get_postulacionesVacante.php';
+    return this.http.post<ApiResponse<Vacante>>(url, {id_vacante: id_vacante}, this.httpOptions);
+
+  }
   
 }
