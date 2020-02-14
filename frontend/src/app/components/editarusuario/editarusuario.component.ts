@@ -11,10 +11,10 @@ import { AreaService } from 'src/app/services/area.service';
 import { GradoEstudio } from 'src/app/models/gradoEstudio';
 import { GradoEstudioService } from 'src/app/services/grado-estudio.service';
 import { Candidato } from 'src/app/models/candidato';
-import { FileUploadService } from 'src/app/services/file-upload.service';
 import { CandidatoService } from 'src/app/services/candidato.service';
 import { Usuario } from 'src/app/models/usuario';
 import { CurrentUserService } from 'src/app/services/current-user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-editarusuario',
@@ -39,6 +39,10 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
   labelCurriculum = "Selecciona un archivo";
   labelIdentificacion = "Selecciona un archivo";
   labelCurp = "Selecciona un archivo";
+
+  cvFileUrl: string;
+  curpFileUrl: string;
+  idFileUrl: string;
 
   infoCandidato: Candidato = {
     nombre: "",
@@ -147,10 +151,14 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
         if (response.success) {
           this.infoCandidato = response.data;
           this.getMunicipios(this.infoCandidato.id_entidad_federativa);
-
-          this.labelCurriculum = this.infoCandidato.ruta_cv || this.labelCurriculum;
+          
           this.labelIdentificacion = this.infoCandidato.ruta_id || this.labelIdentificacion;
           this.labelCurp = this.infoCandidato.ruta_curp || this.labelCurp;
+
+          if (this.infoCandidato.ruta_cv) {
+            this.labelCurriculum = this.infoCandidato.ruta_cv;
+            this.cvFileUrl = environment.uploadsUrl + this.infoCandidato.ruta_cv;
+          }
         }
         else {
           Swal.fire("Error", response.message, 'error');

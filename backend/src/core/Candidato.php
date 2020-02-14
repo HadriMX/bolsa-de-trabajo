@@ -48,57 +48,55 @@ class Candidato
         );
 
 
-        if($telefono == null || $telefono == ""){
-            array_push($datosIncompletos,"Telefono");
+        if ($telefono == null || $telefono == "") {
+            array_push($datosIncompletos, "Telefono");
         }
-        if($id_municipio == null || $id_municipio == "" || $id_municipio == 0){
-            array_push($datosIncompletos,"Municipio");
+        if ($id_municipio == null || $id_municipio == "" || $id_municipio == 0) {
+            array_push($datosIncompletos, "Municipio");
         }
-        if($ciudad == null || $ciudad == ""){
-            array_push($datosIncompletos,"Ciudad/Localidad");
+        if ($ciudad == null || $ciudad == "") {
+            array_push($datosIncompletos, "Ciudad/Localidad");
         }
-        if($colonia == null || $colonia == ""){
-            array_push($datosIncompletos,"Colonia");
+        if ($colonia == null || $colonia == "") {
+            array_push($datosIncompletos, "Colonia");
         }
-        if($cp == null || $cp == ""){
-            array_push($datosIncompletos,"Codigo postal");
+        if ($cp == null || $cp == "") {
+            array_push($datosIncompletos, "Codigo postal");
         }
-        if($calle == null || $calle == ""){
-            array_push($datosIncompletos,"Calle");
+        if ($calle == null || $calle == "") {
+            array_push($datosIncompletos, "Calle");
         }
-        if($num_ext == null || $num_ext == ""){
-            array_push($datosIncompletos,"Numero exterior");
+        if ($num_ext == null || $num_ext == "") {
+            array_push($datosIncompletos, "Numero exterior");
         }
-        if($id_area_estudio == null || $id_area_estudio == ""){
-            array_push($datosIncompletos,"Area de estudio");
+        if ($id_area_estudio == null || $id_area_estudio == "") {
+            array_push($datosIncompletos, "Area de estudio");
         }
-        if($escuela == null || $escuela == ""){
-            array_push($datosIncompletos,"Escuela");
+        if ($escuela == null || $escuela == "") {
+            array_push($datosIncompletos, "Escuela");
         }
 
-        if(count($datosIncompletos) >= 1){
+        if (count($datosIncompletos) >= 1) {
 
-            for ($i=0; $i < count($datosIncompletos); $i++) { 
+            for ($i = 0; $i < count($datosIncompletos); $i++) {
                 $cadenaDatosIncompletos = $cadenaDatosIncompletos . $datosIncompletos[$i];
-                if($i == count($datosIncompletos) - 1){
+                if ($i == count($datosIncompletos) - 1) {
                     $cadenaDatosIncompletos = $cadenaDatosIncompletos . ".";
-                }else{
+                } else {
                     $cadenaDatosIncompletos = $cadenaDatosIncompletos . ", ";
                 }
             }
 
             return new ErrorResult("Error: Datos incompletos. Porfavor llene todos los datos: " . $cadenaDatosIncompletos, 415);
+        } else {
 
-        }else{
-
-            if($_SESSION["currentUser"]["estatus"]=="I"){
+            if ($_SESSION["currentUser"]["estatus"] == "I") {
                 $stmt2 = $conn->prepare("UPDATE usuarios SET estatus='A' where id_usuario = ?");
                 $stmt2->bind_param('i', $id_usuario);
                 $stmt2->execute();
 
                 $msj = "Tu información ha sido guardada correctamente. Vuelve a iniciar sesión para que se apliquen los cambios.";
             }
-
         }
 
         $stmt->execute();
@@ -179,17 +177,17 @@ class Candidato
         return $output;
     }
 
-    public static function aceptarCandidato(int $id_usuario){
+    public static function aceptarCandidato(int $id_usuario)
+    {
         $db = new Db();
         $conn = $db->getConn();
 
         $stmt = $conn->prepare("UPDATE usuarios SET estatus='I' where id_usuario = ?");
-        $stmt->bind_param('i',$id_usuario);
+        $stmt->bind_param('i', $id_usuario);
         $stmt->execute();
-        
+
         if ($stmt->affected_rows > 0) {
-            $output=new SuccessResult("Candidato aceptado", true);
-            
+            $output = new SuccessResult("Candidato aceptado", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
@@ -197,17 +195,17 @@ class Candidato
         return $output;
     }
 
-    public static function rechazarCandidato(int $id_usuario){
+    public static function rechazarCandidato(int $id_usuario)
+    {
         $db = new Db();
         $conn = $db->getConn();
 
         $stmt = $conn->prepare("UPDATE usuarios SET estatus='R' where id_usuario = ?");
-        $stmt->bind_param('i',$id_usuario);
+        $stmt->bind_param('i', $id_usuario);
         $stmt->execute();
-        
+
         if ($stmt->affected_rows > 0) {
-            $output=new SuccessResult("Candidato rechazado", true);
-            
+            $output = new SuccessResult("Candidato rechazado", true);
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
@@ -216,32 +214,31 @@ class Candidato
     }
 
 
-    public static function updateEstatusCandidato($estatus, $id_usuario){
+    public static function updateEstatusCandidato($estatus, $id_usuario)
+    {
         $db = new Db();
         $conn = $db->getConn();
 
         $stmt = $conn->prepare("UPDATE usuarios SET estatus=? WHERE id_usuario = ?");
-        $stmt->bind_param('si',$estatus,$id_usuario);
+        $stmt->bind_param('si', $estatus, $id_usuario);
         $stmt->execute();
 
 
-        
+
         if ($stmt->affected_rows > 0) {
-            if($estatus=="R"){
-                $output=new SuccessResult("Candidato rechazado", true);
-            }elseif ($estatus=="B") {
+            if ($estatus == "R") {
+                $output = new SuccessResult("Candidato rechazado", true);
+            } elseif ($estatus == "B") {
                 $output = new SuccessResult("La cuenta del candidato ha sido desactivada", true);
-            }elseif ($estatus=="A") {
+            } elseif ($estatus == "A") {
                 $output = new SuccessResult("La cuenta del candidato ha sido activada nuevamente", true);
-            }elseif ($estatus=="I") {
-                $output=new SuccessResult("Candidato aceptado", true);
-            }  
+            } elseif ($estatus == "I") {
+                $output = new SuccessResult("Candidato aceptado", true);
+            }
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
         }
         $stmt->close();
         return $output;
     }
-
-
 }

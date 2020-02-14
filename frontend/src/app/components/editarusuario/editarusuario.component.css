@@ -1,22 +1,28 @@
 #titulo {
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 10px;
   color: #404044;
 }
+
 label {
+  font-weight: 400;
+  color: #404044;
+}
+
+.custom-label {
   font-size: 15px;
   font-weight: 400;
   color: #404044;
 }
-input {
+
+/* input {
   font-size: 15px;
-  margin-bottom: 10px;
 }
+
 select {
   font-size: 15px;
-  margin-bottom: 10px;
-}
+} */
+
 /* Custom dropdown */
 .custom-dropdown {
   position: relative;
@@ -40,6 +46,7 @@ select {
   -ms-appearance: button; /* Internet Explorer */
   appearance: none; /* CSS3 */
 }
+
 .custom-dropdown::before,
 .custom-dropdown::after {
   content: "";
@@ -69,19 +76,14 @@ select {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.input-group {
-  margin-bottom: 20px;
+#boton3:hover {
+  background: rgb(77, 16, 83);
 }
-#inputFile {
-  height: 37px;
-}
-#boton3:hover{
-    background:rgb(77, 16, 83);
-  
-}
+
 #espacioabajo {
-      margin-block-start: 4%;
+  margin-block-start: 4%;
 }
+
 .custom-file-input ~ .custom-file-label:lang(es)::after {
-    content: "Elegir";
+  content: "Elegir";
 }

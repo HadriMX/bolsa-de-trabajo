@@ -2,9 +2,12 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col">
-            <h3>INFORMACIÓN DE LA CUENTA</h3> <label *ngIf="!isLoading && usuarioActual.estatus == 'I'" for=""
-                style="color: red; font-size: 15;">Tu información sigue incompleta. Para poder postularte necesitas
-                llenar el formulario y guardar los datos.</label>
+            <h3>INFORMACIÓN DE LA CUENTA</h3>
+
+            <label *ngIf="!isLoading && usuarioActual.estatus == 'I'" for="" style="color: red; font-size: 15;">
+                Tu información sigue incompleta. Para poder postularte necesitas
+                llenar el formulario y guardar los datos.
+            </label>
         </div>
     </div>
 </div>
@@ -15,180 +18,192 @@
 </div>
 
 <div *ngIf="!isLoading" class="container">
-        <h6 id="titulo">
-            <span>DATOS PERSONALES </span>
-        </h6>
+    <h6 id="titulo">
+        <span>DATOS PERSONALES</span>
+    </h6>
 
-        <div class="row">
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                <label for="nombre">Nombre</label>
-                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="" autocomplete="off"
-                    [(ngModel)]="infoCandidato.nombre" disabled>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                <label for="apellido1">Primer Apellido</label>
-                <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder=""
-                    autocomplete="off" [(ngModel)]="infoCandidato.apellido1" disabled>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                <label for="apellido2">Segundo Apellido</label>
-                <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder=""
-                    autocomplete="off" [(ngModel)]="infoCandidato.apellido2" disabled>
-            </div>
+    <div class="row mb-1">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" class="form-control" type="text" placeholder="" autocomplete="off"
+                [(ngModel)]="infoCandidato.nombre" disabled>
         </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off"
-                    [(ngModel)]="infoCandidato.fecha_nacimiento" disabled required="required">
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <label for="genero">Género</label>
-                <span class="custom-dropdown">
-                    <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero" disabled>
-                        <option value="0" selected disabled>Seleccione el género</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                        <option value="O">Otro</option>
-                    </select>
-                </span>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <label for="telefono">Teléfono</label>
-                <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
-                    autocomplete="off" [(ngModel)]="infoCandidato.telefono" OnlyNumber="true" maxlength="12">
-            </div>
-
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <label for="apellido1">Primer Apellido</label>
+            <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder="" autocomplete="off"
+                [(ngModel)]="infoCandidato.apellido1" disabled>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <label for="apellido2">Segundo Apellido</label>
+            <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder="" autocomplete="off"
+                [(ngModel)]="infoCandidato.apellido2" disabled>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off"
+                [(ngModel)]="infoCandidato.fecha_nacimiento" disabled required="required">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="genero">Género</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero" disabled>
+                    <option value="0" selected disabled>Seleccione el género</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                    <option value="O">Otro</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
+                autocomplete="off" [(ngModel)]="infoCandidato.telefono" OnlyNumber="true" maxlength="12">
         </div>
 
-        <h6 id="titulo" style="margin-top: 50px">
-            DOMICILIO
-        </h6>
-        <div class="row">
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
-                <label for="estado">Entidad Federativa</label>
-                <span class="custom-dropdown">
-                    <select class="form-control" name="estado" id="estado"
-                        [(ngModel)]="infoCandidato.id_entidad_federativa" disabled>
-                        <option value="0" selected disabled>Seleccione la entidad federativa</option>
-                        <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">
-                            {{entidad.nombre}}</option>
-                    </select>
-                </span>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <label for="ciudad">Municipio</label>
-                <span class="custom-dropdown">
-                    <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoCandidato.id_municipio">
-                        <option value="0" selected disabled>Seleccione el municipio</option>
-                        <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">
-                            {{municipio.nombre}}
-                        </option>
-                    </select>
-                </span>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <label for="ciudad">Ciudad/Localidad</label>
-                <input id="ciudad" name="ciudad" class="form-control" type="text" placeholder="Ej. Los Mochis"
-                    autocomplete="off" [(ngModel)]="infoCandidato.ciudad">
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
-                <label for="colonia">Colonia</label>
-                <input id="colonia" name="colonia" class="form-control" type="text" placeholder="Ej. Centro"
-                    autocomplete="off" [(ngModel)]="infoCandidato.colonia">
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <label for="codigoPostal">Codigo Postal</label>
-                <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
-                    placeholder="Ej. 81271" [(ngModel)]="infoCandidato.cp" OnlyNumber="true" maxlength="5">
-            </div>
-            <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                <label for="calle">Calle</label>
-                <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
-                    placeholder="Ej. Miguel Hidalgo" [(ngModel)]="infoCandidato.calle">
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <label for="numExterior">Numero Exterior</label>
-                <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
-                    placeholder="Ej. 856" [(ngModel)]="infoCandidato.num_ext" OnlyNumber="true" maxlength="6">
-            </div>
-        </div>
+    </div>
 
-        <h6 id="titulo" style="margin-top: 50px">
-            DATOS ACADEMICOS
-        </h6>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
-                <label for="nivelEstudios">Ultimo Nivel de Estudios</label>
-                <span class="custom-dropdown">
-                    <select class="form-control" name="nivelEstudios" id="nivelEstudios"
-                        [(ngModel)]="infoCandidato.id_grado_estudios" disabled>
-                        <option value="0" selected disabled>Seleccione un nivel de estudios</option>
-                        <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}
-                        </option>
-                    </select>
-                </span>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                <label for="areaEstudio">Area de Estudio</label>
-                <span class="custom-dropdown">
-                    <select class="form-control" name="areaEstudio" id="areaEstudio"
-                        [(ngModel)]="infoCandidato.id_area_estudio">
-                        <option value="0" selected disabled>Seleccione el area de estudio</option>
-                        <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
-                    </select>
-                </span>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <label for="escuela">Escuela</label>
-                <input id="escuela" name="escuela" class="form-control" type="text"
-                    placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off"
-                    [(ngModel)]="infoCandidato.escuela">
-            </div>
+    <h6 id="titulo">
+        <span>DOMICILIO</span>
+    </h6>
+    
+    <div class="row mb-4">
+        <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="margin-bottom: 10px;">
+            <label for="estado">Entidad Federativa</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="estado" id="estado" [(ngModel)]="infoCandidato.id_entidad_federativa"
+                    disabled>
+                    <option value="0" selected disabled>Seleccione la entidad federativa</option>
+                    <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">
+                        {{entidad.nombre}}</option>
+                </select>
+            </span>
         </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="ciudad">Municipio</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoCandidato.id_municipio">
+                    <option value="0" selected disabled>Seleccione el municipio</option>
+                    <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">
+                        {{municipio.nombre}}
+                    </option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="ciudad">Ciudad/Localidad</label>
+            <input id="ciudad" name="ciudad" class="form-control" type="text" placeholder="Ej. Los Mochis"
+                autocomplete="off" [(ngModel)]="infoCandidato.ciudad">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12" style="margin-bottom: 10px;">
+            <label for="colonia">Colonia</label>
+            <input id="colonia" name="colonia" class="form-control" type="text" placeholder="Ej. Centro"
+                autocomplete="off" [(ngModel)]="infoCandidato.colonia">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="codigoPostal">Código Postal</label>
+            <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
+                placeholder="Ej. 81271" [(ngModel)]="infoCandidato.cp" OnlyNumber="true" maxlength="5">
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12 col-12">
+            <label for="calle">Calle</label>
+            <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
+                placeholder="Ej. Miguel Hidalgo" [(ngModel)]="infoCandidato.calle">
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+            <label for="numExterior">Número Exterior</label>
+            <input id="numExterior" name="numExterior" class="form-control" type="text" autocomplete="off"
+                placeholder="Ej. 856" [(ngModel)]="infoCandidato.num_ext" OnlyNumber="true" maxlength="6">
+        </div>
+    </div>
 
-        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
-        <h6 id="titulo" style="margin-top: 50px">
-            ARCHIVOS
-        </h6>
-        <p>Para poder validar tus datos y comprobar que eres quien dices ser, es
-            necesario subir ciertos archivos para concluir con tu registro.</p>
-        <div class="row">
+    <h6 id="titulo">
+        <span>DATOS ACADÉMICOS</span>
+    </h6>
+
+    <div class="row mb-4">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <label for="nivelEstudios">Último Nivel de Estudios</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="nivelEstudios" id="nivelEstudios"
+                    [(ngModel)]="infoCandidato.id_grado_estudios" disabled>
+                    <option value="0" selected disabled>Seleccione un nivel de estudios</option>
+                    <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}
+                    </option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            <label for="areaEstudio">Área de Estudio</label>
+            <span class="custom-dropdown">
+                <select class="form-control" name="areaEstudio" id="areaEstudio"
+                    [(ngModel)]="infoCandidato.id_area_estudio">
+                    <option value="0" selected disabled>Seleccione el area de estudio</option>
+                    <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
+                </select>
+            </span>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <label for="escuela">Escuela</label>
+            <input id="escuela" name="escuela" class="form-control" type="text"
+                placeholder="Ej. Facultad de Ingenieria Los Mochis, UAS" autocomplete="off"
+                [(ngModel)]="infoCandidato.escuela">
+        </div>
+    </div>
+
+    <h6 id="titulo">
+        <span>ARCHIVOS</span>
+    </h6>
+
+    <p>Para poder validar tus datos y comprobar que eres quien dices ser, es
+        necesario subir ciertos archivos para concluir con tu registro.</p>
+    
+    <p class="text-muted">Tamaño máximo por archivo: 2 MB</p>
+
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <!-- CURP -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="input-group" style="width: 100%;">
+            <div class="row">
+                <div class="input-group">
                     <div id="inputFile" class="input-group-prepend">
-                        <span class="input-group-text" id="fileCurp">CURP</span>
+                        <span class="input-group-text">CURP</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="fileCurp" accept=".docx,.pdf" lang="es"
+                        <input type="file" class="custom-file-input" id="fileCurp" accept="application/pdf" lang="es"
                             (change)="onFileSelectCurp($event)">
                         <label id="labelCurp" class="custom-file-label" for="fileCurp">{{ labelCurp }}</label>
                     </div>
+
+                    <div *ngIf="cvFileUrl" class="input-group-append">
+                        <a [href]="cvFileUrl" target="_blank"><span class="input-group-text">Ver</span></a>
+                    </div>
                 </div>
             </div>
+
             <!-- ID -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="row">
                 <div class="input-group" style="width: 100%;">
                     <div id="inputFile" class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">IDENTIFICACIÓN</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="fileIdentificacion" accept=".docx,.pdf"
+                        <input type="file" class="custom-file-input" id="fileIdentificacion" accept="application/pdf"
                             lang="es" (change)="onFileSelectIdentificacion($event)">
                         <label id="labelIdentificacion" class="custom-file-label"
                             for="fileIdentificacion">{{ labelIdentificacion }}</label>
                     </div>
                 </div>
             </div>
+
             <!-- CURRICULUM -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="row">
                 <div class="input-group" style="width: 100%;">
                     <div id="inputFile" class="input-group-prepend">
                         <span class="input-group-text" id="fileCurriculum">CURRICULUM</span>
                     </div>
                     <div class="custom-file">
-                        <input #file type="file" class="custom-file-input" id="fileCurriculum" accept=".docx,.pdf"
+                        <input #file type="file" class="custom-file-input" id="fileCurriculum" accept="application/pdf"
                             lang="es" (change)="onFileSelectCurriculum($event)">
                         <label id="labelCurriculum" class="custom-file-label"
                             for="fileCurriculum">{{ labelCurriculum }}</label>
@@ -197,8 +212,8 @@
             </div>
 
         </div>
-        <div class="row justify-content-end pb-4">
-            <div class="col text-right">
+        <div class="row justify-content-end mt-3 pb-4">
+            <div class="col-12 text-right">
                 <button type="submit" class="btn btn-primary mx-2">GUARDAR</button>
             </div>
         </div>

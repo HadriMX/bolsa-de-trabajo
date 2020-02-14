@@ -16,7 +16,6 @@ class FileUpload
     );
 
     private static $allowedFileTypes = array(
-        '.docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         '.pdf' => 'application/pdf'
     );
 
@@ -47,14 +46,15 @@ class FileUpload
                     $uploadFileName = $newFileName;
                 }
 
+                $currentUserId = $_SESSION['currentUser']['id_usuario'];
                 $prefix = $noReplace ? time() . rand(10, 99) : "";
                 $uploadFileName = preg_replace('/[\s,_]+/', '-', $uploadFileName) . $fileExtension; // convertir espacios en guiones
-                $fileName = basename(strtolower($prefix . "_" . $_SESSION['currentUser']['id_usuario'] . "_" . $uploadFileName));
+                $fileName = basename(strtolower($prefix . self::get_file_name($uploadFileName, $currentUserId)));
                 $fullFilePath = self::get_upload_dir() . $fileName;
 
+                self::delete_file($newFileName, $currentUserId);
+
                 if (move_uploaded_file($tmpUploadedFilename, $fullFilePath)) {
-                    // $fileData = array('file_name' => $fileName);
-                    // $result = new SuccessResult("Archivo subido correctamente.", $fileData);
                     $result = $fileName;
                 } else {
                     $result = new ErrorResult("Error al guardar el archivo en el servidor.", 500);
@@ -67,18 +67,36 @@ class FileUpload
         return $result;
     }
 
-    public static function check_file_exists(string $filename, $id_usuario)
+    /*
+    Comprueba que exista el archivo correspondiente al usuario actual.
+    Por ejemplo: check_file_exists("curriculum") comprueba que exista su archivo correspondiente según el campo ruta_cv en la BD
+    */
+    public static function check_file_exists(string $filename)
     {
-        $fileExists = false;
+        return file_exists($_SESSION["currentUser"]["ruta_" + $filename]);
+        // $fileExists = false;
         
+        // $extensions = array_keys(self::$allowedFileTypes);
+        // foreach ($extensions as $ext) {
+        //     $fullFilePath = self::get_upload_dir() . self::get_file_name($filename, $id_usuario) . $ext;
+
+        //     if (file_exists($fullFilePath))
+        //         return true;
+        // }
+
+        // return $fileExists;
+    }
+
+    public static function delete_file(string $filename, $id_usuario) {
         $extensions = array_keys(self::$allowedFileTypes);
         foreach ($extensions as $ext) {
-            $fullFilePath = self::get_upload_dir() . "_" . $id_usuario . "_" . $filename . $ext;
-
-            if (file_exists($fullFilePath))
-                return true;
+            $pattern = self::get_upload_dir() . "*" . self::get_file_name($filename, $id_usuario) . $ext;
+            array_map('unlink', glob($pattern));
         }
+    }
 
-        return $fileExists;
+    public static function get_file_name(string $filename, $id_usuario)
+    {
+        return "_" . $id_usuario . "_" . $filename;
     }
 }
