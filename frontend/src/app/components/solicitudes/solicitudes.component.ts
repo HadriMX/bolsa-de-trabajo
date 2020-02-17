@@ -139,4 +139,7 @@ export class SolicitudesComponent implements OnInit {
         }
       });
   }
+  verArchivo(ruta:string){
+    window.open("http://192.168.1.200/uploads/"+ruta);
+  }
 }

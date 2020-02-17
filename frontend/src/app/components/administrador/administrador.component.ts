@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { AreaService } from "../../services/area.service";
 import { CatEmpresaService } from "../../services/cat-empresa.service";
 import { AuxiliarService } from "../../services/auxiliar.service";
-import { MatDialog } from "@angular/material";
 import { CandidatoService } from "src/app/services/candidato.service";
 import { LoginService } from "src/app/services/login.service";
 import { Router } from "@angular/router";
@@ -23,8 +22,9 @@ import {
   animate
 } from "@angular/animations";
 import { CurrentUserService } from "src/app/services/current-user.service";
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { Candidato } from 'src/app/models/candidato';
 
 @Component({
   selector: "app-administrador",
@@ -131,7 +131,7 @@ export class AdministradorComponent implements OnInit {
     estatus: ""
   };
 
-  public dialog: MatDialog;
+  
   inputbooleano: boolean = false;
 
   swalWithBootstrapButtons = Swal.mixin({
@@ -385,6 +385,10 @@ export class AdministradorComponent implements OnInit {
     this.infoCategoria = Cat_empresa;
   }
 
+  verArchivo(ruta:string){
+    window.open("http://192.168.1.200/uploads/"+ruta);
+  }
+
   //METODOS CRUD (U)
   updateArea(idArea) {
     var index = this.datosArea
@@ -626,8 +630,11 @@ export class AdministradorComponent implements OnInit {
     else return "Baja";
   }
 
-  exportPdf(tipo: number) {
-    var doc = new jsPDF("p", "pt");
+  exportPdf(tipo: number, estatus: string) {
+    var doc = new jsPDF("p", "pt", "a4");
+    var img = new Image();
+    img.src = "assets/descargar.png";
+    doc.addImage(img, "png", 25, 20, 150, 80);
     if (tipo == 1) {
       //REPORTE PARA AREAS DE ESTUDIO
       doc.add;
@@ -635,7 +642,9 @@ export class AdministradorComponent implements OnInit {
         title: col.header,
         dataKey: col.field
       }));
-      doc.autoTable(this.exportColumns, this.reporte_area);
+      doc.autoTable(this.exportColumns, this.reporte_area, {
+        startY: 100
+      });
       doc.save("Reporte de areas de estudio.pdf");
     } else if (tipo == 2) {
       //REPORTE PARA LAS CATEGORIAS DE LAS EMPRESAS
@@ -643,19 +652,53 @@ export class AdministradorComponent implements OnInit {
         title: col.header,
         dataKey: col.field
       }));
-      doc.autoTable(this.exportColumns, this.reporte_categoria);
+      doc.autoTable(this.exportColumns, this.reporte_categoria, {
+        startY: 100
+      });
       doc.save("Reporte de categorias de empresas.pdf");
     } else if (tipo == 3) {
       this.exportColumns = this.columnasCandidato.map(col => ({
         title: col.header,
         dataKey: col.field
       }));
-      var img = new Image()
-      img.src = 'https://lh3.googleusercontent.com/proxy/pUn0DiaxXZ-QLCeTIXYKKBYil4y0Z8k9uQ6rQM1nfE27t5Ydgf50TPE9NkeOh7q5bw0wvQsG30mvhkdKFrfjsxL-pTYfGmDAJLEkts081PcUT0Wz';
-      doc.addImage(img, 'png', 10, 78, 12, 15)
-      doc.text(7, 15, "Overflow 'ellipsize' (default)");
-      doc.autoTable(this.exportColumns, this.datosCandidato);
-      doc.save("Reporte de candidatos.pdf");
+
+      doc.text("Reporte de candidatos activos", 300, 70, "center");
+      // doc.autoTable(this.exportColumns, this.datosCandidato);
+
+      doc.autoTable(this.exportColumns, this.datosCandidato, {
+        startY: 100
+      });
+      doc.save("Reporte de candidatos activos.pdf");
+    } else if (tipo == 4) {
+      this.exportColumns = this.columnasCandidato.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.text("Reporte de candidatos inactivos", 300, 70, "center");
+      doc.autoTable(this.exportColumns, this.datosCandidato, {
+        startY: 100
+      });
+      doc.save("Reporte de candidatos inactivos.pdf");
+    } else if (tipo == 5) {
+      this.exportColumns = this.columnasEmpresa.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.text("Reporte de empresas activas", 300, 70, "center");
+      doc.autoTable(this.exportColumns, this.datosEmpresa, {
+        startY: 100
+      });
+      doc.save("Reporte de empresas activas.pdf");
+    } else if (tipo == 6) {
+      this.exportColumns = this.columnasEmpresa.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.text("Reporte de empresas inactivas", 300, 70, "center");
+      doc.autoTable(this.exportColumns, this.datosEmpresa, {
+        startY: 100
+      });
+      doc.save("Reporte de empresas inactivas.pdf");
     }
   }
 

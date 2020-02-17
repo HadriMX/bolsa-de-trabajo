@@ -293,6 +293,9 @@
                     <div class="ui-g-12">
                       <b>Email:</b> {{rowData.email}}
                     </div>
+                    <div>
+                      <button (click)="verArchivo(rowData.rutaCV)">Ver curriclum</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -377,6 +380,15 @@
                     <div class="ui-g-12">
                       <b>Area de estudio:</b> {{rowData.areaestudio}}
                     </div>
+                    <div class="ui-g-12">
+                      <button (click)="verArchivo(rowData.ruta_cv)">Ver curriclum</button>
+                    </div>
+                    <div class="ui-g-12">
+                      <button (click)="verArchivo(rowData.ruta_id)">Ver identificación</button>
+                    </div>
+                    <div class="ui-g-12">
+                      <button (click)="verArchivo(rowData.ruta_curp)">Ver CURP</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -385,7 +397,9 @@
         </ng-template>
         <ng-template pTemplate="summary" >
           <div style="text-align:left">
-            <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(3)"
+            <button *ngIf="candidatoActivo" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(3)"
+            class="ui-button-warning"></button>
+            <button *ngIf="!candidatoActivo" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(4)"
             class="ui-button-warning"></button>
           </div>
         </ng-template>
@@ -474,8 +488,15 @@
             </td>
           </tr>
         </ng-template>
+        <ng-template pTemplate="summary" >
+          <div style="text-align:left">
+            <button *ngIf="empresaActiva" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(5)"
+            class="ui-button-warning"></button>
+            <button *ngIf="!empresaActiva" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(6)"
+            class="ui-button-warning"></button>
+          </div>
+        </ng-template>
       </p-table>
-
     </div>
   </div>
 
