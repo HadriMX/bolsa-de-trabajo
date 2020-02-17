@@ -29,8 +29,8 @@ export class VacantesService {
     return this.http.post<ApiResponse<Vacante>>(url, vacante, this.httpOptions);
   }
 
-  comprobarVacanteEmpresa(id_vacante: number): Observable<ApiResponse<Vacante>>{
-    let url = 'http://localhost/bdt/php/src/vacante/get_postulacionesVacante.php';
+  comprobarPertenenciaVacante(id_vacante: number): Observable<ApiResponse<Vacante>>{
+    let url = 'http://localhost/bdt/php/src/vacante/comprobarPertenenciaVacante.php';
     return this.http.post<ApiResponse<Vacante>>(url, {id_vacante: id_vacante}, this.httpOptions);
 
   }

@@ -5,9 +5,101 @@
         <app-loading></app-loading>
     </div>
 
-    <div *ngIf="!isLoading" class="container">
-        <div *ngIf="accesoDenegado" style="margin-top: 100px; width: 100%; text-align: center;">
+    <div *ngIf="!isLoading && accesoDenegado" class="container">
+        <div style="margin-top: 100px; width: 100%; text-align: center;">
             Acceso denegado papá, vayase para otro lado mejor. <a href="" [routerLink]="['/vacantes']">Sacame de aquí mejor. bye</a>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading && !accesoDenegado" class="container" id="cabecera_vacante">
+        <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
+        <div class="row justify-content-between">
+            <div class="col-md-6 col-12 text-left">
+                <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-md-6 col-12 text-left">
+                <h6> <span class="font-weight-light text-muted">Empresa
+                    </span>{{infoVacante.nombre_empresa}}</h6>
+            </div>
+            <div class="col-md-6 col-12 text-md-right">
+                <h6><span class="font-weight-light text-muted">Publicada </span>
+                    {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-md-6 col-12 text-left">
+                <h6> <span class="font-weight-light text-muted">Ubicación
+                    </span>{{infoVacante.entidad_federativa}}</h6>
+            </div>
+            <div class="col-md-6 col-12 text-md-right">
+                <h6><span class="font-weight-light text-muted">Sueldo
+                    </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-md-6 col-12 text-left">
+                <h6><span class="font-weight-light text-muted"> Area </span>{{infoVacante.area_estudio}}
+                </h6>
+            </div>
+            <div class="col-md-6 col-12 text-md-right">
+                <h6><span class="font-weight-light text-muted">Género preferente </span>
+                    {{infoVacante.genero}}</h6>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading && !accesoDenegado" class="container" >
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-lg-12" id="titulo_postulaciones">
+                Postulaciones ({{postulaciones.length}})
+            </div>
+        </div>
+        
+        <div class="row" id="row_cabecera">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3" id="col_cabecera" style="text-align: left;">
+                Nombre y Edad
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_cabecera">
+                Género
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3" id="col_cabecera">
+                Email
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2" id="col_cabecera">
+                Postulación
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3" id="col_cabecera">
+                Acciones
+            </div>
+        </div>
+
+        <div class="row" *ngFor="let item of postulaciones" id="row_postulaciones">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3" id="col_postulaciones" style="text-align: left;">
+                {{item.nombre}} ({{item.edad}} años)
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+                {{item.genero}}
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-3" id="col_postulaciones">
+                {{item.email}}
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2" id="col_postulaciones">
+                {{item.fecha_postulacion}}
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+                <a href="" style="color: blueviolet;">Ver más</a>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+                <a href="" style="color: blueviolet;">Aceptar</a>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+                <a href="" style="color: blueviolet;">Rechazar</a>
+            </div>
         </div>
     </div>
 </div>

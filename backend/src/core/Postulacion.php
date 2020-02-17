@@ -41,4 +41,18 @@ class Postulacion {
         return new SuccessResult("", $r);
     }
 
+        
+    public static function get_postulacionesPorVacante($id_vacante){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("SELECT * FROM bdt_bd.postulaciones_vacante WHERE id_vacante = ?");
+        $stmt->bind_param('i', $id_vacante);
+        $stmt->execute();
+
+        $r = $db->readResult($stmt->get_result());
+
+        return new SuccessResult("",$r);
+    }
+
 }
