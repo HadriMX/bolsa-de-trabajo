@@ -87,3 +87,7 @@ select {
 .custom-file-input ~ .custom-file-label:lang(es)::after {
   content: "Elegir";
 }
+
+.input-group-append {
+  z-index: 100;
+}

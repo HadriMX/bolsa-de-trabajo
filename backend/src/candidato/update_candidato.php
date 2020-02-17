@@ -17,12 +17,12 @@ $candidato = (array) json_decode($_POST['infoCandidato']);
 $currentUser = $_SESSION['currentUser'];
 $response = array();
 
-$uploadCurriculum = FileUpload::check_file_exists("cv", $currentUser['id_usuario']) ? isset($_FILES['curriculum']) : true;
-if ($uploadCurriculum) {
-    $curriculumResult = FileUpload::upload($_FILES['curriculum'], true, "curriculum");
+$uploadCurp = FileUpload::check_file_exists("curp", $currentUser['id_usuario']) ? isset($_FILES['curp']) : true;
+if ($uploadCurp) {
+    $curriculumResult = FileUpload::upload($_FILES['curp'], "curp");
 
     if (is_string($curriculumResult)) {
-        $candidato['ruta_cv'] = $curriculumResult;
+        $candidato['ruta_curp'] = $curriculumResult;
     } else {
         $response = $curriculumResult;
     }
@@ -30,7 +30,7 @@ if ($uploadCurriculum) {
 
 $uploadIdentificacion = FileUpload::check_file_exists("id", $currentUser['id_usuario']) ? isset($_FILES['identificacion']) : true;
 if ($uploadIdentificacion) {
-    $curriculumResult = FileUpload::upload($_FILES['identificacion'], true, "identificacion");
+    $curriculumResult = FileUpload::upload($_FILES['identificacion'], "identificacion");
 
     if (is_string($curriculumResult)) {
         $candidato['ruta_id'] = $curriculumResult;
@@ -39,12 +39,12 @@ if ($uploadIdentificacion) {
     }
 }
 
-$uploadCurp = FileUpload::check_file_exists("curp", $currentUser['id_usuario']) ? isset($_FILES['curp']) : true;
-if ($uploadCurp) {
-    $curriculumResult = FileUpload::upload($_FILES['curp'], true, "curp");
+$uploadCurriculum = FileUpload::check_file_exists("cv", $currentUser['id_usuario']) ? isset($_FILES['curriculum']) : true;
+if ($uploadCurriculum) {
+    $curriculumResult = FileUpload::upload($_FILES['curriculum'], "curriculum");
 
     if (is_string($curriculumResult)) {
-        $candidato['ruta_curp'] = $curriculumResult;
+        $candidato['ruta_cv'] = $curriculumResult;
     } else {
         $response = $curriculumResult;
     }

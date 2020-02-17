@@ -164,7 +164,7 @@
     <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
             <!-- CURP -->
-            <div class="row">
+            <div class="row mb-3">
                 <div class="input-group">
                     <div id="inputFile" class="input-group-prepend">
                         <span class="input-group-text">CURP</span>
@@ -175,14 +175,14 @@
                         <label id="labelCurp" class="custom-file-label" for="fileCurp">{{ labelCurp }}</label>
                     </div>
 
-                    <div *ngIf="cvFileUrl" class="input-group-append">
-                        <a [href]="cvFileUrl" target="_blank"><span class="input-group-text">Ver</span></a>
+                    <div *ngIf="curpFileUrl" class="input-group-append">
+                        <a [href]="curpFileUrl" target="_blank"><span class="input-group-text">Ver</span></a>
                     </div>
                 </div>
             </div>
 
             <!-- ID -->
-            <div class="row">
+            <div class="row mb-3">
                 <div class="input-group" style="width: 100%;">
                     <div id="inputFile" class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">IDENTIFICACIÓN</span>
@@ -193,11 +193,15 @@
                         <label id="labelIdentificacion" class="custom-file-label"
                             for="fileIdentificacion">{{ labelIdentificacion }}</label>
                     </div>
+
+                    <div *ngIf="idFileUrl" class="input-group-append">
+                        <a [href]="idFileUrl" target="_blank"><span class="input-group-text">Ver</span></a>
+                    </div>
                 </div>
             </div>
 
             <!-- CURRICULUM -->
-            <div class="row">
+            <div class="row mb-3">
                 <div class="input-group" style="width: 100%;">
                     <div id="inputFile" class="input-group-prepend">
                         <span class="input-group-text" id="fileCurriculum">CURRICULUM</span>
@@ -207,6 +211,10 @@
                             lang="es" (change)="onFileSelectCurriculum($event)">
                         <label id="labelCurriculum" class="custom-file-label"
                             for="fileCurriculum">{{ labelCurriculum }}</label>
+                    </div>
+
+                    <div *ngIf="cvFileUrl" class="input-group-append">
+                        <a [href]="cvFileUrl" target="_blank"><span class="input-group-text">Ver</span></a>
                     </div>
                 </div>
             </div>

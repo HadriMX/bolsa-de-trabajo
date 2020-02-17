@@ -152,9 +152,16 @@ export class EditarusuarioComponent implements OnInit, IAppPage {
           this.infoCandidato = response.data;
           this.getMunicipios(this.infoCandidato.id_entidad_federativa);
           
-          this.labelIdentificacion = this.infoCandidato.ruta_id || this.labelIdentificacion;
-          this.labelCurp = this.infoCandidato.ruta_curp || this.labelCurp;
-
+          if (this.infoCandidato.ruta_curp) {
+            this.labelCurp = this.infoCandidato.ruta_curp;
+            this.curpFileUrl = environment.uploadsUrl + this.infoCandidato.ruta_curp;
+          }
+          
+          if (this.infoCandidato.ruta_id) {
+            this.labelIdentificacion = this.infoCandidato.ruta_id;
+            this.idFileUrl = environment.uploadsUrl + this.infoCandidato.ruta_id;
+          }
+          
           if (this.infoCandidato.ruta_cv) {
             this.labelCurriculum = this.infoCandidato.ruta_cv;
             this.cvFileUrl = environment.uploadsUrl + this.infoCandidato.ruta_cv;

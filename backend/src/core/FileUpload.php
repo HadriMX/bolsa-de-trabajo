@@ -24,7 +24,7 @@ class FileUpload
         return $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
     }
 
-    public static function upload(?array $fileData, bool $noReplace, string $newFileName = "")
+    public static function upload(?array $fileData, string $newFileName, bool $noReplace = true)
     {
         $result = array();
 
@@ -35,7 +35,7 @@ class FileUpload
             $mimeType = mime_content_type($tmpUploadedFilename);
             $fileExtension = array_search($mimeType, self::$allowedFileTypes);
 
-            if ($fileExtension === false) {
+            if ($error === 0 && $fileExtension === false) {
                 $error = 9;
             }
 
@@ -73,9 +73,14 @@ class FileUpload
     */
     public static function check_file_exists(string $filename)
     {
-        return file_exists($_SESSION["currentUser"]["ruta_" + $filename]);
+        $filePath = $_SESSION["currentUser"]["ruta_" . $filename];
+        if (empty($filePath))
+            return false;
+
+        $fullFilePath = self::get_upload_dir() . $filePath;
+        return file_exists($fullFilePath);
         // $fileExists = false;
-        
+
         // $extensions = array_keys(self::$allowedFileTypes);
         // foreach ($extensions as $ext) {
         //     $fullFilePath = self::get_upload_dir() . self::get_file_name($filename, $id_usuario) . $ext;
@@ -87,7 +92,8 @@ class FileUpload
         // return $fileExists;
     }
 
-    public static function delete_file(string $filename, $id_usuario) {
+    public static function delete_file(string $filename, $id_usuario)
+    {
         $extensions = array_keys(self::$allowedFileTypes);
         foreach ($extensions as $ext) {
             $pattern = self::get_upload_dir() . "*" . self::get_file_name($filename, $id_usuario) . $ext;

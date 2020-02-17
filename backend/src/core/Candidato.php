@@ -9,6 +9,11 @@ class Candidato
         $cadenaDatosIncompletos = "";
         $db = new Db();
         $conn = $db->getConn();
+
+        if (is_a($conn, 'ErrorResult')) {
+            return $conn;
+        }
+
         $stmt = $conn->prepare("UPDATE candidatos SET telefono = ?, id_municipio = ?, ciudad = ?, colonia = ?, cp = ?, calle = ?, num_ext = ?, id_area_estudio = ?, escuela = ?, ruta_curp = ?, ruta_id = ?, ruta_cv = ? WHERE id_usuario = ?");
 
         //info personal
@@ -104,7 +109,7 @@ class Candidato
         if ($stmt->affected_rows > 0) {
             $output = new SuccessResult($msj, true);
         } else {
-            $output = new ErrorResult("Error: No se pudo guardar la información. Intentelo mas tarde", 515);
+            $output = new SuccessResult("No hubo cambios.", 1);
         }
 
         $stmt->close();
