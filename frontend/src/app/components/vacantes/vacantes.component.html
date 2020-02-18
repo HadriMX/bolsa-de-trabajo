@@ -18,7 +18,7 @@
                     </div>
 
                     <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
-                        <div id="vacantesInfo" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
+                        <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,true)" data-toggle="modal"
                             data-target="#datosvacantes">
                             <div class="row">
                                 <div class="col-9">
@@ -56,9 +56,45 @@
                     </div>
 
                 </mat-tab>
-                <mat-tab label="Vacantes Canceladas">
+                <mat-tab label="Vacantes Cerradas">
 
-                    NADA POR AQUI
+                    <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
+                        <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,false)" data-toggle="modal"
+                            data-target="#datosvacantes">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h6 style="color: rgb(121, 24, 129);">
+                                        <strong>{{item.titulo_vacante}}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-3">
+                                    <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
+                        <div class="col">
+                          <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)</h6>
+                        </div>
+                      </div> -->
+
+                            <div class="row">
+                                <div class="col">
+                                    <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
+                                            class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
+                                    <h6 class="font-weight-bold">({{item.sueldo | currency:'MXN'}} MXN)</h6>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <p class="d-sm-block">
+                                        {{item.descripcion_puesto_plain_text | slice:0:190}}...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </mat-tab>
             </mat-tab-group>
@@ -139,15 +175,19 @@
                         Postularme
                     </button>
                 </span> -->
-                    <a href="" [routerLink]="['/vacantes/postulaciones', infoVacante.id_vacante]">
-                        <button class="btn btn-primary">
-                            Ver postulaciones
-                        </button>
-                    </a>
+                        <a *ngIf="mostrarBoton" href="" [routerLink]="['/vacantes/postulaciones', infoVacante.id_vacante]">
+                            <button class="btn btn-primary">
+                                Ver postulaciones
+                            </button>
+                        </a>
 
-                    <button class="btn btn-danger">
-                        Eliminar
-                    </button>
+                        <button *ngIf="mostrarBoton" class="btn btn-danger" style="margin-left: 10px;">
+                            Cerrar vacante
+                        </button>
+
+                        <button *ngIf="!mostrarBoton" class="btn btn-primary" style="margin-left: 10px;">
+                            Abrir vacante
+                        </button>
                 </div>
             </div>
         </div>
