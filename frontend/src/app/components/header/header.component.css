@@ -13,6 +13,7 @@ nav.navbar {
 }
 #contenedor_inputs{
     justify-content: right;
+    justify-content: flex-end;
 }
 
 @media (max-width: 829px) {

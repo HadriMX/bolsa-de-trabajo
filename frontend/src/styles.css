@@ -50,6 +50,10 @@ body {
   border: 1px solid #5d0877;
   box-shadow: 0 0 0 .2rem #964fac98;
 }
+.btn-primary:disabled{
+  background-color: #5d0877;
+  border-color: #5d0877;
+}
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle{
   background-color: #5d0877;
   border: 1px solid #5d0877;
