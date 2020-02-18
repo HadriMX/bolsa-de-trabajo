@@ -4,7 +4,14 @@
         <div class="container">
             <mat-tab-group id="mattab" dynamicHeight>
                 <mat-tab label="Vacantes Publicadas">
-
+                    <div *ngIf="vacantesPublicadas.length === 0 && !isLoading">
+                        <div id="espacioNovacante">
+                          <div id="espacioAviso">
+                            <h4>No tienes vacantes publicadas</h4>
+                            <img src="/assets/warning.png" width="30%" height="30%" alt="">
+                          </div>
+                        </div>
+                      </div>
                     <div *ngIf="!isLoading" class="row" id="registrarVacanteArea">
                         <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="text-align: left; padding-top: 15px;">
                             <h6 class="font-weight-bold" style="font-size: 20px;">Empresa:
@@ -17,7 +24,7 @@
                         </div>
                     </div>
 
-                    <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
+                    <div *ngFor="let item of vacantesPublicadas" id="vacantesContenedor" class="my-3 py-2">
                         <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,true)" data-toggle="modal"
                             data-target="#datosvacantes">
                             <div class="row">
@@ -58,7 +65,16 @@
                 </mat-tab>
                 <mat-tab label="Vacantes Cerradas">
 
-                    <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
+                    <div *ngIf="vacantesCerradas.length === 0 && !isLoading">
+                        <div id="espacioNovacante">
+                          <div id="espacioAviso">
+                            <h4>No tienes vacantes deshabilitadas</h4>
+                            <img src="/assets/warning.png" width="30%" height="30%" alt="">
+                          </div>
+                        </div>
+                      </div>
+
+                    <div *ngFor="let item of vacantesCerradas" id="vacantesContenedor" class="my-3 py-2">
                         <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,false)" data-toggle="modal"
                             data-target="#datosvacantes">
                             <div class="row">
@@ -181,11 +197,11 @@
                             </button>
                         </a>
 
-                        <button *ngIf="mostrarBoton" class="btn btn-danger" style="margin-left: 10px;">
+                        <button *ngIf="mostrarBoton" class="btn btn-danger" style="margin-left: 10px;" (click)="CerrarVacante(infoVacante.id_vacante)">
                             Cerrar vacante
                         </button>
 
-                        <button *ngIf="!mostrarBoton" class="btn btn-primary" style="margin-left: 10px;">
+                        <button *ngIf="!mostrarBoton" class="btn btn-primary" style="margin-left: 10px;" (click)="AbrirVacante(infoVacante.id_vacante)">
                             Abrir vacante
                         </button>
                 </div>

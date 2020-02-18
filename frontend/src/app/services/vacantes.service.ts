@@ -11,28 +11,28 @@ import { HttpOptionsService } from './http-options.service';
 })
 export class VacantesService {
 
+  private endpointUrlBusquedaVacantes = 'http://localhost/bdt/php/src/vacante/busqueda_vacante.php';
+  private endpointUrlGetMisVacantes = 'http://localhost/bdt/php/src/vacante/get_mis_vacantes.php';
+  private endpointUrlAddVacante = 'http://localhost/bdt/php/src/vacante/add_vacante.php';
+  private endpointUrlComprobarPertenenciaVacante = 'http://localhost/bdt/php/src/vacante/comprobarPertenenciaVacante.php';
+
   constructor(private http: HttpClient,
     private httpOptions: HttpOptionsService) { }
 
   busquedaVacantes(busqueda: Busqueda): Observable<ApiResponse<Vacante[]>> {
-    let url = 'http://localhost/bdt/php/src/vacante/busqueda_vacante.php';
-    return this.http.post<ApiResponse<Vacante[]>>(url, busqueda, this.httpOptions);
+    return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrlBusquedaVacantes, busqueda, this.httpOptions);
   }
 
-  getMisVacantes(): Observable<ApiResponse<Vacante[]>> {
-    let url = 'http://localhost/bdt/php/src/vacante/get_mis_vacantes.php';
-    return this.http.get<ApiResponse<Vacante[]>>(url, this.httpOptions);
+  getMisVacantes(estatus: string): Observable<ApiResponse<Vacante[]>> {
+    return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrlGetMisVacantes, { estatus: estatus } ,this.httpOptions);
   }
 
   addVacante(vacante: Vacante): Observable<ApiResponse<Vacante>> {
-    let url = 'http://localhost/bdt/php/src/vacante/add_vacante.php';
-    return this.http.post<ApiResponse<Vacante>>(url, vacante, this.httpOptions);
+    return this.http.post<ApiResponse<Vacante>>(this.endpointUrlAddVacante, vacante, this.httpOptions);
   }
 
   comprobarPertenenciaVacante(id_vacante: number): Observable<ApiResponse<Vacante>>{
-    let url = 'http://localhost/bdt/php/src/vacante/comprobarPertenenciaVacante.php';
-    return this.http.post<ApiResponse<Vacante>>(url, {id_vacante: id_vacante}, this.httpOptions);
-
+    return this.http.post<ApiResponse<Vacante>>(this.endpointUrlComprobarPertenenciaVacante, {id_vacante: id_vacante}, this.httpOptions);
   }
   
 }

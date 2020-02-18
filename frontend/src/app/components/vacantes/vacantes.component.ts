@@ -19,7 +19,8 @@ export class VacantesComponent implements OnInit, IAppPage {
   goTopEnabled = true;
   goTop?: Function;
 
-  vacantes: Vacante[] = [];
+  vacantesPublicadas: Vacante[] = [];
+  vacantesCerradas: Vacante[] = [];
   infoVacante: Vacante = new Vacante();
   isLoading = true;
   mostrarBoton = true;
@@ -50,17 +51,9 @@ export class VacantesComponent implements OnInit, IAppPage {
     private empresaService: EmpresaService) { }
 
   ngOnInit() {
-
     this.getInfoEmpresa();
-    this.vacantesService.getMisVacantes().subscribe(response => {
-      if (response.success) {
-        this.vacantes = response.data;
-        console.log(this.vacantes);
-      }
-
-      this.isLoading = false;
-    });
-
+    this.getVacantesMisVacantesPublicadas();
+    this.getVacantesMisVacantesCerradas();
   }
 
   getInfoEmpresa() {
@@ -75,7 +68,34 @@ export class VacantesComponent implements OnInit, IAppPage {
       });
   }
 
-  mostrarDetalleVacante(item, aux) {
+  getVacantesMisVacantesPublicadas(){
+    this.vacantesService.getMisVacantes('A').subscribe(response => {
+      if (response.success) {
+        this.vacantesPublicadas = response.data;
+      }
+      this.isLoading = false;
+    });
+  }
+
+  getVacantesMisVacantesCerradas(){
+    this.vacantesService.getMisVacantes('B').subscribe(response => {
+      if (response.success) {
+        this.vacantesCerradas = response.data;
+      }
+      this.isLoading = false;
+    });
+  }
+
+  CerrarVacante(id_vacante:number){
+    console.log(id_vacante);
+  }
+  
+  AbrirVacante(id_vacante:number){
+    console.log(id_vacante);
+  }
+
+
+  mostrarDetalleVacante(item, aux:boolean) {
     this.infoVacante = item;
     this.mostrarBoton = aux;
   }
