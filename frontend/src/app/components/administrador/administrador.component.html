@@ -102,6 +102,8 @@
         <ng-template pTemplate="caption">
           Categorias de empresas
           <div style="text-align: right">
+            <button type="button" pButton icon="fa fa-plus" (click)="dialogAddCategoria()" label="Añadir"
+             style="float: left;"></button>
             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
             <input type="text" pInputText size="50" placeholder="Filtrar"
               (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
@@ -152,8 +154,8 @@
         </ng-template>
         <ng-template pTemplate="summary" let-datosCategoria>
           <div style="text-align:left">
-            <button type="button" pButton icon="fa fa-plus" (click)="dialogAddCategoria()" label="Añadir"
-              class="btneditar"></button>
+            <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(2)"
+            class="ui-button-warning"></button>
           </div>
         </ng-template>
       </p-table>
@@ -167,11 +169,11 @@
     <div style="margin-top: 1%;">
       <p-table #dt [value]="datosArea" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
         [globalFilterFields]="['nombre']" editMode="row" dataKey="id_area_estudio" [responsive]="true">
-
         <ng-template pTemplate="caption">
           Áreas de estudio
-
           <div style="text-align: right">
+            <button type="button" pButton icon="fa fa-plus" (click)="dialogAddArea()" label="Añadir"
+              style="float: left;"></button>
             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
             <input type="text" pInputText size="50" placeholder="Filtrar"
               (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
@@ -222,8 +224,8 @@
         </ng-template>
         <ng-template pTemplate="summary" let-datosArea>
           <div style="text-align:left">
-            <button type="button" pButton icon="fa fa-plus" (click)="dialogAddArea()" label="Añadir"
-              class="btneditar"></button>
+            <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(1)"
+            class="ui-button-warning"></button>
           </div>
         </ng-template>
       </p-table>
@@ -290,6 +292,9 @@
                     </div>
                     <div class="ui-g-12">
                       <b>Email:</b> {{rowData.email}}
+                    </div>
+                    <div>
+                      <button (click)="verArchivo(rowData.rutaCV)">Ver curriclum</button>
                     </div>
                   </div>
                 </div>
@@ -375,11 +380,28 @@
                     <div class="ui-g-12">
                       <b>Area de estudio:</b> {{rowData.areaestudio}}
                     </div>
+                    <div class="ui-g-12">
+                      <button (click)="verArchivo(rowData.ruta_cv)">Ver curriclum</button>
+                    </div>
+                    <div class="ui-g-12">
+                      <button (click)="verArchivo(rowData.ruta_id)">Ver identificación</button>
+                    </div>
+                    <div class="ui-g-12">
+                      <button (click)="verArchivo(rowData.ruta_curp)">Ver CURP</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </td>
           </tr>
+        </ng-template>
+        <ng-template pTemplate="summary" >
+          <div style="text-align:left">
+            <button *ngIf="candidatoActivo" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(3)"
+            class="ui-button-warning"></button>
+            <button *ngIf="!candidatoActivo" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(4)"
+            class="ui-button-warning"></button>
+          </div>
         </ng-template>
       </p-table>
     </div>
@@ -466,8 +488,15 @@
             </td>
           </tr>
         </ng-template>
+        <ng-template pTemplate="summary" >
+          <div style="text-align:left">
+            <button *ngIf="empresaActiva" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(5)"
+            class="ui-button-warning"></button>
+            <button *ngIf="!empresaActiva" type="button" pButton icon="pi pi-file-pdf" iconPos="left" label="PDF" (click)="exportPdf(6)"
+            class="ui-button-warning"></button>
+          </div>
+        </ng-template>
       </p-table>
-
     </div>
   </div>
 

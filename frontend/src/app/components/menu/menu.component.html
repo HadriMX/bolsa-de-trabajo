@@ -253,14 +253,8 @@
                         class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
                         Postularme
                     </button>
-                    <span *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'I'"
-                        class="d-inline-block" tabindex="0" data-toggle="tooltip" title="No puedes postularte">
-                        <button class="btn btn-disabled" disabled>
-                            Postularme
-                        </button>
-                    </span>
                     <button *ngIf="usuarioActual.id_tipo_usuario == 0" class="btn btn-danger"
-                        (click)="darDeBajaVacante(infoVacante)">
+                        (click)="cerrarModales();mostrarModalEliminar()">
                         Eliminar
                     </button>
                 </div>
@@ -268,3 +262,24 @@
         </div>
     </div>
 </div>
+
+<!--===============================================================================================-->
+
+<p-dialog header="Motivo" [(visible)]="displayDialogEliminarVacante" [focusOnShow]="false" [responsive]="true"
+    showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+            <div class="ui-g-4">
+                <label>Motivo:</label>
+            </div>
+            <div class="ui-g-8">
+                <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            <button type="button" pButton icon="fa fa-check" label="Guardar" class="btneditar"></button>
+        </div>
+    </p-footer>
+</p-dialog>

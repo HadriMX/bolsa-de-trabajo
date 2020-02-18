@@ -66,6 +66,10 @@ table {
   width: 100%;
 }
 
+i {
+  color: #791881;
+}
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;
@@ -242,12 +246,28 @@ body .ui-tabview.ui-tabview-right .ui-tabview-nav li:focus {
   color: #ffffff;
 }
 
+:host::ng-deep .ui-paginator .ui-paginator-pages .ui-paginator-page:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  -webkit-box-shadow: 0 0 0 0.2em #b079b4;
+  -moz-box-shadow: 0 0 0 0.2em #b079b4;
+  box-shadow: 0 0 0 0.2em #b079b4;
+}
+
 :host::ng-deep
   .ui-paginator
   .ui-paginator-pages
   .ui-paginator-page:not(.ui-state-active):hover {
   background-color: #bb26c7;
   color: #333333;
+}
+
+:host::ng-deep .ui-table .ui-sortable-column:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  -webkit-box-shadow: inset 0 0 0 0.2em #b079b4;
+  -moz-box-shadow: inset 0 0 0 0.2em #b079b4;
+  box-shadow: inset 0 0 0 0.2em #b079b4;
 }
 
 :host__ng-deep .ui-datatable table {
@@ -264,6 +284,15 @@ body
   .ui-dropdown-item-group.ui-state-highlight {
   color: #ffffff;
   background-color: #791881;
+}
+
+:host::ng-deep .ui-inputtext:enabled:focus:not(.ui-state-error) {
+  outline: 0 none;
+  outline-offset: 0;
+  -webkit-box-shadow: 0 0 0 0.2em #b079b4;
+  -moz-box-shadow: 0 0 0 0.2em #b079b4;
+  box-shadow: 0 0 0 0.2em #b079b4;
+  border-color: #bb26c7;
 }
 
 @media (max-width: 1000px) and (min-width: 320px) {

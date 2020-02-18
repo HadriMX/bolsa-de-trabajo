@@ -14,6 +14,7 @@ export class CatEmpresaService {
   private endpointUrlGeCategorias = environment.hostUrl + 'categoria/get_categorias.php';
   private endpointUrlGeCategoriasEmpresa = environment.hostUrl + 'categoria/get_categoriasEmpresa.php';
   private endpointUrlUpdateCategoria = environment.hostUrl + 'categoria/update_categoria.php';
+  private endpointUrlGeCategoriaReporte = environment.hostUrl + 'categoria/get_categoriasReporte.php';
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -29,7 +30,12 @@ export class CatEmpresaService {
     return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlGeCategoriasEmpresa, this.httpOptions);
   }
 
+  get_categoriasReporte(): Observable<ApiResponse<Cat_empresa[]>> {
+    return this.http.get<ApiResponse<Cat_empresa[]>>(this.endpointUrlGeCategoriaReporte, this.httpOptions);
+  }
+
   update_categoria(categoria: Cat_empresa): Observable<ApiResponse<Cat_empresa[]>> {
     return this.http.post<ApiResponse<Cat_empresa[]>>(this.endpointUrlUpdateCategoria, categoria, this.httpOptions);
   }
+
 }

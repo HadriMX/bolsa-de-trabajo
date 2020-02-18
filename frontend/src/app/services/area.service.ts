@@ -14,6 +14,7 @@ export class AreaService {
   private endpointUrlGetAreas = environment.hostUrl + 'area/get_areas.php';
   private endpointUrlUpdateArea = environment.hostUrl + 'area/update_area.php';
   private endpointUrlGetAreasMenu = environment.hostUrl + 'area/get_areasMenu.php';
+  private endpointUrlGetAreasReporte = environment.hostUrl + 'area/get_areasReporte.php';
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -29,7 +30,12 @@ export class AreaService {
     return this.http.get<ApiResponse<Area[]>>(this.endpointUrlGetAreasMenu, this.httpOptions);
   }
 
+  get_areasReporte(): Observable<ApiResponse<Area[]>> {
+    return this.http.get<ApiResponse<Area[]>>(this.endpointUrlGetAreasReporte, this.httpOptions);
+  }
+
   update_area(area: Area): Observable<ApiResponse<Area[]>> {
     return this.http.post<ApiResponse<Area[]>>(this.endpointUrlUpdateArea, area, this.httpOptions);
   }
+
 }

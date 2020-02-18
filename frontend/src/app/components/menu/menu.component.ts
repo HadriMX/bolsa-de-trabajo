@@ -46,6 +46,7 @@ export class MenuComponent implements OnInit, IAppPage {
 
   //otros
   noVacantesDisponibles: boolean = false;
+  displayDialogEliminarVacante: boolean;
   
   busqueda: Busqueda = {
     SelectedSalario: "0",
@@ -246,5 +247,9 @@ export class MenuComponent implements OnInit, IAppPage {
 
   darDeBajaVacante(vacante: Vacante) {
     alert('Aquí se va a dar de baja');
+  }
+
+  mostrarModalEliminar(){
+    this.displayDialogEliminarVacante=true;
   }
 }

@@ -44,6 +44,17 @@ class Categoria{
         return new SuccessResult("",$r);
     }
 
+    public static function get_categoriasReporte(){
+        $db = new Db();
+        $conn = $db->getConn();
+        
+        $stmt = $conn->prepare("SELECT  * FROM reporte_categoria");
+        
+        $stmt->execute();
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("",$r);
+    }
+
     public static function update_categoria( array $categoria){
         $db = new Db();
         $conn = $db->getConn();

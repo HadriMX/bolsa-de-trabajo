@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class NavbarAdminComponent implements OnInit {
   public usuarioActual: Usuario;
+  numero:number;
 
   constructor(
     private currentUserService: CurrentUserService,
@@ -28,7 +29,7 @@ export class NavbarAdminComponent implements OnInit {
 
   estado(numero: number) {
     this.router.navigateByUrl("/administracion");
-    this.admin.estado = numero;
+    this.admin.estado=numero;
   }
 
 
