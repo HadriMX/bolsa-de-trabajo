@@ -6,6 +6,7 @@ import { IAppPage } from 'src/app/interfaces/app-page';
 import { Empresa } from 'src/app/models/empresa';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import Swal from 'sweetalert2';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-vacantes',
@@ -21,6 +22,7 @@ export class VacantesComponent implements OnInit, IAppPage {
   vacantes: Vacante[] = [];
   infoVacante: Vacante = new Vacante();
   isLoading = true;
+  mostrarBoton = true;
 
   infoEmpresa: Empresa = {
     nombre_empresa: "",
@@ -48,14 +50,17 @@ export class VacantesComponent implements OnInit, IAppPage {
     private empresaService: EmpresaService) { }
 
   ngOnInit() {
+
     this.getInfoEmpresa();
     this.vacantesService.getMisVacantes().subscribe(response => {
       if (response.success) {
         this.vacantes = response.data;
+        console.log(this.vacantes);
       }
 
       this.isLoading = false;
     });
+
   }
 
   getInfoEmpresa() {
@@ -70,10 +75,10 @@ export class VacantesComponent implements OnInit, IAppPage {
       });
   }
 
-  mostrarDetalleVacante(item) {
+  mostrarDetalleVacante(item, aux) {
     this.infoVacante = item;
+    this.mostrarBoton = aux;
   }
-
 
   arriba() {
     $('#body, html').animate({

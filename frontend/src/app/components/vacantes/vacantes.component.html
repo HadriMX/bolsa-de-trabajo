@@ -1,150 +1,194 @@
-<app-headertittle></app-headertittle>
-<div id="body">
-    <div class="container">
-        <mat-tab-group id="mattab" dynamicHeight>
-            <mat-tab label="Vacantes Publicadas">
-
-                <div *ngIf="!isLoading" class="row" id="registrarVacanteArea">
-                    <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="text-align: left; padding-top: 15px;">
-                        <h6 class="font-weight-bold" style="font-size: 20px;">Empresa: {{infoEmpresa.nombre_empresa}}</h6>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-12" style="text-align: right;">
-                        <a routerLink="registrar">
-                            <button id="registrarVacanteButton" class="btn btn-primary">
-                                Agregar vacante
+<div class="body-content">
+    <app-headertittle></app-headertittle>
+    <div id="body">
+        <div class="container">
+            <mat-tab-group id="mattab" dynamicHeight>
+                <mat-tab label="Vacantes Publicadas">
+                    <div *ngIf="!isLoading" class="row" id="registrarVacanteArea">
+                        <div class="col-lg-8 col-md-12 col-sm-12 col-12" style="text-align: left; padding-top: 15px;">
+                            <h6 class="font-weight-bold" style="font-size: 20px;">Empresa:
+                                {{infoEmpresa.nombre_empresa}}</h6>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12 col-12" style="text-align: right;">
+                            <button routerLink="registrar" id="registrarVacanteButton" class="btn btn-primary">
+                                Agregar Vacante
                             </button>
-                        </a>
+                        </div>
                     </div>
-                </div>
 
-                <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
-                    <div id="vacantesInfo" (click)="mostrarDetalleVacante(item)" data-toggle="modal" data-target="#datosvacantes">
-                      <div class="row">
-                        <div class="col-9">
-                          <h6 style="color: rgb(121, 24, 129);">
-                            <strong>{{item.titulo_vacante}}</strong>
-                          </h6>
-                        </div>
-                        <div class="col-3">
-                          <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
-                        </div>
-                      </div>
-          
-                      <!-- <div class="row">
+                    <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
+                        <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,true)" data-toggle="modal"
+                            data-target="#datosvacantes">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h6 style="color: rgb(121, 24, 129);">
+                                        <strong>{{item.titulo_vacante}}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-3">
+                                    <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
                         <div class="col">
                           <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)</h6>
                         </div>
                       </div> -->
-          
-                      <div class="row">
-                        <div class="col">
-                          <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
-                              class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6><h6 class="font-weight-bold">({{item.sueldo | currency:'MXN'}} MXN)</h6>
+
+                            <div class="row">
+                                <div class="col">
+                                    <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
+                                            class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
+                                    <h6 class="font-weight-bold">({{item.sueldo | currency:'MXN'}} MXN)</h6>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <p class="d-sm-block">
+                                        {{item.descripcion_puesto_plain_text | slice:0:190}}...
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-          
-                      <div class="row">
-                        <div class="col">
-                          <p class="d-sm-block">
-                            {{item.descripcion_puesto_plain_text | slice:0:190}}...
-                          </p>
-                        </div>
-                      </div>
                     </div>
-                  </div>
 
-            </mat-tab>
-            <mat-tab label="Vacantes Canceladas">
+                </mat-tab>
+                <mat-tab label="Vacantes Cerradas">
 
-                NADA POR AQUI
+                    <div *ngFor="let item of vacantes" id="vacantesContenedor" class="my-3 py-2">
+                        <div id="vacantesInfo" (click)="mostrarDetalleVacante(item,false)" data-toggle="modal"
+                            data-target="#datosvacantes">
+                            <div class="row">
+                                <div class="col-9">
+                                    <h6 style="color: rgb(121, 24, 129);">
+                                        <strong>{{item.titulo_vacante}}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-3">
+                                    <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                                </div>
+                            </div>
 
-            </mat-tab>
-        </mat-tab-group>
-        
-        <div *ngIf="isLoading" class="container">
-            <app-loading></app-loading>
+                            <!-- <div class="row">
+                        <div class="col">
+                          <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}} MXN)</h6>
+                        </div>
+                      </div> -->
+
+                            <div class="row">
+                                <div class="col">
+                                    <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
+                                            class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
+                                    <h6 class="font-weight-bold">({{item.sueldo | currency:'MXN'}} MXN)</h6>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <p class="d-sm-block">
+                                        {{item.descripcion_puesto_plain_text | slice:0:190}}...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-tab>
+            </mat-tab-group>
+
+            <div *ngIf="isLoading" class="container">
+                <app-loading></app-loading>
+            </div>
         </div>
     </div>
-</div>
 
-<!--===============================================================================================-->
-<!-- Modal de los datos de las vacantes -->
-<div class="modal fade" id="datosvacantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" data-controls-modal="datosvacante" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header mx-2" style="border-bottom: 1px solid rgb(121, 24, 129);">
-                <div class="container">
-                    <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
+    <!--===============================================================================================-->
+    <!-- Modal de los datos de las vacantes -->
+    <div class="modal fade" id="datosvacantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" data-controls-modal="datosvacante" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header mx-2" style="border-bottom: 1px solid rgb(121, 24, 129);">
+                    <div class="container">
+                        <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6> <span class="font-weight-light text-muted">Empresa
+                                    </span>{{infoVacante.nombre_empresa}}</h6>
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <h6><span class="font-weight-light text-muted">Publicada </span>
+                                    {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6> <span class="font-weight-light text-muted">Ubicación
+                                    </span>{{infoVacante.entidad_federativa}}</h6>
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <h6><span class="font-weight-light text-muted">Sueldo
+                                    </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6><span class="font-weight-light text-muted"> Area </span>{{infoVacante.area_estudio}}
+                                </h6>
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <h6><span class="font-weight-light text-muted">Género preferente </span>
+                                    {{infoVacante.genero}}</h6>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6> <span class="font-weight-light text-muted">Empresa
-                                </span>{{infoVacante.nombre_empresa}}</h6>
-                        </div>
-                        <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Publicada </span>
-                                {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6> <span class="font-weight-light text-muted">Ubicación
-                                </span>{{infoVacante.entidad_federativa}}</h6>
-                        </div>
-                        <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Sueldo
-                                </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6><span class="font-weight-light text-muted"> Area </span>{{infoVacante.area_estudio}}
-                            </h6>
-                        </div>
-                        <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Género preferente </span>
-                                {{infoVacante.genero}}</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-12">
+                                <span style="text-align: justify;" [innerHTML]="infoVacante.descripcion_puesto"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer mx-2" style="border-top: 1px solid rgb(121, 24, 129);">
 
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body mx-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-12 col-12">
-                            <span style="text-align: justify;" [innerHTML]="infoVacante.descripcion_puesto"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer mx-2" style="border-top: 1px solid rgb(121, 24, 129);">
-                
-                <!-- <span *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'I'" class="d-inline-block"
+                    <!-- <span *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'I'" class="d-inline-block"
                     tabindex="0" data-toggle="tooltip" title="No puedes postularte">
                     <button class="btn btn-disabled" disabled>
                         Postularme
                     </button>
                 </span> -->
-                <button class="btn btn-primary">
-                    Ver postulaciones
-                </button>
-                <button class="btn btn-danger">
-                    Eliminar
-                </button>
+                    <a *ngIf="mostrarBoton" href="" [routerLink]="['/vacantes/postulaciones', infoVacante.id_vacante]">
+                        <button class="btn btn-primary">
+                            Ver postulaciones
+                        </button>
+                    </a>
+
+                    <button *ngIf="mostrarBoton" class="btn btn-danger" style="margin-left: 10px;">
+                        Cerrar vacante
+                    </button>
+
+                    <button *ngIf="!mostrarBoton" class="btn btn-primary" style="margin-left: 10px;">
+                        Abrir vacante
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-

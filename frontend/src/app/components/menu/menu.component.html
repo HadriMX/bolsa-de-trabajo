@@ -1,265 +1,269 @@
-<app-headertittle></app-headertittle>
+<div class="body-content">
+    <app-headertittle></app-headertittle>
+    <!--inicia del cuerpo de la pagina del menu -->
+    <div id="body">
+        <div id="cabeceraBusqueda" class="container-fluid">
+            <div class="container">
+                <div class="row pt-3 align-items-end">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <h6 class="font-weight-bold">Título de la vacante o empresa</h6>
+                            <input type="text" class="form-control" placeholder="Ej: Ingeniero en software"
+                                [(ngModel)]="busqueda.InputTitulo">
+                        </div>
+                    </div>
 
-<!--inicia del cuerpo de la pagina del menu -->
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <h6 class="font-weight-bold">Ubicación</h6>
+                            <input class="form-control" placeholder="Ej: Sinaloa" [(ngModel)]="busqueda.InputUbicacion"
+                                list="browsers">
 
-<div id="body">
-    <div id="cabeceraBusqueda" class="container-fluid">
-        <div class="container">
-            <div class="row pt-3 align-items-end">
-                <div class="col-sm-5">
-                    <div class="form-group">
-                        <h6 class="font-weight-bold">Título de la vacante o empresa</h6>
-                        <input type="text" class="form-control" placeholder="Ej: Ingeniero en software"
-                            [(ngModel)]="busqueda.InputTitulo">
+                            <datalist id="browsers">
+                                <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.nombre">
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="w-100 d-none d-sm-none"></div>
+                    <div id="espaciobuscar" class="col-sm-3">
+                        <div class="form-group">
+                            <button (click)="buscar()" class="btn btn-success form-control">
+                                BUSCAR
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <h6 class="font-weight-bold">Ubicación</h6>
-                        <input class="form-control" placeholder="Ej: Sinaloa" [(ngModel)]="busqueda.InputUbicacion"
-                            list="browsers">
-
-                        <datalist id="browsers">
-                            <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.nombre">
-                        </datalist>
+                <div class="row pb-2">
+                    <div class="form-group col-sm-3">
+                        <span class="custom-dropdown">
+                            <select class="form-control" [(ngModel)]="busqueda.SelectedSalario">
+                                <option value="0">Sueldos</option>
+                                <option value="1">$0 - $5,000 MXN</option>
+                                <option value="2">$5,000 - $10,000 MXN</option>
+                                <option value="3">$10,000 - $15,000 MXN</option>
+                                <option value="4">$15,000 - $20,000 MXN</option>
+                                <option value="5">$20,000 - $30,000 MXN</option>
+                                <option value="6">$30,000 - $40,000 MXN</option>
+                                <option value="7">$40,000 - $60,000 MXN</option>
+                                <option value="8">$60,000 - $80,000 MXN</option>
+                                <option value="9">$80,000 - o más</option>
+                            </select>
+                        </span>
                     </div>
-                </div>
-                <div class="w-100 d-none d-sm-none"></div>
-                <div id="espaciobuscar" class="col-sm-3">
-                    <div class="form-group">
-                        <button (click)="buscar()" class="btn btn-success form-control">
-                            BUSCAR
+
+                    <div class="form-group col-sm-3">
+                        <span class="custom-dropdown">
+                            <select class="form-control" name="select" [(ngModel)]="busqueda.SelectedFecha">
+                                <option value="0">Fecha</option>
+                                <option value="1">Hace 1 semana</option>
+                                <option value="2">Hace 2 semanas</option>
+                                <option value="3">Hace 1 mes</option>
+                                <option value="4">Hace 2 meses</option>
+                                <option value="5">Hace 4 meses</option>
+                                <option value="6">Hace 6 meses</option>
+                            </select>
+                        </span>
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <span class="custom-dropdown">
+                            <select class="form-control" [(ngModel)]="busqueda.SelectedArea">
+                                <option value="0" selected>Áreas</option>
+                                <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}
+                                </option>
+                            </select>
+                        </span>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <button id="limpiar" class="btn btn-outline-secondary form-control" (click)="limpiarFiltros()">
+                            LIMPIAR FILTROS
+                        </button>
+                        <button id="limpiar-short" class="btn btn-outline-secondary form-control"
+                            (click)="limpiarFiltros()">
+                            LIMPIAR
                         </button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row pb-2">
-                <div class="form-group col-sm-3">
-                    <span class="custom-dropdown">
-                        <select class="form-control" [(ngModel)]="busqueda.SelectedSalario">
-                            <option value="0">Sueldos</option>
-                            <option value="1">$0 - $5,000 MXN</option>
-                            <option value="2">$5,000 - $10,000 MXN</option>
-                            <option value="3">$10,000 - $15,000 MXN</option>
-                            <option value="4">$15,000 - $20,000 MXN</option>
-                            <option value="5">$20,000 - $30,000 MXN</option>
-                            <option value="6">$30,000 - $40,000 MXN</option>
-                            <option value="7">$40,000 - $60,000 MXN</option>
-                            <option value="8">$60,000 - $80,000 MXN</option>
-                            <option value="9">$80,000 - o más</option>
-                        </select>
-                    </span>
+        <div *ngIf="!isLoading && noVacantesDisponibles" class="container">
+            <div id="espacioNovacante">
+                <div id="espacioAviso">
+                    <h4>No hay vacantes disponibles</h4>
+                    <img src="/assets/warning.png" width="30%" height="30%" alt="">
                 </div>
+            </div>
+        </div>
 
-                <div class="form-group col-sm-3">
-                    <span class="custom-dropdown">
-                        <select class="form-control" name="select" [(ngModel)]="busqueda.SelectedFecha">
-                            <option value="0">Fecha</option>
-                            <option value="1">Hace 1 semana</option>
-                            <option value="2">Hace 2 semanas</option>
-                            <option value="3">Hace 1 mes</option>
-                            <option value="4">Hace 2 meses</option>
-                            <option value="5">Hace 4 meses</option>
-                            <option value="6">Hace 6 meses</option>
-                        </select>
-                    </span>
-                </div>
+        <div *ngIf="isLoading" class="container">
+            <app-loading></app-loading>
+        </div>
 
-                <div class="form-group col-sm-3">
-                    <span class="custom-dropdown">
-                        <select class="form-control" [(ngModel)]="busqueda.SelectedArea">
-                            <option value="0" selected>Áreas</option>
-                            <option *ngFor="let area of areas" [value]="area.id_area_estudio">{{area.nombre}}</option>
-                        </select>
-                    </span>
-                </div>
 
-                <div class="col-sm-3">
-                    <button id="limpiar" class="btn btn-outline-secondary form-control" (click)="limpiarFiltros()">
-                        LIMPIAR FILTROS
-                    </button>
-                    <button id="limpiar-short" class="btn btn-outline-secondary form-control"
-                        (click)="limpiarFiltros()">
-                        LIMPIAR
-                    </button>
+        <div *ngIf="!isLoading && !noVacantesDisponibles" class="container">
+            <div class="row my-3" style="text-align: left;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 *ngIf="usuarioActual.estatus == 'A'" style="font-size: large;">{{allItems.length}} ofertas de
+                        empleo</h6>
+                    <label *ngIf="usuarioActual.estatus == 'I'" for="" style="color: red; font-size: 15;">La información
+                        de la cuenta sigue incompleta. Sólo podrás ver las vacantes pero no postularte.</label>
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="col mx-1">
+                    <!-- EMPIEZAN VACANTES -->
+                    <!-- items que estan siendo paginados -->
+                    <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-3 py-2">
+                        <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
+                            data-target="#datosvacantes">
+                            <div class="row">
+                                <div class="col-lg-9 col-9">
+                                    <h6 style="color: rgb(121, 24, 129);">
+                                        <strong>{{item.titulo_vacante}}</strong>
+                                    </h6>
+                                </div>
+                                <div class="col-lg-3 col-3">
+                                    <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <h6 class="font-weight-bold">{{item.nombre_empresa}}
+                                        ({{item.sueldo | currency:'MXN'}}
+                                        MXN)
+                                    </h6>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
+                                            class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <p class="d-sm-block">
+                                        {{item.descripcion_puesto_plain_text | slice:0:190}}...
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TERMINA VACANTES -->
+                </div>
+            </div>
+
+            <div *ngIf="!isLoading" class="row justify-content-center mt-3">
+                <!-- paginacion -->
+                <nav aria-label="Paginación">
+                    <ul class="pagination">
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}">
+                            <a class="page-link" (click)="setUrl(1)">Primera</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}">
+                            <a class="page-link" (click)="setUrl(pager.currentPage - 1)">‹</a>
+                        </li>
+                        <li class="page-item" *ngFor="let page of pager.pages"
+                            [ngClass]="{active:pager.currentPage == page}">
+                            <a class="page-link" (click)="setUrl(page)">{{page}}</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                            <a class="page-link" (click)="setUrl(+pager.currentPage + 1)">›</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
+                            <a class="page-link" (click)="setUrl(pager.totalPages)">Última</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
 
-    <div *ngIf="!isLoading && noVacantesDisponibles" class="container">
-        <div id="espacioNovacante">
-            <div id="espacioAviso">
-                <h4>No hay vacantes disponibles</h4>
-                <img src="/assets/warning.png" width="30%" height="30%" alt="">
-            </div>
-        </div>
-    </div>
+    <!--===============================================================================================-->
+    <!-- Modal de los datos de las vacantes -->
+    <div class="modal fade" id="datosvacantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" data-controls-modal="datosvacante" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header mx-2" style="border-bottom: 1px solid rgb(121, 24, 129);">
+                    <div class="container">
+                        <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
+                            </div>
+                        </div>
 
-    <div *ngIf="isLoading" class="container">
-        <app-loading></app-loading>
-    </div>
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6> <span class="font-weight-light text-muted">Empresa
+                                    </span>{{infoVacante.nombre_empresa}}</h6>
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <h6><span class="font-weight-light text-muted">Publicada </span>
+                                    {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
+                            </div>
+                        </div>
 
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6> <span class="font-weight-light text-muted">Ubicación
+                                    </span>{{infoVacante.entidad_federativa}}</h6>
+                            </div>
+                            <div class="col-md-6 text-md-right">
+                                <h6><span class="font-weight-light text-muted">Sueldo
+                                    </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
+                            </div>
+                        </div>
 
-    <div *ngIf="!isLoading && !noVacantesDisponibles" class="container">
-        <div class="row my-3"  style="text-align: left;">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                <h6 *ngIf="usuarioActual.estatus == 'A'" style="font-size: large;">{{allItems.length}} ofertas de empleo</h6>
-                <label *ngIf="usuarioActual.estatus == 'I'" for="" style="color: red; font-size: 15;">La información de la cuenta sigue incompleta. Sólo podrás ver las vacantes pero no postularte.</label>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col mx-1">
-                <!-- EMPIEZAN VACANTES -->
-                <!-- items que estan siendo paginados -->
-                <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-3 py-2">
-                    <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
-                        data-target="#datosvacantes">
-                        <div class="row">
-                            <div class="col-lg-9 col-9">
-                                <h6 style="color: rgb(121, 24, 129);">
-                                    <strong>{{item.titulo_vacante}}</strong>
+                        <div class="row justify-content-between">
+                            <div class="col-md-6 text-left">
+                                <h6><span class="font-weight-light text-muted"> Area </span>{{infoVacante.area_estudio}}
                                 </h6>
                             </div>
-                            <div class="col-lg-3 col-3">
-                                <h6 class="font-weight-bold">{{item.fecha_publicacion | date: 'longDate'}}</h6>
+                            <div class="col-md-6 text-md-right">
+                                <h6><span class="font-weight-light text-muted">Género preferente </span>
+                                    {{infoVacante.genero}}</h6>
                             </div>
                         </div>
+                    </div>
 
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-2">
+                    <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <h6 class="font-weight-bold">{{item.nombre_empresa}} ({{item.sueldo | currency:'MXN'}}
-                                    MXN)
-                                </h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <h6 class="font-weight-bold">{{item.entidad_federativa}} <span
-                                        class="font-weight-light text-muted">|</span> {{item.area_estudio}}</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <p class="d-sm-block">
-                                    {{item.descripcion_puesto_plain_text | slice:0:190}}...
-                                </p>
+                            <div class="col-lg-12 col-sm-12 col-12">
+                                <span style="text-align: justify;" [innerHTML]="infoVacante.descripcion_puesto"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- TERMINA VACANTES -->
-            </div>
-        </div>
-
-        <div *ngIf="!isLoading" class="row justify-content-center mt-3">
-            <!-- paginacion -->
-            <nav aria-label="Paginación">
-                <ul class="pagination">
-                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}">
-                        <a class="page-link" (click)="setUrl(1)">Primera</a>
-                    </li>
-                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == 1}">
-                        <a class="page-link" (click)="setUrl(pager.currentPage - 1)">‹</a>
-                    </li>
-                    <li class="page-item" *ngFor="let page of pager.pages"
-                        [ngClass]="{active:pager.currentPage == page}">
-                        <a class="page-link" (click)="setUrl(page)">{{page}}</a>
-                    </li>
-                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
-                        <a class="page-link" (click)="setUrl(+pager.currentPage + 1)">›</a>
-                    </li>
-                    <li class="page-item" [ngClass]="{disabled:pager.currentPage == pager.totalPages}">
-                        <a class="page-link" (click)="setUrl(pager.totalPages)">Última</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
-<!--===============================================================================================-->
-<!-- Modal de los datos de las vacantes -->
-<div class="modal fade" id="datosvacantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" data-controls-modal="datosvacante" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header mx-2" style="border-bottom: 1px solid rgb(121, 24, 129);">
-                <div class="container">
-                    <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6> <span class="font-weight-light text-muted">Empresa
-                                </span>{{infoVacante.nombre_empresa}}</h6>
-                        </div>
-                        <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Publicada </span>
-                                {{infoVacante.fecha_publicacion | date: 'longDate'}}</h6>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6> <span class="font-weight-light text-muted">Ubicación
-                                </span>{{infoVacante.entidad_federativa}}</h6>
-                        </div>
-                        <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Sueldo
-                                </span>{{infoVacante.sueldo | currency:'MXN'}} MXN</h6>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-between">
-                        <div class="col-md-6 text-left">
-                            <h6><span class="font-weight-light text-muted"> Area </span>{{infoVacante.area_estudio}}
-                            </h6>
-                        </div>
-                        <div class="col-md-6 text-md-right">
-                            <h6><span class="font-weight-light text-muted">Género preferente </span>
-                                {{infoVacante.genero}}</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body mx-2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-12 col-12">
-                            <span style="text-align: justify;" [innerHTML]="infoVacante.descripcion_puesto"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer mx-2" style="border-top: 1px solid rgb(121, 24, 129);">
-                <button *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'A'"
-                    class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
-                    Postularme
-                </button>
-                <span *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'I'" class="d-inline-block"
-                    tabindex="0" data-toggle="tooltip" title="No puedes postularte">
-                    <button class="btn btn-disabled" disabled>
+                <div class="modal-footer mx-2" style="border-top: 1px solid rgb(121, 24, 129);">
+                    <button *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'A'"
+                        class="btn btn-primary" (click)="postularCandidato(infoVacante.id_vacante)">
                         Postularme
                     </button>
-                </span>
-                <button *ngIf="usuarioActual.id_tipo_usuario == 0" class="btn btn-danger"
-                    (click)="darDeBajaVacante(infoVacante)">
-                    Eliminar
-                </button>
+                    <span *ngIf="usuarioActual.id_tipo_usuario == 1 && usuarioActual.estatus == 'I'"
+                        class="d-inline-block" tabindex="0" data-toggle="tooltip" title="No puedes postularte">
+                        <button class="btn btn-disabled" disabled>
+                            Postularme
+                        </button>
+                    </span>
+                    <button *ngIf="usuarioActual.id_tipo_usuario == 0" class="btn btn-danger"
+                        (click)="darDeBajaVacante(infoVacante)">
+                        Eliminar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

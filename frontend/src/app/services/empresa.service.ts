@@ -33,5 +33,5 @@ export class EmpresaService {
   guardarInfoEmpresa(infoEmpresa: Empresa): Observable<ApiResponse<Empresa>> {
     return this.http.post<ApiResponse<Empresa>>(this.endpointUrlGuardarInfoEmpresa, infoEmpresa, this.httpOptions);
   }
-  
+
 }

@@ -1,14 +1,14 @@
-.body-content {
+/* .body-content {
   background-image: url("/assets/background.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: local;
   background-size: cover;
   min-height: 120vh;
-}
+} */
 
 .ir-arriba {
-  padding:16px;
+  padding: 16px;
   background-repeat: no-repeat;
   background: rgb(121, 24, 129);
   font-size: 20px;
@@ -17,7 +17,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .ir-arriba:hover {

@@ -59,4 +59,22 @@ class Vacante
 
         return new SuccessResult("", $r);
     }
+
+    public static function comprobarPertenenciaVacante($id_empresa, $id_vacante){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("SELECT * FROM bdt_bd.vacantes_activos WHERE id_vacante = ? AND id_empresa = ?");
+        $stmt->bind_param('ii', $id_vacante, $id_empresa);
+        $stmt->execute();
+        
+        $r = $db->readResult($stmt->get_result());
+        if (empty($r)) {
+            return new ErrorResult("Acceso denegado", 404);
+        }
+        
+        return new SuccessResult("",$r[0]);
+    }
+
+
 }

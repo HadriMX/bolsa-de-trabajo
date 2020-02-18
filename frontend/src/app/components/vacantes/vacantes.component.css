@@ -1,3 +1,11 @@
+.body-content {
+  background-image: url("/assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 120vh;
+}
 #registrarVacanteArea{
   /* text-align: r; */
   width: 93%;

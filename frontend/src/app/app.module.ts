@@ -52,6 +52,7 @@ import { SolicitudesComponent } from './components/solicitudes/solicitudes.compo
 import { PanelAuxiliarComponent } from './components/panel-auxiliar/panel-auxiliar.component';
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
 import { AuxiliarGuard } from './guards/auxiliar.guard';
+import { VacantesPostulacionesComponent } from './components/vacantes-postulaciones/vacantes-postulaciones.component';
 
 registerLocaleData(localeEsMx);
 
@@ -65,6 +66,7 @@ const routes: Routes = [
   { path: 'solicitudes' ,component:SolicitudesComponent,canActivate:[AuxiliarGuard]},
   { path: 'vacantes', component: VacantesComponent, canActivate: [EmpresaGuard] },
   { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
+  { path: 'vacantes/postulaciones/:id', component: VacantesPostulacionesComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
   { path: 'registro', component: RegistroComponent },
   { path: '**', redirectTo: '/login' }
@@ -90,7 +92,8 @@ const routes: Routes = [
     EditarempresaComponent,
     SolicitudesComponent,
     PanelAuxiliarComponent,
-    NavbarAdminComponent
+    NavbarAdminComponent,
+    VacantesPostulacionesComponent
   ],
   imports: [
     FormsModule,

@@ -30,4 +30,9 @@ export class VacantesService {
     return this.http.post<ApiResponse<Vacante>>(this.endpointUrlAddVacante, vacante, this.httpOptions);
   }
 
+  comprobarPertenenciaVacante(id_vacante: number): Observable<ApiResponse<Vacante>> {
+    let url = environment.hostUrl + 'vacante/comprobarPertenenciaVacante.php';
+    return this.http.post<ApiResponse<Vacante>>(url, { id_vacante: id_vacante }, this.httpOptions);
+  }
+
 }

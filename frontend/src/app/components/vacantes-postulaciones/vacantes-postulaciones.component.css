@@ -1,0 +1,46 @@
+.body-content {
+    background-image: url("/assets/background.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 120vh;
+  }
+#cabecera_vacante{
+  width: 90%;
+  padding: 10px 10px 10px 10px;
+  margin-top: 50px;
+  /* border: 1px solid white; */
+  background-color: white;
+  -webkit-box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
+-moz-box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
+box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
+}
+#titulo_postulaciones{
+  text-align: center;
+  font-size: 30px;
+  margin-top: 20px;
+}
+#row_cabecera{
+  margin: 0; 
+  padding: 0;
+  background-color: white;
+}
+#col_cabecera{
+  border: 1px solid #5d0877;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+}
+#row_postulaciones{ 
+  margin: 0; 
+  padding: 0;
+}
+#col_postulaciones{
+  border: 1px solid #5d0877;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}

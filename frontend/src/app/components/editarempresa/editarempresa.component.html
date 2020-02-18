@@ -1,133 +1,143 @@
-<app-headertittle></app-headertittle>
-<div class="container">
-    <div class="row mt-4">
-        <div class="col">
-            <h3>INFORMACIÓN DE LA CUENTA</h3>
+<div class="body-content">
+    <app-headertittle></app-headertittle>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col">
+                <h3>INFORMACIÓN DE LA CUENTA</h3>
+            </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <div *ngIf="isLoading" class="container">
-        <app-loading></app-loading>
-    </div>
-</div>
-
-<div *ngIf="!isLoading" class="container">
-    <h6 id="titulo">
-        <span>DATOS DE LA EMPRESA</span>
-    </h6>
-
-    <div class="row">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12" >
-            <label for="nombreEmpresa">Nombre</label>
-            <input id="nombreEmpresa" name="nombreEmpresa" class="form-control" type="text" placeholder="Ingrese el nombre de la empresa" 
-            [(ngModel)]="infoEmpresa.nombre_empresa" autocomplete="off" maxlength="70">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="rfc">RFC</label>
-            <input id="rfc" name="rfc" class="form-control" type="text" placeholder="" autocomplete="off" placeholder="Ej. XEXX010101000" [(ngModel)]="infoEmpresa.rfc" maxlength="13">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="tipoEmpresa">Tipo</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="tipoEmpresa" id="tipoEmpresa" [(ngModel)]="infoEmpresa.id_tipo_empresa">
-                    <option value="0" selected disabled>Seleccione el tipo de empresa</option>
-                    <option *ngFor="let tipo of tiposEmpresa" [value]="tipo.id_tipo_empresa">
-                        {{tipo.nombre_empresa}}</option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="telefono">Teléfono</label>
-            <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
-            [(ngModel)]="infoEmpresa.telefono" autocomplete="off" OnlyNumber="true" maxlength="10">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="web">Página web</label>
-            <input id="web" name="web" class="form-control" type="text" placeholder="Ej. mipaginaweb.com.mx"
-            [(ngModel)]="infoEmpresa.pagina_web" autocomplete="off" maxlength="40">
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <label for="descripcion">Descripción</label>
-            <input id="descripcion" name="descripcion" class="form-control" type="text" placeholder="Ingrese una breve descripción de la empresa"
-            [(ngModel)]="infoEmpresa.descripcion" autocomplete="off" maxlength="200">
-        </div>
-
-    </div>
-
-    <h6 id="titulo" style="margin-top: 50px">
-        DIRECCIÓN
-    </h6>
-    <div class="row">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-            <label for="estado">Entidad Federativa</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="estado" id="estado" [(ngModel)]="infoEmpresa.id_entidad_federativa" (change)="getMunicipios()">
-                    <option value="0" selected disabled>Seleccione la entidad federativa</option>
-                    <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">
-                        {{entidad.nombre}}</option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="ciudad">Municipio</label>
-            <span class="custom-dropdown">
-                <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoEmpresa.id_municipio">
-                    <option value="0" selected disabled>Seleccione el municipio</option>
-                    <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">{{municipio.nombre}}
-                    </option>
-                </select>
-            </span>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="ciudad">Ciudad/Localidad</label>
-            <input id="ciudad" name="ciudad" class="form-control" type="text" placeholder="Ej. Los Mochis"
-            [(ngModel)]="infoEmpresa.ciudad" autocomplete="off" maxlength="40">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="colonia">Colonia</label>
-            <input id="colonia" name="colonia" class="form-control" type="text" placeholder="Ej. Centro"
-            [(ngModel)]="infoEmpresa.colonia" autocomplete="off" maxlength="40">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="codigoPostal">Codigo Postal</label>
-            <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
-            [(ngModel)]="infoEmpresa.cp" placeholder="Ej. 81271" OnlyNumber="true" maxlength="5">
-        </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-            <label for="calle">Calle</label>
-            <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
-            [(ngModel)]="infoEmpresa.calle" placeholder="Ej. Miguel Hidalgo" maxlength="40">
+    <div class="container">
+        <div *ngIf="isLoading" class="container">
+            <app-loading></app-loading>
         </div>
     </div>
 
-    <h6 id="titulo" style="margin-top: 50px">
-        DATOS DE CONTACTO
-    </h6>
-    <div class="row">
-        <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-            <label for="contactoNombre">Nombre</label>
-            <input id="contactoNombre" name="contactoNombre" class="form-control" type="text" placeholder="Ej. Juan Dominguez Hernandez"
-            [(ngModel)]="infoEmpresa.nombre_persona_contacto" autocomplete="off" maxlength="40">
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-            <label for="contactoTelefono">Teléfono</label>
-            <input id="contactoTelefono" name="contactoTelefono" class="form-control" type="text" placeholder="Ej. 6684953849"
-            [(ngModel)]="infoEmpresa.telefono_contacto" autocomplete="off" OnlyNumber="true" maxlength="12">
-        </div>
-        <div class="col-lg-12 col-md-6 col-sm-12 col-12">
-            <label for="contactoEmail">Email</label>
-            <input id="contactoEmail" name="contactoEmail" class="form-control" type="text" autocomplete="off"
-                placeholder="Ej. micorreo@hotmail.com" [(ngModel)]="infoEmpresa.email_contacto" maxlength="40">
-        </div>
-    </div>
+    <div *ngIf="!isLoading" class="container">
+        <h6 id="titulo">
+            <span>DATOS DE LA EMPRESA</span>
+        </h6>
 
-    <div class="row justify-content-end pb-4">
-        <div class="col text-right">
-            <button type="submit" class="btn btn-primary mx-2" (click)="guardarInfoEmpresa()">GUARDAR</button>
-        </div>
-    </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                <label for="nombreEmpresa">Nombre</label>
+                <input id="nombreEmpresa" name="nombreEmpresa" class="form-control" type="text"
+                    placeholder="Ingrese el nombre de la empresa" [(ngModel)]="infoEmpresa.nombre_empresa"
+                    autocomplete="off" maxlength="70">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="rfc">RFC</label>
+                <input id="rfc" name="rfc" class="form-control" type="text" placeholder="" autocomplete="off"
+                    placeholder="Ej. XEXX010101000" [(ngModel)]="infoEmpresa.rfc" maxlength="13">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="tipoEmpresa">Tipo</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="tipoEmpresa" id="tipoEmpresa"
+                        [(ngModel)]="infoEmpresa.id_tipo_empresa">
+                        <option value="0" selected disabled>Seleccione el tipo de empresa</option>
+                        <option *ngFor="let tipo of tiposEmpresa" [value]="tipo.id_tipo_empresa">
+                            {{tipo.nombre_empresa}}</option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6684953849"
+                    [(ngModel)]="infoEmpresa.telefono" autocomplete="off" OnlyNumber="true" maxlength="10">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="web">Página web</label>
+                <input id="web" name="web" class="form-control" type="text" placeholder="Ej. mipaginaweb.com.mx"
+                    [(ngModel)]="infoEmpresa.pagina_web" autocomplete="off" maxlength="40">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <label for="descripcion">Descripción</label>
+                <input id="descripcion" name="descripcion" class="form-control" type="text"
+                    placeholder="Ingrese una breve descripción de la empresa" [(ngModel)]="infoEmpresa.descripcion"
+                    autocomplete="off" maxlength="200">
+            </div>
 
-    <div id="separador" style="height: 150px;">
+        </div>
+
+        <h6 id="titulo" style="margin-top: 50px">
+            DIRECCIÓN
+        </h6>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                <label for="estado">Entidad Federativa</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="estado" id="estado"
+                        [(ngModel)]="infoEmpresa.id_entidad_federativa" (change)="getMunicipios()">
+                        <option value="0" selected disabled>Seleccione la entidad federativa</option>
+                        <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">
+                            {{entidad.nombre}}</option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="ciudad">Municipio</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="ciudad" id="ciudad" [(ngModel)]="infoEmpresa.id_municipio">
+                        <option value="0" selected disabled>Seleccione el municipio</option>
+                        <option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">
+                            {{municipio.nombre}}
+                        </option>
+                    </select>
+                </span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="ciudad">Ciudad/Localidad</label>
+                <input id="ciudad" name="ciudad" class="form-control" type="text" placeholder="Ej. Los Mochis"
+                    [(ngModel)]="infoEmpresa.ciudad" autocomplete="off" maxlength="40">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="colonia">Colonia</label>
+                <input id="colonia" name="colonia" class="form-control" type="text" placeholder="Ej. Centro"
+                    [(ngModel)]="infoEmpresa.colonia" autocomplete="off" maxlength="40">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="codigoPostal">Codigo Postal</label>
+                <input id="codigoPostal" name="codigoPostal" class="form-control" type="text" autocomplete="off"
+                    [(ngModel)]="infoEmpresa.cp" placeholder="Ej. 81271" OnlyNumber="true" maxlength="5">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <label for="calle">Calle</label>
+                <input id="calle" name="calle" class="form-control" type="text" autocomplete="off"
+                    [(ngModel)]="infoEmpresa.calle" placeholder="Ej. Miguel Hidalgo" maxlength="40">
+            </div>
+        </div>
+
+        <h6 id="titulo" style="margin-top: 50px">
+            DATOS DE CONTACTO
+        </h6>
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+                <label for="contactoNombre">Nombre</label>
+                <input id="contactoNombre" name="contactoNombre" class="form-control" type="text"
+                    placeholder="Ej. Juan Dominguez Hernandez" [(ngModel)]="infoEmpresa.nombre_persona_contacto"
+                    autocomplete="off" maxlength="40">
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                <label for="contactoTelefono">Teléfono</label>
+                <input id="contactoTelefono" name="contactoTelefono" class="form-control" type="text"
+                    placeholder="Ej. 6684953849" [(ngModel)]="infoEmpresa.telefono_contacto" autocomplete="off"
+                    OnlyNumber="true" maxlength="12">
+            </div>
+            <div class="col-lg-12 col-md-6 col-sm-12 col-12">
+                <label for="contactoEmail">Email</label>
+                <input id="contactoEmail" name="contactoEmail" class="form-control" type="text" autocomplete="off"
+                    placeholder="Ej. micorreo@hotmail.com" [(ngModel)]="infoEmpresa.email_contacto" maxlength="40">
+            </div>
+        </div>
+
+        <div class="row justify-content-end pb-4">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-primary mx-2" (click)="guardarInfoEmpresa()">GUARDAR</button>
+            </div>
+        </div>
+
+        <div id="separador" style="height: 150px;">
+        </div>
     </div>
 </div>
