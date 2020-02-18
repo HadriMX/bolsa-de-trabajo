@@ -99,11 +99,12 @@ export class AdministradorComponent implements OnInit {
   btncerrar_area: boolean;
   opc: any;
   // variables del dashboard
-  canvas: any;
-  ctx;
-  chartColor;
-  chartEmail;
-  chartHours;
+
+
+
+
+
+  
   columnasCategoria: any[];
   columnasArea: any[];
   columnasCandidato: any[];
