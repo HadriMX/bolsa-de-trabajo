@@ -1,7 +1,8 @@
 <!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
-<app-navbar-admin></app-navbar-admin>
-<div class="container">
-  
+<div class="body-content">
+  <app-navbar-admin></app-navbar-admin>
+  <div class="container">
+
     <div>
       <div style="margin-top: 1%;">
         <p-table #dtSolicitdudes [columns]="columnasSolicitud" [value]="datos_solicitud" dataKey="id_candidato"
@@ -72,4 +73,5 @@
         </p-table>
       </div>
     </div>
+  </div>
 </div>

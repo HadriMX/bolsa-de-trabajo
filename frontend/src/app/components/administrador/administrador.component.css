@@ -44,17 +44,14 @@ input {
   font-size: large;
 }
 
-/* body {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-image: url('/assets/background.png');
+.body-content {
+  background-image: url("/assets/background.png");
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
   background-attachment: fixed;
   background-size: cover;
-  min-height: 90vh;
-} */
+  min-height: 120vh;
+}
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
