@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 export class SolicitudesComponent implements OnInit {
   columnasSolicitud: any[];
   datos_solicitud: any[];
+  loading:boolean;
 
   infoSolicitud: Solicitudes = {
     id_usuario: 0,

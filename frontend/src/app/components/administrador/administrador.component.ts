@@ -86,6 +86,8 @@ export class AdministradorComponent implements OnInit {
   reporte_area: any[];
   datos = [1, 2, 3, 4, 5, 6];
 
+  activos:boolean;
+
   estadoimagen = false;
   titulo: string;
   mensaje: string;
