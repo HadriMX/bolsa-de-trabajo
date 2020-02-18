@@ -191,7 +191,7 @@
                         Postularme
                     </button>
                 </span> -->
-                        <a *ngIf="mostrarBoton" href="" [routerLink]="['/vacantes/postulaciones', infoVacante.id_vacante]">
+                        <a href="" [routerLink]="['/vacantes/postulaciones', infoVacante.id_vacante]">
                             <button class="btn btn-primary">
                                 Ver postulaciones
                             </button>
@@ -201,7 +201,7 @@
                             Cerrar vacante
                         </button>
 
-                        <button *ngIf="!mostrarBoton" class="btn btn-primary" style="margin-left: 10px;" (click)="AbrirVacante(infoVacante.id_vacante)">
+                        <button *ngIf="!mostrarBoton" class="btn btn-success" style="margin-left: 10px;" (click)="AbrirVacante(infoVacante.id_vacante)">
                             Abrir vacante
                         </button>
                 </div>

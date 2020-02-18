@@ -23,8 +23,8 @@ export class VacantesService {
     return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrlBusquedaVacante, busqueda, this.httpOptions);
   }
 
-  getMisVacantes(): Observable<ApiResponse<Vacante[]>> {
-    return this.http.get<ApiResponse<Vacante[]>>(this.endpointUrlGetMisVacantes, this.httpOptions);
+  getMisVacantes(estatus:string): Observable<ApiResponse<Vacante[]>> {
+    return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrlGetMisVacantes, {estatus:estatus},this.httpOptions);
   }
 
   addVacante(vacante: Vacante): Observable<ApiResponse<Vacante>> {

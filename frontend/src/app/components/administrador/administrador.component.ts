@@ -22,8 +22,8 @@ import {
   animate
 } from "@angular/animations";
 import { CurrentUserService } from "src/app/services/current-user.service";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+// import jsPDF from "jspdf";
+// import "jspdf-autotable";
 import { Candidato } from 'src/app/models/candidato';
 
 @Component({
@@ -631,77 +631,77 @@ export class AdministradorComponent implements OnInit {
     else return "Baja";
   }
 
-  exportPdf(tipo: number, estatus: string) {
-    var doc = new jsPDF("p", "pt", "a4");
-    var img = new Image();
-    img.src = "assets/descargar.png";
-    doc.addImage(img, "png", 25, 20, 150, 80);
-    if (tipo == 1) {
-      //REPORTE PARA AREAS DE ESTUDIO
-      doc.add;
-      this.exportColumns = this.columnaReporteAreas.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      doc.autoTable(this.exportColumns, this.reporte_area, {
-        startY: 100
-      });
-      doc.save("Reporte de areas de estudio.pdf");
-    } else if (tipo == 2) {
-      //REPORTE PARA LAS CATEGORIAS DE LAS EMPRESAS
-      this.exportColumns = this.columnaReporteCategoria.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      doc.autoTable(this.exportColumns, this.reporte_categoria, {
-        startY: 100
-      });
-      doc.save("Reporte de categorias de empresas.pdf");
-    } else if (tipo == 3) {
-      this.exportColumns = this.columnasCandidato.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
+  // exportPdf(tipo: number, estatus: string) {
+  //   var doc = new jsPDF("p", "pt", "a4");
+  //   var img = new Image();
+  //   img.src = "assets/descargar.png";
+  //   doc.addImage(img, "png", 25, 20, 150, 80);
+  //   if (tipo == 1) {
+  //     //REPORTE PARA AREAS DE ESTUDIO
+  //     doc.add;
+  //     this.exportColumns = this.columnaReporteAreas.map(col => ({
+  //       title: col.header,
+  //       dataKey: col.field
+  //     }));
+  //     doc.autoTable(this.exportColumns, this.reporte_area, {
+  //       startY: 100
+  //     });
+  //     doc.save("Reporte de areas de estudio.pdf");
+  //   } else if (tipo == 2) {
+  //     //REPORTE PARA LAS CATEGORIAS DE LAS EMPRESAS
+  //     this.exportColumns = this.columnaReporteCategoria.map(col => ({
+  //       title: col.header,
+  //       dataKey: col.field
+  //     }));
+  //     doc.autoTable(this.exportColumns, this.reporte_categoria, {
+  //       startY: 100
+  //     });
+  //     doc.save("Reporte de categorias de empresas.pdf");
+  //   } else if (tipo == 3) {
+  //     this.exportColumns = this.columnasCandidato.map(col => ({
+  //       title: col.header,
+  //       dataKey: col.field
+  //     }));
 
-      doc.text("Reporte de candidatos activos", 300, 70, "center");
-      // doc.autoTable(this.exportColumns, this.datosCandidato);
+  //     doc.text("Reporte de candidatos activos", 300, 70, "center");
+  //     // doc.autoTable(this.exportColumns, this.datosCandidato);
 
-      doc.autoTable(this.exportColumns, this.datosCandidato, {
-        startY: 100
-      });
-      doc.save("Reporte de candidatos activos.pdf");
-    } else if (tipo == 4) {
-      this.exportColumns = this.columnasCandidato.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      doc.text("Reporte de candidatos inactivos", 300, 70, "center");
-      doc.autoTable(this.exportColumns, this.datosCandidato, {
-        startY: 100
-      });
-      doc.save("Reporte de candidatos inactivos.pdf");
-    } else if (tipo == 5) {
-      this.exportColumns = this.columnasEmpresa.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      doc.text("Reporte de empresas activas", 300, 70, "center");
-      doc.autoTable(this.exportColumns, this.datosEmpresa, {
-        startY: 100
-      });
-      doc.save("Reporte de empresas activas.pdf");
-    } else if (tipo == 6) {
-      this.exportColumns = this.columnasEmpresa.map(col => ({
-        title: col.header,
-        dataKey: col.field
-      }));
-      doc.text("Reporte de empresas inactivas", 300, 70, "center");
-      doc.autoTable(this.exportColumns, this.datosEmpresa, {
-        startY: 100
-      });
-      doc.save("Reporte de empresas inactivas.pdf");
-    }
-  }
+  //     doc.autoTable(this.exportColumns, this.datosCandidato, {
+  //       startY: 100
+  //     });
+  //     doc.save("Reporte de candidatos activos.pdf");
+  //   } else if (tipo == 4) {
+  //     this.exportColumns = this.columnasCandidato.map(col => ({
+  //       title: col.header,
+  //       dataKey: col.field
+  //     }));
+  //     doc.text("Reporte de candidatos inactivos", 300, 70, "center");
+  //     doc.autoTable(this.exportColumns, this.datosCandidato, {
+  //       startY: 100
+  //     });
+  //     doc.save("Reporte de candidatos inactivos.pdf");
+  //   } else if (tipo == 5) {
+  //     this.exportColumns = this.columnasEmpresa.map(col => ({
+  //       title: col.header,
+  //       dataKey: col.field
+  //     }));
+  //     doc.text("Reporte de empresas activas", 300, 70, "center");
+  //     doc.autoTable(this.exportColumns, this.datosEmpresa, {
+  //       startY: 100
+  //     });
+  //     doc.save("Reporte de empresas activas.pdf");
+  //   } else if (tipo == 6) {
+  //     this.exportColumns = this.columnasEmpresa.map(col => ({
+  //       title: col.header,
+  //       dataKey: col.field
+  //     }));
+  //     doc.text("Reporte de empresas inactivas", 300, 70, "center");
+  //     doc.autoTable(this.exportColumns, this.datosEmpresa, {
+  //       startY: 100
+  //     });
+  //     doc.save("Reporte de empresas inactivas.pdf");
+  //   }
+  // }
 
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
 

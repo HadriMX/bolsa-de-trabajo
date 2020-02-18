@@ -45,15 +45,15 @@ class Vacante
         return $output;
     }
 
-    public static function get_mis_vacantes()
+    public static function get_mis_vacantes($estatus)
     {
         $db = new Db();
         $conn = $db->getConn();
 
         $id_empresa = $_SESSION['currentUser']['id_usuario'];
 
-        $stmt = $conn->prepare("SELECT * FROM vacantes_activos WHERE id_empresa = ?");
-        $stmt->bind_param("i", $id_empresa);
+        $stmt = $conn->prepare("SELECT * FROM vacantesvista WHERE id_empresa = ? AND estatus = ?");
+        $stmt->bind_param("is", $id_empresa,$estatus);
         $stmt->execute();
         $r = $db->readResult($stmt->get_result());
 
@@ -64,7 +64,7 @@ class Vacante
         $db = new Db();
         $conn = $db->getConn();
 
-        $stmt = $conn->prepare("SELECT * FROM bdt_bd.vacantes_activos WHERE id_vacante = ? AND id_empresa = ?");
+        $stmt = $conn->prepare("SELECT * FROM bdt_bd.vacantesvista WHERE id_vacante = ? AND id_empresa = ?");
         $stmt->bind_param('ii', $id_vacante, $id_empresa);
         $stmt->execute();
         
