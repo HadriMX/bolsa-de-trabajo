@@ -1,48 +1,52 @@
 nav.navbar {
-    background-color:rgb(121, 24, 129);
-    width: 100%;
+  background-color: rgb(121, 24, 129);
+  width: 100%;
 }
-#btn-login{
-    margin: 5px 0 0 5px;
-    max-width: 150px;
-    font-size: 15px;
+#btn-login {
+  margin: 5px 0 0 5px;
+  max-width: 150px;
+  font-size: 15px;
 }
-#contrasena , #usuario{
-    max-width: 250px;
-    margin: 5px 5px 0 0px;
+#contrasena,
+#usuario {
+  max-width: 250px;
+  margin: 5px 5px 0 0px;
 }
-#contenedor_inputs{
-    justify-content: right;
-    justify-content: flex-end;
+#contenedor_inputs {
+  justify-content: right;
+  justify-content: flex-end;
 }
 
 @media (max-width: 829px) {
-    #contrasena , #usuario{
-        max-width: 200px;
-        margin: 5px 5px 0 0px;
-    }
+  #contrasena,
+  #usuario {
+    max-width: 200px;
+    margin: 5px 5px 0 0px;
   }
+}
 @media (max-width: 767px) {
-    #contenedor_inputs{
-        justify-content: center;
-    }
-    #contrasena , #usuario{
-        max-width: 240px;
-        margin: 5px 5px 0 0px;
-    }
-    #btn-login{
-        margin: 5px 0 0 0px;
-        max-width: 150px;
-        font-size: 15px;
-    }
+  #contenedor_inputs {
+    justify-content: center;
+  }
+  #contrasena,
+  #usuario {
+    max-width: 240px;
+    margin: 5px 5px 0 0px;
+  }
+  #btn-login {
+    margin: 5px 0 0 0px;
+    max-width: 150px;
+    font-size: 15px;
+  }
 }
 @media (max-width: 696px) {
-    #contrasena , #usuario{
-        max-width: 450px;
-        margin: 5px 0px 0 0px;
-    }
-    #btn-login{
-        max-width: 450px;
-        margin: 5px 0px 0px 0px;
-    }
+  #contrasena,
+  #usuario {
+    max-width: 450px;
+    margin: 5px 0px 0 0px;
   }
+  #btn-login {
+    max-width: 450px;
+    margin: 5px 0px 0px 0px;
+  }
+}

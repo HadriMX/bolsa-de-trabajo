@@ -41,6 +41,17 @@ class Area{
         return new SuccessResult("",$r);
     }
 
+    public static function get_areasReporte(){
+        $db = new Db();
+        $conn = $db->getConn();
+        
+        $stmt = $conn->prepare("SELECT  * FROM reporte_areas");
+        
+        $stmt->execute();
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("",$r);
+    }
+
     public static function update_areaEstudio( array $areaEstudio){
         $db = new Db();
         $conn = $db->getConn();

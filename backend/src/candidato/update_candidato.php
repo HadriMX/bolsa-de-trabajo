@@ -17,31 +17,9 @@ $candidato = (array) json_decode($_POST['infoCandidato']);
 $currentUser = $_SESSION['currentUser'];
 $response = array();
 
-$uploadCurriculum = FileUpload::check_file_exists("curriculum", $currentUser['id_usuario']) ? $_FILES['curriculum'] : true;
-if ($uploadCurriculum) {
-    $curriculumResult = FileUpload::upload($_FILES['curriculum'], false, "curriculum");
-
-    if (is_string($curriculumResult)) {
-        $candidato['ruta_cv'] = $curriculumResult;
-    } else {
-        $response = $curriculumResult;
-    }
-}
-
-$uploadIdentificacion = FileUpload::check_file_exists("identificacion", $currentUser['id_usuario']) ? $_FILES['identificacion'] : true;
-if ($uploadIdentificacion) {
-    $curriculumResult = FileUpload::upload($_FILES['identificacion'], false, "identificacion");
-
-    if (is_string($curriculumResult)) {
-        $candidato['ruta_id'] = $curriculumResult;
-    } else {
-        $response = $curriculumResult;
-    }
-}
-
-$uploadCurp = FileUpload::check_file_exists("curp", $currentUser['id_usuario']) ? $_FILES['curp'] : true;
+$uploadCurp = FileUpload::check_file_exists("curp", $currentUser['id_usuario']) ? isset($_FILES['curp']) : true;
 if ($uploadCurp) {
-    $curriculumResult = FileUpload::upload($_FILES['curp'], false, "curp");
+    $curriculumResult = FileUpload::upload($_FILES['curp'], "curp");
 
     if (is_string($curriculumResult)) {
         $candidato['ruta_curp'] = $curriculumResult;
@@ -50,8 +28,31 @@ if ($uploadCurp) {
     }
 }
 
+$uploadIdentificacion = FileUpload::check_file_exists("id", $currentUser['id_usuario']) ? isset($_FILES['identificacion']) : true;
+if ($uploadIdentificacion) {
+    $curriculumResult = FileUpload::upload($_FILES['identificacion'], "identificacion");
+
+    if (is_string($curriculumResult)) {
+        $candidato['ruta_id'] = $curriculumResult;
+    } else {
+        $response = $curriculumResult;
+    }
+}
+
+$uploadCurriculum = FileUpload::check_file_exists("cv", $currentUser['id_usuario']) ? isset($_FILES['curriculum']) : true;
+if ($uploadCurriculum) {
+    $curriculumResult = FileUpload::upload($_FILES['curriculum'], "curriculum");
+
+    if (is_string($curriculumResult)) {
+        $candidato['ruta_cv'] = $curriculumResult;
+    } else {
+        $response = $curriculumResult;
+    }
+}
+
 if (empty($response)) {
     $response = Candidato::update($candidato);
+    $_SESSION['currentUser'] = Auth::reload_current_user($_SESSION['currentUser']['email'])->data;
 }
 
 echo json_encode($response);

@@ -58,6 +58,44 @@ class Auth
         return new SuccessResult("Login correcto", $usuario);
     }
 
+    public static function reload_current_user(string $username)
+    {
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("SELECT * FROM usuarios_activos WHERE email = ?");
+        $stmt->bind_param("s", $username);
+
+        $stmt->execute();
+
+        $r = $db->readResult($stmt->get_result());
+
+        if (empty($r)) {
+            return new ErrorResult("El usuario no existe.", 404);
+        }
+
+        $usuario = $r[0];
+
+        if ($usuario['id_tipo_usuario'] != 0 && $usuario['id_tipo_usuario'] != 100) {
+            if ($usuario['id_tipo_usuario'] == 1) {
+                $stmt = $conn->prepare("SELECT * FROM usuarios_candidatos WHERE id_usuario = ?");
+            } elseif ($usuario['id_tipo_usuario']) {
+                $stmt = $conn->prepare("SELECT * FROM usuarios_empresas WHERE id_usuario = ?");
+            }
+
+            $stmt->bind_param("i", $usuario['id_usuario']);
+            $stmt->execute();
+            $r = $db->readResult($stmt->get_result());
+            $usuario = $r[0];
+        }
+
+        // limpiar antes de retornar
+        $usuario['pw'] = null;
+        $usuario['codigo_confirmacion'] = null;
+
+        return new SuccessResult("", $usuario);
+    }
+
     public static function register(array $usuario)
     {
         if (self::validate_email($usuario['email']) !== 1) {

@@ -1,15 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
 import { Area } from "src/app/models/area";
 import { Cat_empresa } from "src/app/models/categoria";
-import { Usuario } from 'src/app/models/usuario';
-import {RegistroService} from 'src/app/services/registro.service';
-import { Solicitudes } from "../../models/solicitudes";
+import { Usuario } from "src/app/models/usuario";
+import { RegistroService } from "src/app/services/registro.service";
 import Swal from "sweetalert2";
 import { AreaService } from "../../services/area.service";
 import { CatEmpresaService } from "../../services/cat-empresa.service";
-import { SolicitudService } from "../../services/solicitud.service";
-import { AuxiliarService } from '../../services/auxiliar.service';
-import { MatDialog } from "@angular/material";
+import { AuxiliarService } from "../../services/auxiliar.service";
 import { CandidatoService } from "src/app/services/candidato.service";
 import { LoginService } from "src/app/services/login.service";
 import { Router } from "@angular/router";
@@ -24,22 +21,14 @@ import {
   transition,
   animate
 } from "@angular/animations";
-
+import { CurrentUserService } from "src/app/services/current-user.service";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import { Candidato } from 'src/app/models/candidato';
 
 @Component({
   selector: "app-administrador",
   templateUrl: "./administrador.component.html",
-  styles: [
-    `
-      .ui-datatable .ui-datatable-header {
-        background-color: red;
-      }
-
-      .ui-datatable .ui-paginator {
-        background-color: yellow;
-      }
-    `
-  ],
   styleUrls: ["./administrador.component.css"],
   animations: [
     trigger("rowExpansionTrigger", [
@@ -62,6 +51,8 @@ import {
   ]
 })
 export class AdministradorComponent implements OnInit {
+  @Input() numero;
+  @Input() estado = 0;
   @Input() nuevaArea: Area = {
     id_area_estudio: 0,
     nombre: "",
@@ -75,54 +66,54 @@ export class AdministradorComponent implements OnInit {
     estatus: ""
   };
 
-  auxiliarAdministrativo:Usuario={
+  auxiliarAdministrativo: Usuario = {
     id_usuario: 0,
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     id_tipo_usuario: 100,
-    estatus: '',
-    phpsessid: ''
-  }
-
-  infoSolicitud: Solicitudes = {
-    id_usuario: 0,
-    email: '',
-    escolaridad:'',
-    telefono:'',
-    rutaCV:'',
-    candidato: '',
-    edad:0,
-    genero:''
+    estatus: "",
+    phpsessid: ""
   };
+
   accion;
   loading = false;
   datosCategoria = [];
   datosArea = [];
-  datosAuxiliares =[];
+  datosAuxiliares = [];
   datosCandidato = [];
   datosEmpresa = [];
-  datos_solicitud = [];
+  reporte_categoria: any[];
+  reporte_area: any[];
   datos = [1, 2, 3, 4, 5, 6];
-  estado = 0;
+
   estadoimagen = false;
+  titulo: string;
+  mensaje: string;
   displayDialogCategoria: boolean;
   displayDialogArea: boolean;
-  activos: boolean = true;
+  auxiliarActivo: boolean = true;
+  candidatoActivo: boolean = true;
+  empresaActiva: boolean = true;
   inactivo: boolean = false;
-  usuario:boolean;
+  usuario: boolean;
   btncerrar_area: boolean;
   opc: any;
   // variables del dashboard
-  canvas: any;
-  ctx;
-  chartColor;
-  chartEmail;
-  chartHours;
+
+
+
+
+
+  
   columnasCategoria: any[];
   columnasArea: any[];
   columnasCandidato: any[];
   columnasEmpresa: any[];
-  columnasSolicitud: any[];
+  exportColumns: any[];
+  columnaReporteCategoria: any[];
+  columnaReporteAreas: any[];
+  columnasReporteCandidatos: any[];
+  columnasAuxiliaresAdmin: any[];
   clonCategoria: { [s: string]: Cat_empresa } = {};
   clonArea: { [s: string]: Area } = {};
 
@@ -141,23 +132,14 @@ export class AdministradorComponent implements OnInit {
     estatus: ""
   };
 
-  public dialog: MatDialog;
+  
   inputbooleano: boolean = false;
-
-  ColumnasEmpresas: string[] = [
-    "empresa",
-    "email",
-    "telefono",
-    "personaContacto",
-    "estatus",
-    "acciones"
-  ];
 
   swalWithBootstrapButtons = Swal.mixin({
     customClass: {},
     buttonsStyling: true,
     confirmButtonColor: "#7A26D3",
-        cancelButtonColor: "white"
+    cancelButtonColor: "white"
   });
 
   // variales para las vacantes
@@ -170,26 +152,28 @@ export class AdministradorComponent implements OnInit {
     InputUbicacion: ""
   };
   allItems: Vacante[] = [];
+  public usuarioActual: Usuario;
 
   constructor(
     private areaService: AreaService,
     private categoriaService: CatEmpresaService,
-    private solicitudService: SolicitudService,
     private candidatoService: CandidatoService,
     private loginService: LoginService,
     private empresaService: EmpresaService,
     private auxiliaresService: AuxiliarService,
     private vacantesService: VacantesService,
     private registroService: RegistroService,
-    private router: Router
+    private router: Router,
+    private currentUserService: CurrentUserService
   ) {}
 
   ngOnInit() {
-    // this.usuarioActual = this.currentUserService.getUsuarioActual();
+    this.usuarioActual = this.currentUserService.getUsuarioActual();
+    this.getCategoriasReporte();
+    this.get_areaReporte();
     this.dashboard();
     this.getAreas();
     this.getCategorias();
-    this.getSolicitudes();
     this.getCandidatos("Alta");
     this.getAuxiliares("A");
     this.getEmpresas("Alta");
@@ -220,15 +204,24 @@ export class AdministradorComponent implements OnInit {
       { field: "status", header: "Estatus" }
     ];
 
-    this.columnasSolicitud = [
-      { field: "candidato", header: "Candidato" },
-      { field: "edad", header: "Edad" },
-      { field: "genero", header: "Genero" }
+    this.columnasAuxiliaresAdmin = [
+      { field: "email", header: "Email" },
+      { field: "estatus", header: "Estatus" }
     ];
 
     this.estatus = [
       { label: "Alta", value: "A" },
       { label: "Baja", value: "B" }
+    ];
+
+    this.columnaReporteCategoria = [
+      { field: "Categoria", header: "Categoria" },
+      { field: "Estatus", header: "Estatus" }
+    ];
+
+    this.columnaReporteAreas = [
+      { field: "Area de estudio", header: "Area de estudio" },
+      { field: "Estatus", header: "Estatus" }
     ];
   }
   //METODOS CRUD (C)
@@ -272,20 +265,22 @@ export class AdministradorComponent implements OnInit {
     }
   }
 
-  add_auxiliarAdministrativo(){
-    this.registroService.registrar(this.auxiliarAdministrativo)
-    .subscribe((response) => {
-      if (response.success) {
-        Swal.fire("Cuenta creada", "Auxiliar administrativo registrado exitosamente", 'success');
-        this.auxiliarAdministrativo.email = '';
-        this.auxiliarAdministrativo.password = '';
-      }
-      else {
-        Swal.fire("Error", response.message, 'error');
-      }
-
-    });
-    
+  add_auxiliarAdministrativo() {
+    this.registroService
+      .registrar(this.auxiliarAdministrativo)
+      .subscribe(response => {
+        if (response.success) {
+          Swal.fire(
+            "Cuenta creada",
+            "Auxiliar administrativo registrado exitosamente",
+            "success"
+          );
+          this.auxiliarAdministrativo.email = "";
+          this.auxiliarAdministrativo.password = "";
+        } else {
+          Swal.fire("Error", response.message, "error");
+        }
+      });
   }
 
   //METODOS CRUD (R)
@@ -299,15 +294,32 @@ export class AdministradorComponent implements OnInit {
     });
   }
 
-  getAuxiliares(estatus:string){
+  get_areaReporte() {
+    this.areaService.get_areasReporte().subscribe(response => {
+      if (response.success) {
+        this.reporte_area = response.data;
+      } else {
+        Swal.fire("Error", response.message, "error");
+      }
+    });
+  }
+
+  getAuxiliares(estatus: string) {
+    this.datosAuxiliares = null;
+    if (estatus === "A") {
+      this.auxiliarActivo = true;
+    } else {
+      this.auxiliarActivo = false;
+    }
+    this.loading = true;
     this.auxiliaresService.get_auxiliares(estatus).subscribe(response => {
       if (response.success) {
         this.datosAuxiliares = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
+      this.loading = false;
     });
-
   }
 
   getCategorias() {
@@ -320,50 +332,49 @@ export class AdministradorComponent implements OnInit {
     });
   }
 
+  async getCategoriasReporte() {
+    this.categoriaService.get_categoriasReporte().subscribe(response => {
+      if (response.success) {
+        this.reporte_categoria = response.data;
+      } else {
+        Swal.fire("Error", response.message, "error");
+      }
+    });
+  }
+
   getCandidatos(estatus: string) {
-    this.datosCandidato=null;
-    if(estatus==='Alta'){
-      this.activos=true
-    }else{
-      this.activos=false;
+    this.datosCandidato = null;
+    if (estatus === "Alta") {
+      this.candidatoActivo = true;
+    } else {
+      this.candidatoActivo = false;
     }
-    this.loading=true;
+    this.loading = true;
     this.candidatoService.get_candidatos(estatus).subscribe(response => {
-      
       if (response.success) {
         this.datosCandidato = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
-      this.loading=false;
+      this.loading = false;
     });
   }
 
   getEmpresas(estatus: string) {
-    this.datosEmpresa=null;
-    if(estatus==='Alta'){
-      this.activos=true
-    }else{
-      this.activos=false;
+    this.datosEmpresa = null;
+    if (estatus === "Alta") {
+      this.empresaActiva = true;
+    } else {
+      this.empresaActiva = false;
     }
-    this.loading=true;
+    this.loading = true;
     this.empresaService.get_empresas(estatus).subscribe(response => {
       if (response.success) {
         this.datosEmpresa = response.data;
       } else {
         Swal.fire("Error", response.message, "error");
       }
-      this.loading=false;
-    });
-  }
-
-  getSolicitudes() {
-    this.solicitudService.get_solicitudes().subscribe(response => {
-      if (response.success) {
-        this.datos_solicitud = response.data;
-      } else {
-        Swal.fire("Error", response.message, "error");
-      }
+      this.loading = false;
     });
   }
 
@@ -375,8 +386,8 @@ export class AdministradorComponent implements OnInit {
     this.infoCategoria = Cat_empresa;
   }
 
-  detalleSolicitud(Solicitudes){
-    this.infoSolicitud=Solicitudes;
+  verArchivo(ruta:string){
+    window.open("http://192.168.1.200/uploads/"+ruta);
   }
 
   //METODOS CRUD (U)
@@ -436,14 +447,16 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.candidatoService.reactivar_candidato(id).subscribe(response => {
-            if (response.success) {
-              Swal.fire("Correcto", response.message, "success");
-              this.getCandidatos("Baja");
-            } else {
-              Swal.fire("Error", response.message, "error");
-            }
-          });
+          this.candidatoService
+            .update_estatusCandidato("A", id)
+            .subscribe(response => {
+              if (response.success) {
+                Swal.fire("Correcto", response.message, "success");
+                this.getCandidatos("Baja");
+              } else {
+                Swal.fire("Error", response.message, "error");
+              }
+            });
         } else {
         }
       });
@@ -461,14 +474,65 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.empresaService.reactivarEmpresa(id).subscribe(response => {
-            if (response.success) {
-              Swal.fire("Correcto", response.message, "success");
-              this.getEmpresas("Baja");
-            } else {
-              Swal.fire("Error", response.message, "error");
-            }
-          });
+          this.empresaService
+            .update_estatusEmpresa("A", id)
+            .subscribe(response => {
+              if (response.success) {
+                Swal.fire("Correcto", response.message, "success");
+                this.getEmpresas("Baja");
+              } else {
+                Swal.fire("Error", response.message, "error");
+              }
+            });
+        } else {
+        }
+      });
+  }
+
+  updateEstatusAuxiliar(id: number, estatus: string) {
+    var mostrar;
+    if (estatus == "A") {
+      this.titulo = "¿Deseas reactivar la cuenta del usuario?";
+      this.mensaje = "La cuenta tendra acceso al sistema";
+      mostrar = "B";
+    } else if (estatus == "B") {
+      this.titulo = "¿Deseas desactivar la cuenta del usuario?";
+      this.mensaje = "La cuenta no tendra acceso al sistema";
+      mostrar = "A";
+    }
+    this.swalWithBootstrapButtons
+      .fire({
+        title: this.titulo,
+        text: this.mensaje,
+        type: "question",
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "No"
+      })
+      .then(result => {
+        if (result.value) {
+          this.auxiliaresService
+            .update_estatus_auxiliarAdmin(estatus, id)
+            .subscribe(response => {
+              if (response.success) {
+                this.swalWithBootstrapButtons.fire({
+                  title: "Correcto",
+                  text: response.message,
+                  type: "success",
+                  showCancelButton: false,
+                  confirmButtonText: "Entendido"
+                });
+                this.getAuxiliares(mostrar);
+              } else {
+                this.swalWithBootstrapButtons.fire({
+                  title: "Error",
+                  text: response.message,
+                  type: "error",
+                  showCancelButton: false,
+                  confirmButtonText: "Entendido"
+                });
+              }
+            });
         } else {
         }
       });
@@ -487,14 +551,16 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.candidatoService.delete_candidato(id).subscribe(response => {
-            if (response.success) {
-              Swal.fire("Correcto", response.message, "success");
-              this.getCandidatos("Alta");
-            } else {
-              Swal.fire("Error", response.message, "error");
-            }
-          });
+          this.candidatoService
+            .update_estatusCandidato("B", id)
+            .subscribe(response => {
+              if (response.success) {
+                Swal.fire("Correcto", response.message, "success");
+                this.getCandidatos("Alta");
+              } else {
+                Swal.fire("Error", response.message, "error");
+              }
+            });
         } else {
         }
       });
@@ -512,14 +578,16 @@ export class AdministradorComponent implements OnInit {
       })
       .then(result => {
         if (result.value) {
-          this.empresaService.delete_empresa(id).subscribe(response => {
-            if (response.success) {
-              Swal.fire("Correcto", response.message, "success");
-              this.getEmpresas("Alta");
-            } else {
-              Swal.fire("Error", response.message, "error");
-            }
-          });
+          this.empresaService
+            .update_estatusEmpresa("B", id)
+            .subscribe(response => {
+              if (response.success) {
+                Swal.fire("Correcto", response.message, "success");
+                this.getEmpresas("Alta");
+              } else {
+                Swal.fire("Error", response.message, "error");
+              }
+            });
         } else {
         }
       });
@@ -563,6 +631,77 @@ export class AdministradorComponent implements OnInit {
     else return "Baja";
   }
 
+  exportPdf(tipo: number, estatus: string) {
+    var doc = new jsPDF("p", "pt", "a4");
+    var img = new Image();
+    img.src = "assets/descargar.png";
+    doc.addImage(img, "png", 25, 20, 150, 80);
+    if (tipo == 1) {
+      //REPORTE PARA AREAS DE ESTUDIO
+      doc.add;
+      this.exportColumns = this.columnaReporteAreas.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.autoTable(this.exportColumns, this.reporte_area, {
+        startY: 100
+      });
+      doc.save("Reporte de areas de estudio.pdf");
+    } else if (tipo == 2) {
+      //REPORTE PARA LAS CATEGORIAS DE LAS EMPRESAS
+      this.exportColumns = this.columnaReporteCategoria.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.autoTable(this.exportColumns, this.reporte_categoria, {
+        startY: 100
+      });
+      doc.save("Reporte de categorias de empresas.pdf");
+    } else if (tipo == 3) {
+      this.exportColumns = this.columnasCandidato.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+
+      doc.text("Reporte de candidatos activos", 300, 70, "center");
+      // doc.autoTable(this.exportColumns, this.datosCandidato);
+
+      doc.autoTable(this.exportColumns, this.datosCandidato, {
+        startY: 100
+      });
+      doc.save("Reporte de candidatos activos.pdf");
+    } else if (tipo == 4) {
+      this.exportColumns = this.columnasCandidato.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.text("Reporte de candidatos inactivos", 300, 70, "center");
+      doc.autoTable(this.exportColumns, this.datosCandidato, {
+        startY: 100
+      });
+      doc.save("Reporte de candidatos inactivos.pdf");
+    } else if (tipo == 5) {
+      this.exportColumns = this.columnasEmpresa.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.text("Reporte de empresas activas", 300, 70, "center");
+      doc.autoTable(this.exportColumns, this.datosEmpresa, {
+        startY: 100
+      });
+      doc.save("Reporte de empresas activas.pdf");
+    } else if (tipo == 6) {
+      this.exportColumns = this.columnasEmpresa.map(col => ({
+        title: col.header,
+        dataKey: col.field
+      }));
+      doc.text("Reporte de empresas inactivas", 300, 70, "center");
+      doc.autoTable(this.exportColumns, this.datosEmpresa, {
+        startY: 100
+      });
+      doc.save("Reporte de empresas inactivas.pdf");
+    }
+  }
 
   //UTILIDADES PARA EL ENCARGADO DE DISEÑO
 
@@ -574,7 +713,8 @@ export class AdministradorComponent implements OnInit {
     (<any>$("#ModalModificarCat")).modal("hide");
   }
 
-  categorias(numero) {
+  categorias(numero: number) {
+    //numero= this.navBarComponentAdmin.numero;
     this.inputbooleano = false;
     // Se selecciona Categorias de las empresas
     if (numero === 1) {
@@ -638,10 +778,9 @@ export class AdministradorComponent implements OnInit {
         this.estado = 0;
         $("#empresasActivas").css("border-bottom", "transparent");
       } else {
-        $("#empresasActivas,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css(
-          "border-bottom",
-          "transparent"
-        );
+        $(
+          "#empresasActivas,#areas,#categoriaboton,#Auxiliares,#vacantesadmin"
+        ).css("border-bottom", "transparent");
         $("#empresasActivas").css("border-bottom", "1px solid white");
         this.opc = numero;
         this.estadoimagen = false;
@@ -660,25 +799,19 @@ export class AdministradorComponent implements OnInit {
         this.estadoimagen = false;
         this.estado = 6;
       }
-    } else if(numero==7){
-      if (this.estado===7){
-        this.estado=0;
+    } else if (numero == 7) {
+      if (this.estado === 7) {
+        this.estado = 0;
         $("#Auxiliares").css("border-bottom", "transparent");
-      } else{
-        $("#usuarios,#areas,#categoriaboton,#usuariosactivos,#vacantesadmin").css(
-          "border-bottom",
-          "transparent"
-        );
+      } else {
+        $(
+          "#usuarios,#areas,#categoriaboton,#usuariosactivos,#vacantesadmin"
+        ).css("border-bottom", "transparent");
         $("#Auxiliares").css("border-bottom", "1px solid white");
-        this.estadoimagen=false;
-        this.estado=7;
+        this.estadoimagen = false;
+        this.estado = 7;
       }
-
     }
-    
-    
-    
- 
   }
   inputeffec() {
     if (this.inputbooleano === false) {
