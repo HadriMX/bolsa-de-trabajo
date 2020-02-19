@@ -12,7 +12,7 @@
     </div>
 
     <div *ngIf="!isLoading && !accesoDenegado" class="container" id="cabecera_vacante">
-        <h3 class="mt-3">{{infoVacante.titulo_vacante}}</h3>
+    <h3 class="mt-3">{{infoVacante.titulo_vacante}} <label style="color: rgb(17, 226, 17);" *ngIf="infoVacante.estatus == 'A'">(Abierta)</label><label style="color: rgb(255, 0, 0);" *ngIf="infoVacante.estatus == 'B'">(Cerrada)</label></h3>
         <div class="row justify-content-between">
             <div class="col-md-6 col-12 text-left">
                 <h6 style="color: rgb(121, 24, 129);">{{infoVacante.puesto}}</h6>
@@ -94,11 +94,17 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
                 <a href="" style="color: blueviolet;">Ver más</a>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+            <div *ngIf="infoVacante.estatus == 'A'" class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
                 <a href="" style="color: blueviolet;">Aceptar</a>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+            <div *ngIf="infoVacante.estatus == 'A'" class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
                 <a href="" style="color: blueviolet;">Rechazar</a>
+            </div>
+            <div *ngIf="infoVacante.estatus == 'B'" class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+                -
+            </div>
+            <div *ngIf="infoVacante.estatus == 'B'" class="col-lg-1 col-md-1 col-sm-1 col-1" id="col_postulaciones">
+                -
             </div>
         </div>
     </div>

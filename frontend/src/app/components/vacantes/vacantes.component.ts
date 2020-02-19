@@ -19,9 +19,9 @@ export class VacantesComponent implements OnInit, IAppPage {
   goTopEnabled = true;
   goTop?: Function;
 
-  vacantesPublicadas: Vacante[] = [];
-  vacantesCerradas: Vacante[] = [];
-  infoVacante: Vacante = new Vacante();
+  vacantesPublicadas = [];
+  vacantesCerradas = [];
+  infoVacante: any = [];
   isLoading = true;
   mostrarBoton = true;
 
@@ -72,6 +72,7 @@ export class VacantesComponent implements OnInit, IAppPage {
     this.vacantesService.getMisVacantes('A').subscribe(response => {
       if (response.success) {
         this.vacantesPublicadas = response.data;
+        // console.log(this.vacantesPublicadas);
       }
       this.isLoading = false;
     });
@@ -81,23 +82,90 @@ export class VacantesComponent implements OnInit, IAppPage {
     this.vacantesService.getMisVacantes('B').subscribe(response => {
       if (response.success) {
         this.vacantesCerradas = response.data;
+        // console.log(this.vacantesCerradas);
       }
       this.isLoading = false;
     });
   }
 
   CerrarVacante(id_vacante:number){
-    console.log(id_vacante);
+    Swal.fire({
+      title: '¿Estás seguro de cerrar esta vacante?',
+      showCancelButton: true,
+      focusConfirm: true,
+      confirmButtonColor: '#7A26D3',
+      cancelButtonColor: 'white',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Sí, cerrar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.vacantesService.cerrarVacante(id_vacante)
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire({
+                title: "Éxito", 
+                text: response.message,
+                type: "success",
+                focusConfirm: true,
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: '#7A26D3'
+              });
+              this.cerrarModales();
+              this.getVacantesMisVacantesCerradas();
+              this.getVacantesMisVacantesPublicadas();
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
+      }
+    })
   }
   
   AbrirVacante(id_vacante:number){
-    console.log(id_vacante);
+    Swal.fire({
+      title: '¿Estás seguro de reabrir esta vacante?',
+      showCancelButton: true,
+      focusConfirm: true,
+      confirmButtonColor: '#7A26D3',
+      cancelButtonColor: 'white',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Sí, reabrir',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.vacantesService.abrirVacante(id_vacante)
+          .subscribe((response) => {
+            if (response.success) {
+              Swal.fire({
+                title: "Éxito", 
+                text: response.message,
+                type: "success",
+                focusConfirm: true,
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: '#7A26D3'
+              });
+              this.cerrarModales();
+              this.getVacantesMisVacantesCerradas();
+              this.getVacantesMisVacantesPublicadas();
+            }
+            else {
+              Swal.fire("Error", response.message, 'error');
+            }
+          });
+      }
+    })
   }
-
+  
 
   mostrarDetalleVacante(item, aux:boolean) {
     this.infoVacante = item;
     this.mostrarBoton = aux;
+  }
+
+  cerrarModales(){
+    (<any>$('#datosvacantes .close')).click();
   }
 
   arriba() {
