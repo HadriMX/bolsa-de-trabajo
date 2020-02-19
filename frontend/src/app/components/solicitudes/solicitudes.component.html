@@ -1,6 +1,6 @@
 <!-- En esta parte comienza la verificacion de las solicitudes de los usuario -->
 <div class="body-content">
-  <app-navbar-admin></app-navbar-admin>
+  <app-navbar-admin *ngIf="usuarioActual.id_tipo_usuario== 100"></app-navbar-admin>
   <div class="container">
 
     <div>
@@ -62,7 +62,7 @@
                         <b>Email:</b> {{rowData.email}}
                       </div>
                       <div>
-                        <button (click)="verArchivo(rowData.rutaCV)">Ver Curriculum</button>
+                        <button (click)="verArchivo(rowData.rutaCV)" class="btn btn-primary">Ver Curriculum</button>
                       </div>
                     </div>
                   </div>

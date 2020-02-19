@@ -265,26 +265,17 @@
 
 <!--===============================================================================================-->
 
-<p-dialog header="Motivo" [(visible)]="displayDialogEliminarVacante" [focusOnShow]="false" [responsive]="true"
+<p-dialog header="¿Por qué vas a eliminar esta vacante?" [(visible)]="displayDialogEliminarVacante" [focusOnShow]="false" [responsive]="true"
     showEffect="fade" [modal]="true" [style]="{width: '300px'}">
     <div class="ui-g ui-fluid">
         <div class="ui-g-12">
-            <div class="ui-g-4">
-                <label>Motivo:</label>
-            </div>
-            <div class="ui-g-8">
                 <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
-            </div>
         </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
-<<<<<<< Updated upstream
-            <button type="button" pButton icon="fa fa-check" label="Guardar" class="btneditar"></button>
-=======
-            <button type="button" pButton icon="fa fa-check"  label="Guardar"
-                class="btneditar"></button>
->>>>>>> Stashed changes
+            <button type="button" pButton icon="fa fa-check" label="Guardar" class="btneditar">
+            </button>
         </div>
     </p-footer>
 </p-dialog>

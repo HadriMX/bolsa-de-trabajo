@@ -10,11 +10,11 @@
           <span style="color: white;">Usuarios</span>
         </a>
         <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(7)">Auxiliares administrativos</a>
-          <a  class="dropdown-item" routerLink="/solicitudes">Solicitudes</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(4)">Candidatos</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(5)">Empresas</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" routerLink="/vacantes">Vacantes</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item"  style="cursor: pointer" (click)="estado(7)">Auxiliares administrativos</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item"  style="cursor: pointer" (click)="estado(3)">Solicitudes</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==100"  class="dropdown-item"  style="cursor: pointer" routerLink="/solicitudes">Solicitudes</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item"  style="cursor: pointer" (click)="estado(4)">Candidatos</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item"  style="cursor: pointer" (click)="estado(5)">Empresas</a>
         </div>
       </div>
     </ul>
@@ -25,8 +25,8 @@
           <span style="color: white;">Catálogos</span>
         </a>
         <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(1)">Categorías de empresas</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(2)">Áreas de estudio</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item"  style="cursor: pointer" (click)="estado(1)">Categorías de empresas</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item"  style="cursor: pointer" (click)="estado(2)">Áreas de estudio</a>
         </div>
       </div>
     </ul>

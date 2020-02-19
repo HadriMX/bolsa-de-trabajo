@@ -87,16 +87,6 @@ th.mat-sort-header-sorted {
   overflow: auto;
 }
 
-.btn {
-  border-radius: 15px;
-  border: none;
-  color: white;
-  background-color: rgb(152, 93, 158);
-  margin-block-start: 30%;
-  width: 95%;
-  margin-block-end: 1%;
-}
-
 @media (max-width: 574px) {
   .btn {
     margin-block-start: 5%;
