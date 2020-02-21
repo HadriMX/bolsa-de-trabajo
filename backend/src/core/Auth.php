@@ -137,7 +137,7 @@ class Auth
             //mandar correo
 
             $host = 'http://localhost:4200';
-            $urlVerificacion = $host . '/login?codigo_confirmacion=' . $codigoConfirmacion;
+            $urlVerificacion = $host . '/registro/codigo_confirmacion=' . $codigoConfirmacion;
 
             $to = $email;
             $subject = "Confirmación de correo electrónico";
@@ -425,7 +425,7 @@ class Auth
             //     $err = new ErrorResult("Error de registro", 401);
             //     $output = $err;
             // }
-            $output = new ErrorResult("cambiar este mensaje", 0);
+            $output = new ErrorResult("El usuario ya está registrado.", 0);
         }
 
         return $output;

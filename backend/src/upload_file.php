@@ -19,6 +19,6 @@ if (isset($_GET['no_replace'])) {
     $noReplace = $_GET['no_replace'] == "true" ? true : false;
 }
 
-$response = FileUpload::upload($_FILES['archivo'], $noReplace, $newFileName);
+$response = FileUpload::upload($_FILES['archivo'], $newFileName, $_SESSION["currentUser"]["id_usuario"], $noReplace);
 
 echo json_encode($response);

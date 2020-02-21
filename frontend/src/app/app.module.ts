@@ -69,7 +69,7 @@ const routes: Routes = [
   { path: 'vacantes/registrar', component: RegistrarVacanteComponent, canActivate: [EmpresaGuard] },
   { path: 'vacantes/postulaciones/:id', component: VacantesPostulacionesComponent, canActivate: [EmpresaGuard] },
   { path: 'verificacion/:codigo', component: VerificacionComponent },
-  { path: 'registro', component: RegistroComponent },
+  { path: 'registro/:codigo', component: RegistroComponent, canActivate: [LoginGuard] },
   { path: '**', redirectTo: '/login' }
 ];
 

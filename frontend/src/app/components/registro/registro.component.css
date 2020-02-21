@@ -1,0 +1,14 @@
+nav.navbar {
+  background-color: rgb(121, 24, 129);
+  width: 100%;
+}
+
+#titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: #404044;
+}
+
+.custom-file-input ~ .custom-file-label:lang(es)::after {
+  content: "Elegir";
+}

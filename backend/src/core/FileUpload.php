@@ -24,7 +24,7 @@ class FileUpload
         return $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
     }
 
-    public static function upload(?array $fileData, string $newFileName, bool $noReplace = true)
+    public static function upload(?array $fileData, string $newFileName, int $currentUserId, bool $noReplace = true)
     {
         $result = array();
 
@@ -45,8 +45,7 @@ class FileUpload
                 if ($newFileName != "") {
                     $uploadFileName = $newFileName;
                 }
-
-                $currentUserId = $_SESSION['currentUser']['id_usuario'];
+                
                 $prefix = $noReplace ? time() . rand(10, 99) : "";
                 $uploadFileName = preg_replace('/[\s,_]+/', '-', $uploadFileName) . $fileExtension; // convertir espacios en guiones
                 $fileName = basename(strtolower($prefix . self::get_file_name($uploadFileName, $currentUserId)));

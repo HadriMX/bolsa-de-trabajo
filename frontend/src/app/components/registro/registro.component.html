@@ -1,1 +1,142 @@
-<p>registro works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
+    <div class="row" style="width: 100%; margin: 0;">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-12" style="text-align: center;">
+            <a class="navbar-brand">
+                <img src="/assets/logo-volar.png" alt="Logo Volar">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="body-content">
+    <div class="container">
+        <div class="row mt-4 justify-content-around">
+            <div class="col-12 col-md-8">
+                <h3>TERMINAR REGISTRO</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div *ngIf="isLoading">
+            <app-loading></app-loading>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading" class="container">
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="" autocomplete="off"
+                    [(ngModel)]="infoCandidato.nombre">
+            </div>
+        </div>
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="apellido1">Primer Apellido</label>
+                <input id="apellido1" name="apellido1" class="form-control" type="text" placeholder=""
+                    autocomplete="off" [(ngModel)]="infoCandidato.apellido1">
+            </div>
+        </div>
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="apellido2">Segundo Apellido</label>
+                <small class="text-muted"> (opcional)</small>
+                <input id="apellido2" name="apellido2" class="form-control" type="text" placeholder=""
+                    autocomplete="off" [(ngModel)]="infoCandidato.apellido2">
+            </div>
+        </div>
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input id="fechaNacimiento" name="fechaNacimiento" class="form-control" type="date" autocomplete="off"
+                    [(ngModel)]="infoCandidato.fecha_nacimiento" required="required">
+            </div>
+        </div>
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="genero">Género</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="genero" id="genero" [(ngModel)]="infoCandidato.genero">
+                        <option value="" selected disabled>Seleccione el género</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otro</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" name="telefono" class="form-control" type="text" placeholder="Ej. 6686214365"
+                    autocomplete="off" [(ngModel)]="infoCandidato.telefono" OnlyNumber="true" maxlength="12">
+            </div>
+        </div>
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="estado">Entidad Federativa De Residencia</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="estado" id="estado"
+                        [(ngModel)]="infoCandidato.id_entidad_federativa">
+                        <option value="0" selected disabled>Seleccione la entidad federativa</option>
+                        <option *ngFor="let entidad of entidadesFederativas" [value]="entidad.id_entidad_federativa">
+                            {{entidad.nombre}}</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+
+        <div class="row mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <label for="nivelEstudios">Último Nivel de Estudios</label>
+                <span class="custom-dropdown">
+                    <select class="form-control" name="nivelEstudios" id="nivelEstudios"
+                        [(ngModel)]="infoCandidato.id_grado_estudios">
+                        <option value="0" selected disabled>Seleccione un nivel de estudios</option>
+                        <option *ngFor="let grado of gradosEstudio" [value]="grado.id_grado_estudios">{{grado.nombre}}
+                        </option>
+                    </select>
+                </span>
+            </div>
+        </div>
+
+        <div class="row pt-2 mb-2 justify-content-around">
+            <div class="col-12 col-md-8">
+                <p>Carga tu curriculum a continuación.</p>
+                <span class="text-muted">Tamaño máximo de archivo: 2 MB</span>
+            </div>
+        </div>
+
+        <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+            <div class="row mb-2 justify-content-around">
+                <div class="col-12 col-md-8">
+                    <!-- CURRICULUM -->
+                    <div class="input-group" style="width: 100%;">
+                        <div id="inputFile" class="input-group-prepend">
+                            <span class="input-group-text" id="fileCurriculum">CURRICULUM</span>
+                        </div>
+                        <div class="custom-file">
+                            <input #file type="file" class="custom-file-input" id="fileCurriculum"
+                                accept="application/pdf" lang="es" (change)="onFileSelectCurriculum($event)">
+                            <label id="labelCurriculum" class="custom-file-label"
+                                for="fileCurriculum">{{ labelCurriculum }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row py-3 my-3 justify-content-around">
+                <div class="col-12 col-md-8 text-right">
+                    <button type="submit" class="btn btn-primary">ENVIAR</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
