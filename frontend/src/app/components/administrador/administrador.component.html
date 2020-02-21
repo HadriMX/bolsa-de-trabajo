@@ -23,7 +23,8 @@
                   </div>
                   <div class="ui-grid-col-6">
                     <input type="password" pPassword promptLabel="Ingrese una Contraseña" weakLabel="Débil"
-                      mediumLabel="Medio" strongLabel="Fuerte" match="pdw2" [(ngModel)]="auxiliarAdministrativo.password" />
+                      mediumLabel="Medio" strongLabel="Fuerte" match="pdw2"
+                      [(ngModel)]="auxiliarAdministrativo.password" />
                   </div>
                 </div>
                 <div class="ui-grid-row">
@@ -31,12 +32,12 @@
                     Confrimar contraseña*:
                   </div>
                   <div class="ui-grid-col-6">
-                    <input type="password" pInputText  [(ngModel)]="Confirmar" />
+                    <input type="password" pInputText [(ngModel)]="Confirmar" />
                   </div>
                 </div>
                 <div style="color: red; text-align: center;" *ngIf="auxiliarAdministrativo.password !== Confirmar">
                   Las contraseñas no coinciden.
-              </div>
+                </div>
                 <div class="ui-grid-row" style="text-align: center;">
                   <div class="ui-grid-col-2"></div>
                   <div class="ui-grid-col-6">
@@ -61,12 +62,12 @@
           </div>
           <p-table #dtAuxiliaresAdmins [columns]="columnasAuxiliaresAdmin" [value]="datosAuxiliares"
             dataKey="id_usuario" [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
-            [globalFilterFields]="['email']" [loading]="loading">
+            [globalFilterFields]="['email']" [loading]="loading" [responsive]="true">
             <ng-template pTemplate="caption">
               Auxiliares administrativos
               <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Filtrar"
+                <input type="text" pInputText size="auto" placeholder="Filtrar"
                   (input)="dtAuxiliaresAdmins.filterGlobal($event.target.value, 'contains')" style="width:auto">
               </div>
             </ng-template>
@@ -82,23 +83,30 @@
             <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columnas>
               <tr>
                 <td>
+                  <span class="ui-column-title">Email:</span>
                   {{columnas.email}}
                 </td>
-                <td *ngIf="columnas.estatus==='A'">Alta</td>
-                <td *ngIf="columnas.estatus==='B'">Baja</td>
-
-                <td *ngIf="auxiliarActivo" style="text-align: center;">
+                <td *ngIf="columnas.estatus==='A'">
+                  <span class="ui-column-title">Estatus:</span>
+                  Alta
+                </td>
+                <td *ngIf="columnas.estatus==='B'">
+                  <span class="ui-column-title">Estatus:</span>
+                  Baja
+                </td>
+                <td *ngIf="auxiliarActivo" style="text-align: left;">
+                  <span class="ui-column-title">Desactivar</span>
                   <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
                     (click)="updateEstatusAuxiliar(rowData.id_usuario,'B')"></button>
                 </td>
-                <td *ngIf="!auxiliarActivo" style="text-align: center;">
+                <td *ngIf="!auxiliarActivo" style="text-align: left;">
+                  <span class="ui-column-title">Activar</span>
                   <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
                     (click)="updateEstatusAuxiliar(rowData.id_usuario,'A')"></button>
                 </td>
               </tr>
             </ng-template>
           </p-table>
-
         </p-tabPanel>
       </p-tabView>
     </div>
@@ -117,7 +125,7 @@
               <button type="button" pButton icon="fa fa-plus" (click)="dialogAddCategoria()" label="Añadir"
                 style="float: left;"></button>
               <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Filtrar"
+              <input type="text" pInputText size="auto" placeholder="Filtrar"
                 (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
           </ng-template>
@@ -125,44 +133,48 @@
             <tr>
               <th *ngFor="let columna of columnasCategoria" [pSortableColumn]="columna.field">
                 {{columna.header}}
-              <p-sortIcon [field]="columna.field"></p-sortIcon>
-            </th>
-            <th style="width:8em">Editar</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-datosCategoria let-editing="editing" let-ri="rowIndex">
-          <tr [pEditableRow]="datosCategoria">
-            <td>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="datosCategoria.nombre_empresa" id="modCategoria" required>
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{datosCategoria.nombre_empresa}}
+                <p-sortIcon [field]="columna.field"></p-sortIcon>
+              </th>
+              <th style="width:8em">Editar</th>
+            </tr>
           </ng-template>
-          </p-cellEditor>
-          </td>
-          <td>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <p-dropdown [options]="estatus" [(ngModel)]="datosCategoria.estatus" [style]="{'width':'100%'}">
-                </p-dropdown>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{estatus_categorias(datosCategoria.estatus)}}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td style="text-align:center">
-            <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btneditar"
-              (click)="onRowEditCategoria(datosCategoria);detalleCategoria(datosCategoria)"></button>
-            <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success"
-              id="btnEditarCategoria" style="margin-right: .5em"
-              (click)="updateCategoria(datosCategoria.id_tipo_empresa)"></button>
-            <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger"
-              (click)="onRowEditCancelCategoria(datosCategoria, ri)"></button>
-          </td>
-          </tr>
+          <ng-template pTemplate="body" let-datosCategoria let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="datosCategoria">
+              <td>
+                <span class="ui-column-title">Nombre:</span>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="datosCategoria.nombre_empresa" id="modCategoria"
+                      required>
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{datosCategoria.nombre_empresa}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td>
+                <span class="ui-column-title">Estatus:</span>
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <p-dropdown [options]="estatus" [(ngModel)]="datosCategoria.estatus" [style]="{'width':'100%'}">
+                    </p-dropdown>
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{estatus_categorias(datosCategoria.estatus)}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+              <td style="text-align:left">
+                <span class="ui-column-title">Editar</span>
+                <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btneditar"
+                  (click)="onRowEditCategoria(datosCategoria);detalleCategoria(datosCategoria)"></button>
+                <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                  class="ui-button-success" id="btnEditarCategoria" style="margin-right: .5em"
+                  (click)="updateCategoria(datosCategoria.id_tipo_empresa)"></button>
+                <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                  class="ui-button-danger" (click)="onRowEditCancelCategoria(datosCategoria, ri)"></button>
+              </td>
+            </tr>
           </ng-template>
           <ng-template pTemplate="summary" let-datosCategoria>
             <div style="text-align:left">
@@ -187,7 +199,7 @@
               <button type="button" pButton icon="fa fa-plus" (click)="dialogAddArea()" label="Añadir"
                 style="float: left;"></button>
               <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Filtrar"
+              <input type="text" pInputText size="auto" placeholder="Filtrar"
                 (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
           </ng-template>
@@ -203,6 +215,7 @@
           <ng-template pTemplate="body" let-datosArea let-editing="editing" let-ri="rowIndex">
             <tr [pEditableRow]="datosArea">
               <td>
+                <span class="ui-column-title">Nombre:</span>
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input pInputText type="text" [(ngModel)]="datosArea.nombre" id="modArea" required>
@@ -213,6 +226,7 @@
                 </p-cellEditor>
               </td>
               <td>
+                <span class="ui-column-title">Estatus:</span>
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <p-dropdown [options]="estatus" [(ngModel)]="datosArea.estatus" [style]="{'width':'100%'}">
@@ -223,7 +237,8 @@
                   </ng-template>
                 </p-cellEditor>
               </td>
-              <td style="text-align:center">
+              <td style="text-align:left">
+                <span class="ui-column-title">Editar</span>
                 <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="btneditar"
                   (click)="onRowEditArea(datosArea);detalleArea(datosArea)"></button>
                 <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
@@ -268,12 +283,12 @@
         </div>
         <p-table #dtCandidatos [columns]="columnasCandidato" [value]="datosCandidato" dataKey="id_usuario"
           [paginator]="true" [rowsPerPageOptions]="[5,10,20]" [rows]="10"
-          [globalFilterFields]="['candidato','genero','telefono','email']" [loading]="loading">
+          [globalFilterFields]="['candidato','genero','telefono','email']" [loading]="loading" [responsive]="true">
           <ng-template pTemplate="caption">
             Candidatos
             <div style="text-align: right">
               <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Filtrar"
+              <input type="text" pInputText size="auto" placeholder="Filtrar"
                 (input)="dtCandidatos.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
           </ng-template>
@@ -295,13 +310,16 @@
                 </a>
               </td>
               <td *ngFor="let columna of columnasCandidato">
+                <span class="ui-column-title">{{columna.header}}:</span>
                 {{rowData[columna.field]}}
               </td>
-              <td *ngIf="candidatoActivo" style="text-align: center;">
+              <td *ngIf="candidatoActivo" style="text-align: left;">
+                <span class="ui-column-title">Desactivar</span>
                 <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
                   (click)="updateEstatusCandidato(rowData.id_usuario,'B')"></button>
               </td>
-              <td *ngIf="!candidatoActivo" style="text-align: center;">
+              <td *ngIf="!candidatoActivo" style="text-align: left;">
+                <span class="ui-column-title">Activar</span>
                 <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
                   (click)="updateEstatusCandidato(rowData.id_usuario,'A')"></button>
               </td>
@@ -329,7 +347,8 @@
                         <button (click)="verArchivo(rowData.ruta_cv)" class="btn btn-primary">Ver curriclum</button>
                       </div>
                       <div class="ui-g-12">
-                        <button (click)="verArchivo(rowData.ruta_id)" class="btn btn-primary">Ver identificación</button>
+                        <button (click)="verArchivo(rowData.ruta_id)" class="btn btn-primary">Ver
+                          identificación</button>
                       </div>
                       <div class="ui-g-12">
                         <button (click)="verArchivo(rowData.ruta_curp)" class="btn btn-primary">Ver CURP</button>
@@ -357,7 +376,6 @@
   <div class="container">
     <div *ngIf="estado === 5">
       <div style="margin-top: 1%;">
-
         <div class="col-lg-6 col-sm-4 col-5">
           <div class="form-check" style="margin-block-start: 2%;">
             <input class="form-check-input" type="radio" name="filtroEmpresas" id="radioButtonEmpresaActivos"
@@ -370,12 +388,13 @@
         </div>
         <p-table #dt [columns]="columnasEmpresa" [value]="datosEmpresa" dataKey="id_usuario" [paginator]="true"
           [rowsPerPageOptions]="[5,10,20]" [rows]="10"
-          [globalFilterFields]="['empresa','email','telefono','nombre_persona_contacto']" [loading]="loading">
+          [globalFilterFields]="['nombre_empresa','email','telefono','nombre_persona_contacto']" [loading]="loading"
+          [responsive]="true">
           <ng-template pTemplate="caption">
             Empresas
             <div style="text-align: right">
               <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Filtrar"
+              <input type="text" pInputText size="auto" placeholder="Filtrar"
                 (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
           </ng-template>
@@ -397,13 +416,16 @@
                 </a>
               </td>
               <td *ngFor="let col of columnasEmpresa">
+                <span class="ui-column-title">{{col.header}}:</span>
                 {{rowData[col.field]}}
               </td>
-              <td *ngIf="empresaActiva" style="text-align: center;">
+              <td *ngIf="empresaActiva" style="text-align: left;">
+                <span class="ui-column-title">Desactivar</span>
                 <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
                   (click)="updateEstatusEmpresa(rowData.id_usuario,'B')"></button>
               </td>
-              <td *ngIf="!empresaActiva" style="text-align: center;">
+              <td *ngIf="!empresaActiva" style="text-align: left;">
+                <span class="ui-column-title">Activar</span>
                 <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
                   (click)="updateEstatusEmpresa(rowData.id_usuario,'A')"></button>
               </td>
@@ -444,24 +466,6 @@
         </p-table>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- aqui comienza el codigo para el dashBoard  -->
     <div class="container">
       <div *ngIf="estadoimagen === false">
@@ -470,8 +474,8 @@
     </div>
   </div>
 </div>
-
 <!-- aqui comienza el codigo para el dashBoard  -->
+<!--  -->
 <p-dialog header="Categoria" [(visible)]="displayDialogCategoria" [focusOnShow]="false" [responsive]="true"
   showEffect="fade" [modal]="true" [style]="{width: '300px'}">
   <div class="ui-g ui-fluid">

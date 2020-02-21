@@ -95,6 +95,8 @@ th.mat-sort-header-sorted {
   }
 }
 
+
+
 @media (min-width: 576px) and (max-width: 963px) {
   .btn {
     margin-block-start: 40%;
@@ -257,9 +259,18 @@ body .ui-tabview.ui-tabview-right .ui-tabview-nav li:focus {
   box-shadow: inset 0 0 0 0.2em #b079b4;
 }
 
-:host__ng-deep .ui-datatable table {
+:host::ng-deep .ui-datatable table {
   table-layout: auto;
+  
 }
+
+
+@media (max-width: 1000px) and (min-width: 415px) {
+  :host::ng-deep .ui-table .ui-table-tbody > tr > td {
+    word-break : break-all;
+  }
+}
+
 
 :host::ng-deep
   .ui-dropdown-panel

@@ -2,17 +2,16 @@
 <div class="body-content">
   <app-navbar-admin *ngIf="usuarioActual.id_tipo_usuario== 100"></app-navbar-admin>
   <div class="container">
-
     <div>
       <div style="margin-top: 1%;">
         <p-table #dtSolicitdudes [columns]="columnasSolicitud" [value]="datos_solicitud" dataKey="id_candidato"
           [paginator]="true" [rowsPerPageOptions]="[20,30,50]" [rows]="10"
-          [globalFilterFields]="['candidato','telefono','email']" [loading]="loading">
+          [globalFilterFields]="['candidato','telefono','email']" [loading]="loading" [responsive]="true">
           <ng-template pTemplate="caption">
             Solicitudes de candidatos
             <div style="text-align: right">
               <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-              <input type="text" pInputText size="50" placeholder="Filtrar"
+              <input type="text" pInputText size="auto" placeholder="Filtrar"
                 (input)="dtSolicitdudes.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
           </ng-template>
@@ -34,13 +33,16 @@
                 </a>
               </td>
               <td *ngFor="let columna of columnasSolicitud">
+                <span class="ui-column-title">{{columna.header}}:</span>
                 {{rowData[columna.field]}}
               </td>
-              <td style="text-align: center;">
+              <td style="text-align: left;">
+                <span class="ui-column-title">Aceptar</span>
                 <button pButton type="button" icon="pi pi-check" class="ui-button-success" style="margin-right: .5em"
                   (click)="detalleSolicitud(datos_solicitud);aceptarCandidato(infoSolicitud[0].id_usuario)"></button>
               </td>
-              <td style="text-align: center;">
+              <td style="text-align: left;">
+                <span class="ui-column-title">Rechazar</span>
                 <button pButton type="button" icon="pi pi-times" class="ui-button-danger" style="margin-right: .5em"
                   (click)="detalleSolicitud(datos_solicitud);rechazarCandidato(infoSolicitud[0].id_usuario)"></button>
               </td>
