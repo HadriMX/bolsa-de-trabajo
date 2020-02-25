@@ -9,6 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EntidadFederativa } from 'src/app/models/entidadFederativa';
 import { CandidatoService } from 'src/app/services/candidato.service';
 import { EntidadesFederativasService } from 'src/app/services/entidades-federativas.service';
+import { CurrentUserService } from 'src/app/services/current-user.service';
+import { Usuario } from 'src/app/models/usuario';
+import { VerificacionEmailService } from 'src/app/services/verificacion-email.service';
 
 @Component({
   selector: 'app-registro',
@@ -20,7 +23,7 @@ export class RegistroComponent implements OnInit, IAppPage {
   showFooter = false;
   goTopEnabled = false;
   goTop?: Function;
-  isLoading = false;
+  isLoading = true;
   labelCurriculum = "Selecciona un archivo";
 
   codigoConfirmacion: string;
@@ -28,10 +31,13 @@ export class RegistroComponent implements OnInit, IAppPage {
   gradosEstudio: GradoEstudio[] = [];
   entidadesFederativas: EntidadFederativa[] = [];
   uploadForm: FormGroup;
+  user: Usuario;
 
   constructor(private entidadFederativaService: EntidadesFederativasService,
     private gradoEstudioService: GradoEstudioService,
     private candidatoService: CandidatoService,
+    private userService: CurrentUserService,
+    private verificacionEmailService: VerificacionEmailService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder) { }
@@ -45,6 +51,25 @@ export class RegistroComponent implements OnInit, IAppPage {
 
     this.getEntidadesFederativas();
     this.getGradosEstudio();
+
+    this.verificacionEmailService.verificar(this.codigoConfirmacion).then(response => {
+      if (response.success) {
+        // nada
+      }
+    });
+
+    this.userService.getUsuarioFromVerification(this.codigoConfirmacion)
+      .subscribe(response => {
+        if (response.success) {
+          this.user = response.data;
+          console.log(this.user);
+
+          this.isLoading = false;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
   }
 
   getEntidadesFederativas() {

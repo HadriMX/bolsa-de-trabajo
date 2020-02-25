@@ -32,7 +32,7 @@ class Auth
             $r = $db->readResult($stmt->get_result());
             $usuario = $r[0];
         }
-        
+
         $hashedPwd = $usuario['pw'];
         if (!password_verify($pwd, $hashedPwd)) {
             return new ErrorResult("Contraseña incorrecta. Intente de nuevo, por favor.", 401);
@@ -117,7 +117,7 @@ class Auth
             $estatus = "A";
         } elseif ($usuario['id_tipo_usuario'] == 0) {   // administrador
             $estatus = "A";
-        } elseif ($usuario['id_tipo_usuario'] == 100){
+        } elseif ($usuario['id_tipo_usuario'] == 100) { // administrador auxiliar
             $estatus = "A";
         }
         /*
@@ -409,22 +409,12 @@ class Auth
 </html>';
 
             $headers = 'From: luisarredondo1398@gmail.com' . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
+                'X-Mailer: PHP/' . phpversion();
 
             mail($to, $subject, $message, $headers);
 
             $output = new SuccessResult("Registro correcto", true);
-
-        } else { //No se hizo la insersión
-            // $query = "select * from usuarios where email='" . $username1 . "'";
-            // $result = $conn->query($query);
-            // if ($result->num_rows > 0) {
-            //     $err = new ErrorResult("El correo ingresado ya existe", 401);
-            //     $output = $err;
-            // } else {
-            //     $err = new ErrorResult("Error de registro", 401);
-            //     $output = $err;
-            // }
+        } else {
             $output = new ErrorResult("El usuario ya está registrado.", 0);
         }
 
@@ -480,5 +470,33 @@ class Auth
         $stmt->close();
 
         return $output;
+    }
+
+    public static function getUserFromVerificationCode(string $codigoConfirmacion)
+    {
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("SELECT * FROM usuarios_activos WHERE codigo_confirmacion = ?");
+        $stmt->bind_param("s", $codigoConfirmacion);
+
+        $stmt->execute();
+
+        $r = $db->readResult($stmt->get_result());
+
+        if (empty($r)) {
+            return new ErrorResult("No hay ningún usuario asociado a este código de confirmación.", 404);
+        }
+
+        $usuario = $r[0];
+
+        if ($usuario['estatus'] != 'N') {
+            return new ErrorResult("Ya se completó el registro de este usuario.", 4031);
+        }
+
+        // limpiar antes de retornar
+        $usuario['pw'] = null;
+
+        return new SuccessResult("OK", $usuario);
     }
 }
