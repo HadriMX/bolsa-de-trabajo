@@ -76,5 +76,39 @@ class Vacante
         return new SuccessResult("",$r[0]);
     }
 
+    public static function cerrarVacante($id_empresa, $id_vacante){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("UPDATE vacantes SET estatus='B' WHERE id_vacante = ? AND id_usuario = ?");
+        $stmt->bind_param('ii', $id_vacante,$id_empresa);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $output = new SuccessResult("La vacante ha sido cerrada. Se les avisará a los candidatos que se hayan postulado en esta vacante via email", true);
+        } else {
+            $output = new ErrorResult("Hubo un error al cerrar la vacante. Intentelo más tarde", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
+
+    public static function abrirVacante($id_empresa, $id_vacante){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("UPDATE vacantes SET estatus='A' WHERE id_vacante = ? AND id_usuario = ?");
+        $stmt->bind_param('ii', $id_vacante,$id_empresa);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $output = new SuccessResult("La vacante ha sido reabierta correctamente", true);
+        } else {
+            $output = new ErrorResult("Hubo un error al abrir la vacante. Intentelo más tarde", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
+
 
 }

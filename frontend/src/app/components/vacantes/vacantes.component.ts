@@ -125,13 +125,13 @@ export class VacantesComponent implements OnInit, IAppPage {
   
   AbrirVacante(id_vacante:number){
     Swal.fire({
-      title: '¿Estás seguro de reabrir esta vacante?',
+      title: '¿Estás seguro de abrir esta vacante?',
       showCancelButton: true,
       focusConfirm: true,
       confirmButtonColor: '#7A26D3',
       cancelButtonColor: 'white',
       cancelButtonText: 'No',
-      confirmButtonText: 'Sí, reabrir',
+      confirmButtonText: 'Sí, abrir',
       reverseButtons: true
     }).then((result) => {
       if (result.value) {

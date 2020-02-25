@@ -13,34 +13,53 @@
   /* border: 1px solid white; */
   background-color: white;
   -webkit-box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
--moz-box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
-box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
+  -moz-box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
+  box-shadow: 3px 6px 13px -1px rgba(0,0,0,0.31);
 }
 #titulo_postulaciones{
   text-align: center;
   font-size: 30px;
   margin-top: 20px;
 }
-#row_cabecera{
-  margin: 0; 
-  padding: 0;
-  background-color: white;
+
+#vacantecontenedor {
+  background: white;
+  min-height: 2em;
+  cursor: pointer;
+  /* border-left: 5px solid rgb(121, 24, 129); */
+  -webkit-box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 3px 39px -15px rgba(0, 0, 0, 0.7);
 }
-#col_cabecera{
-  border: 1px solid #5d0877;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  font-weight: bold;
-  font-size: larger;
+
+#vacantecontenedor:hover {
+  -webkit-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  transform: scale(1.01);
+  background: rgb(224, 224, 224);
 }
-#row_postulaciones{ 
-  margin: 0; 
-  padding: 0;
+
+#button_accion{
+  border:none; 
+  background-color: transparent;
 }
-#col_postulaciones{
-  border: 1px solid #5d0877;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+#button_accion:hover{
+color: #5d0877;
 }
+#button_accion:focus{
+  outline: none;
+}
+#button_modal{
+  min-width: 150px;
+  margin: 5px 5px 0px 5px;
+}
+#email_col{
+text-align: right;
+}
+@media (max-width: 767px){
+  #email_col{
+    text-align: left;
+  }
+}
+
+

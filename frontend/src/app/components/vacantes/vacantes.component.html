@@ -80,7 +80,7 @@
                             <div class="row">
                                 <div class="col-9">
                                     <h6 style="color: rgb(121, 24, 129);">
-                                        <strong>{{item.titulo_vacante}} {{item.n_postulaciones}}</strong>
+                                        <strong>{{item.titulo_vacante}} <label *ngIf="item.n_postulaciones>0">*</label></strong>
                                     </h6>
                                 </div>
                                 <div class="col-3">

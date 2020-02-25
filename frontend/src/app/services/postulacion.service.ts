@@ -15,6 +15,7 @@ export class PostulacionService {
   private endpointUrlGetPostPendientes = environment.hostUrl + 'postulacion/getPostulaciones.php';
   private endpointUrlDeletePostulacion = environment.hostUrl + 'postulacion/deletePostulacion.php';
   private endpointUrlGetPostulacionesPorVacante = environment.hostUrl + 'postulacion/get_postulacionesPorVacante.php';
+  private endpointUrlActualizarEstatusPostulaciones = environment.hostUrl +'postulacion/actualizarEstatusPostulacion.php';
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -32,6 +33,10 @@ export class PostulacionService {
 
   get_postulacionesPorVacante(id_vacante: number): Observable<ApiResponse<Postulacion[]>> {
     return this.http.post<ApiResponse<Postulacion[]>>(this.endpointUrlGetPostulacionesPorVacante, { id_vacante: id_vacante }, this.httpOptions);
+  }
+
+  actualizarEstatusPostulaciones(id_candidato: number, id_vacante: number, estatus: string): Observable<ApiResponse<Postulacion[]>> {
+    return this.http.post<ApiResponse<Postulacion[]>>(this.endpointUrlActualizarEstatusPostulaciones, { id_candidato: id_candidato, id_vacante: id_vacante, estatus: estatus }, this.httpOptions);
   }
 
 }

@@ -46,13 +46,30 @@ class Postulacion {
         $db = new Db();
         $conn = $db->getConn();
 
-        $stmt = $conn->prepare("SELECT * FROM bdt_bd.postulaciones_vacante WHERE id_vacante = ?");
+        $stmt = $conn->prepare("SELECT * FROM bdt_bd.postulaciones_vacante WHERE id_vacante = ? ORDER BY estatus");
         $stmt->bind_param('i', $id_vacante);
         $stmt->execute();
 
         $r = $db->readResult($stmt->get_result());
 
         return new SuccessResult("",$r);
+    }
+
+    public static function actualizarEstatusPostulacion($id_candidato,$id_vacante,$estatus){
+        $db = new Db();
+        $conn = $db->getConn();
+        $stmt = $conn->prepare("UPDATE postulados SET estatus = ? WHERE id_candidato = ? AND id_vacante = ?");
+        $stmt->bind_param("sii",$estatus,$id_candidato,$id_vacante);
+        $resultado = $stmt->execute();
+        if ($resultado==true) {
+            if($estatus == "A"){
+                return new SuccessResult("El candidato ha sido aceptado correctamente", true);
+            }
+            return new SuccessResult("El candidato ha sido rechazado correctamente", true);
+        }
+        else {
+            return new ErrorResult("Error de actualización. Intentelo más tarde", 501);
+        }
     }
 
 }
