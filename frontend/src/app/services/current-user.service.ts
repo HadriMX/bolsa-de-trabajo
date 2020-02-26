@@ -38,7 +38,7 @@ export class CurrentUserService {
     }
 
     let url = environment.hostUrl + 'whoami.php?phpsessid=' + this.getPhpsessid();
-    return this.http.get<ApiResponse<Usuario>>(url, this.httpOptions);
+    return this.http.get<ApiResponse<Usuario>>(url);
   }
 
   getUsuarioActual(): Usuario {
@@ -48,6 +48,15 @@ export class CurrentUserService {
 
     var currentUser = JSON.parse(this.cookies.get(this.CURRENT_USER_COOKIE));
     return currentUser;
+  }
+
+  getUsuarioFromVerification(codigoConfirmacion: string): Observable<ApiResponse<Usuario>> {
+    if (this.haySesionActiva()) {
+      return null;
+    }
+
+    let url = environment.hostUrl + 'get_user_from_verification.php?codigo_confirmacion=' + codigoConfirmacion;
+    return this.http.get<ApiResponse<Usuario>>(url);
   }
 
   getPhpsessid(): string {
@@ -60,8 +69,12 @@ export class CurrentUserService {
     return currentUser.phpsessid;
   }
 
-  agregarPhpsessidEnUrl(url: string): string {
-    return url + '?phpsessid=' + this.getPhpsessid();
+  agregarPhpsessidEnUrl(plainUrl: string): string {
+    let url = new URL(plainUrl);
+    let baseUrl = url.toString().replace(url.search, "");
+    let param = new URLSearchParams(url.search);
+    param.append("phpsessid", this.getPhpsessid());
+    return baseUrl + "?" + param.toString();
   }
 
   haySesionActiva(): boolean {

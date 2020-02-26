@@ -29,26 +29,7 @@ export class EditarempresaComponent implements OnInit {
   usuarioActual: Usuario;
   tiposEmpresa: TipoEmpresa[] = [];
 
-  infoEmpresa: Empresa = {
-    nombre_empresa: "",
-    rfc: "",
-    calle: "",
-    colonia: "",
-    cp: "",
-    ciudad: "",
-    id_municipio: 0,
-    id_entidad_federativa: 0,
-    id_tipo_empresa: 0,
-    telefono: "",
-    descripcion: "",
-    pagina_web: "",
-    logo: "",
-    nombre_persona_contacto: "",
-    telefono_contacto: "",
-    email_contacto: "",
-    id_tipo_usuario: 2,
-    fecha_ultima_modificacion: ""
-  }
+  infoEmpresa = new Empresa();
   
   constructor(
     private entidadFederativaService: EntidadesFederativasService,

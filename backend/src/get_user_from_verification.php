@@ -9,16 +9,13 @@ header("Allow: POST, OPTIONS");
 header("Content-Type: application/json; charset=utf-8");
 
 require_once 'core/cors.php';
+
 require_once 'autoload.inc.php';
-require_once 'core/session_starter.php';
+require_once 'core/sess_handler.php'; // esta línea es necesaria para sobreescribir la implementación de sesiones
 
-$newFileName = $_GET['rename'] ?? "";
-$noReplace = false;
+// session_start();
+$codigoConfirmacion = $_GET['codigo_confirmacion'] ?? "";
 
-if (isset($_GET['no_replace'])) {
-    $noReplace = $_GET['no_replace'] == "true" ? true : false;
-}
-
-$response = FileUpload::upload($_FILES['archivo'], $newFileName, $_SESSION["currentUser"]["id_usuario"], $noReplace);
+$response = Auth::getUserFromVerificationCode($codigoConfirmacion);
 
 echo json_encode($response);

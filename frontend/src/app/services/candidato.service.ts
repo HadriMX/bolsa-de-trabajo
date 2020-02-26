@@ -16,6 +16,7 @@ export class CandidatoService {
   private endpointUrlGetCandidatoInfoCompleta = environment.hostUrl + 'candidato/get_candidatoInfoCompleta.php';
   private endpointUrlGuardarInfoCandidato = environment.hostUrl + 'candidato/update_candidato.php';
   private endpointUrlUpdateEstatusCandidato = environment.hostUrl + 'candidato/updateEstatusCandidato.php';
+  private endpointUrlRegistrarCandidato = environment.hostUrl + 'candidato/registrar_candidato.php';
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -33,6 +34,10 @@ export class CandidatoService {
 
   update_estatusCandidato(estatus: string, id_usuario): Observable<ApiResponse<Candidato>> {
     return this.http.post<ApiResponse<Candidato>>(this.endpointUrlUpdateEstatusCandidato, { estatus: estatus, id_usuario: id_usuario }, this.httpOptions);
+  }
+
+  registrar_candidato(info: FormData): Observable<ApiResponse<Candidato>> {
+    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlRegistrarCandidato, info);
   }
 
 }
