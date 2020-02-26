@@ -12,6 +12,12 @@ import { EntidadesFederativasService } from 'src/app/services/entidades-federati
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Usuario } from 'src/app/models/usuario';
 import { VerificacionEmailService } from 'src/app/services/verificacion-email.service';
+import { TipoEmpresa } from 'src/app/models/tipoEmpresa';
+import { Empresa } from 'src/app/models/empresa';
+import { CatEmpresaService } from 'src/app/services/cat-empresa.service';
+import { EmpresaService } from 'src/app/services/empresa.service';
+import { Municipio } from 'src/app/models/municipio';
+import { MunicipioService } from 'src/app/services/municipio.service';
 
 @Component({
   selector: 'app-registro',
@@ -28,8 +34,11 @@ export class RegistroComponent implements OnInit, IAppPage {
 
   codigoConfirmacion: string;
   infoCandidato = new Candidato();
+  infoEmpresa = new Empresa();
+  tiposEmpresa: TipoEmpresa[] = [];
   gradosEstudio: GradoEstudio[] = [];
   entidadesFederativas: EntidadFederativa[] = [];
+  municipios: Municipio[] = [];
   uploadForm: FormGroup;
   user: Usuario;
 
@@ -38,6 +47,9 @@ export class RegistroComponent implements OnInit, IAppPage {
     private candidatoService: CandidatoService,
     private userService: CurrentUserService,
     private verificacionEmailService: VerificacionEmailService,
+    private empresaService: EmpresaService,
+    private categoriaEmpresaService: CatEmpresaService,
+    private municipioService: MunicipioService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder) { }
@@ -51,6 +63,7 @@ export class RegistroComponent implements OnInit, IAppPage {
 
     this.getEntidadesFederativas();
     this.getGradosEstudio();
+    this.getTipoEmpresas();
 
     this.verificacionEmailService.verificar(this.codigoConfirmacion).then(response => {
       if (response.success) {
@@ -96,6 +109,31 @@ export class RegistroComponent implements OnInit, IAppPage {
       });
   }
 
+  getTipoEmpresas() {
+    this.categoriaEmpresaService.get_categoriasEmpresa()
+      .subscribe((response) => {
+        if (response.success) {
+          this.tiposEmpresa = response.data;
+          // console.log(this.tiposEmpresa);
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
+  getMunicipios() {
+    this.municipioService.getMunicipios(this.infoEmpresa.id_entidad_federativa)
+      .subscribe((response) => {
+        if (response.success) {
+          this.municipios = response.data;
+        }
+        else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
+
   onFileSelectCurriculum(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -124,8 +162,28 @@ export class RegistroComponent implements OnInit, IAppPage {
           });
 
           this.router.navigateByUrl("/login");
+        } else {
+          Swal.fire("Error", response.message, 'error');
+        }
+      });
+  }
 
-          // this.getInfoUsuario();
+  onSubmitEmpresa() {
+    this.infoEmpresa.id_usuario = this.user.id_usuario;
+
+    this.empresaService.registrarEmpresa(this.infoEmpresa)
+      .subscribe((response) => {
+        if (response.success) {
+          Swal.fire({
+            title: "Éxito",
+            text: response.message,
+            type: "success",
+            focusConfirm: true,
+            confirmButtonText: "Aceptar",
+            confirmButtonColor: '#7A26D3'
+          });
+
+          this.router.navigateByUrl("/login");
         } else {
           Swal.fire("Error", response.message, 'error');
         }

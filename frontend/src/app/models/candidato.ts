@@ -1,4 +1,4 @@
-export class Candidato{
+export class Candidato {
     nombre: string;
     apellido1: string;
     apellido2: string;

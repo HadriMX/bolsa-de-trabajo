@@ -114,7 +114,7 @@ class Auth
         if ($usuario['id_tipo_usuario'] == 1) { // candidato
             $estatus = "N";
         } elseif ($usuario['id_tipo_usuario'] == 2) {   // empresa
-            $estatus = "A";
+            $estatus = "N";
         } elseif ($usuario['id_tipo_usuario'] == 0) {   // administrador
             $estatus = "A";
         } elseif ($usuario['id_tipo_usuario'] == 100) { // administrador auxiliar

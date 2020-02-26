@@ -330,7 +330,7 @@ class Candidato
         $stmt2->execute();
 
         if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("Has completado el registro completamente. El siguiente paso es esperar la autorización de tu registro por parte de un administrador.", true);
+            $output = new SuccessResult("Has completado el registro correctamente. El siguiente paso es esperar la autorización de tu registro por parte de un administrador.", true);
         } else {
             $output = new ErrorResult("Ocurrió un error inesperado. Inténtalo más tarde.", 555);
         }
