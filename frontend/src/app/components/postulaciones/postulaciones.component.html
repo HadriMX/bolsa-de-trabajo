@@ -52,7 +52,7 @@
           </div>
         </mat-tab>
         <mat-tab label="Postulaciones Aceptadas">
-          <div *ngIf="postulacionesAceptadas.length === 0">
+          <div *ngIf="postulacionesAceptadas.length === 0 && !isLoading">
             <div id="espacioNovacante">
               <div id="espacioAviso">
                 <h4>Aún no tienes postulaciones aceptadas</h4>

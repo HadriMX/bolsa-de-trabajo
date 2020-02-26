@@ -116,7 +116,6 @@
             <div class="row">
                 <div class="col mx-1">
                     <!-- EMPIEZAN VACANTES -->
-                    <!-- items que estan siendo paginados -->
                     <div *ngFor="let item of pagedItems" id="vacantecontenedor" class="my-3 py-2">
                         <div id="vacantesmenu" (click)="mostrarDetalleVacante(item)" data-toggle="modal"
                             data-target="#datosvacantes">
@@ -265,17 +264,16 @@
 
 <!--===============================================================================================-->
 
-<p-dialog header="¿Por qué vas a eliminar esta vacante?" [(visible)]="displayDialogEliminarVacante" [focusOnShow]="false" [responsive]="true"
-    showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+<p-dialog header="¿Por qué vas a eliminar esta vacante?" [(visible)]="displayDialogEliminarVacante"
+    [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
     <div class="ui-g ui-fluid">
         <div class="ui-g-12">
-                <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+            <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
         </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="fa fa-check" label="Guardar" class="btneditar">
-            </button>
+            <button type="button" pButton icon="fa fa-check" label="Guardar"></button>
         </div>
     </p-footer>
 </p-dialog>

@@ -15,6 +15,9 @@ export class VacantesService {
   private endpointUrlBusquedaVacante = environment.hostUrl + 'vacante/busqueda_vacante.php';
   private endpointUrlGetMisVacantes = environment.hostUrl + 'vacante/get_mis_vacantes.php';
   private endpointUrlAddVacante = environment.hostUrl + 'vacante/add_vacante.php';
+  private endpointUrlComprobarPertenenciaVacante = environment.hostUrl + 'vacante/comprobarPertenenciaVacante.php';
+  private endpointUrlCerrarVacante = environment.hostUrl + 'vacante/cerrar_vacante.php';
+  private endpointUrlAbrirVacante = environment.hostUrl + 'vacante/abrir_vacante.php';
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -22,8 +25,8 @@ export class VacantesService {
     return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrlBusquedaVacante, busqueda, this.httpOptions);
   }
 
-  getMisVacantes(): Observable<ApiResponse<Vacante[]>> {
-    return this.http.get<ApiResponse<Vacante[]>>(this.endpointUrlGetMisVacantes, this.httpOptions);
+  getMisVacantes(estatus:string): Observable<ApiResponse<Vacante[]>> {
+    return this.http.post<ApiResponse<Vacante[]>>(this.endpointUrlGetMisVacantes, {estatus:estatus},this.httpOptions);
   }
 
   addVacante(vacante: Vacante): Observable<ApiResponse<Vacante>> {
@@ -31,8 +34,15 @@ export class VacantesService {
   }
 
   comprobarPertenenciaVacante(id_vacante: number): Observable<ApiResponse<Vacante>> {
-    let url = environment.hostUrl + 'vacante/comprobarPertenenciaVacante.php';
-    return this.http.post<ApiResponse<Vacante>>(url, { id_vacante: id_vacante }, this.httpOptions);
+    return this.http.post<ApiResponse<Vacante>>(this.endpointUrlComprobarPertenenciaVacante, { id_vacante: id_vacante }, this.httpOptions);
+  }
+
+  cerrarVacante(id_vacante: number): Observable<ApiResponse<Vacante>>{
+    return this.http.post<ApiResponse<Vacante>>(this.endpointUrlCerrarVacante, {id_vacante:id_vacante}, this.httpOptions);
+  }
+
+  abrirVacante(id_vacante: number): Observable<ApiResponse<Vacante>>{
+    return this.http.post<ApiResponse<Vacante>>(this.endpointUrlAbrirVacante, {id_vacante:id_vacante}, this.httpOptions);
   }
 
 }

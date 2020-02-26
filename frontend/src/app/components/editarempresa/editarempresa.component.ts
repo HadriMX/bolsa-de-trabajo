@@ -60,9 +60,6 @@ export class EditarempresaComponent implements OnInit {
   }
 
   getMunicipios() {
-    //  if(this.infoEmpresa.id_municipio == null){
-    //      this.infoEmpresa.id_municipio = 0;
-    //  }
     this.municipioService.getMunicipios(this.infoEmpresa.id_entidad_federativa)
       .subscribe((response) => {
         if (response.success) {
@@ -71,6 +68,7 @@ export class EditarempresaComponent implements OnInit {
         else {
           Swal.fire("Error", response.message, 'error');
         }
+        this.isLoading = false;
       });
   }
 
@@ -79,7 +77,6 @@ export class EditarempresaComponent implements OnInit {
     .subscribe((response) => {
       if (response.success) {
         this.tiposEmpresa = response.data;
-        // console.log(this.tiposEmpresa);
       }
       else {
         Swal.fire("Error", response.message, 'error');
@@ -93,14 +90,12 @@ export class EditarempresaComponent implements OnInit {
       .subscribe((response) => {
         if (response.success) {
           this.infoEmpresa = response.data;
-          // console.log(this.infoEmpresa);
           this.getMunicipios();
-          // console.log(this.infoEmpresa);
         }
         else {
           Swal.fire("Error", response.message, 'error');
         }
-        this.isLoading = false;
+        
       });
   }
 

@@ -13,4 +13,8 @@ require_once '../core/cors.php';
 require_once '../autoload.inc.php';
 require_once '../core/session_starter_empresa.php';
 
-echo json_encode(Vacante::get_mis_vacantes());
+
+$post = json_decode(file_get_contents("php://input"));
+$estatus = $post->estatus;
+
+echo json_encode(Vacante::get_mis_vacantes($estatus));

@@ -19,7 +19,8 @@ class Vacante
         $direccion = $vacante['direccion'];
         $id_entidad_federativa = $vacante['id_entidad_federativa'];
 
-        $stmt->bind_param("sisssidssi",
+        $stmt->bind_param(
+            "sisssidssi",
             $titulo_vacante,
             $id_usuario,
             $puesto,
@@ -45,36 +46,71 @@ class Vacante
         return $output;
     }
 
-    public static function get_mis_vacantes()
+    public static function get_mis_vacantes($estatus)
     {
         $db = new Db();
         $conn = $db->getConn();
 
         $id_empresa = $_SESSION['currentUser']['id_usuario'];
 
-        $stmt = $conn->prepare("SELECT * FROM vacantesvista WHERE estatus = 'A' AND id_empresa = ?");
-        $stmt->bind_param("i", $id_empresa);
+        $stmt = $conn->prepare("SELECT * FROM vacantesvista WHERE id_empresa = ? AND estatus = ?");
+        $stmt->bind_param("is", $id_empresa, $estatus);
         $stmt->execute();
         $r = $db->readResult($stmt->get_result());
 
         return new SuccessResult("", $r);
     }
 
-    public static function comprobarPertenenciaVacante($id_empresa, $id_vacante){
+    public static function comprobarPertenenciaVacante($id_empresa, $id_vacante)
+    {
         $db = new Db();
         $conn = $db->getConn();
 
-        $stmt = $conn->prepare("SELECT * FROM vacantesvista WHERE estatus = 'A' AND id_vacante = ? AND id_empresa = ?");
+        $stmt = $conn->prepare("SELECT * FROM bdt_bd.vacantesvista WHERE id_vacante = ? AND id_empresa = ?");
         $stmt->bind_param('ii', $id_vacante, $id_empresa);
         $stmt->execute();
-        
+
         $r = $db->readResult($stmt->get_result());
         if (empty($r)) {
             return new ErrorResult("Acceso denegado", 404);
         }
-        
-        return new SuccessResult("",$r[0]);
+
+        return new SuccessResult("", $r[0]);
     }
 
+    public static function cerrarVacante($id_empresa, $id_vacante)
+    {
+        $db = new Db();
+        $conn = $db->getConn();
 
+        $stmt = $conn->prepare("UPDATE vacantes SET estatus='B' WHERE id_vacante = ? AND id_usuario = ?");
+        $stmt->bind_param('ii', $id_vacante, $id_empresa);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $output = new SuccessResult("La vacante ha sido cerrada. Se les avisará a los candidatos que se hayan postulado en esta vacante via email", true);
+        } else {
+            $output = new ErrorResult("Hubo un error al cerrar la vacante. Intentelo más tarde", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
+
+    public static function abrirVacante($id_empresa, $id_vacante)
+    {
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("UPDATE vacantes SET estatus='A' WHERE id_vacante = ? AND id_usuario = ?");
+        $stmt->bind_param('ii', $id_vacante, $id_empresa);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $output = new SuccessResult("La vacante ha sido reabierta correctamente", true);
+        } else {
+            $output = new ErrorResult("Hubo un error al abrir la vacante. Intentelo más tarde", 515);
+        }
+        $stmt->close();
+        return $output;
+    }
 }

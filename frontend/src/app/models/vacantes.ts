@@ -16,8 +16,6 @@ export class Vacante {
     id_entidad_federativa: number;
     entidad_federativa: string;
     estatus: string;
-    // categoria: string;   FALTAN EN LA BD AL REGRISTRAR VACANTE
-    // subcategoria: string;
 
     constructor() {
         this.titulo_vacante = '';
