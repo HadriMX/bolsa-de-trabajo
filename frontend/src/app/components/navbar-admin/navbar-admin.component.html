@@ -54,7 +54,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
           <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" routerLink="/menu">Menú principal</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" routerLink="/administracion">Menú
+          <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" style="cursor: pointer;" (click)="estado(0)">Menú
             administrativo</a>
           <a class="dropdown-item" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
         </div>

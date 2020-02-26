@@ -11,11 +11,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CandidatoService {
+  numero:Number;
 
   private endpointUrlGetCandidatos = environment.hostUrl + 'candidato/get_candidato.php';
   private endpointUrlGetCandidatoInfoCompleta = environment.hostUrl + 'candidato/get_candidatoInfoCompleta.php';
   private endpointUrlGuardarInfoCandidato = environment.hostUrl + 'candidato/update_candidato.php';
   private endpointUrlUpdateEstatusCandidato = environment.hostUrl + 'candidato/updateEstatusCandidato.php';
+  private endpointUrlNumeroUsuarios= environment.hostUrl+'candidato/get_numero_usuarios.php';
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -33,6 +35,10 @@ export class CandidatoService {
 
   update_estatusCandidato(estatus: string, id_usuario): Observable<ApiResponse<Candidato>> {
     return this.http.post<ApiResponse<Candidato>>(this.endpointUrlUpdateEstatusCandidato, { estatus: estatus, id_usuario: id_usuario }, this.httpOptions);
+  }
+
+  get_numero_usuarios(estatus:string,id_tipo_usuario): Observable<ApiResponse<number>> {
+    return this.http.post<ApiResponse<number>>(this.endpointUrlNumeroUsuarios, { estatus: estatus, id_tipo_usuario: id_tipo_usuario }, this.httpOptions);
   }
 
 }

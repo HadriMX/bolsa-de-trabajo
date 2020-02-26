@@ -24,7 +24,9 @@ import {
 import { CurrentUserService } from "src/app/services/current-user.service";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { Candidato } from "src/app/models/candidato";
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
+
 
 @Component({
   selector: "app-administrador",
@@ -100,8 +102,38 @@ export class AdministradorComponent implements OnInit {
   usuario: boolean;
   btncerrar_area: boolean;
   opc: any;
-  // variables del dashboard
 
+  
+
+  // variables del dashboard
+  numeroCandidatosActivas:number;
+  numeroEmpresasActivas:number;
+  numeroCandidatosInactivos:number;
+  numeroEmpresasInactivas:number;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: { xAxes: [{}], yAxes: [{  }] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = ['Candidatos', 'Empresas'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData: ChartDataSets[] = [
+    { data: [0,0], label: 'Activos' },
+    { data: [0,0], label: 'Inactivos' }
+  ];
+  public barChartColors: Color[] = [
+    { backgroundColor: '#944BD6' },
+    { backgroundColor: '#D09FE1' },
+  ];
+
+
+  //
   Confirmar:string ="";
   columnasCategoria: any[];
   columnasArea: any[];
@@ -194,6 +226,9 @@ export class AdministradorComponent implements OnInit {
     this.getCandidatos("Alta");
     this.getAuxiliares("A");
     this.getEmpresas("Alta");
+   this.estado=0;
+    
+ 
 
     this.columnasCategoria = [
       { field: "nombre_empresa", header: "Nombre" },
@@ -737,104 +772,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   categorias(numero: number) {
-    //numero= this.navBarComponentAdmin.numero;
-    this.inputbooleano = false;
-    // Se selecciona Categorias de las empresas
-    if (numero === 1) {
-      if (this.estado === 1) {
-        this.estado = 0;
-        $("#categoriaboton").css("border-bottom", "transparent");
-      } else {
-        $("#categoriaboton").css("border-bottom", "1px solid white");
-        $("#areas,#usuarios,#usuariosactivos,#Auxiliares,#vacantesadmin").css(
-          "border-bottom",
-          "transparent"
-        );
-        this.estado = 1;
-        this.opc = numero;
-        this.estadoimagen = false;
-      }
-      // Se selecciona Aareas de estudio
-    } else if (numero === 2) {
-      if (this.estado === 2) {
-        this.estado = 0;
-        $("#areas").css("border-bottom", "transparent");
-      } else {
-        $("#areas").css("border-bottom", "1px solid white");
-        $(
-          "#usuarios,#categoriaboton,#usuariosactivos,#Auxiliares,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        this.estadoimagen = false;
-        this.estado = 2;
-        this.opc = numero;
-      }
-      //Se selecciona las solicitudes de los usuarios
-    } else if (numero == 3) {
-      if (this.estado === 3) {
-        this.estado = 0;
-        $("#usuarios").css("border-bottom", "transparent");
-      } else {
-        $("#usuarios").css("border-bottom", "1px solid white");
-        $(
-          "#areas,#categoriaboton,#usuariosactivos,#Auxiliares,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        this.estado = 3;
-        this.estadoimagen = false;
-      }
-      //Se selecciona el apartado de usuarios candidatos registrados
-    } else if (numero === 4) {
-      if (this.estado === 4) {
-        this.estado = 0;
-        $("#usuariosactivos").css("border-bottom", "transparent");
-      } else {
-        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css(
-          "border-bottom",
-          "transparent"
-        );
-        $("#usuariosactivos").css("border-bottom", "1px solid white");
-        this.opc = numero;
-        this.estadoimagen = false;
-        this.estado = 4;
-      }
-    } else if (numero === 5) {
-      if (this.estado === 5) {
-        this.estado = 0;
-        $("#empresasActivas").css("border-bottom", "transparent");
-      } else {
-        $(
-          "#empresasActivas,#areas,#categoriaboton,#Auxiliares,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        $("#empresasActivas").css("border-bottom", "1px solid white");
-        this.opc = numero;
-        this.estadoimagen = false;
-        this.estado = 5;
-      }
-    } else if (numero == 6) {
-      if (this.estado === 6) {
-        this.estado = 0;
-        $("#vacantesadmin").css("border-bottom", "transparent");
-      } else {
-        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#usuariosactivos").css(
-          "border-bottom",
-          "transparent"
-        );
-        $("#vacantesadmin").css("border-bottom", "1px solid white");
-        this.estadoimagen = false;
-        this.estado = 6;
-      }
-    } else if (numero == 7) {
-      if (this.estado === 7) {
-        this.estado = 0;
-        $("#Auxiliares").css("border-bottom", "transparent");
-      } else {
-        $(
-          "#usuarios,#areas,#categoriaboton,#usuariosactivos,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        $("#Auxiliares").css("border-bottom", "1px solid white");
-        this.estadoimagen = false;
-        this.estado = 7;
-      }
-    }
+    this.estado=numero;
   }
   inputeffec() {
     if (this.inputbooleano === false) {
@@ -871,5 +809,33 @@ export class AdministradorComponent implements OnInit {
   // aqui comienza el codigo para el dashboard
   dashboard() {
     // aqui va el codigo para el dashboard
+   
+  }
+
+  getNumCandidatos(estatus:string,id_tipo_usuario:number){
+    this.candidatoService.get_numero_usuarios(estatus,id_tipo_usuario).subscribe(response => {
+      if (response.success) {
+        if(estatus=='A' && id_tipo_usuario==1){
+          this.numeroCandidatosActivas=response.data;
+          this.numeroCandidatosActivas= this.numeroCandidatosActivas[0]["COUNT(id_usuario  )"];
+          console.log(this.numeroCandidatosActivas);
+        }else if(estatus=='B'&& id_tipo_usuario==1){
+          this.numeroCandidatosInactivos=response.data;
+          this.numeroCandidatosInactivos= this.numeroCandidatosInactivos[0]["COUNT(id_usuario  )"];
+        }else if(estatus=='A' && id_tipo_usuario==2){
+          this.numeroEmpresasActivas=response.data;
+          this.numeroEmpresasActivas= this.numeroEmpresasActivas[0]["COUNT(id_usuario  )"];
+        }else if(estatus=='B' && id_tipo_usuario==2){
+          this.numeroEmpresasInactivas=response.data;
+          this.numeroEmpresasInactivas= this.numeroEmpresasInactivas[0]["COUNT(id_usuario  )"];
+        }
+      } else {
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
+      }
+    });
+    this.barChartData=[{data: [this.numeroCandidatosActivas, this.numeroEmpresasActivas], label: 'Activos'},
+                      {data:[this.numeroCandidatosInactivos,this.numeroEmpresasInactivas],label:'Inactivos'}];
   }
 }

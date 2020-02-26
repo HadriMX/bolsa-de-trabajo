@@ -31,6 +31,8 @@ import {
   MatButtonModule, MatTabsModule, MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule, MatSlideToggleModule, MatSlideToggle
 } from "@angular/material";
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label, ChartsModule } from 'ng2-charts';
 
 import { TableModule } from 'primeng/table'
 import { DialogModule } from 'primeng/dialog';
@@ -127,7 +129,8 @@ const routes: Routes = [
     InputTextModule,
     MessageModule,
     TabViewModule,
-    DropdownModule
+    DropdownModule,
+    ChartsModule,
   ],
   exports: [
     RouterModule

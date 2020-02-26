@@ -2,6 +2,87 @@
   <app-navbar-admin></app-navbar-admin>
   <!-- En esta parte comienza el cuerpo de la pagina -->
 
+  <div class="container" *ngIf="estado===0">
+
+
+    <div class="row">
+      <div class="col-xl-3 col-md-6 mb-4" id="contenedorCard" style="margin-top: 1%; margin-left: 5%;"
+        (click)="categorias(3)">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="font-weight-bold">Solicitudes pendientes</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+              </div>
+              <div class="col-auto">
+                <i class="fa fa-address-card-o fa-3x" style="color: gray;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6 mb-4" style="margin-top: 1%; margin-left: 5%;">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="font-weight-bold">Vacantes abiertas</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+              </div>
+              <div class="col-auto">
+                <i class="fa fa-briefcase fa-3x" style="color: gray;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6 mb-4" id="contenedorCard" style="margin-top: 1%; margin-left: 5%;"
+        (click)="categorias(7)">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="font-weight-bold">Auxiliares administrativos</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+              </div>
+              <div class="col-auto">
+                <i class="fa fa-user fa-3x" style="color: gray;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--  -->
+
+    <div class="col-xl-8 col-lg-7" id="grafica1">
+      <div class="card shadow mb-4">
+        <!-- Card Header -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="font-weight-bold" style="text-align: center;">Usuarios</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+              [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColors">
+            </canvas>
+            <button mat-button mat-raised-button color="primary"
+              (click)="getNumCandidatos('A',1);getNumCandidatos('A',2);getNumCandidatos('B',1);getNumCandidatos('B',2)">Actualizar
+              datos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
   <div class="container">
     <div *ngIf="estado===7">
       <p-tabView>
@@ -344,14 +425,19 @@
                         <b>Area de estudio:</b> {{rowData.areaestudio}}
                       </div>
                       <div class="ui-g-12">
-                        <button (click)="verArchivo(rowData.ruta_cv)" class="btn btn-primary">Ver curriclum</button>
-                      </div>
-                      <div class="ui-g-12">
-                        <button (click)="verArchivo(rowData.ruta_id)" class="btn btn-primary">Ver
-                          identificación</button>
-                      </div>
-                      <div class="ui-g-12">
-                        <button (click)="verArchivo(rowData.ruta_curp)" class="btn btn-primary">Ver CURP</button>
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12 col-12" style="text-align: left;">
+                            <label for="" style="font-weight: bolder;">Documentos</label>
+                          </div>
+                          <div class="col-lg-12 col-sm-12 col-12" style="text-align: left;">
+                            <button (click)="verArchivo(rowData.ruta_curp)" class="btn btn-primary"
+                              id="button_modal">Curp</button>
+                            <button (click)="verArchivo(rowData.ruta_cv)" class="btn btn-primary"
+                              id="button_modal">Curriculum</button>
+                            <button (click)="verArchivo(rowData.ruta_id)" class="btn btn-primary"
+                              id="button_modal">Identificación</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
