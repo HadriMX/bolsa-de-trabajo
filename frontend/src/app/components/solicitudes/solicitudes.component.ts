@@ -4,6 +4,8 @@ import { SolicitudService } from "../../services/solicitud.service";
 import { CandidatoService } from "src/app/services/candidato.service";
 
 import Swal from "sweetalert2";
+import { CurrentUserService } from 'src/app/services/current-user.service';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: "app-solicitudes",
@@ -11,6 +13,7 @@ import Swal from "sweetalert2";
   styleUrls: ["./solicitudes.component.css"]
 })
 export class SolicitudesComponent implements OnInit {
+  public usuarioActual:Usuario;
   columnasSolicitud: any[];
   datos_solicitud: any[];
   loading:boolean;
@@ -54,7 +57,8 @@ export class SolicitudesComponent implements OnInit {
 
   constructor(
     private solicitudService: SolicitudService,
-    private candidatoService: CandidatoService
+    private candidatoService: CandidatoService,
+    private currentUserService: CurrentUserService,
   ) {}
 
   ngOnInit() {
@@ -63,7 +67,7 @@ export class SolicitudesComponent implements OnInit {
       { field: "edad", header: "Edad" },
       { field: "genero", header: "Genero" }
     ];
-
+    this.usuarioActual = this.currentUserService.getUsuarioActual();
     this.getSolicitudes();
   }
 

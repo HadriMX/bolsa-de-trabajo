@@ -2,6 +2,10 @@
   <a class="navbar-brand" routerLink="/menu">
     <img src="/assets/logo-volar.png" alt="Logo Volar">
   </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav">
       <div class="dropdown show">
@@ -10,23 +14,32 @@
           <span style="color: white;">Usuarios</span>
         </a>
         <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(7)">Auxiliares administrativos</a>
-          <a  class="dropdown-item" routerLink="/solicitudes">Solicitudes</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(4)">Candidatos</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(5)">Empresas</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" routerLink="/vacantes">Vacantes</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" style="cursor: pointer"
+            (click)="estado(7)">Auxiliares administrativos</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" style="cursor: pointer"
+            (click)="estado(3)">Solicitudes</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==100" class="dropdown-item" style="cursor: pointer"
+            routerLink="/solicitudes">Solicitudes</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" style="cursor: pointer"
+            (click)="estado(4)">Candidatos</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" style="cursor: pointer"
+            (click)="estado(5)">Empresas</a>
         </div>
       </div>
     </ul>
+  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 62%;">
     <ul class="navbar-nav">
       <div class="dropdown show">
-        <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-toggle link-no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" style="margin-left: 10%;">
+        <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-toggle link-no-underline" href="#" role="button"
+          id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span style="color: white;">Catálogos</span>
         </a>
         <div class="dropdown-menu dropdown-menu-left dropdown-content" aria-labelledby="dropdownMenuLink">
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(1)">Categorías de empresas</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" (click)="estado(2)">Áreas de estudio</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" style="cursor: pointer"
+            (click)="estado(1)">Categorías de empresas</a>
+          <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" style="cursor: pointer"
+            (click)="estado(2)">Áreas de estudio</a>
         </div>
       </div>
     </ul>
@@ -41,7 +54,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right dropdown-content" aria-labelledby="dropdownMenuLink">
           <a *ngIf="usuarioActual.id_tipo_usuario ==0" class="dropdown-item" routerLink="/menu">Menú principal</a>
-          <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" routerLink="/administracion">Menú
+          <a *ngIf="usuarioActual.id_tipo_usuario == 0" class="dropdown-item" style="cursor: pointer;" (click)="estado(0)">Menú
             administrativo</a>
           <a class="dropdown-item" (click)="logout()" style="cursor: pointer">Cerrar sesión</a>
         </div>

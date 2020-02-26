@@ -142,83 +142,6 @@ class Candidato
         return new SuccessResult("", $candidato);
     }
 
-    public static function delete(int $id_usuario)
-    {
-        $db = new Db();
-        $conn = $db->getConn();
-
-        $stmt = $conn->prepare("UPDATE usuarios SET estatus='B' where id_usuario = ?");
-        $stmt->bind_param('i', $id_usuario);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("La cuenta del candidato ha sido desactivada", true);
-        } else {
-            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
-        }
-
-        $stmt->close();
-
-        return $output;
-    }
-
-    public static function reactivar(int $id_usuario)
-    {
-        $db = new Db();
-        $conn = $db->getConn();
-
-        $stmt = $conn->prepare("UPDATE usuarios SET estatus='A' where id_usuario = ?");
-        $stmt->bind_param('i', $id_usuario);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("La cuenta del candidato ha sido activada nuevamente", true);
-        } else {
-            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
-        }
-
-        $stmt->close();
-
-        return $output;
-    }
-
-    public static function aceptarCandidato(int $id_usuario)
-    {
-        $db = new Db();
-        $conn = $db->getConn();
-
-        $stmt = $conn->prepare("UPDATE usuarios SET estatus='I' where id_usuario = ?");
-        $stmt->bind_param('i', $id_usuario);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("Candidato aceptado", true);
-        } else {
-            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
-        }
-        $stmt->close();
-        return $output;
-    }
-
-    public static function rechazarCandidato(int $id_usuario)
-    {
-        $db = new Db();
-        $conn = $db->getConn();
-
-        $stmt = $conn->prepare("UPDATE usuarios SET estatus='R' where id_usuario = ?");
-        $stmt->bind_param('i', $id_usuario);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("Candidato rechazado", true);
-        } else {
-            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
-        }
-        $stmt->close();
-        return $output;
-    }
-
-
     public static function updateEstatusCandidato($estatus, $id_usuario)
     {
         $db = new Db();
@@ -227,8 +150,6 @@ class Candidato
         $stmt = $conn->prepare("UPDATE usuarios SET estatus=? WHERE id_usuario = ?");
         $stmt->bind_param('si', $estatus, $id_usuario);
         $stmt->execute();
-
-
 
         if ($stmt->affected_rows > 0) {
             if ($estatus == "R") {
@@ -339,5 +260,16 @@ class Candidato
         $stmt2->close();
 
         return $output;
+    }
+
+    public static function numeroUsuarios($estatus,$id_tipo_usuario){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("SELECT COUNT(id_usuario) from usuarios WHERE estatus =? AND id_tipo_usuario=?");
+        $stmt->bind_param('si', $estatus,$id_tipo_usuario);
+        $stmt->execute();
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("", $r);
     }
 }

@@ -124,3 +124,16 @@ body
   background-size: cover;
   min-height: 120vh;
 }
+
+
+:host::ng-deep .ui-datatable table {
+  table-layout: auto;
+  
+}
+
+
+@media (max-width: 1000px) and (min-width: 415px) {
+  :host::ng-deep .ui-table .ui-table-tbody > tr > td {
+    word-break : break-all;
+  }
+}

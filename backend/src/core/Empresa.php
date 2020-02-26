@@ -154,48 +154,7 @@ class Empresa
         return new SuccessResult("", $r[0]);
     }
 
-    public static function delete_empresa(int $id_usuario)
-    {
-        $db = new Db();
-        $conn = $db->getConn();
-
-        $stmt = $conn->prepare("UPDATE usuarios SET estatus='B' where id_usuario = ?");
-        $stmt->bind_param('i', $id_usuario);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("La cuenta de la empresa ha sido desactivada", true);
-        } else {
-            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
-        }
-
-        $stmt->close();
-
-        return $output;
-    }
-
-    public static function reactivar_empresa(int $id_usuario)
-    {
-        $db = new Db();
-        $conn = $db->getConn();
-
-        $stmt = $conn->prepare("UPDATE usuarios SET estatus='A' where id_usuario = ?");
-        $stmt->bind_param('i', $id_usuario);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            $output = new SuccessResult("La cuenta de la empresa ha sido activada nuevamente", true);
-        } else {
-            $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
-        }
-
-        $stmt->close();
-
-        return $output;
-    }
-
-    public static function updateEstatusEmpresa($estatus, $id_usuario)
-    {
+    public static function updateEstatusEmpresa($estatus,$id_usuario){
         $db = new Db();
         $conn = $db->getConn();
 

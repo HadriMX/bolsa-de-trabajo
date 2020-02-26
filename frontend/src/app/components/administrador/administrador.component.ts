@@ -24,7 +24,9 @@ import {
 import { CurrentUserService } from "src/app/services/current-user.service";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { Candidato } from 'src/app/models/candidato';
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label, Color } from 'ng2-charts';
+
 
 @Component({
   selector: "app-administrador",
@@ -86,7 +88,7 @@ export class AdministradorComponent implements OnInit {
   reporte_area: any[];
   datos = [1, 2, 3, 4, 5, 6];
 
-  activos:boolean;
+  activos: boolean;
 
   estadoimagen = false;
   titulo: string;
@@ -100,13 +102,39 @@ export class AdministradorComponent implements OnInit {
   usuario: boolean;
   btncerrar_area: boolean;
   opc: any;
-  // variables del dashboard
-
-
-
-
 
   
+
+  // variables del dashboard
+  numeroCandidatosActivas:number;
+  numeroEmpresasActivas:number;
+  numeroCandidatosInactivos:number;
+  numeroEmpresasInactivas:number;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    scales: { xAxes: [{}], yAxes: [{  }] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = ['Candidatos', 'Empresas'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData: ChartDataSets[] = [
+    { data: [0,0], label: 'Activos' },
+    { data: [0,0], label: 'Inactivos' }
+  ];
+  public barChartColors: Color[] = [
+    { backgroundColor: '#944BD6' },
+    { backgroundColor: '#D09FE1' },
+  ];
+
+
+  //
+  Confirmar:string ="";
   columnasCategoria: any[];
   columnasArea: any[];
   columnasCandidato: any[];
@@ -134,7 +162,6 @@ export class AdministradorComponent implements OnInit {
     estatus: ""
   };
 
-  
   inputbooleano: boolean = false;
 
   swalWithBootstrapButtons = Swal.mixin({
@@ -142,6 +169,26 @@ export class AdministradorComponent implements OnInit {
     buttonsStyling: true,
     confirmButtonColor: "#7A26D3",
     cancelButtonColor: "white"
+  });
+  swalWithBootstrapButtonsCorrecto = Swal.mixin({
+    customClass: {},
+    buttonsStyling: true,
+    confirmButtonColor: "#7A26D3",
+    cancelButtonColor: "white",
+    showCancelButton: false,
+    confirmButtonText: "Entendido",
+    title: "Correcto",
+    type: "success"
+  });
+  swalWithBootstrapButtonsError = Swal.mixin({
+    customClass: {},
+    buttonsStyling: true,
+    confirmButtonColor: "#7A26D3",
+    cancelButtonColor: "white",
+    showCancelButton: false,
+    confirmButtonText: "Entendido",
+    title: "Error",
+    type: "error"
   });
 
   // variales para las vacantes
@@ -179,6 +226,9 @@ export class AdministradorComponent implements OnInit {
     this.getCandidatos("Alta");
     this.getAuxiliares("A");
     this.getEmpresas("Alta");
+   this.estado=0;
+    
+ 
 
     this.columnasCategoria = [
       { field: "nombre_empresa", header: "Nombre" },
@@ -230,17 +280,23 @@ export class AdministradorComponent implements OnInit {
   add_areaEstudio() {
     const nombre = $("#nomArea").val();
     if (nombre === "") {
-      Swal.fire("Error", "No ingreso ningun valor", "error");
+      this.swalWithBootstrapButtonsError.fire({
+        text: "No ingreso ningun valor."
+      });
     } else {
       this.areaService.add_area(this.nuevaArea).subscribe(response => {
         if (response.success) {
-          Swal.fire("correcto", "response.message", "success");
+          this.swalWithBootstrapButtonsCorrecto.fire({
+            text: response.message
+          });
           this.datosArea.push(nombre);
           this.getAreas();
           this.displayDialogArea = false;
           $("#nomArea").val("");
         } else {
-          Swal.fire("Error", response.message, "error");
+          this.swalWithBootstrapButtonsError.fire({
+            text: response.message
+          });
         }
       });
     }
@@ -249,19 +305,25 @@ export class AdministradorComponent implements OnInit {
   add_CategoriaEmpresa() {
     const nombre = $("#nomCategoria").val();
     if (nombre === "") {
-      Swal.fire("Error", "No ingreso ningun valor", "error");
+      this.swalWithBootstrapButtonsError.fire({
+        text: "No ingreso ningun valor."
+      });
     } else {
       this.categoriaService
         .add_categoria(this.nuevaCategoria)
         .subscribe(response => {
           if (response.success) {
-            Swal.fire("Correcto", response.message, "success");
+            this.swalWithBootstrapButtonsCorrecto.fire({
+              text: response.message
+            });
             this.datosCategoria.push(nombre);
             this.getCategorias();
             this.displayDialogCategoria = false;
             $("#nomCategoria").val("");
           } else {
-            Swal.fire("Error", response.message, "error");
+            this.swalWithBootstrapButtonsError.fire({
+              text: response.message
+            });
           }
         });
     }
@@ -272,15 +334,16 @@ export class AdministradorComponent implements OnInit {
       .registrar(this.auxiliarAdministrativo)
       .subscribe(response => {
         if (response.success) {
-          Swal.fire(
-            "Cuenta creada",
-            "Auxiliar administrativo registrado exitosamente",
-            "success"
-          );
+          this.swalWithBootstrapButtonsCorrecto.fire({
+            title: "Correcto",
+            text: "Cuenta auxiliar creada con exito"
+          });
           this.auxiliarAdministrativo.email = "";
           this.auxiliarAdministrativo.password = "";
         } else {
-          Swal.fire("Error", response.message, "error");
+          this.swalWithBootstrapButtonsError.fire({
+            text: response.message
+          });
         }
       });
   }
@@ -291,7 +354,9 @@ export class AdministradorComponent implements OnInit {
       if (response.success) {
         this.datosArea = response.data;
       } else {
-        Swal.fire("Error", response.message, "error");
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
       }
     });
   }
@@ -301,7 +366,9 @@ export class AdministradorComponent implements OnInit {
       if (response.success) {
         this.reporte_area = response.data;
       } else {
-        Swal.fire("Error", response.message, "error");
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
       }
     });
   }
@@ -318,7 +385,9 @@ export class AdministradorComponent implements OnInit {
       if (response.success) {
         this.datosAuxiliares = response.data;
       } else {
-        Swal.fire("Error", response.message, "error");
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
       }
       this.loading = false;
     });
@@ -329,7 +398,9 @@ export class AdministradorComponent implements OnInit {
       if (response.success) {
         this.datosCategoria = response.data;
       } else {
-        Swal.fire("Error", response.message, "error");
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
       }
     });
   }
@@ -339,7 +410,9 @@ export class AdministradorComponent implements OnInit {
       if (response.success) {
         this.reporte_categoria = response.data;
       } else {
-        Swal.fire("Error", response.message, "error");
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
       }
     });
   }
@@ -356,7 +429,9 @@ export class AdministradorComponent implements OnInit {
       if (response.success) {
         this.datosCandidato = response.data;
       } else {
-        Swal.fire("Error", response.message, "error");
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
       }
       this.loading = false;
     });
@@ -374,7 +449,9 @@ export class AdministradorComponent implements OnInit {
       if (response.success) {
         this.datosEmpresa = response.data;
       } else {
-        Swal.fire("Error", response.message, "error");
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
       }
       this.loading = false;
     });
@@ -388,8 +465,8 @@ export class AdministradorComponent implements OnInit {
     this.infoCategoria = Cat_empresa;
   }
 
-  verArchivo(ruta:string){
-    window.open("http://192.168.1.200/uploads/"+ruta);
+  verArchivo(ruta: string) {
+    window.open("http://192.168.1.200/uploads/" + ruta);
   }
 
   //METODOS CRUD (U)
@@ -401,15 +478,21 @@ export class AdministradorComponent implements OnInit {
       .indexOf(idArea);
     const nombre = $("#modArea").val();
     if (nombre === "") {
-      Swal.fire("Error", "No ingreso ningun valor", "error");
+      this.swalWithBootstrapButtonsError.fire({
+        text: "No ingreso ningun valor."
+      });
     } else {
       this.areaService
         .update_area(this.datosArea[index])
         .subscribe(response => {
           if (response.success) {
-            Swal.fire("Correcto", response.message, "success");
+            this.swalWithBootstrapButtonsCorrecto.fire({
+              text: response.message
+            });
           } else {
-            Swal.fire("Error", response.message, "error");
+            this.swalWithBootstrapButtonsError.fire({
+              text: response.message
+            });
           }
         });
     }
@@ -423,52 +506,41 @@ export class AdministradorComponent implements OnInit {
       })
       .indexOf(idCategoria);
     if (nombre === "") {
-      Swal.fire("Error", "No ingreso ningun valor", "error");
+      this.swalWithBootstrapButtonsError.fire({
+        text: "No ingreso ningun valor."
+      });
     } else {
       this.categoriaService
         .update_categoria(this.datosCategoria[index])
         .subscribe(response => {
           if (response.success) {
-            Swal.fire("Correcto", response.message, "success");
+            this.swalWithBootstrapButtonsCorrecto.fire({
+              text: response.message
+            });
           } else {
-            Swal.fire("Error", response.message, "error");
+            this.swalWithBootstrapButtonsError.fire({
+              text: response.message
+            });
           }
         });
     }
   }
 
-  reactivarCandidato(id) {
+  updateEstatusEmpresa(id: number, estatus: string) {
+    var status;
+    if (estatus == "A") {
+      this.titulo = "¿Deseas reactivar la cuenta de la empresa?";
+      this.mensaje = "¿La cuenta tendra acceso al sistema?";
+      status = "Baja";
+    } else if (estatus == "B") {
+      this.titulo = "¿Deseas desactivar la cuenta de la empresa?";
+      this.mensaje = "La cuenta no tendra acceso al sistema";
+      status = "Alta";
+    }
     this.swalWithBootstrapButtons
       .fire({
-        title: "¿Deseas reactivar la cuenta del candidato?",
-        text: "La cuenta tendra acceso al sistema",
-        type: "question",
-        showCancelButton: true,
-        confirmButtonText: "Si",
-        cancelButtonText: "No"
-      })
-      .then(result => {
-        if (result.value) {
-          this.candidatoService
-            .update_estatusCandidato("A", id)
-            .subscribe(response => {
-              if (response.success) {
-                Swal.fire("Correcto", response.message, "success");
-                this.getCandidatos("Baja");
-              } else {
-                Swal.fire("Error", response.message, "error");
-              }
-            });
-        } else {
-        }
-      });
-  }
-
-  reactivarEmpresa(id) {
-    this.swalWithBootstrapButtons
-      .fire({
-        title: "¿Deseas reactivar la cuenta de la empresa?",
-        text: "La cuenta tendra acceso al sistema",
+        title: this.titulo,
+        text: this.mensaje,
         type: "question",
         showCancelButton: true,
         confirmButtonText: "Si",
@@ -477,13 +549,58 @@ export class AdministradorComponent implements OnInit {
       .then(result => {
         if (result.value) {
           this.empresaService
-            .update_estatusEmpresa("A", id)
+            .update_estatusEmpresa(estatus, id)
             .subscribe(response => {
               if (response.success) {
-                Swal.fire("Correcto", response.message, "success");
-                this.getEmpresas("Baja");
+                this.swalWithBootstrapButtonsCorrecto.fire({
+                  text: response.message
+                });
+                this.getEmpresas(status);
               } else {
-                Swal.fire("Error", response.message, "error");
+                this.swalWithBootstrapButtonsError.fire({
+                  text: response.message
+                });
+              }
+            });
+        } else {
+        }
+      });
+  }
+
+  updateEstatusCandidato(id: number, estatus: string) {
+    var status;
+    if (estatus == "A") {
+      this.titulo = "¿Deseas reactivar la cuenta del candidato?";
+      this.mensaje = "¿La cuenta tendra acceso al sistema?";
+      status = "Baja";
+    } else if (estatus == "B") {
+      this.titulo = "¿Deseas desactivar la cuenta del candidato?";
+      this.mensaje = "La cuenta no tendra acceso al sistema";
+      status = "Alta";
+    }
+    this.swalWithBootstrapButtons
+      .fire({
+        title: this.titulo,
+        text: this.mensaje,
+        type: "question",
+        showCancelButton: true,
+        confirmButtonText: "Si",
+        cancelButtonText: "No"
+      })
+      .then(result => {
+        if (result.value) {
+          this.candidatoService
+            .update_estatusCandidato(estatus, id)
+            .subscribe(response => {
+              if (response.success) {
+                this.swalWithBootstrapButtonsCorrecto.fire({
+                  text: response.message
+                });
+                this.getCandidatos(status);
+              } else {
+                this.swalWithBootstrapButtonsError.fire({
+                  text: response.message
+                });
               }
             });
         } else {
@@ -492,15 +609,15 @@ export class AdministradorComponent implements OnInit {
   }
 
   updateEstatusAuxiliar(id: number, estatus: string) {
-    var mostrar;
+    var status;
     if (estatus == "A") {
       this.titulo = "¿Deseas reactivar la cuenta del usuario?";
       this.mensaje = "La cuenta tendra acceso al sistema";
-      mostrar = "B";
+      status = "B";
     } else if (estatus == "B") {
       this.titulo = "¿Deseas desactivar la cuenta del usuario?";
       this.mensaje = "La cuenta no tendra acceso al sistema";
-      mostrar = "A";
+      status = "A";
     }
     this.swalWithBootstrapButtons
       .fire({
@@ -517,21 +634,13 @@ export class AdministradorComponent implements OnInit {
             .update_estatus_auxiliarAdmin(estatus, id)
             .subscribe(response => {
               if (response.success) {
-                this.swalWithBootstrapButtons.fire({
-                  title: "Correcto",
-                  text: response.message,
-                  type: "success",
-                  showCancelButton: false,
-                  confirmButtonText: "Entendido"
+                this.swalWithBootstrapButtonsCorrecto.fire({
+                  text: response.message
                 });
-                this.getAuxiliares(mostrar);
+                this.getAuxiliares(status);
               } else {
-                this.swalWithBootstrapButtons.fire({
-                  title: "Error",
-                  text: response.message,
-                  type: "error",
-                  showCancelButton: false,
-                  confirmButtonText: "Entendido"
+                this.swalWithBootstrapButtonsError.fire({
+                  text: response.message
                 });
               }
             });
@@ -541,59 +650,6 @@ export class AdministradorComponent implements OnInit {
   }
 
   //METODOS CRUD (D)
-  desactivarCandidato(id) {
-    this.swalWithBootstrapButtons
-      .fire({
-        title: "¿Deseas desactivar la cuenta?",
-        text: "El candidato no tendra acceso al sistema",
-        type: "question",
-        showCancelButton: true,
-        confirmButtonText: "Si",
-        cancelButtonText: "No"
-      })
-      .then(result => {
-        if (result.value) {
-          this.candidatoService
-            .update_estatusCandidato("B", id)
-            .subscribe(response => {
-              if (response.success) {
-                Swal.fire("Correcto", response.message, "success");
-                this.getCandidatos("Alta");
-              } else {
-                Swal.fire("Error", response.message, "error");
-              }
-            });
-        } else {
-        }
-      });
-  }
-
-  desactivarEmpresa(id) {
-    this.swalWithBootstrapButtons
-      .fire({
-        title: "¿Deseas desactivar la cuenta de la empresa?",
-        text: "La cuenta del usuario quedará inhabilitada",
-        type: "question",
-        showCancelButton: true,
-        confirmButtonText: "Si",
-        cancelButtonText: "No"
-      })
-      .then(result => {
-        if (result.value) {
-          this.empresaService
-            .update_estatusEmpresa("B", id)
-            .subscribe(response => {
-              if (response.success) {
-                Swal.fire("Correcto", response.message, "success");
-                this.getEmpresas("Alta");
-              } else {
-                Swal.fire("Error", response.message, "error");
-              }
-            });
-        } else {
-        }
-      });
-  }
 
   //UTILIDADES
 
@@ -716,104 +772,7 @@ export class AdministradorComponent implements OnInit {
   }
 
   categorias(numero: number) {
-    //numero= this.navBarComponentAdmin.numero;
-    this.inputbooleano = false;
-    // Se selecciona Categorias de las empresas
-    if (numero === 1) {
-      if (this.estado === 1) {
-        this.estado = 0;
-        $("#categoriaboton").css("border-bottom", "transparent");
-      } else {
-        $("#categoriaboton").css("border-bottom", "1px solid white");
-        $("#areas,#usuarios,#usuariosactivos,#Auxiliares,#vacantesadmin").css(
-          "border-bottom",
-          "transparent"
-        );
-        this.estado = 1;
-        this.opc = numero;
-        this.estadoimagen = false;
-      }
-      // Se selecciona Aareas de estudio
-    } else if (numero === 2) {
-      if (this.estado === 2) {
-        this.estado = 0;
-        $("#areas").css("border-bottom", "transparent");
-      } else {
-        $("#areas").css("border-bottom", "1px solid white");
-        $(
-          "#usuarios,#categoriaboton,#usuariosactivos,#Auxiliares,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        this.estadoimagen = false;
-        this.estado = 2;
-        this.opc = numero;
-      }
-      //Se selecciona las solicitudes de los usuarios
-    } else if (numero == 3) {
-      if (this.estado === 3) {
-        this.estado = 0;
-        $("#usuarios").css("border-bottom", "transparent");
-      } else {
-        $("#usuarios").css("border-bottom", "1px solid white");
-        $(
-          "#areas,#categoriaboton,#usuariosactivos,#Auxiliares,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        this.estado = 3;
-        this.estadoimagen = false;
-      }
-      //Se selecciona el apartado de usuarios candidatos registrados
-    } else if (numero === 4) {
-      if (this.estado === 4) {
-        this.estado = 0;
-        $("#usuariosactivos").css("border-bottom", "transparent");
-      } else {
-        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#vacantesadmin").css(
-          "border-bottom",
-          "transparent"
-        );
-        $("#usuariosactivos").css("border-bottom", "1px solid white");
-        this.opc = numero;
-        this.estadoimagen = false;
-        this.estado = 4;
-      }
-    } else if (numero === 5) {
-      if (this.estado === 5) {
-        this.estado = 0;
-        $("#empresasActivas").css("border-bottom", "transparent");
-      } else {
-        $(
-          "#empresasActivas,#areas,#categoriaboton,#Auxiliares,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        $("#empresasActivas").css("border-bottom", "1px solid white");
-        this.opc = numero;
-        this.estadoimagen = false;
-        this.estado = 5;
-      }
-    } else if (numero == 6) {
-      if (this.estado === 6) {
-        this.estado = 0;
-        $("#vacantesadmin").css("border-bottom", "transparent");
-      } else {
-        $("#usuarios,#areas,#categoriaboton,#Auxiliares,#usuariosactivos").css(
-          "border-bottom",
-          "transparent"
-        );
-        $("#vacantesadmin").css("border-bottom", "1px solid white");
-        this.estadoimagen = false;
-        this.estado = 6;
-      }
-    } else if (numero == 7) {
-      if (this.estado === 7) {
-        this.estado = 0;
-        $("#Auxiliares").css("border-bottom", "transparent");
-      } else {
-        $(
-          "#usuarios,#areas,#categoriaboton,#usuariosactivos,#vacantesadmin"
-        ).css("border-bottom", "transparent");
-        $("#Auxiliares").css("border-bottom", "1px solid white");
-        this.estadoimagen = false;
-        this.estado = 7;
-      }
-    }
+    this.estado=numero;
   }
   inputeffec() {
     if (this.inputbooleano === false) {
@@ -850,5 +809,33 @@ export class AdministradorComponent implements OnInit {
   // aqui comienza el codigo para el dashboard
   dashboard() {
     // aqui va el codigo para el dashboard
+   
+  }
+
+  getNumCandidatos(estatus:string,id_tipo_usuario:number){
+    this.candidatoService.get_numero_usuarios(estatus,id_tipo_usuario).subscribe(response => {
+      if (response.success) {
+        if(estatus=='A' && id_tipo_usuario==1){
+          this.numeroCandidatosActivas=response.data;
+          this.numeroCandidatosActivas= this.numeroCandidatosActivas[0]["COUNT(id_usuario  )"];
+          console.log(this.numeroCandidatosActivas);
+        }else if(estatus=='B'&& id_tipo_usuario==1){
+          this.numeroCandidatosInactivos=response.data;
+          this.numeroCandidatosInactivos= this.numeroCandidatosInactivos[0]["COUNT(id_usuario  )"];
+        }else if(estatus=='A' && id_tipo_usuario==2){
+          this.numeroEmpresasActivas=response.data;
+          this.numeroEmpresasActivas= this.numeroEmpresasActivas[0]["COUNT(id_usuario  )"];
+        }else if(estatus=='B' && id_tipo_usuario==2){
+          this.numeroEmpresasInactivas=response.data;
+          this.numeroEmpresasInactivas= this.numeroEmpresasInactivas[0]["COUNT(id_usuario  )"];
+        }
+      } else {
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
+      }
+    });
+    this.barChartData=[{data: [this.numeroCandidatosActivas, this.numeroEmpresasActivas], label: 'Activos'},
+                      {data:[this.numeroCandidatosInactivos,this.numeroEmpresasInactivas],label:'Inactivos'}];
   }
 }
