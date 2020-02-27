@@ -13,6 +13,7 @@ spl_autoload_register(
                 'candidato' => '/core/Candidato.php',
                 'categoria' => '/core/Categoria.php',
                 'ciudad' => '/core/Ciudad.php',
+                'dashboard' => '/core/Dashboard.php',
                 'db' => '/core/db_conn.php',
                 'empresa' => '/core/Empresa.php',
                 'entidad' => '/core/EntidadFederativa.php',

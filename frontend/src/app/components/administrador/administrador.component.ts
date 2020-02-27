@@ -25,7 +25,8 @@ import { CurrentUserService } from "src/app/services/current-user.service";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label, Color } from 'ng2-charts';
+import { Label, Color, BaseChartDirective } from 'ng2-charts';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 
 @Component({
@@ -53,6 +54,7 @@ import { Label, Color } from 'ng2-charts';
   ]
 })
 export class AdministradorComponent implements OnInit {
+ 
   @Input() numero;
   @Input() estado = 0;
   @Input() nuevaArea: Area = {
@@ -110,9 +112,14 @@ export class AdministradorComponent implements OnInit {
   numeroEmpresasActivas:number;
   numeroCandidatosInactivos:number;
   numeroEmpresasInactivas:number;
+  numeroSolicitudes:number;
+  numeroVacantes:number;
+  numeroAuxiliares:number;
   public barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{  }] },
+    scales: { xAxes: [{}], yAxes: [{ ticks: {
+      stepSize:1
+    } }] },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -213,7 +220,8 @@ export class AdministradorComponent implements OnInit {
     private vacantesService: VacantesService,
     private registroService: RegistroService,
     private router: Router,
-    private currentUserService: CurrentUserService
+    private currentUserService: CurrentUserService,
+    private dashboardService:DashboardService
   ) {}
 
   ngOnInit() {
@@ -226,6 +234,11 @@ export class AdministradorComponent implements OnInit {
     this.getCandidatos("Alta");
     this.getAuxiliares("A");
     this.getEmpresas("Alta");
+    this.getNumeroUsuarios('A',1);this.getNumeroUsuarios('A',2);this.getNumeroUsuarios('B',1);this.getNumeroUsuarios('B',2);
+    this.getNumeroUsuarios('A',100)
+    this.getNumeroSolicitudes();
+    this.getNumeroVacantes();
+    this.mostrarDatos();
    this.estado=0;
     
  
@@ -812,22 +825,25 @@ export class AdministradorComponent implements OnInit {
    
   }
 
-  getNumCandidatos(estatus:string,id_tipo_usuario:number){
-    this.candidatoService.get_numero_usuarios(estatus,id_tipo_usuario).subscribe(response => {
+  getNumeroUsuarios(estatus:string,id_tipo_usuario:number){
+    this.dashboardService.get_numero_usuarios(estatus,id_tipo_usuario).subscribe(response => {
       if (response.success) {
         if(estatus=='A' && id_tipo_usuario==1){
           this.numeroCandidatosActivas=response.data;
-          this.numeroCandidatosActivas= this.numeroCandidatosActivas[0]["COUNT(id_usuario  )"];
+          this.numeroCandidatosActivas= this.numeroCandidatosActivas[0]["total"];
           console.log(this.numeroCandidatosActivas);
         }else if(estatus=='B'&& id_tipo_usuario==1){
           this.numeroCandidatosInactivos=response.data;
-          this.numeroCandidatosInactivos= this.numeroCandidatosInactivos[0]["COUNT(id_usuario  )"];
+          this.numeroCandidatosInactivos= this.numeroCandidatosInactivos[0]["total"];
         }else if(estatus=='A' && id_tipo_usuario==2){
           this.numeroEmpresasActivas=response.data;
-          this.numeroEmpresasActivas= this.numeroEmpresasActivas[0]["COUNT(id_usuario  )"];
+          this.numeroEmpresasActivas= this.numeroEmpresasActivas[0]["total"];
         }else if(estatus=='B' && id_tipo_usuario==2){
           this.numeroEmpresasInactivas=response.data;
-          this.numeroEmpresasInactivas= this.numeroEmpresasInactivas[0]["COUNT(id_usuario  )"];
+          this.numeroEmpresasInactivas= this.numeroEmpresasInactivas[0]["total"];
+        }else if(estatus=='A' && id_tipo_usuario==100){
+          this.numeroAuxiliares=response.data;
+          this.numeroAuxiliares=this.numeroAuxiliares[0]["total"];
         }
       } else {
         this.swalWithBootstrapButtonsError.fire({
@@ -837,5 +853,39 @@ export class AdministradorComponent implements OnInit {
     });
     this.barChartData=[{data: [this.numeroCandidatosActivas, this.numeroEmpresasActivas], label: 'Activos'},
                       {data:[this.numeroCandidatosInactivos,this.numeroEmpresasInactivas],label:'Inactivos'}];
+
+    this.mostrarDatos();
+  }
+
+  getNumeroSolicitudes(){
+    this.dashboardService.get_numero_solicitudes().subscribe(response => {
+      if (response.success) {
+        this.numeroSolicitudes=response.data;
+        this.numeroSolicitudes=this.numeroSolicitudes[0]["total"];
+      } else {
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
+      }
+    });
+  }
+
+  getNumeroVacantes(){
+    this.dashboardService.get_numero_vacantes().subscribe(response=>{
+      if(response.success){
+        this.numeroVacantes=response.data;
+        this.numeroVacantes=this.numeroVacantes[0]["total"];
+      }else{
+        this.swalWithBootstrapButtonsError.fire({
+          text: response.message
+        });
+      }
+    });
+  }
+
+  mostrarDatos(){
+    this.barChartData=this.barChartData.slice();
+    this.barChartData=[{data: [this.numeroCandidatosActivas, this.numeroEmpresasActivas], label: 'Activos'},
+    {data:[this.numeroCandidatosInactivos,this.numeroEmpresasInactivas],label:'Inactivos'}];
   }
 }

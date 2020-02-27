@@ -15,5 +15,5 @@ $post = json_decode(file_get_contents("php://input"));
 
 $estatus =$post->estatus;
 $id_tipo_usuario = $post->id_tipo_usuario;
-echo json_encode (Candidato::numeroUsuarios($estatus,$id_tipo_usuario));
+echo json_encode (Dashboard::numeroUsuarios($estatus,$id_tipo_usuario));
 ?>

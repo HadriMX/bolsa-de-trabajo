@@ -13,7 +13,7 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="font-weight-bold">Solicitudes pendientes</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{numeroSolicitudes}}</div>
               </div>
               <div class="col-auto">
                 <i class="fa fa-address-card-o fa-3x" style="color: gray;"></i>
@@ -29,7 +29,7 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="font-weight-bold">Vacantes abiertas</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{numeroVacantes}}</div>
               </div>
               <div class="col-auto">
                 <i class="fa fa-briefcase fa-3x" style="color: gray;"></i>
@@ -46,7 +46,7 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="font-weight-bold">Auxiliares administrativos</div>
-                <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">{{numeroAuxiliares}}</div>
               </div>
               <div class="col-auto">
                 <i class="fa fa-user fa-3x" style="color: gray;"></i>
@@ -73,7 +73,7 @@
               [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColors">
             </canvas>
             <button mat-button mat-raised-button color="primary"
-              (click)="getNumCandidatos('A',1);getNumCandidatos('A',2);getNumCandidatos('B',1);getNumCandidatos('B',2)">Actualizar
+              (click)="getNumeroUsuarios('A',1);getNumeroUsuarios('A',2);getNumeroUsuarios('B',1);getNumeroUsuarios('B',2)">Actualizar
               datos</button>
           </div>
         </div>
