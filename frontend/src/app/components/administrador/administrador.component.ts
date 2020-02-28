@@ -235,6 +235,7 @@ export class AdministradorComponent implements OnInit {
     this.getAuxiliares("A");
     this.getEmpresas("Alta");
     this.getNumeroUsuarios('A',1);this.getNumeroUsuarios('A',2);this.getNumeroUsuarios('B',1);this.getNumeroUsuarios('B',2);
+    
     this.getNumeroUsuarios('A',100)
     this.getNumeroSolicitudes();
     this.getNumeroVacantes();
@@ -831,7 +832,6 @@ export class AdministradorComponent implements OnInit {
         if(estatus=='A' && id_tipo_usuario==1){
           this.numeroCandidatosActivas=response.data;
           this.numeroCandidatosActivas= this.numeroCandidatosActivas[0]["total"];
-          console.log(this.numeroCandidatosActivas);
         }else if(estatus=='B'&& id_tipo_usuario==1){
           this.numeroCandidatosInactivos=response.data;
           this.numeroCandidatosInactivos= this.numeroCandidatosInactivos[0]["total"];
