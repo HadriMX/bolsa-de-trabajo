@@ -80,6 +80,7 @@ export class AdministradorComponent implements OnInit {
   };
 
   accion;
+  isLoading: boolean = true;
   loading = false;
   datosCategoria = [];
   datosArea = [];
@@ -228,7 +229,6 @@ export class AdministradorComponent implements OnInit {
     this.usuarioActual = this.currentUserService.getUsuarioActual();
     this.getCategoriasReporte();
     this.get_areaReporte();
-    this.dashboard();
     this.getAreas();
     this.getCategorias();
     this.getCandidatos("Alta");
@@ -818,13 +818,6 @@ export class AdministradorComponent implements OnInit {
       reason => console.log(reason)
     );
   }
-  // aqui comienza el codigo de las vacantes que se muestran en el menu
-
-  // aqui comienza el codigo para el dashboard
-  dashboard() {
-    // aqui va el codigo para el dashboard
-   
-  }
 
   getNumeroUsuarios(estatus:string,id_tipo_usuario:number){
     this.dashboardService.get_numero_usuarios(estatus,id_tipo_usuario).subscribe(response => {
@@ -880,6 +873,7 @@ export class AdministradorComponent implements OnInit {
           text: response.message
         });
       }
+      this.isLoading = false;
     });
   }
 

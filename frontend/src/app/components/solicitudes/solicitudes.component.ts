@@ -16,7 +16,7 @@ export class SolicitudesComponent implements OnInit {
   public usuarioActual:Usuario;
   columnasSolicitud: any[];
   datos_solicitud: any[];
-  loading:boolean;
+  loading:boolean = true;
 
   infoSolicitud: Solicitudes = {
     id_usuario: 0,
@@ -78,6 +78,7 @@ export class SolicitudesComponent implements OnInit {
       } else {
         Swal.fire("Error", response.message, "error");
       }
+      this.loading = false;
     });
   }
   detalleSolicitud(Solicitudes) {

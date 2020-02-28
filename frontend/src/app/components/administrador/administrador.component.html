@@ -2,8 +2,11 @@
   <app-navbar-admin></app-navbar-admin>
   <!-- En esta parte comienza el cuerpo de la pagina -->
 
-  <div class="container" *ngIf="estado===0">
+  <div *ngIf="isLoading" class="container">
+    <app-loading></app-loading>
+  </div>
 
+  <div class="container" *ngIf="estado===0 && !isLoading">
 
     <div class="row">
       <div class="col-xl-3 col-md-6 mb-4" id="contenedorCard" style="margin-top: 1%; margin-left: 5%;"
