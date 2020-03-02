@@ -295,7 +295,7 @@ export class AdministradorComponent implements OnInit {
     const nombre = $("#nomArea").val();
     if (nombre === "") {
       this.swalWithBootstrapButtonsError.fire({
-        text: "No ingreso ningun valor."
+        text: "No ingreso ningún valor."
       });
     } else {
       this.areaService.add_area(this.nuevaArea).subscribe(response => {
@@ -320,7 +320,7 @@ export class AdministradorComponent implements OnInit {
     const nombre = $("#nomCategoria").val();
     if (nombre === "") {
       this.swalWithBootstrapButtonsError.fire({
-        text: "No ingreso ningun valor."
+        text: "No ingreso ningún valor."
       });
     } else {
       this.categoriaService
@@ -344,13 +344,14 @@ export class AdministradorComponent implements OnInit {
   }
 
   add_auxiliarAdministrativo() {
-    this.registroService
+    if (this.Confirmar===this.auxiliarAdministrativo.password){
+      this.registroService
       .registrar(this.auxiliarAdministrativo)
       .subscribe(response => {
         if (response.success) {
           this.swalWithBootstrapButtonsCorrecto.fire({
             title: "Correcto",
-            text: "Cuenta auxiliar creada con exito"
+            text: "Cuenta auxiliar creada con éxito."
           });
           this.auxiliarAdministrativo.email = "";
           this.auxiliarAdministrativo.password = "";
@@ -360,6 +361,12 @@ export class AdministradorComponent implements OnInit {
           });
         }
       });
+    }else{
+      this.swalWithBootstrapButtonsError.fire({
+        text: "Las contraseñas no coinciden."
+      });
+    }
+    
   }
 
   //METODOS CRUD (R)
@@ -493,7 +500,7 @@ export class AdministradorComponent implements OnInit {
     const nombre = $("#modArea").val();
     if (nombre === "") {
       this.swalWithBootstrapButtonsError.fire({
-        text: "No ingreso ningun valor."
+        text: "No ingreso ningún valor."
       });
     } else {
       this.areaService
@@ -521,7 +528,7 @@ export class AdministradorComponent implements OnInit {
       .indexOf(idCategoria);
     if (nombre === "") {
       this.swalWithBootstrapButtonsError.fire({
-        text: "No ingreso ningun valor."
+        text: "No ingreso ningún valor."
       });
     } else {
       this.categoriaService

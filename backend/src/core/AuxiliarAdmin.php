@@ -23,9 +23,9 @@ class AuxiliarAdmin{
         
         if ($stmt->affected_rows > 0) {
             if($estatus=="B"){
-                $output=new SuccessResult("Cuenta desactivada", true);
+                $output=new SuccessResult("Cuenta desactivada.", true);
             }elseif ($estatus=="A") {
-                $output = new SuccessResult("Cuenta activada nuevamente", true);
+                $output = new SuccessResult("Cuenta activada nuevamente.", true);
             }
         } else {
             $output = new ErrorResult("No se pudo actualizar la base de datos.", 515);
