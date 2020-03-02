@@ -1,5 +1,12 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'mailer/Exception.php';
+require 'mailer/PHPMailer.php';
+require 'mailer/SMTP.php';
+
 class Auth
 {
     public static function login(string $username, string $pwd)
@@ -137,11 +144,29 @@ class Auth
             //mandar correo
 
             $host = 'http://localhost:4200';
-            $urlVerificacion = $host . '/registro/codigo_confirmacion=' . $codigoConfirmacion;
+            $urlVerificacion = $host . '/registro/' . $codigoConfirmacion;
 
-            $to = $email;
-            $subject = "Confirmación de correo electrónico";
-            $message = '<!DOCTYPE html
+            $mail = new PHPMailer(true);
+
+            try {
+                //Server settings
+                $mail->isSMTP();                                            // Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                $mail->Username   = 'volar.noreply@gmail.com';                     // SMTP username
+                $mail->Password   = 'Volar12345$';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                $mail->Port       = 587;                                    // TCP port to connect to
+
+                //Recipients
+                $mail->setFrom('volar.noreply@gmail.com', 'Remitente');
+                $mail->addAddress($email);     // Add a recipient
+
+                // Content
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->CharSet = 'utf-8';
+                $mail->Subject = 'Confirmación de correo electrónico';
+                $mail->Body    = '<!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -407,11 +432,12 @@ class Auth
 </body>
 
 </html>';
+                $mail->AltBody = $urlVerificacion;
 
-            $headers = 'From: luisarredondo1398@gmail.com' . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-
-            mail($to, $subject, $message, $headers);
+                $mail->send();
+            } catch (Exception $e) {
+                $output = new ErrorResult("Message could not be sent. Mailer Error: {$mail->ErrorInfo}", 0);
+            }
 
             $output = new SuccessResult("Registro correcto", true);
         } else {
