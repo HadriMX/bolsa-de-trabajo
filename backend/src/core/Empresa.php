@@ -302,4 +302,17 @@ class Empresa
 
         return $output;
     }
+
+    public static function get_emails($id_usuario,$id_empresa){
+        $db = new Db();
+        $conn = $db->getConn();
+
+        $stmt = $conn->prepare("SELECT email as 'email', email_contacto 'email_contacto'FROM usuarios, empresas WHERE usuarios.id_usuario=? AND empresas.id_usuario=?");
+        $stmt->bind_param('ii', $id_usuario,$id_empresa);
+        $stmt->execute();
+
+        $r = $db->readResult($stmt->get_result());
+        return new SuccessResult("", $r[0]);
+     
+    }
 }

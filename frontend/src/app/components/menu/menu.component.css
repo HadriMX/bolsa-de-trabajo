@@ -140,3 +140,38 @@ li {
     display: inline-block;
   }
 }
+
+/* Diseño de admin para dar de baja vacante */
+:host::ng-deep .ui-inputtext:enabled:focus:not(.ui-state-error) {
+  outline: 0 none;
+  outline-offset: 0;
+  -webkit-box-shadow: 0 0 0 0.2em #b079b4;
+  -moz-box-shadow: 0 0 0 0.2em #b079b4;
+  box-shadow: 0 0 0 0.2em #b079b4;
+  border-color: #bb26c7;
+}
+
+:host::ng-deep.ui-button:enabled:hover {
+  background-color: #45003a;
+  color: #ffffff;
+  border-color: #45003a;
+}
+
+:host::ng-deep .ui-button:enabled:focus {
+  outline: 0 none;
+  outline-offset: 0px;
+  -webkit-box-shadow: 0 0 0 0.2em #45003a;
+  -moz-box-shadow: 0 0 0 0.2em #45003a;
+  box-shadow: 0 0 0 0.2em #45003a;
+}
+
+:host::ng-deep .ui-button:enabled:active {
+  background-color: #45003a;
+  color: #ffffff;
+  border-color: #45003a;
+}
+:host::ng-deep .ui-button {
+  background-color: #791881;
+  color: #ffffff;
+  border-color: #791881;
+}

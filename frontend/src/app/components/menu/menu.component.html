@@ -265,15 +265,15 @@
 <!--===============================================================================================-->
 
 <p-dialog header="¿Por qué vas a eliminar esta vacante?" [(visible)]="displayDialogEliminarVacante"
-    [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+    [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '400px'}">
     <div class="ui-g ui-fluid">
         <div class="ui-g-12">
-            <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
+            <textarea [rows]="5" [cols]="30" [(ngModel)]="motivo" pInputTextarea autoResize="autoResize"></textarea>
         </div>
     </div>
     <p-footer>
         <div class="ui-dialog-buttonpane ui-helper-clearfix">
-            <button type="button" pButton icon="fa fa-check" label="Guardar"></button>
+            <button type="button" pButton icon="fa fa-check" label="Aceptar" (click)="eliminarVacante(infoVacante.id_vacante,email,email_contacto,motivo)"></button>
         </div>
     </p-footer>
 </p-dialog>

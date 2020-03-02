@@ -16,6 +16,7 @@ export class EmpresaService {
   private endpointUrlGuardarInfoEmpresa = environment.hostUrl + 'empresa/update_empresa.php';
   private endpointUrlUpdateEstatusEmpresa = environment.hostUrl + 'empresa/updateEstatusEmpresa.php';
   private endpointUrlRegistrarEmpresa = environment.hostUrl + 'empresa/registrar_empresa.php';
+  private endpointUrlGetEmailEmpresa = environment.hostUrl+'empresa/get_email_empresa.php'
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -38,5 +39,11 @@ export class EmpresaService {
   registrarEmpresa(infoEmpresa: Empresa): Observable<ApiResponse<Empresa>> {
     return this.http.post<ApiResponse<Empresa>>(this.endpointUrlRegistrarEmpresa, infoEmpresa, this.httpOptions);
   }
+
+  get_emailEmpresa(id_usuario: number, id_empresa: number): Observable<ApiResponse<string>> {
+    return this.http.post<ApiResponse<string>>(this.endpointUrlGetEmailEmpresa,{id_usuario:id_usuario, id_empresa:id_empresa}, this.httpOptions);
+  }
+
+  
 
 }

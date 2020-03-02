@@ -18,6 +18,7 @@ export class VacantesService {
   private endpointUrlComprobarPertenenciaVacante = environment.hostUrl + 'vacante/comprobarPertenenciaVacante.php';
   private endpointUrlCerrarVacante = environment.hostUrl + 'vacante/cerrar_vacante.php';
   private endpointUrlAbrirVacante = environment.hostUrl + 'vacante/abrir_vacante.php';
+  private endpointUrlUpdateEstatusVacante = environment.hostUrl + 'vacante/update_estatus_vacante.php';
 
   constructor(private http: HttpClient, private httpOptions: HttpOptionsService) { }
 
@@ -43,6 +44,10 @@ export class VacantesService {
 
   abrirVacante(id_vacante: number): Observable<ApiResponse<Vacante>>{
     return this.http.post<ApiResponse<Vacante>>(this.endpointUrlAbrirVacante, {id_vacante:id_vacante}, this.httpOptions);
+  }
+
+  updateEstatusVacante(id_vacante: number,email1: string, email2:string, motivo:string): Observable<ApiResponse<Vacante>>{
+    return this.http.put<ApiResponse<Vacante>>(this.endpointUrlUpdateEstatusVacante, {id_vacante:id_vacante, email1:email1, email2:email2, motivo:motivo}, this.httpOptions);
   }
 
 }
