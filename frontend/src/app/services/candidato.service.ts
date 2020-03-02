@@ -46,4 +46,8 @@ export class CandidatoService {
     return this.http.post<ApiResponse<number>>(this.endpointUrlNumeroUsuarios, { estatus: estatus, id_tipo_usuario: id_tipo_usuario }, this.httpOptions);
   }
 
+  aceptarCandidato(estatus: string, id_usuario, email:string): Observable<ApiResponse<Candidato>> {
+    return this.http.post<ApiResponse<Candidato>>(this.endpointUrlUpdateEstatusCandidato, { estatus: estatus, id_usuario: id_usuario, email:email }, this.httpOptions);
+  }
+
 }

@@ -16,6 +16,5 @@ $post = json_decode(file_get_contents("php://input"));
 
 $estatus =$post->estatus;
 $id_usuario = $post->id_usuario;
-echo json_encode(Candidato::updateEstatusCandidato($estatus,$id_usuario));
-
-?>
+$email = $post->email;
+echo json_encode(Candidato::updateEstatusCandidato($estatus,$id_usuario,$email));

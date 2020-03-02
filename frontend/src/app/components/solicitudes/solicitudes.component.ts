@@ -3,6 +3,7 @@ import { Solicitudes } from "../../models/solicitudes";
 import { SolicitudService } from "../../services/solicitud.service";
 import { CandidatoService } from "src/app/services/candidato.service";
 
+
 import Swal from "sweetalert2";
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { Usuario } from 'src/app/models/usuario';
@@ -10,7 +11,7 @@ import { Usuario } from 'src/app/models/usuario';
 @Component({
   selector: "app-solicitudes",
   templateUrl: "./solicitudes.component.html",
-  styleUrls: ["./solicitudes.component.css"]
+  styleUrls: ["../administrador/administrador.component.css"]
 })
 export class SolicitudesComponent implements OnInit {
   public usuarioActual:Usuario;
@@ -128,7 +129,7 @@ export class SolicitudesComponent implements OnInit {
       .then(result => {
         if (result.value) {
           this.candidatoService
-            .update_estatusCandidato("I", id_candidato)
+            .aceptarCandidato("I", id_candidato,this.infoSolicitud[0].email)
             .subscribe(response => {
               if (response.success) {
                 this.swalWithBootstrapButtonsCorrecto.fire({

@@ -125,6 +125,10 @@ body
   min-height: 120vh;
 }
 
+li{
+  color:  #bb26c7;
+}
+
 
 :host::ng-deep .ui-datatable table {
   table-layout: auto;
