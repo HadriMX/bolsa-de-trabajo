@@ -184,7 +184,7 @@ export class AdministradorComponent implements OnInit {
     confirmButtonColor: "#7A26D3",
     cancelButtonColor: "white",
     showCancelButton: false,
-    confirmButtonText: "Entendido",
+    confirmButtonText: "Aceptar",
     title: "Correcto",
     type: "success"
   });
@@ -194,7 +194,7 @@ export class AdministradorComponent implements OnInit {
     confirmButtonColor: "#7A26D3",
     cancelButtonColor: "white",
     showCancelButton: false,
-    confirmButtonText: "Entendido",
+    confirmButtonText: "Aceptar",
     title: "Error",
     type: "error"
   });
@@ -723,7 +723,9 @@ export class AdministradorComponent implements OnInit {
         dataKey: col.field
       }));
       doc.autoTable(this.exportColumns, this.reporte_area, {
-        startY: 100
+        startY: 100,
+        theme: 'grid',
+        headStyles: { fillColor: [155, 89, 182] }, // Purple
       });
       doc.save("Reporte de areas de estudio.pdf");
     } else if (tipo == 2) {
@@ -733,8 +735,11 @@ export class AdministradorComponent implements OnInit {
         dataKey: col.field
       }));
       doc.autoTable(this.exportColumns, this.reporte_categoria, {
-        startY: 100
+        startY: 100,
+        theme: 'grid',
+        headStyles: { fillColor: [155, 89, 182] }, // Purple
       });
+
       doc.save("Reporte de categorias de empresas.pdf");
     } else if (tipo == 3) {
       this.exportColumns = this.columnasCandidato.map(col => ({
@@ -746,7 +751,9 @@ export class AdministradorComponent implements OnInit {
       // doc.autoTable(this.exportColumns, this.datosCandidato);
 
       doc.autoTable(this.exportColumns, this.datosCandidato, {
-        startY: 100
+        startY: 100,
+        theme: 'grid',
+        headStyles: { fillColor: [155, 89, 182] }, // Purple
       });
       doc.save("Reporte de candidatos activos.pdf");
     } else if (tipo == 4) {
@@ -756,7 +763,9 @@ export class AdministradorComponent implements OnInit {
       }));
       doc.text("Reporte de candidatos inactivos", 300, 70, "center");
       doc.autoTable(this.exportColumns, this.datosCandidato, {
-        startY: 100
+        startY: 100,
+        theme: 'grid',
+        headStyles: { fillColor: [155, 89, 182] }, // Purple
       });
       doc.save("Reporte de candidatos inactivos.pdf");
     } else if (tipo == 5) {
@@ -766,7 +775,9 @@ export class AdministradorComponent implements OnInit {
       }));
       doc.text("Reporte de empresas activas", 300, 70, "center");
       doc.autoTable(this.exportColumns, this.datosEmpresa, {
-        startY: 100
+        startY: 100,
+        theme: 'grid',
+        headStyles: { fillColor: [155, 89, 182] }, // Purple
       });
       doc.save("Reporte de empresas activas.pdf");
     } else if (tipo == 6) {
@@ -776,7 +787,9 @@ export class AdministradorComponent implements OnInit {
       }));
       doc.text("Reporte de empresas inactivas", 300, 70, "center");
       doc.autoTable(this.exportColumns, this.datosEmpresa, {
-        startY: 100
+        startY: 100,
+        theme: 'grid',
+        headStyles: { fillColor: [155, 89, 182] }, // Purple
       });
       doc.save("Reporte de empresas inactivas.pdf");
     }

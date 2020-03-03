@@ -264,13 +264,8 @@ export class MenuComponent implements OnInit, IAppPage {
   }
   /* administración */
 
-  darDeBajaVacante(vacante: Vacante) {
-    alert("Aquí se va a dar de baja");
-  }
-
   mostrarModalEliminar() {
     this.displayDialogEliminarVacante = true;
-    console.log(this.infoVacante);
     this.getEmailEmpresa(this.infoVacante.id_empresa);
   }
 
@@ -281,48 +276,59 @@ export class MenuComponent implements OnInit, IAppPage {
         this.email_contacto=response.data["email_contacto"];
       }
     });
-    console.log(this.email);
-    console.log(this.email_contacto);
   }
 
   eliminarVacante(id_vacante: number, email1 :string, email2:string, motivo:string) {
-    Swal.fire({
-      title: "¿Estás seguro qué deseas eliminar esta vacante?",
-      type: "question",
-      showCancelButton: true,
-      focusConfirm: true,
-      confirmButtonColor: "#7A26D3",
-      cancelButtonColor: "white",
-      cancelButtonText: "No",
-      confirmButtonText: "Si",
-      reverseButtons: true
-    }).then(result => {
-      if (result.value) {
-        this.vacantesService
-          .updateEstatusVacante(id_vacante,email1,email2,motivo)
-          .subscribe(response => {
-            if (response.success) {
-              Swal.fire({
-                title: "Éxito",
-                text: response.message,
-                type: "success",
-                focusConfirm: true,
-                confirmButtonText: "Aceptar",
-                confirmButtonColor: "#7A26D3"
-              });
-              this.displayDialogEliminarVacante=false;
-            } else {
-              Swal.fire({
-                title: "Error",
-                text: response.message,
-                type: "error",
-                focusConfirm: true,
-                confirmButtonText: "Aceptar",
-                confirmButtonColor: "#7A26D3"
-              });
-            }
-          });
-      }
-    });
+    if(this.motivo===undefined){
+      Swal.fire({
+        title: "Error",
+        text:"Debes ingresar un motivo",
+        type: "error",
+        showCancelButton: false,
+        focusConfirm: true,
+        confirmButtonColor: "#7A26D3",
+      confirmButtonText:"Aceptar"});
+    }else{
+      Swal.fire({
+        title: "¿Estás seguro qué deseas eliminar esta vacante?",
+        type: "question",
+        showCancelButton: true,
+        focusConfirm: true,
+        confirmButtonColor: "#7A26D3",
+        cancelButtonColor: "white",
+        cancelButtonText: "No",
+        confirmButtonText: "Si",
+        reverseButtons: true
+      }).then(result => {
+        if (result.value) {
+          this.vacantesService
+            .updateEstatusVacante(id_vacante,email1,email2,motivo)
+            .subscribe(response => {
+              if (response.success) {
+                Swal.fire({
+                  title: "Éxito",
+                  text: response.message,
+                  type: "success",
+                  focusConfirm: true,
+                  confirmButtonText: "Aceptar",
+                  confirmButtonColor: "#7A26D3"
+                });
+                this.displayDialogEliminarVacante=false;
+                this.motivo=undefined;
+                this.limpiarFiltros();
+              } else {
+                Swal.fire({
+                  title: "Error",
+                  text: response.message,
+                  type: "error",
+                  focusConfirm: true,
+                  confirmButtonText: "Aceptar",
+                  confirmButtonColor: "#7A26D3"
+                });
+              }
+            });
+        }
+      });
+    }
   }
 }
